@@ -171,27 +171,27 @@ namespace YouYou
         {
             string url = string.Format("{0}{1}", GameEntry.Data.SysDataManager.CurrChannelConfig.RealSourceUrl, ConstDefine.VersionFileName);
             GameEntry.Log(LogCategory.Resource, url);
-            GameEntry.Http.SendData(url, OnInitCDNAssetBundleInfo, isGetData: true);
+            //GameEntry.Http.SendData(url, OnInitCDNAssetBundleInfo, isGetData: true);
         }
 
         /// <summary>
         /// 初始化CDN资源包信息回调
         /// </summary>
         /// <param name="args"></param>
-        private void OnInitCDNAssetBundleInfo(HttpCallBackArgs args)
-        {
-            if (!args.HasError)
-            {
-                m_CNDVersionDic = GetAssetBundleVersionList(args.Data, ref m_CDNVersion);
-                GameEntry.Log(LogCategory.Resource, "OnInitCDNAssetBundleInfo");
+        //private void OnInitCDNAssetBundleInfo(HttpCallBackArgs args)
+        //{
+        //    if (!args.HasError)
+        //    {
+        //        m_CNDVersionDic = GetAssetBundleVersionList(args.Data, ref m_CDNVersion);
+        //        GameEntry.Log(LogCategory.Resource, "OnInitCDNAssetBundleInfo");
 
-                CheckVersionFileExistsInLocal();
-            }
-            else
-            {
-                GameEntry.Log(LogCategory.Resource, args.Value);
-            }
-        }
+        //        CheckVersionFileExistsInLocal();
+        //    }
+        //    else
+        //    {
+        //        GameEntry.Log(LogCategory.Resource, args.Value);
+        //    }
+        //}
         #endregion
 
         #region 可写区

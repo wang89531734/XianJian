@@ -23,7 +23,6 @@ namespace YouYou
                 typeof(CommonEvent),
                 typeof(BaseParams),
                 typeof(BaseParams),
-                typeof(HttpCallBackArgs),
                 typeof(RetValue),
                 typeof(JsonData),
                 typeof(StringUtil),
@@ -38,7 +37,7 @@ namespace YouYou
         [CSharpCallLua]
         public static List<Type> CSharpCallLua = new List<Type>()
         {
-                typeof(HttpSendDataCallBack),
+                //typeof(HttpSendDataCallBack),
         };
     }
 }

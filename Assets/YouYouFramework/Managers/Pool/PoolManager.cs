@@ -62,7 +62,7 @@ namespace YouYou
         /// </summary>
         public override void Init()
         {
-            ReleaseClassObjectInterval = GameEntry.ParamsSettings.GetGradeParamData(ConstDefine.Pool_ReleaseClassObjectInterval, GameEntry.CurrDeviceGrade);
+            //ReleaseClassObjectInterval = GameEntry.ParamsSettings.GetGradeParamData(ConstDefine.Pool_ReleaseClassObjectInterval, GameEntry.CurrDeviceGrade);
             ReleaseAssetBundleInterval = GameEntry.ParamsSettings.GetGradeParamData(ConstDefine.Pool_ReleaseAssetBundleInterval, GameEntry.CurrDeviceGrade);
             ReleaseAssetInterval = GameEntry.ParamsSettings.GetGradeParamData(ConstDefine.Pool_ReleaseAssetInterval, GameEntry.CurrDeviceGrade);
 
@@ -155,8 +155,7 @@ namespace YouYou
         /// 初始化常用类常驻数量
         /// </summary>
         private void InitClassReside()
-        {
-            SetClassObjectResideCount<HttpRoutine>(3);
+        {          
             SetClassObjectResideCount<Dictionary<string, object>>(3);
             SetClassObjectResideCount<AssetBundleLoaderRoutine>(10);
             SetClassObjectResideCount<AssetLoaderRoutine>(10);

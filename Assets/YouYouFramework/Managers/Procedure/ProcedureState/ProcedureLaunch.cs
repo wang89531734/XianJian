@@ -21,41 +21,41 @@ namespace YouYou
             GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureLaunch");
 
             //访问账号服务器
-            string url = GameEntry.Http.RealWebAccountUrl + "/init";
+            //string url = GameEntry.Http.RealWebAccountUrl + "/init";
 
-            Dictionary<string, object> dic = GameEntry.Pool.DequeueClassObject<Dictionary<string, object>>();
-            dic.Clear();
+            //Dictionary<string, object> dic = GameEntry.Pool.DequeueClassObject<Dictionary<string, object>>();
+            //dic.Clear();
 
-            GameEntry.Data.SysDataManager.CurrChannelConfig.ChannelId = 0;
-            GameEntry.Data.SysDataManager.CurrChannelConfig.InnerVersion = 1001;
+            //GameEntry.Data.SysDataManager.CurrChannelConfig.ChannelId = 0;
+            //GameEntry.Data.SysDataManager.CurrChannelConfig.InnerVersion = 1001;
 
-            dic["ChannelId"] = GameEntry.Data.SysDataManager.CurrChannelConfig.ChannelId;
-            dic["InnerVersion"] = GameEntry.Data.SysDataManager.CurrChannelConfig.InnerVersion;
+            //dic["ChannelId"] = GameEntry.Data.SysDataManager.CurrChannelConfig.ChannelId;
+            //dic["InnerVersion"] = GameEntry.Data.SysDataManager.CurrChannelConfig.InnerVersion;
 
-            GameEntry.Http.SendData(url, OnWebAccountInit, true, false, dic);
+            //GameEntry.Http.SendData(url, OnWebAccountInit, true, false, dic);
         }
 
-        private void OnWebAccountInit(HttpCallBackArgs args)
-        {
-            if (!args.HasError)
-            {
-                RetValue retValue = LitJson.JsonMapper.ToObject<RetValue>(args.Value);
-                if (!retValue.HasError)
-                {
-                    LitJson.JsonData config = LitJson.JsonMapper.ToObject(retValue.Value.ToString());
-                    long.TryParse(config["ServerTime"].ToString(), out GameEntry.Data.SysDataManager.CurrChannelConfig.ServerTime);
+        //private void OnWebAccountInit(HttpCallBackArgs args)
+        //{
+        //    if (!args.HasError)
+        //    {
+        //        RetValue retValue = LitJson.JsonMapper.ToObject<RetValue>(args.Value);
+        //        if (!retValue.HasError)
+        //        {
+        //            LitJson.JsonData config = LitJson.JsonMapper.ToObject(retValue.Value.ToString());
+        //            long.TryParse(config["ServerTime"].ToString(), out GameEntry.Data.SysDataManager.CurrChannelConfig.ServerTime);
 
-                    GameEntry.Data.SysDataManager.CurrChannelConfig.SourceVersion = config["SourceVersion"].ToString();
-                    GameEntry.Data.SysDataManager.CurrChannelConfig.SourceUrl = config["SourceUrl"].ToString();
-                    GameEntry.Data.SysDataManager.CurrChannelConfig.RechargeUrl = config["RechargeUrl"].ToString();
-                    GameEntry.Data.SysDataManager.CurrChannelConfig.TDAppId = config["TDAppId"].ToString();
-                    bool.TryParse(config["IsOpenTD"].ToString(), out GameEntry.Data.SysDataManager.CurrChannelConfig.IsOpenTD);
+        //            GameEntry.Data.SysDataManager.CurrChannelConfig.SourceVersion = config["SourceVersion"].ToString();
+        //            GameEntry.Data.SysDataManager.CurrChannelConfig.SourceUrl = config["SourceUrl"].ToString();
+        //            GameEntry.Data.SysDataManager.CurrChannelConfig.RechargeUrl = config["RechargeUrl"].ToString();
+        //            GameEntry.Data.SysDataManager.CurrChannelConfig.TDAppId = config["TDAppId"].ToString();
+        //            bool.TryParse(config["IsOpenTD"].ToString(), out GameEntry.Data.SysDataManager.CurrChannelConfig.IsOpenTD);
 
-                    GameEntry.Log(LogCategory.Resource, "RealSourceUrl=>" + GameEntry.Data.SysDataManager.CurrChannelConfig.RealSourceUrl);
-                    GameEntry.Procedure.ChangeState(ProcedureState.CheckVersion);
-                }
-            }
-        }
+        //            GameEntry.Log(LogCategory.Resource, "RealSourceUrl=>" + GameEntry.Data.SysDataManager.CurrChannelConfig.RealSourceUrl);
+        //            GameEntry.Procedure.ChangeState(ProcedureState.CheckVersion);
+        //        }
+        //    }
+        //}
 
         public override void OnUpdate()
         {

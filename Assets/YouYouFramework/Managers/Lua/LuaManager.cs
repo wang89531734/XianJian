@@ -125,26 +125,26 @@ namespace YouYou
             luaEnv.DoString(str);
         }
 
-        /// <summary>
-        /// 发送Http请求
-        /// </summary>
-        /// <param name="url"></param>
-        /// <param name="callBack"></param>
-        /// <param name="luaTable"></param>
-        public void SendHttpData(string url, HttpSendDataCallBack callBack, LuaTable luaTable)
-        {
-            Dictionary<string, object> dic = GameEntry.Pool.DequeueClassObject<Dictionary<string, object>>();
-            dic.Clear();
+        ///// <summary>
+        ///// 发送Http请求
+        ///// </summary>
+        ///// <param name="url"></param>
+        ///// <param name="callBack"></param>
+        ///// <param name="luaTable"></param>
+        //public void SendHttpData(string url, HttpSendDataCallBack callBack, LuaTable luaTable)
+        //{
+        //    Dictionary<string, object> dic = GameEntry.Pool.DequeueClassObject<Dictionary<string, object>>();
+        //    dic.Clear();
 
-            IEnumerator enumerator = luaTable.GetKeys().GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                string key = enumerator.Current.ToString();
-                dic[key] = luaTable.GetInPath<string>(key);
-            }
+        //    IEnumerator enumerator = luaTable.GetKeys().GetEnumerator();
+        //    while (enumerator.MoveNext())
+        //    {
+        //        string key = enumerator.Current.ToString();
+        //        dic[key] = luaTable.GetInPath<string>(key);
+        //    }
 
-            GameEntry.Http.SendData(url, callBack, true, false, dic);
-        }
+        //    GameEntry.Http.SendData(url, callBack, true, false, dic);
+        //}
 
         /// <summary>
         /// 获取RetValue

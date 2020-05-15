@@ -173,24 +173,6 @@ namespace YouYou
         }
 
         /// <summary>
-        /// Socket管理器
-        /// </summary>
-        public static SocketManager Socket
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Http管理器
-        /// </summary>
-        public static HttpManager Http
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
         /// 数据管理器
         /// </summary>
         public static DataManager Data
@@ -280,8 +262,6 @@ namespace YouYou
             Fsm = new FsmManager();
             Procedure = new ProcedureManager();
             DataTable = new DataTableManager();
-            Socket = new SocketManager();
-            Http = new HttpManager();
             Data = new DataManager();
             Localization = new LocalizationManager();
             Pool = new PoolManager();
@@ -289,8 +269,7 @@ namespace YouYou
             Resource = new AddressableManager();
             Download = new DownloadManager();
             UI = new YouYouUIManager();
-            Lua = new LuaManager();
-            Audio = new AudioManager();
+            //Audio = new AudioManager();
 
             Logger.Init();
             Event.Init();
@@ -298,8 +277,6 @@ namespace YouYou
             Fsm.Init();
             Procedure.Init();
             DataTable.Init();
-            Socket.Init();
-            Http.Init();
             Data.Init();
             Localization.Init();
             Pool.Init();
@@ -307,8 +284,7 @@ namespace YouYou
             Resource.Init();
             Download.Init();
             UI.Init();
-            //Lua.Init();
-            Audio.Init();
+            //Audio.Init();
 
             //进入第一个流程
             Procedure.ChangeState(ProcedureState.Launch);
@@ -406,13 +382,12 @@ namespace YouYou
 
             Time.OnUpdate();
             Procedure.OnUpdate();
-            Socket.OnUpdate();
             Pool.OnUpdate();
             Scene.OnUpdate();
             Resource.OnUpdate();
             Download.OnUpdate();
             UI.OnUpdate();
-            Audio.OnUpdate();
+            //Audio.OnUpdate();
         }
 
         /// <summary>
@@ -426,9 +401,7 @@ namespace YouYou
             Time.Dispose();
             Fsm.Dispose();
             Procedure.Dispose();
-            DataTable.Dispose();
-            Socket.Dispose();
-            Http.Dispose();
+            DataTable.Dispose();  
             Data.Dispose();
             Localization.Dispose();
             Pool.Dispose();
@@ -436,8 +409,7 @@ namespace YouYou
             Resource.Dispose();
             Download.Dispose();
             UI.Dispose();
-            Lua.Dispose();
-            Audio.Dispose();
+            //Audio.Dispose();
         }
 
         /// <summary>
