@@ -79,9 +79,6 @@ namespace YouYou
             if (m_LoadDataTableStatus == 1)
             {
                 m_LoadDataTableStatus = 2;
-
-                //执行Lua初始化
-                GameEntry.Lua.Init();
             }
 
             if (m_CurrProgress < m_TargetProgress || m_TargetProgress < 100)

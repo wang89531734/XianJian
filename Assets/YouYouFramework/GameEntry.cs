@@ -236,15 +236,6 @@ namespace YouYou
         }
 
         /// <summary>
-        /// Lua管理器
-        /// </summary>
-        public static LuaManager Lua
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
         /// 声音管理器
         /// </summary>
         public static AudioManager Audio;

@@ -28,12 +28,12 @@ public class Menu
 
         Transform trans = Selection.transforms[0];
 
-        LuaForm luaForm = trans.GetComponent<LuaForm>();
-        if (luaForm == null)
-        {
-            Debug.LogError("该UI上没有LuaForm脚本");
-            return;
-        }
+        //LuaForm luaForm = trans.GetComponent<LuaForm>();
+        //if (luaForm == null)
+        //{
+        //    Debug.LogError("该UI上没有LuaForm脚本");
+        //    return;
+        //}
 
         string viewName = trans.gameObject.name;
 

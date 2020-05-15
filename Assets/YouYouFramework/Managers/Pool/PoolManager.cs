@@ -349,10 +349,6 @@ namespace YouYou
                 GameEntry.Event.CommonEvent.Dispatch(SysEventId.LuaFullGc);
 
 #if !UNLOADRES_CHANGESCENE
-                if (LuaManager.luaEnv != null)
-                {
-                    LuaManager.luaEnv.FullGc();
-                }
                 Resources.UnloadUnusedAssets();
 #endif
             }

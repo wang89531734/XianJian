@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XLua;
 
 namespace YouYou
 {
@@ -11,8 +10,6 @@ namespace YouYou
     /// </summary>
     public class CommonEvent: IDisposable
     {
-        [LuaCallCSharp]
-        [CSharpCallLua]
         public delegate void OnActionHandler(object userData);
         public Dictionary<ushort, LinkedList<OnActionHandler>> dic = new Dictionary<ushort, LinkedList<OnActionHandler>>();
 

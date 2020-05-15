@@ -28,7 +28,7 @@ public class TestAsync : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.C))
         {
-            Debug.LogError(GameEntry.Data.UserDataManager.ShareUserData.AccountId);
+           // Debug.LogError(GameEntry.Data.UserDataManager.ShareUserData.AccountId);
         }
         //if (Input.GetKeyUp(KeyCode.X))
         //{
