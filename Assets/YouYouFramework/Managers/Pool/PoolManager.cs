@@ -19,14 +19,14 @@ namespace YouYou
             private set;
         }
 
-        /// <summary>
-        /// 游戏物体对象池
-        /// </summary>
-        public GameObjectPool GameObjectPool
-        {
-            get;
-            private set;
-        }
+        ///// <summary>
+        ///// 游戏物体对象池
+        ///// </summary>
+        //public GameObjectPool GameObjectPool
+        //{
+        //    get;
+        //    private set;
+        //}
 
         /// <summary>
         /// 资源包池
@@ -49,7 +49,7 @@ namespace YouYou
         public PoolManager()
         {
             ClassObjectPool = new ClassObjectPool();
-            GameObjectPool = new GameObjectPool();
+            //GameObjectPool = new GameObjectPool();
 
             AssetBundlePool = new ResourcePool("AssetBundlePool");
             m_InstanceResourceDic = new Dictionary<int, ResourceEntity>();
@@ -123,7 +123,7 @@ namespace YouYou
         public void Dispose()
         {
             ClassObjectPool.Dispose();
-            GameObjectPool.Dispose();
+            //GameObjectPool.Dispose();
         }
 
         //============================
@@ -366,7 +366,7 @@ namespace YouYou
         /// </summary>
         public void InitGameObjectPool()
         {
-            GameEntry.Instance.StartCoroutine(GameObjectPool.Init(GameEntry.Instance.GameObjectPoolGroups, GameEntry.Instance.PoolParent));
+           // GameEntry.Instance.StartCoroutine(GameObjectPool.Init(GameEntry.Instance.GameObjectPoolGroups, GameEntry.Instance.PoolParent));
         }
 
         /// <summary>
@@ -377,7 +377,7 @@ namespace YouYou
         /// <param name="onComplete"></param>
         public void GameObjectSpawn(byte poolId, Transform prefab, BaseAction<Transform> onComplete)
         {
-            GameObjectPool.Spawn(poolId, prefab, onComplete);
+           // GameObjectPool.Spawn(poolId, prefab, onComplete);
         }
 
         /// <summary>
@@ -387,7 +387,7 @@ namespace YouYou
         /// <param name="onComplete"></param>
         public void GameObjectSpawn(int prefabId, BaseAction<Transform> onComplete)
         {
-            GameObjectPool.Spawn(prefabId, onComplete);
+           // GameObjectPool.Spawn(prefabId, onComplete);
         }
 
         /// <summary>
@@ -397,7 +397,7 @@ namespace YouYou
         /// <param name="instance">实例</param>
         public void GameObjectDespawn(byte poolId, Transform instance)
         {
-            GameObjectPool.Despawn(poolId, instance);
+            //GameObjectPool.Despawn(poolId, instance);
         }
 
         /// <summary>
@@ -406,7 +406,7 @@ namespace YouYou
         /// <param name="instance">实例</param>
         public void GameObjectDespawn(Transform instance)
         {
-            GameObjectPool.Despawn(instance);
+           // GameObjectPool.Despawn(instance);
         }
 #endregion
 
