@@ -150,10 +150,10 @@ namespace YouYou
         /// </summary>
         private void LoadAudio()
         {
-            GameEntry.Audio.LoadBanks(() =>
-            {
-                LoadShader();
-            });
+            //GameEntry.Audio.LoadBanks(() =>
+            //{
+            //    LoadShader();
+            //});
         }
 
         /// <summary>

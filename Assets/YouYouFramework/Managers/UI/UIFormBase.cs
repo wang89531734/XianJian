@@ -111,7 +111,7 @@ namespace YouYou
 
         internal void Open(object userData, bool isFromInit = false)
         {
-            GameEntry.Audio.PlayAudio(ConstDefine.Aduio_ButtonClick);
+            //GameEntry.Audio.PlayAudio(ConstDefine.Aduio_ButtonClick);
             if (!isFromInit)
             {
                 UserData = userData;
@@ -134,7 +134,7 @@ namespace YouYou
 
         public void ToClose()
         {
-            GameEntry.Audio.PlayAudio(ConstDefine.Aduio_UIClose);
+            //GameEntry.Audio.PlayAudio(ConstDefine.Aduio_UIClose);
             if (!DisableUILayer)
             {
                 //进行层级管理 减少层级

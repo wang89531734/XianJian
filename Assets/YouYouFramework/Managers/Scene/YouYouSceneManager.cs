@@ -97,7 +97,7 @@ namespace YouYou
             }
 
             //停止BGM
-            GameEntry.Audio.StopBGM();
+            //GameEntry.Audio.StopBGM();
 
             m_CurrLoadingParam = GameEntry.Pool.DequeueClassObject<BaseParams>();
             m_OnComplete = onComplete;
@@ -238,7 +238,7 @@ namespace YouYou
                     GameEntry.Log(LogCategory.Normal, "场景加载完毕");
 
                     //播放BGM
-                    GameEntry.Audio.PlayBGM(m_CurrSceneEntity.Value.BGMId);
+                    //GameEntry.Audio.PlayBGM(m_CurrSceneEntity.Value.BGMId);
 
                     m_NeedLoadOrUnloadSceneDetailCount = 0;
                     m_CurrLoadOrUnloadSceneDetailCount = 0;

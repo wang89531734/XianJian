@@ -225,11 +225,6 @@ namespace YouYou
             get;
             private set;
         }
-
-        /// <summary>
-        /// 声音管理器
-        /// </summary>
-        public static AudioManager Audio;
         #endregion
 
         #region InitManagers 初始化管理器
@@ -250,7 +245,6 @@ namespace YouYou
             Scene = new YouYouSceneManager();
             Resource = new AddressableManager();
             UI = new YouYouUIManager();
-            //Audio = new AudioManager();
 
             Logger.Init();
             Event.Init();
@@ -264,10 +258,9 @@ namespace YouYou
             Scene.Init();
             Resource.Init();
             UI.Init();
-            //Audio.Init();
 
             //进入第一个流程
-            Procedure.ChangeState(ProcedureState.Preload);
+            //Procedure.ChangeState(ProcedureState.Preload);
         }
         #endregion
 
