@@ -38,12 +38,11 @@ namespace YouYou
             GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedurePreload");
             GameEntry.Event.CommonEvent.AddEventListener(SysEventId.LoadOneDataTableComplete, OnLoadOneDataTableComplete);
             GameEntry.Event.CommonEvent.AddEventListener(SysEventId.LoadDataTableComplete, OnLoadDataTableComplete);
-            GameEntry.Event.CommonEvent.AddEventListener(SysEventId.LoadLuaDataTableComplete, OnLoadLuaDataTableComplete);
 
             GameEntry.Log(LogCategory.Normal, "预加载开始");
-            m_PreloadParams = GameEntry.Pool.DequeueClassObject<BaseParams>();
-            m_PreloadParams.Reset();
-            GameEntry.Event.CommonEvent.Dispatch(SysEventId.PreloadBegin);
+            //m_PreloadParams = GameEntry.Pool.DequeueClassObject<BaseParams>();
+            //m_PreloadParams.Reset();
+            //GameEntry.Event.CommonEvent.Dispatch(SysEventId.PreloadBegin);
 
             m_TargetProgress = 99;
 
@@ -53,10 +52,10 @@ namespace YouYou
                 LoadReport();
             });
 #else
-            LoadReport();
+           // LoadReport();
 #endif
 
-            GameEntry.DataTable.LoadDataAllTable();
+           // GameEntry.DataTable.LoadDataAllTable();
         }
 
         /// <summary>
@@ -76,29 +75,29 @@ namespace YouYou
         {
             base.OnUpdate();
 
-            if (m_LoadDataTableStatus == 1)
-            {
-                m_LoadDataTableStatus = 2;
-            }
+            //if (m_LoadDataTableStatus == 1)
+            //{
+            //    m_LoadDataTableStatus = 2;
+            //}
 
-            if (m_CurrProgress < m_TargetProgress || m_TargetProgress < 100)
-            {
-                m_CurrProgress = m_CurrProgress + Time.deltaTime * 200; //根据实际情况调节速度
-                m_PreloadParams.FloatParam1 = m_CurrProgress;
-                GameEntry.Event.CommonEvent.Dispatch(SysEventId.PreloadUpdate, m_PreloadParams);
-            }
-            else if (m_CurrProgress >= 100)
-            {
-                m_CurrProgress = 100;
-                m_PreloadParams.FloatParam1 = m_CurrProgress;
-                GameEntry.Event.CommonEvent.Dispatch(SysEventId.PreloadUpdate, m_PreloadParams);
+            //if (m_CurrProgress < m_TargetProgress || m_TargetProgress < 100)
+            //{
+            //    m_CurrProgress = m_CurrProgress + Time.deltaTime * 200; //根据实际情况调节速度
+            //    m_PreloadParams.FloatParam1 = m_CurrProgress;
+            //    GameEntry.Event.CommonEvent.Dispatch(SysEventId.PreloadUpdate, m_PreloadParams);
+            //}
+            //else if (m_CurrProgress >= 100)
+            //{
+            //    m_CurrProgress = 100;
+            //    m_PreloadParams.FloatParam1 = m_CurrProgress;
+            //    GameEntry.Event.CommonEvent.Dispatch(SysEventId.PreloadUpdate, m_PreloadParams);
 
-                GameEntry.Log(LogCategory.Normal, "预加载完毕");
-                GameEntry.Event.CommonEvent.Dispatch(SysEventId.PreloadComplete);
-                GameEntry.Pool.EnqueueClassObject(m_PreloadParams);
+            //    GameEntry.Log(LogCategory.Normal, "预加载完毕");
+            //    GameEntry.Event.CommonEvent.Dispatch(SysEventId.PreloadComplete);
+            //    GameEntry.Pool.EnqueueClassObject(m_PreloadParams);
 
-                GameEntry.Procedure.ChangeState(ProcedureState.LogOn);
-            }
+            //    GameEntry.Procedure.ChangeState(ProcedureState.LogOn);
+            //}
         }
 
         public override void OnLeave()
@@ -108,7 +107,6 @@ namespace YouYou
 
             GameEntry.Event.CommonEvent.RemoveEventListener(SysEventId.LoadOneDataTableComplete, OnLoadOneDataTableComplete);
             GameEntry.Event.CommonEvent.RemoveEventListener(SysEventId.LoadDataTableComplete, OnLoadDataTableComplete);
-            GameEntry.Event.CommonEvent.RemoveEventListener(SysEventId.LoadLuaDataTableComplete, OnLoadLuaDataTableComplete);
         }
 
         /// <summary>

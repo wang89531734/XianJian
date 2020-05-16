@@ -260,7 +260,7 @@ namespace YouYou
             UI.Init();
 
             //进入第一个流程
-            //Procedure.ChangeState(ProcedureState.Preload);
+            Procedure.ChangeState(ProcedureState.Preload);
         }
         #endregion
 
@@ -359,7 +359,6 @@ namespace YouYou
             Scene.OnUpdate();
             Resource.OnUpdate();
             UI.OnUpdate();
-            //Audio.OnUpdate();
         }
 
         /// <summary>
@@ -380,7 +379,6 @@ namespace YouYou
             Scene.Dispose();
             Resource.Dispose();
             UI.Dispose();
-            //Audio.Dispose();
         }
 
         /// <summary>
