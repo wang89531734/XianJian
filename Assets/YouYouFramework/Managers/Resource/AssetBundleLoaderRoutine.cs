@@ -62,11 +62,11 @@ namespace YouYou
                     {
                         if (buff == null)
                         {
-                            GameEntry.Download.BeginDownloadSingle(assetbundlePath, onComplete: (string fileUrl) =>
-                            {
-                                buffer = GameEntry.Resource.ResourceManager.LocalAssetsManager.GetFileBuffer(fileUrl);
-                                LoadAssetBundleAsync(buffer);
-                            });
+                            //GameEntry.Download.BeginDownloadSingle(assetbundlePath, onComplete: (string fileUrl) =>
+                            //{
+                            //    buffer = GameEntry.Resource.ResourceManager.LocalAssetsManager.GetFileBuffer(fileUrl);
+                            //    LoadAssetBundleAsync(buffer);
+                            //});
                         }
                         else
                         {

@@ -126,6 +126,9 @@ namespace SoftStar.Pal6
         //		// Token: 0x04003134 RID: 12596
         //		public static bool ForceLow = false;
 
+        /// <summary>
+        /// 是否初始化
+        /// </summary>
         private static bool initialized = false;
 
         //		// Token: 0x04003136 RID: 12598
@@ -781,10 +784,6 @@ namespace SoftStar.Pal6
             this.Initialize();
         }
 
-        private void OnDestroy()
-        {
-        }
-
         //		// Token: 0x060036BB RID: 14011 RVA: 0x0018A7B8 File Offset: 0x001889B8
         //		public static void LoadOneLangueUIAtlas(string subname)
         //		{
@@ -823,57 +822,13 @@ namespace SoftStar.Pal6
 
         private void Initialize()
         {
-            if (PalMain.initialized || !Application.isPlaying)
+            if (PalMain.initialized)
             {
                 return;
             }
 
-            //UnityEngine.Debug.Log("Log : CurVersion = " + this.CurVersion.ToString());
-
-            //try
-            //{
-            //    if (ConfigManager.ReadWritePath == null) //配置管理 路径如果为空 关闭程序
-            //    {
-            //        UnityEngine.Debug.LogError("Read or write fail 0x2204.");
-            //        UtilFun.WinMessageBox("read or write fail", "error", 8708);
-            //        Application.Quit();
-            //        return;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    UnityEngine.Debug.Log(ex.ToString() + " 0x2204.");
-            //    UtilFun.WinMessageBox(ex.ToString(), "error", 8708);
-            //    Application.Quit();
-            //    return;
-            //}
-
-            //int num = QualitySettings.names.Length - 1;//质量有6个级别
-            //UnityEngine.Debug.Log(QualitySettings.names);
-            //num = Mathf.Clamp(num, 0, 10);
-            //QualitySettings.SetQualityLevel(num); //设置质量级别
-
-            //			OptionConfig optionConfig = OptionConfig.GetInstance(); //选项设置
-            //			if (!ConfigManager.IsFileExist())
-            //			{
-            //				optionConfig.SetAllQualityFirstTime(PalMain.FirstTimeLaunch103());
-            //				optionConfig.Save();
-            //			}
-            //			optionConfig.Use_Start();
-            //			optionConfig.Use_Other();
-
             Physics.gravity = new Vector3(0f, -20f, 0f);//重力设置
             Physics2D.queriesHitTriggers = false;//关闭2D碰撞
-                                                 //			QualitySettings.blendWeights = BlendWeights.FourBones;
-                                                 //			string operatingSystem = SystemInfo.operatingSystem;
-                                                 //			PalMain.IsXP = operatingSystem.Contains("Windows XP");
-                                                 //			PalMain.IsWin32 = !operatingSystem.Contains("64bit");
-                                                 //			if (!PalMain.IsXP)
-                                                 //			{
-                                                 //				QualitySettings.anisotropicFiltering = AnisotropicFiltering.ForceEnable;
-                                                 //				QualitySettings.shadowProjection = ShadowProjection.StableFit;
-                                                 //			}
-            UnityEngine.Object.DontDestroyOnLoad(base.gameObject);
             PalMain.instance = this;
 
             //			ItemManager.GetInstance().OnBeforeRemoveItem += this.PutOffItem;
@@ -901,17 +856,17 @@ namespace SoftStar.Pal6
             //			ShaderPropertyIDManager.Initialize();
             //			MessageProcess.Initialize();
             //			SetActiveByFlagManager.Initialize();
-            ScenesManager.Initialize();
+            //ScenesManager.Initialize();
             //			FlagManager.Initialize();
             //			DistanceCullManager.Initialize();
             //			MoviesManager.Initialize();
             //			CharactersManager.Initialize();
             //			InputManager.Initialize();
             //			PlayerCtrlManager.Initialize();
-            PalBattleManager.Initialize();
+            //PalBattleManager.Initialize();
             //			EntityManager.Initialize();
             //			MissionTick.Initialize();
-            PlayersManager.Initialize();
+            //PlayersManager.Initialize();
             //			RenownManager.Initialize();
             //			AnimWithoutClothSet.Initialize();
             //			SlowLoopAnimSet.Initialize();

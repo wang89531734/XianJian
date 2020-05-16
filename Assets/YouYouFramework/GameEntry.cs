@@ -218,15 +218,6 @@ namespace YouYou
         }
 
         /// <summary>
-        /// 下载管理器
-        /// </summary>
-        public static DownloadManager Download
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
         /// UI管理器
         /// </summary>
         public static YouYouUIManager UI
@@ -258,7 +249,6 @@ namespace YouYou
             Pool = new PoolManager();
             Scene = new YouYouSceneManager();
             Resource = new AddressableManager();
-            Download = new DownloadManager();
             UI = new YouYouUIManager();
             //Audio = new AudioManager();
 
@@ -273,12 +263,11 @@ namespace YouYou
             Pool.Init();
             Scene.Init();
             Resource.Init();
-            Download.Init();
             UI.Init();
             //Audio.Init();
 
             //进入第一个流程
-            Procedure.ChangeState(ProcedureState.Launch);
+            Procedure.ChangeState(ProcedureState.Preload);
         }
         #endregion
 
@@ -376,7 +365,6 @@ namespace YouYou
             Pool.OnUpdate();
             Scene.OnUpdate();
             Resource.OnUpdate();
-            Download.OnUpdate();
             UI.OnUpdate();
             //Audio.OnUpdate();
         }
@@ -398,7 +386,6 @@ namespace YouYou
             Pool.Dispose();
             Scene.Dispose();
             Resource.Dispose();
-            Download.Dispose();
             UI.Dispose();
             //Audio.Dispose();
         }

@@ -379,7 +379,7 @@ namespace YouYou
             }
             else
             {
-                GameEntry.Download.BeginDownloadMulit(m_NeedDownloadList, OnDownloadMulitUpdate, OnDownloadMulitComplete);
+                //GameEntry.Download.BeginDownloadMulit(m_NeedDownloadList, OnDownloadMulitUpdate, OnDownloadMulitComplete);
             }
         }
         #endregion
@@ -517,7 +517,7 @@ namespace YouYou
             GameEntry.Event.CommonEvent.Dispatch(SysEventId.CheckVersionBeginDownload);
 
             //进行下载
-            GameEntry.Download.BeginDownloadMulit(needDownloadList, OnDownloadMulitUpdate, OnDownloadMulitComplete);
+            //GameEntry.Download.BeginDownloadMulit(needDownloadList, OnDownloadMulitUpdate, OnDownloadMulitComplete);
         }
 
         #region OnDownloadMulitUpdate 下载中
