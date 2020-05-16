@@ -40,9 +40,9 @@ namespace YouYou
             GameEntry.Event.CommonEvent.AddEventListener(SysEventId.LoadDataTableComplete, OnLoadDataTableComplete);
 
             GameEntry.Log(LogCategory.Normal, "预加载开始");
-            //m_PreloadParams = GameEntry.Pool.DequeueClassObject<BaseParams>();
-            //m_PreloadParams.Reset();
-            //GameEntry.Event.CommonEvent.Dispatch(SysEventId.PreloadBegin);
+            m_PreloadParams = GameEntry.Pool.DequeueClassObject<BaseParams>();
+            m_PreloadParams.Reset();
+            GameEntry.Event.CommonEvent.Dispatch(SysEventId.PreloadBegin);
 
             m_TargetProgress = 99;
 
@@ -52,10 +52,10 @@ namespace YouYou
                 LoadReport();
             });
 #else
-           // LoadReport();
+            //LoadReport();
 #endif
 
-           // GameEntry.DataTable.LoadDataAllTable();
+            GameEntry.DataTable.LoadDataAllTable();
         }
 
         /// <summary>

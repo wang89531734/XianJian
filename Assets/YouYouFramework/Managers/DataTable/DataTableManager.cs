@@ -82,7 +82,7 @@ namespace YouYou
         /// </summary>
         public void LoadDataTable()
         {
-            Sys_LocalizationList.LoadData();
+            //Sys_LocalizationList.LoadData();
             Sys_AudioList.LoadData();
             Sys_CodeList.LoadData();
             Sys_EffectList.LoadData();
