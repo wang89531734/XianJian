@@ -6,7 +6,7 @@ using System.Text;
 //using Funfia.File;
 //using Glow11;
 //using SoftStar.BuffDebuff;
-//using SoftStar.Item;
+using SoftStar.Item;
 //using SoftStar.Pal6.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -829,9 +829,13 @@ namespace SoftStar.Pal6
 
             Physics.gravity = new Vector3(0f, -20f, 0f);//重力设置
             Physics2D.queriesHitTriggers = false;//关闭2D碰撞
+            UnityEngine.Object.DontDestroyOnLoad(base.gameObject);
+  
             PalMain.instance = this;
 
-            //			ItemManager.GetInstance().OnBeforeRemoveItem += this.PutOffItem;
+
+            //ItemManager.GetInstance().OnBeforeRemoveItem += this.PutOffItem;
+
             //			ItemPackage orCreatePackage = ItemManager.GetInstance().GetOrCreatePackage(1u);
             //			orCreatePackage.OnItemAdded += delegate(IItem obj)
             //			{
@@ -851,7 +855,7 @@ namespace SoftStar.Pal6
             //				FashionClothItemTypeCache.SetIsGet(obj.ItemType.TypeID, true);
             //				achievements[189].m_CurrentNum = ((FashionClothItemTypeCache.IsGetRate() < 1f) ? 0 : 1);
             //			};
-            //			ProceduralMaterial.substanceProcessorUsage = ProceduralProcessorUsage.All;
+
             //			MouseEventManager.Initialize();
             //			ShaderPropertyIDManager.Initialize();
             //			MessageProcess.Initialize();
@@ -1149,28 +1153,27 @@ namespace SoftStar.Pal6
             //			}
         }
 
-        //		// Token: 0x060036C0 RID: 14016 RVA: 0x0018AD88 File Offset: 0x00188F88
-        //		private void PutOffItem(IItem inItem)
-        //		{
-        //			IItemAssemble<SymbolPanelItem> itemAssemble = inItem as IItemAssemble<SymbolPanelItem>;
-        //			if (itemAssemble != null)
-        //			{
-        //				SymbolPanelItem owner = itemAssemble.GetOwner();
-        //				if (owner != null)
-        //				{
-        //					owner.RemoveNode(itemAssemble as SymbolNodeItem);
-        //				}
-        //			}
-        //			IItemAssemble<PalNPC> itemAssemble2 = inItem as IItemAssemble<PalNPC>;
-        //			if (itemAssemble2 != null)
-        //			{
-        //				PalNPC owner2 = itemAssemble2.GetOwner();
-        //				if (owner2 != null)
-        //				{
-        //					owner2.PutOffEquip(inItem);
-        //				}
-        //			}
-        //		}
+        private void PutOffItem(IItem inItem)
+        {
+            //IItemAssemble<SymbolPanelItem> itemAssemble = inItem as IItemAssemble<SymbolPanelItem>;
+            //if (itemAssemble != null)
+            //{
+            //    SymbolPanelItem owner = itemAssemble.GetOwner();
+            //    if (owner != null)
+            //    {
+            //        owner.RemoveNode(itemAssemble as SymbolNodeItem);
+            //    }
+            //}
+            //IItemAssemble<PalNPC> itemAssemble2 = inItem as IItemAssemble<PalNPC>;
+            //if (itemAssemble2 != null)
+            //{
+            //    PalNPC owner2 = itemAssemble2.GetOwner();
+            //    if (owner2 != null)
+            //    {
+            //        owner2.PutOffEquip(inItem);
+            //    }
+            //}
+        }
 
         //		// Token: 0x060036C1 RID: 14017 RVA: 0x0018ADE4 File Offset: 0x00188FE4
         //		public void InitPlayBeginMovie()
@@ -1775,10 +1778,10 @@ namespace SoftStar.Pal6
         //			return flag > 0;
         //		}
 
-        public static void SetFlag(int idx, int value)
-        {
-            FlagManager.SetFlag(idx, value, true);
-        }
+        //public static void SetFlag(int idx, int value)
+        //{
+        //    FlagManager.SetFlag(idx, value, true);
+        //}
 
         //		// Token: 0x060036DD RID: 14045 RVA: 0x0018C188 File Offset: 0x0018A388
         //		public static int GetFlag(int idx)
@@ -1807,10 +1810,10 @@ namespace SoftStar.Pal6
         //			return PalMain.GetFlag(2);
         //		}
 
-        public static void SetMoney(int money)
-        {
-            PalMain.SetFlag(2, money);
-        }
+        //public static void SetMoney(int money)
+        //{
+        //    PalMain.SetFlag(2, money);
+        //}
 
         //		public static void SetCameraDistanceForPot()
         //		{
@@ -1930,12 +1933,12 @@ namespace SoftStar.Pal6
                 SaveDynamicObjs
             }));
 
-            PalBattleManager.Instance().OnSceneChangeClear();
+            //PalBattleManager.Instance().OnSceneChangeClear();
 
-            if (ScenesManager.CurLoadedLevel == 11 && LevelIndex != 11)
-            {
-                FlagManager.SetFlag(8, 1, false);
-            }
+            //if (ScenesManager.CurLoadedLevel == 11 && LevelIndex != 11)
+            //{
+            //    FlagManager.SetFlag(8, 1, false);
+            //}
 
             //if (Cutscene.current != null && (Cutscene.current.isPlaying || Cutscene.current.isPause))
             //{
@@ -1949,12 +1952,12 @@ namespace SoftStar.Pal6
             //}
             //UtilFun.GetMainCamera().cullingMask = 0;
 
-            if (ScenesManager.IsChanging)
-            {
-                return;
-            }
+            //if (ScenesManager.IsChanging)
+            //{
+            //    return;
+            //}
 
-            PlayersManager.RestoreLayer(true);
+            //PlayersManager.RestoreLayer(true);
 
             //PlayersManager.ChangeHairShader(false);
 
@@ -1965,7 +1968,7 @@ namespace SoftStar.Pal6
 
             //PalMain.ClearManagerData();
 
-            ScenesManager.IsChanging = true;
+            //ScenesManager.IsChanging = true;
 
             //if (PalMain.backgroundAudio != null)
             //{
@@ -1980,8 +1983,8 @@ namespace SoftStar.Pal6
             //{
             //    SkillSEPreloader.Instance.unLoadAllSkillSE();
             //}
-            GameEntry.Procedure.ChangeState(ProcedureState.ChangeScene);
-            GameEntry.Scene.LoadScene(1,true, OnLevelLoaded);
+            //GameEntry.Procedure.ChangeState(ProcedureState.ChangeScene);
+            //GameEntry.Scene.LoadScene(1,true, OnLevelLoaded);
         }
 
         /// <summary>
@@ -1989,10 +1992,10 @@ namespace SoftStar.Pal6
         /// </summary>
         public static void OnReadySpawn()
         {
-            if (PlayersManager.Player == null)
-            {
-                PlayersManager.SpawnPlayer(null, null, false);
-            }
+            //if (PlayersManager.Player == null)
+            //{
+            //    PlayersManager.SpawnPlayer(null, null, false);
+            //}
             //PlayersManager.SetPlayerPosByDestObj(ScenesManager.Instance.NextDestObjName);
             //if (PlayersManager.Player != null)
             //{
