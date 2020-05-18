@@ -260,7 +260,7 @@ namespace YouYou
             UI.Init();
 
             //进入第一个流程
-            //Procedure.ChangeState(ProcedureState.Preload);
+            Procedure.ChangeState(ProcedureState.Preload);
         }
         #endregion
 

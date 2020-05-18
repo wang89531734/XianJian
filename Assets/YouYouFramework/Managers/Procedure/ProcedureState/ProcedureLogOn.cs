@@ -19,8 +19,7 @@ namespace YouYou
         {
             base.OnEnter();
             GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureLogOn");
-
-            //GameEntry.UI.OpenUIForm(UIFormId.UI_LogonBG, onOpen: OnLogonBGOpen);
+            GameEntry.Scene.LoadScene(2);
         }
 
         private void OnLogonBGOpen(UIFormBase uiFormBase)
