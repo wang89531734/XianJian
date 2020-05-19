@@ -18,10 +18,8 @@ public class UILogOnForm : UIFormBase
 
     public void OnNewGameBtn()
     {
-        Debug.Log("开始新游戏 添加初始数据");
-
         PalMain.GameDifficulty = 0;//设置游戏难度
-        //SaveManager.GameDifficulty = 0;
+        SaveManager.GameDifficulty = 0;
         //HPMPDPProperty.StaticData.Reset();
         //FightProperty.StaticData.Reset();
         //PalMain.backgroundAudio.ChangeBackMusicImmediate(null);
@@ -56,6 +54,7 @@ public class UILogOnForm : UIFormBase
         //}
         PalMain.GameBeginTime = Time.fixedTime;
         PalMain.GameTotleTime = 0f;
-        PalMain.ChangeMap("SceneEnter", 1, true, true);
+        GameEntry.UI.CloseUIForm(101);
+        GameEntry.Scene.LoadScene(2);
     }
 }
