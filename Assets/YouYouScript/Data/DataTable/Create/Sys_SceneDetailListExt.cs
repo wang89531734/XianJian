@@ -4,7 +4,7 @@ using YouYou;
 using YouYou.DataTable;
 
 /// <summary>
-/// Create By 悠游课堂 http://www.u3dol.com zmx000
+/// Create By 悠游课堂 http://www.u3dol.com 王一博 18321883193
 /// </summary>
 public static partial class Sys_SceneDetailListExt
 {

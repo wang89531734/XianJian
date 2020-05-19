@@ -48,20 +48,20 @@ public class TestUI : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.T))
         {
-            Chapter chapter = GameEntry.DataTable.ChapterList.GetEntityValue(1);
-            string chapterName = chapter.ChapterName;
-            Debug.LogError("ChapterName==" + chapterName);
-            int len = chapter.BranchLevelIdLength;
-            for (int i = 0; i < len; i++)
-            {
-                Debug.LogError("BranchLevelId==" + chapter.BranchLevelId(i));
-            }
+           // Chapter chapter = GameEntry.DataTable.ChapterList.GetEntityValue(1);
+            //string chapterName = chapter.ChapterName;
+            //Debug.LogError("ChapterName==" + chapterName);
+            //int len = chapter.BranchLevelIdLength;
+            //for (int i = 0; i < len; i++)
+            //{
+            //    Debug.LogError("BranchLevelId==" + chapter.BranchLevelId(i));
+            //}
 
-            len = chapter.BranchLevelNameLength;
-            for (int i = 0; i < len; i++)
-            {
-                Debug.LogError("BranchLevelId==" + chapter.BranchLevelName(i));
-            }
+            //len = chapter.BranchLevelNameLength;
+            //for (int i = 0; i < len; i++)
+            //{
+            //    Debug.LogError("BranchLevelId==" + chapter.BranchLevelName(i));
+            //}
 
             //Sys_Prefab prefab = GameEntry.DataTable.Sys_PrefabList.GetEntityValue(1);
             //string aa = prefab.AssetPath;

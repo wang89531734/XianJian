@@ -66,16 +66,16 @@ namespace YouYou
         public int CurrLoadTableCount = 0;
 
         public Sys_LocalizationList Sys_LocalizationList;
-        public Sys_AudioList Sys_AudioList;
+        //public Sys_AudioList Sys_AudioList;
         public Sys_CodeList Sys_CodeList;
-        public Sys_EffectList Sys_EffectList;
+        //public Sys_EffectList Sys_EffectList;
         public Sys_PrefabList Sys_PrefabList;
         public Sys_SceneList Sys_SceneList;
         public Sys_SceneDetailList Sys_SceneDetailList;
-        public Sys_StorySoundList Sys_StorySoundList;
+        //public Sys_StorySoundList Sys_StorySoundList;
         public Sys_UIFormList Sys_UIFormList;
 
-        public ChapterList ChapterList;
+        //public ChapterList ChapterList;
 
         /// <summary>
         /// 加载表格
