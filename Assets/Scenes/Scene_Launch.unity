@@ -262,13 +262,13 @@ MonoBehaviour:
   UIRootCanvas: {fileID: 1551695558}
   UIRootCanvasScaler: {fileID: 1551695557}
   UIGroups:
-  - Id: 0
+  - Id: 1
     BaseOrder: 10
     Group: {fileID: 1312360515}
-  - Id: 0
+  - Id: 2
     BaseOrder: 100
     Group: {fileID: 1628815473}
-  - Id: 0
+  - Id: 3
     BaseOrder: 6000
     Group: {fileID: 1794511368}
   timeScale: 0

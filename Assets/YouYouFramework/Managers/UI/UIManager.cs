@@ -43,7 +43,6 @@ namespace YouYou
             {
                 return;
             }
-
             Sys_UIForm sys_UIForm = entity.Value;
 
             //判断UI多实例

@@ -778,7 +778,6 @@ namespace SoftStar.Pal6
         {
             if (PalMain.instance != null && PalMain.instance != this)
             {
-                UnityEngine.Object.Destroy(base.gameObject);
                 return;
             }
             this.Initialize();
@@ -829,7 +828,6 @@ namespace SoftStar.Pal6
 
             Physics.gravity = new Vector3(0f, -20f, 0f);//重力设置
             Physics2D.queriesHitTriggers = false;//关闭2D碰撞
-            UnityEngine.Object.DontDestroyOnLoad(base.gameObject);
   
             PalMain.instance = this;
 

@@ -90,7 +90,7 @@ namespace YouYou
             Sys_SceneList.LoadData();
             Sys_SceneDetailList.LoadData();
             //Sys_StorySoundList.LoadData();
-            //Sys_UIFormList.LoadData();
+            Sys_UIFormList.LoadData();
             //ChapterList.LoadData();
         }
 

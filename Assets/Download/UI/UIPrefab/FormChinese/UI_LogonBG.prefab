@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.2, y: 0}
+  m_AnchoredPosition: {x: -1.199997, y: 0}
   m_SizeDelta: {x: 1286.5, y: 857.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222542117021736710
@@ -119,37 +119,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1988337133857764}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 551f57429244f944cace364d12e3143d, type: 3}
+  m_Script: {fileID: 11500000, guid: cc0ca81a3f71d364dbd481aeccc6715a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  luaScript: {fileID: 4900000, guid: 686c4663ad0414e46b498f7f1e407c5a, type: 3}
-  m_LuaComGroups:
-  - Name: Common
-    LuaComs:
-    - Name: btnOpenLogin
-      Type: 2
-      Trans: {fileID: 8904946535874490361}
-    - Name: btnOpenReg
-      Type: 2
-      Trans: {fileID: 6161255560720832376}
-    - Name: btnOpenTask
-      Type: 2
-      Trans: {fileID: 8858480163302698672}
-    - Name: btnReadLuaData
-      Type: 2
-      Trans: {fileID: 2166391661077212864}
-    - Name: btnSendProto
-      Type: 2
-      Trans: {fileID: 3792374219701173221}
-    - Name: btnSetRoleId1
-      Type: 2
-      Trans: {fileID: 5527461948980561014}
-    - Name: btnSetRoleId2
-      Type: 2
-      Trans: {fileID: 2560140446543822813}
-    - Name: btnGettRoleId
-      Type: 2
-      Trans: {fileID: 4127060500347540797}
 --- !u!223 &223887179264670012
 Canvas:
   m_ObjectHideFlags: 0
@@ -187,7 +159,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 311
+    m_Bits: 55
 --- !u!1 &962469975556896753
 GameObject:
   m_ObjectHideFlags: 0
