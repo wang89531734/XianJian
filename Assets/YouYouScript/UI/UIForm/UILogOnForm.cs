@@ -48,13 +48,12 @@ public class UILogOnForm : UIFormBase
 
     public void AfterSetGameDifficulty_NewStart()
     {
-        //if (PlayerTeam.Instance != null)
-        //{
-        //    PlayerTeam.Instance.LoadTeam();
-        //}
+        if (PlayerTeam.Instance != null)
+        {
+            PlayerTeam.Instance.LoadTeam();
+        }
         PalMain.GameBeginTime = Time.fixedTime;
         PalMain.GameTotleTime = 0f;
-        GameEntry.UI.CloseUIForm(101);
-        GameEntry.Scene.LoadScene(2);
+        PalMain.LoadScene(2);
     }
 }

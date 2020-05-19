@@ -346,7 +346,6 @@ namespace YouYou
                 ReleaseAssetPool();
                 GameEntry.Log(LogCategory.Normal, "释放Asset池");
 #endif
-                GameEntry.Event.CommonEvent.Dispatch(SysEventId.LuaFullGc);
 
 #if !UNLOADRES_CHANGESCENE
                 Resources.UnloadUnusedAssets();

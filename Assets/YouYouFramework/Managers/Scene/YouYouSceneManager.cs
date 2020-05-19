@@ -247,7 +247,7 @@ namespace YouYou
 
                     m_CurrLoadingParam.Reset();
                     GameEntry.Pool.EnqueueClassObject(m_CurrLoadingParam);
-
+                    GameEntry.Event.CommonEvent.Dispatch(SysEventId.OnSceneLoaded);
                     if (m_OnComplete != null)
                     {
                         m_OnComplete();

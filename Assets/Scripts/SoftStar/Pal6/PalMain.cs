@@ -1776,10 +1776,10 @@ namespace SoftStar.Pal6
         //			return flag > 0;
         //		}
 
-        //public static void SetFlag(int idx, int value)
-        //{
-        //    FlagManager.SetFlag(idx, value, true);
-        //}
+        public static void SetFlag(int idx, int value)
+        {
+            FlagManager.SetFlag(idx, value, true);
+        }
 
         //		// Token: 0x060036DD RID: 14045 RVA: 0x0018C188 File Offset: 0x0018A388
         //		public static int GetFlag(int idx)
@@ -1808,10 +1808,10 @@ namespace SoftStar.Pal6
         //			return PalMain.GetFlag(2);
         //		}
 
-        //public static void SetMoney(int money)
-        //{
-        //    PalMain.SetFlag(2, money);
-        //}
+        public static void SetMoney(int money)
+        {
+            PalMain.SetFlag(2, money);
+        }
 
         //		public static void SetCameraDistanceForPot()
         //		{
@@ -1912,6 +1912,56 @@ namespace SoftStar.Pal6
         //			DynamicObjsDataManager.Instance.ClearLayers();
         //			Footmark.Clear();
         //		}
+
+
+        public static void LoadScene(int sceneId, bool PlayDefaultAudio = true, bool SaveDynamicObjs = true)
+        {
+            GameEntry.UI.CloseUIForm(101);//需要改成关闭所有UI
+
+            Time.timeScale = 1f;
+
+            //PalBattleManager.Instance().OnSceneChangeClear();
+            //if (ScenesManager.CurLoadedLevel == 11 && LevelIndex != 11)
+            //{
+            //    FlagManager.SetFlag(8, 1, false);
+            //}
+            //if (Cutscene.current != null && (Cutscene.current.isPlaying || Cutscene.current.isPause))
+            //{
+            //    Cutscene.current.End(false);
+            //}
+            //Transform transform = UtilFun.GetMainCamera().transform;
+            //if (transform != null)
+            //{
+            //    transform.parent = null;
+            //}
+            //UtilFun.GetMainCamera().cullingMask = 0;
+            //if (ScenesManager.IsChanging)
+            //{
+            //    return;
+            //}
+            //PlayersManager.RestoreLayer(true);
+            //PlayersManager.ChangeHairShader(false);
+            //if (SaveDynamicObjs)
+            //{
+            //    DynamicObjsDataManager.Instance.SaveCurObjsDataToMemory();
+            //}
+            //PalMain.ClearManagerData();
+            //ScenesManager.IsChanging = true;
+            //if (PalMain.backgroundAudio != null)
+            //{
+            //    PalMain.backgroundAudio.PlayDefaultAudio = PlayDefaultAudio;
+            //}
+            //else
+            //{
+            //    UnityEngine.Debug.LogError("PalMain.backgroundAudio==null");
+            //}
+            //if (SkillSEPreloader.s_preloadEnable)
+            //{
+            //    SkillSEPreloader.Instance.unLoadAllSkillSE();
+            //}
+            //ScenesManager.Instance.ChangeMap(DestName, LevelIndex, new Action<int>(PalMain.Instance.OnLevelLoaded));
+            GameEntry.Scene.LoadScene(sceneId);
+        }
 
         /// <summary>
         /// 读取出生点

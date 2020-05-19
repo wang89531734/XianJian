@@ -65,8 +65,8 @@ namespace YouYou
         public const ushort CloseCheckVersionUI = 1207;
 
         /// <summary>
-        /// Lua内存释放
+        /// 场景加载完毕
         /// </summary>
-        public const ushort LuaFullGc = 1208;
+        public const ushort OnSceneLoaded = 1208;
     }
 }
