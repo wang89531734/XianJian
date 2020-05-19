@@ -158,7 +158,7 @@ namespace YouYou
         private void LoadNewScene()
         {
             m_CurrSceneEntity = GameEntry.DataTable.Sys_SceneList.GetEntity(m_CurrLoadSceneId);
-            m_CurrSceneDetailList = GameEntry.DataTable.Sys_SceneDetailList.GetListBySceneId(m_CurrSceneEntity.Value.Id, 2);
+            m_CurrSceneDetailList = GameEntry.DataTable.Sys_SceneDetailList.GetListBySceneId(m_CurrSceneEntity.Value.Id, 0);
             m_NeedLoadOrUnloadSceneDetailCount = m_CurrSceneDetailList.Count;
 
             for (int i = 0; i < m_NeedLoadOrUnloadSceneDetailCount; i++)

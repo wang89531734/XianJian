@@ -96,6 +96,7 @@ namespace YouYou
                 GameEntry.Event.CommonEvent.Dispatch(SysEventId.PreloadComplete);
                 GameEntry.Pool.EnqueueClassObject(m_PreloadParams);
 
+                GameEntry.Scene.LoadScene(1);
                 GameEntry.Procedure.ChangeState(ProcedureState.LogOn);
             }
         }

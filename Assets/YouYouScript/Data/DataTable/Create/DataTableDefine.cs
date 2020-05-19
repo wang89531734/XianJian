@@ -1,7 +1,5 @@
 public sealed class DataTableDefine
 {
-    public const string ChapterName = "Chapter";
-    public const int ChapterVersion = 8;
     public const string Sys_AudioName = "Sys_Audio";
     public const int Sys_AudioVersion = 5;
     public const string Sys_CodeName = "Sys_Code";
