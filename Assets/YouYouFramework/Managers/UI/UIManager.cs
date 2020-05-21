@@ -180,6 +180,17 @@ namespace YouYou
 
         #region CloseUIForm 关闭UI
         /// <summary>
+        /// 关闭所有UI
+        /// </summary>
+        internal void CloseAllUIForm()
+        {
+            for (LinkedListNode<UIFormBase> curr = m_OpenUIFormList.First; curr != null; curr = curr.Next)
+            {
+                CloseUIForm(curr.Value);
+            }
+        }
+
+        /// <summary>
         /// 根据UIFormId关闭UI
         /// </summary>
         /// <param name="uiformId"></param>

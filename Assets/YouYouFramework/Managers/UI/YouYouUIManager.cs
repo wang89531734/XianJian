@@ -162,6 +162,11 @@ namespace YouYou
             m_UIManager.CloseUIForm(formBase);
         }
 
+        public void CloseAllUIForm()
+        {
+            m_UIManager.CloseAllUIForm();
+        }
+
         /// <summary>
         /// 显示/激活一个UI
         /// </summary>

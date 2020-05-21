@@ -263,6 +263,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ba328de7f5fe349ba11d3e944bb4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  money: 1000
+  data:
+  - Enqueue: 1
+    HP: 10
+    mCharacterID: 1
+    mLevel: 1
+    m_SkillIDs: []
+    m_ItemIDs: []
+  PackItemIDs: []
+  flagValues: []
+  startWeatherTime: 0.4
 --- !u!1 &1531371451
 GameObject:
   m_ObjectHideFlags: 0

@@ -662,7 +662,6 @@ namespace SoftStar.Pal6
         //			return RenownManager.GetRenownManner(ID);
         //		}
 
-        //		// Token: 0x060036AD RID: 13997 RVA: 0x0018A590 File Offset: 0x00188790
         //		public static GameObject GetPlayer(bool bAgent)
         //		{
         //			GameObject result;
@@ -868,7 +867,7 @@ namespace SoftStar.Pal6
             //PalBattleManager.Initialize();
             //			EntityManager.Initialize();
             //			MissionTick.Initialize();
-            //PlayersManager.Initialize();
+            PlayersManager.Initialize();
             //			RenownManager.Initialize();
             //			AnimWithoutClothSet.Initialize();
             //			SlowLoopAnimSet.Initialize();
@@ -1916,7 +1915,7 @@ namespace SoftStar.Pal6
 
         public static void LoadScene(int sceneId, bool PlayDefaultAudio = true, bool SaveDynamicObjs = true)
         {
-            GameEntry.UI.CloseUIForm(101);//需要改成关闭所有UI
+            GameEntry.UI.CloseAllUIForm();//关闭所有UI
 
             Time.timeScale = 1f;
 
