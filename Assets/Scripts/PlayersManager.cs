@@ -823,9 +823,35 @@ public class PlayersManager
     /// </summary>
     /// <param name="ID"></param>
     /// <returns></returns>
-    public static GameObject LoadPlayer(int ID)
+    public static GameObject LoadPlayer(int ID, object userData = null, BaseAction<ResourceEntity> onOpen = null)
     {
+        Debug.Log("ToDo 加载角色模型");
         string path =  ID.ToString();
+        GameEntry.Resource.ResourceLoaderManager.LoadMainAsset(AssetCategory.RolePrefab, string.Format("Assets/Download/Role/RolePrefab/{0}.prefab", ID.ToString()), (ResourceEntity resourceEntity) =>
+        {
+            GameObject uiObj = UnityEngine.Object.Instantiate((UnityEngine.Object)resourceEntity.Target) as GameObject;
+
+            //把克隆出来的资源 加入实例资源池
+            //GameEntry.Pool.RegisterInstanceResource(uiObj.GetInstanceID(), resourceEntity);
+
+            //uiObj.transform.SetParent(GameEntry.UI.GetUIGroup((byte)sys_UIForm.UIGroupId).Group);
+            //uiObj.transform.localPosition = Vector3.zero;
+            //uiObj.transform.localScale = Vector3.one;
+
+            //RectTransform rectTransform = uiObj.GetComponent<RectTransform>();
+            //rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0, 0);
+            //rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0, 0);
+            //rectTransform.anchorMin = Vector2.zero;
+            //rectTransform.anchorMax = Vector2.one;
+
+            //formBase = uiObj.GetComponent<UIFormBase>();
+            //formBase.Init(uiFormId, sys_UIForm, (byte)sys_UIForm.UIGroupId, sys_UIForm.DisableUILayer == 1, sys_UIForm.IsLock == 1, userData, () =>
+            //{
+            //    OpenUI(sys_UIForm, formBase, onOpen);
+            //});
+            //m_OpenUIFormList.AddLast(formBase);
+            //m_LoadingUIFormList.Remove(uiFormId);
+        });
         UnityEngine.Object @object = Resources.Load(path);
         GameObject gameObject = null;
         if (@object != null)
