@@ -45,3 +45,16 @@ The following packages were added:
   com.unity.modules.vr@1.0.0
   com.unity.modules.wind@1.0.0
   com.unity.modules.xr@1.0.0
+
+=== Tue Jun 16 15:19:20 2020
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were 已更新:
+  com.unity.ide.rider 从版本 1.1.0 到 1.1.4
+  com.unity.ide.vscode 从版本 1.1.0 到 1.1.4
+  com.unity.test-framework 从版本 1.0.13 到 1.1.13
+  com.unity.timeline 从版本 1.1.0 到 1.2.6
+The following packages were 已移除:
+  com.unity.package-manager-ui@2.2.0
