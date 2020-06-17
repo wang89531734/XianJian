@@ -126,11 +126,6 @@ namespace SoftStar.Pal6
         //		// Token: 0x04003134 RID: 12596
         //		public static bool ForceLow = false;
 
-        /// <summary>
-        /// 是否初始化
-        /// </summary>
-        private static bool initialized = false;
-
         //		// Token: 0x04003136 RID: 12598
         //		public bool bPlayBeginMovie = true;
 
@@ -775,10 +770,6 @@ namespace SoftStar.Pal6
 
         private void Awake()
         {
-            if (PalMain.instance != null && PalMain.instance != this)
-            {
-                return;
-            }
             this.Initialize();
         }
 
@@ -820,19 +811,51 @@ namespace SoftStar.Pal6
 
         private void Initialize()
         {
-            if (PalMain.initialized)
-            {
-                return;
-            }
+            //try
+            //{
+            //    if (ConfigManager.ReadWritePath == null)
+            //    {
+            //        UnityEngine.Debug.LogError("Read or write fail 0x2204.");
+            //        UtilFun.WinMessageBox("read or write fail", "error", 8708);
+            //        Application.Quit();
+            //        return;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    UnityEngine.Debug.Log(ex.ToString() + " 0x2204.");
+            //    UtilFun.WinMessageBox(ex.ToString(), "error", 8708);
+            //    Application.Quit();
+            //    return;
+            //}
+
+            int num = QualitySettings.names.Length - 1;
+            num = Mathf.Clamp(num, 0, 10);
+            QualitySettings.SetQualityLevel(num);
+            //OptionConfig optionConfig = OptionConfig.GetInstance();
+            //if (!ConfigManager.IsFileExist())
+            //{
+            //    optionConfig.SetAllQualityFirstTime(PalMain.FirstTimeLaunch103());
+            //    optionConfig.Save();
+            //}
+            //optionConfig.Use_Start();
+            //optionConfig.Use_Other();
 
             Physics.gravity = new Vector3(0f, -20f, 0f);//重力设置
             Physics2D.queriesHitTriggers = false;//关闭2D碰撞
-  
+            //QualitySettings.blendWeights = BlendWeights.FourBones;
+            //string operatingSystem = SystemInfo.operatingSystem;
+            //PalMain.IsXP = operatingSystem.Contains("Windows XP");
+            //PalMain.IsWin32 = !operatingSystem.Contains("64bit");
+            //if (!PalMain.IsXP)
+            //{
+            //    QualitySettings.anisotropicFiltering = AnisotropicFiltering.ForceEnable;
+            //    QualitySettings.shadowProjection = ShadowProjection.StableFit;
+            //}
+
             PalMain.instance = this;
 
-
             //ItemManager.GetInstance().OnBeforeRemoveItem += this.PutOffItem;
-
             //			ItemPackage orCreatePackage = ItemManager.GetInstance().GetOrCreatePackage(1u);
             //			orCreatePackage.OnItemAdded += delegate(IItem obj)
             //			{
@@ -1124,7 +1147,6 @@ namespace SoftStar.Pal6
             //			};
             //			UIManager.Instance.Initialize();
             //			EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Combine(EntityManager.OnLoadOver, new EntityManager.void_fun(MiniMap.Instance.OnLoadOver));
-            PalMain.initialized = true;
             //			MissionManager.Initialize();
             //			HuanHuaManager.Instance.Initialize();
             //			PanelFaceManager.Initialize();
@@ -1998,19 +2020,6 @@ namespace SoftStar.Pal6
         //		{
         //			string value = "PalMain.ShowMemory: Current scene = " + SceneManager.GetActiveScene().buildIndex.ToString();
         //			Console.WriteLine(value);
-        //		}
-
-        //		// Token: 0x060036EC RID: 14060 RVA: 0x0018C670 File Offset: 0x0018A870
-        //		public static void InitPermanentObject()
-        //		{
-        //			if (!UnityEngine.Object.FindObjectOfType(typeof(PalShroudObjectManager)))
-        //			{
-        //				new GameObject
-        //				{
-        //					name = "shroudMrg"
-        //				}.AddComponent<PalShroudObjectManager>();
-        //			}
-        //			PalMain.CreatePermanentObject<uScript_MasterComponent>("Template/System/_uScript", true);
         //		}
 
         //		// Token: 0x060036ED RID: 14061 RVA: 0x0018C6BC File Offset: 0x0018A8BC
