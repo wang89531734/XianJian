@@ -425,7 +425,14 @@ MonoBehaviour:
   m_ParamsSettings: {fileID: 11400000, guid: 023273a405c5ee543a06976928d561c3, type: 2}
   m_CurrLanguage: 0
   PoolParent: {fileID: 13513176}
-  GameObjectPoolGroups: []
+  GameObjectPoolGroups:
+  - PoolId: 1
+    PoolName: Prefab
+    CullDespawned: 1
+    CullAbove: 5
+    CullDelay: 2
+    CullMaxPerPass: 2
+    Pool: {fileID: 0}
   LockedAssetBundle: []
   StandardWidth: 1280
   StandardHeight: 720

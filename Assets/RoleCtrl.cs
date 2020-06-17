@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class RoleCtrl : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public void Init()
+    {
+
+    }
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         

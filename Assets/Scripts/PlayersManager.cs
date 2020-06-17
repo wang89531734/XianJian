@@ -826,6 +826,8 @@ public class PlayersManager
     public static GameObject LoadPlayer(int ID, object userData = null, BaseAction<ResourceEntity> onOpen = null)
     {
         Debug.Log("ToDo 加载角色模型");
+        GameEntry.Data.RoleDataManager.CreatePlayerByJobId(1);
+        //CreatePlayerByJobId(1);
         //string path =  ID.ToString();
         //GameEntry.Resource.ResourceLoaderManager.LoadMainAsset(AssetCategory.RolePrefab, string.Format("Assets/Download/Role/RolePrefab/{0}.prefab", ID.ToString()), (ResourceEntity resourceEntity) =>
         //{

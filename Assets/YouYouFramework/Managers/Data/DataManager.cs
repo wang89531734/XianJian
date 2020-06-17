@@ -46,8 +46,19 @@ namespace YouYou
             private set;
         }
 
+
+        /// <summary>
+        /// ½ÇÉ«Êı¾İ
+        /// </summary>
+        public RoleDataManager RoleDataManager
+        {
+            get;
+            private set;
+        }
+
         public DataManager()
         {
+            RoleDataManager = new RoleDataManager();
             CacheDataManager = new CacheDataManager();
             SysDataManager = new SysDataManager();
             UserDataManager = new UserDataManager();

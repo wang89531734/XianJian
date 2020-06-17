@@ -86,7 +86,7 @@ namespace YouYou
             //Sys_AudioList.LoadData();
             //Sys_CodeList.LoadData();
             //Sys_EffectList.LoadData();
-            //Sys_PrefabList.LoadData();
+            Sys_PrefabList.LoadData();
             Sys_SceneList.LoadData();
             Sys_SceneDetailList.LoadData();
             //Sys_StorySoundList.LoadData();
