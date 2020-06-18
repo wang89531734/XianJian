@@ -1829,6 +1829,10 @@ namespace SoftStar.Pal6
         //			return PalMain.GetFlag(2);
         //		}
 
+        /// <summary>
+        /// 设置金钱  金钱是2
+        /// </summary>
+        /// <param name="money"></param>
         public static void SetMoney(int money)
         {
             PalMain.SetFlag(2, money);

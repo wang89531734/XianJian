@@ -272,6 +272,18 @@ MonoBehaviour:
     mLevel: 1
     m_SkillIDs: []
     m_ItemIDs: []
+  - Enqueue: 0
+    HP: 10
+    mCharacterID: 2
+    mLevel: 1
+    m_SkillIDs: []
+    m_ItemIDs: []
+  - Enqueue: 0
+    HP: 10
+    mCharacterID: 3
+    mLevel: 1
+    m_SkillIDs: []
+    m_ItemIDs: []
   PackItemIDs: []
   flagValues: []
   startWeatherTime: 0.4
@@ -427,7 +439,7 @@ MonoBehaviour:
   PoolParent: {fileID: 13513176}
   GameObjectPoolGroups:
   - PoolId: 1
-    PoolName: Prefab
+    PoolName: Role
     CullDespawned: 1
     CullAbove: 5
     CullDelay: 2

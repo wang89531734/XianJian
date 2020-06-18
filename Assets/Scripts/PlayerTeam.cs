@@ -35,15 +35,6 @@ public class PlayerTeam : MonoBehaviour
         }
     }
 
-    public static void ReStart()
-    {
-        if (PlayerTeam.instance != null)
-        {
-            UnityEngine.Object.Destroy(PlayerTeam.instance.gameObject);
-            PlayerTeam.instance = null;
-        }
-    }
-
     private void Start()
     {
         if (PlayerTeam.instance == null)
@@ -57,29 +48,54 @@ public class PlayerTeam : MonoBehaviour
         PlayerTeam.instance = this;
     }
 
+    /// <summary>
+    /// 加载队伍
+    /// </summary>
     public void LoadTeam()
     {
         GameEntry.Event.CommonEvent.AddEventListener(SysEventId.OnSceneLoaded, OnLoadTeam);
         this.SetInitValue();
     }
 
+    /// <summary>
+    /// 设置初始数值
+    /// </summary>
     public void SetInitValue()
     {
         PalMain.SetMoney(this.money);
         this.InitTime();
     }
 
+    /// <summary>
+    /// 加载队伍
+    /// </summary>
+    /// <param name="userData"></param>
     public void OnLoadTeam(object userData)
     {
+        GameEntry.Event.CommonEvent.RemoveEventListener(SysEventId.OnSceneLoaded, OnLoadTeam);
+        //if (UniStormWeatherSystem.instance != null)//应该是天气系统
+        //{
+        //    TimeManager.Initialize().timeStopped = UniStormWeatherSystem.instance.timeStopped;
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("Warn : UniStormWeatherSystem.instance==null");
+        //}
         this.InitTeam();
-        this.InitPlayerLevel();
+        //this.InitPlayerLevel();
         //this.InitSkill();
         //this.InitItem();
+        //if (base.gameObject != null)
+        //{
+        //    UnityEngine.Object.Destroy(base.gameObject);
+        //}
     }
 
+    /// <summary>
+    /// 初始化队伍
+    /// </summary>
     public void InitTeam()
-    {
-        GameEntry.Event.CommonEvent.RemoveEventListener(SysEventId.OnSceneLoaded, OnLoadTeam);
+    {       
         PlayersManager.ActivePlayers.Clear();
         for (int i = 0; i < this.data.Length; i++)
         {
@@ -187,6 +203,9 @@ public class PlayerTeam : MonoBehaviour
     //		}
     //	}
 
+    /// <summary>
+    /// 初始化时间
+    /// </summary>
     public void InitTime()
     {
         //TimeManager.Initialize().AutoSaveInit();

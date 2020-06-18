@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace SoftStar.Pal6
 {
+    /// <summary>
+    /// 血量蓝量属性
+    /// </summary>
     public class HPMPDPProperty
     {
         //		public HPMPDPProperty(HPMPDPProperty.StaticData SourceData)
@@ -464,6 +467,9 @@ namespace SoftStar.Pal6
                 return result;
             }
 
+            /// <summary>
+            /// 重置
+            /// </summary>
             public static void Reset()
             {
                 HPMPDPProperty.StaticData.mDataPaths = null;

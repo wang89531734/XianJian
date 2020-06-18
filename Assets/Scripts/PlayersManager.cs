@@ -5,15 +5,21 @@ using SoftStar.Pal6;
 using UnityEngine;
 using YouYou;
 
+/// <summary>
+/// 玩家管理
+/// </summary>
 public class PlayersManager
 {
     public static GameObject curCtrlModel = null;
 
     /// <summary>
-    /// 激活主角
+    /// 激活主角列表
     /// </summary>
     public static List<GameObject> ActivePlayers = new List<GameObject>();
 
+    /// <summary>
+    /// 全部玩家
+    /// </summary>
     public static List<GameObject> AllPlayers = new List<GameObject>();
 
     //	private static List<PerceptionRange> AllPlayersPerceptionRange = new List<PerceptionRange>();
@@ -476,8 +482,14 @@ public class PlayersManager
     //		model.SetHeadLight(true);
     //	}
 
+    /// <summary>
+    /// 设置玩家
+    /// </summary>
+    /// <param name="newPlayerIndex"></param>
+    /// <param name="SetPos"></param>
     public static void SetPlayer(int newPlayerIndex, bool SetPos = true)
     {
+        Debug.Log(newPlayerIndex+"玩家ID");
         //using (new PlayersManager.AfterSetPlayer())
         //{
         //    if (newPlayerIndex == PlayersManager.PlayerIndex)
@@ -706,6 +718,11 @@ public class PlayersManager
         //}
     }
 
+    /// <summary>
+    /// 获取玩家
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns></returns>
     public static GameObject GetPlayer(int ID)
     {
         GameObject result = null;
@@ -720,6 +737,12 @@ public class PlayersManager
         return result;
     }
 
+    /// <summary>
+    /// 寻找主要角色
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <param name="NeedAddToAllPlayers"></param>
+    /// <returns></returns>
     public static GameObject FindMainChar(int ID, bool NeedAddToAllPlayers = true)
     {
         for (int i = 0; i < PlayersManager.AllPlayers.Count; i++)
@@ -746,6 +769,12 @@ public class PlayersManager
         return gameObject2;
     }
 
+    /// <summary>
+    /// 添加玩家
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <param name="bSetLevel"></param>
+    /// <returns></returns>
     public static GameObject AddPlayer(int ID, bool bSetLevel = true)
     {
         GameObject player = PlayersManager.GetPlayer(ID);
@@ -754,6 +783,7 @@ public class PlayersManager
             Debug.Log("PlayersManager.AddPlayer 已经存在" + ID.ToString());
             return player;
         }
+
         GameObject gameObject = PlayersManager.FindMainChar(ID, true);
         if (gameObject != null && gameObject.GetComponent<PalNPC>() != null)
         {
@@ -768,6 +798,7 @@ public class PlayersManager
             }
             return gameObject;
         }
+
         GameObject gameObject2 = PlayersManager.LoadPlayer(ID);
         if (gameObject2 != null)
         {
@@ -784,7 +815,6 @@ public class PlayersManager
         return gameObject2;
     }
 
-    //	// Token: 0x0600377B RID: 14203 RVA: 0x00192CE4 File Offset: 0x00190EE4
     //	private static void SetLevel(GameObject go)
     //	{
     //		PalNPC component = go.GetComponent<PalNPC>();
@@ -825,93 +855,75 @@ public class PlayersManager
     /// <returns></returns>
     public static GameObject LoadPlayer(int ID, object userData = null, BaseAction<ResourceEntity> onOpen = null)
     {
-        Debug.Log("ToDo 加载角色模型");
-        GameEntry.Data.RoleDataManager.CreatePlayerByJobId(1);
-        //CreatePlayerByJobId(1);
-        //string path =  ID.ToString();
-        //GameEntry.Resource.ResourceLoaderManager.LoadMainAsset(AssetCategory.RolePrefab, string.Format("Assets/Download/Role/RolePrefab/{0}.prefab", ID.ToString()), (ResourceEntity resourceEntity) =>
-        //{
-        //    GameObject uiObj = UnityEngine.Object.Instantiate((UnityEngine.Object)resourceEntity.Target) as GameObject;
+        Debug.Log(ID+"  ToDo 加载角色模型");
 
-        //    //把克隆出来的资源 加入实例资源池
-        //    //GameEntry.Pool.RegisterInstanceResource(uiObj.GetInstanceID(), resourceEntity);
-
-        //    //uiObj.transform.SetParent(GameEntry.UI.GetUIGroup((byte)sys_UIForm.UIGroupId).Group);
-        //    //uiObj.transform.localPosition = Vector3.zero;
-        //    //uiObj.transform.localScale = Vector3.one;
-
-        //    //RectTransform rectTransform = uiObj.GetComponent<RectTransform>();
-        //    //rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0, 0);
-        //    //rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0, 0);
-        //    //rectTransform.anchorMin = Vector2.zero;
-        //    //rectTransform.anchorMax = Vector2.one;
-
-        //    //formBase = uiObj.GetComponent<UIFormBase>();
-        //    //formBase.Init(uiFormId, sys_UIForm, (byte)sys_UIForm.UIGroupId, sys_UIForm.DisableUILayer == 1, sys_UIForm.IsLock == 1, userData, () =>
-        //    //{
-        //    //    OpenUI(sys_UIForm, formBase, onOpen);
-        //    //});
-        //    //m_OpenUIFormList.AddLast(formBase);
-        //    //m_LoadingUIFormList.Remove(uiFormId);
-        //});
+        GameObject gameObject = null;
+        GameEntry.Data.RoleDataManager.CreatePlayerByJobId(1, (RoleCtrl roleCtrl) =>
+        {
+            gameObject=roleCtrl.gameObject;         
+        });
+        //string path = PlayersManager.PlayerTemplatePath + ID.ToString();
         //UnityEngine.Object @object = Resources.Load(path);
-        //GameObject gameObject = null;
+
         //if (@object != null)
         //{
         //    gameObject = (UnityEngine.Object.Instantiate(@object) as GameObject);
-        //    //gameObject.ExcludeCloneName();
-        //    //PlayersManager.PlayerInitSneakScript(gameObject, null);
+        //    gameObject.ExcludeCloneName();
+        //    PlayersManager.PlayerInitSneakScript(gameObject, null);
         //}
         //else
         //{
         //    Debug.Log("PlayersManager.LoadPlayer: playerObj == null");
         //}
-        return null;
-        // return gameObject;
+        return gameObject;
     }
 
-    //	// Token: 0x0600377D RID: 14205 RVA: 0x00192E48 File Offset: 0x00191048
-    //	public static void PlayerInitSneakScript(GameObject newPlayer, PalNPC npc = null)
-    //	{
-    //		if (npc == null)
-    //		{
-    //			npc = newPlayer.GetComponent<PalNPC>();
-    //		}
-    //		if (!newPlayer.name.ToLower().Contains("jiguanxiong"))
-    //		{
-    //			newPlayer.AddComponent<InitSneakScript>();
-    //			SneakAttack[] componentsInChildren = newPlayer.GetComponentsInChildren<SneakAttack>();
-    //			if (componentsInChildren == null || componentsInChildren.Length < 1)
-    //			{
-    //				int characterID = npc.Data.CharacterID;
-    //				if (characterID != 6 && characterID != 7)
-    //				{
-    //					if (characterID == 0 || characterID == 2 || characterID == 3)
-    //					{
-    //						newPlayer.AddComponent<JinQiXi>();
-    //					}
-    //					else
-    //					{
-    //						newPlayer.AddComponent<YuanQiXi>();
-    //					}
-    //				}
-    //			}
-    //		}
-    //	}
+    public static void PlayerInitSneakScript(GameObject newPlayer, PalNPC npc = null)
+    {
+        if (npc == null)
+        {
+            npc = newPlayer.GetComponent<PalNPC>();
+        }
+        //if (!newPlayer.name.ToLower().Contains("jiguanxiong"))
+        //{
+        //    newPlayer.AddComponent<InitSneakScript>();
+        //    SneakAttack[] componentsInChildren = newPlayer.GetComponentsInChildren<SneakAttack>();
+        //    if (componentsInChildren == null || componentsInChildren.Length < 1)
+        //    {
+        //        int characterID = npc.Data.CharacterID;
+        //        if (characterID != 6 && characterID != 7)
+        //        {
+        //            if (characterID == 0 || characterID == 2 || characterID == 3)
+        //            {
+        //                newPlayer.AddComponent<JinQiXi>();
+        //            }
+        //            else
+        //            {
+        //                newPlayer.AddComponent<YuanQiXi>();
+        //            }
+        //        }
+        //    }
+        //}
+    }
 
+    /// <summary>
+    /// 添加玩家
+    /// </summary>
+    /// <param name="newPlayer"></param>
+    /// <param name="bSetLevel"></param>
     public static void AddPlayer(GameObject newPlayer, bool bSetLevel = true)
     {
         if (newPlayer == null)
         {
             return;
         }
-        //newPlayer.ExcludeCloneName();
-        //PalNPC component = newPlayer.GetComponent<PalNPC>();
-        //if (component == null)
-        //{
-        //    return;
-        //}
-        //PlayersManager.PlayerInitSneakScript(newPlayer, component);
+        newPlayer.ExcludeCloneName();
+        PalNPC component = newPlayer.GetComponent<PalNPC>();
+        if (component == null)
+        {
+            return;
+        }
+        PlayersManager.PlayerInitSneakScript(newPlayer, component);
         //if (!PlayersManager.ActivePlayers.Contains(newPlayer))
         //{
         //    newPlayer.transform.parent = null;
@@ -969,7 +981,6 @@ public class PlayersManager
         //}
     }
 
-    //	// Token: 0x0600377F RID: 14207 RVA: 0x001930A4 File Offset: 0x001912A4
     //	private static void WaitLoadOverThanSetActiveFalse(PalNPC npc)
     //	{
     //		if (PlayersManager.Player != null && npc != null && PlayersManager.Player != npc.gameObject)

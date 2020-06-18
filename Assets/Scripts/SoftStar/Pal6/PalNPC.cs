@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 namespace SoftStar.Pal6
 {
-    public class PalNPC //: PalAnimatorObject, ISaveInterface
+    public class PalNPC : PalAnimatorObject, ISaveInterface
     {
         //		public delegate void void_fun_TF(PalNPC npc);
 
@@ -1109,137 +1109,135 @@ namespace SoftStar.Pal6
         //			return npcObj.transform.position + vector;
         //		}
 
-        //		// Token: 0x06001D10 RID: 7440 RVA: 0x001035A4 File Offset: 0x001017A4
-        //		public void Save(BinaryWriter writer)
-        //		{
-        //			this.Data.Save(writer);
-        //			this.BuffDebuffData.Save(writer);
-        //			List<uint> list = new List<uint>();
-        //			int count = this.mEquipSlots.Values.Count;
-        //			if (count < 1 && this.Data != null && this.Data.CharacterID > -1 && this.Data.CharacterID < 6)
-        //			{
-        //				Debug.LogError("警告：" + base.name + " 的 mEquipSlots.Values.Count==0");
-        //			}
-        //			UtilFun.ConsoleLog("Log : " + base.name + "  PalNPC.Save  mEquipSlots.Values.Count ==" + count.ToString(), false);
-        //			foreach (KeyValuePair<EquipSlotEnum, ItemWatcher> keyValuePair in this.mEquipSlots)
-        //			{
-        //				if (keyValuePair.Value == null || keyValuePair.Value.Target == null)
-        //				{
-        //					if (this.Data != null && this.Data.CharacterID > -1 && this.Data.CharacterID < 6)
-        //					{
-        //						Debug.LogError(string.Concat(new string[]
-        //						{
-        //							"警告：",
-        //							base.name,
-        //							" 的 ",
-        //							keyValuePair.Key.ToString(),
-        //							" 的 ",
-        //							(keyValuePair.Value != null) ? "cur.Value.Target == null" : "cur.Value == null"
-        //						}));
-        //					}
-        //				}
-        //				else
-        //				{
-        //					list.Add(keyValuePair.Value.Target.ID);
-        //				}
-        //			}
-        //			UtilFun.ConsoleLog("Log : " + base.name + " PalNPC.Save 装备链接数=" + list.Count.ToString(), false);
-        //			if (list.Count < 1 && this.Data != null && this.Data.CharacterID > -1 && this.Data.CharacterID < 6)
-        //			{
-        //				Debug.LogError("警告：" + base.name + " 的 装备链接数 = 0 ！！！！！！！！！！！！！！！！！！！！");
-        //			}
-        //			writer.Write(list.Count);
-        //			using (List<uint>.Enumerator enumerator2 = list.GetEnumerator())
-        //			{
-        //				while (enumerator2.MoveNext())
-        //				{
-        //					int value = (int)enumerator2.Current;
-        //					writer.Write(value);
-        //				}
-        //			}
-        //			writer.Write((int)this.mCurrentAchievement);
-        //			int count2 = this.m_SkillIDs.Count;
-        //			writer.Write(count2);
-        //			for (int i = 0; i < count2; i++)
-        //			{
-        //				writer.Write(this.m_SkillIDs[i].m_ID);
-        //				writer.Write(this.m_SkillIDs[i].m_bOpen);
-        //				writer.Write(this.m_SkillIDs[i].m_CurrentExp);
-        //			}
-        //			writer.Write((int)this.m_curObjType);
-        //		}
+        public void Save(BinaryWriter writer)
+        {
+            //this.Data.Save(writer);
+            //this.BuffDebuffData.Save(writer);
+            //List<uint> list = new List<uint>();
+            //int count = this.mEquipSlots.Values.Count;
+            //if (count < 1 && this.Data != null && this.Data.CharacterID > -1 && this.Data.CharacterID < 6)
+            //{
+            //    Debug.LogError("警告：" + base.name + " 的 mEquipSlots.Values.Count==0");
+            //}
+            //UtilFun.ConsoleLog("Log : " + base.name + "  PalNPC.Save  mEquipSlots.Values.Count ==" + count.ToString(), false);
+            //foreach (KeyValuePair<EquipSlotEnum, ItemWatcher> keyValuePair in this.mEquipSlots)
+            //{
+            //    if (keyValuePair.Value == null || keyValuePair.Value.Target == null)
+            //    {
+            //        if (this.Data != null && this.Data.CharacterID > -1 && this.Data.CharacterID < 6)
+            //        {
+            //            Debug.LogError(string.Concat(new string[]
+            //            {
+            //                        "警告：",
+            //                        base.name,
+            //                        " 的 ",
+            //                        keyValuePair.Key.ToString(),
+            //                        " 的 ",
+            //                        (keyValuePair.Value != null) ? "cur.Value.Target == null" : "cur.Value == null"
+            //            }));
+            //        }
+            //    }
+            //    else
+            //    {
+            //        list.Add(keyValuePair.Value.Target.ID);
+            //    }
+            //}
+            //UtilFun.ConsoleLog("Log : " + base.name + " PalNPC.Save 装备链接数=" + list.Count.ToString(), false);
+            //if (list.Count < 1 && this.Data != null && this.Data.CharacterID > -1 && this.Data.CharacterID < 6)
+            //{
+            //    Debug.LogError("警告：" + base.name + " 的 装备链接数 = 0 ！！！！！！！！！！！！！！！！！！！！");
+            //}
+            //writer.Write(list.Count);
+            //using (List<uint>.Enumerator enumerator2 = list.GetEnumerator())
+            //{
+            //    while (enumerator2.MoveNext())
+            //    {
+            //        int value = (int)enumerator2.Current;
+            //        writer.Write(value);
+            //    }
+            //}
+            //writer.Write((int)this.mCurrentAchievement);
+            //int count2 = this.m_SkillIDs.Count;
+            //writer.Write(count2);
+            //for (int i = 0; i < count2; i++)
+            //{
+            //    writer.Write(this.m_SkillIDs[i].m_ID);
+            //    writer.Write(this.m_SkillIDs[i].m_bOpen);
+            //    writer.Write(this.m_SkillIDs[i].m_CurrentExp);
+            //}
+            //writer.Write((int)this.m_curObjType);
+        }
 
-        //		// Token: 0x06001D11 RID: 7441 RVA: 0x001038D4 File Offset: 0x00101AD4
-        //		public void Load(BinaryReader reader)
-        //		{
-        //			this.Data.Load(reader);
-        //			this.ExpRate = 1f;
-        //			this.ImmunityAllBadBattleStates = 0;
-        //			this.FengYinAddRate = 0f;
-        //			this.MiaoShouAddRate = 0f;
-        //			this.BreakAddRate = 0f;
-        //			this.BuffDebuffData = new BuffDebuffManager.BuffDebuffOwner();
-        //			this.BuffDebuffData.Owner = this;
-        //			this.BuffDebuffData.Load(reader);
-        //			int num = reader.ReadInt32();
-        //			UtilFun.ConsoleLog("Log : " + base.name + " PalNPC.Load 装备链接数=" + num.ToString(), false);
-        //			if (!SaveManager.IsErZhouMu || SaveManager.inheritStruct.Item)
-        //			{
-        //				this.mLoadEquipSlots = new uint[num];
-        //				for (int i = 0; i < this.mLoadEquipSlots.Length; i++)
-        //				{
-        //					this.mLoadEquipSlots[i] = reader.ReadUInt32();
-        //				}
-        //			}
-        //			else
-        //			{
-        //				this.mLoadEquipSlots = new uint[0];
-        //				for (int j = 0; j < num; j++)
-        //				{
-        //					reader.ReadUInt32();
-        //				}
-        //			}
-        //			int num2 = reader.ReadInt32();
-        //			try
-        //			{
-        //				if (num2 >= 0)
-        //				{
-        //					if (num2 < PalBattleManager.Instance().m_Achievement.m_Achievements.Length && PalBattleManager.Instance().m_Achievement.m_Achievements[num2] == null)
-        //					{
-        //						num2 = -1;
-        //					}
-        //				}
-        //				else
-        //				{
-        //					num2 = -1;
-        //				}
-        //			}
-        //			catch (Exception ex)
-        //			{
-        //				num2 = -1;
-        //				Debug.LogError(ex.ToString());
-        //			}
-        //			this.mCurrentAchievement = (AchievementManager.ACHIEVEMENT_INDEX)num2;
-        //			if (SaveManager.VersionNum >= 9u)
-        //			{
-        //				int num3 = reader.ReadInt32();
-        //				this.m_SkillIDs.Clear();
-        //				for (int k = 0; k < num3; k++)
-        //				{
-        //					this.AddSkillNoRepeat(new PalNPC.SkillInfo
-        //					{
-        //						m_ID = reader.ReadInt32(),
-        //						m_bOpen = reader.ReadBoolean(),
-        //						m_CurrentExp = reader.ReadInt32()
-        //					});
-        //				}
-        //			}
-        //			this.m_curObjType = (ObjType)reader.ReadInt32();
-        //			if (this.Data.HPMPDP != null)
-        //			{
-        //				this.Data.HPMPDP.SetWithoutEvents(this.Data.LoadHP, this.Data.LoadMP, this.Data.LoadDP);
-        //			}
-        //		}
+        public void Load(BinaryReader reader)
+        {
+            //this.Data.Load(reader);
+            //this.ExpRate = 1f;
+            //this.ImmunityAllBadBattleStates = 0;
+            //this.FengYinAddRate = 0f;
+            //this.MiaoShouAddRate = 0f;
+            //this.BreakAddRate = 0f;
+            //this.BuffDebuffData = new BuffDebuffManager.BuffDebuffOwner();
+            //this.BuffDebuffData.Owner = this;
+            //this.BuffDebuffData.Load(reader);
+            //int num = reader.ReadInt32();
+            //UtilFun.ConsoleLog("Log : " + base.name + " PalNPC.Load 装备链接数=" + num.ToString(), false);
+            //if (!SaveManager.IsErZhouMu || SaveManager.inheritStruct.Item)
+            //{
+            //    this.mLoadEquipSlots = new uint[num];
+            //    for (int i = 0; i < this.mLoadEquipSlots.Length; i++)
+            //    {
+            //        this.mLoadEquipSlots[i] = reader.ReadUInt32();
+            //    }
+            //}
+            //else
+            //{
+            //    this.mLoadEquipSlots = new uint[0];
+            //    for (int j = 0; j < num; j++)
+            //    {
+            //        reader.ReadUInt32();
+            //    }
+            //}
+            //int num2 = reader.ReadInt32();
+            //try
+            //{
+            //    if (num2 >= 0)
+            //    {
+            //        if (num2 < PalBattleManager.Instance().m_Achievement.m_Achievements.Length && PalBattleManager.Instance().m_Achievement.m_Achievements[num2] == null)
+            //        {
+            //            num2 = -1;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        num2 = -1;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    num2 = -1;
+            //    Debug.LogError(ex.ToString());
+            //}
+            //this.mCurrentAchievement = (AchievementManager.ACHIEVEMENT_INDEX)num2;
+            //if (SaveManager.VersionNum >= 9u)
+            //{
+            //    int num3 = reader.ReadInt32();
+            //    this.m_SkillIDs.Clear();
+            //    for (int k = 0; k < num3; k++)
+            //    {
+            //        this.AddSkillNoRepeat(new PalNPC.SkillInfo
+            //        {
+            //            m_ID = reader.ReadInt32(),
+            //            m_bOpen = reader.ReadBoolean(),
+            //            m_CurrentExp = reader.ReadInt32()
+            //        });
+            //    }
+            //}
+            //this.m_curObjType = (ObjType)reader.ReadInt32();
+            //if (this.Data.HPMPDP != null)
+            //{
+            //    this.Data.HPMPDP.SetWithoutEvents(this.Data.LoadHP, this.Data.LoadMP, this.Data.LoadDP);
+            //}
+        }
 
         //		// Token: 0x06001D12 RID: 7442 RVA: 0x00103B1C File Offset: 0x00101D1C
         //		public IEnumerator Prepare()
