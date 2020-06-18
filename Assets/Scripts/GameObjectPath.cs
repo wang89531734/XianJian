@@ -484,7 +484,6 @@ public static class GameObjectPath
         go.name = name.Substring(0, num);
     }
 
-    //	// Token: 0x06003E8B RID: 16011 RVA: 0x001BFD6C File Offset: 0x001BDF6C
     //	public static string ExcludeCloneName(this string goName)
     //	{
     //		int num = goName.IndexOf("(Clone)");

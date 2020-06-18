@@ -860,21 +860,10 @@ public class PlayersManager
         GameObject gameObject = null;
         GameEntry.Data.RoleDataManager.CreatePlayerByJobId(1, (RoleCtrl roleCtrl) =>
         {
-            gameObject=roleCtrl.gameObject;         
+            gameObject=roleCtrl.gameObject;
+            gameObject.ExcludeCloneName();
+            PlayersManager.PlayerInitSneakScript(gameObject, null);
         });
-        //string path = PlayersManager.PlayerTemplatePath + ID.ToString();
-        //UnityEngine.Object @object = Resources.Load(path);
-
-        //if (@object != null)
-        //{
-        //    gameObject = (UnityEngine.Object.Instantiate(@object) as GameObject);
-        //    gameObject.ExcludeCloneName();
-        //    PlayersManager.PlayerInitSneakScript(gameObject, null);
-        //}
-        //else
-        //{
-        //    Debug.Log("PlayersManager.LoadPlayer: playerObj == null");
-        //}
         return gameObject;
     }
 
@@ -884,26 +873,27 @@ public class PlayersManager
         {
             npc = newPlayer.GetComponent<PalNPC>();
         }
-        //if (!newPlayer.name.ToLower().Contains("jiguanxiong"))
-        //{
-        //    newPlayer.AddComponent<InitSneakScript>();
-        //    SneakAttack[] componentsInChildren = newPlayer.GetComponentsInChildren<SneakAttack>();
-        //    if (componentsInChildren == null || componentsInChildren.Length < 1)
-        //    {
-        //        int characterID = npc.Data.CharacterID;
-        //        if (characterID != 6 && characterID != 7)
-        //        {
-        //            if (characterID == 0 || characterID == 2 || characterID == 3)
-        //            {
-        //                newPlayer.AddComponent<JinQiXi>();
-        //            }
-        //            else
-        //            {
-        //                newPlayer.AddComponent<YuanQiXi>();
-        //            }
-        //        }
-        //    }
-        //}
+
+        if (!newPlayer.name.ToLower().Contains("jiguanxiong"))
+        {
+            newPlayer.AddComponent<InitSneakScript>();
+            SneakAttack[] componentsInChildren = newPlayer.GetComponentsInChildren<SneakAttack>();
+            if (componentsInChildren == null || componentsInChildren.Length < 1)
+            {
+                //int characterID = npc.Data.CharacterID;
+                //if (characterID != 6 && characterID != 7)
+                //{
+                //    if (characterID == 0 || characterID == 2 || characterID == 3)
+                //    {
+                //        newPlayer.AddComponent<JinQiXi>();
+                //    }
+                //    else
+                //    {
+                //        newPlayer.AddComponent<YuanQiXi>();
+                //    }
+                //}
+            }
+        }
     }
 
     /// <summary>
