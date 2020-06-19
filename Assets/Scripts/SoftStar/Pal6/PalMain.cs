@@ -61,7 +61,7 @@ namespace SoftStar.Pal6
         //		public BattleFormationManager CurBattleFormationManager = new BattleFormationManager();
 
         /// <summary>
-        /// 游戏开始事件
+        /// 游戏开始时间
         /// </summary>
         [NonSerialized]
         public static float GameBeginTime;
@@ -276,20 +276,11 @@ namespace SoftStar.Pal6
         //		// Token: 0x04003166 RID: 12646
         //		private int shouldRenewFrames;
 
-        //		// Token: 0x14000025 RID: 37
-        //		// (add) Token: 0x06003691 RID: 13969 RVA: 0x00189D90 File Offset: 0x00187F90
-        //		// (remove) Token: 0x06003692 RID: 13970 RVA: 0x00189DAC File Offset: 0x00187FAC
-        //		public event PalMain.void_func_float_float updateHandles;
+        public event PalMain.void_func_float_float updateHandles;
 
-        //		// Token: 0x14000026 RID: 38
-        //		// (add) Token: 0x06003693 RID: 13971 RVA: 0x00189DC8 File Offset: 0x00187FC8
-        //		// (remove) Token: 0x06003694 RID: 13972 RVA: 0x00189DE4 File Offset: 0x00187FE4
-        //		public event PalMain.void_func_void onInputHandles;
+        public event PalMain.void_func_void onInputHandles;
 
-        //		// Token: 0x14000027 RID: 39
-        //		// (add) Token: 0x06003695 RID: 13973 RVA: 0x00189E00 File Offset: 0x00188000
-        //		// (remove) Token: 0x06003696 RID: 13974 RVA: 0x00189E1C File Offset: 0x0018801C
-        //		public event PalMain.void_func_void onGUIHandles;
+        public event PalMain.void_func_void onGUIHandles;
 
         //		// Token: 0x17000428 RID: 1064
         //		// (get) Token: 0x06003697 RID: 13975 RVA: 0x00189E38 File Offset: 0x00188038
@@ -885,7 +876,7 @@ namespace SoftStar.Pal6
             //			DistanceCullManager.Initialize();
             //			MoviesManager.Initialize();
             //			CharactersManager.Initialize();
-            //			InputManager.Initialize();
+            InputManager.Initialize();
             PlayerCtrlManager.Initialize();
             //PalBattleManager.Initialize();
             //			EntityManager.Initialize();
@@ -1217,80 +1208,79 @@ namespace SoftStar.Pal6
         //			this.updateHandles = (PalMain.void_func_float_float)Delegate.Remove(this.updateHandles, new PalMain.void_func_float_float(this.PlayBeginMovie));
         //		}
 
-        //		// Token: 0x060036C3 RID: 14019 RVA: 0x0018AE80 File Offset: 0x00189080
-        //		private void Start()
-        //		{
-        //			this.m_LevelCullOpParams.Add(0, new PalMain.SceneOptiDistFogParams(0, -1f, 305f, 305f));
-        //			this.m_LevelCullOpParams.Add(1, new PalMain.SceneOptiDistFogParams(1, -1f, 200f, 105f));
-        //			this.m_LevelCullOpParams.Add(2, new PalMain.SceneOptiDistFogParams(2, -1f, 145f, 145f));
-        //			this.m_LevelCullOpParams.Add(3, new PalMain.SceneOptiDistFogParams(3, -1f, 150f, 75f));
-        //			this.m_LevelCullOpParams.Add(4, new PalMain.SceneOptiDistFogParams(4, -1f, 150f, 75f));
-        //			this.m_LevelCullOpParams.Add(5, new PalMain.SceneOptiDistFogParams(5, -1f, 200f, 75f));
-        //			this.m_LevelCullOpParams.Add(6, new PalMain.SceneOptiDistFogParams(6, -1f, 70f, 45f));
-        //			this.m_LevelCullOpParams.Add(7, new PalMain.SceneOptiDistFogParams(7, -1f, 150f, 95f));
-        //			this.m_LevelCullOpParams.Add(8, new PalMain.SceneOptiDistFogParams(8, -1f, 200f, 105f));
-        //			this.m_LevelCullOpParams.Add(9, new PalMain.SceneOptiDistFogParams(9, -1f, 100f, 65f));
-        //			this.m_LevelCullOpParams.Add(10, new PalMain.SceneOptiDistFogParams(10, -1f, 120f, 85f));
-        //			this.m_LevelCullOpParams.Add(11, new PalMain.SceneOptiDistFogParams(11, -1f, 70f, 35f));
-        //			this.m_LevelCullOpParams.Add(12, new PalMain.SceneOptiDistFogParams(12, -1f, 80f, 105f));
-        //			this.m_LevelCullOpParams.Add(13, new PalMain.SceneOptiDistFogParams(13, -1f, 150f, 75f));
-        //			this.m_LevelCullOpParams.Add(14, new PalMain.SceneOptiDistFogParams(14, -1f, 140f, 85f));
-        //			this.m_LevelCullOpParams.Add(15, new PalMain.SceneOptiDistFogParams(15, -1f, 100f, 75f));
-        //			this.m_LevelCullOpParams.Add(16, new PalMain.SceneOptiDistFogParams(16, -1f, 200f, 205f));
-        //			this.m_LevelCullOpParams.Add(17, new PalMain.SceneOptiDistFogParams(17, -1f, 140f, 75f));
-        //			this.m_LevelCullOpParams.Add(18, new PalMain.SceneOptiDistFogParams(18, -1f, 200f, 205f));
-        //			this.m_LevelCullOpParams.Add(19, new PalMain.SceneOptiDistFogParams(19, -1f, 250f, 155f));
-        //			this.m_LevelCullOpParams.Add(20, new PalMain.SceneOptiDistFogParams(20, -1f, 150f, 85f));
-        //			this.m_LevelCullOpParams.Add(21, new PalMain.SceneOptiDistFogParams(21, -1f, 300f, 305f));
-        //			this.m_LevelCullOpParams.Add(22, new PalMain.SceneOptiDistFogParams(22, -1f, 150f, 55f));
-        //			this.m_LevelCullOpParams.Add(23, new PalMain.SceneOptiDistFogParams(23, -1f, 120f, 55f));
-        //			this.m_LevelCullOpParams.Add(24, new PalMain.SceneOptiDistFogParams(24, -1f, 100f, 105f));
-        //			this.m_LevelCullOpParams.Add(25, new PalMain.SceneOptiDistFogParams(25, -1f, 120f, 45f));
-        //			this.m_LevelCullOpParams.Add(26, new PalMain.SceneOptiDistFogParams(26, -1f, 75f, 75f));
-        //			this.m_LevelCullOpParams.Add(27, new PalMain.SceneOptiDistFogParams(27, -1f, 200f, 75f));
-        //			this.m_LevelCullOpParams.Add(28, new PalMain.SceneOptiDistFogParams(28, -1f, 200f, 75f));
-        //			this.m_LevelCullOpParams.Add(29, new PalMain.SceneOptiDistFogParams(29, -1f, 105f, 105f));
-        //			this.m_LevelCullOpParams.Add(30, new PalMain.SceneOptiDistFogParams(30, -1f, 105f, 105f));
-        //			this.m_LevelCullOpParams.Add(31, new PalMain.SceneOptiDistFogParams(31, -1f, 150f, 75f));
-        //			this.m_LevelCullOpParams.Add(32, new PalMain.SceneOptiDistFogParams(32, -1f, 105f, 105f));
-        //			this.m_LevelCullOpParams.Add(33, new PalMain.SceneOptiDistFogParams(33, -1f, 200f, 105f));
-        //			this.m_LevelCullOpParams.Add(34, new PalMain.SceneOptiDistFogParams(34, -1f, 905f, 905f));
-        //			string text = SystemInfo.graphicsDeviceName;
-        //			string text2 = SystemInfo.graphicsDeviceVendor;
-        //			UnityEngine.Debug.Log(string.Format("[Info] : Graphics Device Name={0}, Vender={1}", text, text2));
-        //			text = text.ToLower();
-        //			text2 = text2.ToLower();
-        //			if (text.Contains("intel"))
-        //			{
-        //				this.m_bIsIntel = true;
-        //			}
-        //			if (text2.Contains("intel"))
-        //			{
-        //				this.m_bIsIntel = true;
-        //			}
-        //			if (text.Contains("gdi"))
-        //			{
-        //				this.m_bIsGDI = true;
-        //			}
-        //			if (text2.Contains("gdi"))
-        //			{
-        //				this.m_bIsGDI = true;
-        //			}
-        //			int systemMemorySize = SystemInfo.systemMemorySize;
-        //			if (base.GetComponent<LoadFont>() == null)
-        //			{
-        //				base.gameObject.AddComponent<LoadFont>();
-        //			}
-        //			if (base.GetComponent<AudioSource>() == null)
-        //			{
-        //				base.gameObject.AddComponent<AudioSource>();
-        //			}
-        //			PalMain.backgroundAudio = base.GetComponent<BackgroundAudio>();
-        //			if (PalMain.backgroundAudio == null)
-        //			{
-        //				PalMain.backgroundAudio = base.gameObject.AddComponent<BackgroundAudio>();
-        //			}
-        //		}
+        private void Start()
+        {
+            //this.m_LevelCullOpParams.Add(0, new PalMain.SceneOptiDistFogParams(0, -1f, 305f, 305f));
+            //this.m_LevelCullOpParams.Add(1, new PalMain.SceneOptiDistFogParams(1, -1f, 200f, 105f));
+            //this.m_LevelCullOpParams.Add(2, new PalMain.SceneOptiDistFogParams(2, -1f, 145f, 145f));
+            //this.m_LevelCullOpParams.Add(3, new PalMain.SceneOptiDistFogParams(3, -1f, 150f, 75f));
+            //this.m_LevelCullOpParams.Add(4, new PalMain.SceneOptiDistFogParams(4, -1f, 150f, 75f));
+            //this.m_LevelCullOpParams.Add(5, new PalMain.SceneOptiDistFogParams(5, -1f, 200f, 75f));
+            //this.m_LevelCullOpParams.Add(6, new PalMain.SceneOptiDistFogParams(6, -1f, 70f, 45f));
+            //this.m_LevelCullOpParams.Add(7, new PalMain.SceneOptiDistFogParams(7, -1f, 150f, 95f));
+            //this.m_LevelCullOpParams.Add(8, new PalMain.SceneOptiDistFogParams(8, -1f, 200f, 105f));
+            //this.m_LevelCullOpParams.Add(9, new PalMain.SceneOptiDistFogParams(9, -1f, 100f, 65f));
+            //this.m_LevelCullOpParams.Add(10, new PalMain.SceneOptiDistFogParams(10, -1f, 120f, 85f));
+            //this.m_LevelCullOpParams.Add(11, new PalMain.SceneOptiDistFogParams(11, -1f, 70f, 35f));
+            //this.m_LevelCullOpParams.Add(12, new PalMain.SceneOptiDistFogParams(12, -1f, 80f, 105f));
+            //this.m_LevelCullOpParams.Add(13, new PalMain.SceneOptiDistFogParams(13, -1f, 150f, 75f));
+            //this.m_LevelCullOpParams.Add(14, new PalMain.SceneOptiDistFogParams(14, -1f, 140f, 85f));
+            //this.m_LevelCullOpParams.Add(15, new PalMain.SceneOptiDistFogParams(15, -1f, 100f, 75f));
+            //this.m_LevelCullOpParams.Add(16, new PalMain.SceneOptiDistFogParams(16, -1f, 200f, 205f));
+            //this.m_LevelCullOpParams.Add(17, new PalMain.SceneOptiDistFogParams(17, -1f, 140f, 75f));
+            //this.m_LevelCullOpParams.Add(18, new PalMain.SceneOptiDistFogParams(18, -1f, 200f, 205f));
+            //this.m_LevelCullOpParams.Add(19, new PalMain.SceneOptiDistFogParams(19, -1f, 250f, 155f));
+            //this.m_LevelCullOpParams.Add(20, new PalMain.SceneOptiDistFogParams(20, -1f, 150f, 85f));
+            //this.m_LevelCullOpParams.Add(21, new PalMain.SceneOptiDistFogParams(21, -1f, 300f, 305f));
+            //this.m_LevelCullOpParams.Add(22, new PalMain.SceneOptiDistFogParams(22, -1f, 150f, 55f));
+            //this.m_LevelCullOpParams.Add(23, new PalMain.SceneOptiDistFogParams(23, -1f, 120f, 55f));
+            //this.m_LevelCullOpParams.Add(24, new PalMain.SceneOptiDistFogParams(24, -1f, 100f, 105f));
+            //this.m_LevelCullOpParams.Add(25, new PalMain.SceneOptiDistFogParams(25, -1f, 120f, 45f));
+            //this.m_LevelCullOpParams.Add(26, new PalMain.SceneOptiDistFogParams(26, -1f, 75f, 75f));
+            //this.m_LevelCullOpParams.Add(27, new PalMain.SceneOptiDistFogParams(27, -1f, 200f, 75f));
+            //this.m_LevelCullOpParams.Add(28, new PalMain.SceneOptiDistFogParams(28, -1f, 200f, 75f));
+            //this.m_LevelCullOpParams.Add(29, new PalMain.SceneOptiDistFogParams(29, -1f, 105f, 105f));
+            //this.m_LevelCullOpParams.Add(30, new PalMain.SceneOptiDistFogParams(30, -1f, 105f, 105f));
+            //this.m_LevelCullOpParams.Add(31, new PalMain.SceneOptiDistFogParams(31, -1f, 150f, 75f));
+            //this.m_LevelCullOpParams.Add(32, new PalMain.SceneOptiDistFogParams(32, -1f, 105f, 105f));
+            //this.m_LevelCullOpParams.Add(33, new PalMain.SceneOptiDistFogParams(33, -1f, 200f, 105f));
+            //this.m_LevelCullOpParams.Add(34, new PalMain.SceneOptiDistFogParams(34, -1f, 905f, 905f));
+            string text = SystemInfo.graphicsDeviceName;
+            string text2 = SystemInfo.graphicsDeviceVendor;
+            UnityEngine.Debug.Log(string.Format("[Info] : Graphics Device Name={0}, Vender={1}", text, text2));
+            text = text.ToLower();
+            text2 = text2.ToLower();
+            //if (text.Contains("intel"))
+            //{
+            //    this.m_bIsIntel = true;
+            //}
+            //if (text2.Contains("intel"))
+            //{
+            //    this.m_bIsIntel = true;
+            //}
+            //if (text.Contains("gdi"))
+            //{
+            //    this.m_bIsGDI = true;
+            //}
+            //if (text2.Contains("gdi"))
+            //{
+            //    this.m_bIsGDI = true;
+            //}
+            //int systemMemorySize = SystemInfo.systemMemorySize;
+            //if (base.GetComponent<LoadFont>() == null)
+            //{
+            //    base.gameObject.AddComponent<LoadFont>();
+            //}
+            //if (base.GetComponent<AudioSource>() == null)
+            //{
+            //    base.gameObject.AddComponent<AudioSource>();
+            //}
+            //PalMain.backgroundAudio = base.GetComponent<BackgroundAudio>();
+            //if (PalMain.backgroundAudio == null)
+            //{
+            //    PalMain.backgroundAudio = base.gameObject.AddComponent<BackgroundAudio>();
+            //}
+        }
 
         //		// Token: 0x060036C4 RID: 14020 RVA: 0x0018B438 File Offset: 0x00189638
         //		public static void RefreshAllLandMarks()
@@ -1310,63 +1300,59 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x060036C6 RID: 14022 RVA: 0x0018B4AC File Offset: 0x001896AC
-        //		private void Update()
-        //		{
-        //			this.UpdateMinFPS();
-        //			if (this.onInputHandles != null)
-        //			{
-        //				this.onInputHandles();
-        //			}
-        //			if (this.updateHandles != null)
-        //			{
-        //				this.updateHandles(Time.time, Time.deltaTime);
-        //			}
-        //			this.m_QTEManager.Update();
-        //			if (ScenesManager.IsChanging || ShowLoading.Instance != null)
-        //			{
-        //				return;
-        //			}
-        //			this.UpdateOpCull();
-        //			PalMain.UpdateCheckUnload();
-        //			this.UpdateSpecialIssueForNonFocus();
-        //			if (WaitForSonyCheck.Instance == null)
-        //			{
-        //			}
-        //			FileLoader.Instance.Update();
-        //		}
+        private void Update()
+        {
+            //this.UpdateMinFPS();
+            //if (this.onInputHandles != null)
+            //{
+            //    this.onInputHandles();
+            //}
+            //if (this.updateHandles != null)
+            //{
+            //    this.updateHandles(Time.time, Time.deltaTime);
+            //}
+            //this.m_QTEManager.Update();
+            //if (ScenesManager.IsChanging || ShowLoading.Instance != null)
+            //{
+            //    return;
+            //}
+            //this.UpdateOpCull();
+            //PalMain.UpdateCheckUnload();
+            //this.UpdateSpecialIssueForNonFocus();
+            //if (WaitForSonyCheck.Instance == null)
+            //{
+            //}
+            //FileLoader.Instance.Update();
+        }
 
-        //		// Token: 0x060036C7 RID: 14023 RVA: 0x0018B548 File Offset: 0x00189748
-        //		private void FixedUpdate()
-        //		{
-        //			BuffDebuffManager.GetInstance().FixedUpdate(Time.fixedTime);
-        //			if (DateTime.Now > this.mLastConfigSave)
-        //			{
-        //				this.mLastConfigSave = DateTime.Now.AddSeconds(1.0);
-        //				bool flag = false;
-        //				OptionConfig optionConfig = OptionConfig.GetInstance();
-        //				if (optionConfig.IsDirty)
-        //				{
-        //					optionConfig.Save();
-        //					flag = true;
-        //				}
-        //				if (flag)
-        //				{
-        //					SaveManager.SaveGlobalData();
-        //				}
-        //			}
-        //		}
+        private void FixedUpdate()
+        {
+            //BuffDebuffManager.GetInstance().FixedUpdate(Time.fixedTime);
+            //if (DateTime.Now > this.mLastConfigSave)
+            //{
+            //    this.mLastConfigSave = DateTime.Now.AddSeconds(1.0);
+            //    bool flag = false;
+            //    OptionConfig optionConfig = OptionConfig.GetInstance();
+            //    if (optionConfig.IsDirty)
+            //    {
+            //        optionConfig.Save();
+            //        flag = true;
+            //    }
+            //    if (flag)
+            //    {
+            //        SaveManager.SaveGlobalData();
+            //    }
+            //}
+        }
 
-        //		// Token: 0x060036C8 RID: 14024 RVA: 0x0018B5BC File Offset: 0x001897BC
-        //		private void OnGUI()
-        //		{
-        //			if (this.onGUIHandles != null)
-        //			{
-        //				this.onGUIHandles();
-        //			}
-        //		}
+        private void OnGUI()
+        {
+            //if (this.onGUIHandles != null)
+            //{
+            //    this.onGUIHandles();
+            //}
+        }
 
-        //		// Token: 0x060036C9 RID: 14025 RVA: 0x0018B5D4 File Offset: 0x001897D4
         //		private void ReplaceMeshColliderFor7()
         //		{
         //			GameObject gameObject = GameObject.Find("/jianzhu");
@@ -1688,7 +1674,6 @@ namespace SoftStar.Pal6
             //MapWatch.Instance.SetMap();
         }
 
-        //		// Token: 0x060036D0 RID: 14032 RVA: 0x0018BF80 File Offset: 0x0018A180
         //		public static IEnumerator Quit(float time)
         //		{
         //			Console.Log("Game will quit in " + time.ToString() + " seconds");
@@ -3569,12 +3554,8 @@ namespace SoftStar.Pal6
         //			VERYLONG
         //		}
 
-        //		// Token: 0x02001852 RID: 6226
-        //		// (Invoke) Token: 0x060166B0 RID: 91824
-        //		public delegate void void_func_void();
+        public delegate void void_func_void();
 
-        //		// Token: 0x02001853 RID: 6227
-        //		// (Invoke) Token: 0x060166B4 RID: 91828
-        //		public delegate void void_func_float_float(float currentTime, float deltaTime);
+        public delegate void void_func_float_float(float currentTime, float deltaTime);
     }
 }

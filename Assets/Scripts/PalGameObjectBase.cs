@@ -8,56 +8,43 @@ using UnityEngine;
 
 public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 {
-    //	public static bool LoadImmediately;
+    public static bool LoadImmediately;
 
-    //	// Token: 0x0400209F RID: 8351
-    //	private bool isPrefab;
+    private bool isPrefab;
 
-    //	// Token: 0x040020A0 RID: 8352
     //	public DOBJLayer dobjLayer;
 
     public GameObject model;
 
-    //	// Token: 0x040020A2 RID: 8354
     //	public ObjType objType = ObjType.none;
 
-    //	// Token: 0x040020A3 RID: 8355
     //	protected ObjType m_curObjType = ObjType.none;
 
-    //	// Token: 0x040020A4 RID: 8356
     //	public Action<PalGameObjectBase> OnCurObjTypeChange;
 
-    //	// Token: 0x040020A5 RID: 8357
-    //	[SerializeField]
-    //	protected string modelResourcePath;
+    [SerializeField]
+    protected string modelResourcePath;
 
-    //	// Token: 0x040020A6 RID: 8358
-    //	[SerializeField]
-    //	protected string modelResourcePath2;
+    [SerializeField]
+    protected string modelResourcePath2;
 
-    //	// Token: 0x040020A7 RID: 8359
-    //	[NonSerialized]
-    //	public bool HasLoad;
+    [NonSerialized]
+    public bool HasLoad;
 
-    //	// Token: 0x040020A8 RID: 8360
     //	private TimeSpan loadTime;
 
     //	// Token: 0x040020A9 RID: 8361
     //	public Action<PalGameObjectBase> DestroyEvent;
 
-    //	// Token: 0x040020AA RID: 8362
-    //	public GameObject Another;
+    public GameObject Another;
 
-    //	// Token: 0x040020AB RID: 8363
-    //	private GameObject model2;
+    private GameObject model2;
 
     //	// Token: 0x040020AC RID: 8364
     //	private SphereCollider baseCollider;
 
-    //	// Token: 0x040020AD RID: 8365
     //	private Rigidbody baseRb;
 
-    //	// Token: 0x040020AE RID: 8366
     //	private List<UnityEngine.Object> prefabObjs = new List<UnityEngine.Object>();
 
     //	public ObjType CurObjType

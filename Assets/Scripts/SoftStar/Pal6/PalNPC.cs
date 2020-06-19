@@ -1464,10 +1464,9 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x040020C5 RID: 8389
-        //		[SerializeField]
-        //		[HideInInspector]
-        //		public PalNPC.CharacterData Data;
+        [SerializeField]
+        [HideInInspector]
+        public PalNPC.CharacterData Data;
 
         //		// Token: 0x040020C6 RID: 8390
         //		[NonSerialized]
@@ -1622,388 +1621,336 @@ namespace SoftStar.Pal6
         //		// Token: 0x040020F4 RID: 8436
         //		private string curAnimName;
 
-        //		// Token: 0x020003D8 RID: 984
-        //		[Serializable]
-        //		public class CharacterData : ISaveInterface
-        //		{
-        //			// Token: 0x1700029E RID: 670
-        //			// (get) Token: 0x06001D1C RID: 7452 RVA: 0x00103F0C File Offset: 0x0010210C
-        //			// (set) Token: 0x06001D1D RID: 7453 RVA: 0x00103F14 File Offset: 0x00102114
-        //			public GameObject Owner
-        //			{
-        //				get
-        //				{
-        //					return this.mOwner;
-        //				}
-        //				set
-        //				{
-        //					this.mOwner = value;
-        //				}
-        //			}
+        [Serializable]
+        public class CharacterData : ISaveInterface
+        {
+            [NonSerialized]
+            private GameObject mOwner;
 
-        //			// Token: 0x1700029F RID: 671
-        //			// (get) Token: 0x06001D1E RID: 7454 RVA: 0x00103F20 File Offset: 0x00102120
-        //			public PlayerBaseProperty PlayerBase
-        //			{
-        //				get
-        //				{
-        //					return this.mPlayerBase;
-        //				}
-        //			}
+            //[NonSerialized]
+            //private PlayerBaseProperty mPlayerBase;
 
-        //			// Token: 0x170002A0 RID: 672
-        //			// (get) Token: 0x06001D1F RID: 7455 RVA: 0x00103F28 File Offset: 0x00102128
-        //			public HPMPDPProperty HPMPDP
-        //			{
-        //				get
-        //				{
-        //					return this.mHPMPDP;
-        //				}
-        //			}
+            [NonSerialized]
+            private HPMPDPProperty mHPMPDP;
 
-        //			// Token: 0x170002A1 RID: 673
-        //			// (get) Token: 0x06001D20 RID: 7456 RVA: 0x00103F30 File Offset: 0x00102130
-        //			public FightProperty Fight
-        //			{
-        //				get
-        //				{
-        //					return this.mFight;
-        //				}
-        //			}
+            [NonSerialized]
+            private FightProperty mFight;
 
-        //			// Token: 0x170002A2 RID: 674
-        //			// (get) Token: 0x06001D21 RID: 7457 RVA: 0x00103F38 File Offset: 0x00102138
-        //			public CharacterProperty CharacterCommon
-        //			{
-        //				get
-        //				{
-        //					return this.mCharacter;
-        //				}
-        //			}
+            //[NonSerialized]
+            //private CharacterProperty mCharacter;
 
-        //			// Token: 0x170002A3 RID: 675
-        //			// (get) Token: 0x06001D22 RID: 7458 RVA: 0x00103F40 File Offset: 0x00102140
-        //			public PlayerProperty Player
-        //			{
-        //				get
-        //				{
-        //					return this.mPlayer;
-        //				}
-        //			}
+            //[NonSerialized]
+            //private PlayerProperty mPlayer;
 
-        //			// Token: 0x170002A4 RID: 676
-        //			// (get) Token: 0x06001D23 RID: 7459 RVA: 0x00103F48 File Offset: 0x00102148
-        //			public SocialNPCProperty SocialNPC
-        //			{
-        //				get
-        //				{
-        //					if (this.mSocialNPC == null)
-        //					{
-        //						string message = "Error : 严重错误！！！ npc[" + ((!(this.Owner != null)) ? this.CharacterID.ToString() : this.Owner.name) + "] SocialNPC==null";
-        //						Debug.LogError(message);
-        //					}
-        //					return this.mSocialNPC;
-        //				}
-        //			}
+            //[NonSerialized]
+            //private SocialNPCProperty mSocialNPC;
 
-        //			// Token: 0x170002A5 RID: 677
-        //			// (get) Token: 0x06001D24 RID: 7460 RVA: 0x00103FAC File Offset: 0x001021AC
-        //			public MonsterProperty Monster
-        //			{
-        //				get
-        //				{
-        //					return this.mMonster;
-        //				}
-        //			}
+            //[NonSerialized]
+            //private MonsterProperty mMonster;
 
-        //			// Token: 0x170002A6 RID: 678
-        //			// (get) Token: 0x06001D25 RID: 7461 RVA: 0x00103FB4 File Offset: 0x001021B4
-        //			public int CharacterID
-        //			{
-        //				get
-        //				{
-        //					return this.mCharacterID;
-        //				}
-        //			}
+            [SerializeField]
+            private int mCharacterID;
 
-        //			// Token: 0x170002A7 RID: 679
-        //			// (get) Token: 0x06001D26 RID: 7462 RVA: 0x00103FBC File Offset: 0x001021BC
-        //			// (set) Token: 0x06001D27 RID: 7463 RVA: 0x00103FC4 File Offset: 0x001021C4
-        //			public int Level
-        //			{
-        //				get
-        //				{
-        //					return this.mLevel;
-        //				}
-        //				private set
-        //				{
-        //					if (this.mLevel != value)
-        //					{
-        //						if (this.mPlayerBase != null)
-        //						{
-        //							uint characterID = (uint)this.mCharacterID;
-        //							int oldLevel = this.mLevel;
-        //							this.mLevel = value;
-        //							this.mPlayerBase.ChangeLevel(characterID, this.mLevel);
-        //							ChangeLevelScript.OnChangeLevel(characterID, oldLevel, this.mLevel, this.mOwner);
-        //						}
-        //						else
-        //						{
-        //							this.mLevel = value;
-        //						}
-        //						if (this.mHPMPDP != null)
-        //						{
-        //							this.mHPMPDP.HP = this.mHPMPDP.HPRange;
-        //							this.mHPMPDP.MP = this.mHPMPDP.MPRange;
-        //						}
-        //					}
-        //				}
-        //			}
+            [SerializeField]
+            private int mLevel;
 
-        //			// Token: 0x170002A8 RID: 680
-        //			// (get) Token: 0x06001D28 RID: 7464 RVA: 0x00104070 File Offset: 0x00102270
-        //			// (set) Token: 0x06001D29 RID: 7465 RVA: 0x00104078 File Offset: 0x00102278
-        //			public int Exp
-        //			{
-        //				get
-        //				{
-        //					return this.mExp;
-        //				}
-        //				set
-        //				{
-        //					if (this.mExp != value)
-        //					{
-        //						try
-        //						{
-        //							this.mExp = value;
-        //							this.Level = PlayerBaseProperty.LevelData.FindLevel(this.mExp);
-        //						}
-        //						catch (Exception ex)
-        //						{
-        //							Debug.LogException(ex);
-        //							UIDialogManager.Instance.ShowNoForceInfoDialog(ex.ToString(), 60f);
-        //						}
-        //					}
-        //				}
-        //			}
+            [NonSerialized]
+            private int mExp;
 
-        //			// Token: 0x170002A9 RID: 681
-        //			// (get) Token: 0x06001D2A RID: 7466 RVA: 0x001040EC File Offset: 0x001022EC
-        //			public int NeedExp
-        //			{
-        //				get
-        //				{
-        //					return PlayerBaseProperty.LevelData.GetLevelExp(this.mLevel) - this.mExp;
-        //				}
-        //			}
+            [NonSerialized]
+            private int mSoul;
 
-        //			// Token: 0x170002AA RID: 682
-        //			// (get) Token: 0x06001D2B RID: 7467 RVA: 0x00104100 File Offset: 0x00102300
-        //			// (set) Token: 0x06001D2C RID: 7468 RVA: 0x00104108 File Offset: 0x00102308
-        //			public int Soul
-        //			{
-        //				get
-        //				{
-        //					return this.mSoul;
-        //				}
-        //				set
-        //				{
-        //					this.mSoul = value;
-        //				}
-        //			}
+            [NonSerialized]
+            public int LoadHP;
 
-        //			// Token: 0x06001D2D RID: 7469 RVA: 0x00104114 File Offset: 0x00102314
-        //			public void initialization(GameObject inOwner, int inCharacterID, int inLevel)
-        //			{
-        //				this.mOwner = inOwner;
-        //				this.mCharacterID = inCharacterID;
-        //				this.Reset();
-        //				this.Level = inLevel;
-        //			}
+            [NonSerialized]
+            public int LoadMP;
 
-        //			// Token: 0x06001D2E RID: 7470 RVA: 0x00104134 File Offset: 0x00102334
-        //			public void initialization(GameObject inOwner, uint inCharacterID, int inLevel)
-        //			{
-        //				this.initialization(inOwner, (int)inCharacterID, inLevel);
-        //			}
+            [NonSerialized]
+            public int LoadDP;
+            public GameObject Owner
+            {
+                get
+                {
+                    return this.mOwner;
+                }
+                set
+                {
+                    this.mOwner = value;
+                }
+            }
 
-        //			// Token: 0x06001D2F RID: 7471 RVA: 0x00104140 File Offset: 0x00102340
-        //			public void Reset()
-        //			{
-        //				uint num = (uint)this.mCharacterID;
-        //				if (this.mPlayerBase != null)
-        //				{
-        //					this.mPlayerBase = null;
-        //				}
-        //				PlayerBaseProperty.PlayerBaseData data = PlayerBaseProperty.GetData(num, this.Level);
-        //				if (data != null)
-        //				{
-        //					this.mPlayerBase = new PlayerBaseProperty(data);
-        //				}
-        //				if (this.mHPMPDP != null)
-        //				{
-        //					this.mHPMPDP.UnLink();
-        //					this.mHPMPDP = null;
-        //				}
-        //				HPMPDPProperty.StaticData data2 = HPMPDPProperty.StaticData.GetData(num);
-        //				if (data2 != null)
-        //				{
-        //					this.mHPMPDP = new HPMPDPProperty(data2);
-        //				}
-        //				if (this.mFight != null)
-        //				{
-        //					this.mFight.UnLink();
-        //					this.mFight = null;
-        //				}
-        //				FightProperty.StaticData data3 = FightProperty.StaticData.GetData(num);
-        //				if (data3 != null)
-        //				{
-        //					this.mFight = new FightProperty(data3);
-        //				}
-        //				if (this.mHPMPDP != null)
-        //				{
-        //					this.mHPMPDP.LinkPlayerBase = this.mPlayerBase;
-        //					this.mHPMPDP.SetWithoutEvents(this.mHPMPDP.HPRange, 0, 0);
-        //				}
-        //				if (this.mFight != null)
-        //				{
-        //					this.mFight.LinkPlayerBase = this.mPlayerBase;
-        //				}
-        //				CharacterProperty.StaticData data4 = CharacterProperty.StaticData.GetData(num);
-        //				if (data4 != null)
-        //				{
-        //					this.mCharacter = new CharacterProperty(data4);
-        //				}
-        //				else
-        //				{
-        //					this.mCharacter = null;
-        //				}
-        //				PlayerProperty.StaticData data5 = PlayerProperty.StaticData.GetData(num);
-        //				if (data5 != null)
-        //				{
-        //					this.mPlayer = new PlayerProperty(data5);
-        //				}
-        //				else
-        //				{
-        //					this.mPlayer = null;
-        //				}
-        //				SocialNPCProperty.StaticData data6 = SocialNPCProperty.StaticData.GetData(num);
-        //				if (data6 != null)
-        //				{
-        //					this.mSocialNPC = new SocialNPCProperty(data6);
-        //				}
-        //				else
-        //				{
-        //					this.mSocialNPC = null;
-        //				}
-        //				MonsterProperty.StaticData data7 = MonsterProperty.StaticData.GetData(num);
-        //				if (data7 != null)
-        //				{
-        //					this.mMonster = new MonsterProperty(data7);
-        //				}
-        //				else
-        //				{
-        //					this.mMonster = null;
-        //				}
-        //			}
+            //public PlayerBaseProperty PlayerBase
+            //{
+            //    get
+            //    {
+            //        return this.mPlayerBase;
+            //    }
+            //}
 
-        //			// Token: 0x06001D30 RID: 7472 RVA: 0x001042E8 File Offset: 0x001024E8
-        //			public void Save(BinaryWriter writer)
-        //			{
-        //				writer.Write(this.mCharacterID);
-        //				if (this.mHPMPDP != null)
-        //				{
-        //					writer.Write(this.mHPMPDP.HP);
-        //					writer.Write(this.mHPMPDP.MP);
-        //					writer.Write(this.mHPMPDP.DP);
-        //				}
-        //				else
-        //				{
-        //					writer.Write(0);
-        //					writer.Write(0);
-        //					writer.Write(0);
-        //				}
-        //				writer.Write(this.mExp);
-        //				writer.Write(this.mSoul);
-        //			}
+            public HPMPDPProperty HPMPDP
+            {
+                get
+                {
+                    return this.mHPMPDP;
+                }
+            }
 
-        //			// Token: 0x06001D31 RID: 7473 RVA: 0x00104374 File Offset: 0x00102574
-        //			public void Load(BinaryReader reader)
-        //			{
-        //				this.mCharacterID = reader.ReadInt32();
-        //				this.LoadHP = reader.ReadInt32();
-        //				this.LoadMP = reader.ReadInt32();
-        //				this.LoadDP = reader.ReadInt32();
-        //				if (SaveManager.VersionNum < 21u)
-        //				{
-        //					this.mLevel = reader.ReadInt32();
-        //				}
-        //				this.mExp = reader.ReadInt32();
-        //				this.mLevel = PlayerBaseProperty.LevelData.FindLevel(this.mExp);
-        //				this.mSoul = reader.ReadInt32();
-        //				this.Reset();
-        //			}
+            public FightProperty Fight
+            {
+                get
+                {
+                    return this.mFight;
+                }
+            }
 
-        //			// Token: 0x040020F9 RID: 8441
-        //			[NonSerialized]
-        //			private GameObject mOwner;
+            //public CharacterProperty CharacterCommon
+            //{
+            //    get
+            //    {
+            //        return this.mCharacter;
+            //    }
+            //}
 
-        //			// Token: 0x040020FA RID: 8442
-        //			[NonSerialized]
-        //			private PlayerBaseProperty mPlayerBase;
+            //public PlayerProperty Player
+            //{
+            //    get
+            //    {
+            //        return this.mPlayer;
+            //    }
+            //}
 
-        //			// Token: 0x040020FB RID: 8443
-        //			[NonSerialized]
-        //			private HPMPDPProperty mHPMPDP;
+            //public SocialNPCProperty SocialNPC
+            //{
+            //    get
+            //    {
+            //        if (this.mSocialNPC == null)
+            //        {
+            //            string message = "Error : 严重错误！！！ npc[" + ((!(this.Owner != null)) ? this.CharacterID.ToString() : this.Owner.name) + "] SocialNPC==null";
+            //            Debug.LogError(message);
+            //        }
+            //        return this.mSocialNPC;
+            //    }
+            //}
 
-        //			// Token: 0x040020FC RID: 8444
-        //			[NonSerialized]
-        //			private FightProperty mFight;
+            //public MonsterProperty Monster
+            //{
+            //    get
+            //    {
+            //        return this.mMonster;
+            //    }
+            //}
 
-        //			// Token: 0x040020FD RID: 8445
-        //			[NonSerialized]
-        //			private CharacterProperty mCharacter;
+            public int CharacterID
+            {
+                get
+                {
+                    return this.mCharacterID;
+                }
+            }
 
-        //			// Token: 0x040020FE RID: 8446
-        //			[NonSerialized]
-        //			private PlayerProperty mPlayer;
+            public int Level
+            {
+                get
+                {
+                    return this.mLevel;
+                }
+                private set
+                {
+                    if (this.mLevel != value)
+                    {
+                        //if (this.mPlayerBase != null)
+                        //{
+                        //    uint characterID = (uint)this.mCharacterID;
+                        //    int oldLevel = this.mLevel;
+                        //    this.mLevel = value;
+                        //    this.mPlayerBase.ChangeLevel(characterID, this.mLevel);
+                        //    ChangeLevelScript.OnChangeLevel(characterID, oldLevel, this.mLevel, this.mOwner);
+                        //}
+                        //else
+                        //{
+                        //    this.mLevel = value;
+                        //}
+                        //if (this.mHPMPDP != null)
+                        //{
+                        //    this.mHPMPDP.HP = this.mHPMPDP.HPRange;
+                        //    this.mHPMPDP.MP = this.mHPMPDP.MPRange;
+                        //}
+                    }
+                }
+            }
 
-        //			// Token: 0x040020FF RID: 8447
-        //			[NonSerialized]
-        //			private SocialNPCProperty mSocialNPC;
+            public int Exp
+            {
+                get
+                {
+                    return this.mExp;
+                }
+                set
+                {
+                    if (this.mExp != value)
+                    {
+                        try
+                        {
+                            this.mExp = value;
+                            //this.Level = PlayerBaseProperty.LevelData.FindLevel(this.mExp);
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.LogException(ex);
+                           // UIDialogManager.Instance.ShowNoForceInfoDialog(ex.ToString(), 60f);
+                        }
+                    }
+                }
+            }
 
-        //			// Token: 0x04002100 RID: 8448
-        //			[NonSerialized]
-        //			private MonsterProperty mMonster;
+            //public int NeedExp
+            //{
+            //    get
+            //    {
+            //        return PlayerBaseProperty.LevelData.GetLevelExp(this.mLevel) - this.mExp;
+            //    }
+            //}
 
-        //			// Token: 0x04002101 RID: 8449
-        //			[SerializeField]
-        //			private int mCharacterID;
+            public int Soul
+            {
+                get
+                {
+                    return this.mSoul;
+                }
+                set
+                {
+                    this.mSoul = value;
+                }
+            }
 
-        //			// Token: 0x04002102 RID: 8450
-        //			[SerializeField]
-        //			private int mLevel;
+            public void initialization(GameObject inOwner, int inCharacterID, int inLevel)
+            {
+                this.mOwner = inOwner;
+                this.mCharacterID = inCharacterID;
+                this.Reset();
+                this.Level = inLevel;
+            }
 
-        //			// Token: 0x04002103 RID: 8451
-        //			[NonSerialized]
-        //			private int mExp;
+            public void initialization(GameObject inOwner, uint inCharacterID, int inLevel)
+            {
+                this.initialization(inOwner, (int)inCharacterID, inLevel);
+            }
 
-        //			// Token: 0x04002104 RID: 8452
-        //			[NonSerialized]
-        //			private int mSoul;
+            public void Reset()
+            {
+                uint num = (uint)this.mCharacterID;
+                //if (this.mPlayerBase != null)
+                //{
+                //    this.mPlayerBase = null;
+                //}
+                //PlayerBaseProperty.PlayerBaseData data = PlayerBaseProperty.GetData(num, this.Level);
+                //if (data != null)
+                //{
+                //    this.mPlayerBase = new PlayerBaseProperty(data);
+                //}
+                //if (this.mHPMPDP != null)
+                //{
+                //    this.mHPMPDP.UnLink();
+                //    this.mHPMPDP = null;
+                //}
+                HPMPDPProperty.StaticData data2 = HPMPDPProperty.StaticData.GetData(num);
+                if (data2 != null)
+                {
+                   // this.mHPMPDP = new HPMPDPProperty(data2);
+                }
+                if (this.mFight != null)
+                {
+                   // this.mFight.UnLink();
+                    this.mFight = null;
+                }
+                FightProperty.StaticData data3 = FightProperty.StaticData.GetData(num);
+                if (data3 != null)
+                {
+                    //this.mFight = new FightProperty(data3);
+                }
+                if (this.mHPMPDP != null)
+                {
+                   // this.mHPMPDP.LinkPlayerBase = this.mPlayerBase;
+                   // this.mHPMPDP.SetWithoutEvents(this.mHPMPDP.HPRange, 0, 0);
+                }
+                if (this.mFight != null)
+                {
+                    //this.mFight.LinkPlayerBase = this.mPlayerBase;
+                }
+                //CharacterProperty.StaticData data4 = CharacterProperty.StaticData.GetData(num);
+                //if (data4 != null)
+                //{
+                //    //this.mCharacter = new CharacterProperty(data4);
+                //}
+                //else
+                //{
+                //    this.mCharacter = null;
+                //}
+                //PlayerProperty.StaticData data5 = PlayerProperty.StaticData.GetData(num);
+                //if (data5 != null)
+                //{
+                //    this.mPlayer = new PlayerProperty(data5);
+                //}
+                //else
+                //{
+                //    this.mPlayer = null;
+                //}
+                //SocialNPCProperty.StaticData data6 = SocialNPCProperty.StaticData.GetData(num);
+                //if (data6 != null)
+                //{
+                //    this.mSocialNPC = new SocialNPCProperty(data6);
+                //}
+                //else
+                //{
+                //    this.mSocialNPC = null;
+                //}
+                //MonsterProperty.StaticData data7 = MonsterProperty.StaticData.GetData(num);
+                //if (data7 != null)
+                //{
+                //    this.mMonster = new MonsterProperty(data7);
+                //}
+                //else
+                //{
+                //    this.mMonster = null;
+                //}
+            }
 
-        //			// Token: 0x04002105 RID: 8453
-        //			[NonSerialized]
-        //			public int LoadHP;
+            public void Save(BinaryWriter writer)
+            {
+                writer.Write(this.mCharacterID);
+                if (this.mHPMPDP != null)
+                {
+                    //writer.Write(this.mHPMPDP.HP);
+                    //writer.Write(this.mHPMPDP.MP);
+                    //writer.Write(this.mHPMPDP.DP);
+                }
+                else
+                {
+                    writer.Write(0);
+                    writer.Write(0);
+                    writer.Write(0);
+                }
+                writer.Write(this.mExp);
+                writer.Write(this.mSoul);
+            }
 
-        //			// Token: 0x04002106 RID: 8454
-        //			[NonSerialized]
-        //			public int LoadMP;
-
-        //			// Token: 0x04002107 RID: 8455
-        //			[NonSerialized]
-        //			public int LoadDP;
-        //		}
+            public void Load(BinaryReader reader)
+            {
+                this.mCharacterID = reader.ReadInt32();
+                this.LoadHP = reader.ReadInt32();
+                this.LoadMP = reader.ReadInt32();
+                this.LoadDP = reader.ReadInt32();
+                //if (SaveManager.VersionNum < 21u)
+                //{
+                //    this.mLevel = reader.ReadInt32();
+                //}
+                this.mExp = reader.ReadInt32();
+                //this.mLevel = PlayerBaseProperty.LevelData.FindLevel(this.mExp);
+                this.mSoul = reader.ReadInt32();
+                this.Reset();
+            }
+        }
 
         [Serializable]
         public class SkillInfo
@@ -2015,17 +1962,12 @@ namespace SoftStar.Pal6
             public int m_CurrentExp;
         }
 
-        //		// Token: 0x020003DA RID: 986
-        //		public enum NPCState
-        //		{
-        //			// Token: 0x0400210C RID: 8460
-        //			Default,
-        //			// Token: 0x0400210D RID: 8461
-        //			Patrol,
-        //			// Token: 0x0400210E RID: 8462
-        //			Guard,
-        //			// Token: 0x0400210F RID: 8463
-        //			Die
-        //		}
+        public enum NPCState
+        {
+            Default,
+            Patrol,
+            Guard,
+            Die
+        }
     }
 }

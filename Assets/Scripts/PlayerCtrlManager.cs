@@ -6,20 +6,19 @@ using UnityEngine;
 
 public class PlayerCtrlManager
 {
-    //	private static bool m_bControl = true;
+    private static bool m_bControl = true;
 
-    //	public static bool bCanTab = true;
+    public static bool bCanTab = true;
 
-    //	public static bool bCtrlOther = false;
+    public static bool bCtrlOther = false;
 
-    //	public static bool CanChangeState = false;
+    public static bool CanChangeState = false;
 
-    //	protected static Transform m_MainCam;
+    protected static Transform m_MainCam;
 
-    //	public static bool UseSunddenlyTurn = true;
+    public static bool UseSunddenlyTurn = true;
 
-    //	// Token: 0x040031AF RID: 12719
-    //	private static int MoveID = 0;
+    private static int MoveID = 0;
 
     //	// Token: 0x040031B0 RID: 12720
     //	private static Quaternion LastRot;
@@ -326,7 +325,6 @@ public class PlayerCtrlManager
         //PlayerCtrlManager.maskValue = ~PlayerCtrlManager.maskValue;
     }
 
-    //	// Token: 0x0600374E RID: 14158 RVA: 0x00190200 File Offset: 0x0018E400
     //	private static void OnInit()
     //	{
     //		PlayerCtrlManager.SetJumpEvent(true);
@@ -344,7 +342,6 @@ public class PlayerCtrlManager
     //		PlayerCtrlManager.bCtrlOther = false;
     //	}
 
-    //	// Token: 0x0600374F RID: 14159 RVA: 0x00190268 File Offset: 0x0018E468
     //	public static void OnExit()
     //	{
     //		if (GameStateManager.NextGameState != GameState.SmallGame)
