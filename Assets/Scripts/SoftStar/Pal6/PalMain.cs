@@ -17,48 +17,40 @@ namespace SoftStar.Pal6
 {
     public class PalMain : MonoBehaviour
     {
-        //		public const int MoneyFlag = 2;
+        public delegate void void_func_void();
 
-        //		// Token: 0x04003112 RID: 12562
-        //		private bool m_skillPreloading;
+        public delegate void void_func_float_float(float currentTime, float deltaTime);
 
-        //		// Token: 0x04003113 RID: 12563
-        //		private static float m_loadingValue = 0f;
+        public const int MoneyFlag = 2;
 
-        //		// Token: 0x04003114 RID: 12564
-        //		public static bool mIsDLC = false;
+        private bool m_skillPreloading;
 
-        //		// Token: 0x04003115 RID: 12565
-        //		private static uint _MoneyID = 0u;
+        private static float m_loadingValue = 0f;
+
+        public static bool mIsDLC = false;
+
+        private static uint _MoneyID = 0u;
 
         /// <summary>
         /// 游戏难度
         /// </summary>
         public static int GameDifficulty = 0;
 
-        //		// Token: 0x04003117 RID: 12567
-        //		public static int MapOffset = 4194304;
+        public static int MapOffset = 4194304;
 
-        //		// Token: 0x04003118 RID: 12568
-        //		public static float dyingRate = 0.1f;
+        public static float dyingRate = 0.1f;
 
-        //		// Token: 0x04003119 RID: 12569
-        //		public static string dyingZhanLi = string.Empty;
+        public static string dyingZhanLi = string.Empty;
 
-        //		// Token: 0x0400311A RID: 12570
-        //		public static string normalZhanli = string.Empty;
+        public static string normalZhanli = string.Empty;
 
-        //		// Token: 0x0400311B RID: 12571
-        //		public static int IgnoreLayer = 2;
+        public static int IgnoreLayer = 2;
 
-        //		// Token: 0x0400311C RID: 12572
-        //		public static int IgnoreMaskValue = (int)Mathf.Pow(2f, (float)PalMain.IgnoreLayer);
+        public static int IgnoreMaskValue = (int)Mathf.Pow(2f, (float)PalMain.IgnoreLayer);
 
-        //		// Token: 0x0400311D RID: 12573
-        //		public static List<string> dialogue = new List<string>();
+        public static List<string> dialogue = new List<string>();
 
-        //		// Token: 0x0400311E RID: 12574
-        //		public BattleFormationManager CurBattleFormationManager = new BattleFormationManager();
+        //public BattleFormationManager CurBattleFormationManager = new BattleFormationManager();
 
         /// <summary>
         /// 游戏开始时间
@@ -74,113 +66,79 @@ namespace SoftStar.Pal6
 
         public static string PlayerName = "Default";
 
-        //		// Token: 0x04003123 RID: 12579
         //		public static List<Landmark> landMarks = new List<Landmark>();
 
-        //		// Token: 0x04003124 RID: 12580
-        //		public static string mapInfoPrefix = "/Resources/MapData/";
+        public static string mapInfoPrefix = "/Resources/MapData/";
 
-        //		// Token: 0x04003125 RID: 12581
-        //		public static GameObject mapinfo = null;
+        public static GameObject mapinfo = null;
 
-        //		// Token: 0x04003126 RID: 12582
-        //		public static Dictionary<int, int> ItemCount = new Dictionary<int, int>();
+        public static Dictionary<int, int> ItemCount = new Dictionary<int, int>();
 
-        //		// Token: 0x04003127 RID: 12583
         //		public static Dictionary<int, List<IItem>> SceneItems = new Dictionary<int, List<IItem>>();
 
-        //		// Token: 0x04003128 RID: 12584
-        //		public float minFPS = 10f;
+        public float minFPS = 10f;
 
-        //		// Token: 0x04003129 RID: 12585
-        //		public static float MinFPS = 10f;
+        public static float MinFPS = 10f;
 
-        //		// Token: 0x0400312A RID: 12586
-        //		public static float MinDeltaTime;
+        public static float MinDeltaTime;
 
-        //		// Token: 0x0400312B RID: 12587
-        //		public bool m_bIgnoreEnemy;
+        public bool m_bIgnoreEnemy;
 
         //public static BackgroundAudio backgroundAudio;
 
-        //		// Token: 0x0400312D RID: 12589
         //		public bool m_bVoiceBlance;
 
-        //		// Token: 0x0400312E RID: 12590
         //		private static GameObject mMainObj = null;
 
-        //		// Token: 0x0400312F RID: 12591
         //		private static GameObject m_MainCamera = null;
 
-        //		// Token: 0x04003130 RID: 12592
         //		public static Transform MainCameraTF = null;
 
         private static PalMain instance = null;
 
-        //		// Token: 0x04003132 RID: 12594
         //		public static bool IsXP = false;
 
-        //		// Token: 0x04003133 RID: 12595
         //		public static bool IsWin32 = false;
 
-        //		// Token: 0x04003134 RID: 12596
         //		public static bool ForceLow = false;
 
-        //		// Token: 0x04003136 RID: 12598
         //		public bool bPlayBeginMovie = true;
 
-        //		// Token: 0x04003137 RID: 12599
         //		private DateTime mLastConfigSave = DateTime.Now.AddSeconds(1.0);
 
-        //		// Token: 0x04003138 RID: 12600
         //		private static float CameraOptDistance = 60f;
 
-        //		// Token: 0x04003139 RID: 12601
         //		public static Action LoadOverEvent = null;
 
-        //		// Token: 0x0400313A RID: 12602
         //		private static Transform tempGameLayer = null;
 
-        //		// Token: 0x0400313B RID: 12603
         //		public QTEManager m_QTEManager = new QTEManager();
 
-        //		// Token: 0x0400313C RID: 12604
         //		private List<object> mTempObjects = new List<object>();
 
-        //		// Token: 0x0400313D RID: 12605
         //		private int mTempPosition;
 
-        //		// Token: 0x0400313E RID: 12606
         //		[NonSerialized]
         //		public float MoneyRate = 1f;
 
-        //		// Token: 0x0400313F RID: 12607
         //		[NonSerialized]
         //		public float DropAddRate;
 
-        //		// Token: 0x04003140 RID: 12608
         //		[NonSerialized]
         //		public float DPRate = 1f;
 
-        //		// Token: 0x04003141 RID: 12609
         //		public static PalMain.DISTANCE_CULL m_DistCull = PalMain.DISTANCE_CULL.RESTORE;
 
-        //		// Token: 0x04003142 RID: 12610
         //		public static PalMain.POST_CAM m_PostCam = PalMain.POST_CAM.FULL;
 
-        //		// Token: 0x04003143 RID: 12611
         //		public static PalMain.LIGHT m_Light = PalMain.LIGHT.FULL;
 
-        //		// Token: 0x04003144 RID: 12612
         //		private List<Behaviour> m_CamPosts = new List<Behaviour>();
 
-        //		// Token: 0x04003145 RID: 12613
         //		private List<Light> m_Lights = new List<Light>();
 
-        //		// Token: 0x04003146 RID: 12614
         //		private List<Light> m_LightsShadow = new List<Light>();
 
-        //		// Token: 0x04003147 RID: 12615
         //		private List<Camera> m_Cams = new List<Camera>();
 
         //		// Token: 0x04003148 RID: 12616
@@ -867,7 +825,7 @@ namespace SoftStar.Pal6
             //				achievements[189].m_CurrentNum = ((FashionClothItemTypeCache.IsGetRate() < 1f) ? 0 : 1);
             //			};
 
-            //			MouseEventManager.Initialize();
+            MouseEventManager.Initialize();
             //			ShaderPropertyIDManager.Initialize();
             //			MessageProcess.Initialize();
             //			SetActiveByFlagManager.Initialize();
@@ -1163,6 +1121,10 @@ namespace SoftStar.Pal6
             //			}
         }
 
+        /// <summary>
+        /// 推迟物品
+        /// </summary>
+        /// <param name="inItem"></param>
         private void PutOffItem(IItem inItem)
         {
             //IItemAssemble<SymbolPanelItem> itemAssemble = inItem as IItemAssemble<SymbolPanelItem>;
@@ -1185,7 +1147,6 @@ namespace SoftStar.Pal6
             //}
         }
 
-        //		// Token: 0x060036C1 RID: 14017 RVA: 0x0018ADE4 File Offset: 0x00188FE4
         //		public void InitPlayBeginMovie()
         //		{
         //			if (SceneManager.GetActiveScene().buildIndex == 0)
@@ -3553,9 +3514,5 @@ namespace SoftStar.Pal6
         //			// Token: 0x0400319C RID: 12700
         //			VERYLONG
         //		}
-
-        public delegate void void_func_void();
-
-        public delegate void void_func_float_float(float currentTime, float deltaTime);
     }
 }

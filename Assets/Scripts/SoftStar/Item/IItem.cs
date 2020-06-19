@@ -16,6 +16,9 @@ namespace SoftStar.Item
         /// </summary>
         List<ItemGroup> OwnerGroup { get; }
 
+        /// <summary>
+        /// 物品类型
+        /// </summary>
         IItemType ItemType { get; }
 
 		uint ID { get; }

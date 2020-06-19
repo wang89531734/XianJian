@@ -6,9 +6,16 @@ using UnityEngine;
 
 namespace SoftStar.Item
 {
-    public class ItemGroup //: IComparable<ItemGroup>
+    public class ItemGroup : IComparable<ItemGroup>
     {
-        //		// Token: 0x06003010 RID: 12304 RVA: 0x0015F8A4 File Offset: 0x0015DAA4
+        private readonly string mID;
+
+        //		private Dictionary<uint, IItem> mItems = new Dictionary<uint, IItem>();
+
+        //		private uint[] mLoadData;
+
+        private bool mIsInitialized;
+
         //		private ItemGroup(string inID)
         //		{
         //			this.mID = inID;
@@ -16,11 +23,10 @@ namespace SoftStar.Item
         //			this.mIsInitialized = true;
         //		}
 
-        //		// Token: 0x06003011 RID: 12305 RVA: 0x0015F8DC File Offset: 0x0015DADC
-        //		public int CompareTo(ItemGroup other)
-        //		{
-        //			return this.mID.CompareTo(other.mID);
-        //		}
+        public int CompareTo(ItemGroup other)
+        {
+            return this.mID.CompareTo(other.mID);
+        }
 
         //		// Token: 0x17000347 RID: 839
         //		// (get) Token: 0x06003012 RID: 12306 RVA: 0x0015F8F0 File Offset: 0x0015DAF0
@@ -172,17 +178,5 @@ namespace SoftStar.Item
         //				this.UnLink(curItem);
         //			}
         //		}
-
-        //		// Token: 0x04002BB5 RID: 11189
-        //		private readonly string mID;
-
-        //		// Token: 0x04002BB6 RID: 11190
-        //		private Dictionary<uint, IItem> mItems = new Dictionary<uint, IItem>();
-
-        //		// Token: 0x04002BB7 RID: 11191
-        //		private uint[] mLoadData;
-
-        //		// Token: 0x04002BB8 RID: 11192
-        //		private bool mIsInitialized;
     }
 }

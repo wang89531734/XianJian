@@ -6,14 +6,12 @@ using UnityEngine;
 
 namespace SoftStar.Item
 {
-    public class ItemManager //: ISaveInterface
+    public class ItemManager : ISaveInterface
     {
-        //		private Dictionary<string, ItemGroup> mGroups;
+        private Dictionary<string, ItemGroup> mGroups;
 
-        //		// Token: 0x0400308D RID: 12429
         //		private static Func<uint, IItemType>[] mItemFactory;
 
-        //		// Token: 0x0400308E RID: 12430
         //		private uint emptyItemPos;
 
         //		// Token: 0x0400308F RID: 12431
@@ -50,22 +48,15 @@ namespace SoftStar.Item
         //			ItemManager.instance = new ItemManager();
         //		}
 
-        //		// Token: 0x14000022 RID: 34
-        //		// (add) Token: 0x060035D0 RID: 13776 RVA: 0x00186674 File Offset: 0x00184874
-        //		// (remove) Token: 0x060035D1 RID: 13777 RVA: 0x00186690 File Offset: 0x00184890
-        //		public event Action<IItem> OnAfterAddItem;
+        public event Action<IItem> OnAfterAddItem;
 
-        //		// Token: 0x14000023 RID: 35
-        //		// (add) Token: 0x060035D2 RID: 13778 RVA: 0x001866AC File Offset: 0x001848AC
-        //		// (remove) Token: 0x060035D3 RID: 13779 RVA: 0x001866C8 File Offset: 0x001848C8
-        //		public event Action<IItem> OnBeforeRemoveItem;
+        /// <summary>
+        /// 移除物品之前
+        /// </summary>
+        public event Action<IItem> OnBeforeRemoveItem;
 
-        //		// Token: 0x14000024 RID: 36
-        //		// (add) Token: 0x060035D4 RID: 13780 RVA: 0x001866E4 File Offset: 0x001848E4
-        //		// (remove) Token: 0x060035D5 RID: 13781 RVA: 0x00186700 File Offset: 0x00184900
-        //		public event Action<IItem[]> AfterCountChange;
+        public event Action<IItem[]> AfterCountChange;
 
-        //		// Token: 0x060035D6 RID: 13782 RVA: 0x0018671C File Offset: 0x0018491C
         //		public void AddGroup(ItemGroup inGroup)
         //		{
         //			this.mGroups.Add(inGroup.ID, inGroup);
@@ -344,54 +335,53 @@ namespace SoftStar.Item
         //			this.mPackages.Remove(ID);
         //		}
 
-        //		// Token: 0x060035EB RID: 13803 RVA: 0x00186D84 File Offset: 0x00184F84
-        //		public void Save(BinaryWriter writer)
-        //		{
-        //			int num = 0;
-        //			foreach (IItem item in this.mItems)
-        //			{
-        //				if (item != null)
-        //				{
-        //					num++;
-        //				}
-        //			}
-        //			writer.Write(num);
-        //			MemoryStream memoryStream = new MemoryStream(8);
-        //			BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
-        //			foreach (IItem item2 in this.mItems)
-        //			{
-        //				if (item2 != null)
-        //				{
-        //					writer.Write(item2.ItemType.TypeID);
-        //					memoryStream.SetLength(0L);
-        //					item2.ItemType.SaveUserData(binaryWriter, item2);
-        //					StreamHelper.UserDefined_Save(binaryWriter, item2.UserDefinedData);
-        //					StreamHelper.number_to_bytes((uint)memoryStream.Length, writer.BaseStream);
-        //					writer.Write(memoryStream.ToArray());
-        //				}
-        //			}
-        //			writer.Write(this.mGroups.Count);
-        //			foreach (KeyValuePair<string, ItemGroup> keyValuePair in this.mGroups)
-        //			{
-        //				keyValuePair.Value.Save(writer);
-        //			}
-        //			List<ItemPackage> list = new List<ItemPackage>(this.mPackages.Count);
-        //			foreach (KeyValuePair<uint, ItemPackage> keyValuePair2 in this.mPackages)
-        //			{
-        //				if (keyValuePair2.Value != null && keyValuePair2.Value.ID != 0u && keyValuePair2.Value.ItemsCount > 0)
-        //				{
-        //					list.Add(keyValuePair2.Value);
-        //				}
-        //			}
-        //			writer.Write(list.Count);
-        //			foreach (ItemPackage itemPackage in list)
-        //			{
-        //				if (itemPackage != null)
-        //				{
-        //					itemPackage.Save(writer);
-        //				}
-        //			}
-        //		}
+        public void Save(BinaryWriter writer)
+        {
+            //int num = 0;
+            //foreach (IItem item in this.mItems)
+            //{
+            //    if (item != null)
+            //    {
+            //        num++;
+            //    }
+            //}
+            //writer.Write(num);
+            //MemoryStream memoryStream = new MemoryStream(8);
+            //BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
+            //foreach (IItem item2 in this.mItems)
+            //{
+            //    if (item2 != null)
+            //    {
+            //        writer.Write(item2.ItemType.TypeID);
+            //        memoryStream.SetLength(0L);
+            //        item2.ItemType.SaveUserData(binaryWriter, item2);
+            //        StreamHelper.UserDefined_Save(binaryWriter, item2.UserDefinedData);
+            //        StreamHelper.number_to_bytes((uint)memoryStream.Length, writer.BaseStream);
+            //        writer.Write(memoryStream.ToArray());
+            //    }
+            //}
+            //writer.Write(this.mGroups.Count);
+            //foreach (KeyValuePair<string, ItemGroup> keyValuePair in this.mGroups)
+            //{
+            //    keyValuePair.Value.Save(writer);
+            //}
+            //List<ItemPackage> list = new List<ItemPackage>(this.mPackages.Count);
+            //foreach (KeyValuePair<uint, ItemPackage> keyValuePair2 in this.mPackages)
+            //{
+            //    if (keyValuePair2.Value != null && keyValuePair2.Value.ID != 0u && keyValuePair2.Value.ItemsCount > 0)
+            //    {
+            //        list.Add(keyValuePair2.Value);
+            //    }
+            //}
+            //writer.Write(list.Count);
+            //foreach (ItemPackage itemPackage in list)
+            //{
+            //    if (itemPackage != null)
+            //    {
+            //        itemPackage.Save(writer);
+            //    }
+            //}
+        }
 
         //		// Token: 0x17000405 RID: 1029
         //		// (get) Token: 0x060035EC RID: 13804 RVA: 0x0018702C File Offset: 0x0018522C
@@ -421,49 +411,48 @@ namespace SoftStar.Item
         //			FashionClothItemTypeCache.ClearIsGet();
         //		}
 
-        //		// Token: 0x060035EE RID: 13806 RVA: 0x0018711C File Offset: 0x0018531C
-        //		public void Load(BinaryReader reader)
-        //		{
-        //			this.ClearData();
-        //			uint num = reader.ReadUInt32();
-        //			MemoryStream memoryStream = new MemoryStream(8);
-        //			BinaryReader binaryReader = new BinaryReader(memoryStream);
-        //			while (num > 0u)
-        //			{
-        //				uint inTypeID = reader.ReadUInt32();
-        //				memoryStream.SetLength((long)((ulong)StreamHelper.bytes_to_uint32(reader.BaseStream)));
-        //				memoryStream.Position = 0L;
-        //				memoryStream.Write(reader.ReadBytes((int)memoryStream.Length), 0, (int)memoryStream.Length);
-        //				if (!SaveManager.IsErZhouMu || SaveManager.inheritStruct.Item)
-        //				{
-        //					memoryStream.Position = 0L;
-        //					try
-        //					{
-        //						IItemType itemType = ItemManager.GetItemType(inTypeID);
-        //						if (itemType == null)
-        //						{
-        //							throw new Exception("read item error : " + inTypeID.ToString() + " not exist");
-        //						}
-        //						IItem item = itemType.Create(binaryReader);
-        //						StreamHelper.UserDefined_Load(binaryReader, item.UserDefinedData);
-        //					}
-        //					catch (Exception ex)
-        //					{
-        //						Debug.LogError("read item error : " + ex.ToString());
-        //					}
-        //				}
-        //				num -= 1u;
-        //			}
-        //			for (num = reader.ReadUInt32(); num > 0u; num -= 1u)
-        //			{
-        //				ItemGroup.GetOrCreateGroup(reader.ReadString()).Load(reader);
-        //			}
-        //			for (num = reader.ReadUInt32(); num > 0u; num -= 1u)
-        //			{
-        //				ItemPackage.GetOrCreatePackage(reader.ReadUInt32()).Load(reader);
-        //			}
-        //			this.GetItemEmptyID();
-        //		}
+        public void Load(BinaryReader reader)
+        {
+            //this.ClearData();
+            //uint num = reader.ReadUInt32();
+            //MemoryStream memoryStream = new MemoryStream(8);
+            //BinaryReader binaryReader = new BinaryReader(memoryStream);
+            //while (num > 0u)
+            //{
+            //    uint inTypeID = reader.ReadUInt32();
+            //    memoryStream.SetLength((long)((ulong)StreamHelper.bytes_to_uint32(reader.BaseStream)));
+            //    memoryStream.Position = 0L;
+            //    memoryStream.Write(reader.ReadBytes((int)memoryStream.Length), 0, (int)memoryStream.Length);
+            //    if (!SaveManager.IsErZhouMu || SaveManager.inheritStruct.Item)
+            //    {
+            //        memoryStream.Position = 0L;
+            //        try
+            //        {
+            //            IItemType itemType = ItemManager.GetItemType(inTypeID);
+            //            if (itemType == null)
+            //            {
+            //                throw new Exception("read item error : " + inTypeID.ToString() + " not exist");
+            //            }
+            //            IItem item = itemType.Create(binaryReader);
+            //            StreamHelper.UserDefined_Load(binaryReader, item.UserDefinedData);
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            Debug.LogError("read item error : " + ex.ToString());
+            //        }
+            //    }
+            //    num -= 1u;
+            //}
+            //for (num = reader.ReadUInt32(); num > 0u; num -= 1u)
+            //{
+            //    ItemGroup.GetOrCreateGroup(reader.ReadString()).Load(reader);
+            //}
+            //for (num = reader.ReadUInt32(); num > 0u; num -= 1u)
+            //{
+            //    ItemPackage.GetOrCreatePackage(reader.ReadUInt32()).Load(reader);
+            //}
+            //this.GetItemEmptyID();
+        }
 
         //		// Token: 0x060035EF RID: 13807 RVA: 0x00187288 File Offset: 0x00185488
         //		public IEnumerator Prepare()
