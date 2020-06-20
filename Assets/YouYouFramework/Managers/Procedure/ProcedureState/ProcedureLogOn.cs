@@ -1,8 +1,4 @@
-//===================================================
-//作    者：边涯  http://www.u3dol.com
-//创建时间：
-//备    注：
-//===================================================
+using SoftStar.Pal6;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +15,7 @@ namespace YouYou
         {
             base.OnEnter();
             GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureLogOn");
+            PalMain.Instance.ReStart();
             GameEntry.UI.OpenUIForm(101);
         }
 
@@ -36,6 +33,7 @@ namespace YouYou
         {
             base.OnLeave();
             GameEntry.Log(LogCategory.Procedure, "OnLeave ProcedureLogOn");
+            GameEntry.UI.CloseUIForm(101);
         }
     }
 }

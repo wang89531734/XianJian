@@ -133,7 +133,6 @@ public class FlagManager
 		return !FlagManager.flags.TryGetValue((int)key, out num) || (num & 1 << (int)((byte)(idx % 32UL))) != 0;
 	}
 
-	// Token: 0x06003572 RID: 13682 RVA: 0x00184174 File Offset: 0x00182374
 	public static void SetBoolFlag(ulong idx, bool newValue)
 	{
 		uint key = (uint)(idx / 32UL);
@@ -157,7 +156,6 @@ public class FlagManager
 		}
 	}
 
-	// Token: 0x06003573 RID: 13683 RVA: 0x001841F4 File Offset: 0x001823F4
 	public static void Save(BinaryWriter writer)
 	{
 		writer.Write(FlagManager.flags.Count);

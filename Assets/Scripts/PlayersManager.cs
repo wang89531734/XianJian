@@ -6,10 +6,13 @@ using UnityEngine;
 using YouYou;
 
 /// <summary>
-/// 玩家管理
+/// 玩家管理器
 /// </summary>
 public class PlayersManager
 {
+    /// <summary>
+    /// 当前玩家控制模型
+    /// </summary>
     public static GameObject curCtrlModel = null;
 
     /// <summary>
@@ -34,16 +37,16 @@ public class PlayersManager
 
     private static int TempPlayerIndex = 0;
 
-    static PlayersManager()
-    {
-        PlayersManager.OnTabPlayer = null;
-        PlayersManager.OnRemovePlayer = null;
-    }
-
+    /// <summary>
+    /// 更换玩家
+    /// </summary>
     public static event Action<int> OnTabPlayer;
 
     public static event Action<PalNPC> OnAfterSetPlayer;
 
+    /// <summary>
+    /// 移除玩家
+    /// </summary>
     public static event Action<int> OnRemovePlayer;
 
     public static GameObject Player
@@ -70,6 +73,12 @@ public class PlayersManager
         }
     }
 
+    static PlayersManager()
+    {
+        PlayersManager.OnTabPlayer = null;
+        PlayersManager.OnRemovePlayer = null;
+    }
+
     public static void Initialize()
     {
         PlayersManager.AllPlayers.Clear();
@@ -85,7 +94,7 @@ public class PlayersManager
                     if (!(component == null))
                     {
                         PalNPC palNPC = component;
-                        //palNPC.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(palNPC.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.SetClothFar));
+                        palNPC.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(palNPC.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.SetClothFar));
                     }
                 }
             }
@@ -231,16 +240,15 @@ public class PlayersManager
     //		}
     //	}
 
-    //	// Token: 0x0600376B RID: 14187 RVA: 0x00191C88 File Offset: 0x0018FE88
-    //	private static void SetClothFar(PalNPC npc)
-    //	{
-    //		ShroudInstance[] components = npc.model.GetComponents<ShroudInstance>();
-    //		foreach (ShroudInstance shroudInstance in components)
-    //		{
-    //			shroudInstance.m_blendStartDistance = 300f;
-    //			shroudInstance.m_blendEndDistance = 400f;
-    //		}
-    //	}
+    private static void SetClothFar(PalNPC npc)
+    {
+        //ShroudInstance[] components = npc.model.GetComponents<ShroudInstance>();
+        //foreach (ShroudInstance shroudInstance in components)
+        //{
+        //    shroudInstance.m_blendStartDistance = 300f;
+        //    shroudInstance.m_blendEndDistance = 400f;
+        //}
+    }
 
     //	// Token: 0x0600376C RID: 14188 RVA: 0x00191CD4 File Offset: 0x0018FED4
     //	public static void Restart()
@@ -815,38 +823,38 @@ public class PlayersManager
         return gameObject2;
     }
 
-    //	private static void SetLevel(GameObject go)
-    //	{
-    //		PalNPC component = go.GetComponent<PalNPC>();
-    //		int level = component.Data.Level;
-    //		GameObject gameObject = go;
-    //		for (int i = 0; i < PlayersManager.ActivePlayers.Count; i++)
-    //		{
-    //			GameObject gameObject2 = PlayersManager.ActivePlayers[i];
-    //			PalNPC component2 = gameObject2.GetComponent<PalNPC>();
-    //			if (level < component2.Data.Level)
-    //			{
-    //				level = component2.Data.Level;
-    //				gameObject = gameObject2;
-    //			}
-    //		}
-    //		if (gameObject != go)
-    //		{
-    //			PalNPC component3 = go.GetComponent<PalNPC>();
-    //			component3.Data.Exp = PlayerBaseProperty.LevelData.GetLevelExp(level - 1);
-    //			Debug.Log(string.Concat(new string[]
-    //			{
-    //				"Log : 对角色",
-    //				go.name,
-    //				"进行等级设置，参照了",
-    //				gameObject.name,
-    //				"的等级(",
-    //				level.ToString(),
-    //				"级)  其经验为:",
-    //				component3.Data.Exp.ToString()
-    //			}));
-    //		}
-    //	}
+    private static void SetLevel(GameObject go)
+    {
+        PalNPC component = go.GetComponent<PalNPC>();
+        int level = component.Data.Level;
+        GameObject gameObject = go;
+        for (int i = 0; i < PlayersManager.ActivePlayers.Count; i++)
+        {
+            GameObject gameObject2 = PlayersManager.ActivePlayers[i];
+            PalNPC component2 = gameObject2.GetComponent<PalNPC>();
+            if (level < component2.Data.Level)
+            {
+                level = component2.Data.Level;
+                gameObject = gameObject2;
+            }
+        }
+        if (gameObject != go)
+        {
+            PalNPC component3 = go.GetComponent<PalNPC>();
+            //component3.Data.Exp = PlayerBaseProperty.LevelData.GetLevelExp(level - 1);
+            Debug.Log(string.Concat(new string[]
+            {
+                    "Log : 对角色",
+                    go.name,
+                    "进行等级设置，参照了",
+                    gameObject.name,
+                    "的等级(",
+                    level.ToString(),
+                    "级)  其经验为:",
+                    component3.Data.Exp.ToString()
+            }));
+        }
+    }
 
     /// <summary>
     /// 加载玩家
@@ -924,43 +932,43 @@ public class PlayersManager
             if (component.model == null)
             {
                 PalNPC palNPC = component;
-                //palNPC.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(palNPC.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.WaitLoadOverThanSetActiveFalse));
+               palNPC.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(palNPC.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.WaitLoadOverThanSetActiveFalse));//等待模型加载完毕
             }
             else
             {
-                //ShroudInstance component2 = component.model.GetComponent<ShroudInstance>();
+                // ShroudInstance component2 = component.model.GetComponent<ShroudInstance>();
                 //if (component2 != null)
                 //{
                 //    component2.blendWeightK = 100f;
                 //}
                 //AnimCtrlScript component3 = component.model.GetComponent<AnimCtrlScript>();
                 //component3.ActiveAnimCrossFade("ZhanLi", false, 0f, true);
-                //if (component.Data.CharacterID == 2)
-                //{
-                //    if (!component.animator.GetCurrentAnimatorStateInfo(0).IsName("yidongState.ZhanLi"))
-                //    {
-                //        LateSetActive.Init(component.model, false, 0.01f);
-                //    }
-                //    else
-                //    {
-                //        UtilFun.SetActive(component.model, false);
-                //    }
-                //}
-                //else
-                //{
-                //    UtilFun.SetActive(component.model, false);
-                //}
+                if (component.Data.CharacterID == 2)
+                {
+                    //if (!component.animator.GetCurrentAnimatorStateInfo(0).IsName("yidongState.ZhanLi"))
+                    //{
+                    //    LateSetActive.Init(component.model, false, 0.01f);
+                    //}
+                    //else
+                    //{
+                    //    UtilFun.SetActive(component.model, false);
+                    //}
+                }
+                else
+                {
+                    UtilFun.SetActive(component.model, false);
+                }
             }
 
-            //if (bSetLevel)
-            //{
-            //    PlayersManager.SetLevel(newPlayer);
-            //}
-            //PlayersManager.ActivePlayers.Add(newPlayer);
-            //if (component.Data != null)
-            //{
-            //    FlagManager.SetBoolFlag((ulong)(34048L + (long)component.Data.CharacterID), true);
-            //}
+            if (bSetLevel)
+            {
+                PlayersManager.SetLevel(newPlayer);
+            }
+            PlayersManager.ActivePlayers.Add(newPlayer);
+            if (component.Data != null)
+            {
+                FlagManager.SetBoolFlag((ulong)(34048L + (long)component.Data.CharacterID), true);
+            }
         }
         else
         {
@@ -968,13 +976,13 @@ public class PlayersManager
         }
     }
 
-    //	private static void WaitLoadOverThanSetActiveFalse(PalNPC npc)
-    //	{
-    //		if (PlayersManager.Player != null && npc != null && PlayersManager.Player != npc.gameObject)
-    //		{
-    //			UtilFun.SetActive(npc.model, false);
-    //		}
-    //	}
+    private static void WaitLoadOverThanSetActiveFalse(PalNPC npc)
+    {
+        if (PlayersManager.Player != null && npc != null && PlayersManager.Player != npc.gameObject)
+        {
+            UtilFun.SetActive(npc.model, false);
+        }
+    }
 
     //	// Token: 0x06003780 RID: 14208 RVA: 0x001930F0 File Offset: 0x001912F0
     //	public static void RemovePlayer(int ID, bool bActive = false)
@@ -1043,57 +1051,56 @@ public class PlayersManager
     //		return PlayersManager.Player;
     //	}
 
-    //	// Token: 0x06003783 RID: 14211 RVA: 0x00193244 File Offset: 0x00191444
-    //	public static void SetPlayerPosByDestObj(string DestName)
-    //	{
-    //		GameObject gameObject = GameObject.Find(DestName);
-    //		if (gameObject == null)
-    //		{
-    //			Debug.LogError("没有找到 " + DestName);
-    //			return;
-    //		}
-    //		if (PlayersManager.Player == null)
-    //		{
-    //			Debug.LogError("没有主控角色");
-    //			return;
-    //		}
-    //		Transform transform;
-    //		if (PlayerCtrlManager.agentObj != null)
-    //		{
-    //			transform = PlayerCtrlManager.agentObj.transform;
-    //		}
-    //		else
-    //		{
-    //			PalNPC component = PlayersManager.Player.GetComponent<PalNPC>();
-    //			if (!(component.model != null))
-    //			{
-    //				PlayersManager.tempDestTF = gameObject.transform;
-    //				PalNPC palNPC = component;
-    //				palNPC.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(palNPC.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.WaitForSpawn));
-    //				return;
-    //			}
-    //			transform = component.model.transform;
-    //		}
-    //		if (transform != null)
-    //		{
-    //			Agent component2 = transform.GetComponent<Agent>();
-    //			if (component2 != null && component2.charCtrller != null && !component2.charCtrller.enabled)
-    //			{
-    //				component2.charCtrller.enabled = true;
-    //			}
-    //		}
-    //		Transform transform2 = gameObject.transform;
-    //		Vector3 vector = transform2.position;
-    //		vector.y += 1f;
-    //		RaycastHit raycastHit;
-    //		if (Physics.Raycast(vector, Vector3.down, out raycastHit))
-    //		{
-    //			vector = raycastHit.point;
-    //		}
-    //		UtilFun.SetPosition(transform, vector);
-    //		transform.eulerAngles = new Vector3(0f, transform2.eulerAngles.y, 0f);
-    //		SceneFall2.SetLastPointOnLoadOver();
-    //	}
+    public static void SetPlayerPosByDestObj(string DestName)
+    {
+        GameObject gameObject = GameObject.Find(DestName);
+        if (gameObject == null)
+        {
+            Debug.LogError("没有找到 " + DestName);
+            return;
+        }
+        if (PlayersManager.Player == null)
+        {
+            Debug.LogError("没有主控角色");
+            return;
+        }
+        Transform transform;
+        //if (PlayerCtrlManager.agentObj != null)
+        //{
+        //    transform = PlayerCtrlManager.agentObj.transform;
+        //}
+        //else
+        //{
+        //    PalNPC component = PlayersManager.Player.GetComponent<PalNPC>();
+        //    if (!(component.model != null))
+        //    {
+        //        PlayersManager.tempDestTF = gameObject.transform;
+        //        PalNPC palNPC = component;
+        //        palNPC.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(palNPC.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.WaitForSpawn));
+        //        return;
+        //    }
+        //    transform = component.model.transform;
+        //}
+        //if (transform != null)
+        //{
+        //    Agent component2 = transform.GetComponent<Agent>();
+        //    if (component2 != null && component2.charCtrller != null && !component2.charCtrller.enabled)
+        //    {
+        //        component2.charCtrller.enabled = true;
+        //    }
+        //}
+        Transform transform2 = gameObject.transform;
+        Vector3 vector = transform2.position;
+        vector.y += 1f;
+        RaycastHit raycastHit;
+        if (Physics.Raycast(vector, Vector3.down, out raycastHit))
+        {
+            vector = raycastHit.point;
+        }
+        //UtilFun.SetPosition(transform, vector);
+        //transform.eulerAngles = new Vector3(0f, transform2.eulerAngles.y, 0f);
+        //SceneFall2.SetLastPointOnLoadOver();
+    }
 
     //	// Token: 0x06003784 RID: 14212 RVA: 0x001933CC File Offset: 0x001915CC
     //	private static void WaitForSpawn(PalNPC npc)
@@ -1369,7 +1376,6 @@ public class PlayersManager
     //		}
     //	}
 
-    //	// Token: 0x0600378F RID: 14223 RVA: 0x00193B44 File Offset: 0x00191D44
     //	public static void SetAllPlayersPerceptionRange(bool enable)
     //	{
     //		for (int i = 0; i < PlayersManager.AllPlayersPerceptionRange.Count; i++)

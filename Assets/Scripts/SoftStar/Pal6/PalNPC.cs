@@ -12,7 +12,164 @@ namespace SoftStar.Pal6
 {
     public class PalNPC : PalAnimatorObject, ISaveInterface
     {
-        //		public delegate void void_fun_TF(PalNPC npc);
+
+        [SerializeField]
+        [HideInInspector]
+        public PalNPC.CharacterData Data;
+
+        //		// Token: 0x040020C6 RID: 8390
+        //		[NonSerialized]
+        //		public BuffDebuffManager.BuffDebuffOwner BuffDebuffData;
+
+        //		// Token: 0x040020C7 RID: 8391
+        //		public int[] MonsterGroups;
+
+        //		// Token: 0x040020C8 RID: 8392
+        //		public int mBattleFieldID;
+
+        //		// Token: 0x040020C9 RID: 8393
+        //		public AudioClip m_BeHitSound;
+
+        //		// Token: 0x040020CA RID: 8394
+        //		private static int[] mAdvanceSkillIDs;
+
+        //		// Token: 0x040020CB RID: 8395
+        //		public List<PalNPC.SkillInfo> m_SkillIDs;
+
+        //		// Token: 0x040020CC RID: 8396
+        //		[NonSerialized]
+        //		public float ExpRate;
+
+        //		// Token: 0x040020CD RID: 8397
+        //		[NonSerialized]
+        //		public int ImmunityAllBadBattleStates;
+
+        //		// Token: 0x040020CE RID: 8398
+        //		[NonSerialized]
+        //		public float FengYinAddRate;
+
+        //		// Token: 0x040020CF RID: 8399
+        //		[NonSerialized]
+        //		public float MiaoShouAddRate;
+
+        //		// Token: 0x040020D0 RID: 8400
+        //		[NonSerialized]
+        //		public float BreakAddRate;
+
+        //		// Token: 0x040020D1 RID: 8401
+        //		[NonSerialized]
+        //		public List<GameObject> Weapons = new List<GameObject>(2);
+
+        //		// Token: 0x040020D2 RID: 8402
+        //		[NonSerialized]
+        //		public GameObject ornament;
+
+        //		// Token: 0x040020D3 RID: 8403
+        //		[NonSerialized]
+        //		public Texture oriMainTex;
+
+        //		// Token: 0x040020D4 RID: 8404
+        //		[NonSerialized]
+        //		public Texture oriSpecTex;
+
+        //		// Token: 0x040020D5 RID: 8405
+        //		private Material m_oriAssortMat;
+
+        //		// Token: 0x040020D6 RID: 8406
+        //		private GameObject weaponAssortObj;
+
+        //		// Token: 0x040020D7 RID: 8407
+        //		[NonSerialized]
+        //		private uint[] mLoadEquipSlots;
+
+        //		// Token: 0x040020D8 RID: 8408
+        //		[NonSerialized]
+        //		private Dictionary<EquipSlotEnum, ItemWatcher> mEquipSlots = new Dictionary<EquipSlotEnum, ItemWatcher>();
+
+        //		// Token: 0x040020D9 RID: 8409
+        //		private AchievementManager.ACHIEVEMENT_INDEX mCurrentAchievement = (AchievementManager.ACHIEVEMENT_INDEX)(-1);
+
+        //		// Token: 0x040020DA RID: 8410
+        //		protected PalNPC.NPCState state;
+
+        public PalNPC.void_fun_TF OnLoadModelEnd;
+
+        //		// Token: 0x040020DC RID: 8412
+        //		public bool bEnableOnLoadModelEnd = true;
+
+        //		// Token: 0x040020DD RID: 8413
+        //		private Animator m_animator;
+
+        //		// Token: 0x040020DE RID: 8414
+        //		public Patrol patrol;
+
+        //		// Token: 0x040020DF RID: 8415
+        //		public NPCMode curNPCMode = NPCMode.fight;
+
+        //		// Token: 0x040020E0 RID: 8416
+        //		public NPCPersonalityType personalityType;
+
+        //		// Token: 0x040020E1 RID: 8417
+        //		public Perception perception;
+
+        //		// Token: 0x040020E2 RID: 8418
+        //		public float hatred = 50f;
+
+        //		// Token: 0x040020E3 RID: 8419
+        //		public float CurFightDistance = 0.5f;
+
+        //		// Token: 0x040020E4 RID: 8420
+        //		public string PrefabID = string.Empty;
+
+        //		// Token: 0x040020E5 RID: 8421
+        //		private bool IsDataInit;
+
+        //		// Token: 0x040020E6 RID: 8422
+        //		private Footmark m_FootMark;
+
+        //		// Token: 0x040020E7 RID: 8423
+        //		public float BattleColR = 1.67f;
+
+        //		// Token: 0x040020E8 RID: 8424
+        //		public float BattleColH = 0.1f;
+
+        //		// Token: 0x040020E9 RID: 8425
+        //		public List<Interact> interActs = new List<Interact>();
+
+        //		// Token: 0x040020EA RID: 8426
+        //		private int m_SkillGroup;
+
+        //		// Token: 0x040020EB RID: 8427
+        //		private bool m_bDontLoadModel;
+
+        //		// Token: 0x040020EC RID: 8428
+        //		private Action ProcessCore;
+
+        //		// Token: 0x040020ED RID: 8429
+        //		public static float interval = 1f;
+
+        //		// Token: 0x040020EE RID: 8430
+        //		private float curTime = 0.23f;
+
+        //		// Token: 0x040020EF RID: 8431
+        //		private Transform modelTF;
+
+        //		// Token: 0x040020F0 RID: 8432
+        //		private bool isMonster;
+
+        //		// Token: 0x040020F1 RID: 8433
+        //		public static bool SevereCull = true;
+
+        //		// Token: 0x040020F2 RID: 8434
+        //		public static float CullCamOffsetRatio = 0.35f;
+
+        //		// Token: 0x040020F3 RID: 8435
+        //		private List<string> uScriptsName = new List<string>();
+
+        //		// Token: 0x040020F4 RID: 8436
+        //		private string curAnimName;
+
+        public delegate void void_fun_TF(PalNPC npc);
 
         //		public PalNPC()
         //		{
@@ -672,7 +829,6 @@ namespace SoftStar.Pal6
         //			sphereCollider.isTrigger = true;
         //		}
 
-        //		// Token: 0x06001D06 RID: 7430 RVA: 0x0010292C File Offset: 0x00100B2C
         //		public override void LoadModelEnd(UnityEngine.Object obj)
         //		{
         //			base.LoadModelEnd(obj);
@@ -1463,163 +1619,6 @@ namespace SoftStar.Pal6
         //				component3.enabled = bValue;
         //			}
         //		}
-
-        [SerializeField]
-        [HideInInspector]
-        public PalNPC.CharacterData Data;
-
-        //		// Token: 0x040020C6 RID: 8390
-        //		[NonSerialized]
-        //		public BuffDebuffManager.BuffDebuffOwner BuffDebuffData;
-
-        //		// Token: 0x040020C7 RID: 8391
-        //		public int[] MonsterGroups;
-
-        //		// Token: 0x040020C8 RID: 8392
-        //		public int mBattleFieldID;
-
-        //		// Token: 0x040020C9 RID: 8393
-        //		public AudioClip m_BeHitSound;
-
-        //		// Token: 0x040020CA RID: 8394
-        //		private static int[] mAdvanceSkillIDs;
-
-        //		// Token: 0x040020CB RID: 8395
-        //		public List<PalNPC.SkillInfo> m_SkillIDs;
-
-        //		// Token: 0x040020CC RID: 8396
-        //		[NonSerialized]
-        //		public float ExpRate;
-
-        //		// Token: 0x040020CD RID: 8397
-        //		[NonSerialized]
-        //		public int ImmunityAllBadBattleStates;
-
-        //		// Token: 0x040020CE RID: 8398
-        //		[NonSerialized]
-        //		public float FengYinAddRate;
-
-        //		// Token: 0x040020CF RID: 8399
-        //		[NonSerialized]
-        //		public float MiaoShouAddRate;
-
-        //		// Token: 0x040020D0 RID: 8400
-        //		[NonSerialized]
-        //		public float BreakAddRate;
-
-        //		// Token: 0x040020D1 RID: 8401
-        //		[NonSerialized]
-        //		public List<GameObject> Weapons = new List<GameObject>(2);
-
-        //		// Token: 0x040020D2 RID: 8402
-        //		[NonSerialized]
-        //		public GameObject ornament;
-
-        //		// Token: 0x040020D3 RID: 8403
-        //		[NonSerialized]
-        //		public Texture oriMainTex;
-
-        //		// Token: 0x040020D4 RID: 8404
-        //		[NonSerialized]
-        //		public Texture oriSpecTex;
-
-        //		// Token: 0x040020D5 RID: 8405
-        //		private Material m_oriAssortMat;
-
-        //		// Token: 0x040020D6 RID: 8406
-        //		private GameObject weaponAssortObj;
-
-        //		// Token: 0x040020D7 RID: 8407
-        //		[NonSerialized]
-        //		private uint[] mLoadEquipSlots;
-
-        //		// Token: 0x040020D8 RID: 8408
-        //		[NonSerialized]
-        //		private Dictionary<EquipSlotEnum, ItemWatcher> mEquipSlots = new Dictionary<EquipSlotEnum, ItemWatcher>();
-
-        //		// Token: 0x040020D9 RID: 8409
-        //		private AchievementManager.ACHIEVEMENT_INDEX mCurrentAchievement = (AchievementManager.ACHIEVEMENT_INDEX)(-1);
-
-        //		// Token: 0x040020DA RID: 8410
-        //		protected PalNPC.NPCState state;
-
-        //		// Token: 0x040020DB RID: 8411
-        //		public PalNPC.void_fun_TF OnLoadModelEnd;
-
-        //		// Token: 0x040020DC RID: 8412
-        //		public bool bEnableOnLoadModelEnd = true;
-
-        //		// Token: 0x040020DD RID: 8413
-        //		private Animator m_animator;
-
-        //		// Token: 0x040020DE RID: 8414
-        //		public Patrol patrol;
-
-        //		// Token: 0x040020DF RID: 8415
-        //		public NPCMode curNPCMode = NPCMode.fight;
-
-        //		// Token: 0x040020E0 RID: 8416
-        //		public NPCPersonalityType personalityType;
-
-        //		// Token: 0x040020E1 RID: 8417
-        //		public Perception perception;
-
-        //		// Token: 0x040020E2 RID: 8418
-        //		public float hatred = 50f;
-
-        //		// Token: 0x040020E3 RID: 8419
-        //		public float CurFightDistance = 0.5f;
-
-        //		// Token: 0x040020E4 RID: 8420
-        //		public string PrefabID = string.Empty;
-
-        //		// Token: 0x040020E5 RID: 8421
-        //		private bool IsDataInit;
-
-        //		// Token: 0x040020E6 RID: 8422
-        //		private Footmark m_FootMark;
-
-        //		// Token: 0x040020E7 RID: 8423
-        //		public float BattleColR = 1.67f;
-
-        //		// Token: 0x040020E8 RID: 8424
-        //		public float BattleColH = 0.1f;
-
-        //		// Token: 0x040020E9 RID: 8425
-        //		public List<Interact> interActs = new List<Interact>();
-
-        //		// Token: 0x040020EA RID: 8426
-        //		private int m_SkillGroup;
-
-        //		// Token: 0x040020EB RID: 8427
-        //		private bool m_bDontLoadModel;
-
-        //		// Token: 0x040020EC RID: 8428
-        //		private Action ProcessCore;
-
-        //		// Token: 0x040020ED RID: 8429
-        //		public static float interval = 1f;
-
-        //		// Token: 0x040020EE RID: 8430
-        //		private float curTime = 0.23f;
-
-        //		// Token: 0x040020EF RID: 8431
-        //		private Transform modelTF;
-
-        //		// Token: 0x040020F0 RID: 8432
-        //		private bool isMonster;
-
-        //		// Token: 0x040020F1 RID: 8433
-        //		public static bool SevereCull = true;
-
-        //		// Token: 0x040020F2 RID: 8434
-        //		public static float CullCamOffsetRatio = 0.35f;
-
-        //		// Token: 0x040020F3 RID: 8435
-        //		private List<string> uScriptsName = new List<string>();
-
-        //		// Token: 0x040020F4 RID: 8436
-        //		private string curAnimName;
 
         [Serializable]
         public class CharacterData : ISaveInterface

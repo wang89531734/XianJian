@@ -27,8 +27,6 @@ namespace SoftStar.Pal6
 
         private static float m_loadingValue = 0f;
 
-        public static bool mIsDLC = false;
-
         private static uint _MoneyID = 0u;
 
         /// <summary>
@@ -240,8 +238,6 @@ namespace SoftStar.Pal6
 
         public event PalMain.void_func_void onGUIHandles;
 
-        //		// Token: 0x17000428 RID: 1064
-        //		// (get) Token: 0x06003697 RID: 13975 RVA: 0x00189E38 File Offset: 0x00188038
         //		public bool IsSkillPreloading
         //		{
         //			get
@@ -272,30 +268,6 @@ namespace SoftStar.Pal6
                 return 2f;
             }
         }
-
-        //		// Token: 0x1700042B RID: 1067
-        //		// (get) Token: 0x0600369C RID: 13980 RVA: 0x00189E7C File Offset: 0x0018807C
-        //		// (set) Token: 0x0600369B RID: 13979 RVA: 0x00189E58 File Offset: 0x00188058
-        //		public static bool IsDLC
-        //		{
-        //			get
-        //			{
-        //				return PalMain.IsBranch();
-        //			}
-        //			set
-        //			{
-        //				if (value)
-        //				{
-        //					PalMain.ActiveBranch();
-        //					PalMain.mIsDLC = true;
-        //				}
-        //				else
-        //				{
-        //					PalMain.InActiveBranch();
-        //					PalMain.mIsDLC = false;
-        //				}
-        //			}
-        //		}
 
         //		// Token: 0x1700042C RID: 1068
         //		// (get) Token: 0x0600369D RID: 13981 RVA: 0x00189E84 File Offset: 0x00188084
@@ -449,320 +421,21 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x060036A5 RID: 13989 RVA: 0x0018A1C4 File Offset: 0x001883C4
-        //		public void ReStart()
-        //		{
-        //			UIManager.Instance.DoNotOpenMainMenu = false;
-        //			PalMain.IsDLC = false;
-        //			PlayerTeam.ReStart();
-        //			PlayersManager.Restart();
-        //			PlayerCtrlManager.Reset();
-        //			PalMain.Instance.CurBattleFormationManager.Clear();
-        //			BattleFormationManager.BattleFormationData battleFormationData = new BattleFormationManager.BattleFormationData();
-        //			battleFormationData.m_InFormationCharaDatas.AddRange(new BattleFormationManager.InFormationCharaData[9]);
-        //			PalMain.Instance.CurBattleFormationManager.AddFormation(battleFormationData);
-        //			PalBattleManager.Instance().Restart();
-        //			FlagManager.InitFlags();
-        //			ItemManager.GetInstance().ClearData();
-        //			for (int i = 0; i < PlayersManager.AllPlayers.Count; i++)
-        //			{
-        //				try
-        //				{
-        //					PalNPC component = PlayersManager.AllPlayers[i].GetComponent<PalNPC>();
-        //					if (component != null && component.Data != null && component.m_SkillIDs != null)
-        //					{
-        //						PlayersManager.AllPlayers[i].GetComponent<PalNPC>().Data.Exp = 0;
-        //						PlayersManager.AllPlayers[i].GetComponent<PalNPC>().Data.Soul = 0;
-        //						PlayersManager.AllPlayers[i].GetComponent<PalNPC>().m_SkillIDs.Clear();
-        //						if (i < PlayersManager.AllPlayers.Count)
-        //						{
-        //							component = PlayersManager.AllPlayers[i].GetComponent<PalNPC>();
-        //							if (component != null)
-        //							{
-        //								BuffDebuffManager.BuffDebuffOwner buffDebuffData = PlayersManager.AllPlayers[i].GetComponent<PalNPC>().BuffDebuffData;
-        //								if (buffDebuffData != null)
-        //								{
-        //									buffDebuffData.ClearData();
-        //								}
-        //							}
-        //						}
-        //					}
-        //				}
-        //				catch
-        //				{
-        //				}
-        //			}
-        //			OrnamentItemTypeCache.ClearIsGet();
-        //			FashionClothItemTypeCache.ClearIsGet();
-        //			MonsterProperty.HideAll();
-        //			UIInformation_Help_Item.ReStart();
-        //			UIInformation_StrangeNews_Item.ReStart();
-        //			MissionManager.Restart();
-        //			RenownManager.Reset();
-        //			HuanHuaManager.Instance.Reset();
-        //			DynamicObjsDataManager.Instance.Clear();
-        //		}
-
-        //		// Token: 0x060036A6 RID: 13990 RVA: 0x0018A38C File Offset: 0x0018858C
-        //		public static bool GetPersonCtrl()
-        //		{
-        //			return PlayerCtrlManager.bControl;
-        //		}
-
-        //		// Token: 0x060036A7 RID: 13991 RVA: 0x0018A394 File Offset: 0x00188594
-        //		public static void CheckLottery(out int result, out string outString)
-        //		{
-        //			result = 1;
-        //			outString = null;
-        //			StringBuilder stringBuilder = null;
-        //			result = (int)SelfExtern.Lottery(out stringBuilder);
-        //			outString = stringBuilder.ToString();
-        //		}
-
-        //		// Token: 0x060036A8 RID: 13992 RVA: 0x0018A3BC File Offset: 0x001885BC
-        //		public static void SpawnLottery()
-        //		{
-        //			List<PalGameObjectBase> monsters = CharactersManager.Instance.Monsters;
-        //			PalGameObjectBase palGameObjectBase = null;
-        //			int i = monsters.Count;
-        //			while (i > 0)
-        //			{
-        //				i--;
-        //				int index = UnityEngine.Random.Range(0, monsters.Count - 1);
-        //				PalGameObjectBase palGameObjectBase2 = monsters[index];
-        //				if (palGameObjectBase2 != null)
-        //				{
-        //					palGameObjectBase = palGameObjectBase2;
-        //					break;
-        //				}
-        //			}
-        //			if (palGameObjectBase == null)
-        //			{
-        //				UnityEngine.Debug.LogError("没有找到怪物，SpawnLottery失败");
-        //				return;
-        //			}
-        //			palGameObjectBase.gameObject.SetActive(false);
-        //			GameObject gameObject = new GameObject("Lottery");
-        //			Transform transform = gameObject.transform;
-        //			transform.position = palGameObjectBase.transform.position;
-        //			transform.parent = palGameObjectBase.transform.parent;
-        //			if (Console.showConsole)
-        //			{
-        //				string text = "Log : 乐动宝箱的位置为 " + transform.position.ToString();
-        //				UnityEngine.Debug.Log(text);
-        //				Console.Log(text);
-        //			}
-        //			PalLottery palLottery = gameObject.AddComponent<PalLottery>();
-        //			palLottery.PickItemID = UnityEngine.Random.Range(1008, 1020);
-        //			palLottery.SetModelResourcePath("Character/Props/EXPH_SQ_baoxiang_jin.prefab", 1);
-        //			Interact interact = gameObject.AddComponent<Interact>();
-        //			interact.ActionClassName = "baoxiang_Lottery";
-        //		}
-
-        //		// Token: 0x060036A9 RID: 13993 RVA: 0x0018A4EC File Offset: 0x001886EC
-        //		public static void SetGameState(GameState newState)
-        //		{
-        //			GameStateManager.CurGameState = newState;
-        //		}
-
-        //		// Token: 0x060036AA RID: 13994 RVA: 0x0018A4F4 File Offset: 0x001886F4
-        //		public static void ChangeModel(int ID, GameObject newGo)
-        //		{
-        //			GameObject gameObject = PlayersManager.FindMainChar(ID, true);
-        //			if (gameObject == null)
-        //			{
-        //				UnityEngine.Debug.LogError("没有找到此人");
-        //				return;
-        //			}
-        //			ModelChangeScript component = gameObject.GetComponent<ModelChangeScript>();
-        //			if (component != null)
-        //			{
-        //				if (component.curMode == ModelChangeScript.Mode.Another)
-        //				{
-        //					component.curMode = ModelChangeScript.Mode.Original;
-        //				}
-        //				else
-        //				{
-        //					component.curMode = ModelChangeScript.Mode.Another;
-        //				}
-        //			}
-        //			else
-        //			{
-        //				UnityEngine.Debug.LogError(ID.ToString() + "没有找到ModelChangeScript,直接调用了PalNPC里面的函数ChangeModel");
-        //				PalNPC component2 = gameObject.GetComponent<PalNPC>();
-        //				component2.ChangeModel(newGo, true);
-        //			}
-        //		}
-
-        //		// Token: 0x060036AB RID: 13995 RVA: 0x0018A57C File Offset: 0x0018877C
-        //		public static void AddRenownValue(int ID, int AddValue)
-        //		{
-        //			RenownManager.AddRenownValue(ID, AddValue);
-        //		}
-
-        //		// Token: 0x060036AC RID: 13996 RVA: 0x0018A588 File Offset: 0x00188788
-        //		public static Renown.Manner GetRenownManner(int ID)
-        //		{
-        //			return RenownManager.GetRenownManner(ID);
-        //		}
-
-        //		public static GameObject GetPlayer(bool bAgent)
-        //		{
-        //			GameObject result;
-        //			if (bAgent)
-        //			{
-        //				result = PlayerCtrlManager.agentObj.gameObject;
-        //			}
-        //			else
-        //			{
-        //				result = PlayersManager.Player;
-        //			}
-        //			return result;
-        //		}
-
-        //		// Token: 0x060036AE RID: 13998 RVA: 0x0018A5BC File Offset: 0x001887BC
-        //		public static int GetPlayerID()
-        //		{
-        //			string name = PlayersManager.Player.name;
-        //			return int.Parse(name);
-        //		}
-
-        //		// Token: 0x060036AF RID: 13999 RVA: 0x0018A5DC File Offset: 0x001887DC
-        //		public static bool ExistInTeam(int id)
-        //		{
-        //			GameObject player = PlayersManager.GetPlayer(id);
-        //			return player != null;
-        //		}
-
-        //		// Token: 0x060036B0 RID: 14000 RVA: 0x0018A5F8 File Offset: 0x001887F8
-        //		public static GameObject GetModelObj(GameObject go)
-        //		{
-        //			GameObject gameObject = null;
-        //			PalGameObjectBase component = go.GetComponent<PalGameObjectBase>();
-        //			if (component != null)
-        //			{
-        //				gameObject = component.model;
-        //			}
-        //			if (gameObject == null)
-        //			{
-        //				gameObject = go;
-        //			}
-        //			return gameObject;
-        //		}
-
-        //		// Token: 0x060036B1 RID: 14001 RVA: 0x0018A630 File Offset: 0x00188830
-        //		public static GameObject AddPlayer(int ID)
-        //		{
-        //			return PlayersManager.AddPlayer(ID, true);
-        //		}
-
-        //		// Token: 0x060036B2 RID: 14002 RVA: 0x0018A63C File Offset: 0x0018883C
-        //		public static void SetPlayer(int Index)
-        //		{
-        //			PlayersManager.SetPlayer(Index, true);
-        //		}
-
-        public static PalMain GameMain
-        {
-            get
-            {               
-                return PalMain.instance;
-            }
-        }
-
-        public static PalMain Instance
-        {
-            get
-            {
-                return PalMain.instance;
-            }
-        }
-
-        //		// Token: 0x060036B6 RID: 14006 RVA: 0x0018A71C File Offset: 0x0018891C
-        //		public static bool Exist()
-        //		{
-        //			return PalMain.instance != null;
-        //		}
-
-        //		// Token: 0x17000433 RID: 1075
-        //		// (get) Token: 0x060036B7 RID: 14007 RVA: 0x0018A72C File Offset: 0x0018892C
-        //		public static bool IsLow
-        //		{
-        //			get
-        //			{
-        //				bool result = false;
-        //				if (PalMain.ForceLow)
-        //				{
-        //					result = true;
-        //				}
-        //				else if (SystemInfo.graphicsMemorySize < 900)
-        //				{
-        //					result = true;
-        //				}
-        //				else if (PalMain.IsWin32)
-        //				{
-        //					result = true;
-        //				}
-        //				return result;
-        //			}
-        //		}
-
-        //		// Token: 0x17000434 RID: 1076
-        //		// (get) Token: 0x060036B8 RID: 14008 RVA: 0x0018A770 File Offset: 0x00188970
-        //		public static bool MemoryLack
-        //		{
-        //			get
-        //			{
-        //				return false;
-        //			}
-        //		}
-
         private void Awake()
         {
+            if (PalMain.instance != null && PalMain.instance != this)
+            {
+                UnityEngine.Object.Destroy(base.gameObject);
+                return;
+            }
             this.Initialize();
         }
-
-        //		// Token: 0x060036BB RID: 14011 RVA: 0x0018A7B8 File Offset: 0x001889B8
-        //		public static void LoadOneLangueUIAtlas(string subname)
-        //		{
-        //			string path = subname.ToLanguagePath();
-        //			UIAtlas uiatlas = FileLoader.LoadComponentFromFile<UIAtlas>(path, false);
-        //			FileLoader.SetNoUnload(path, true);
-        //			string path2 = ("AssetBundles/UI/" + subname + "_Empty").ToAssetBundlePath();
-        //			UIAtlas uiatlas2 = FileLoader.LoadComponentFromFile<UIAtlas>(path2, false);
-        //			FileLoader.SetNoUnload(path2, true);
-        //			uiatlas2.gameObject.name = subname + "_Empty";
-        //			NGUITools.SetCacheAtlas(subname, uiatlas);
-        //			NGUITools.SetCacheAtlas(subname + "_Empty", uiatlas2);
-        //			uiatlas2.replacement = uiatlas;
-        //		}
-
-        //		// Token: 0x060036BC RID: 14012 RVA: 0x0018A838 File Offset: 0x00188A38
-        //		public static void ReleaseLangueUIAtlas(string subname)
-        //		{
-        //			string path = subname.ToLanguagePath();
-        //			FileLoader.SetNoUnload(path, false);
-        //			FileLoader.UnloadAssetBundle(path);
-        //			NGUITools.RemoveCacheAtlas(subname);
-        //		}
-
-        //		// Token: 0x060036BD RID: 14013 RVA: 0x0018A860 File Offset: 0x00188A60
-        //		public static void ReloadLangueUIAtlas(string subname)
-        //		{
-        //			string path = subname.ToLanguagePath();
-        //			UIAtlas uiatlas = FileLoader.LoadComponentFromFile<UIAtlas>(path, false);
-        //			FileLoader.SetNoUnload(path, true);
-        //			string name = subname + "_Empty";
-        //			UIAtlas cacheAtlas = NGUITools.GetCacheAtlas(name);
-        //			NGUITools.SetCacheAtlas(subname, uiatlas);
-        //			cacheAtlas.replacement = uiatlas;
-        //		}
 
         private void Initialize()
         {
             //try
             //{
-            //    if (ConfigManager.ReadWritePath == null)
+            //    if (ConfigManager.ReadWritePath == null)//读取配置
             //    {
             //        UnityEngine.Debug.LogError("Read or write fail 0x2204.");
             //        UtilFun.WinMessageBox("read or write fail", "error", 8708);
@@ -778,9 +451,9 @@ namespace SoftStar.Pal6
             //    return;
             //}
 
-            int num = QualitySettings.names.Length - 1;
-            num = Mathf.Clamp(num, 0, 10);
-            QualitySettings.SetQualityLevel(num);
+            //int num = QualitySettings.names.Length - 1;
+            //num = Mathf.Clamp(num, 0, 10);
+            //QualitySettings.SetQualityLevel(num);//设置质量
             //OptionConfig optionConfig = OptionConfig.GetInstance();
             //if (!ConfigManager.IsFileExist())
             //{
@@ -826,10 +499,8 @@ namespace SoftStar.Pal6
             //			};
 
             MouseEventManager.Initialize();
-            //			ShaderPropertyIDManager.Initialize();
-            //			MessageProcess.Initialize();
-            //			SetActiveByFlagManager.Initialize();
-            //ScenesManager.Initialize();
+            MessageProcess.Initialize();
+            //SetActiveByFlagManager.Initialize();
             //			FlagManager.Initialize();
             //			DistanceCullManager.Initialize();
             //			MoviesManager.Initialize();
@@ -1094,7 +765,7 @@ namespace SoftStar.Pal6
             //					}
             //				}
             //			};
-            //			UIManager.Instance.Initialize();
+
             //			EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Combine(EntityManager.OnLoadOver, new EntityManager.void_fun(MiniMap.Instance.OnLoadOver));
             //			MissionManager.Initialize();
             //			HuanHuaManager.Instance.Initialize();
@@ -1120,6 +791,308 @@ namespace SoftStar.Pal6
             //				SkillSEPreloader.Initialize();
             //			}
         }
+
+        public void ReStart()
+        {
+            //UIManager.Instance.DoNotOpenMainMenu = false;
+            //PlayerTeam.ReStart();
+            //PlayersManager.Restart();
+            //PlayerCtrlManager.Reset();
+            //PalMain.Instance.CurBattleFormationManager.Clear();
+            //BattleFormationManager.BattleFormationData battleFormationData = new BattleFormationManager.BattleFormationData();
+            //battleFormationData.m_InFormationCharaDatas.AddRange(new BattleFormationManager.InFormationCharaData[9]);
+            //PalMain.Instance.CurBattleFormationManager.AddFormation(battleFormationData);
+            //PalBattleManager.Instance().Restart();
+            //FlagManager.InitFlags();
+            //ItemManager.GetInstance().ClearData();
+            //for (int i = 0; i < PlayersManager.AllPlayers.Count; i++)
+            //{
+            //    try
+            //    {
+            //        PalNPC component = PlayersManager.AllPlayers[i].GetComponent<PalNPC>();
+            //        if (component != null && component.Data != null && component.m_SkillIDs != null)
+            //        {
+            //            PlayersManager.AllPlayers[i].GetComponent<PalNPC>().Data.Exp = 0;
+            //            PlayersManager.AllPlayers[i].GetComponent<PalNPC>().Data.Soul = 0;
+            //            PlayersManager.AllPlayers[i].GetComponent<PalNPC>().m_SkillIDs.Clear();
+            //            if (i < PlayersManager.AllPlayers.Count)
+            //            {
+            //                component = PlayersManager.AllPlayers[i].GetComponent<PalNPC>();
+            //                if (component != null)
+            //                {
+            //                    BuffDebuffManager.BuffDebuffOwner buffDebuffData = PlayersManager.AllPlayers[i].GetComponent<PalNPC>().BuffDebuffData;
+            //                    if (buffDebuffData != null)
+            //                    {
+            //                        buffDebuffData.ClearData();
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+            //    catch
+            //    {
+            //    }
+            //}
+            //OrnamentItemTypeCache.ClearIsGet();
+            //FashionClothItemTypeCache.ClearIsGet();
+            //MonsterProperty.HideAll();
+            //UIInformation_Help_Item.ReStart();
+            //UIInformation_StrangeNews_Item.ReStart();
+            //MissionManager.Restart();
+            //RenownManager.Reset();
+            //HuanHuaManager.Instance.Reset();
+            //DynamicObjsDataManager.Instance.Clear();
+        }
+
+        //		// Token: 0x060036A6 RID: 13990 RVA: 0x0018A38C File Offset: 0x0018858C
+        //		public static bool GetPersonCtrl()
+        //		{
+        //			return PlayerCtrlManager.bControl;
+        //		}
+
+        //		// Token: 0x060036A7 RID: 13991 RVA: 0x0018A394 File Offset: 0x00188594
+        //		public static void CheckLottery(out int result, out string outString)
+        //		{
+        //			result = 1;
+        //			outString = null;
+        //			StringBuilder stringBuilder = null;
+        //			result = (int)SelfExtern.Lottery(out stringBuilder);
+        //			outString = stringBuilder.ToString();
+        //		}
+
+        //		// Token: 0x060036A8 RID: 13992 RVA: 0x0018A3BC File Offset: 0x001885BC
+        //		public static void SpawnLottery()
+        //		{
+        //			List<PalGameObjectBase> monsters = CharactersManager.Instance.Monsters;
+        //			PalGameObjectBase palGameObjectBase = null;
+        //			int i = monsters.Count;
+        //			while (i > 0)
+        //			{
+        //				i--;
+        //				int index = UnityEngine.Random.Range(0, monsters.Count - 1);
+        //				PalGameObjectBase palGameObjectBase2 = monsters[index];
+        //				if (palGameObjectBase2 != null)
+        //				{
+        //					palGameObjectBase = palGameObjectBase2;
+        //					break;
+        //				}
+        //			}
+        //			if (palGameObjectBase == null)
+        //			{
+        //				UnityEngine.Debug.LogError("没有找到怪物，SpawnLottery失败");
+        //				return;
+        //			}
+        //			palGameObjectBase.gameObject.SetActive(false);
+        //			GameObject gameObject = new GameObject("Lottery");
+        //			Transform transform = gameObject.transform;
+        //			transform.position = palGameObjectBase.transform.position;
+        //			transform.parent = palGameObjectBase.transform.parent;
+        //			if (Console.showConsole)
+        //			{
+        //				string text = "Log : 乐动宝箱的位置为 " + transform.position.ToString();
+        //				UnityEngine.Debug.Log(text);
+        //				Console.Log(text);
+        //			}
+        //			PalLottery palLottery = gameObject.AddComponent<PalLottery>();
+        //			palLottery.PickItemID = UnityEngine.Random.Range(1008, 1020);
+        //			palLottery.SetModelResourcePath("Character/Props/EXPH_SQ_baoxiang_jin.prefab", 1);
+        //			Interact interact = gameObject.AddComponent<Interact>();
+        //			interact.ActionClassName = "baoxiang_Lottery";
+        //		}
+
+        //		// Token: 0x060036A9 RID: 13993 RVA: 0x0018A4EC File Offset: 0x001886EC
+        //		public static void SetGameState(GameState newState)
+        //		{
+        //			GameStateManager.CurGameState = newState;
+        //		}
+
+        //		// Token: 0x060036AA RID: 13994 RVA: 0x0018A4F4 File Offset: 0x001886F4
+        //		public static void ChangeModel(int ID, GameObject newGo)
+        //		{
+        //			GameObject gameObject = PlayersManager.FindMainChar(ID, true);
+        //			if (gameObject == null)
+        //			{
+        //				UnityEngine.Debug.LogError("没有找到此人");
+        //				return;
+        //			}
+        //			ModelChangeScript component = gameObject.GetComponent<ModelChangeScript>();
+        //			if (component != null)
+        //			{
+        //				if (component.curMode == ModelChangeScript.Mode.Another)
+        //				{
+        //					component.curMode = ModelChangeScript.Mode.Original;
+        //				}
+        //				else
+        //				{
+        //					component.curMode = ModelChangeScript.Mode.Another;
+        //				}
+        //			}
+        //			else
+        //			{
+        //				UnityEngine.Debug.LogError(ID.ToString() + "没有找到ModelChangeScript,直接调用了PalNPC里面的函数ChangeModel");
+        //				PalNPC component2 = gameObject.GetComponent<PalNPC>();
+        //				component2.ChangeModel(newGo, true);
+        //			}
+        //		}
+
+        //		// Token: 0x060036AB RID: 13995 RVA: 0x0018A57C File Offset: 0x0018877C
+        //		public static void AddRenownValue(int ID, int AddValue)
+        //		{
+        //			RenownManager.AddRenownValue(ID, AddValue);
+        //		}
+
+        //		// Token: 0x060036AC RID: 13996 RVA: 0x0018A588 File Offset: 0x00188788
+        //		public static Renown.Manner GetRenownManner(int ID)
+        //		{
+        //			return RenownManager.GetRenownManner(ID);
+        //		}
+
+        //		public static GameObject GetPlayer(bool bAgent)
+        //		{
+        //			GameObject result;
+        //			if (bAgent)
+        //			{
+        //				result = PlayerCtrlManager.agentObj.gameObject;
+        //			}
+        //			else
+        //			{
+        //				result = PlayersManager.Player;
+        //			}
+        //			return result;
+        //		}
+
+        //		// Token: 0x060036AE RID: 13998 RVA: 0x0018A5BC File Offset: 0x001887BC
+        //		public static int GetPlayerID()
+        //		{
+        //			string name = PlayersManager.Player.name;
+        //			return int.Parse(name);
+        //		}
+
+        //		// Token: 0x060036AF RID: 13999 RVA: 0x0018A5DC File Offset: 0x001887DC
+        //		public static bool ExistInTeam(int id)
+        //		{
+        //			GameObject player = PlayersManager.GetPlayer(id);
+        //			return player != null;
+        //		}
+
+        //		// Token: 0x060036B0 RID: 14000 RVA: 0x0018A5F8 File Offset: 0x001887F8
+        //		public static GameObject GetModelObj(GameObject go)
+        //		{
+        //			GameObject gameObject = null;
+        //			PalGameObjectBase component = go.GetComponent<PalGameObjectBase>();
+        //			if (component != null)
+        //			{
+        //				gameObject = component.model;
+        //			}
+        //			if (gameObject == null)
+        //			{
+        //				gameObject = go;
+        //			}
+        //			return gameObject;
+        //		}
+
+        //		// Token: 0x060036B1 RID: 14001 RVA: 0x0018A630 File Offset: 0x00188830
+        //		public static GameObject AddPlayer(int ID)
+        //		{
+        //			return PlayersManager.AddPlayer(ID, true);
+        //		}
+
+        //		// Token: 0x060036B2 RID: 14002 RVA: 0x0018A63C File Offset: 0x0018883C
+        //		public static void SetPlayer(int Index)
+        //		{
+        //			PlayersManager.SetPlayer(Index, true);
+        //		}
+
+        public static PalMain GameMain
+        {
+            get
+            {               
+                return PalMain.instance;
+            }
+        }
+
+        public static PalMain Instance
+        {
+            get
+            {
+                return PalMain.instance;
+            }
+        }
+
+        //		// Token: 0x060036B6 RID: 14006 RVA: 0x0018A71C File Offset: 0x0018891C
+        //		public static bool Exist()
+        //		{
+        //			return PalMain.instance != null;
+        //		}
+
+        //		// Token: 0x17000433 RID: 1075
+        //		// (get) Token: 0x060036B7 RID: 14007 RVA: 0x0018A72C File Offset: 0x0018892C
+        //		public static bool IsLow
+        //		{
+        //			get
+        //			{
+        //				bool result = false;
+        //				if (PalMain.ForceLow)
+        //				{
+        //					result = true;
+        //				}
+        //				else if (SystemInfo.graphicsMemorySize < 900)
+        //				{
+        //					result = true;
+        //				}
+        //				else if (PalMain.IsWin32)
+        //				{
+        //					result = true;
+        //				}
+        //				return result;
+        //			}
+        //		}
+
+        //		// Token: 0x17000434 RID: 1076
+        //		// (get) Token: 0x060036B8 RID: 14008 RVA: 0x0018A770 File Offset: 0x00188970
+        //		public static bool MemoryLack
+        //		{
+        //			get
+        //			{
+        //				return false;
+        //			}
+        //		}
+
+        //		// Token: 0x060036BB RID: 14011 RVA: 0x0018A7B8 File Offset: 0x001889B8
+        //		public static void LoadOneLangueUIAtlas(string subname)
+        //		{
+        //			string path = subname.ToLanguagePath();
+        //			UIAtlas uiatlas = FileLoader.LoadComponentFromFile<UIAtlas>(path, false);
+        //			FileLoader.SetNoUnload(path, true);
+        //			string path2 = ("AssetBundles/UI/" + subname + "_Empty").ToAssetBundlePath();
+        //			UIAtlas uiatlas2 = FileLoader.LoadComponentFromFile<UIAtlas>(path2, false);
+        //			FileLoader.SetNoUnload(path2, true);
+        //			uiatlas2.gameObject.name = subname + "_Empty";
+        //			NGUITools.SetCacheAtlas(subname, uiatlas);
+        //			NGUITools.SetCacheAtlas(subname + "_Empty", uiatlas2);
+        //			uiatlas2.replacement = uiatlas;
+        //		}
+
+        //		// Token: 0x060036BC RID: 14012 RVA: 0x0018A838 File Offset: 0x00188A38
+        //		public static void ReleaseLangueUIAtlas(string subname)
+        //		{
+        //			string path = subname.ToLanguagePath();
+        //			FileLoader.SetNoUnload(path, false);
+        //			FileLoader.UnloadAssetBundle(path);
+        //			NGUITools.RemoveCacheAtlas(subname);
+        //		}
+
+        //		// Token: 0x060036BD RID: 14013 RVA: 0x0018A860 File Offset: 0x00188A60
+        //		public static void ReloadLangueUIAtlas(string subname)
+        //		{
+        //			string path = subname.ToLanguagePath();
+        //			UIAtlas uiatlas = FileLoader.LoadComponentFromFile<UIAtlas>(path, false);
+        //			FileLoader.SetNoUnload(path, true);
+        //			string name = subname + "_Empty";
+        //			UIAtlas cacheAtlas = NGUITools.GetCacheAtlas(name);
+        //			NGUITools.SetCacheAtlas(subname, uiatlas);
+        //			cacheAtlas.replacement = uiatlas;
+        //		}
 
         /// <summary>
         /// 推迟物品
