@@ -178,59 +178,41 @@ namespace SoftStar.Pal6
         //		// Token: 0x04003154 RID: 12628
         //		private bool m_bIsIntel;
 
-        //		// Token: 0x04003155 RID: 12629
         //		private bool m_bIsGDI;
 
-        //		// Token: 0x04003156 RID: 12630
         //		public GameState m_lastGameState = GameState.None;
 
-        //		// Token: 0x04003157 RID: 12631
         //		public Camera m_SkyCam;
 
-        //		// Token: 0x04003158 RID: 12632
         //		private static PalMain.PLAYER_RECOMMANDATION m_PlayerRecommandation;
 
-        //		// Token: 0x04003159 RID: 12633
         //		public bool m_bZhuYuGame;
 
-        //		// Token: 0x0400315A RID: 12634
         //		public bool m_bGuHanJiang;
 
-        //		// Token: 0x0400315B RID: 12635
         //		public static PalMain.UNLOADPROIR m_CurPrior = PalMain.UNLOADPROIR.LONG;
 
-        //		// Token: 0x0400315C RID: 12636
-        //		public static float m_CurUnloadTime = 0f;
+        public static float m_CurUnloadTime = 0f;
 
-        //		// Token: 0x0400315D RID: 12637
-        //		public static float m_FixImmediateTime = 1f;
+        public static float m_FixImmediateTime = 1f;
 
-        //		// Token: 0x0400315E RID: 12638
-        //		public static float m_FixShortTime = 5f;
+        public static float m_FixShortTime = 5f;
 
-        //		// Token: 0x0400315F RID: 12639
-        //		public static float m_FixLongTime = 15f;
+        public static float m_FixLongTime = 15f;
 
-        //		// Token: 0x04003160 RID: 12640
-        //		public static float m_FixVeryLongTime = 30f;
+        public static float m_FixVeryLongTime = 30f;
 
-        //		// Token: 0x04003161 RID: 12641
-        //		public static bool m_bHasUnload = false;
+        public static bool m_bHasUnload = false;
 
-        //		// Token: 0x04003162 RID: 12642
-        //		private static bool s_waitForActiveUserWarning = false;
+        private static bool s_waitForActiveUserWarning = false;
 
-        //		// Token: 0x04003163 RID: 12643
-        //		private static bool s_noControllerWarning = false;
+        private static bool s_noControllerWarning = false;
 
-        //		// Token: 0x04003164 RID: 12644
-        //		private static float s_noControllerTimeCounter = 0f;
+        private static float s_noControllerTimeCounter = 0f;
 
-        //		// Token: 0x04003165 RID: 12645
-        //		public int FOCUS_WAIT_FRAMES = 3;
+        public int FOCUS_WAIT_FRAMES = 3;
 
-        //		// Token: 0x04003166 RID: 12646
-        //		private int shouldRenewFrames;
+        private int shouldRenewFrames;
 
         public event PalMain.void_func_float_float updateHandles;
 
@@ -238,13 +220,13 @@ namespace SoftStar.Pal6
 
         public event PalMain.void_func_void onGUIHandles;
 
-        //		public bool IsSkillPreloading
-        //		{
-        //			get
-        //			{
-        //				return this.m_skillPreloading;
-        //			}
-        //		}
+        public bool IsSkillPreloading
+        {
+            get
+            {
+                return this.m_skillPreloading;
+            }
+        }
 
         //		// Token: 0x17000429 RID: 1065
         //		// (get) Token: 0x06003698 RID: 13976 RVA: 0x00189E40 File Offset: 0x00188040
@@ -423,15 +405,11 @@ namespace SoftStar.Pal6
 
         private void Awake()
         {
-            if (PalMain.instance != null && PalMain.instance != this)
-            {
-                UnityEngine.Object.Destroy(base.gameObject);
-                return;
-            }
-            this.Initialize();
+            instance = this;
         }
 
-        private void Initialize()
+
+        public static void Initialize()
         {
             //try
             //{
@@ -475,7 +453,7 @@ namespace SoftStar.Pal6
             //    QualitySettings.shadowProjection = ShadowProjection.StableFit;
             //}
 
-            PalMain.instance = this;
+          
 
             //ItemManager.GetInstance().OnBeforeRemoveItem += this.PutOffItem;
             //			ItemPackage orCreatePackage = ItemManager.GetInstance().GetOrCreatePackage(1u);
@@ -1224,27 +1202,26 @@ namespace SoftStar.Pal6
         //			PalMain.landMarks.AddRange(collection);
         //		}
 
-        //		// Token: 0x060036C5 RID: 14021 RVA: 0x0018B470 File Offset: 0x00189670
-        //		private void UpdateMinFPS()
-        //		{
-        //			if (PalMain.MinFPS != this.minFPS)
-        //			{
-        //				PalMain.MinFPS = this.minFPS;
-        //				PalMain.MinDeltaTime = 1f / this.minFPS;
-        //			}
-        //		}
+        private void UpdateMinFPS()
+        {
+            if (PalMain.MinFPS != this.minFPS)
+            {
+                PalMain.MinFPS = this.minFPS;
+                PalMain.MinDeltaTime = 1f / this.minFPS;
+            }
+        }
 
         private void Update()
         {
-            //this.UpdateMinFPS();
-            //if (this.onInputHandles != null)
-            //{
-            //    this.onInputHandles();
-            //}
-            //if (this.updateHandles != null)
-            //{
-            //    this.updateHandles(Time.time, Time.deltaTime);
-            //}
+            this.UpdateMinFPS();
+            if (this.onInputHandles != null)
+            {
+                this.onInputHandles();
+            }
+            if (this.updateHandles != null)
+            {
+                this.updateHandles(Time.time, Time.deltaTime);
+            }
             //this.m_QTEManager.Update();
             //if (ScenesManager.IsChanging || ShowLoading.Instance != null)
             //{
@@ -1281,10 +1258,10 @@ namespace SoftStar.Pal6
 
         private void OnGUI()
         {
-            //if (this.onGUIHandles != null)
-            //{
-            //    this.onGUIHandles();
-            //}
+            if (this.onGUIHandles != null)
+            {
+                this.onGUIHandles();
+            }
         }
 
         //		private void ReplaceMeshColliderFor7()

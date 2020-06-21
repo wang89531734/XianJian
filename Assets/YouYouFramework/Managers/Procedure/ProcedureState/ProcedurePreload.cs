@@ -3,6 +3,7 @@
 //创建时间：
 //备    注：
 //===================================================
+using SoftStar.Pal6;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -96,7 +97,7 @@ namespace YouYou
                 GameEntry.Event.CommonEvent.Dispatch(SysEventId.PreloadComplete);
                 GameEntry.Pool.EnqueueClassObject(m_PreloadParams);
 
-                GameEntry.Scene.LoadScene(1);
+                PalMain.Initialize();
                 GameEntry.Procedure.ChangeState(ProcedureState.LogOn);
             }
         }

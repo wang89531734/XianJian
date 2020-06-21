@@ -68,5 +68,15 @@ namespace YouYou
         /// 场景加载完毕
         /// </summary>
         public const ushort OnSceneLoaded = 1208;
+
+        /// <summary>
+        /// 进去登陆流程
+        /// </summary>
+        public const ushort EnterProcedureLogOn = 1301;
+
+        /// <summary>
+        /// 离开登陆流程
+        /// </summary>
+        public const ushort LeaveProcedureLogOn = 1302;
     }
 }

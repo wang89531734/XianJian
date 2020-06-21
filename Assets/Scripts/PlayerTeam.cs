@@ -109,7 +109,7 @@ public class PlayerTeam : MonoBehaviour
             }
         }
         PlayersManager.SetPlayer(0, true);
-        PlayersManager.SetPlayerPosByDestObj("SceneEnter");
+        //PlayersManager.SetPlayerPosByDestObj("SceneEnter");设置主角出生点
         //PlayerCtrlManager.Reset();
     }
 
