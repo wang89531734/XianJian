@@ -27,23 +27,11 @@ public class PlayerTeam : MonoBehaviour
     {
         get
         {
-            if (PlayerTeam.instance == null)
-            {
-                PlayerTeam.instance.Init();
-            }
             return PlayerTeam.instance;
         }
     }
 
     private void Start()
-    {
-        if (PlayerTeam.instance == null)
-        {
-            this.Init();
-        }
-    }
-
-    private void Init()
     {
         PlayerTeam.instance = this;
     }
@@ -82,13 +70,9 @@ public class PlayerTeam : MonoBehaviour
         //    Debug.LogWarning("Warn : UniStormWeatherSystem.instance==null");
         //}
         this.InitTeam();
-        //this.InitPlayerLevel();
-        //this.InitSkill();
-        //this.InitItem();
-        //if (base.gameObject != null)
-        //{
-        //    UnityEngine.Object.Destroy(base.gameObject);
-        //}
+        this.InitPlayerLevel();
+        this.InitSkill();
+        this.InitItem();
     }
 
     /// <summary>
@@ -128,62 +112,61 @@ public class PlayerTeam : MonoBehaviour
         }
     }
 
-    //	public void InitItem()
-    //	{
-    //		for (int i = 0; i < this.data.Length; i++)
-    //		{
-    //			GameObject gameObject = PlayersManager.FindMainChar(this.data[i].mCharacterID, true);
-    //			if (gameObject != null)
-    //			{
-    //				PalNPC component = gameObject.GetComponent<PalNPC>();
-    //				for (int j = 0; j < this.data[i].m_ItemIDs.Count; j++)
-    //				{
-    //					ItemD itemD = this.data[i].m_ItemIDs[j];
-    //					uint id = ItemManager.GetID((uint)itemD.ParentID, (uint)itemD.ChildID);
-    //					ItemManager.GetInstance().GetOrCreatePackage(1u).AddNewItem_Limit(id, 1);
-    //					ItemWatcher[] itemsByItemType = ItemManager.GetInstance().GetOrCreatePackage(1u).GetItemsByItemType(id);
-    //					foreach (ItemWatcher itemWatcher in itemsByItemType)
-    //					{
-    //						if (itemWatcher != null)
-    //						{
-    //							IItemAssemble<PalNPC> itemAssemble = itemWatcher.Target as IItemAssemble<PalNPC>;
-    //							if (itemAssemble != null)
-    //							{
-    //								if (!(itemAssemble.GetOwner() != null))
-    //								{
-    //									component.PutOnEquip(itemAssemble);
-    //									break;
-    //								}
-    //							}
-    //						}
-    //					}
-    //				}
-    //			}
-    //		}
-    //		for (int l = 0; l < this.PackItemIDs.Count; l++)
-    //		{
-    //			ItemD itemD2 = this.PackItemIDs[l];
-    //			uint id2 = ItemManager.GetID((uint)itemD2.ParentID, (uint)itemD2.ChildID);
-    //			ItemManager.GetInstance().GetOrCreatePackage(1u).AddNewItem_Limit(id2, itemD2.Number);
-    //		}
-    //	}
+    public void InitItem()
+    {
+        for (int i = 0; i < this.data.Length; i++)
+        {
+            GameObject gameObject = PlayersManager.FindMainChar(this.data[i].mCharacterID, true);
+            if (gameObject != null)
+            {
+                PalNPC component = gameObject.GetComponent<PalNPC>();
+                for (int j = 0; j < this.data[i].m_ItemIDs.Count; j++)
+                {
+                    ItemD itemD = this.data[i].m_ItemIDs[j];
+                    //uint id = ItemManager.GetID((uint)itemD.ParentID, (uint)itemD.ChildID);
+                    //ItemManager.GetInstance().GetOrCreatePackage(1u).AddNewItem_Limit(id, 1);
+                    //ItemWatcher[] itemsByItemType = ItemManager.GetInstance().GetOrCreatePackage(1u).GetItemsByItemType(id);
+                    //foreach (ItemWatcher itemWatcher in itemsByItemType)
+                    //{
+                    //    if (itemWatcher != null)
+                    //    {
+                    //        IItemAssemble<PalNPC> itemAssemble = itemWatcher.Target as IItemAssemble<PalNPC>;
+                    //        if (itemAssemble != null)
+                    //        {
+                    //            if (!(itemAssemble.GetOwner() != null))
+                    //            {
+                    //                component.PutOnEquip(itemAssemble);
+                    //                break;
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                }
+            }
+        }
+        for (int l = 0; l < this.PackItemIDs.Count; l++)
+        {
+            ItemD itemD2 = this.PackItemIDs[l];
+            //uint id2 = ItemManager.GetID((uint)itemD2.ParentID, (uint)itemD2.ChildID);
+            //ItemManager.GetInstance().GetOrCreatePackage(1u).AddNewItem_Limit(id2, itemD2.Number);
+        }
+    }
 
-    //	// Token: 0x06003219 RID: 12825 RVA: 0x0016BDF8 File Offset: 0x00169FF8
-    //	public void InitSkill()
-    //	{
-    //		for (int i = 0; i < this.data.Length; i++)
-    //		{
-    //			GameObject gameObject = PlayersManager.FindMainChar(this.data[i].mCharacterID, true);
-    //			if (gameObject != null)
-    //			{
-    //				PalNPC component = gameObject.GetComponent<PalNPC>();
-    //				foreach (PalNPC.SkillInfo newSkill in this.data[i].m_SkillIDs)
-    //				{
-    //					component.AddSkillNoRepeat(newSkill);
-    //				}
-    //			}
-    //		}
-    //	}
+    public void InitSkill()
+    {
+        for (int i = 0; i < this.data.Length; i++)
+        {
+            GameObject gameObject = PlayersManager.FindMainChar(this.data[i].mCharacterID, true);
+            if (gameObject != null)
+            {
+                PalNPC component = gameObject.GetComponent<PalNPC>();
+                foreach (PalNPC.SkillInfo newSkill in this.data[i].m_SkillIDs)
+                {
+                    //component.AddSkillNoRepeat(newSkill);
+                }
+            }
+        }
+    }
 
     public void InitPlayerTeamFlags()
     {
@@ -193,7 +176,6 @@ public class PlayerTeam : MonoBehaviour
         }
     }
 
-    //	// Token: 0x0600321B RID: 12827 RVA: 0x0016BEFC File Offset: 0x0016A0FC
     //	public static void InitPickItemFlag()
     //	{
     //		Dictionary<int, PickUpItemContainer> datasFromFile = PickUpItemContainer.GetDatasFromFile();
@@ -208,7 +190,7 @@ public class PlayerTeam : MonoBehaviour
     /// </summary>
     public void InitTime()
     {
-        //TimeManager.Initialize().AutoSaveInit();
-        //TimeManager.Initialize().weatherTime = this.startWeatherTime;
+        GameEntry.Time.AutoSaveInit();
+        GameEntry.Time.weatherTime = this.startWeatherTime;
     }
 }

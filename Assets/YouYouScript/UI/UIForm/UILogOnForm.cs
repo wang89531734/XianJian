@@ -54,6 +54,6 @@ public class UILogOnForm : UIFormBase
         }
         PalMain.GameBeginTime = Time.fixedTime;
         PalMain.GameTotleTime = 0f;
-        PalMain.LoadScene(2);
+        PalMain.LoadScene(2);//这里回头改成切换流程
     }
 }

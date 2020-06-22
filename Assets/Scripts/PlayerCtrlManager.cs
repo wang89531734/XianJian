@@ -145,13 +145,13 @@ public class PlayerCtrlManager
         }
     }
 
-    //	private static CharacterController charCtrler
-    //	{
-    //		get
-    //		{
-    //			return PlayerCtrlManager.agentObj.GetComponent<CharacterController>();
-    //		}
-    //	}
+    private static CharacterController charCtrler
+    {
+        get
+        {
+            return PlayerCtrlManager.agentObj.GetComponent<CharacterController>();
+        }
+    }
 
     public static Agent agentObj
     {
@@ -393,10 +393,11 @@ public class PlayerCtrlManager
                 //    component.ActiveBattle(animator.GetLayerWeight(1) <= 0.5f);
                 //}
             }
-            //if (PlayerCtrlManager.bCanTab && InputManager.GetKeyDown(KEY_ACTION.TAB, false) && GameStateManager.CurGameState != GameState.Battle && (PlayerCtrlManager.charCtrler.isGrounded || Physics.Raycast(PlayerCtrlManager.agentObj.transform.position, Vector3.down, 0.07f)) && !PlayerCtrlManager.agentObj.IsJump)
-            //{
-            //   // PlayersManager.TabPlayer();
-            //}
+            if (PlayerCtrlManager.bCanTab && InputManager.GetKeyDown(KEY_ACTION.TAB, false) && (PlayerCtrlManager.charCtrler.isGrounded || Physics.Raycast(PlayerCtrlManager.agentObj.transform.position, Vector3.down, 0.07f)) && !PlayerCtrlManager.agentObj.IsJump)//&& GameStateManager.CurGameState != GameState.Battle
+            {
+                Debug.Log("按下Tab");
+                //PlayersManager.TabPlayer();
+            }
             //if (InputManager.GetKeyDown(KEY_ACTION.ACTION, false) && !PlayerCtrlManager.agentObj.IsJump)
             //{
             //    PalNPC palNPC = PlayerCtrlManager.agentObj.palNPC;

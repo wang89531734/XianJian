@@ -11,71 +11,51 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class Agent : MonoBehaviour
 {
-    //	// Token: 0x04001E02 RID: 7682
-    //	public PalNPC palNPC;
+    public PalNPC palNPC;
 
-    //	// Token: 0x04001E03 RID: 7683
     //	public NavMeshAgent agent;
 
     public Animator animator;
 
-    //	// Token: 0x04001E05 RID: 7685
     //	public AnimCtrlScript animCtrl;
 
-    //	// Token: 0x04001E06 RID: 7686
-    //	public CharacterController charCtrller;
+    public CharacterController charCtrller;
 
-    //	// Token: 0x04001E07 RID: 7687
     //	[NonSerialized]
     //	public Perception perception;
 
-    //	// Token: 0x04001E08 RID: 7688
-    //	public bool bControl = true;
+    public bool bControl = true;
 
-    //	// Token: 0x04001E09 RID: 7689
-    //	public float SpeedK = 1f;
+    public float SpeedK = 1f;
 
-    //	// Token: 0x04001E0A RID: 7690
-    //	private bool m_NeedEnableAgent = true;
+    private bool m_NeedEnableAgent = true;
 
     //	// Token: 0x04001E0B RID: 7691
     //	public ControlMode m_curCtrlMode = ControlMode.None;
 
-    //	// Token: 0x04001E0C RID: 7692
-    //	protected bool controlByAgent = true;
+    protected bool controlByAgent = true;
 
-    //	// Token: 0x04001E0D RID: 7693
-    //	public float RunSpeed = 10f;
+    public float RunSpeed = 10f;
 
-    //	// Token: 0x04001E0E RID: 7694
-    //	public float WalkSpeed = 2f;
+    public float WalkSpeed = 2f;
 
-    //	// Token: 0x04001E0F RID: 7695
-    //	public float AniRunSpeed = 7f;
+    public float AniRunSpeed = 7f;
 
-    //	// Token: 0x04001E10 RID: 7696
-    //	public float RotSpeed = 15f;
+    public float RotSpeed = 15f;
 
-    //	// Token: 0x04001E11 RID: 7697
-    //	public float dampSpeed = 3.7f;
+    public float dampSpeed = 3.7f;
 
-    //	// Token: 0x04001E12 RID: 7698
-    //	public float CurSpeed = 1f;
+    public float CurSpeed = 1f;
 
-    //	// Token: 0x04001E13 RID: 7699
-    //	public float LongJumpSpeed = 0.45f;
+    public float LongJumpSpeed = 0.45f;
 
-    //	// Token: 0x04001E14 RID: 7700
-    //	public float jumpPower = 1f;
+    public float jumpPower = 1f;
 
-    //	// Token: 0x04001E15 RID: 7701
-    //	private float jumpPowerSecond = 1.3f;
+    private float jumpPowerSecond = 1.3f;
 
-    //	// Token: 0x04001E16 RID: 7702
-    //	public float MaxJumpPower = 2f;
+    public float MaxJumpPower = 2f;
 
-    //	// Token: 0x04001E17 RID: 7703
-    //	public float ActionRadius = 1.5f;
+    public float ActionRadius = 1.5f;
 
     //	// Token: 0x04001E18 RID: 7704
     //	public Locomotion locomotion;
@@ -116,8 +96,7 @@ public class Agent : MonoBehaviour
     //	// Token: 0x04001E24 RID: 7716
     //	public bool IsInSky;
 
-    //	// Token: 0x04001E25 RID: 7717
-    //	public bool IsJump;
+    public bool IsJump;
 
     //	// Token: 0x04001E26 RID: 7718
     //	public bool CanSlowByKeyUp;

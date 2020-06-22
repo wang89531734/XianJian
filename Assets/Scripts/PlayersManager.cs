@@ -448,23 +448,22 @@ public class PlayersManager
     //		return newPlayerIndex;
     //	}
 
-    //	// Token: 0x06003775 RID: 14197 RVA: 0x001921FC File Offset: 0x001903FC
-    //	public static void TabPlayer()
-    //	{
-    //		int count = PlayersManager.ActivePlayers.Count;
-    //		int num = PlayersManager.PlayerIndex + 1;
-    //		if (num >= count)
-    //		{
-    //			num = 0;
-    //		}
-    //		num = PlayersManager.ExcludeJiGuanXiong(num);
-    //		PlayersManager.SetPlayer(num, true);
-    //		MiniMap.Instance.MapSkillTime_Cur.fillAmount = 1f;
-    //		if (PlayersManager.OnTabPlayer != null)
-    //		{
-    //			PlayersManager.OnTabPlayer(num);
-    //		}
-    //	}
+    public static void TabPlayer()
+    {
+        int count = PlayersManager.ActivePlayers.Count;
+        int num = PlayersManager.PlayerIndex + 1;
+        if (num >= count)
+        {
+            num = 0;
+        }
+       // num = PlayersManager.ExcludeJiGuanXiong(num);
+        PlayersManager.SetPlayer(num, true);
+       // MiniMap.Instance.MapSkillTime_Cur.fillAmount = 1f;
+        if (PlayersManager.OnTabPlayer != null)
+        {
+            PlayersManager.OnTabPlayer(num);
+        }
+    }
 
     //	// Token: 0x06003776 RID: 14198 RVA: 0x0019225C File Offset: 0x0019045C
     //	private static void AddNeedComponent(PalNPC npc)
@@ -753,28 +752,19 @@ public class PlayersManager
     /// <returns></returns>
     public static GameObject FindMainChar(int ID, bool NeedAddToAllPlayers = true)
     {
+        GameObject gameObject=null;
         for (int i = 0; i < PlayersManager.AllPlayers.Count; i++)
         {
-            GameObject gameObject = PlayersManager.AllPlayers[i];
+            gameObject = PlayersManager.AllPlayers[i];
             if (!(gameObject == null))
             {
                 if (gameObject.name == ID.ToString())
                 {
                     return gameObject;
                 }
-            }
+            }           
         }
-
-        GameObject gameObject2 = GameObject.Find("/" + ID.ToString());
-        if (gameObject2 == null)
-        {
-            gameObject2 = GameObject.Find(ID.ToString());
-        }
-        if (NeedAddToAllPlayers && gameObject2 != null)
-        {
-            PlayersManager.AllPlayers.Add(gameObject2);
-        }
-        return gameObject2;
+        return gameObject;
     }
 
     /// <summary>
