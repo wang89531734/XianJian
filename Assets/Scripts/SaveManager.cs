@@ -12,13 +12,11 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
-    //	private const int GLOBALDATA_FILE_SIZE = 1024;
+    private const int GLOBALDATA_FILE_SIZE = 1024;
 
-    //	// Token: 0x04002DB6 RID: 11702
-    //	private const int SAVE_FILE_SIZE = 10485760;
+    private const int SAVE_FILE_SIZE = 10485760;
 
-    //	// Token: 0x04002DB7 RID: 11703
-    //	public static readonly uint Version;
+    public static readonly uint Version;
 
     //	// Token: 0x04002DB8 RID: 11704
     //	public static string TempGameLayerName;

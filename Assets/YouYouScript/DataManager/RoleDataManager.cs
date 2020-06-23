@@ -1,3 +1,4 @@
+using SoftStar.Pal6;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,12 +7,11 @@ using YouYou;
 
 public class RoleDataManager:IDisposable
 {
-    public void CreatePlayerByJobId(int jobId,BaseAction<RoleCtrl> onComplete=null)
+    public void CreatePlayerByJobId(int jobId,BaseAction<PalNPC> onComplete=null)
     {
         GameEntry.Pool.GameObjectSpawn(1, (Transform trans) => 
         {
-            RoleCtrl roleCtrl = trans.GetComponent<RoleCtrl>();
-            roleCtrl.Init();
+            PalNPC roleCtrl = trans.GetComponent<PalNPC>();
 
             onComplete?.Invoke(roleCtrl);
         });

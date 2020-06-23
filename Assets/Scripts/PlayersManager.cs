@@ -465,29 +465,32 @@ public class PlayersManager
         }
     }
 
-    //	// Token: 0x06003776 RID: 14198 RVA: 0x0019225C File Offset: 0x0019045C
-    //	private static void AddNeedComponent(PalNPC npc)
-    //	{
-    //		if (npc == null)
-    //		{
-    //			Debug.LogError("Error : AddNeedComponent npc==null");
-    //			return;
-    //		}
-    //		if (npc.model == null)
-    //		{
-    //			return;
-    //		}
-    //		GameObject model = npc.model;
-    //		if (model.GetComponent<BattleTrigger>() == null)
-    //		{
-    //			model.AddComponent<BattleTrigger>();
-    //		}
-    //		if (model.GetComponent<TakePlace>() == null)
-    //		{
-    //			model.AddComponent<TakePlace>();
-    //		}
-    //		model.SetHeadLight(true);
-    //	}
+    /// <summary>
+    /// 添加需要组件
+    /// </summary>
+    /// <param name="npc"></param>
+    private static void AddNeedComponent(PalNPC npc)
+    {
+        if (npc == null)
+        {
+            Debug.LogError("Error : AddNeedComponent npc==null");
+            return;
+        }
+        if (npc.model == null)
+        {
+            return;
+        }
+        GameObject model = npc.model;
+        //if (model.GetComponent<BattleTrigger>() == null)
+        //{
+        //    model.AddComponent<BattleTrigger>();
+        //}
+        //if (model.GetComponent<TakePlace>() == null)
+        //{
+        //    model.AddComponent<TakePlace>();
+        //}
+        //model.SetHeadLight(true);
+    }
 
     /// <summary>
     /// 设置玩家
@@ -496,233 +499,233 @@ public class PlayersManager
     /// <param name="SetPos"></param>
     public static void SetPlayer(int newPlayerIndex, bool SetPos = true)
     {
-        Debug.Log(newPlayerIndex+"玩家ID");
-        //using (new PlayersManager.AfterSetPlayer())
-        //{
-        //    if (newPlayerIndex == PlayersManager.PlayerIndex)
-        //    {
-        //        if (PlayersManager.Player == null)
-        //        {
-        //            Debug.LogError("Error : PlayerIndex==" + PlayersManager.PlayerIndex.ToString() + " Player == null 596行");
-        //        }
-        //        else
-        //        {
-        //            PalNPC component = PlayersManager.Player.GetComponent<PalNPC>();
-        //            if (component == null)
-        //            {
-        //                Debug.LogError("Error : " + PlayersManager.Player.name + " npc == null 604行");
-        //            }
-        //            else
-        //            {
-        //                SneakAttack[] componentsInChildren = component.GetComponentsInChildren<SneakAttack>(true);
-        //                if (componentsInChildren != null && componentsInChildren.Length > 0 && componentsInChildren[0] != null)
-        //                {
-        //                    componentsInChildren[0].enabled = true;
-        //                }
-        //                GameObject model = component.model;
-        //                if (model != null)
-        //                {
-        //                    model.layer = 8;
-        //                }
-        //                PlayersManager.Player.tag = "Player";
-        //                PlayersManager.Player.layer = SmoothFollow2.IgnoreLayer;
-        //                UtilFun.SetActive(PlayersManager.Player, true);
-        //                if (model != null)
-        //                {
-        //                    PalNPC palNPC = component;
-        //                    palNPC.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Remove(palNPC.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.AddNeedComponent));
-        //                    LateSetActive.DeleteKey(model.name);
-        //                    if (!model.activeSelf)
-        //                    {
-        //                        UtilFun.SetActive(model, true);
-        //                    }
-        //                    PlayersManager.AddNeedComponent(component);
-        //                    model.SetHeadLight(true);
-        //                    SkillSEPreviewAnimMove component2 = model.GetComponent<SkillSEPreviewAnimMove>();
-        //                    if (component2 != null)
-        //                    {
-        //                        UnityEngine.Object.Destroy(component2);
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    PalNPC palNPC2 = component;
-        //                    palNPC2.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(palNPC2.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.AddNeedComponent));
-        //                }
-        //                Agent component3 = model.GetComponent<Agent>();
-        //                if (component3 != null && component3.charCtrller != null && !component3.charCtrller.enabled)
-        //                {
-        //                    component3.charCtrller.enabled = true;
-        //                }
-        //                PlayerCtrlManager.Reset();
-        //            }
-        //        }
-        //    }
-        //    else if (newPlayerIndex < 0 || newPlayerIndex >= PlayersManager.ActivePlayers.Count)
-        //    {
-        //        Debug.LogError("PlayersManager.SetPlayer: out of bound, newPlayerIndex = " + newPlayerIndex);
-        //    }
-        //    else
-        //    {
-        //        GameObject gameObject = null;
-        //        Transform transform = null;
-        //        GameObject player = PlayersManager.Player;
-        //        SlideDown slideDown = null;
-        //        if (PlayersManager.Player != null)
-        //        {
-        //            PalNPC component4 = PlayersManager.Player.GetComponent<PalNPC>();
-        //            if (component4 == null)
-        //            {
-        //                Debug.LogError("Error : " + PlayersManager.Player.name + " npc == null 690行");
-        //            }
-        //            SneakAttack component5 = component4.GetComponent<SneakAttack>();
-        //            if (component5 != null)
-        //            {
-        //                component5.enabled = false;
-        //            }
-        //            if (component4 != null && component4.Data != null && component4.Data.CharacterID == 0)
-        //            {
-        //                if (component4.model == null)
-        //                {
-        //                    Debug.LogError("Error : " + component4.name + " npc.model == null 707行");
-        //                }
-        //                AnimCtrlScript component6 = component4.model.GetComponent<AnimCtrlScript>();
-        //                if (component6 != null)
-        //                {
-        //                    component6.ActiveZhanDou(false, 1, true, true, true);
-        //                }
-        //                if (component4.Weapons == null)
-        //                {
-        //                    Debug.LogError("Error : " + component4.name + " npc.Weapons == null 718行");
-        //                }
-        //                for (int i = 0; i < component4.Weapons.Count; i++)
-        //                {
-        //                    GameObject gameObject2 = component4.Weapons[i];
-        //                    if (gameObject2 != null)
-        //                    {
-        //                        Animator componentInChildren = gameObject2.GetComponentInChildren<Animator>();
-        //                        if (componentInChildren != null)
-        //                        {
-        //                            componentInChildren.enabled = false;
-        //                            AnimatorListen componentInChildren2 = gameObject2.GetComponentInChildren<AnimatorListen>();
-        //                            if (componentInChildren2 != null)
-        //                            {
-        //                                UnityEngine.Object.Destroy(componentInChildren2);
-        //                            }
-        //                        }
-        //                        UtilFun.YueJinChaoShenSuo(gameObject2.transform, Vector3.zero);
-        //                    }
-        //                }
-        //            }
-        //            gameObject = component4.model;
-        //            if (gameObject != null)
-        //            {
-        //                if (gameObject.transform.parent != PlayersManager.Player.transform)
-        //                {
-        //                    transform = gameObject.transform.parent;
-        //                    gameObject.transform.parent = PlayersManager.Player.transform;
-        //                }
-        //                PlayersManager.Player.tag = "Untagged";
-        //                PlayersManager.Player.layer = 0;
-        //                UtilFun.SetActive(gameObject, false);
-        //                Agent component7 = gameObject.GetComponent<Agent>();
-        //                if (component7 != null)
-        //                {
-        //                    component7.curCtrlMode = ControlMode.ControlByAgent;
-        //                }
-        //                gameObject.SetHeadLight(false);
-        //            }
-        //            slideDown = gameObject.GetComponent<SlideDown>();
-        //        }
-        //        PlayersManager.PlayerIndex = newPlayerIndex;
-        //        if (PlayersManager.Player != null)
-        //        {
-        //            PalNPC component8 = PlayersManager.Player.GetComponent<PalNPC>();
-        //            if (component8 == null)
-        //            {
-        //                Debug.LogError("Error : " + PlayersManager.Player.name + "  npc==null  784行");
-        //            }
-        //            SneakAttack[] componentsInChildren2 = component8.GetComponentsInChildren<SneakAttack>(true);
-        //            if (componentsInChildren2 != null && componentsInChildren2.Length > 0 && componentsInChildren2[0] != null)
-        //            {
-        //                componentsInChildren2[0].enabled = true;
-        //            }
-        //            GameObject model2 = component8.model;
-        //            if (model2 == null)
-        //            {
-        //                Debug.LogError("Error : " + PlayersManager.Player.name + "  npc.model==null  799行");
-        //            }
-        //            model2.layer = 8;
-        //            Agent component9 = model2.GetComponent<Agent>();
-        //            if (component9 != null && component9.charCtrller != null && !component9.charCtrller.enabled)
-        //            {
-        //                component9.charCtrller.enabled = true;
-        //            }
-        //            PlayersManager.Player.tag = "Player";
-        //            PlayersManager.Player.layer = SmoothFollow2.IgnoreLayer;
-        //            if (gameObject != null && SetPos)
-        //            {
-        //                if (transform != null && transform.name != "7")
-        //                {
-        //                    model2.transform.parent = transform;
-        //                }
-        //                UtilFun.SetPosition(model2.transform, gameObject.transform.position);
-        //                model2.transform.rotation = gameObject.transform.rotation;
-        //            }
-        //            UtilFun.SetActive(PlayersManager.Player, true);
-        //            LateSetActive.DeleteKey(model2.name);
-        //            if (!model2.activeSelf)
-        //            {
-        //                UtilFun.SetActive(model2, true);
-        //            }
-        //            if (gameObject != null && SetPos)
-        //            {
-        //                UtilFun.SetPosition(model2.transform, gameObject.transform.position);
-        //            }
-        //            Agent component10 = model2.GetComponent<Agent>();
-        //            if (component10 != null)
-        //            {
-        //                component10.curCtrlMode = ControlMode.None;
-        //            }
-        //            if (model2 != null)
-        //            {
-        //                if (model2.GetComponent<BattleTrigger>() == null)
-        //                {
-        //                    model2.AddComponent<BattleTrigger>();
-        //                }
-        //                model2.SetHeadLight(true);
-        //                TurnHead component11 = model2.GetComponent<TurnHead>();
-        //                if (component11 != null)
-        //                {
-        //                    component11.enabled = false;
-        //                }
-        //                SkillSEPreviewAnimMove component12 = model2.GetComponent<SkillSEPreviewAnimMove>();
-        //                if (component12 != null)
-        //                {
-        //                    UnityEngine.Object.Destroy(component12);
-        //                }
-        //            }
-        //            PlayerCtrlManager.Reset();
-        //            if (player != null)
-        //            {
-        //                PalNPC component13 = PlayersManager.Player.GetComponent<PalNPC>();
-        //                PalNPC component14 = player.GetComponent<PalNPC>();
-        //                if (component13 != null && component13.perception != null && component14 != null && component14.perception != null)
-        //                {
-        //                    component13.perception.CopyData(component14.perception);
-        //                }
-        //            }
-        //            if (model2 != null && slideDown != null)
-        //            {
-        //                SlideDown component15 = model2.GetComponent<SlideDown>();
-        //                if (component15 != null)
-        //                {
-        //                    component15.enabled = slideDown.enabled;
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
+        using (new PlayersManager.AfterSetPlayer())
+        {
+            if (newPlayerIndex == PlayersManager.PlayerIndex)
+            {
+                if (PlayersManager.Player == null)
+                {
+                    Debug.LogError("Error : PlayerIndex==" + PlayersManager.PlayerIndex.ToString() + " Player == null 596行");
+                }
+                else
+                {
+                    PalNPC component = PlayersManager.Player.GetComponent<PalNPC>();
+                    if (component == null)
+                    {
+                        Debug.LogError("Error : " + PlayersManager.Player.name + " npc == null 604行");
+                    }
+                    else
+                    {
+                        SneakAttack[] componentsInChildren = component.GetComponentsInChildren<SneakAttack>(true);
+                        if (componentsInChildren != null && componentsInChildren.Length > 0 && componentsInChildren[0] != null)
+                        {
+                            componentsInChildren[0].enabled = true;
+                        }
+                        GameObject model = component.model;
+                        if (model != null)
+                        {
+                            model.layer = 8;
+                        }
+                        PlayersManager.Player.tag = "Player";
+                        PlayersManager.Player.layer = SmoothFollow2.IgnoreLayer;
+                        UtilFun.SetActive(PlayersManager.Player, true);
+                        if (model != null)
+                        {
+                            PalNPC palNPC = component;
+                            palNPC.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Remove(palNPC.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.AddNeedComponent));
+                            //LateSetActive.DeleteKey(model.name);
+                            if (!model.activeSelf)
+                            {
+                                UtilFun.SetActive(model, true);
+                            }
+                            PlayersManager.AddNeedComponent(component);
+                            //model.SetHeadLight(true);
+                            //SkillSEPreviewAnimMove component2 = model.GetComponent<SkillSEPreviewAnimMove>();
+                            //if (component2 != null)
+                            //{
+                            //    UnityEngine.Object.Destroy(component2);
+                            //}
+                        }
+                        else
+                        {
+                            PalNPC palNPC2 = component;
+                            //palNPC2.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(palNPC2.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.AddNeedComponent));
+                        }
+                        //Agent component3 = model.GetComponent<Agent>();
+                        //if (component3 != null && component3.charCtrller != null && !component3.charCtrller.enabled)
+                        //{
+                        //    component3.charCtrller.enabled = true;
+                        //}
+                        PlayerCtrlManager.Reset();
+                    }
+                }
+            }
+            else if (newPlayerIndex < 0 || newPlayerIndex >= PlayersManager.ActivePlayers.Count)
+            {
+                Debug.LogError("PlayersManager.SetPlayer: out of bound, newPlayerIndex = " + newPlayerIndex);
+            }
+            else
+            {
+                Debug.Log("执行2");
+                //GameObject gameObject = null;
+                //Transform transform = null;
+                //GameObject player = PlayersManager.Player;
+                ////SlideDown slideDown = null;
+                //if (PlayersManager.Player != null)
+                //{
+                //    PalNPC component4 = PlayersManager.Player.GetComponent<PalNPC>();
+                //    if (component4 == null)
+                //    {
+                //        Debug.LogError("Error : " + PlayersManager.Player.name + " npc == null 690行");
+                //    }
+                //    SneakAttack component5 = component4.GetComponent<SneakAttack>();
+                //    if (component5 != null)
+                //    {
+                //        component5.enabled = false;
+                //    }
+                //    if (component4 != null && component4.Data != null && component4.Data.CharacterID == 0)
+                //    {
+                //        if (component4.model == null)
+                //        {
+                //            Debug.LogError("Error : " + component4.name + " npc.model == null 707行");
+                //        }
+                //        AnimCtrlScript component6 = component4.model.GetComponent<AnimCtrlScript>();
+                //        //if (component6 != null)
+                //        //{
+                //        //    component6.ActiveZhanDou(false, 1, true, true, true);
+                //        //}
+                //        //if (component4.Weapons == null)
+                //        //{
+                //        //    Debug.LogError("Error : " + component4.name + " npc.Weapons == null 718行");
+                //        //}
+                //        //for (int i = 0; i < component4.Weapons.Count; i++)
+                //        //{
+                //        //   // GameObject gameObject2 = component4.Weapons[i];
+                //        //    if (gameObject2 != null)
+                //        //    {
+                //        //        Animator componentInChildren = gameObject2.GetComponentInChildren<Animator>();
+                //        //        if (componentInChildren != null)
+                //        //        {
+                //        //            componentInChildren.enabled = false;
+                //        //           // AnimatorListen componentInChildren2 = gameObject2.GetComponentInChildren<AnimatorListen>();
+                //        //            //if (componentInChildren2 != null)
+                //        //            //{
+                //        //            //    UnityEngine.Object.Destroy(componentInChildren2);
+                //        //            //}
+                //        //        }
+                //        //       // UtilFun.YueJinChaoShenSuo(gameObject2.transform, Vector3.zero);
+                //        //    }
+                //        //}
+                //    }
+                //    gameObject = component4.model;
+                //    if (gameObject != null)
+                //    {
+                //        if (gameObject.transform.parent != PlayersManager.Player.transform)
+                //        {
+                //            transform = gameObject.transform.parent;
+                //            gameObject.transform.parent = PlayersManager.Player.transform;
+                //        }
+                //        PlayersManager.Player.tag = "Untagged";
+                //        PlayersManager.Player.layer = 0;
+                //        UtilFun.SetActive(gameObject, false);
+                //        Agent component7 = gameObject.GetComponent<Agent>();
+                //        if (component7 != null)
+                //        {
+                //           // component7.curCtrlMode = ControlMode.ControlByAgent;
+                //        }
+                //        //gameObject.SetHeadLight(false);
+                //    }
+                //    //slideDown = gameObject.GetComponent<SlideDown>();
+                //}
+                //PlayersManager.PlayerIndex = newPlayerIndex;
+                //if (PlayersManager.Player != null)
+                //{
+                //    PalNPC component8 = PlayersManager.Player.GetComponent<PalNPC>();
+                //    if (component8 == null)
+                //    {
+                //        Debug.LogError("Error : " + PlayersManager.Player.name + "  npc==null  784行");
+                //    }
+                //    SneakAttack[] componentsInChildren2 = component8.GetComponentsInChildren<SneakAttack>(true);
+                //    if (componentsInChildren2 != null && componentsInChildren2.Length > 0 && componentsInChildren2[0] != null)
+                //    {
+                //        componentsInChildren2[0].enabled = true;
+                //    }
+                //    GameObject model2 = component8.model;
+                //    if (model2 == null)
+                //    {
+                //        Debug.LogError("Error : " + PlayersManager.Player.name + "  npc.model==null  799行");
+                //    }
+                //    model2.layer = 8;
+                //    Agent component9 = model2.GetComponent<Agent>();
+                //    if (component9 != null && component9.charCtrller != null && !component9.charCtrller.enabled)
+                //    {
+                //        component9.charCtrller.enabled = true;
+                //    }
+                //    PlayersManager.Player.tag = "Player";
+                //    //PlayersManager.Player.layer = SmoothFollow2.IgnoreLayer;
+                //    if (gameObject != null && SetPos)
+                //    {
+                //        if (transform != null && transform.name != "7")
+                //        {
+                //            model2.transform.parent = transform;
+                //        }
+                //        //UtilFun.SetPosition(model2.transform, gameObject.transform.position);
+                //        model2.transform.rotation = gameObject.transform.rotation;
+                //    }
+                //    UtilFun.SetActive(PlayersManager.Player, true);
+                //    //LateSetActive.DeleteKey(model2.name);
+                //    if (!model2.activeSelf)
+                //    {
+                //        UtilFun.SetActive(model2, true);
+                //    }
+                //    if (gameObject != null && SetPos)
+                //    {
+                //        //UtilFun.SetPosition(model2.transform, gameObject.transform.position);
+                //    }
+                //    Agent component10 = model2.GetComponent<Agent>();
+                //    if (component10 != null)
+                //    {
+                //        //component10.curCtrlMode = ControlMode.None;
+                //    }
+                //    if (model2 != null)
+                //    {
+                //        //if (model2.GetComponent<BattleTrigger>() == null)
+                //        //{
+                //        //    model2.AddComponent<BattleTrigger>();
+                //        //}
+                //        //model2.SetHeadLight(true);
+                //        //TurnHead component11 = model2.GetComponent<TurnHead>();
+                //        //if (component11 != null)
+                //        //{
+                //        //    component11.enabled = false;
+                //        //}
+                //        ////SkillSEPreviewAnimMove component12 = model2.GetComponent<SkillSEPreviewAnimMove>();
+                //        //if (component12 != null)
+                //        //{
+                //        //    UnityEngine.Object.Destroy(component12);
+                //        //}
+                //    }
+                //    PlayerCtrlManager.Reset();
+                //    if (player != null)
+                //    {
+                //        PalNPC component13 = PlayersManager.Player.GetComponent<PalNPC>();
+                //        PalNPC component14 = player.GetComponent<PalNPC>();
+                //        //if (component13 != null && component13.perception != null && component14 != null && component14.perception != null)
+                //        //{
+                //        //    component13.perception.CopyData(component14.perception);
+                //        //}
+                //    }
+                //    //if (model2 != null && slideDown != null)
+                //    //{
+                //    //    SlideDown component15 = model2.GetComponent<SlideDown>();
+                //    //    if (component15 != null)
+                //    //    {
+                //    //        component15.enabled = slideDown.enabled;
+                //    //    }
+                //    //}
+                //}
+            }
+        }
     }
 
     /// <summary>
@@ -752,19 +755,28 @@ public class PlayersManager
     /// <returns></returns>
     public static GameObject FindMainChar(int ID, bool NeedAddToAllPlayers = true)
     {
-        GameObject gameObject=null;
         for (int i = 0; i < PlayersManager.AllPlayers.Count; i++)
         {
-            gameObject = PlayersManager.AllPlayers[i];
+            GameObject gameObject = PlayersManager.AllPlayers[i];
             if (!(gameObject == null))
             {
                 if (gameObject.name == ID.ToString())
                 {
                     return gameObject;
                 }
-            }           
+            }
         }
-        return gameObject;
+
+        GameObject gameObject2 = GameObject.Find("/" + ID.ToString());
+        if (gameObject2 == null)
+        {
+            gameObject2 = GameObject.Find(ID.ToString());
+        }
+        if (NeedAddToAllPlayers && gameObject2 != null && ID != 6)
+        {
+            PlayersManager.AllPlayers.Add(gameObject2);
+        }
+        return gameObject2;
     }
 
     /// <summary>
@@ -852,15 +864,14 @@ public class PlayersManager
     /// <param name="ID"></param>
     /// <returns></returns>
     public static GameObject LoadPlayer(int ID, object userData = null, BaseAction<ResourceEntity> onOpen = null)
-    {
-        Debug.Log(ID+"  ToDo 加载角色模型");
-
+    {      
         GameObject gameObject = null;
-        GameEntry.Data.RoleDataManager.CreatePlayerByJobId(1, (RoleCtrl roleCtrl) =>
+        GameEntry.Data.RoleDataManager.CreatePlayerByJobId(1, (PalNPC roleCtrl) =>
         {
-            gameObject=roleCtrl.gameObject;
+            Debug.Log(ID + "  ToDo 加载角色模型");
+            gameObject =roleCtrl.gameObject;
             gameObject.ExcludeCloneName();
-            //PlayersManager.PlayerInitSneakScript(gameObject, null);
+            PlayersManager.PlayerInitSneakScript(gameObject, null);
         });
         return gameObject;
     }
@@ -878,18 +889,18 @@ public class PlayersManager
             SneakAttack[] componentsInChildren = newPlayer.GetComponentsInChildren<SneakAttack>();
             if (componentsInChildren == null || componentsInChildren.Length < 1)
             {
-                //int characterID = npc.Data.CharacterID;
-                //if (characterID != 6 && characterID != 7)
-                //{
-                //    if (characterID == 0 || characterID == 2 || characterID == 3)
-                //    {
-                //        newPlayer.AddComponent<JinQiXi>();
-                //    }
-                //    else
-                //    {
-                //        newPlayer.AddComponent<YuanQiXi>();
-                //    }
-                //}
+                int characterID = npc.Data.CharacterID;
+                if (characterID != 6 && characterID != 7)
+                {
+                    if (characterID == 0 || characterID == 2 || characterID == 3)
+                    {
+                        //newPlayer.AddComponent<JinQiXi>();
+                    }
+                    else
+                    {
+                       // newPlayer.AddComponent<YuanQiXi>();
+                    }
+                }
             }
         }
     }
@@ -911,7 +922,8 @@ public class PlayersManager
         {
             return;
         }
-        //PlayersManager.PlayerInitSneakScript(newPlayer, component);
+
+        PlayersManager.PlayerInitSneakScript(newPlayer, component);
         if (!PlayersManager.ActivePlayers.Contains(newPlayer))
         {
             if (newPlayer.GetComponent<SavePrefabTarget>() == null)
@@ -926,28 +938,28 @@ public class PlayersManager
             }
             else
             {
-                // ShroudInstance component2 = component.model.GetComponent<ShroudInstance>();
-                //if (component2 != null)
-                //{
-                //    component2.blendWeightK = 100f;
-                //}
-                //AnimCtrlScript component3 = component.model.GetComponent<AnimCtrlScript>();
+                ShroudInstance component2 = component.model.GetComponent<ShroudInstance>();
+                if (component2 != null)
+                {
+                    component2.blendWeightK = 100f;
+                }
+                AnimCtrlScript component3 = component.model.GetComponent<AnimCtrlScript>();
                 //component3.ActiveAnimCrossFade("ZhanLi", false, 0f, true);
-                if (component.Data.CharacterID == 2)
-                {
-                    //if (!component.animator.GetCurrentAnimatorStateInfo(0).IsName("yidongState.ZhanLi"))
-                    //{
-                    //    LateSetActive.Init(component.model, false, 0.01f);
-                    //}
-                    //else
-                    //{
-                    //    UtilFun.SetActive(component.model, false);
-                    //}
-                }
-                else
-                {
-                    UtilFun.SetActive(component.model, false);
-                }
+                //if (component.Data.CharacterID == 2)
+                //{
+                //    if (!component.animator.GetCurrentAnimatorStateInfo(0).IsName("yidongState.ZhanLi"))
+                //    {
+                //        LateSetActive.Init(component.model, false, 0.01f);
+                //    }
+                //    else
+                //    {
+                //        UtilFun.SetActive(component.model, false);
+                //    }
+                //}
+                //else
+                //{
+                //    UtilFun.SetActive(component.model, false);
+                //}
             }
 
             if (bSetLevel)
@@ -1375,25 +1387,24 @@ public class PlayersManager
     //		}
     //	}
 
-    //	private class AfterSetPlayer : IDisposable
-    //	{
-    //		// Token: 0x06003791 RID: 14225 RVA: 0x00193B8C File Offset: 0x00191D8C
-    //		public void Dispose()
-    //		{
-    //			if (PlayersManager.PlayerIndex < 0 || PlayersManager.PlayerIndex >= PlayersManager.ActivePlayers.Count)
-    //			{
-    //				return;
-    //			}
-    //			GameObject gameObject = PlayersManager.ActivePlayers[PlayersManager.PlayerIndex];
-    //			PalNPC obj = null;
-    //			if (gameObject != null)
-    //			{
-    //				obj = gameObject.GetComponent<PalNPC>();
-    //			}
-    //			if (PlayersManager.OnAfterSetPlayer != null)
-    //			{
-    //				PlayersManager.OnAfterSetPlayer(obj);
-    //			}
-    //		}
-    //	}
+    private class AfterSetPlayer : IDisposable
+    {
+        public void Dispose()
+        {
+            if (PlayersManager.PlayerIndex < 0 || PlayersManager.PlayerIndex >= PlayersManager.ActivePlayers.Count)
+            {
+                return;
+            }
+            GameObject gameObject = PlayersManager.ActivePlayers[PlayersManager.PlayerIndex];
+            PalNPC obj = null;
+            if (gameObject != null)
+            {
+                obj = gameObject.GetComponent<PalNPC>();
+            }
+            if (PlayersManager.OnAfterSetPlayer != null)
+            {
+                PlayersManager.OnAfterSetPlayer(obj);
+            }
+        }
+    }
 }

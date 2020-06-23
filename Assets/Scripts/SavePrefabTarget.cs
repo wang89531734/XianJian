@@ -21,13 +21,11 @@ public class SavePrefabTarget : SaveTarget
 		}
 	}
 
-	// Token: 0x060032A3 RID: 12963 RVA: 0x0016FA08 File Offset: 0x0016DC08
 	private void Start()
 	{
 		this.GetPrefabPath();
 	}
 
-	// Token: 0x060032A4 RID: 12964 RVA: 0x0016FA14 File Offset: 0x0016DC14
 	private string GetPrefabPath()
 	{
 		if (string.IsNullOrEmpty(this.PrefabPath))
@@ -43,7 +41,6 @@ public class SavePrefabTarget : SaveTarget
 		return this.PrefabPath;
 	}
 
-	// Token: 0x060032A5 RID: 12965 RVA: 0x0016FA7C File Offset: 0x0016DC7C
 	public override bool Save(BinaryWriter writer)
 	{
 		writer.Write(this.ID);
@@ -53,7 +50,6 @@ public class SavePrefabTarget : SaveTarget
 		return true;
 	}
 
-	// Token: 0x060032A6 RID: 12966 RVA: 0x0016FAB0 File Offset: 0x0016DCB0
 	public static GameObject Load(BinaryReader reader, Transform parent)
 	{
 		int num = reader.ReadInt32();

@@ -11,25 +11,40 @@ namespace SoftStar.Pal6
     /// </summary>
     public class HPMPDPProperty
     {
-        //		public HPMPDPProperty(HPMPDPProperty.StaticData SourceData)
-        //		{
-        //			this.mHPRange = new HPMPDPProperty.DynamicValue(1, 999999);
-        //			this.mHPRange.Base = SourceData.HPRange;
-        //			this.mMPRange = new HPMPDPProperty.DynamicValue(1, 9999);
-        //			this.mMPRange.Base = SourceData.MPRange;
-        //			this.mDPRange = new HPMPDPProperty.DynamicValue(1, 9999);
-        //			this.mDPRange.Base = SourceData.DPRange;
-        //		}
+        private HPMPDPProperty.DynamicValue mHPRange;
 
-        //		// Token: 0x14000016 RID: 22
-        //		// (add) Token: 0x06002F67 RID: 12135 RVA: 0x0015C4EC File Offset: 0x0015A6EC
-        //		// (remove) Token: 0x06002F68 RID: 12136 RVA: 0x0015C508 File Offset: 0x0015A708
-        //		public event Action<int> OnChangeHP;
+        private HPMPDPProperty.DynamicValue mMPRange;
 
-        //		// Token: 0x14000017 RID: 23
-        //		// (add) Token: 0x06002F69 RID: 12137 RVA: 0x0015C524 File Offset: 0x0015A724
-        //		// (remove) Token: 0x06002F6A RID: 12138 RVA: 0x0015C540 File Offset: 0x0015A740
-        //		public event Action<int> OnChangeMP;
+        private HPMPDPProperty.DynamicValue mDPRange;
+
+        private int mHP;
+
+        private int mMP;
+
+        private int mDP;
+
+        //		private PlayerBaseProperty mLinkPlayerBase;
+
+        public enum FieldEnum
+        {
+            mHPRange = 1,
+            mMPRange,
+            mDPRange
+        }
+
+        public HPMPDPProperty(HPMPDPProperty.StaticData SourceData)
+        {
+            //this.mHPRange = new HPMPDPProperty.DynamicValue(1, 999999);
+            //this.mHPRange.Base = SourceData.HPRange;
+            //this.mMPRange = new HPMPDPProperty.DynamicValue(1, 9999);
+            //this.mMPRange.Base = SourceData.MPRange;
+            //this.mDPRange = new HPMPDPProperty.DynamicValue(1, 9999);
+            //this.mDPRange.Base = SourceData.DPRange;
+        }
+
+        public event Action<int> OnChangeHP;
+
+        public event Action<int> OnChangeMP;
 
         //		// Token: 0x14000018 RID: 24
         //		// (add) Token: 0x06002F6B RID: 12139 RVA: 0x0015C55C File Offset: 0x0015A75C
@@ -120,40 +135,37 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x17000314 RID: 788
-        //		// (get) Token: 0x06002F75 RID: 12149 RVA: 0x0015C70C File Offset: 0x0015A90C
-        //		// (set) Token: 0x06002F76 RID: 12150 RVA: 0x0015C714 File Offset: 0x0015A914
-        //		public int HP
-        //		{
-        //			get
-        //			{
-        //				return this.mHP;
-        //			}
-        //			set
-        //			{
-        //				if (value == this.mHP)
-        //				{
-        //					return;
-        //				}
-        //				int obj = this.mHP;
-        //				if (value < 0)
-        //				{
-        //					this.mHP = 0;
-        //				}
-        //				else if (value > this.mHPRange)
-        //				{
-        //					this.mHP = this.mHPRange;
-        //				}
-        //				else
-        //				{
-        //					this.mHP = value;
-        //				}
-        //				if (this.OnChangeHP != null)
-        //				{
-        //					this.OnChangeHP(obj);
-        //				}
-        //			}
-        //		}
+        public int HP
+        {
+            get
+            {
+                return this.mHP;
+            }
+            set
+            {
+                if (value == this.mHP)
+                {
+                    return;
+                }
+                int obj = this.mHP;
+                if (value < 0)
+                {
+                    this.mHP = 0;
+                }
+                //else if (value > this.mHPRange)
+                //{
+                //    this.mHP = this.mHPRange;
+                //}
+                else
+                {
+                    this.mHP = value;
+                }
+                if (this.OnChangeHP != null)
+                {
+                    this.OnChangeHP(obj);
+                }
+            }
+        }
 
         //		// Token: 0x17000315 RID: 789
         //		// (get) Token: 0x06002F77 RID: 12151 RVA: 0x0015C790 File Offset: 0x0015A990
@@ -249,104 +261,71 @@ namespace SoftStar.Pal6
         //			this.UnLink();
         //		}
 
-        //		// Token: 0x04002B43 RID: 11075
-        //		private HPMPDPProperty.DynamicValue mHPRange;
+        public class DynamicValue// : DynamicInt32
+        {
+            //			// Token: 0x06002F7E RID: 12158 RVA: 0x0015C90C File Offset: 0x0015AB0C
+            //			public DynamicValue(int inMinValue, int inMaxValue) : base(inMinValue, inMaxValue)
+            //			{
+            //			}
 
-        //		// Token: 0x04002B44 RID: 11076
-        //		private HPMPDPProperty.DynamicValue mMPRange;
+            //			// Token: 0x17000317 RID: 791
+            //			// (get) Token: 0x06002F7F RID: 12159 RVA: 0x0015C918 File Offset: 0x0015AB18
+            //			// (set) Token: 0x06002F80 RID: 12160 RVA: 0x0015C920 File Offset: 0x0015AB20
+            //			public int Base
+            //			{
+            //				get
+            //				{
+            //					return this.mBase;
+            //				}
+            //				set
+            //				{
+            //					this.mBase = value;
+            //					this.Calculate();
+            //				}
+            //			}
 
-        //		// Token: 0x04002B45 RID: 11077
-        //		private HPMPDPProperty.DynamicValue mDPRange;
+            //			// Token: 0x17000318 RID: 792
+            //			// (get) Token: 0x06002F81 RID: 12161 RVA: 0x0015C930 File Offset: 0x0015AB30
+            //			// (set) Token: 0x06002F82 RID: 12162 RVA: 0x0015C938 File Offset: 0x0015AB38
+            //			public int ByCalculate
+            //			{
+            //				get
+            //				{
+            //					return this.mByCalculate;
+            //				}
+            //				set
+            //				{
+            //					this.mByCalculate = value;
+            //					this.Calculate();
+            //				}
+            //			}
 
-        //		// Token: 0x04002B46 RID: 11078
-        //		private int mHP;
+            //			// Token: 0x06002F83 RID: 12163 RVA: 0x0015C948 File Offset: 0x0015AB48
+            //			public override void Calculate()
+            //			{
+            //				int result = this.result;
+            //				this.result = (int)((float)(this.mBase + this.mByCalculate + this.mAdd) * this.mScale);
+            //				if (this.result < this.mMinValue)
+            //				{
+            //					this.mIsOverdraw = true;
+            //					this.result = this.mMinValue;
+            //				}
+            //				else if (this.result > this.mMaxValue)
+            //				{
+            //					this.result = this.mMaxValue;
+            //				}
+            //				if (result != this.result)
+            //				{
+            //					base.ChangeValue(result);
+            //				}
+            //			}
 
-        //		// Token: 0x04002B47 RID: 11079
-        //		private int mMP;
+            //			// Token: 0x04002B52 RID: 11090
+            //			private int mBase;
 
-        //		// Token: 0x04002B48 RID: 11080
-        //		private int mDP;
-
-        //		// Token: 0x04002B49 RID: 11081
-        //		private PlayerBaseProperty mLinkPlayerBase;
-
-        //		// Token: 0x020006C7 RID: 1735
-        //		public enum FieldEnum
-        //		{
-        //			// Token: 0x04002B4F RID: 11087
-        //			mHPRange = 1,
-        //			// Token: 0x04002B50 RID: 11088
-        //			mMPRange,
-        //			// Token: 0x04002B51 RID: 11089
-        //			mDPRange
-        //		}
-
-        //		// Token: 0x020006C8 RID: 1736
-        //		public class DynamicValue : DynamicInt32
-        //		{
-        //			// Token: 0x06002F7E RID: 12158 RVA: 0x0015C90C File Offset: 0x0015AB0C
-        //			public DynamicValue(int inMinValue, int inMaxValue) : base(inMinValue, inMaxValue)
-        //			{
-        //			}
-
-        //			// Token: 0x17000317 RID: 791
-        //			// (get) Token: 0x06002F7F RID: 12159 RVA: 0x0015C918 File Offset: 0x0015AB18
-        //			// (set) Token: 0x06002F80 RID: 12160 RVA: 0x0015C920 File Offset: 0x0015AB20
-        //			public int Base
-        //			{
-        //				get
-        //				{
-        //					return this.mBase;
-        //				}
-        //				set
-        //				{
-        //					this.mBase = value;
-        //					this.Calculate();
-        //				}
-        //			}
-
-        //			// Token: 0x17000318 RID: 792
-        //			// (get) Token: 0x06002F81 RID: 12161 RVA: 0x0015C930 File Offset: 0x0015AB30
-        //			// (set) Token: 0x06002F82 RID: 12162 RVA: 0x0015C938 File Offset: 0x0015AB38
-        //			public int ByCalculate
-        //			{
-        //				get
-        //				{
-        //					return this.mByCalculate;
-        //				}
-        //				set
-        //				{
-        //					this.mByCalculate = value;
-        //					this.Calculate();
-        //				}
-        //			}
-
-        //			// Token: 0x06002F83 RID: 12163 RVA: 0x0015C948 File Offset: 0x0015AB48
-        //			public override void Calculate()
-        //			{
-        //				int result = this.result;
-        //				this.result = (int)((float)(this.mBase + this.mByCalculate + this.mAdd) * this.mScale);
-        //				if (this.result < this.mMinValue)
-        //				{
-        //					this.mIsOverdraw = true;
-        //					this.result = this.mMinValue;
-        //				}
-        //				else if (this.result > this.mMaxValue)
-        //				{
-        //					this.result = this.mMaxValue;
-        //				}
-        //				if (result != this.result)
-        //				{
-        //					base.ChangeValue(result);
-        //				}
-        //			}
-
-        //			// Token: 0x04002B52 RID: 11090
-        //			private int mBase;
-
-        //			// Token: 0x04002B53 RID: 11091
-        //			private int mByCalculate;
-        //		}
+            //			// Token: 0x04002B53 RID: 11091
+            //			private int mByCalculate;
+        }
 
         public class StaticData
         {

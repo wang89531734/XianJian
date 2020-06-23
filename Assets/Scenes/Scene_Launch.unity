@@ -327,19 +327,7 @@ MonoBehaviour:
   data:
   - Enqueue: 1
     HP: 10
-    mCharacterID: 1
-    mLevel: 1
-    m_SkillIDs: []
-    m_ItemIDs: []
-  - Enqueue: 0
-    HP: 10
-    mCharacterID: 2
-    mLevel: 1
-    m_SkillIDs: []
-    m_ItemIDs: []
-  - Enqueue: 0
-    HP: 10
-    mCharacterID: 3
+    mCharacterID: 101
     mLevel: 1
     m_SkillIDs: []
     m_ItemIDs: []

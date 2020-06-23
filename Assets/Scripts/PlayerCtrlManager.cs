@@ -214,13 +214,11 @@ public class PlayerCtrlManager
     //		}
     //	}
 
-    //	// Token: 0x0600374A RID: 14154 RVA: 0x0019003C File Offset: 0x0018E23C
-    //	public static void Reset()
-    //	{
-    //		PlayerCtrlManager.m_agentObj = null;
-    //	}
+    public static void Reset()
+    {
+        PlayerCtrlManager.m_agentObj = null;
+    }
 
-    //	// Token: 0x0600374B RID: 14155 RVA: 0x00190044 File Offset: 0x0018E244
     //	public static void SetCtrlModel(GameObject go)
     //	{
     //		if (go == null)

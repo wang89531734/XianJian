@@ -71,8 +71,8 @@ public class PlayerTeam : MonoBehaviour
         //}
         this.InitTeam();
         this.InitPlayerLevel();
-        this.InitSkill();
-        this.InitItem();
+        //this.InitSkill();
+        //this.InitItem();
     }
 
     /// <summary>
@@ -86,29 +86,25 @@ public class PlayerTeam : MonoBehaviour
             if (this.data[i].Enqueue)
             {
                 PlayersManager.AddPlayer(this.data[i].mCharacterID, true);
-            }
-            else
-            {
-                PlayersManager.FindMainChar(this.data[i].mCharacterID, true);
-            }
+            }      
         }
         PlayersManager.SetPlayer(0, true);
-        //PlayersManager.SetPlayerPosByDestObj("SceneEnter");设置主角出生点
-        //PlayerCtrlManager.Reset();
+        //PlayersManager.SetPlayerPosByDestObj("SceneEnter");//设置主角出生点
+        PlayerCtrlManager.Reset();
     }
 
     public void InitPlayerLevel()
     {
         for (int i = 0; i < this.data.Length; i++)
         {
-            //GameObject gameObject = PlayersManager.FindMainChar(this.data[i].mCharacterID, true);
-            //if (gameObject != null)
-            //{
-            //    PalNPC component = gameObject.GetComponent<PalNPC>();
-            //    PalNPC.CharacterData characterData = component.Data;
-            //    characterData.Exp = PlayerBaseProperty.LevelData.GetLevelExp(this.data[i].mLevel - 1);
-            //    characterData.HPMPDP.HP = this.data[i].HP;
-            //}
+            GameObject gameObject = PlayersManager.FindMainChar(this.data[i].mCharacterID, true);
+            if (gameObject != null)
+            {
+                PalNPC component = gameObject.GetComponent<PalNPC>();
+                PalNPC.CharacterData characterData = component.Data;
+                characterData.Exp = PlayerBaseProperty.LevelData.GetLevelExp(this.data[i].mLevel - 1);
+                characterData.HPMPDP.HP = this.data[i].HP;
+            }
         }
     }
 

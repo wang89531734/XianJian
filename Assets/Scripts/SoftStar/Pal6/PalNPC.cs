@@ -17,7 +17,6 @@ namespace SoftStar.Pal6
         [HideInInspector]
         public PalNPC.CharacterData Data;
 
-        //		// Token: 0x040020C6 RID: 8390
         //		[NonSerialized]
         //		public BuffDebuffManager.BuffDebuffOwner BuffDebuffData;
 
@@ -30,15 +29,12 @@ namespace SoftStar.Pal6
         //		// Token: 0x040020C9 RID: 8393
         //		public AudioClip m_BeHitSound;
 
-        //		// Token: 0x040020CA RID: 8394
-        //		private static int[] mAdvanceSkillIDs;
+        private static int[] mAdvanceSkillIDs;
 
-        //		// Token: 0x040020CB RID: 8395
-        //		public List<PalNPC.SkillInfo> m_SkillIDs;
+        public List<PalNPC.SkillInfo> m_SkillIDs;
 
-        //		// Token: 0x040020CC RID: 8396
-        //		[NonSerialized]
-        //		public float ExpRate;
+        [NonSerialized]
+        public float ExpRate;
 
         //		// Token: 0x040020CD RID: 8397
         //		[NonSerialized]
@@ -171,33 +167,30 @@ namespace SoftStar.Pal6
 
         public delegate void void_fun_TF(PalNPC npc);
 
-        //		public PalNPC()
-        //		{
-        //			this.m_SkillIDs = new List<PalNPC.SkillInfo>();
-        //			this.ExpRate = 1f;
-        //			base..ctor();
-        //		}
+        public PalNPC()
+        {
+            this.m_SkillIDs = new List<PalNPC.SkillInfo>();
+            this.ExpRate = 1f;
+        }
 
-        //		// Token: 0x06001CE5 RID: 7397 RVA: 0x00101A08 File Offset: 0x000FFC08
-        //		// Note: this type is marked as 'beforefieldinit'.
-        //		static PalNPC()
-        //		{
-        //			PalNPC.mAdvanceSkillIDs = new int[]
-        //			{
-        //				101,
-        //				3088,
-        //				104,
-        //				2078,
-        //				107,
-        //				2084,
-        //				114,
-        //				3090,
-        //				2102,
-        //				116,
-        //				3097,
-        //				3096
-        //			};
-        //		}
+        static PalNPC()
+        {
+            PalNPC.mAdvanceSkillIDs = new int[]
+            {
+                        101,
+                        3088,
+                        104,
+                        2078,
+                        107,
+                        2084,
+                        114,
+                        3090,
+                        2102,
+                        116,
+                        3097,
+                        3096
+            };
+        }
 
         //		// Token: 0x06001CE6 RID: 7398 RVA: 0x00101A3C File Offset: 0x000FFC3C
         //		public bool CanLookAt()

@@ -12,15 +12,15 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 
     private bool isPrefab;
 
-    //	public DOBJLayer dobjLayer;
+    public DOBJLayer dobjLayer;
 
     public GameObject model;
 
-    //	public ObjType objType = ObjType.none;
+    public ObjType objType = ObjType.none;
 
-    //	protected ObjType m_curObjType = ObjType.none;
+    protected ObjType m_curObjType = ObjType.none;
 
-    //	public Action<PalGameObjectBase> OnCurObjTypeChange;
+    public Action<PalGameObjectBase> OnCurObjTypeChange;
 
     [SerializeField]
     protected string modelResourcePath;
@@ -33,17 +33,15 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 
     //	private TimeSpan loadTime;
 
-    //	// Token: 0x040020A9 RID: 8361
-    //	public Action<PalGameObjectBase> DestroyEvent;
+    public Action<PalGameObjectBase> DestroyEvent;
 
     public GameObject Another;
 
     private GameObject model2;
 
-    //	// Token: 0x040020AC RID: 8364
     //	private SphereCollider baseCollider;
 
-    //	private Rigidbody baseRb;
+    private Rigidbody baseRb;
 
     //	private List<UnityEngine.Object> prefabObjs = new List<UnityEngine.Object>();
 
@@ -74,27 +72,25 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
     //		}
     //	}
 
-    //	// Token: 0x06001CB0 RID: 7344 RVA: 0x000FFB54 File Offset: 0x000FDD54
-    //	public virtual void Awake()
-    //	{
-    //		if (this.objType != ObjType.MainLineCanNotGet)
-    //		{
-    //			this.m_curObjType = this.objType;
-    //		}
-    //		if (this.objType != ObjType.none && this.objType != ObjType.none0)
-    //		{
-    //			CharactersManager.AddCharacter(this);
-    //		}
-    //		if (base.GetComponent<SignSetActiveByState>() != null)
-    //		{
-    //			CharactersManager.AddObj(this);
-    //		}
-    //	}
+    public virtual void Awake()
+    {
+        if (this.objType != ObjType.MainLineCanNotGet)
+        {
+            this.m_curObjType = this.objType;
+        }
+        //if (this.objType != ObjType.none && this.objType != ObjType.none0)
+        //{
+        //    CharactersManager.AddCharacter(this);
+        //}
+        //if (base.GetComponent<SignSetActiveByState>() != null)
+        //{
+        //    CharactersManager.AddObj(this);
+        //}
+    }
 
-    //	// Token: 0x06001CB1 RID: 7345 RVA: 0x000FFBB0 File Offset: 0x000FDDB0
-    //	public virtual void Start()
-    //	{
-    //	}
+    public virtual void Start()
+    {
+    }
 
     public virtual string[] AvailableComponentNames
     {
@@ -297,14 +293,13 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
     //		this.dobjLayer.JudgeLoadOver(this);
     //	}
 
-    //	// Token: 0x06001CBE RID: 7358 RVA: 0x00100104 File Offset: 0x000FE304
-    //	public virtual void OnDestroy()
-    //	{
-    //		if (this.DestroyEvent != null)
-    //		{
-    //			this.DestroyEvent(this);
-    //		}
-    //	}
+    public virtual void OnDestroy()
+    {
+        if (this.DestroyEvent != null)
+        {
+            this.DestroyEvent(this);
+        }
+    }
 
     //	// Token: 0x17000295 RID: 661
     //	// (get) Token: 0x06001CBF RID: 7359 RVA: 0x00100120 File Offset: 0x000FE320
@@ -342,7 +337,6 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
     //		this.Another = go;
     //	}
 
-    //	// Token: 0x06001CC2 RID: 7362 RVA: 0x00100198 File Offset: 0x000FE398
     //	public virtual void ChangeModelForever(GameObject go, bool bActive = false)
     //	{
     //		if (go == null)
@@ -453,7 +447,6 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
     //		this.LoadModelEnd(this);
     //	}
 
-    //	// Token: 0x06001CC5 RID: 7365 RVA: 0x001004FC File Offset: 0x000FE6FC
     //	private void CreateAreaTarget()
     //	{
     //		base.gameObject.SetActive(true);
@@ -466,7 +459,6 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
     //		base.Invoke("ClearTarget", 0.01f);
     //	}
 
-    //	// Token: 0x06001CC6 RID: 7366 RVA: 0x00100598 File Offset: 0x000FE798
     //	private void ClearTarget()
     //	{
     //		if (this.baseCollider != null)
@@ -481,7 +473,6 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
     //		}
     //	}
 
-    //	// Token: 0x06001CC7 RID: 7367 RVA: 0x001005EC File Offset: 0x000FE7EC
     //	public virtual void Clear()
     //	{
     //		if (this.isPrefab)
@@ -495,7 +486,6 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
     //		}
     //	}
 
-    //	// Token: 0x06001CC8 RID: 7368 RVA: 0x00100630 File Offset: 0x000FE830
     //	public virtual void CollectPrefabObjs(GameObject go)
     //	{
     //		foreach (Renderer renderer in go.GetComponentsInChildren<Renderer>(true))
@@ -542,7 +532,6 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
     //		}
     //	}
 
-    //	// Token: 0x06001CC9 RID: 7369 RVA: 0x001007F0 File Offset: 0x000FE9F0
     //	public virtual void ClearPrefab()
     //	{
     //		if (base.transform == null)
