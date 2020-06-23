@@ -70,7 +70,7 @@ public class PlayerTeam : MonoBehaviour
         //    Debug.LogWarning("Warn : UniStormWeatherSystem.instance==null");
         //}
         this.InitTeam();
-        this.InitPlayerLevel();
+        //this.InitPlayerLevel();
         //this.InitSkill();
         //this.InitItem();
     }
@@ -172,14 +172,14 @@ public class PlayerTeam : MonoBehaviour
         }
     }
 
-    //	public static void InitPickItemFlag()
-    //	{
-    //		Dictionary<int, PickUpItemContainer> datasFromFile = PickUpItemContainer.GetDatasFromFile();
-    //		foreach (int num in datasFromFile.Keys)
-    //		{
-    //			FlagManager.SetFlag(num + PalPickItem.OffsetPickItem, 0, true);
-    //		}
-    //	}
+    public static void InitPickItemFlag()
+    {
+        //Dictionary<int, PickUpItemContainer> datasFromFile = PickUpItemContainer.GetDatasFromFile();
+        //foreach (int num in datasFromFile.Keys)
+        //{
+        //    FlagManager.SetFlag(num + PalPickItem.OffsetPickItem, 0, true);
+        //}
+    }
 
     /// <summary>
     /// 初始化时间

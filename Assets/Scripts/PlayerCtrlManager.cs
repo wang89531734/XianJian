@@ -42,20 +42,17 @@ public class PlayerCtrlManager
 
     public static int maskValue = 0;
 
-    //	private static SneakAttack sneakAttack = null;
+    private static SneakAttack sneakAttack = null;
 
     public static bool CanJumpSecond = true;
 
     private static Agent m_agentObj;
 
-    //	// Token: 0x040031BC RID: 12732
-    //	public static Transform PlayerModelTF = null;
+    public static Transform PlayerModelTF = null;
 
-    //	// Token: 0x040031BD RID: 12733
-    //	private static Agent lastAgentObj = null;
+    private static Agent lastAgentObj = null;
 
-    //	// Token: 0x040031BE RID: 12734
-    //	public static PlayerCtrlManager.void_fun_Agent ProcessSpaceKey = null;
+    public static PlayerCtrlManager.void_fun_Agent ProcessSpaceKey = null;
 
     public static Vector3 JumpPosition = Vector3.zero;
 
@@ -104,34 +101,34 @@ public class PlayerCtrlManager
         Auto
     }
 
-    //public delegate void void_fun_Agent(Agent agentObj);
+    public delegate void void_fun_Agent(Agent agentObj);
 
-    //	public static bool bControl
-    //	{
-    //		get
-    //		{
-    //			return PlayerCtrlManager.m_bControl;
-    //		}
-    //		set
-    //		{
-    //			if (PlayerCtrlManager.m_bControl != value)
-    //			{
-    //				PlayerCtrlManager.m_bControl = value;
-    //				if (PlayerCtrlManager.m_bControl)
-    //				{
-    //					if (PlayerCtrlManager.agentObj != null)
-    //					{
-    //						PlayerCtrlManager.agentObj.curCtrlMode = ControlMode.ControlByPlayer;
-    //						PlayerCtrlManager.agentObj.IsInSky = false;
-    //					}
-    //				}
-    //				else if (PlayerCtrlManager.agentObj != null && PlayerCtrlManager.agentObj.animator != null)
-    //				{
-    //					PlayerCtrlManager.agentObj.animator.SetBool("YuanDiZou", false);
-    //				}
-    //			}
-    //		}
-    //	}
+    public static bool bControl
+    {
+        get
+        {
+            return PlayerCtrlManager.m_bControl;
+        }
+        set
+        {
+            if (PlayerCtrlManager.m_bControl != value)
+            {
+                PlayerCtrlManager.m_bControl = value;
+                if (PlayerCtrlManager.m_bControl)
+                {
+                    if (PlayerCtrlManager.agentObj != null)
+                    {
+                        //PlayerCtrlManager.agentObj.curCtrlMode = ControlMode.ControlByPlayer;
+                        //PlayerCtrlManager.agentObj.IsInSky = false;
+                    }
+                }
+                else if (PlayerCtrlManager.agentObj != null && PlayerCtrlManager.agentObj.animator != null)
+                {
+                    PlayerCtrlManager.agentObj.animator.SetBool("YuanDiZou", false);
+                }
+            }
+        }
+    }
 
     protected static Transform MainCam
     {
@@ -172,7 +169,6 @@ public class PlayerCtrlManager
         }
     }
 
-    //	// Token: 0x06003749 RID: 14153 RVA: 0x0018FE9C File Offset: 0x0018E09C
     //	private static void SetAgentProperty(Agent agent)
     //	{
     //		agent.curCtrlMode = ControlMode.ControlByPlayer;
@@ -245,7 +241,6 @@ public class PlayerCtrlManager
     //		UIManager.Instance.DoNotOpenMainMenu = true;
     //	}
 
-    //	// Token: 0x0600374C RID: 14156 RVA: 0x001900EC File Offset: 0x0018E2EC
     //	public static void RestoreModel()
     //	{
     //		if (PlayerCtrlManager.lastAgentObj == null)
@@ -277,7 +272,7 @@ public class PlayerCtrlManager
         //GameEntry.Event.CommonEvent.AddEventListener(SysEventId.EnterProcedureLogOn, OnInit);
         //GameEntry.Event.CommonEvent.AddEventListener(SysEventId.LeaveProcedureLogOn, OnExit);
         PalMain.GameMain.updateHandles += PlayerCtrlManager.Update;
-        //PlayerCtrlManager.MoveID = Animator.StringToHash("Move");
+        PlayerCtrlManager.MoveID = Animator.StringToHash("Move");//字符串到哈希
         GameEntry.Event.CommonEvent.AddEventListener(SysEventId.OnSceneLoaded, LoadOver);
         //PlayerCtrlManager.maskValue = 393220;
         //PlayerCtrlManager.maskValue = ~PlayerCtrlManager.maskValue;
@@ -772,7 +767,6 @@ public class PlayerCtrlManager
     //		}
     //	}
 
-    //	// Token: 0x06003754 RID: 14164 RVA: 0x00191530 File Offset: 0x0018F730
     //	private static void CheckReset()
     //	{
     //		if (PlayerCtrlManager.agentObj.transform.position.y < PlayerCtrlManager.ResetHeight)
@@ -792,15 +786,11 @@ public class PlayerCtrlManager
     //		}
     //	}
 
-    //	// Token: 0x06003755 RID: 14165 RVA: 0x001915A0 File Offset: 0x0018F7A0
     //	public static Vector3 GetCurMoveDir()
     //	{
     //		return PlayerCtrlManager.moveDirection;
     //	}
 
-    //	// Token: 0x1700043A RID: 1082
-    //	// (get) Token: 0x06003756 RID: 14166 RVA: 0x001915A8 File Offset: 0x0018F7A8
-    //	// (set) Token: 0x06003757 RID: 14167 RVA: 0x001915B0 File Offset: 0x0018F7B0
     //	private static PlayerCtrlManager.PlayerControlModel CurControlModel
     //	{
     //		get
@@ -832,25 +822,22 @@ public class PlayerCtrlManager
         PlayerCtrlManager.LastForward = PlayerCtrlManager.MainCam.forward;
     }
 
-    //	// Token: 0x06003759 RID: 14169 RVA: 0x00191628 File Offset: 0x0018F828
-    //	private static void OnMouseMove()
-    //	{
-    //		PlayerCtrlManager.MouseLeftDownTime = Time.time;
-    //		PlayerCtrlManager.MouseLeftDown = true;
-    //		PlayerCtrlManager.MouseLeftMove = false;
-    //		PlayerCtrlManager.MouseLeftDownPos = Input.mousePosition;
-    //	}
+    private static void OnMouseMove()
+    {
+        PlayerCtrlManager.MouseLeftDownTime = Time.time;
+        PlayerCtrlManager.MouseLeftDown = true;
+        PlayerCtrlManager.MouseLeftMove = false;
+        PlayerCtrlManager.MouseLeftDownPos = Input.mousePosition;
+    }
 
-    //	// Token: 0x0600375A RID: 14170 RVA: 0x00191658 File Offset: 0x0018F858
-    //	private static void OnMouseUp()
-    //	{
-    //		if (Time.time - PlayerCtrlManager.MouseLeftDownTime < CursorScriptTemp.Instance.followCursorTime)
-    //		{
-    //			PlayerCtrlManager.CurControlModel = PlayerCtrlManager.PlayerControlModel.None;
-    //		}
-    //	}
+    private static void OnMouseUp()
+    {
+        //if (Time.time - PlayerCtrlManager.MouseLeftDownTime < CursorScriptTemp.Instance.followCursorTime)
+        //{
+        //    PlayerCtrlManager.CurControlModel = PlayerCtrlManager.PlayerControlModel.None;
+        //}
+    }
 
-    //	// Token: 0x0600375B RID: 14171 RVA: 0x00191688 File Offset: 0x0018F888
     //	private static IEnumerator DelayShow()
     //	{
     //		yield return new WaitForEndOfFrame();

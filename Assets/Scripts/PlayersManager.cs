@@ -527,13 +527,13 @@ public class PlayersManager
                             model.layer = 8;
                         }
                         PlayersManager.Player.tag = "Player";
-                        PlayersManager.Player.layer = SmoothFollow2.IgnoreLayer;
+                        //PlayersManager.Player.layer = SmoothFollow2.IgnoreLayer;//忽略相机光线投射
                         UtilFun.SetActive(PlayersManager.Player, true);
                         if (model != null)
                         {
                             PalNPC palNPC = component;
                             palNPC.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Remove(palNPC.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.AddNeedComponent));
-                            //LateSetActive.DeleteKey(model.name);
+                            LateSetActive.DeleteKey(model.name);
                             if (!model.activeSelf)
                             {
                                 UtilFun.SetActive(model, true);
@@ -1053,6 +1053,10 @@ public class PlayersManager
     //		return PlayersManager.Player;
     //	}
 
+    /// <summary>
+    /// 设置玩家位置
+    /// </summary>
+    /// <param name="DestName"></param>
     public static void SetPlayerPosByDestObj(string DestName)
     {
         GameObject gameObject = GameObject.Find(DestName);
@@ -1067,22 +1071,22 @@ public class PlayersManager
             return;
         }
         Transform transform;
-        //if (PlayerCtrlManager.agentObj != null)
-        //{
-        //    transform = PlayerCtrlManager.agentObj.transform;
-        //}
-        //else
-        //{
-        //    PalNPC component = PlayersManager.Player.GetComponent<PalNPC>();
-        //    if (!(component.model != null))
-        //    {
-        //        PlayersManager.tempDestTF = gameObject.transform;
-        //        PalNPC palNPC = component;
-        //        palNPC.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(palNPC.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.WaitForSpawn));
-        //        return;
-        //    }
-        //    transform = component.model.transform;
-        //}
+        if (PlayerCtrlManager.agentObj != null)
+        {
+            transform = PlayerCtrlManager.agentObj.transform;
+        }
+        else
+        {
+            PalNPC component = PlayersManager.Player.GetComponent<PalNPC>();
+            if (!(component.model != null))
+            {
+                PlayersManager.tempDestTF = gameObject.transform;
+                PalNPC palNPC = component;
+                palNPC.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(palNPC.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.WaitForSpawn));
+                return;
+            }
+            transform = component.model.transform;
+        }
         //if (transform != null)
         //{
         //    Agent component2 = transform.GetComponent<Agent>();
@@ -1091,35 +1095,33 @@ public class PlayersManager
         //        component2.charCtrller.enabled = true;
         //    }
         //}
-        Transform transform2 = gameObject.transform;
-        Vector3 vector = transform2.position;
-        vector.y += 1f;
-        RaycastHit raycastHit;
-        if (Physics.Raycast(vector, Vector3.down, out raycastHit))
-        {
-            vector = raycastHit.point;
-        }
+        //Transform transform2 = gameObject.transform;
+        //Vector3 vector = transform2.position;
+        //vector.y += 1f;
+        //RaycastHit raycastHit;
+        //if (Physics.Raycast(vector, Vector3.down, out raycastHit))
+        //{
+        //    vector = raycastHit.point;
+        //}
         //UtilFun.SetPosition(transform, vector);
         //transform.eulerAngles = new Vector3(0f, transform2.eulerAngles.y, 0f);
         //SceneFall2.SetLastPointOnLoadOver();
     }
 
-    //	// Token: 0x06003784 RID: 14212 RVA: 0x001933CC File Offset: 0x001915CC
-    //	private static void WaitForSpawn(PalNPC npc)
-    //	{
-    //		Vector3 vector = PlayersManager.tempDestTF.position;
-    //		RaycastHit raycastHit;
-    //		if (Physics.Raycast(vector, Vector3.down, out raycastHit))
-    //		{
-    //			vector = raycastHit.point;
-    //		}
-    //		Transform transform = npc.model.transform;
-    //		UtilFun.SetPosition(transform, vector);
-    //		transform.eulerAngles = new Vector3(0f, PlayersManager.tempDestTF.eulerAngles.y, 0f);
-    //		SceneFall2.SetLastPointOnLoadOver();
-    //	}
+    private static void WaitForSpawn(PalNPC npc)
+    {
+        Vector3 vector = PlayersManager.tempDestTF.position;
+        RaycastHit raycastHit;
+        if (Physics.Raycast(vector, Vector3.down, out raycastHit))
+        {
+            vector = raycastHit.point;
+        }
+        Transform transform = npc.model.transform;
+        UtilFun.SetPosition(transform, vector);
+        transform.eulerAngles = new Vector3(0f, PlayersManager.tempDestTF.eulerAngles.y, 0f);
+        //SceneFall2.SetLastPointOnLoadOver();
+    }
 
-    //	// Token: 0x06003785 RID: 14213 RVA: 0x00193440 File Offset: 0x00191640
     //	public static string Save(string SaveName)
     //	{
     //		string text = SaveManager.GetStoreDirePath(SaveName);
@@ -1132,7 +1134,6 @@ public class PlayersManager
     //		return string.Empty;
     //	}
 
-    //	// Token: 0x06003786 RID: 14214 RVA: 0x001934B0 File Offset: 0x001916B0
     //	public static string Save_FileStream(BinaryWriter _writer)
     //	{
     //		List<SavePrefabTarget> players = PlayersManager.GetPlayers();

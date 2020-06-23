@@ -2760,16 +2760,15 @@ public static class UtilFun
     //		return (data != null) ? data.ShadowDistance : 0f;
     //	}
 
-    //	// Token: 0x06003F4B RID: 16203 RVA: 0x001C55CC File Offset: 0x001C37CC
-    //	public static void SetPosition(Transform tf, Vector3 pos)
-    //	{
-    //		if (tf == null)
-    //		{
-    //			UnityEngine.Debug.LogError("Error : UtilFun.SetPosition  tf==null\n\n");
-    //			return;
-    //		}
-    //		tf.position = pos;
-    //	}
+    public static void SetPosition(Transform tf, Vector3 pos)
+    {
+        if (tf == null)
+        {
+            UnityEngine.Debug.LogError("Error : UtilFun.SetPosition  tf==null\n\n");
+            return;
+        }
+        tf.position = pos;
+    }
 
     //	// Token: 0x06003F4C RID: 16204 RVA: 0x001C55EC File Offset: 0x001C37EC
     //	public static void SetVolume(AudioSource audioSource, float volume)
