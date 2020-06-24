@@ -16,9 +16,9 @@ namespace YouYou
             base.OnEnter();
             GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureLogOn");
             GameEntry.Scene.LoadScene(1);
-            //PalMain.Instance.ReStart();
             GameEntry.Event.CommonEvent.Dispatch(SysEventId.EnterProcedureLogOn);
             //GameEntry.UI.OpenUIForm(101);
+            //PalMain.Instance.ReStart();
         }
 
         private void OnLogonBGOpen(UIFormBase uiFormBase)

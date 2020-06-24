@@ -1,21 +1,21 @@
-using System;
 using SoftStar.Pal6;
+using System;
 using UnityEngine;
 
 /// <summary>
-/// 鼠标事件管理器
+/// 鼠标事件管理
 /// </summary>
 public class MouseEventManager : MonoBehaviour
 {
-    private static MouseEventManager instance;
+	private static MouseEventManager instance;
 
-    public Action<Transform> OnMouseEnterEvent;
+	public Action<Transform> OnMouseEnterEvent;
 
-    public Action<Transform> OnMouseOverEvent;
+	public Action<Transform> OnMouseOverEvent;
 
-    public Action<Transform> OnMouseExitEvent;
+	public Action<Transform> OnMouseExitEvent;
 
-    public static MouseEventManager Instance
+	public static MouseEventManager Instance
 	{
 		get
 		{

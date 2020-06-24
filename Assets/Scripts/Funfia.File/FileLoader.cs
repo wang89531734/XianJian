@@ -232,8 +232,6 @@ namespace Funfia.File
 
 		public static readonly string SFMO03 = "BattleEffects/EXL_P_HJ_YJZ_MX_SFMO03.prefab";
 
-		public static string MoviePanel = "UI/MoviePanel.unity3d";
-
 		private static FileLoader s_instance = null;
 
 		private static int s_assetbundlesToKeep = 1000;

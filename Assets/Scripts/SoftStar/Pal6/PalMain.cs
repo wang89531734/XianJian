@@ -36,30 +36,23 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        public enum PLAYER_RECOMMANDATION
+        public enum SETTING_ENUM
         {
-            LOW,
-            MID,
-            HIGH
+            SHI_YE,
+            YIN_YING,
+            HDR,
+            KANG_JU_CHI,
+            TIE_TU_JING_DU,
+            CHUI_ZHI_TONG_BU,
+            TI_JI_GUANG,
+            ZHI_BEI_FAN_WEI,
+            WU_SE_JU_LI,
+            JING_TONG_MEI_HUA,
+            ZHAN_DOU_TE_XIAO,
+            SHUI_MIAN_DAO_YING,
+            GAO_JI_GUANG_YUAN,
+            SETTING_MAX
         }
-
-        //		public enum SETTING_ENUM
-        //		{
-        //			SHI_YE,
-        //			YIN_YING,
-        //			HDR,
-        //			KANG_JU_CHI,
-        //			TIE_TU_JING_DU,
-        //			CHUI_ZHI_TONG_BU,
-        //			TI_JI_GUANG,
-        //			ZHI_BEI_FAN_WEI,
-        //			WU_SE_JU_LI,
-        //			JING_TONG_MEI_HUA,
-        //			ZHAN_DOU_TE_XIAO,
-        //			SHUI_MIAN_DAO_YING,
-        //			GAO_JI_GUANG_YUAN,
-        //			SETTING_MAX
-        //		}
 
         //		public class PlayerConfigs
         //		{
@@ -74,41 +67,41 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		public enum WatchType
-        //		{
-        //			FirstPerson,
-        //			ThirdPerson,
-        //			Custem
-        //		}
+        public enum WatchType
+        {
+            FirstPerson,
+            ThirdPerson,
+            Custem
+        }
 
-        //		public enum DISTANCE_CULL
-        //		{
-        //			LOW,
-        //			MID,
-        //			FULL,
-        //			RESTORE
-        //		}
+        public enum DISTANCE_CULL
+        {
+            LOW,
+            MID,
+            FULL,
+            RESTORE
+        }
 
-        //		public enum POST_CAM
-        //		{
-        //			NONE,
-        //			MID,
-        //			FULL
-        //		}
+        public enum POST_CAM
+        {
+            NONE,
+            MID,
+            FULL
+        }
 
-        //		public enum LIGHT
-        //		{
-        //			NONE,
-        //			FULL
-        //		}
+        public enum LIGHT
+        {
+            NONE,
+            FULL
+        }
 
-        //		public enum UNLOADPROIR
-        //		{
-        //			IMMEDIATE,
-        //			SHORT,
-        //			LONG,
-        //			VERYLONG
-        //		}
+        public enum UNLOADPROIR
+        {
+            IMMEDIATE,
+            SHORT,
+            LONG,
+            VERYLONG
+        }
 
         //		public delegate void void_func_void();
 
@@ -188,8 +181,6 @@ namespace SoftStar.Pal6
         //		public static bool IsWin32 = false;
 
         //		public static bool ForceLow = false;
-
-        //		private static bool initialized = false;
 
         //		public bool bPlayBeginMovie = true;
 
@@ -362,14 +353,6 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		public float CurVersion
-        //		{
-        //			get
-        //			{
-        //				return 2f;
-        //			}
-        //		}
-
         //		public static bool IsDLC
         //		{
         //			get
@@ -497,10 +480,6 @@ namespace SoftStar.Pal6
         {
             get
             {
-                if (PalMain.instance == null)
-                {
-                    PalMain.CreateInstance();
-                }
                 return PalMain.instance;
             }
         }
@@ -802,55 +781,19 @@ namespace SoftStar.Pal6
         //			PlayersManager.SetPlayer(Index, true);
         //		}
 
-        public static int CreateInstance()
-        {
-            //if (PalMain.instance != null)
-            //{
-            //    return 1;
-            //}
-            //MainTester.GetTester();
-            //UnityEngine.Object @object = UnityEngine.Object.Instantiate(Resources.Load("Template/System/Main"));
-            //if (!@object)
-            //{
-            //    UnityEngine.Debug.LogError("Error : PalMain初始化失败");
-            //    return 0;
-            //}
-            //UnityEngine.Object object2 = @object;
-            //if (object2 == null)
-            //{
-            //    UnityEngine.Debug.LogError("main_Obj == null");
-            //    return 0;
-            //}
-            //GameObject gameObject = object2 as GameObject;
-            //gameObject.name = "Main";
-            //PalMain.instance = gameObject.GetComponent<PalMain>();
-            //if (PalMain.instance == null)
-            //{
-            //    UnityEngine.Debug.LogError("Main Prefab 没有 PalMain");
-            //    return 0;
-            //}
-            //PalMain.instance.Initialize();
-            return 1;
-        }
-
         //		public static bool Exist()
         //		{
         //			return PalMain.instance != null;
         //		}
 
-        //		private void Awake()
-        //		{
-        //			if (PalMain.instance != null && PalMain.instance != this)
-        //			{
-        //				UnityEngine.Object.Destroy(base.gameObject);
-        //				return;
-        //			}
-        //			this.Initialize();
-        //		}
+        private void Awake()
+        {
+            this.Initialize();
+        }
 
-        //		private void OnDestroy()
-        //		{
-        //		}
+        private void OnDestroy()
+        {
+        }
 
         //		public static void LoadOneLangueUIAtlas(string subname)
         //		{
@@ -903,387 +846,373 @@ namespace SoftStar.Pal6
         //			PalMain.LoadOneLangueUIAtlas("StringImage0");
         //		}
 
-        //		private void Initialize()
-        //		{
-        //			if (PalMain.initialized || !Application.isPlaying)
-        //			{
-        //				return;
-        //			}
-        //			UnityEngine.Debug.Log("Log : CurVersion = " + this.CurVersion.ToString());
-        //			try
-        //			{
-        //				UIStart.CheckSetProcessAffintyMask_Return = UtilFun.CheckSetProcessAffintyMask(Process.GetCurrentProcess().Handle);
-        //			}
-        //			catch
-        //			{
-        //				UIStart.CheckSetProcessAffintyMask_Return = 0;
-        //			}
-        //			try
-        //			{
-        //				if (ConfigManager.ReadWritePath == null)
-        //				{
-        //					UnityEngine.Debug.LogError("Read or write fail 0x2204.");
-        //					UtilFun.WinMessageBox("read or write fail", "error", 8708);
-        //					Application.Quit();
-        //					return;
-        //				}
-        //			}
-        //			catch (Exception ex)
-        //			{
-        //				UnityEngine.Debug.Log(ex.ToString() + " 0x2204.");
-        //				UtilFun.WinMessageBox(ex.ToString(), "error", 8708);
-        //				Application.Quit();
-        //				return;
-        //			}
-        //			int num = QualitySettings.names.Length - 1;
-        //			num = Mathf.Clamp(num, 0, 10);
-        //			QualitySettings.SetQualityLevel(num);
-        //			Application.logMessageReceived -= new Application.LogCallback(LogManager.LogCallback);
-        //			Application.logMessageReceived += new Application.LogCallback(LogManager.LogCallback);
-        //			OptionConfig optionConfig = OptionConfig.GetInstance();
-        //			if (!ConfigManager.IsFileExist())
-        //			{
-        //				optionConfig.SetAllQualityFirstTime(PalMain.FirstTimeLaunch103());
-        //				optionConfig.Save();
-        //			}
-        //			optionConfig.Use_Start();
-        //			optionConfig.Use_Other();
-        //			PalMain.LoadUI();
-        //			Physics.gravity = new Vector3(0f, -20f, 0f);
-        //			Physics2D.queriesHitTriggers = false;
-        //			QualitySettings.blendWeights = BlendWeights.FourBones;
-        //			string operatingSystem = SystemInfo.operatingSystem;
-        //			PalMain.IsXP = operatingSystem.Contains("Windows XP");
-        //			PalMain.IsWin32 = !operatingSystem.Contains("64bit");
-        //			if (!PalMain.IsXP)
-        //			{
-        //				QualitySettings.anisotropicFiltering = AnisotropicFiltering.ForceEnable;
-        //				QualitySettings.shadowProjection = ShadowProjection.StableFit;
-        //			}
-        //			UnityEngine.Object.DontDestroyOnLoad(base.gameObject);
-        //			PalMain.instance = this;
-        //			PalMain.InitPermanentObject();
-        //			ItemManager.GetInstance().OnBeforeRemoveItem += new Action<IItem>(this.PutOffItem);
-        //			ItemPackage orCreatePackage = ItemManager.GetInstance().GetOrCreatePackage(1u);
-        //			orCreatePackage.OnItemAdded += delegate(IItem obj)
-        //			{
-        //				SymbolNodeItemType symbolNodeItemType = obj.ItemType as SymbolNodeItemType;
-        //				if (symbolNodeItemType != null)
-        //				{
-        //					SymbolNodeItemType.SetState(symbolNodeItemType.TypeID & 255u, true);
-        //				}
-        //				SymbolPanelItemType symbolPanelItemType = obj.ItemType as SymbolPanelItemType;
-        //				if (symbolPanelItemType != null)
-        //				{
-        //					SymbolPanelItemType.SetState(symbolPanelItemType.TypeID & 255u, true);
-        //				}
-        //				AchievementManager.SingleAchievement[] achievements = PalBattleManager.Instance().m_Achievement.m_Achievements;
-        //				OrnamentItemTypeCache.SetIsGet(obj.ItemType.TypeID, true);
-        //				achievements[190].m_CurrentNum = ((OrnamentItemTypeCache.IsGetRate() < 1f) ? 0 : 1);
-        //				FashionClothItemTypeCache.SetIsGet(obj.ItemType.TypeID, true);
-        //				achievements[189].m_CurrentNum = ((FashionClothItemTypeCache.IsGetRate() < 1f) ? 0 : 1);
-        //			};
-        //			ProceduralMaterial.substanceProcessorUsage = ProceduralProcessorUsage.All;
-        //			MouseEventManager.Initialize();
-        //			ShaderPropertyIDManager.Initialize();
-        //			MessageProcess.Initialize();
-        //			SetActiveByFlagManager.Initialize();
-        //			ScenesManager.Initialize();
-        //			FlagManager.Initialize();
-        //			DistanceCullManager.Initialize();
-        //			MoviesManager.Initialize();
-        //			CharactersManager.Initialize();
-        //			InputManager.Initialize();
-        //			PlayerCtrlManager.Initialize();
-        //			PalBattleManager.Initialize();
-        //			EntityManager.Initialize();
-        //			MissionTick.Initialize();
-        //			PlayersManager.Initialize();
-        //			RenownManager.Initialize();
-        //			AnimWithoutClothSet.Initialize();
-        //			SlowLoopAnimSet.Initialize();
-        //			WaterEffectTrigger.Initialize();
-        //			CompoundItemList.CreateWatch();
-        //			SaveManager.OnLoadOver += delegate
-        //			{
-        //				try
-        //				{
-        //					int num2 = 0;
-        //					List<IEnumerator> list = new List<IEnumerator>(8);
-        //					foreach (GameObject current in PlayersManager.AllPlayers)
-        //					{
-        //						if (current != null)
-        //						{
-        //							PalNPC component = current.GetComponent<PalNPC>();
-        //							if (component != null)
-        //							{
-        //								list.Add(component.Prepare());
-        //							}
-        //						}
-        //					}
-        //					list.Add(ItemManager.GetInstance().Prepare());
-        //					list.Add(BuffDebuffManager.GetInstance().Prepare());
-        //					while (list.Count > 0)
-        //					{
-        //						list.RemoveAll((IEnumerator curManager) => curManager == null || !curManager.MoveNext());
-        //						num2++;
-        //						if (num2 > 32)
-        //						{
-        //							UnityEngine.Debug.LogError("加载进程可能陷入了死循环");
-        //							foreach (IEnumerator current2 in list)
-        //							{
-        //								UnityEngine.Debug.LogError(current2.ToString());
-        //							}
-        //							break;
-        //						}
-        //					}
-        //					CompoundItemList.CreateWatch();
-        //					SoulStarData[] datasFromFile = SoulDataManager.GetDatasFromFile();
-        //					for (int i = 0; i < datasFromFile.Length; i++)
-        //					{
-        //						SoulStarData soulStarData = datasFromFile[i];
-        //						if (SoulDataManager.Instance != null)
-        //						{
-        //							if (soulStarData != null)
-        //							{
-        //								if (SoulDataManager.Instance.IsSoulOpen(soulStarData.NodeID))
-        //								{
-        //									soulStarData.OpenScriptFun();
-        //								}
-        //							}
-        //						}
-        //					}
-        //					foreach (GameObject current3 in PlayersManager.AllPlayers)
-        //					{
-        //						PalNPC component2 = current3.GetComponent<PalNPC>();
-        //						if (component2.Data.HPMPDP != null)
-        //						{
-        //							component2.Data.HPMPDP.SetWithoutEvents(component2.Data.LoadHP, component2.Data.LoadMP, component2.Data.LoadDP);
-        //						}
-        //					}
-        //					try
-        //					{
-        //						if (ItemManager.GetInstance() != null)
-        //						{
-        //							ItemPackage orCreatePackage2 = ItemManager.GetInstance().GetOrCreatePackage(1u);
-        //							if (orCreatePackage2 != null)
-        //							{
-        //								foreach (IItem[] current4 in ItemManager.GetInstance().GetOrCreatePackage(1u).ForEachItemArrayInPackage())
-        //								{
-        //									if (current4 != null && current4.Length >= 0 && current4[0] != null)
-        //									{
-        //										if (0 < current4.Length && current4[0].ItemType != null)
-        //										{
-        //											CompoundItemList.ReCheck(current4[0].ItemType.TypeID);
-        //										}
-        //									}
-        //								}
-        //								int hadCreateCount = CompoundItemList.HadCreateCount;
-        //								AchievementManager.SingleAchievement[] achievements = PalBattleManager.Instance().m_Achievement.m_Achievements;
-        //								achievements[7].m_CurrentNum = hadCreateCount;
-        //								achievements[8].m_CurrentNum = hadCreateCount;
-        //								achievements[9].m_CurrentNum = hadCreateCount;
-        //							}
-        //						}
-        //					}
-        //					catch (Exception exception)
-        //					{
-        //						UnityEngine.Debug.LogException(exception);
-        //					}
-        //					try
-        //					{
-        //						for (int j = 0; j < 6; j++)
-        //						{
-        //							bool flag = true;
-        //							int num3 = j * 84;
-        //							for (int k = 0; k < 84; k++)
-        //							{
-        //								if (SoulDataManager.GetData(num3 + k) != null)
-        //								{
-        //									if (!SoulDataManager.Instance.IsSoulOpen(num3 + k))
-        //									{
-        //										flag = false;
-        //										break;
-        //									}
-        //								}
-        //							}
-        //							if (flag)
-        //							{
-        //								PalBattleManager.Instance().m_Achievement.m_Achievements[21].m_CurrentNum = ((!flag) ? 0 : 262143);
-        //								break;
-        //							}
-        //						}
-        //					}
-        //					catch (Exception exception2)
-        //					{
-        //						UnityEngine.Debug.LogException(exception2);
-        //					}
-        //					try
-        //					{
-        //						foreach (GameObject current5 in PlayersManager.AllPlayers)
-        //						{
-        //							if (!(current5 == null))
-        //							{
-        //								PalNPC component3 = current5.GetComponent<PalNPC>();
-        //								if (!(component3 == null) && component3.Data != null)
-        //								{
-        //									if (component3.Data.CharacterID >= 0 && component3.Data.CharacterID <= 5)
-        //									{
-        //										IItem item = component3.GetSlot(EquipSlotEnum.Weapon);
-        //										if (item == null)
-        //										{
-        //											foreach (IItem[] current6 in ItemManager.GetInstance().GetOrCreatePackage(1u).ForEachItemArrayInPackage())
-        //											{
-        //												if (current6 != null && current6.Length > 0)
-        //												{
-        //													if (current6[0] is WeaponItem)
-        //													{
-        //														IItem[] array = current6;
-        //														for (int l = 0; l < array.Length; l++)
-        //														{
-        //															IItem item2 = array[l];
-        //															if (item2 != null)
-        //															{
-        //																WeaponItem weaponItem = item2 as WeaponItem;
-        //																if (weaponItem != null && !(weaponItem.GetOwner() != null))
-        //																{
-        //																	WeaponItemType weaponItemType = weaponItem.ItemType as WeaponItemType;
-        //																	if (weaponItemType != null)
-        //																	{
-        //																		if (((ulong)weaponItemType.CharacterMark & (ulong)(1L << (component3.Data.CharacterID & 31))) != 0uL)
-        //																		{
-        //																			if (item == null)
-        //																			{
-        //																				item = weaponItem;
-        //																			}
-        //																			else if (ShowWeaponItemComparer.GetInstance().Compare(item, weaponItem) > 0)
-        //																			{
-        //																				item = weaponItem;
-        //																			}
-        //																			break;
-        //																		}
-        //																	}
-        //																}
-        //															}
-        //														}
-        //													}
-        //												}
-        //											}
-        //											if (item != null)
-        //											{
-        //												component3.PutOnEquip(item as WeaponItem);
-        //											}
-        //										}
-        //									}
-        //								}
-        //							}
-        //						}
-        //					}
-        //					catch (Exception exception3)
-        //					{
-        //						UnityEngine.Debug.LogException(exception3);
-        //					}
-        //				}
-        //				catch (Exception exception4)
-        //				{
-        //					UnityEngine.Debug.LogException(exception4);
-        //				}
-        //			};
-        //			PlayersManager.OnAddPlayer = (Action<int>)Delegate.Combine(PlayersManager.OnAddPlayer, new Action<int>(delegate(int playerid)
-        //			{
-        //				if (PalMain.Instance.CurBattleFormationManager.m_Formations.Count <= 0)
-        //				{
-        //					BattleFormationManager.BattleFormationData battleFormationData = new BattleFormationManager.BattleFormationData();
-        //					PalMain.Instance.CurBattleFormationManager.AddFormation(battleFormationData);
-        //					foreach (GameObject current in PlayersManager.ActivePlayers)
-        //					{
-        //						battleFormationData.AddOrChangeCharacter(current.GetCharacterID(), 0);
-        //					}
-        //					while (battleFormationData.m_InFormationCharaDatas.Count < 9)
-        //					{
-        //						battleFormationData.m_InFormationCharaDatas.Add(null);
-        //					}
-        //				}
-        //				else
-        //				{
-        //					BattleFormationManager.BattleFormationData battleFormationData = PalMain.Instance.CurBattleFormationManager.m_Formations[0];
-        //					while (battleFormationData.m_InFormationCharaDatas.Count < 9)
-        //					{
-        //						battleFormationData.m_InFormationCharaDatas.Add(null);
-        //					}
-        //					if (battleFormationData.GetPlayer(playerid) == null)
-        //					{
-        //						for (int i = 0; i < 9; i++)
-        //						{
-        //							if (battleFormationData.m_InFormationCharaDatas[i] == null)
-        //							{
-        //								battleFormationData.m_InFormationCharaDatas[i] = new BattleFormationManager.InFormationCharaData(playerid, 0);
-        //								break;
-        //							}
-        //						}
-        //					}
-        //				}
-        //			}));
-        //			PlayersManager.OnRemovePlayer += delegate(int playerid)
-        //			{
-        //				if (PalMain.Instance.CurBattleFormationManager.m_Formations.Count <= 0)
-        //				{
-        //					return;
-        //				}
-        //				BattleFormationManager.BattleFormationData battleFormationData = PalMain.Instance.CurBattleFormationManager.m_Formations[0];
-        //				if (battleFormationData == null)
-        //				{
-        //					return;
-        //				}
-        //				if (battleFormationData.m_InFormationCharaDatas[0] != null && battleFormationData.m_InFormationCharaDatas[0].m_CharacterID != playerid)
-        //				{
-        //					return;
-        //				}
-        //				while (battleFormationData.m_InFormationCharaDatas.Count < 9)
-        //				{
-        //					battleFormationData.m_InFormationCharaDatas.Add(null);
-        //				}
-        //				for (int i = 1; i < 9; i++)
-        //				{
-        //					BattleFormationManager.InFormationCharaData inFormationCharaData = battleFormationData.m_InFormationCharaDatas[i];
-        //					if (inFormationCharaData != null)
-        //					{
-        //						if (!(PlayersManager.GetPlayer(inFormationCharaData.m_CharacterID) == null))
-        //						{
-        //							battleFormationData.m_InFormationCharaDatas[i] = battleFormationData.m_InFormationCharaDatas[0];
-        //							battleFormationData.m_InFormationCharaDatas[0] = inFormationCharaData;
-        //							break;
-        //						}
-        //					}
-        //				}
-        //			};
-        //			UIManager.Instance.Initialize();
-        //			EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Combine(EntityManager.OnLoadOver, new EntityManager.void_fun(MiniMap.Instance.OnLoadOver));
-        //			PalMain.initialized = true;
-        //			MissionManager.Initialize();
-        //			HuanHuaManager.Instance.Initialize();
-        //			PanelFaceManager.Initialize();
-        //			PanelPositonManager.Initialize();
-        //			Cutscene2DManager.Initialize();
-        //			ScenesManager.Instance.RandomFlash();
-        //			TimeManager.Initialize();
-        //			SaveManager.OnLoadOver -= new SaveManager.void_fun(SceneFall2.SetLastPointOnLoadOver);
-        //			SaveManager.OnLoadOver += new SaveManager.void_fun(SceneFall2.SetLastPointOnLoadOver);
-        //			PalMain.MinFPS = this.minFPS;
-        //			PalMain.MinDeltaTime = 1f / this.minFPS;
-        //			PalMain.backgroundAudio = base.gameObject.GetComponent<BackgroundAudio>();
-        //			if (PalMain.backgroundAudio == null)
-        //			{
-        //				PalMain.backgroundAudio = base.gameObject.AddComponent<BackgroundAudio>();
-        //			}
-        //			OptionConfig.GetInstance().Use_CharacterEmission();
-        //			SaveManager.LoadGlobalData();
-        //			FunfiaSteamManager funfiaSteamManager = FunfiaSteamManager.Instance;
-        //			if (SkillSEPreloader.s_preloadEnable && SkillSEPreloader.Instance == null)
-        //			{
-        //				SkillSEPreloader.Initialize();
-        //			}
-        //		}
+        private void Initialize()
+        {
+            //try
+            //{
+            //    if (ConfigManager.ReadWritePath == null)
+            //    {
+            //        UnityEngine.Debug.LogError("Read or write fail 0x2204.");
+            //        UtilFun.WinMessageBox("read or write fail", "error", 8708);
+            //        Application.Quit();
+            //        return;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    UnityEngine.Debug.Log(ex.ToString() + " 0x2204.");
+            //    UtilFun.WinMessageBox(ex.ToString(), "error", 8708);
+            //    Application.Quit();
+            //    return;
+            //}
+            //int num = QualitySettings.names.Length - 1;
+            //num = Mathf.Clamp(num, 0, 10);
+            //QualitySettings.SetQualityLevel(num);
+            //Application.logMessageReceived -= new Application.LogCallback(LogManager.LogCallback);
+            //Application.logMessageReceived += new Application.LogCallback(LogManager.LogCallback);
+            //OptionConfig optionConfig = OptionConfig.GetInstance();
+            //if (!ConfigManager.IsFileExist())
+            //{
+            //    optionConfig.SetAllQualityFirstTime(PalMain.FirstTimeLaunch103());
+            //    optionConfig.Save();
+            //}
+            //optionConfig.Use_Start();
+            //optionConfig.Use_Other();
+            //PalMain.LoadUI();
+            //Physics.gravity = new Vector3(0f, -20f, 0f);
+            //Physics2D.queriesHitTriggers = false;
+            //QualitySettings.blendWeights = BlendWeights.FourBones;
+            //string operatingSystem = SystemInfo.operatingSystem;
+            //PalMain.IsXP = operatingSystem.Contains("Windows XP");
+            //PalMain.IsWin32 = !operatingSystem.Contains("64bit");
+            //if (!PalMain.IsXP)
+            //{
+            //    QualitySettings.anisotropicFiltering = AnisotropicFiltering.ForceEnable;
+            //    QualitySettings.shadowProjection = ShadowProjection.StableFit;
+            //}
+            PalMain.instance = this;
+            //PalMain.InitPermanentObject();//待定 不知道有什么用
+            //ItemManager.GetInstance().OnBeforeRemoveItem += new Action<IItem>(this.PutOffItem);
+            //ItemPackage orCreatePackage = ItemManager.GetInstance().GetOrCreatePackage(1u);
+            //orCreatePackage.OnItemAdded += delegate (IItem obj)
+            //{
+            //    SymbolNodeItemType symbolNodeItemType = obj.ItemType as SymbolNodeItemType;
+            //    if (symbolNodeItemType != null)
+            //    {
+            //        SymbolNodeItemType.SetState(symbolNodeItemType.TypeID & 255u, true);
+            //    }
+            //    SymbolPanelItemType symbolPanelItemType = obj.ItemType as SymbolPanelItemType;
+            //    if (symbolPanelItemType != null)
+            //    {
+            //        SymbolPanelItemType.SetState(symbolPanelItemType.TypeID & 255u, true);
+            //    }
+            //    AchievementManager.SingleAchievement[] achievements = PalBattleManager.Instance().m_Achievement.m_Achievements;
+            //    OrnamentItemTypeCache.SetIsGet(obj.ItemType.TypeID, true);
+            //    achievements[190].m_CurrentNum = ((OrnamentItemTypeCache.IsGetRate() < 1f) ? 0 : 1);
+            //    FashionClothItemTypeCache.SetIsGet(obj.ItemType.TypeID, true);
+            //    achievements[189].m_CurrentNum = ((FashionClothItemTypeCache.IsGetRate() < 1f) ? 0 : 1);
+            //};
+
+            MouseEventManager.Initialize();
+            //ShaderPropertyIDManager.Initialize();
+            //MessageProcess.Initialize();
+            //SetActiveByFlagManager.Initialize();
+            //ScenesManager.Initialize();
+            //FlagManager.Initialize();
+            //DistanceCullManager.Initialize();
+            //MoviesManager.Initialize();
+            //CharactersManager.Initialize();
+            //InputManager.Initialize();
+            //PlayerCtrlManager.Initialize();
+            //PalBattleManager.Initialize();
+            //EntityManager.Initialize();
+            //MissionTick.Initialize();
+            //PlayersManager.Initialize();
+            //RenownManager.Initialize();
+            //AnimWithoutClothSet.Initialize();
+            //SlowLoopAnimSet.Initialize();
+            //WaterEffectTrigger.Initialize();
+            //CompoundItemList.CreateWatch();
+            //SaveManager.OnLoadOver += delegate
+            //{
+            //    try
+            //    {
+            //        int num2 = 0;
+            //        List<IEnumerator> list = new List<IEnumerator>(8);
+            //        foreach (GameObject current in PlayersManager.AllPlayers)
+            //        {
+            //            if (current != null)
+            //            {
+            //                PalNPC component = current.GetComponent<PalNPC>();
+            //                if (component != null)
+            //                {
+            //                    list.Add(component.Prepare());
+            //                }
+            //            }
+            //        }
+            //        list.Add(ItemManager.GetInstance().Prepare());
+            //        list.Add(BuffDebuffManager.GetInstance().Prepare());
+            //        while (list.Count > 0)
+            //        {
+            //            list.RemoveAll((IEnumerator curManager) => curManager == null || !curManager.MoveNext());
+            //            num2++;
+            //            if (num2 > 32)
+            //            {
+            //                UnityEngine.Debug.LogError("加载进程可能陷入了死循环");
+            //                foreach (IEnumerator current2 in list)
+            //                {
+            //                    UnityEngine.Debug.LogError(current2.ToString());
+            //                }
+            //                break;
+            //            }
+            //        }
+            //        CompoundItemList.CreateWatch();
+            //        SoulStarData[] datasFromFile = SoulDataManager.GetDatasFromFile();
+            //        for (int i = 0; i < datasFromFile.Length; i++)
+            //        {
+            //            SoulStarData soulStarData = datasFromFile[i];
+            //            if (SoulDataManager.Instance != null)
+            //            {
+            //                if (soulStarData != null)
+            //                {
+            //                    if (SoulDataManager.Instance.IsSoulOpen(soulStarData.NodeID))
+            //                    {
+            //                        soulStarData.OpenScriptFun();
+            //                    }
+            //                }
+            //            }
+            //        }
+            //        foreach (GameObject current3 in PlayersManager.AllPlayers)
+            //        {
+            //            PalNPC component2 = current3.GetComponent<PalNPC>();
+            //            if (component2.Data.HPMPDP != null)
+            //            {
+            //                component2.Data.HPMPDP.SetWithoutEvents(component2.Data.LoadHP, component2.Data.LoadMP, component2.Data.LoadDP);
+            //            }
+            //        }
+            //        try
+            //        {
+            //            if (ItemManager.GetInstance() != null)
+            //            {
+            //                ItemPackage orCreatePackage2 = ItemManager.GetInstance().GetOrCreatePackage(1u);
+            //                if (orCreatePackage2 != null)
+            //                {
+            //                    foreach (IItem[] current4 in ItemManager.GetInstance().GetOrCreatePackage(1u).ForEachItemArrayInPackage())
+            //                    {
+            //                        if (current4 != null && current4.Length >= 0 && current4[0] != null)
+            //                        {
+            //                            if (0 < current4.Length && current4[0].ItemType != null)
+            //                            {
+            //                                CompoundItemList.ReCheck(current4[0].ItemType.TypeID);
+            //                            }
+            //                        }
+            //                    }
+            //                    int hadCreateCount = CompoundItemList.HadCreateCount;
+            //                    AchievementManager.SingleAchievement[] achievements = PalBattleManager.Instance().m_Achievement.m_Achievements;
+            //                    achievements[7].m_CurrentNum = hadCreateCount;
+            //                    achievements[8].m_CurrentNum = hadCreateCount;
+            //                    achievements[9].m_CurrentNum = hadCreateCount;
+            //                }
+            //            }
+            //        }
+            //        catch (Exception exception)
+            //        {
+            //            UnityEngine.Debug.LogException(exception);
+            //        }
+            //        try
+            //        {
+            //            for (int j = 0; j < 6; j++)
+            //            {
+            //                bool flag = true;
+            //                int num3 = j * 84;
+            //                for (int k = 0; k < 84; k++)
+            //                {
+            //                    if (SoulDataManager.GetData(num3 + k) != null)
+            //                    {
+            //                        if (!SoulDataManager.Instance.IsSoulOpen(num3 + k))
+            //                        {
+            //                            flag = false;
+            //                            break;
+            //                        }
+            //                    }
+            //                }
+            //                if (flag)
+            //                {
+            //                    PalBattleManager.Instance().m_Achievement.m_Achievements[21].m_CurrentNum = ((!flag) ? 0 : 262143);
+            //                    break;
+            //                }
+            //            }
+            //        }
+            //        catch (Exception exception2)
+            //        {
+            //            UnityEngine.Debug.LogException(exception2);
+            //        }
+            //        try
+            //        {
+            //            foreach (GameObject current5 in PlayersManager.AllPlayers)
+            //            {
+            //                if (!(current5 == null))
+            //                {
+            //                    PalNPC component3 = current5.GetComponent<PalNPC>();
+            //                    if (!(component3 == null) && component3.Data != null)
+            //                    {
+            //                        if (component3.Data.CharacterID >= 0 && component3.Data.CharacterID <= 5)
+            //                        {
+            //                            IItem item = component3.GetSlot(EquipSlotEnum.Weapon);
+            //                            if (item == null)
+            //                            {
+            //                                foreach (IItem[] current6 in ItemManager.GetInstance().GetOrCreatePackage(1u).ForEachItemArrayInPackage())
+            //                                {
+            //                                    if (current6 != null && current6.Length > 0)
+            //                                    {
+            //                                        if (current6[0] is WeaponItem)
+            //                                        {
+            //                                            IItem[] array = current6;
+            //                                            for (int l = 0; l < array.Length; l++)
+            //                                            {
+            //                                                IItem item2 = array[l];
+            //                                                if (item2 != null)
+            //                                                {
+            //                                                    WeaponItem weaponItem = item2 as WeaponItem;
+            //                                                    if (weaponItem != null && !(weaponItem.GetOwner() != null))
+            //                                                    {
+            //                                                        WeaponItemType weaponItemType = weaponItem.ItemType as WeaponItemType;
+            //                                                        if (weaponItemType != null)
+            //                                                        {
+            //                                                            if (((ulong)weaponItemType.CharacterMark & (ulong)(1L << (component3.Data.CharacterID & 31))) != 0uL)
+            //                                                            {
+            //                                                                if (item == null)
+            //                                                                {
+            //                                                                    item = weaponItem;
+            //                                                                }
+            //                                                                else if (ShowWeaponItemComparer.GetInstance().Compare(item, weaponItem) > 0)
+            //                                                                {
+            //                                                                    item = weaponItem;
+            //                                                                }
+            //                                                                break;
+            //                                                            }
+            //                                                        }
+            //                                                    }
+            //                                                }
+            //                                            }
+            //                                        }
+            //                                    }
+            //                                }
+            //                                if (item != null)
+            //                                {
+            //                                    component3.PutOnEquip(item as WeaponItem);
+            //                                }
+            //                            }
+            //                        }
+            //                    }
+            //                }
+            //            }
+            //        }
+            //        catch (Exception exception3)
+            //        {
+            //            UnityEngine.Debug.LogException(exception3);
+            //        }
+            //    }
+            //    catch (Exception exception4)
+            //    {
+            //        UnityEngine.Debug.LogException(exception4);
+            //    }
+            //};
+            //PlayersManager.OnAddPlayer = (Action<int>)Delegate.Combine(PlayersManager.OnAddPlayer, new Action<int>(delegate (int playerid)
+            //{
+            //    if (PalMain.Instance.CurBattleFormationManager.m_Formations.Count <= 0)
+            //    {
+            //        BattleFormationManager.BattleFormationData battleFormationData = new BattleFormationManager.BattleFormationData();
+            //        PalMain.Instance.CurBattleFormationManager.AddFormation(battleFormationData);
+            //        foreach (GameObject current in PlayersManager.ActivePlayers)
+            //        {
+            //            battleFormationData.AddOrChangeCharacter(current.GetCharacterID(), 0);
+            //        }
+            //        while (battleFormationData.m_InFormationCharaDatas.Count < 9)
+            //        {
+            //            battleFormationData.m_InFormationCharaDatas.Add(null);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        BattleFormationManager.BattleFormationData battleFormationData = PalMain.Instance.CurBattleFormationManager.m_Formations[0];
+            //        while (battleFormationData.m_InFormationCharaDatas.Count < 9)
+            //        {
+            //            battleFormationData.m_InFormationCharaDatas.Add(null);
+            //        }
+            //        if (battleFormationData.GetPlayer(playerid) == null)
+            //        {
+            //            for (int i = 0; i < 9; i++)
+            //            {
+            //                if (battleFormationData.m_InFormationCharaDatas[i] == null)
+            //                {
+            //                    battleFormationData.m_InFormationCharaDatas[i] = new BattleFormationManager.InFormationCharaData(playerid, 0);
+            //                    break;
+            //                }
+            //            }
+            //        }
+            //    }
+            //}));
+            //PlayersManager.OnRemovePlayer += delegate (int playerid)
+            //{
+            //    if (PalMain.Instance.CurBattleFormationManager.m_Formations.Count <= 0)
+            //    {
+            //        return;
+            //    }
+            //    BattleFormationManager.BattleFormationData battleFormationData = PalMain.Instance.CurBattleFormationManager.m_Formations[0];
+            //    if (battleFormationData == null)
+            //    {
+            //        return;
+            //    }
+            //    if (battleFormationData.m_InFormationCharaDatas[0] != null && battleFormationData.m_InFormationCharaDatas[0].m_CharacterID != playerid)
+            //    {
+            //        return;
+            //    }
+            //    while (battleFormationData.m_InFormationCharaDatas.Count < 9)
+            //    {
+            //        battleFormationData.m_InFormationCharaDatas.Add(null);
+            //    }
+            //    for (int i = 1; i < 9; i++)
+            //    {
+            //        BattleFormationManager.InFormationCharaData inFormationCharaData = battleFormationData.m_InFormationCharaDatas[i];
+            //        if (inFormationCharaData != null)
+            //        {
+            //            if (!(PlayersManager.GetPlayer(inFormationCharaData.m_CharacterID) == null))
+            //            {
+            //                battleFormationData.m_InFormationCharaDatas[i] = battleFormationData.m_InFormationCharaDatas[0];
+            //                battleFormationData.m_InFormationCharaDatas[0] = inFormationCharaData;
+            //                break;
+            //            }
+            //        }
+            //    }
+            //};
+            //UIManager.Instance.Initialize();
+            //EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Combine(EntityManager.OnLoadOver, new EntityManager.void_fun(MiniMap.Instance.OnLoadOver));
+            //PalMain.initialized = true;
+            //MissionManager.Initialize();
+            //HuanHuaManager.Instance.Initialize();
+            //PanelFaceManager.Initialize();
+            //PanelPositonManager.Initialize();
+            //Cutscene2DManager.Initialize();
+            //ScenesManager.Instance.RandomFlash();
+            //TimeManager.Initialize();
+            //SaveManager.OnLoadOver -= new SaveManager.void_fun(SceneFall2.SetLastPointOnLoadOver);
+            //SaveManager.OnLoadOver += new SaveManager.void_fun(SceneFall2.SetLastPointOnLoadOver);
+            //PalMain.MinFPS = this.minFPS;
+            //PalMain.MinDeltaTime = 1f / this.minFPS;
+            //PalMain.backgroundAudio = base.gameObject.GetComponent<BackgroundAudio>();
+            //if (PalMain.backgroundAudio == null)
+            //{
+            //    PalMain.backgroundAudio = base.gameObject.AddComponent<BackgroundAudio>();
+            //}
+            //OptionConfig.GetInstance().Use_CharacterEmission();
+            //SaveManager.LoadGlobalData();
+            //FunfiaSteamManager funfiaSteamManager = FunfiaSteamManager.Instance;
+            //if (SkillSEPreloader.s_preloadEnable && SkillSEPreloader.Instance == null)
+            //{
+            //    SkillSEPreloader.Initialize();
+            //}
+        }
 
         //		private void PutOffItem(IItem inItem)
         //		{
@@ -3037,28 +2966,6 @@ namespace SoftStar.Pal6
         //		{
         //			PalMain.m_PlayerRecommandation = rec;
         //		}
-
-        public static PalMain.PLAYER_RECOMMANDATION DetectMachine()
-        {
-            
-            string operatingSystem = SystemInfo.operatingSystem;
-            bool flag = operatingSystem.Contains("Windows XP");
-            bool flag2 = !operatingSystem.Contains("64bit");
-            PalMain.PLAYER_RECOMMANDATION result;
-            if (SystemInfo.graphicsMemorySize <= 512 || SystemInfo.maxTextureSize < 1800 || (flag && flag2) || SystemInfo.systemMemorySize < 3500)
-            {
-                result = PalMain.PLAYER_RECOMMANDATION.LOW;
-            }
-            else if (SystemInfo.graphicsMemorySize < 1500)
-            {
-                result = PalMain.PLAYER_RECOMMANDATION.MID;
-            }
-            else
-            {
-                result = PalMain.PLAYER_RECOMMANDATION.HIGH;
-            }
-            return result;
-        }
 
         //		public static PalMain.PlayerConfigs GetSettingsByLevel(PalMain.PLAYER_RECOMMANDATION rec)
         //		{
