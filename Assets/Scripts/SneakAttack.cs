@@ -169,7 +169,7 @@ public class SneakAttack : MonoBehaviour
     {
         SneakAttack.canQiXi = false;
         //PlayerCtrlManager.bControl = false;
-        PlayerCtrlManager.bCanTab = false;
+        //PlayerCtrlManager.bCanTab = false;
     }
 
     //// Token: 0x06003B75 RID: 15221 RVA: 0x001AA820 File Offset: 0x001A8A20

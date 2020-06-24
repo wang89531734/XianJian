@@ -15,10 +15,9 @@ namespace YouYou
         {
             base.OnEnter();
             GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureLogOn");
-            GameEntry.Scene.LoadScene(1);
             GameEntry.Event.CommonEvent.Dispatch(SysEventId.EnterProcedureLogOn);
-            //GameEntry.UI.OpenUIForm(101);
-            //PalMain.Instance.ReStart();
+            PalMain.Instance.ReStart();
+            GameEntry.UI.OpenUIForm(101);
         }
 
         private void OnLogonBGOpen(UIFormBase uiFormBase)
@@ -36,7 +35,7 @@ namespace YouYou
             base.OnLeave();
             GameEntry.Log(LogCategory.Procedure, "OnLeave ProcedureLogOn");
             GameEntry.Event.CommonEvent.Dispatch(SysEventId.LeaveProcedureLogOn);
-            //GameEntry.UI.CloseUIForm(101);
+            GameEntry.UI.CloseUIForm(101);
         }
     }
 }

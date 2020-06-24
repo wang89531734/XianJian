@@ -114,17 +114,5 @@ namespace YouYou
             }
         }
         #endregion
-
-        private float autoSaveTime;
-
-        private float waitAutoSave;
-
-        public float weatherTime;
-
-        public void AutoSaveInit()
-        {
-            this.autoSaveTime = 0f;
-            this.waitAutoSave = 0f;
-        }
     }
 }

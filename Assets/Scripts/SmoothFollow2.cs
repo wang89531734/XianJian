@@ -435,14 +435,14 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 		//this.CamAngleH = PlayersManager.Player.GetModelObj(true).transform.eulerAngles.y;
 		this.CamAngleV = 10f;
 		this.LateUpdate();
-		PlayerCtrlManager.LastForward = base.transform.forward;
+		//PlayerCtrlManager.LastForward = base.transform.forward;
 	}
 
 	// Token: 0x06001C12 RID: 7186 RVA: 0x000FB878 File Offset: 0x000F9A78
 	public void InitPlayerForward()
 	{
 		this.LateUpdate();
-		PlayerCtrlManager.LastForward = base.transform.forward;
+		//PlayerCtrlManager.LastForward = base.transform.forward;
 	}
 
 	// Token: 0x06001C13 RID: 7187 RVA: 0x000FB890 File Offset: 0x000F9A90

@@ -14,6 +14,24 @@ namespace YouYou
     /// </summary>
     public class ProcedureWorldMap : ProcedureBase
     {
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureWorldMap");
+            GameEntry.Event.CommonEvent.Dispatch(SysEventId.EnterProcedureLogOn);
 
+        }
+
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+        }
+
+        public override void OnLeave()
+        {
+            base.OnLeave();
+            GameEntry.Log(LogCategory.Procedure, "OnLeave ProcedureWorldMap");
+            GameEntry.Event.CommonEvent.Dispatch(SysEventId.LeaveProcedureLogOn);
+        }
     }
 }

@@ -556,7 +556,7 @@ public class PlayersManager
                         //{
                         //    component3.charCtrller.enabled = true;
                         //}
-                        PlayerCtrlManager.Reset();
+                        //PlayerCtrlManager.Reset();
                     }
                 }
             }
@@ -1071,22 +1071,22 @@ public class PlayersManager
             return;
         }
         Transform transform;
-        if (PlayerCtrlManager.agentObj != null)
-        {
-            transform = PlayerCtrlManager.agentObj.transform;
-        }
-        else
-        {
-            PalNPC component = PlayersManager.Player.GetComponent<PalNPC>();
-            if (!(component.model != null))
-            {
-                PlayersManager.tempDestTF = gameObject.transform;
-                PalNPC palNPC = component;
-                palNPC.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(palNPC.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.WaitForSpawn));
-                return;
-            }
-            transform = component.model.transform;
-        }
+        //if (PlayerCtrlManager.agentObj != null)
+        //{
+        //    transform = PlayerCtrlManager.agentObj.transform;
+        //}
+        //else
+        //{
+        //    PalNPC component = PlayersManager.Player.GetComponent<PalNPC>();
+        //    if (!(component.model != null))
+        //    {
+        //        PlayersManager.tempDestTF = gameObject.transform;
+        //        PalNPC palNPC = component;
+        //        palNPC.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(palNPC.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.WaitForSpawn));
+        //        return;
+        //    }
+        //    transform = component.model.transform;
+        //}
         //if (transform != null)
         //{
         //    Agent component2 = transform.GetComponent<Agent>();
