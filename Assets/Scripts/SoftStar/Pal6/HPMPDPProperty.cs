@@ -379,26 +379,26 @@ namespace SoftStar.Pal6
                 {
                     if (HPMPDPProperty.StaticData.mDataPaths == null)
                     {
-                        string str = "." + PalMain.GameDifficulty.ToString();
-                        List<string> list = new List<string>();
-                        list.Add(HPMPDPProperty.StaticData.DefaultDataPath + str);
-                        string path = HPMPDPProperty.StaticData.DefaultDataPath + ".list";
-                        if (File.Exists(path))
-                        {
-                            using (StreamReader streamReader = new StreamReader(path, Encoding.UTF8, true))
-                            {
-                                do
-                                {
-                                    string text = streamReader.ReadLine() + str;
-                                    if (File.Exists(text))
-                                    {
-                                        list.Add(text);
-                                    }
-                                }
-                                while (streamReader.EndOfStream);
-                            }
-                        }
-                        HPMPDPProperty.StaticData.mDataPaths = list.ToArray();
+                       // string str = "." + PalMain.GameDifficulty.ToString();
+                        //List<string> list = new List<string>();
+                        //list.Add(HPMPDPProperty.StaticData.DefaultDataPath + str);
+                        //string path = HPMPDPProperty.StaticData.DefaultDataPath + ".list";
+                        //if (File.Exists(path))
+                        //{
+                        //    using (StreamReader streamReader = new StreamReader(path, Encoding.UTF8, true))
+                        //    {
+                        //        do
+                        //        {
+                        //            string text = streamReader.ReadLine() + str;
+                        //            if (File.Exists(text))
+                        //            {
+                        //                list.Add(text);
+                        //            }
+                        //        }
+                        //        while (streamReader.EndOfStream);
+                        //    }
+                        //}
+                        //HPMPDPProperty.StaticData.mDataPaths = list.ToArray();
                     }
                     return HPMPDPProperty.StaticData.mDataPaths;
                 }

@@ -50,7 +50,7 @@ public class PlayerTeam : MonoBehaviour
     /// </summary>
     public void SetInitValue()
     {
-        PalMain.SetMoney(this.money);
+        //PalMain.SetMoney(this.money);
         this.InitTime();
     }
 
@@ -168,7 +168,7 @@ public class PlayerTeam : MonoBehaviour
     {
         for (int i = 0; i < this.flagValues.Count; i++)
         {
-            PalMain.SetFlag(this.flagValues[i].flag, this.flagValues[i].Value);
+           // PalMain.SetFlag(this.flagValues[i].flag, this.flagValues[i].Value);
         }
     }
 

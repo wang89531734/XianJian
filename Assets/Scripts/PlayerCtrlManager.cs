@@ -271,7 +271,7 @@ public class PlayerCtrlManager
     {
         //GameEntry.Event.CommonEvent.AddEventListener(SysEventId.EnterProcedureLogOn, OnInit);
         //GameEntry.Event.CommonEvent.AddEventListener(SysEventId.LeaveProcedureLogOn, OnExit);
-        PalMain.GameMain.updateHandles += PlayerCtrlManager.Update;
+        //PalMain.GameMain.updateHandles += PlayerCtrlManager.Update;
         PlayerCtrlManager.MoveID = Animator.StringToHash("Move");//字符串到哈希
         GameEntry.Event.CommonEvent.AddEventListener(SysEventId.OnSceneLoaded, LoadOver);
         //PlayerCtrlManager.maskValue = 393220;

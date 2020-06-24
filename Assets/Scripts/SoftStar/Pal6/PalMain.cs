@@ -1,88 +1,177 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 //using Funfia.File;
 //using Glow11;
 //using SoftStar.BuffDebuff;
 using SoftStar.Item;
 //using SoftStar.Pal6.UI;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using YouYou;
 //using UnityStandardAssets.ImageEffects;
 
 namespace SoftStar.Pal6
 {
     public class PalMain : MonoBehaviour
     {
-        public delegate void void_func_void();
+        //		public class SceneOptiDistFogParams
+        //		{
+        //			public int m_LevelID;
 
-        public delegate void void_func_float_float(float currentTime, float deltaTime);
+        //			public float m_CullDist_Hi;
 
-        public const int MoneyFlag = 2;
+        //			public float m_CullDist_Mid;
 
-        private bool m_skillPreloading;
+        //			public float m_CullDist_Low;
 
-        private static float m_loadingValue = 0f;
+        //			public SceneOptiDistFogParams(int id, float hi, float mid, float low)
+        //			{
+        //				this.m_LevelID = id;
+        //				this.m_CullDist_Hi = hi;
+        //				this.m_CullDist_Mid = mid;
+        //				this.m_CullDist_Low = low;
+        //			}
+        //		}
 
-        private static uint _MoneyID = 0u;
+        public enum PLAYER_RECOMMANDATION
+        {
+            LOW,
+            MID,
+            HIGH
+        }
 
-        /// <summary>
-        /// 游戏难度
-        /// </summary>
-        public static int GameDifficulty = 0;
+        //		public enum SETTING_ENUM
+        //		{
+        //			SHI_YE,
+        //			YIN_YING,
+        //			HDR,
+        //			KANG_JU_CHI,
+        //			TIE_TU_JING_DU,
+        //			CHUI_ZHI_TONG_BU,
+        //			TI_JI_GUANG,
+        //			ZHI_BEI_FAN_WEI,
+        //			WU_SE_JU_LI,
+        //			JING_TONG_MEI_HUA,
+        //			ZHAN_DOU_TE_XIAO,
+        //			SHUI_MIAN_DAO_YING,
+        //			GAO_JI_GUANG_YUAN,
+        //			SETTING_MAX
+        //		}
 
-        public static int MapOffset = 4194304;
+        //		public class PlayerConfigs
+        //		{
+        //			public int[] m_Settings = new int[13];
 
-        public static float dyingRate = 0.1f;
+        //			public PlayerConfigs()
+        //			{
+        //				for (int i = 0; i < 13; i++)
+        //				{
+        //					this.m_Settings[i] = 0;
+        //				}
+        //			}
+        //		}
 
-        public static string dyingZhanLi = string.Empty;
+        //		public enum WatchType
+        //		{
+        //			FirstPerson,
+        //			ThirdPerson,
+        //			Custem
+        //		}
 
-        public static string normalZhanli = string.Empty;
+        //		public enum DISTANCE_CULL
+        //		{
+        //			LOW,
+        //			MID,
+        //			FULL,
+        //			RESTORE
+        //		}
 
-        public static int IgnoreLayer = 2;
+        //		public enum POST_CAM
+        //		{
+        //			NONE,
+        //			MID,
+        //			FULL
+        //		}
 
-        public static int IgnoreMaskValue = (int)Mathf.Pow(2f, (float)PalMain.IgnoreLayer);
+        //		public enum LIGHT
+        //		{
+        //			NONE,
+        //			FULL
+        //		}
 
-        public static List<string> dialogue = new List<string>();
+        //		public enum UNLOADPROIR
+        //		{
+        //			IMMEDIATE,
+        //			SHORT,
+        //			LONG,
+        //			VERYLONG
+        //		}
 
-        //public BattleFormationManager CurBattleFormationManager = new BattleFormationManager();
+        //		public delegate void void_func_void();
 
-        /// <summary>
-        /// 游戏开始时间
-        /// </summary>
-        [NonSerialized]
-        public static float GameBeginTime;
+        //		public delegate void void_func_float_float(float currentTime, float deltaTime);
 
-        [NonSerialized]
-        public static float GameTotleTime;
+        //		public const int MoneyFlag = 2;
 
-        //[SerializeField]
-        //private PalMain.WatchType mCurWatchType;
+        //		private bool m_skillPreloading;
 
-        public static string PlayerName = "Default";
+        //		private static float m_loadingValue = 0f;
+
+        //		public static bool mIsDLC = false;
+
+        //		private static uint _MoneyID = 0u;
+
+        //		public static int GameDifficulty = 0;
+
+        //		public static int MapOffset = 4194304;
+
+        //		public static float dyingRate = 0.1f;
+
+        //		public static string dyingZhanLi = string.Empty;
+
+        //		public static string normalZhanli = string.Empty;
+
+        //		public static int IgnoreLayer = 2;
+
+        //		public static int IgnoreMaskValue = (int)Mathf.Pow(2f, (float)PalMain.IgnoreLayer);
+
+        //		public static List<string> dialogue = new List<string>();
+
+        //		public BattleFormationManager CurBattleFormationManager = new BattleFormationManager();
+
+        //		[NonSerialized]
+        //		public static float GameBeginTime;
+
+        //		[NonSerialized]
+        //		public static float GameTotleTime;
+
+        //		[SerializeField]
+        //		private PalMain.WatchType mCurWatchType;
+
+        //		public static string PlayerName = "Default";
 
         //		public static List<Landmark> landMarks = new List<Landmark>();
 
-        public static string mapInfoPrefix = "/Resources/MapData/";
+        //		public static string mapInfoPrefix = "/Resources/MapData/";
 
-        public static GameObject mapinfo = null;
+        //		public static GameObject mapinfo = null;
 
-        public static Dictionary<int, int> ItemCount = new Dictionary<int, int>();
+        //		public static Dictionary<int, int> ItemCount = new Dictionary<int, int>();
 
         //		public static Dictionary<int, List<IItem>> SceneItems = new Dictionary<int, List<IItem>>();
 
-        public float minFPS = 10f;
+        //		public float minFPS = 10f;
 
-        public static float MinFPS = 10f;
+        //		public static float MinFPS = 10f;
 
-        public static float MinDeltaTime;
+        //		public static float MinDeltaTime;
 
-        public bool m_bIgnoreEnemy;
+        //		public bool m_bIgnoreEnemy;
 
-        //public static BackgroundAudio backgroundAudio;
+        //		public static BackgroundAudio backgroundAudio;
 
         //		public bool m_bVoiceBlance;
 
@@ -99,6 +188,8 @@ namespace SoftStar.Pal6
         //		public static bool IsWin32 = false;
 
         //		public static bool ForceLow = false;
+
+        //		private static bool initialized = false;
 
         //		public bool bPlayBeginMovie = true;
 
@@ -139,43 +230,30 @@ namespace SoftStar.Pal6
 
         //		private List<Camera> m_Cams = new List<Camera>();
 
-        //		// Token: 0x04003148 RID: 12616
         //		public float m_FarClipPlane;
 
-        //		// Token: 0x04003149 RID: 12617
         //		public bool m_bFog;
 
-        //		// Token: 0x0400314A RID: 12618
         //		public float m_FogStartDistance;
 
-        //		// Token: 0x0400314B RID: 12619
         //		public float m_FogEndDistance;
 
-        //		// Token: 0x0400314C RID: 12620
         //		public float m_FogDensity;
 
-        //		// Token: 0x0400314D RID: 12621
         //		public float m_TreeDistance;
 
-        //		// Token: 0x0400314E RID: 12622
         //		public float m_DetailObjectDistance;
 
-        //		// Token: 0x0400314F RID: 12623
         //		public float m_HeightmapPixelError;
 
-        //		// Token: 0x04003150 RID: 12624
         //		public float m_BasemapDistance;
 
-        //		// Token: 0x04003151 RID: 12625
         //		private float m_DualOffset = 0.2f;
 
-        //		// Token: 0x04003152 RID: 12626
         //		private int m_bDualCam;
 
-        //		// Token: 0x04003153 RID: 12627
         //		public Dictionary<int, PalMain.SceneOptiDistFogParams> m_LevelCullOpParams = new Dictionary<int, PalMain.SceneOptiDistFogParams>();
 
-        //		// Token: 0x04003154 RID: 12628
         //		private bool m_bIsIntel;
 
         //		private bool m_bIsGDI;
@@ -192,45 +270,78 @@ namespace SoftStar.Pal6
 
         //		public static PalMain.UNLOADPROIR m_CurPrior = PalMain.UNLOADPROIR.LONG;
 
-        public static float m_CurUnloadTime = 0f;
+        //		public static float m_CurUnloadTime = 0f;
 
-        public static float m_FixImmediateTime = 1f;
+        //		public static float m_FixImmediateTime = 1f;
 
-        public static float m_FixShortTime = 5f;
+        //		public static float m_FixShortTime = 5f;
 
-        public static float m_FixLongTime = 15f;
+        //		public static float m_FixLongTime = 15f;
 
-        public static float m_FixVeryLongTime = 30f;
+        //		public static float m_FixVeryLongTime = 30f;
 
-        public static bool m_bHasUnload = false;
+        //		public static bool m_bHasUnload = false;
 
-        private static bool s_waitForActiveUserWarning = false;
+        //		private static bool s_waitForActiveUserWarning = false;
 
-        private static bool s_noControllerWarning = false;
+        //		private static bool s_noControllerWarning = false;
 
-        private static float s_noControllerTimeCounter = 0f;
+        //		private static float s_noControllerTimeCounter = 0f;
 
-        public int FOCUS_WAIT_FRAMES = 3;
+        //		public int FOCUS_WAIT_FRAMES = 3;
 
-        private int shouldRenewFrames;
+        //		private int shouldRenewFrames;
 
-        public event PalMain.void_func_float_float updateHandles;
+        //		public event PalMain.void_func_float_float updateHandles
+        //		{
+        //			[MethodImpl(MethodImplOptions.Synchronized)]
+        //			add
+        //			{
+        //				this.updateHandles = (PalMain.void_func_float_float)Delegate.Combine(this.updateHandles, value);
+        //			}
+        //			[MethodImpl(MethodImplOptions.Synchronized)]
+        //			remove
+        //			{
+        //				this.updateHandles = (PalMain.void_func_float_float)Delegate.Remove(this.updateHandles, value);
+        //			}
+        //		}
 
-        public event PalMain.void_func_void onInputHandles;
+        //		public event PalMain.void_func_void onInputHandles
+        //		{
+        //			[MethodImpl(MethodImplOptions.Synchronized)]
+        //			add
+        //			{
+        //				this.onInputHandles = (PalMain.void_func_void)Delegate.Combine(this.onInputHandles, value);
+        //			}
+        //			[MethodImpl(MethodImplOptions.Synchronized)]
+        //			remove
+        //			{
+        //				this.onInputHandles = (PalMain.void_func_void)Delegate.Remove(this.onInputHandles, value);
+        //			}
+        //		}
 
-        public event PalMain.void_func_void onGUIHandles;
+        //		public event PalMain.void_func_void onGUIHandles
+        //		{
+        //			[MethodImpl(MethodImplOptions.Synchronized)]
+        //			add
+        //			{
+        //				this.onGUIHandles = (PalMain.void_func_void)Delegate.Combine(this.onGUIHandles, value);
+        //			}
+        //			[MethodImpl(MethodImplOptions.Synchronized)]
+        //			remove
+        //			{
+        //				this.onGUIHandles = (PalMain.void_func_void)Delegate.Remove(this.onGUIHandles, value);
+        //			}
+        //		}
 
-        public bool IsSkillPreloading
-        {
-            get
-            {
-                return this.m_skillPreloading;
-            }
-        }
+        //		public bool IsSkillPreloading
+        //		{
+        //			get
+        //			{
+        //				return this.m_skillPreloading;
+        //			}
+        //		}
 
-        //		// Token: 0x17000429 RID: 1065
-        //		// (get) Token: 0x06003698 RID: 13976 RVA: 0x00189E40 File Offset: 0x00188040
-        //		// (set) Token: 0x06003699 RID: 13977 RVA: 0x00189E48 File Offset: 0x00188048
         //		public static float LoadingValue
         //		{
         //			get
@@ -243,16 +354,43 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        public float CurVersion
-        {
-            get
-            {
-                return 2f;
-            }
-        }
+        //		public static bool hasAssetBundleLoadOver
+        //		{
+        //			get
+        //			{
+        //				return false;
+        //			}
+        //		}
 
-        //		// Token: 0x1700042C RID: 1068
-        //		// (get) Token: 0x0600369D RID: 13981 RVA: 0x00189E84 File Offset: 0x00188084
+        //		public float CurVersion
+        //		{
+        //			get
+        //			{
+        //				return 2f;
+        //			}
+        //		}
+
+        //		public static bool IsDLC
+        //		{
+        //			get
+        //			{
+        //				return PalMain.IsBranch();
+        //			}
+        //			set
+        //			{
+        //				if (value)
+        //				{
+        //					PalMain.ActiveBranch();
+        //					PalMain.mIsDLC = true;
+        //				}
+        //				else
+        //				{
+        //					PalMain.InActiveBranch();
+        //					PalMain.mIsDLC = false;
+        //				}
+        //			}
+        //		}
+
         //		public static uint MoneyID
         //		{
         //			get
@@ -265,7 +403,168 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x0600369E RID: 13982 RVA: 0x00189EB4 File Offset: 0x001880B4
+        //		public PalMain.WatchType CurWatchType
+        //		{
+        //			get
+        //			{
+        //				return this.mCurWatchType;
+        //			}
+        //			set
+        //			{
+        //				if (this.mCurWatchType != value)
+        //				{
+        //					this.mCurWatchType = value;
+        //					this.ResetWatch();
+        //				}
+        //			}
+        //		}
+
+        //		public static GameObject MapInfo
+        //		{
+        //			get
+        //			{
+        //				if (PalMain.mapinfo == null)
+        //				{
+        //					PalMain.mapinfo = GameObject.FindGameObjectWithTag("MapInfo");
+        //					if (PalMain.mapinfo == null && SceneManager.GetActiveScene().name.ToLower() != "empty")
+        //					{
+        //						MapData data = MapData.GetData(UtilFun.GetPalMapLevel(SceneManager.GetActiveScene().buildIndex));
+        //						if (data != null)
+        //						{
+        //							PalMain.mapinfo = FileLoader.LoadObjectFromFile<GameObject>((PalMain.mapInfoPrefix + data.MapInfoPath).ToAssetBundlePath(), true, true);
+        //						}
+        //					}
+        //					if (PalMain.mapinfo == null && SceneManager.GetActiveScene().name.ToLower() != "empty")
+        //					{
+        //						UnityEngine.Debug.LogError("没有找到MapInfo，请在 地图csv中设置其相关路径");
+        //						PalMain.mapinfo = new GameObject("MapInfo");
+        //						PalMain.mapinfo.tag = "MapInfo";
+        //					}
+        //				}
+        //				return PalMain.mapinfo;
+        //			}
+        //		}
+
+        //		public static GameObject MainObj
+        //		{
+        //			get
+        //			{
+        //				if (PalMain.mMainObj == null)
+        //				{
+        //					PalMain.mMainObj = GameObject.Find("/Main");
+        //					if (PalMain.mMainObj == null)
+        //					{
+        //						PalMain.mMainObj = new GameObject("Main");
+        //					}
+        //				}
+        //				return PalMain.mMainObj;
+        //			}
+        //		}
+
+        //		public static GameObject MainCamera
+        //		{
+        //			get
+        //			{
+        //				if (PalMain.m_MainCamera == null)
+        //				{
+        //					GameObject gameObject = GameObject.Find("/Main Camera Pal");
+        //					if (gameObject != null)
+        //					{
+        //						PalMain.m_MainCamera = gameObject;
+        //					}
+        //					else if (UtilFun.GetMainCamera() != null)
+        //					{
+        //						PalMain.m_MainCamera = UtilFun.GetMainCamera().gameObject;
+        //					}
+        //					if (PalMain.m_MainCamera != null)
+        //					{
+        //						PalMain.MainCameraTF = PalMain.m_MainCamera.transform;
+        //					}
+        //				}
+        //				return PalMain.m_MainCamera;
+        //			}
+        //			set
+        //			{
+        //				PalMain.m_MainCamera = value;
+        //				if (PalMain.m_MainCamera != null)
+        //				{
+        //					PalMain.MainCameraTF = PalMain.m_MainCamera.transform;
+        //				}
+        //			}
+        //		}
+
+        public static PalMain GameMain
+        {
+            get
+            {
+                if (PalMain.instance == null)
+                {
+                    PalMain.CreateInstance();
+                }
+                return PalMain.instance;
+            }
+        }
+
+        public static PalMain Instance
+        {
+            get
+            {
+                return PalMain.instance;
+            }
+        }
+
+        //		public static bool IsLow
+        //		{
+        //			get
+        //			{
+        //				bool result = false;
+        //				if (PalMain.ForceLow)
+        //				{
+        //					result = true;
+        //				}
+        //				else if (SystemInfo.graphicsMemorySize < 900)
+        //				{
+        //					result = true;
+        //				}
+        //				else if (PalMain.IsWin32)
+        //				{
+        //					result = true;
+        //				}
+        //				return result;
+        //			}
+        //		}
+
+        //		public static bool MemoryLack
+        //		{
+        //			get
+        //			{
+        //				return false;
+        //			}
+        //		}
+
+        //		public static Transform TempGameLayer
+        //		{
+        //			get
+        //			{
+        //				if (PalMain.tempGameLayer == null)
+        //				{
+        //					GameObject gameObject = GameObject.Find(SaveManager.TempGameLayerName);
+        //					if (gameObject != null)
+        //					{
+        //						PalMain.tempGameLayer = gameObject.transform;
+        //					}
+        //					else
+        //					{
+        //						gameObject = new GameObject(SaveManager.TempGameLayerName);
+        //						UtilFun.SetPosition(gameObject.transform, Vector3.zero);
+        //						gameObject.transform.rotation = Quaternion.identity;
+        //						PalMain.tempGameLayer = gameObject.transform;
+        //					}
+        //				}
+        //				return PalMain.tempGameLayer;
+        //			}
+        //		}
+
         //		public void ResetWatch()
         //		{
         //			Transform transform = UtilFun.GetMainCamera().transform;
@@ -303,532 +602,64 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x1700042D RID: 1069
-        //		// (get) Token: 0x0600369F RID: 13983 RVA: 0x00189FA8 File Offset: 0x001881A8
-        //		// (set) Token: 0x060036A0 RID: 13984 RVA: 0x00189FB0 File Offset: 0x001881B0
-        //		public PalMain.WatchType CurWatchType
+        //		public void ReStart()
         //		{
-        //			get
+        //			UIManager.Instance.DoNotOpenMainMenu = false;
+        //			PalMain.IsDLC = false;
+        //			PlayerTeam.ReStart();
+        //			PlayersManager.Restart();
+        //			PlayerCtrlManager.Reset();
+        //			PalMain.Instance.CurBattleFormationManager.Clear();
+        //			BattleFormationManager.BattleFormationData battleFormationData = new BattleFormationManager.BattleFormationData();
+        //			battleFormationData.m_InFormationCharaDatas.AddRange(new BattleFormationManager.InFormationCharaData[9]);
+        //			PalMain.Instance.CurBattleFormationManager.AddFormation(battleFormationData);
+        //			PalBattleManager.Instance().Restart();
+        //			FlagManager.InitFlags();
+        //			ItemManager.GetInstance().ClearData();
+        //			for (int i = 0; i < PlayersManager.AllPlayers.Count; i++)
         //			{
-        //				return this.mCurWatchType;
-        //			}
-        //			set
-        //			{
-        //				if (this.mCurWatchType != value)
+        //				try
         //				{
-        //					this.mCurWatchType = value;
-        //					this.ResetWatch();
-        //				}
-        //			}
-        //		}
-
-        //		// Token: 0x1700042E RID: 1070
-        //		// (get) Token: 0x060036A1 RID: 13985 RVA: 0x00189FCC File Offset: 0x001881CC
-        //		public static GameObject MapInfo
-        //		{
-        //			get
-        //			{
-        //				if (PalMain.mapinfo == null)
-        //				{
-        //					PalMain.mapinfo = GameObject.FindGameObjectWithTag("MapInfo");
-        //					if (PalMain.mapinfo == null && SceneManager.GetActiveScene().name.ToLower() != "empty")
+        //					PalNPC component = PlayersManager.AllPlayers[i].GetComponent<PalNPC>();
+        //					if (component != null && component.Data != null && component.m_SkillIDs != null)
         //					{
-        //						MapData data = MapData.GetData(UtilFun.GetPalMapLevel(SceneManager.GetActiveScene().buildIndex));
-        //						if (data != null)
+        //						PlayersManager.AllPlayers[i].GetComponent<PalNPC>().Data.Exp = 0;
+        //						PlayersManager.AllPlayers[i].GetComponent<PalNPC>().Data.Soul = 0;
+        //						PlayersManager.AllPlayers[i].GetComponent<PalNPC>().m_SkillIDs.Clear();
+        //						if (i < PlayersManager.AllPlayers.Count)
         //						{
-        //							PalMain.mapinfo = FileLoader.LoadObjectFromFile<GameObject>((PalMain.mapInfoPrefix + data.MapInfoPath).ToAssetBundlePath(), true, true);
+        //							component = PlayersManager.AllPlayers[i].GetComponent<PalNPC>();
+        //							if (component != null)
+        //							{
+        //								BuffDebuffManager.BuffDebuffOwner buffDebuffData = PlayersManager.AllPlayers[i].GetComponent<PalNPC>().BuffDebuffData;
+        //								if (buffDebuffData != null)
+        //								{
+        //									buffDebuffData.ClearData();
+        //								}
+        //							}
         //						}
         //					}
-        //					if (PalMain.mapinfo == null && SceneManager.GetActiveScene().name.ToLower() != "empty")
-        //					{
-        //						UnityEngine.Debug.LogError("没有找到MapInfo，请在 地图csv中设置其相关路径");
-        //						PalMain.mapinfo = new GameObject("MapInfo");
-        //						PalMain.mapinfo.tag = "MapInfo";
-        //					}
         //				}
-        //				return PalMain.mapinfo;
+        //				catch
+        //				{
+        //				}
         //			}
+        //			OrnamentItemTypeCache.ClearIsGet();
+        //			FashionClothItemTypeCache.ClearIsGet();
+        //			MonsterProperty.HideAll();
+        //			UIInformation_Help_Item.ReStart();
+        //			UIInformation_StrangeNews_Item.ReStart();
+        //			MissionManager.Restart();
+        //			RenownManager.Reset();
+        //			HuanHuaManager.Instance.Reset();
+        //			DynamicObjsDataManager.Instance.Clear();
         //		}
 
-        //		// Token: 0x1700042F RID: 1071
-        //		// (get) Token: 0x060036A2 RID: 13986 RVA: 0x0018A0C8 File Offset: 0x001882C8
-        //		public static GameObject MainObj
-        //		{
-        //			get
-        //			{
-        //				if (PalMain.mMainObj == null)
-        //				{
-        //					PalMain.mMainObj = GameObject.Find("/Main");
-        //					if (PalMain.mMainObj == null)
-        //					{
-        //						PalMain.mMainObj = new GameObject("Main");
-        //					}
-        //				}
-        //				return PalMain.mMainObj;
-        //			}
-        //		}
-
-        //		// Token: 0x17000430 RID: 1072
-        //		// (get) Token: 0x060036A3 RID: 13987 RVA: 0x0018A118 File Offset: 0x00188318
-        //		// (set) Token: 0x060036A4 RID: 13988 RVA: 0x0018A19C File Offset: 0x0018839C
-        //		public static GameObject MainCamera
-        //		{
-        //			get
-        //			{
-        //				if (PalMain.m_MainCamera == null)
-        //				{
-        //					GameObject gameObject = GameObject.Find("/Main Camera Pal");
-        //					if (gameObject != null)
-        //					{
-        //						PalMain.m_MainCamera = gameObject;
-        //					}
-        //					else if (UtilFun.GetMainCamera() != null)
-        //					{
-        //						PalMain.m_MainCamera = UtilFun.GetMainCamera().gameObject;
-        //					}
-        //					if (PalMain.m_MainCamera != null)
-        //					{
-        //						PalMain.MainCameraTF = PalMain.m_MainCamera.transform;
-        //					}
-        //				}
-        //				return PalMain.m_MainCamera;
-        //			}
-        //			set
-        //			{
-        //				PalMain.m_MainCamera = value;
-        //				if (PalMain.m_MainCamera != null)
-        //				{
-        //					PalMain.MainCameraTF = PalMain.m_MainCamera.transform;
-        //				}
-        //			}
-        //		}
-
-        private void Awake()
-        {
-            instance = this;
-        }
-
-
-        public static void Initialize()
-        {
-            //try
-            //{
-            //    if (ConfigManager.ReadWritePath == null)//读取配置
-            //    {
-            //        UnityEngine.Debug.LogError("Read or write fail 0x2204.");
-            //        UtilFun.WinMessageBox("read or write fail", "error", 8708);
-            //        Application.Quit();
-            //        return;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    UnityEngine.Debug.Log(ex.ToString() + " 0x2204.");
-            //    UtilFun.WinMessageBox(ex.ToString(), "error", 8708);
-            //    Application.Quit();
-            //    return;
-            //}
-
-            //int num = QualitySettings.names.Length - 1;
-            //num = Mathf.Clamp(num, 0, 10);
-            //QualitySettings.SetQualityLevel(num);//设置质量
-            //OptionConfig optionConfig = OptionConfig.GetInstance();
-            //if (!ConfigManager.IsFileExist())
-            //{
-            //    optionConfig.SetAllQualityFirstTime(PalMain.FirstTimeLaunch103());
-            //    optionConfig.Save();
-            //}
-            //optionConfig.Use_Start();
-            //optionConfig.Use_Other();
-
-            Physics.gravity = new Vector3(0f, -20f, 0f);//重力设置
-            Physics2D.queriesHitTriggers = false;//关闭2D碰撞
-            //QualitySettings.blendWeights = BlendWeights.FourBones;
-            //string operatingSystem = SystemInfo.operatingSystem;
-            //PalMain.IsXP = operatingSystem.Contains("Windows XP");
-            //PalMain.IsWin32 = !operatingSystem.Contains("64bit");
-            //if (!PalMain.IsXP)
-            //{
-            //    QualitySettings.anisotropicFiltering = AnisotropicFiltering.ForceEnable;
-            //    QualitySettings.shadowProjection = ShadowProjection.StableFit;
-            //}
-
-          
-
-            //ItemManager.GetInstance().OnBeforeRemoveItem += this.PutOffItem;
-            //			ItemPackage orCreatePackage = ItemManager.GetInstance().GetOrCreatePackage(1u);
-            //			orCreatePackage.OnItemAdded += delegate(IItem obj)
-            //			{
-            //				SymbolNodeItemType symbolNodeItemType = obj.ItemType as SymbolNodeItemType;
-            //				if (symbolNodeItemType != null)
-            //				{
-            //					SymbolNodeItemType.SetState(symbolNodeItemType.TypeID & 255u, true);
-            //				}
-            //				SymbolPanelItemType symbolPanelItemType = obj.ItemType as SymbolPanelItemType;
-            //				if (symbolPanelItemType != null)
-            //				{
-            //					SymbolPanelItemType.SetState(symbolPanelItemType.TypeID & 255u, true);
-            //				}
-            //				AchievementManager.SingleAchievement[] achievements = PalBattleManager.Instance().m_Achievement.m_Achievements;
-            //				OrnamentItemTypeCache.SetIsGet(obj.ItemType.TypeID, true);
-            //				achievements[190].m_CurrentNum = ((OrnamentItemTypeCache.IsGetRate() < 1f) ? 0 : 1);
-            //				FashionClothItemTypeCache.SetIsGet(obj.ItemType.TypeID, true);
-            //				achievements[189].m_CurrentNum = ((FashionClothItemTypeCache.IsGetRate() < 1f) ? 0 : 1);
-            //			};
-
-            MouseEventManager.Initialize();
-            MessageProcess.Initialize();
-            //SetActiveByFlagManager.Initialize();
-            //			FlagManager.Initialize();
-            //			DistanceCullManager.Initialize();
-            //			MoviesManager.Initialize();
-            //			CharactersManager.Initialize();
-            InputManager.Initialize();
-            PlayerCtrlManager.Initialize();
-            //PalBattleManager.Initialize();
-            //			EntityManager.Initialize();
-            //			MissionTick.Initialize();
-            PlayersManager.Initialize();
-            //			RenownManager.Initialize();
-            //			AnimWithoutClothSet.Initialize();
-            //			SlowLoopAnimSet.Initialize();
-            //			WaterEffectTrigger.Initialize();
-            //			CompoundItemList.CreateWatch();
-            //			SaveManager.OnLoadOver += delegate()
-            //			{
-            //				try
-            //				{
-            //					int num2 = 0;
-            //					List<IEnumerator> list = new List<IEnumerator>(8);
-            //					foreach (GameObject gameObject in PlayersManager.AllPlayers)
-            //					{
-            //						if (gameObject != null)
-            //						{
-            //							PalNPC component = gameObject.GetComponent<PalNPC>();
-            //							if (component != null)
-            //							{
-            //								list.Add(component.Prepare());
-            //							}
-            //						}
-            //					}
-            //					list.Add(ItemManager.GetInstance().Prepare());
-            //					list.Add(BuffDebuffManager.GetInstance().Prepare());
-            //					while (list.Count > 0)
-            //					{
-            //						list.RemoveAll((IEnumerator curManager) => curManager == null || !curManager.MoveNext());
-            //						num2++;
-            //						if (num2 > 32)
-            //						{
-            //							UnityEngine.Debug.LogError("加载进程可能陷入了死循环");
-            //							foreach (IEnumerator enumerator3 in list)
-            //							{
-            //								UnityEngine.Debug.LogError(enumerator3.ToString());
-            //							}
-            //							break;
-            //						}
-            //					}
-            //					CompoundItemList.CreateWatch();
-            //					foreach (SoulStarData soulStarData in SoulDataManager.GetDatasFromFile())
-            //					{
-            //						if (SoulDataManager.Instance != null)
-            //						{
-            //							if (soulStarData != null)
-            //							{
-            //								if (SoulDataManager.Instance.IsSoulOpen(soulStarData.NodeID))
-            //								{
-            //									soulStarData.OpenScriptFun();
-            //								}
-            //							}
-            //						}
-            //					}
-            //					foreach (GameObject gameObject2 in PlayersManager.AllPlayers)
-            //					{
-            //						PalNPC component2 = gameObject2.GetComponent<PalNPC>();
-            //						if (component2.Data.HPMPDP != null)
-            //						{
-            //							component2.Data.HPMPDP.SetWithoutEvents(component2.Data.LoadHP, component2.Data.LoadMP, component2.Data.LoadDP);
-            //						}
-            //					}
-            //					try
-            //					{
-            //						if (ItemManager.GetInstance() != null)
-            //						{
-            //							ItemPackage orCreatePackage2 = ItemManager.GetInstance().GetOrCreatePackage(1u);
-            //							if (orCreatePackage2 != null)
-            //							{
-            //								foreach (IItem[] array in ItemManager.GetInstance().GetOrCreatePackage(1u).ForEachItemArrayInPackage())
-            //								{
-            //									if (array != null && array.Length >= 0 && array[0] != null)
-            //									{
-            //										if (0 < array.Length && array[0].ItemType != null)
-            //										{
-            //											CompoundItemList.ReCheck(array[0].ItemType.TypeID);
-            //										}
-            //									}
-            //								}
-            //								int hadCreateCount = CompoundItemList.HadCreateCount;
-            //								AchievementManager.SingleAchievement[] achievements = PalBattleManager.Instance().m_Achievement.m_Achievements;
-            //								achievements[7].m_CurrentNum = hadCreateCount;
-            //								achievements[8].m_CurrentNum = hadCreateCount;
-            //								achievements[9].m_CurrentNum = hadCreateCount;
-            //							}
-            //						}
-            //					}
-            //					catch (Exception exception)
-            //					{
-            //						UnityEngine.Debug.LogException(exception);
-            //					}
-            //					try
-            //					{
-            //						for (int j = 0; j < 6; j++)
-            //						{
-            //							bool flag = true;
-            //							int num3 = j * 84;
-            //							for (int k = 0; k < 84; k++)
-            //							{
-            //								if (SoulDataManager.GetData(num3 + k) != null)
-            //								{
-            //									if (!SoulDataManager.Instance.IsSoulOpen(num3 + k))
-            //									{
-            //										flag = false;
-            //										break;
-            //									}
-            //								}
-            //							}
-            //							if (flag)
-            //							{
-            //								PalBattleManager.Instance().m_Achievement.m_Achievements[21].m_CurrentNum = ((!flag) ? 0 : 262143);
-            //								break;
-            //							}
-            //						}
-            //					}
-            //					catch (Exception exception2)
-            //					{
-            //						UnityEngine.Debug.LogException(exception2);
-            //					}
-            //					try
-            //					{
-            //						foreach (GameObject gameObject3 in PlayersManager.AllPlayers)
-            //						{
-            //							if (!(gameObject3 == null))
-            //							{
-            //								PalNPC component3 = gameObject3.GetComponent<PalNPC>();
-            //								if (!(component3 == null) && component3.Data != null)
-            //								{
-            //									if (component3.Data.CharacterID >= 0 && component3.Data.CharacterID <= 5)
-            //									{
-            //										IItem item = component3.GetSlot(EquipSlotEnum.Weapon);
-            //										if (item == null)
-            //										{
-            //											foreach (IItem[] array2 in ItemManager.GetInstance().GetOrCreatePackage(1u).ForEachItemArrayInPackage())
-            //											{
-            //												if (array2 != null && array2.Length > 0)
-            //												{
-            //													if (array2[0] is WeaponItem)
-            //													{
-            //														foreach (IItem item2 in array2)
-            //														{
-            //															if (item2 != null)
-            //															{
-            //																WeaponItem weaponItem = item2 as WeaponItem;
-            //																if (weaponItem != null && !(weaponItem.GetOwner() != null))
-            //																{
-            //																	WeaponItemType weaponItemType = weaponItem.ItemType as WeaponItemType;
-            //																	if (weaponItemType != null)
-            //																	{
-            //																		if (((ulong)weaponItemType.CharacterMark & (ulong)(1L << (component3.Data.CharacterID & 31))) != 0UL)
-            //																		{
-            //																			if (item == null)
-            //																			{
-            //																				item = weaponItem;
-            //																			}
-            //																			else if (ShowWeaponItemComparer.GetInstance().Compare(item, weaponItem) > 0)
-            //																			{
-            //																				item = weaponItem;
-            //																			}
-            //																			break;
-            //																		}
-            //																	}
-            //																}
-            //															}
-            //														}
-            //													}
-            //												}
-            //											}
-            //											if (item != null)
-            //											{
-            //												component3.PutOnEquip(item as WeaponItem);
-            //											}
-            //										}
-            //									}
-            //								}
-            //							}
-            //						}
-            //					}
-            //					catch (Exception exception3)
-            //					{
-            //						UnityEngine.Debug.LogException(exception3);
-            //					}
-            //				}
-            //				catch (Exception exception4)
-            //				{
-            //					UnityEngine.Debug.LogException(exception4);
-            //				}
-            //			};
-            //			PlayersManager.OnAddPlayer = (Action<int>)Delegate.Combine(PlayersManager.OnAddPlayer, new Action<int>(delegate(int playerid)
-            //			{
-            //				if (PalMain.Instance.CurBattleFormationManager.m_Formations.Count <= 0)
-            //				{
-            //					BattleFormationManager.BattleFormationData battleFormationData = new BattleFormationManager.BattleFormationData();
-            //					PalMain.Instance.CurBattleFormationManager.AddFormation(battleFormationData);
-            //					foreach (GameObject go in PlayersManager.ActivePlayers)
-            //					{
-            //						battleFormationData.AddOrChangeCharacter(go.GetCharacterID(), 0);
-            //					}
-            //					while (battleFormationData.m_InFormationCharaDatas.Count < 9)
-            //					{
-            //						battleFormationData.m_InFormationCharaDatas.Add(null);
-            //					}
-            //				}
-            //				else
-            //				{
-            //					BattleFormationManager.BattleFormationData battleFormationData = PalMain.Instance.CurBattleFormationManager.m_Formations[0];
-            //					while (battleFormationData.m_InFormationCharaDatas.Count < 9)
-            //					{
-            //						battleFormationData.m_InFormationCharaDatas.Add(null);
-            //					}
-            //					if (battleFormationData.GetPlayer(playerid) == null)
-            //					{
-            //						for (int i = 0; i < 9; i++)
-            //						{
-            //							if (battleFormationData.m_InFormationCharaDatas[i] == null)
-            //							{
-            //								battleFormationData.m_InFormationCharaDatas[i] = new BattleFormationManager.InFormationCharaData(playerid, 0);
-            //								break;
-            //							}
-            //						}
-            //					}
-            //				}
-            //			}));
-            //			PlayersManager.OnRemovePlayer += delegate(int playerid)
-            //			{
-            //				if (PalMain.Instance.CurBattleFormationManager.m_Formations.Count <= 0)
-            //				{
-            //					return;
-            //				}
-            //				BattleFormationManager.BattleFormationData battleFormationData = PalMain.Instance.CurBattleFormationManager.m_Formations[0];
-            //				if (battleFormationData == null)
-            //				{
-            //					return;
-            //				}
-            //				if (battleFormationData.m_InFormationCharaDatas[0] != null && battleFormationData.m_InFormationCharaDatas[0].m_CharacterID != playerid)
-            //				{
-            //					return;
-            //				}
-            //				while (battleFormationData.m_InFormationCharaDatas.Count < 9)
-            //				{
-            //					battleFormationData.m_InFormationCharaDatas.Add(null);
-            //				}
-            //				for (int i = 1; i < 9; i++)
-            //				{
-            //					BattleFormationManager.InFormationCharaData inFormationCharaData = battleFormationData.m_InFormationCharaDatas[i];
-            //					if (inFormationCharaData != null)
-            //					{
-            //						if (!(PlayersManager.GetPlayer(inFormationCharaData.m_CharacterID) == null))
-            //						{
-            //							battleFormationData.m_InFormationCharaDatas[i] = battleFormationData.m_InFormationCharaDatas[0];
-            //							battleFormationData.m_InFormationCharaDatas[0] = inFormationCharaData;
-            //							break;
-            //						}
-            //					}
-            //				}
-            //			};
-
-            //			EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Combine(EntityManager.OnLoadOver, new EntityManager.void_fun(MiniMap.Instance.OnLoadOver));
-            //			MissionManager.Initialize();
-            //			HuanHuaManager.Instance.Initialize();
-            //			PanelFaceManager.Initialize();
-            //			PanelPositonManager.Initialize();
-            //			Cutscene2DManager.Initialize();
-            //			ScenesManager.Instance.RandomFlash();
-            //			TimeManager.Initialize();
-            //			SaveManager.OnLoadOver -= SceneFall2.SetLastPointOnLoadOver;
-            //			SaveManager.OnLoadOver += SceneFall2.SetLastPointOnLoadOver;
-            //			PalMain.MinFPS = this.minFPS;
-            //			PalMain.MinDeltaTime = 1f / this.minFPS;
-            //			PalMain.backgroundAudio = base.gameObject.GetComponent<BackgroundAudio>();
-            //			if (PalMain.backgroundAudio == null)
-            //			{
-            //				PalMain.backgroundAudio = base.gameObject.AddComponent<BackgroundAudio>();
-            //			}
-            //			OptionConfig.GetInstance().Use_CharacterEmission();
-            //SaveManager.LoadGlobalData();
-            //			FunfiaSteamManager funfiaSteamManager = FunfiaSteamManager.Instance;
-            //			if (SkillSEPreloader.s_preloadEnable && SkillSEPreloader.Instance == null)
-            //			{
-            //				SkillSEPreloader.Initialize();
-            //			}
-        }
-
-        public void ReStart()
-        {
-            //UIManager.Instance.DoNotOpenMainMenu = false;
-            //PlayerTeam.ReStart();
-            //PlayersManager.Restart();
-            //PlayerCtrlManager.Reset();
-            //PalMain.Instance.CurBattleFormationManager.Clear();
-            //BattleFormationManager.BattleFormationData battleFormationData = new BattleFormationManager.BattleFormationData();
-            //battleFormationData.m_InFormationCharaDatas.AddRange(new BattleFormationManager.InFormationCharaData[9]);
-            //PalMain.Instance.CurBattleFormationManager.AddFormation(battleFormationData);
-            //PalBattleManager.Instance().Restart();
-            //FlagManager.InitFlags();
-            //ItemManager.GetInstance().ClearData();
-            //for (int i = 0; i < PlayersManager.AllPlayers.Count; i++)
-            //{
-            //    try
-            //    {
-            //        PalNPC component = PlayersManager.AllPlayers[i].GetComponent<PalNPC>();
-            //        if (component != null && component.Data != null && component.m_SkillIDs != null)
-            //        {
-            //            PlayersManager.AllPlayers[i].GetComponent<PalNPC>().Data.Exp = 0;
-            //            PlayersManager.AllPlayers[i].GetComponent<PalNPC>().Data.Soul = 0;
-            //            PlayersManager.AllPlayers[i].GetComponent<PalNPC>().m_SkillIDs.Clear();
-            //            if (i < PlayersManager.AllPlayers.Count)
-            //            {
-            //                component = PlayersManager.AllPlayers[i].GetComponent<PalNPC>();
-            //                if (component != null)
-            //                {
-            //                    BuffDebuffManager.BuffDebuffOwner buffDebuffData = PlayersManager.AllPlayers[i].GetComponent<PalNPC>().BuffDebuffData;
-            //                    if (buffDebuffData != null)
-            //                    {
-            //                        buffDebuffData.ClearData();
-            //                    }
-            //                }
-            //            }
-            //        }
-            //    }
-            //    catch
-            //    {
-            //    }
-            //}
-            //OrnamentItemTypeCache.ClearIsGet();
-            //FashionClothItemTypeCache.ClearIsGet();
-            //MonsterProperty.HideAll();
-            //UIInformation_Help_Item.ReStart();
-            //UIInformation_StrangeNews_Item.ReStart();
-            //MissionManager.Restart();
-            //RenownManager.Reset();
-            //HuanHuaManager.Instance.Reset();
-            //DynamicObjsDataManager.Instance.Clear();
-        }
-
-        //		// Token: 0x060036A6 RID: 13990 RVA: 0x0018A38C File Offset: 0x0018858C
         //		public static bool GetPersonCtrl()
         //		{
         //			return PlayerCtrlManager.bControl;
         //		}
 
-        //		// Token: 0x060036A7 RID: 13991 RVA: 0x0018A394 File Offset: 0x00188594
         //		public static void CheckLottery(out int result, out string outString)
         //		{
         //			result = 1;
@@ -838,7 +669,6 @@ namespace SoftStar.Pal6
         //			outString = stringBuilder.ToString();
         //		}
 
-        //		// Token: 0x060036A8 RID: 13992 RVA: 0x0018A3BC File Offset: 0x001885BC
         //		public static void SpawnLottery()
         //		{
         //			List<PalGameObjectBase> monsters = CharactersManager.Instance.Monsters;
@@ -878,13 +708,11 @@ namespace SoftStar.Pal6
         //			interact.ActionClassName = "baoxiang_Lottery";
         //		}
 
-        //		// Token: 0x060036A9 RID: 13993 RVA: 0x0018A4EC File Offset: 0x001886EC
         //		public static void SetGameState(GameState newState)
         //		{
         //			GameStateManager.CurGameState = newState;
         //		}
 
-        //		// Token: 0x060036AA RID: 13994 RVA: 0x0018A4F4 File Offset: 0x001886F4
         //		public static void ChangeModel(int ID, GameObject newGo)
         //		{
         //			GameObject gameObject = PlayersManager.FindMainChar(ID, true);
@@ -913,13 +741,11 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x060036AB RID: 13995 RVA: 0x0018A57C File Offset: 0x0018877C
         //		public static void AddRenownValue(int ID, int AddValue)
         //		{
         //			RenownManager.AddRenownValue(ID, AddValue);
         //		}
 
-        //		// Token: 0x060036AC RID: 13996 RVA: 0x0018A588 File Offset: 0x00188788
         //		public static Renown.Manner GetRenownManner(int ID)
         //		{
         //			return RenownManager.GetRenownManner(ID);
@@ -939,21 +765,18 @@ namespace SoftStar.Pal6
         //			return result;
         //		}
 
-        //		// Token: 0x060036AE RID: 13998 RVA: 0x0018A5BC File Offset: 0x001887BC
         //		public static int GetPlayerID()
         //		{
         //			string name = PlayersManager.Player.name;
         //			return int.Parse(name);
         //		}
 
-        //		// Token: 0x060036AF RID: 13999 RVA: 0x0018A5DC File Offset: 0x001887DC
         //		public static bool ExistInTeam(int id)
         //		{
         //			GameObject player = PlayersManager.GetPlayer(id);
         //			return player != null;
         //		}
 
-        //		// Token: 0x060036B0 RID: 14000 RVA: 0x0018A5F8 File Offset: 0x001887F8
         //		public static GameObject GetModelObj(GameObject go)
         //		{
         //			GameObject gameObject = null;
@@ -969,89 +792,80 @@ namespace SoftStar.Pal6
         //			return gameObject;
         //		}
 
-        //		// Token: 0x060036B1 RID: 14001 RVA: 0x0018A630 File Offset: 0x00188830
         //		public static GameObject AddPlayer(int ID)
         //		{
         //			return PlayersManager.AddPlayer(ID, true);
         //		}
 
-        //		// Token: 0x060036B2 RID: 14002 RVA: 0x0018A63C File Offset: 0x0018883C
         //		public static void SetPlayer(int Index)
         //		{
         //			PlayersManager.SetPlayer(Index, true);
         //		}
 
-        public static PalMain GameMain
+        public static int CreateInstance()
         {
-            get
-            {               
-                return PalMain.instance;
-            }
+            //if (PalMain.instance != null)
+            //{
+            //    return 1;
+            //}
+            //MainTester.GetTester();
+            //UnityEngine.Object @object = UnityEngine.Object.Instantiate(Resources.Load("Template/System/Main"));
+            //if (!@object)
+            //{
+            //    UnityEngine.Debug.LogError("Error : PalMain初始化失败");
+            //    return 0;
+            //}
+            //UnityEngine.Object object2 = @object;
+            //if (object2 == null)
+            //{
+            //    UnityEngine.Debug.LogError("main_Obj == null");
+            //    return 0;
+            //}
+            //GameObject gameObject = object2 as GameObject;
+            //gameObject.name = "Main";
+            //PalMain.instance = gameObject.GetComponent<PalMain>();
+            //if (PalMain.instance == null)
+            //{
+            //    UnityEngine.Debug.LogError("Main Prefab 没有 PalMain");
+            //    return 0;
+            //}
+            //PalMain.instance.Initialize();
+            return 1;
         }
 
-        public static PalMain Instance
-        {
-            get
-            {
-                return PalMain.instance;
-            }
-        }
-
-        //		// Token: 0x060036B6 RID: 14006 RVA: 0x0018A71C File Offset: 0x0018891C
         //		public static bool Exist()
         //		{
         //			return PalMain.instance != null;
         //		}
 
-        //		// Token: 0x17000433 RID: 1075
-        //		// (get) Token: 0x060036B7 RID: 14007 RVA: 0x0018A72C File Offset: 0x0018892C
-        //		public static bool IsLow
+        //		private void Awake()
         //		{
-        //			get
+        //			if (PalMain.instance != null && PalMain.instance != this)
         //			{
-        //				bool result = false;
-        //				if (PalMain.ForceLow)
-        //				{
-        //					result = true;
-        //				}
-        //				else if (SystemInfo.graphicsMemorySize < 900)
-        //				{
-        //					result = true;
-        //				}
-        //				else if (PalMain.IsWin32)
-        //				{
-        //					result = true;
-        //				}
-        //				return result;
+        //				UnityEngine.Object.Destroy(base.gameObject);
+        //				return;
         //			}
+        //			this.Initialize();
         //		}
 
-        //		// Token: 0x17000434 RID: 1076
-        //		// (get) Token: 0x060036B8 RID: 14008 RVA: 0x0018A770 File Offset: 0x00188970
-        //		public static bool MemoryLack
+        //		private void OnDestroy()
         //		{
-        //			get
-        //			{
-        //				return false;
-        //			}
         //		}
 
-        //		// Token: 0x060036BB RID: 14011 RVA: 0x0018A7B8 File Offset: 0x001889B8
         //		public static void LoadOneLangueUIAtlas(string subname)
         //		{
         //			string path = subname.ToLanguagePath();
-        //			UIAtlas uiatlas = FileLoader.LoadComponentFromFile<UIAtlas>(path, false);
+        //			UIAtlas uIAtlas = FileLoader.LoadComponentFromFile<UIAtlas>(path, false);
         //			FileLoader.SetNoUnload(path, true);
         //			string path2 = ("AssetBundles/UI/" + subname + "_Empty").ToAssetBundlePath();
-        //			UIAtlas uiatlas2 = FileLoader.LoadComponentFromFile<UIAtlas>(path2, false);
+        //			UIAtlas uIAtlas2 = FileLoader.LoadComponentFromFile<UIAtlas>(path2, false);
         //			FileLoader.SetNoUnload(path2, true);
-        //			uiatlas2.gameObject.name = subname + "_Empty";
-        //			NGUITools.SetCacheAtlas(subname, uiatlas);
-        //			NGUITools.SetCacheAtlas(subname + "_Empty", uiatlas2);
-        //			uiatlas2.replacement = uiatlas;
+        //			uIAtlas2.gameObject.name = subname + "_Empty";
+        //			NGUITools.SetCacheAtlas(subname, uIAtlas);
+        //			NGUITools.SetCacheAtlas(subname + "_Empty", uIAtlas2);
+        //			uIAtlas2.replacement = uIAtlas;
         //		}
 
-        //		// Token: 0x060036BC RID: 14012 RVA: 0x0018A838 File Offset: 0x00188A38
         //		public static void ReleaseLangueUIAtlas(string subname)
         //		{
         //			string path = subname.ToLanguagePath();
@@ -1060,43 +874,438 @@ namespace SoftStar.Pal6
         //			NGUITools.RemoveCacheAtlas(subname);
         //		}
 
-        //		// Token: 0x060036BD RID: 14013 RVA: 0x0018A860 File Offset: 0x00188A60
         //		public static void ReloadLangueUIAtlas(string subname)
         //		{
         //			string path = subname.ToLanguagePath();
-        //			UIAtlas uiatlas = FileLoader.LoadComponentFromFile<UIAtlas>(path, false);
+        //			UIAtlas uIAtlas = FileLoader.LoadComponentFromFile<UIAtlas>(path, false);
         //			FileLoader.SetNoUnload(path, true);
         //			string name = subname + "_Empty";
         //			UIAtlas cacheAtlas = NGUITools.GetCacheAtlas(name);
-        //			NGUITools.SetCacheAtlas(subname, uiatlas);
-        //			cacheAtlas.replacement = uiatlas;
+        //			NGUITools.SetCacheAtlas(subname, uIAtlas);
+        //			cacheAtlas.replacement = uIAtlas;
         //		}
 
-        /// <summary>
-        /// 推迟物品
-        /// </summary>
-        /// <param name="inItem"></param>
-        private void PutOffItem(IItem inItem)
-        {
-            //IItemAssemble<SymbolPanelItem> itemAssemble = inItem as IItemAssemble<SymbolPanelItem>;
-            //if (itemAssemble != null)
-            //{
-            //    SymbolPanelItem owner = itemAssemble.GetOwner();
-            //    if (owner != null)
-            //    {
-            //        owner.RemoveNode(itemAssemble as SymbolNodeItem);
-            //    }
-            //}
-            //IItemAssemble<PalNPC> itemAssemble2 = inItem as IItemAssemble<PalNPC>;
-            //if (itemAssemble2 != null)
-            //{
-            //    PalNPC owner2 = itemAssemble2.GetOwner();
-            //    if (owner2 != null)
-            //    {
-            //        owner2.PutOffEquip(inItem);
-            //    }
-            //}
-        }
+        //		public static void LoadUI()
+        //		{
+        //			string[] bigImageNames = UIManager.BigImageNames;
+        //			for (int i = 0; i < bigImageNames.Length; i++)
+        //			{
+        //				string str = bigImageNames[i];
+        //				FileLoader.LoadObjectFromFile<Texture>(("AssetBundles/UI/BigImage/" + str).ToAssetBundlePath(), false, true);
+        //				FileLoader.SetNoUnload(("AssetBundles/UI/BigImage/" + str).ToAssetBundlePath(), true);
+        //			}
+        //			FileLoader.LoadComponentFromFile<UIAtlas>("AssetBundles/UI/Menu0".ToAssetBundlePath(), false);
+        //			FileLoader.SetNoUnload("AssetBundles/UI/Menu0".ToAssetBundlePath(), true);
+        //			FileLoader.LoadComponentFromFile<UIAtlas>("AssetBundles/UI/Dialog0".ToAssetBundlePath(), false);
+        //			FileLoader.SetNoUnload("AssetBundles/UI/Dialog0".ToAssetBundlePath(), true);
+        //			FileLoader.LoadComponentFromFile<UIAtlas>("AssetBundles/UI/Dialog1".ToAssetBundlePath(), false);
+        //			FileLoader.SetNoUnload("AssetBundles/UI/Dialog1".ToAssetBundlePath(), true);
+        //			PalMain.LoadOneLangueUIAtlas("StringImage0");
+        //		}
+
+        //		private void Initialize()
+        //		{
+        //			if (PalMain.initialized || !Application.isPlaying)
+        //			{
+        //				return;
+        //			}
+        //			UnityEngine.Debug.Log("Log : CurVersion = " + this.CurVersion.ToString());
+        //			try
+        //			{
+        //				UIStart.CheckSetProcessAffintyMask_Return = UtilFun.CheckSetProcessAffintyMask(Process.GetCurrentProcess().Handle);
+        //			}
+        //			catch
+        //			{
+        //				UIStart.CheckSetProcessAffintyMask_Return = 0;
+        //			}
+        //			try
+        //			{
+        //				if (ConfigManager.ReadWritePath == null)
+        //				{
+        //					UnityEngine.Debug.LogError("Read or write fail 0x2204.");
+        //					UtilFun.WinMessageBox("read or write fail", "error", 8708);
+        //					Application.Quit();
+        //					return;
+        //				}
+        //			}
+        //			catch (Exception ex)
+        //			{
+        //				UnityEngine.Debug.Log(ex.ToString() + " 0x2204.");
+        //				UtilFun.WinMessageBox(ex.ToString(), "error", 8708);
+        //				Application.Quit();
+        //				return;
+        //			}
+        //			int num = QualitySettings.names.Length - 1;
+        //			num = Mathf.Clamp(num, 0, 10);
+        //			QualitySettings.SetQualityLevel(num);
+        //			Application.logMessageReceived -= new Application.LogCallback(LogManager.LogCallback);
+        //			Application.logMessageReceived += new Application.LogCallback(LogManager.LogCallback);
+        //			OptionConfig optionConfig = OptionConfig.GetInstance();
+        //			if (!ConfigManager.IsFileExist())
+        //			{
+        //				optionConfig.SetAllQualityFirstTime(PalMain.FirstTimeLaunch103());
+        //				optionConfig.Save();
+        //			}
+        //			optionConfig.Use_Start();
+        //			optionConfig.Use_Other();
+        //			PalMain.LoadUI();
+        //			Physics.gravity = new Vector3(0f, -20f, 0f);
+        //			Physics2D.queriesHitTriggers = false;
+        //			QualitySettings.blendWeights = BlendWeights.FourBones;
+        //			string operatingSystem = SystemInfo.operatingSystem;
+        //			PalMain.IsXP = operatingSystem.Contains("Windows XP");
+        //			PalMain.IsWin32 = !operatingSystem.Contains("64bit");
+        //			if (!PalMain.IsXP)
+        //			{
+        //				QualitySettings.anisotropicFiltering = AnisotropicFiltering.ForceEnable;
+        //				QualitySettings.shadowProjection = ShadowProjection.StableFit;
+        //			}
+        //			UnityEngine.Object.DontDestroyOnLoad(base.gameObject);
+        //			PalMain.instance = this;
+        //			PalMain.InitPermanentObject();
+        //			ItemManager.GetInstance().OnBeforeRemoveItem += new Action<IItem>(this.PutOffItem);
+        //			ItemPackage orCreatePackage = ItemManager.GetInstance().GetOrCreatePackage(1u);
+        //			orCreatePackage.OnItemAdded += delegate(IItem obj)
+        //			{
+        //				SymbolNodeItemType symbolNodeItemType = obj.ItemType as SymbolNodeItemType;
+        //				if (symbolNodeItemType != null)
+        //				{
+        //					SymbolNodeItemType.SetState(symbolNodeItemType.TypeID & 255u, true);
+        //				}
+        //				SymbolPanelItemType symbolPanelItemType = obj.ItemType as SymbolPanelItemType;
+        //				if (symbolPanelItemType != null)
+        //				{
+        //					SymbolPanelItemType.SetState(symbolPanelItemType.TypeID & 255u, true);
+        //				}
+        //				AchievementManager.SingleAchievement[] achievements = PalBattleManager.Instance().m_Achievement.m_Achievements;
+        //				OrnamentItemTypeCache.SetIsGet(obj.ItemType.TypeID, true);
+        //				achievements[190].m_CurrentNum = ((OrnamentItemTypeCache.IsGetRate() < 1f) ? 0 : 1);
+        //				FashionClothItemTypeCache.SetIsGet(obj.ItemType.TypeID, true);
+        //				achievements[189].m_CurrentNum = ((FashionClothItemTypeCache.IsGetRate() < 1f) ? 0 : 1);
+        //			};
+        //			ProceduralMaterial.substanceProcessorUsage = ProceduralProcessorUsage.All;
+        //			MouseEventManager.Initialize();
+        //			ShaderPropertyIDManager.Initialize();
+        //			MessageProcess.Initialize();
+        //			SetActiveByFlagManager.Initialize();
+        //			ScenesManager.Initialize();
+        //			FlagManager.Initialize();
+        //			DistanceCullManager.Initialize();
+        //			MoviesManager.Initialize();
+        //			CharactersManager.Initialize();
+        //			InputManager.Initialize();
+        //			PlayerCtrlManager.Initialize();
+        //			PalBattleManager.Initialize();
+        //			EntityManager.Initialize();
+        //			MissionTick.Initialize();
+        //			PlayersManager.Initialize();
+        //			RenownManager.Initialize();
+        //			AnimWithoutClothSet.Initialize();
+        //			SlowLoopAnimSet.Initialize();
+        //			WaterEffectTrigger.Initialize();
+        //			CompoundItemList.CreateWatch();
+        //			SaveManager.OnLoadOver += delegate
+        //			{
+        //				try
+        //				{
+        //					int num2 = 0;
+        //					List<IEnumerator> list = new List<IEnumerator>(8);
+        //					foreach (GameObject current in PlayersManager.AllPlayers)
+        //					{
+        //						if (current != null)
+        //						{
+        //							PalNPC component = current.GetComponent<PalNPC>();
+        //							if (component != null)
+        //							{
+        //								list.Add(component.Prepare());
+        //							}
+        //						}
+        //					}
+        //					list.Add(ItemManager.GetInstance().Prepare());
+        //					list.Add(BuffDebuffManager.GetInstance().Prepare());
+        //					while (list.Count > 0)
+        //					{
+        //						list.RemoveAll((IEnumerator curManager) => curManager == null || !curManager.MoveNext());
+        //						num2++;
+        //						if (num2 > 32)
+        //						{
+        //							UnityEngine.Debug.LogError("加载进程可能陷入了死循环");
+        //							foreach (IEnumerator current2 in list)
+        //							{
+        //								UnityEngine.Debug.LogError(current2.ToString());
+        //							}
+        //							break;
+        //						}
+        //					}
+        //					CompoundItemList.CreateWatch();
+        //					SoulStarData[] datasFromFile = SoulDataManager.GetDatasFromFile();
+        //					for (int i = 0; i < datasFromFile.Length; i++)
+        //					{
+        //						SoulStarData soulStarData = datasFromFile[i];
+        //						if (SoulDataManager.Instance != null)
+        //						{
+        //							if (soulStarData != null)
+        //							{
+        //								if (SoulDataManager.Instance.IsSoulOpen(soulStarData.NodeID))
+        //								{
+        //									soulStarData.OpenScriptFun();
+        //								}
+        //							}
+        //						}
+        //					}
+        //					foreach (GameObject current3 in PlayersManager.AllPlayers)
+        //					{
+        //						PalNPC component2 = current3.GetComponent<PalNPC>();
+        //						if (component2.Data.HPMPDP != null)
+        //						{
+        //							component2.Data.HPMPDP.SetWithoutEvents(component2.Data.LoadHP, component2.Data.LoadMP, component2.Data.LoadDP);
+        //						}
+        //					}
+        //					try
+        //					{
+        //						if (ItemManager.GetInstance() != null)
+        //						{
+        //							ItemPackage orCreatePackage2 = ItemManager.GetInstance().GetOrCreatePackage(1u);
+        //							if (orCreatePackage2 != null)
+        //							{
+        //								foreach (IItem[] current4 in ItemManager.GetInstance().GetOrCreatePackage(1u).ForEachItemArrayInPackage())
+        //								{
+        //									if (current4 != null && current4.Length >= 0 && current4[0] != null)
+        //									{
+        //										if (0 < current4.Length && current4[0].ItemType != null)
+        //										{
+        //											CompoundItemList.ReCheck(current4[0].ItemType.TypeID);
+        //										}
+        //									}
+        //								}
+        //								int hadCreateCount = CompoundItemList.HadCreateCount;
+        //								AchievementManager.SingleAchievement[] achievements = PalBattleManager.Instance().m_Achievement.m_Achievements;
+        //								achievements[7].m_CurrentNum = hadCreateCount;
+        //								achievements[8].m_CurrentNum = hadCreateCount;
+        //								achievements[9].m_CurrentNum = hadCreateCount;
+        //							}
+        //						}
+        //					}
+        //					catch (Exception exception)
+        //					{
+        //						UnityEngine.Debug.LogException(exception);
+        //					}
+        //					try
+        //					{
+        //						for (int j = 0; j < 6; j++)
+        //						{
+        //							bool flag = true;
+        //							int num3 = j * 84;
+        //							for (int k = 0; k < 84; k++)
+        //							{
+        //								if (SoulDataManager.GetData(num3 + k) != null)
+        //								{
+        //									if (!SoulDataManager.Instance.IsSoulOpen(num3 + k))
+        //									{
+        //										flag = false;
+        //										break;
+        //									}
+        //								}
+        //							}
+        //							if (flag)
+        //							{
+        //								PalBattleManager.Instance().m_Achievement.m_Achievements[21].m_CurrentNum = ((!flag) ? 0 : 262143);
+        //								break;
+        //							}
+        //						}
+        //					}
+        //					catch (Exception exception2)
+        //					{
+        //						UnityEngine.Debug.LogException(exception2);
+        //					}
+        //					try
+        //					{
+        //						foreach (GameObject current5 in PlayersManager.AllPlayers)
+        //						{
+        //							if (!(current5 == null))
+        //							{
+        //								PalNPC component3 = current5.GetComponent<PalNPC>();
+        //								if (!(component3 == null) && component3.Data != null)
+        //								{
+        //									if (component3.Data.CharacterID >= 0 && component3.Data.CharacterID <= 5)
+        //									{
+        //										IItem item = component3.GetSlot(EquipSlotEnum.Weapon);
+        //										if (item == null)
+        //										{
+        //											foreach (IItem[] current6 in ItemManager.GetInstance().GetOrCreatePackage(1u).ForEachItemArrayInPackage())
+        //											{
+        //												if (current6 != null && current6.Length > 0)
+        //												{
+        //													if (current6[0] is WeaponItem)
+        //													{
+        //														IItem[] array = current6;
+        //														for (int l = 0; l < array.Length; l++)
+        //														{
+        //															IItem item2 = array[l];
+        //															if (item2 != null)
+        //															{
+        //																WeaponItem weaponItem = item2 as WeaponItem;
+        //																if (weaponItem != null && !(weaponItem.GetOwner() != null))
+        //																{
+        //																	WeaponItemType weaponItemType = weaponItem.ItemType as WeaponItemType;
+        //																	if (weaponItemType != null)
+        //																	{
+        //																		if (((ulong)weaponItemType.CharacterMark & (ulong)(1L << (component3.Data.CharacterID & 31))) != 0uL)
+        //																		{
+        //																			if (item == null)
+        //																			{
+        //																				item = weaponItem;
+        //																			}
+        //																			else if (ShowWeaponItemComparer.GetInstance().Compare(item, weaponItem) > 0)
+        //																			{
+        //																				item = weaponItem;
+        //																			}
+        //																			break;
+        //																		}
+        //																	}
+        //																}
+        //															}
+        //														}
+        //													}
+        //												}
+        //											}
+        //											if (item != null)
+        //											{
+        //												component3.PutOnEquip(item as WeaponItem);
+        //											}
+        //										}
+        //									}
+        //								}
+        //							}
+        //						}
+        //					}
+        //					catch (Exception exception3)
+        //					{
+        //						UnityEngine.Debug.LogException(exception3);
+        //					}
+        //				}
+        //				catch (Exception exception4)
+        //				{
+        //					UnityEngine.Debug.LogException(exception4);
+        //				}
+        //			};
+        //			PlayersManager.OnAddPlayer = (Action<int>)Delegate.Combine(PlayersManager.OnAddPlayer, new Action<int>(delegate(int playerid)
+        //			{
+        //				if (PalMain.Instance.CurBattleFormationManager.m_Formations.Count <= 0)
+        //				{
+        //					BattleFormationManager.BattleFormationData battleFormationData = new BattleFormationManager.BattleFormationData();
+        //					PalMain.Instance.CurBattleFormationManager.AddFormation(battleFormationData);
+        //					foreach (GameObject current in PlayersManager.ActivePlayers)
+        //					{
+        //						battleFormationData.AddOrChangeCharacter(current.GetCharacterID(), 0);
+        //					}
+        //					while (battleFormationData.m_InFormationCharaDatas.Count < 9)
+        //					{
+        //						battleFormationData.m_InFormationCharaDatas.Add(null);
+        //					}
+        //				}
+        //				else
+        //				{
+        //					BattleFormationManager.BattleFormationData battleFormationData = PalMain.Instance.CurBattleFormationManager.m_Formations[0];
+        //					while (battleFormationData.m_InFormationCharaDatas.Count < 9)
+        //					{
+        //						battleFormationData.m_InFormationCharaDatas.Add(null);
+        //					}
+        //					if (battleFormationData.GetPlayer(playerid) == null)
+        //					{
+        //						for (int i = 0; i < 9; i++)
+        //						{
+        //							if (battleFormationData.m_InFormationCharaDatas[i] == null)
+        //							{
+        //								battleFormationData.m_InFormationCharaDatas[i] = new BattleFormationManager.InFormationCharaData(playerid, 0);
+        //								break;
+        //							}
+        //						}
+        //					}
+        //				}
+        //			}));
+        //			PlayersManager.OnRemovePlayer += delegate(int playerid)
+        //			{
+        //				if (PalMain.Instance.CurBattleFormationManager.m_Formations.Count <= 0)
+        //				{
+        //					return;
+        //				}
+        //				BattleFormationManager.BattleFormationData battleFormationData = PalMain.Instance.CurBattleFormationManager.m_Formations[0];
+        //				if (battleFormationData == null)
+        //				{
+        //					return;
+        //				}
+        //				if (battleFormationData.m_InFormationCharaDatas[0] != null && battleFormationData.m_InFormationCharaDatas[0].m_CharacterID != playerid)
+        //				{
+        //					return;
+        //				}
+        //				while (battleFormationData.m_InFormationCharaDatas.Count < 9)
+        //				{
+        //					battleFormationData.m_InFormationCharaDatas.Add(null);
+        //				}
+        //				for (int i = 1; i < 9; i++)
+        //				{
+        //					BattleFormationManager.InFormationCharaData inFormationCharaData = battleFormationData.m_InFormationCharaDatas[i];
+        //					if (inFormationCharaData != null)
+        //					{
+        //						if (!(PlayersManager.GetPlayer(inFormationCharaData.m_CharacterID) == null))
+        //						{
+        //							battleFormationData.m_InFormationCharaDatas[i] = battleFormationData.m_InFormationCharaDatas[0];
+        //							battleFormationData.m_InFormationCharaDatas[0] = inFormationCharaData;
+        //							break;
+        //						}
+        //					}
+        //				}
+        //			};
+        //			UIManager.Instance.Initialize();
+        //			EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Combine(EntityManager.OnLoadOver, new EntityManager.void_fun(MiniMap.Instance.OnLoadOver));
+        //			PalMain.initialized = true;
+        //			MissionManager.Initialize();
+        //			HuanHuaManager.Instance.Initialize();
+        //			PanelFaceManager.Initialize();
+        //			PanelPositonManager.Initialize();
+        //			Cutscene2DManager.Initialize();
+        //			ScenesManager.Instance.RandomFlash();
+        //			TimeManager.Initialize();
+        //			SaveManager.OnLoadOver -= new SaveManager.void_fun(SceneFall2.SetLastPointOnLoadOver);
+        //			SaveManager.OnLoadOver += new SaveManager.void_fun(SceneFall2.SetLastPointOnLoadOver);
+        //			PalMain.MinFPS = this.minFPS;
+        //			PalMain.MinDeltaTime = 1f / this.minFPS;
+        //			PalMain.backgroundAudio = base.gameObject.GetComponent<BackgroundAudio>();
+        //			if (PalMain.backgroundAudio == null)
+        //			{
+        //				PalMain.backgroundAudio = base.gameObject.AddComponent<BackgroundAudio>();
+        //			}
+        //			OptionConfig.GetInstance().Use_CharacterEmission();
+        //			SaveManager.LoadGlobalData();
+        //			FunfiaSteamManager funfiaSteamManager = FunfiaSteamManager.Instance;
+        //			if (SkillSEPreloader.s_preloadEnable && SkillSEPreloader.Instance == null)
+        //			{
+        //				SkillSEPreloader.Initialize();
+        //			}
+        //		}
+
+        //		private void PutOffItem(IItem inItem)
+        //		{
+        //			IItemAssemble<SymbolPanelItem> itemAssemble = inItem as IItemAssemble<SymbolPanelItem>;
+        //			if (itemAssemble != null)
+        //			{
+        //				SymbolPanelItem owner = itemAssemble.GetOwner();
+        //				if (owner != null)
+        //				{
+        //					owner.RemoveNode(itemAssemble as SymbolNodeItem);
+        //				}
+        //			}
+        //			IItemAssemble<PalNPC> itemAssemble2 = inItem as IItemAssemble<PalNPC>;
+        //			if (itemAssemble2 != null)
+        //			{
+        //				PalNPC owner2 = itemAssemble2.GetOwner();
+        //				if (owner2 != null)
+        //				{
+        //					owner2.PutOffEquip(inItem);
+        //				}
+        //			}
+        //		}
 
         //		public void InitPlayBeginMovie()
         //		{
@@ -1106,7 +1315,6 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x060036C2 RID: 14018 RVA: 0x0018AE28 File Offset: 0x00189028
         //		private void PlayBeginMovie(float d, float a)
         //		{
         //			if (StartInit.Instance == null)
@@ -1120,81 +1328,79 @@ namespace SoftStar.Pal6
         //			this.updateHandles = (PalMain.void_func_float_float)Delegate.Remove(this.updateHandles, new PalMain.void_func_float_float(this.PlayBeginMovie));
         //		}
 
-        private void Start()
-        {
-            //this.m_LevelCullOpParams.Add(0, new PalMain.SceneOptiDistFogParams(0, -1f, 305f, 305f));
-            //this.m_LevelCullOpParams.Add(1, new PalMain.SceneOptiDistFogParams(1, -1f, 200f, 105f));
-            //this.m_LevelCullOpParams.Add(2, new PalMain.SceneOptiDistFogParams(2, -1f, 145f, 145f));
-            //this.m_LevelCullOpParams.Add(3, new PalMain.SceneOptiDistFogParams(3, -1f, 150f, 75f));
-            //this.m_LevelCullOpParams.Add(4, new PalMain.SceneOptiDistFogParams(4, -1f, 150f, 75f));
-            //this.m_LevelCullOpParams.Add(5, new PalMain.SceneOptiDistFogParams(5, -1f, 200f, 75f));
-            //this.m_LevelCullOpParams.Add(6, new PalMain.SceneOptiDistFogParams(6, -1f, 70f, 45f));
-            //this.m_LevelCullOpParams.Add(7, new PalMain.SceneOptiDistFogParams(7, -1f, 150f, 95f));
-            //this.m_LevelCullOpParams.Add(8, new PalMain.SceneOptiDistFogParams(8, -1f, 200f, 105f));
-            //this.m_LevelCullOpParams.Add(9, new PalMain.SceneOptiDistFogParams(9, -1f, 100f, 65f));
-            //this.m_LevelCullOpParams.Add(10, new PalMain.SceneOptiDistFogParams(10, -1f, 120f, 85f));
-            //this.m_LevelCullOpParams.Add(11, new PalMain.SceneOptiDistFogParams(11, -1f, 70f, 35f));
-            //this.m_LevelCullOpParams.Add(12, new PalMain.SceneOptiDistFogParams(12, -1f, 80f, 105f));
-            //this.m_LevelCullOpParams.Add(13, new PalMain.SceneOptiDistFogParams(13, -1f, 150f, 75f));
-            //this.m_LevelCullOpParams.Add(14, new PalMain.SceneOptiDistFogParams(14, -1f, 140f, 85f));
-            //this.m_LevelCullOpParams.Add(15, new PalMain.SceneOptiDistFogParams(15, -1f, 100f, 75f));
-            //this.m_LevelCullOpParams.Add(16, new PalMain.SceneOptiDistFogParams(16, -1f, 200f, 205f));
-            //this.m_LevelCullOpParams.Add(17, new PalMain.SceneOptiDistFogParams(17, -1f, 140f, 75f));
-            //this.m_LevelCullOpParams.Add(18, new PalMain.SceneOptiDistFogParams(18, -1f, 200f, 205f));
-            //this.m_LevelCullOpParams.Add(19, new PalMain.SceneOptiDistFogParams(19, -1f, 250f, 155f));
-            //this.m_LevelCullOpParams.Add(20, new PalMain.SceneOptiDistFogParams(20, -1f, 150f, 85f));
-            //this.m_LevelCullOpParams.Add(21, new PalMain.SceneOptiDistFogParams(21, -1f, 300f, 305f));
-            //this.m_LevelCullOpParams.Add(22, new PalMain.SceneOptiDistFogParams(22, -1f, 150f, 55f));
-            //this.m_LevelCullOpParams.Add(23, new PalMain.SceneOptiDistFogParams(23, -1f, 120f, 55f));
-            //this.m_LevelCullOpParams.Add(24, new PalMain.SceneOptiDistFogParams(24, -1f, 100f, 105f));
-            //this.m_LevelCullOpParams.Add(25, new PalMain.SceneOptiDistFogParams(25, -1f, 120f, 45f));
-            //this.m_LevelCullOpParams.Add(26, new PalMain.SceneOptiDistFogParams(26, -1f, 75f, 75f));
-            //this.m_LevelCullOpParams.Add(27, new PalMain.SceneOptiDistFogParams(27, -1f, 200f, 75f));
-            //this.m_LevelCullOpParams.Add(28, new PalMain.SceneOptiDistFogParams(28, -1f, 200f, 75f));
-            //this.m_LevelCullOpParams.Add(29, new PalMain.SceneOptiDistFogParams(29, -1f, 105f, 105f));
-            //this.m_LevelCullOpParams.Add(30, new PalMain.SceneOptiDistFogParams(30, -1f, 105f, 105f));
-            //this.m_LevelCullOpParams.Add(31, new PalMain.SceneOptiDistFogParams(31, -1f, 150f, 75f));
-            //this.m_LevelCullOpParams.Add(32, new PalMain.SceneOptiDistFogParams(32, -1f, 105f, 105f));
-            //this.m_LevelCullOpParams.Add(33, new PalMain.SceneOptiDistFogParams(33, -1f, 200f, 105f));
-            //this.m_LevelCullOpParams.Add(34, new PalMain.SceneOptiDistFogParams(34, -1f, 905f, 905f));
-            string text = SystemInfo.graphicsDeviceName;
-            string text2 = SystemInfo.graphicsDeviceVendor;
-            UnityEngine.Debug.Log(string.Format("[Info] : Graphics Device Name={0}, Vender={1}", text, text2));
-            text = text.ToLower();
-            text2 = text2.ToLower();
-            //if (text.Contains("intel"))
-            //{
-            //    this.m_bIsIntel = true;
-            //}
-            //if (text2.Contains("intel"))
-            //{
-            //    this.m_bIsIntel = true;
-            //}
-            //if (text.Contains("gdi"))
-            //{
-            //    this.m_bIsGDI = true;
-            //}
-            //if (text2.Contains("gdi"))
-            //{
-            //    this.m_bIsGDI = true;
-            //}
-            //int systemMemorySize = SystemInfo.systemMemorySize;
-            //if (base.GetComponent<LoadFont>() == null)
-            //{
-            //    base.gameObject.AddComponent<LoadFont>();
-            //}
-            //if (base.GetComponent<AudioSource>() == null)
-            //{
-            //    base.gameObject.AddComponent<AudioSource>();
-            //}
-            //PalMain.backgroundAudio = base.GetComponent<BackgroundAudio>();
-            //if (PalMain.backgroundAudio == null)
-            //{
-            //    PalMain.backgroundAudio = base.gameObject.AddComponent<BackgroundAudio>();
-            //}
-        }
+        //		private void Start()
+        //		{
+        //			this.m_LevelCullOpParams.Add(0, new PalMain.SceneOptiDistFogParams(0, -1f, 305f, 305f));
+        //			this.m_LevelCullOpParams.Add(1, new PalMain.SceneOptiDistFogParams(1, -1f, 200f, 105f));
+        //			this.m_LevelCullOpParams.Add(2, new PalMain.SceneOptiDistFogParams(2, -1f, 145f, 145f));
+        //			this.m_LevelCullOpParams.Add(3, new PalMain.SceneOptiDistFogParams(3, -1f, 150f, 75f));
+        //			this.m_LevelCullOpParams.Add(4, new PalMain.SceneOptiDistFogParams(4, -1f, 150f, 75f));
+        //			this.m_LevelCullOpParams.Add(5, new PalMain.SceneOptiDistFogParams(5, -1f, 200f, 75f));
+        //			this.m_LevelCullOpParams.Add(6, new PalMain.SceneOptiDistFogParams(6, -1f, 70f, 45f));
+        //			this.m_LevelCullOpParams.Add(7, new PalMain.SceneOptiDistFogParams(7, -1f, 150f, 95f));
+        //			this.m_LevelCullOpParams.Add(8, new PalMain.SceneOptiDistFogParams(8, -1f, 200f, 105f));
+        //			this.m_LevelCullOpParams.Add(9, new PalMain.SceneOptiDistFogParams(9, -1f, 100f, 65f));
+        //			this.m_LevelCullOpParams.Add(10, new PalMain.SceneOptiDistFogParams(10, -1f, 120f, 85f));
+        //			this.m_LevelCullOpParams.Add(11, new PalMain.SceneOptiDistFogParams(11, -1f, 70f, 35f));
+        //			this.m_LevelCullOpParams.Add(12, new PalMain.SceneOptiDistFogParams(12, -1f, 80f, 105f));
+        //			this.m_LevelCullOpParams.Add(13, new PalMain.SceneOptiDistFogParams(13, -1f, 150f, 75f));
+        //			this.m_LevelCullOpParams.Add(14, new PalMain.SceneOptiDistFogParams(14, -1f, 140f, 85f));
+        //			this.m_LevelCullOpParams.Add(15, new PalMain.SceneOptiDistFogParams(15, -1f, 100f, 75f));
+        //			this.m_LevelCullOpParams.Add(16, new PalMain.SceneOptiDistFogParams(16, -1f, 200f, 205f));
+        //			this.m_LevelCullOpParams.Add(17, new PalMain.SceneOptiDistFogParams(17, -1f, 140f, 75f));
+        //			this.m_LevelCullOpParams.Add(18, new PalMain.SceneOptiDistFogParams(18, -1f, 200f, 205f));
+        //			this.m_LevelCullOpParams.Add(19, new PalMain.SceneOptiDistFogParams(19, -1f, 250f, 155f));
+        //			this.m_LevelCullOpParams.Add(20, new PalMain.SceneOptiDistFogParams(20, -1f, 150f, 85f));
+        //			this.m_LevelCullOpParams.Add(21, new PalMain.SceneOptiDistFogParams(21, -1f, 300f, 305f));
+        //			this.m_LevelCullOpParams.Add(22, new PalMain.SceneOptiDistFogParams(22, -1f, 150f, 55f));
+        //			this.m_LevelCullOpParams.Add(23, new PalMain.SceneOptiDistFogParams(23, -1f, 120f, 55f));
+        //			this.m_LevelCullOpParams.Add(24, new PalMain.SceneOptiDistFogParams(24, -1f, 100f, 105f));
+        //			this.m_LevelCullOpParams.Add(25, new PalMain.SceneOptiDistFogParams(25, -1f, 120f, 45f));
+        //			this.m_LevelCullOpParams.Add(26, new PalMain.SceneOptiDistFogParams(26, -1f, 75f, 75f));
+        //			this.m_LevelCullOpParams.Add(27, new PalMain.SceneOptiDistFogParams(27, -1f, 200f, 75f));
+        //			this.m_LevelCullOpParams.Add(28, new PalMain.SceneOptiDistFogParams(28, -1f, 200f, 75f));
+        //			this.m_LevelCullOpParams.Add(29, new PalMain.SceneOptiDistFogParams(29, -1f, 105f, 105f));
+        //			this.m_LevelCullOpParams.Add(30, new PalMain.SceneOptiDistFogParams(30, -1f, 105f, 105f));
+        //			this.m_LevelCullOpParams.Add(31, new PalMain.SceneOptiDistFogParams(31, -1f, 150f, 75f));
+        //			this.m_LevelCullOpParams.Add(32, new PalMain.SceneOptiDistFogParams(32, -1f, 105f, 105f));
+        //			this.m_LevelCullOpParams.Add(33, new PalMain.SceneOptiDistFogParams(33, -1f, 200f, 105f));
+        //			this.m_LevelCullOpParams.Add(34, new PalMain.SceneOptiDistFogParams(34, -1f, 905f, 905f));
+        //			string text = SystemInfo.graphicsDeviceName;
+        //			string text2 = SystemInfo.graphicsDeviceVendor;
+        //			text = text.ToLower();
+        //			text2 = text2.ToLower();
+        //			if (text.Contains("intel"))
+        //			{
+        //				this.m_bIsIntel = true;
+        //			}
+        //			if (text2.Contains("intel"))
+        //			{
+        //				this.m_bIsIntel = true;
+        //			}
+        //			if (text.Contains("gdi"))
+        //			{
+        //				this.m_bIsGDI = true;
+        //			}
+        //			if (text2.Contains("gdi"))
+        //			{
+        //				this.m_bIsGDI = true;
+        //			}
+        //			int systemMemorySize = SystemInfo.systemMemorySize;
+        //			if (base.GetComponent<LoadFont>() == null)
+        //			{
+        //				base.gameObject.AddComponent<LoadFont>();
+        //			}
+        //			if (base.GetComponent<AudioSource>() == null)
+        //			{
+        //				base.gameObject.AddComponent<AudioSource>();
+        //			}
+        //			PalMain.backgroundAudio = base.GetComponent<BackgroundAudio>();
+        //			if (PalMain.backgroundAudio == null)
+        //			{
+        //				PalMain.backgroundAudio = base.gameObject.AddComponent<BackgroundAudio>();
+        //			}
+        //		}
 
-        //		// Token: 0x060036C4 RID: 14020 RVA: 0x0018B438 File Offset: 0x00189638
         //		public static void RefreshAllLandMarks()
         //		{
         //			PalMain.landMarks.Clear();
@@ -1202,75 +1408,77 @@ namespace SoftStar.Pal6
         //			PalMain.landMarks.AddRange(collection);
         //		}
 
-        private void UpdateMinFPS()
-        {
-            if (PalMain.MinFPS != this.minFPS)
-            {
-                PalMain.MinFPS = this.minFPS;
-                PalMain.MinDeltaTime = 1f / this.minFPS;
-            }
-        }
+        //		private void UpdateMinFPS()
+        //		{
+        //			if (PalMain.MinFPS != this.minFPS)
+        //			{
+        //				PalMain.MinFPS = this.minFPS;
+        //				PalMain.MinDeltaTime = 1f / this.minFPS;
+        //			}
+        //		}
 
-        private void Update()
-        {
-            this.UpdateMinFPS();
-            if (this.onInputHandles != null)
-            {
-                this.onInputHandles();
-            }
-            if (this.updateHandles != null)
-            {
-                this.updateHandles(Time.time, Time.deltaTime);
-            }
-            //this.m_QTEManager.Update();
-            //if (ScenesManager.IsChanging || ShowLoading.Instance != null)
-            //{
-            //    return;
-            //}
-            //this.UpdateOpCull();
-            //PalMain.UpdateCheckUnload();
-            //this.UpdateSpecialIssueForNonFocus();
-            //if (WaitForSonyCheck.Instance == null)
-            //{
-            //}
-            //FileLoader.Instance.Update();
-        }
+        //		private void Update()
+        //		{
+        //			this.UpdateMinFPS();
+        //			if (this.onInputHandles != null)
+        //			{
+        //				this.onInputHandles();
+        //			}
+        //			if (this.updateHandles != null)
+        //			{
+        //				this.updateHandles(Time.time, Time.deltaTime);
+        //			}
+        //			this.m_QTEManager.Update();
+        //			if (ScenesManager.IsChanging || ShowLoading.Instance != null)
+        //			{
+        //				return;
+        //			}
+        //			this.UpdateOpCull();
+        //			PalMain.UpdateCheckUnload();
+        //			this.UpdateSpecialIssueForNonFocus();
+        //			if (WaitForSonyCheck.Instance == null)
+        //			{
+        //			}
+        //			FileLoader.Instance.Update();
+        //		}
 
-        private void FixedUpdate()
-        {
-            //BuffDebuffManager.GetInstance().FixedUpdate(Time.fixedTime);
-            //if (DateTime.Now > this.mLastConfigSave)
-            //{
-            //    this.mLastConfigSave = DateTime.Now.AddSeconds(1.0);
-            //    bool flag = false;
-            //    OptionConfig optionConfig = OptionConfig.GetInstance();
-            //    if (optionConfig.IsDirty)
-            //    {
-            //        optionConfig.Save();
-            //        flag = true;
-            //    }
-            //    if (flag)
-            //    {
-            //        SaveManager.SaveGlobalData();
-            //    }
-            //}
-        }
+        //		private void FixedUpdate()
+        //		{
+        //			BuffDebuffManager.GetInstance().FixedUpdate(Time.fixedTime);
+        //			if (DateTime.Now > this.mLastConfigSave)
+        //			{
+        //				this.mLastConfigSave = DateTime.Now.AddSeconds(1.0);
+        //				bool flag = false;
+        //				OptionConfig optionConfig = OptionConfig.GetInstance();
+        //				if (optionConfig.IsDirty)
+        //				{
+        //					optionConfig.Save();
+        //					flag = true;
+        //				}
+        //				if (flag)
+        //				{
+        //					SaveManager.SaveGlobalData();
+        //				}
+        //			}
+        //		}
 
-        private void OnGUI()
-        {
-            if (this.onGUIHandles != null)
-            {
-                this.onGUIHandles();
-            }
-        }
+        //		private void OnGUI()
+        //		{
+        //			if (this.onGUIHandles != null)
+        //			{
+        //				this.onGUIHandles();
+        //			}
+        //		}
 
         //		private void ReplaceMeshColliderFor7()
         //		{
         //			GameObject gameObject = GameObject.Find("/jianzhu");
         //			if (gameObject != null)
         //			{
-        //				foreach (MeshCollider meshCollider in gameObject.GetComponentsInChildren<MeshCollider>())
+        //				MeshCollider[] componentsInChildren = gameObject.GetComponentsInChildren<MeshCollider>();
+        //				for (int i = 0; i < componentsInChildren.Length; i++)
         //				{
+        //					MeshCollider meshCollider = componentsInChildren[i];
         //					if (!(meshCollider.name == "jz_ymh_shitou12") && !(meshCollider.name == "jz_fyy_st01") && !(meshCollider.name == "jz_fyy_st02") && !(meshCollider.name == "jz_fyy_st03") && !(meshCollider.name == "jz_fyy_st04") && !(meshCollider.name == "jz_fyy_shitou07") && !(meshCollider.name == "jz_fyy_shitou05") && !(meshCollider.name == "Object566") && !(meshCollider.name == "Object567") && !(meshCollider.name == "Object572") && !(meshCollider.name == "Object574") && !(meshCollider.name == "Object575") && !(meshCollider.name == "Object576"))
         //					{
         //						meshCollider.enabled = false;
@@ -1280,7 +1488,6 @@ namespace SoftStar.Pal6
         //			FileLoader.LoadObjectFromFile<UnityEngine.Object>("Collider/pengzhuang7".ToAssetBundlePath(), true, true);
         //		}
 
-        //		// Token: 0x060036CA RID: 14026 RVA: 0x0018B748 File Offset: 0x00189948
         //		private void ReplaceMapElementFor25()
         //		{
         //			GameObject gameObject = FileLoader.LoadObjectFromFile<GameObject>("LevelParticles/EXPH_huanjing_PUBU_B".ToAssetBundlePath(), true, true);
@@ -1297,8 +1504,10 @@ namespace SoftStar.Pal6
         //				if (gameObject2 != null)
         //				{
         //					Transform[] componentsInChildren = gameObject2.GetComponentsInChildren<Transform>();
-        //					foreach (Transform transform in componentsInChildren)
+        //					Transform[] array = componentsInChildren;
+        //					for (int j = 0; j < array.Length; j++)
         //					{
+        //						Transform transform = array[j];
         //						if (transform.name == "EXPH_huanjing_PUBU_B")
         //						{
         //							transform.gameObject.SetActive(false);
@@ -1315,14 +1524,12 @@ namespace SoftStar.Pal6
         //			UnityEngine.Object.Destroy(gameObject);
         //		}
 
-        //		// Token: 0x060036CB RID: 14027 RVA: 0x0018B858 File Offset: 0x00189A58
         //		public static void SetForOpt(bool bActive)
         //		{
         //			PalMain.SetEnableWaterReflect("/shui", !bActive);
         //			PalMain.SetEnableMeshCollide("/shitou", !bActive);
         //		}
 
-        //		// Token: 0x060036CC RID: 14028 RVA: 0x0018B878 File Offset: 0x00189A78
         //		public static void SetEnableWaterReflect(string path, bool bEnable)
         //		{
         //			GameObject gameObject = GameObject.Find(path);
@@ -1331,13 +1538,14 @@ namespace SoftStar.Pal6
         //				UnityEngine.Debug.LogError("Error : SetEnableWaterReflect 没有找到 " + path);
         //				return;
         //			}
-        //			foreach (PalMirrorReflection palMirrorReflection in gameObject.GetComponentsInChildren<PalMirrorReflection>())
+        //			PalMirrorReflection[] componentsInChildren = gameObject.GetComponentsInChildren<PalMirrorReflection>();
+        //			for (int i = 0; i < componentsInChildren.Length; i++)
         //			{
+        //				PalMirrorReflection palMirrorReflection = componentsInChildren[i];
         //				palMirrorReflection.enabled = bEnable;
         //			}
         //		}
 
-        //		// Token: 0x060036CD RID: 14029 RVA: 0x0018B8D0 File Offset: 0x00189AD0
         //		public static void SetEnableMeshCollide(string path, bool bEnable)
         //		{
         //			GameObject gameObject = GameObject.Find(path);
@@ -1346,13 +1554,14 @@ namespace SoftStar.Pal6
         //				UnityEngine.Debug.LogError("Error : SetEnableMeshCollide 没有找到 " + path);
         //				return;
         //			}
-        //			foreach (MeshCollider meshCollider in gameObject.GetComponentsInChildren<MeshCollider>())
+        //			MeshCollider[] componentsInChildren = gameObject.GetComponentsInChildren<MeshCollider>();
+        //			for (int i = 0; i < componentsInChildren.Length; i++)
         //			{
+        //				MeshCollider meshCollider = componentsInChildren[i];
         //				meshCollider.enabled = bEnable;
         //			}
         //		}
 
-        //		// Token: 0x060036CE RID: 14030 RVA: 0x0018B928 File Offset: 0x00189B28
         //		public void SpecialProcessForLevel(int level)
         //		{
         //			Terrain activeTerrain = Terrain.activeTerrain;
@@ -1573,39 +1782,38 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        public static void OnLevelLoaded()
-        {
-            //PlayerCtrlManager.OnLevelLoaded(1);
-            PalMain.OnReadySpawn();
-            //EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Remove(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));
-            //EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Combine(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));
-            //EntityManager.OnLevelWasLoaded(level);
-            //OptionConfig.GetInstance().Use_OnLevelLoaded();
-            //OptionConfig.GetInstance().Use_CharacterEmission();
-            //MapWatch.Instance.SetMap();
-        }
-
-        //		public static IEnumerator Quit(float time)
+        //		private void OnLevelLoaded(int level)
         //		{
-        //			Console.Log("Game will quit in " + time.ToString() + " seconds");
-        //			yield return new WaitForSeconds(time);
-        //			Application.Quit();
-        //			yield break;
+        //			level = ScenesManager.CurLoadedLevel;
+        //			PlayerCtrlManager.OnLevelLoaded(level);
+        //			PalMain.OnReadySpawn();
+        //			EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Remove(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));
+        //			EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Combine(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));
+        //			EntityManager.OnLevelWasLoaded(level);
+        //			OptionConfig.GetInstance().Use_OnLevelLoaded();
+        //			OptionConfig.GetInstance().Use_CharacterEmission();
+        //			MapWatch.Instance.SetMap();
         //		}
 
-        //		// Token: 0x060036D1 RID: 14033 RVA: 0x0018BFA4 File Offset: 0x0018A1A4
+        //		[DebuggerHidden]
+        //		public static IEnumerator Quit(float time)
+        //		{
+        //			PalMain.<Quit>c__Iterator53 <Quit>c__Iterator = new PalMain.<Quit>c__Iterator53();
+        //			<Quit>c__Iterator.time = time;
+        //			<Quit>c__Iterator.<$>time = time;
+        //			return <Quit>c__Iterator;
+        //		}
+
         //		public static void LoadLevel(int LevelIndex)
         //		{
         //			SceneManager.LoadSceneAsync(LevelIndex);
         //		}
 
-        //		// Token: 0x060036D2 RID: 14034 RVA: 0x0018BFB0 File Offset: 0x0018A1B0
         //		public static void LoadLevel(string levelName)
         //		{
         //			SceneManager.LoadSceneAsync(levelName);
         //		}
 
-        //		// Token: 0x060036D3 RID: 14035 RVA: 0x0018BFBC File Offset: 0x0018A1BC
         //		public static void ToSuitablePlace(GameObject o)
         //		{
         //			if (UtilFun.GetMainCamera() == null)
@@ -1637,22 +1845,19 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x060036D4 RID: 14036 RVA: 0x0018C0AC File Offset: 0x0018A2AC
         //		public static GameObject ABInstantiateToUscript(string path)
         //		{
         //			return FileLoader.LoadObjectFromFile<GameObject>(path.ToAssetBundlePath(), true, true);
         //		}
 
-        //		// Token: 0x060036D5 RID: 14037 RVA: 0x0018C0C8 File Offset: 0x0018A2C8
         //		public static void SetBianLuoHuanState()
         //		{
         //			UIManager.Instance.EndState_Normal();
         //			PlayerCtrlManager.bCanTab = false;
         //			PlayerCtrlManager.bCtrlOther = true;
-        //			TimeManager.Initialize().selfUpdate -= TimeManager.Initialize().AutoSave;
+        //			TimeManager.Initialize().selfUpdate -= new Action(TimeManager.Initialize().AutoSave);
         //		}
 
-        //		// Token: 0x060036D6 RID: 14038 RVA: 0x0018C108 File Offset: 0x0018A308
         //		public static void EndNPCWeatherInteract(GameObject npc)
         //		{
         //			NPCWeatherInteract component = npc.GetComponent<NPCWeatherInteract>();
@@ -1662,56 +1867,48 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x060036D7 RID: 14039 RVA: 0x0018C130 File Offset: 0x0018A330
         //		public static void SetFlyMapBtnEnabled(bool enabled)
         //		{
         //			UtilFun.SetFlyMapBtnEnabled(enabled);
         //		}
 
-        //		// Token: 0x060036D8 RID: 14040 RVA: 0x0018C138 File Offset: 0x0018A338
         //		public static void TeamRecoverHPAndMP()
         //		{
         //			UtilFun.TeamRecoverHPAndMP();
         //		}
 
-        //		// Token: 0x060036D9 RID: 14041 RVA: 0x0018C140 File Offset: 0x0018A340
         //		public static void ActiveBranch()
         //		{
         //			FlagManager.SetFlag(MissionManager.BranchLineToggleFlag, 1, true);
         //		}
 
-        //		// Token: 0x060036DA RID: 14042 RVA: 0x0018C150 File Offset: 0x0018A350
         //		public static void InActiveBranch()
         //		{
         //			FlagManager.SetFlag(MissionManager.BranchLineToggleFlag, 0, true);
         //		}
 
-        //		// Token: 0x060036DB RID: 14043 RVA: 0x0018C160 File Offset: 0x0018A360
         //		public static bool IsBranch()
         //		{
         //			int flag = FlagManager.GetFlag(MissionManager.BranchLineToggleFlag);
         //			return flag > 0;
         //		}
 
-        public static void SetFlag(int idx, int value)
-        {
-            FlagManager.SetFlag(idx, value, true);
-        }
+        //		public static void SetFlag(int idx, int value)
+        //		{
+        //			FlagManager.SetFlag(idx, value, true);
+        //		}
 
-        //		// Token: 0x060036DD RID: 14045 RVA: 0x0018C188 File Offset: 0x0018A388
         //		public static int GetFlag(int idx)
         //		{
         //			return FlagManager.GetFlag(idx);
         //		}
 
-        //		// Token: 0x060036DE RID: 14046 RVA: 0x0018C190 File Offset: 0x0018A390
         //		public static void ChangeFlag(int idx, int value)
         //		{
         //			int flag = FlagManager.GetFlag(idx);
         //			FlagManager.SetFlag(idx, flag + value, true);
         //		}
 
-        //		// Token: 0x060036DF RID: 14047 RVA: 0x0018C1B0 File Offset: 0x0018A3B0
         //		public static void ChangeMoney(int difmoney)
         //		{
         //			int num = PalMain.GetMoney();
@@ -1719,20 +1916,15 @@ namespace SoftStar.Pal6
         //			PalMain.SetFlag(2, num);
         //		}
 
-        //		// Token: 0x060036E0 RID: 14048 RVA: 0x0018C1D0 File Offset: 0x0018A3D0
         //		public static int GetMoney()
         //		{
         //			return PalMain.GetFlag(2);
         //		}
 
-        /// <summary>
-        /// 设置金钱  金钱是2
-        /// </summary>
-        /// <param name="money"></param>
-        public static void SetMoney(int money)
-        {
-            PalMain.SetFlag(2, money);
-        }
+        //		public static void SetMoney(int money)
+        //		{
+        //			PalMain.SetFlag(2, money);
+        //		}
 
         //		public static void SetCameraDistanceForPot()
         //		{
@@ -1749,12 +1941,10 @@ namespace SoftStar.Pal6
         //			mainCamera.layerCullDistances = array;
         //		}
 
-        //		// Token: 0x060036E3 RID: 14051 RVA: 0x0018C240 File Offset: 0x0018A440
         //		private static void AddGlowCamera()
         //		{
         //		}
 
-        //		// Token: 0x060036E4 RID: 14052 RVA: 0x0018C244 File Offset: 0x0018A444
         //		public static void KeepCameraOnly()
         //		{
         //			if (PalMain.MainCamera == null && UtilFun.GetMainCamera() != null)
@@ -1773,8 +1963,10 @@ namespace SoftStar.Pal6
         //			GameObject[] array = GameObject.FindGameObjectsWithTag("MainCamera");
         //			if (array.Length > 1)
         //			{
-        //				foreach (GameObject gameObject in array)
+        //				GameObject[] array2 = array;
+        //				for (int i = 0; i < array2.Length; i++)
         //				{
+        //					GameObject gameObject = array2[i];
         //					if (PalMain.MainCamera != gameObject)
         //					{
         //						gameObject.SetActive(false);
@@ -1785,14 +1977,15 @@ namespace SoftStar.Pal6
         //			DontDestroyOnLevelChange[] components = UtilFun.GetMainCamera().GetComponents<DontDestroyOnLevelChange>();
         //			if (components.Length > 0)
         //			{
-        //				foreach (DontDestroyOnLevelChange obj in components)
+        //				DontDestroyOnLevelChange[] array3 = components;
+        //				for (int j = 0; j < array3.Length; j++)
         //				{
+        //					DontDestroyOnLevelChange obj = array3[j];
         //					UnityEngine.Object.Destroy(obj);
         //				}
         //			}
         //		}
 
-        //		// Token: 0x060036E5 RID: 14053 RVA: 0x0018C344 File Offset: 0x0018A544
         //		public static void SetMainCamera(GameObject go)
         //		{
         //			go = go.GetModelObj(false);
@@ -1808,7 +2001,6 @@ namespace SoftStar.Pal6
         //			UtilFun.GetMainCamera().cullingMask = (-67108865 & UtilFun.GetMainCamera().cullingMask);
         //		}
 
-        //		// Token: 0x060036E6 RID: 14054 RVA: 0x0018C3B0 File Offset: 0x0018A5B0
         //		private void OnDrawGizmos()
         //		{
         //			if (PalBattleManager.Instance() != null)
@@ -1817,7 +2009,6 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x060036E7 RID: 14055 RVA: 0x0018C3C8 File Offset: 0x0018A5C8
         //		public static void ClearManagerData()
         //		{
         //			GameObject gameObject = GameObject.Find("/FootMarks");
@@ -1834,95 +2025,107 @@ namespace SoftStar.Pal6
         //			Footmark.Clear();
         //		}
 
+        //		public static void ChangeMap(string DestName, int LevelIndex, bool PlayDefaultAudio = true, bool SaveDynamicObjs = true)
+        //		{
+        //			if (!AssetBundleChecker.checkMapChange(DestName, LevelIndex))
+        //			{
+        //				return;
+        //			}
+        //			Time.timeScale = 1f;
+        //			UnityEngine.Debug.Log(string.Format("ChangeMap : DestName={0}, LevelIndex={1}, PlayDefaultAudio={2}, SaveDynamicObjs={3}", new object[]
+        //			{
+        //				DestName,
+        //				LevelIndex,
+        //				PlayDefaultAudio,
+        //				SaveDynamicObjs
+        //			}));
+        //			PalBattleManager.Instance().OnSceneChangeClear();
+        //			if (ScenesManager.CurLoadedLevel == 11 && LevelIndex != 11)
+        //			{
+        //				FlagManager.SetFlag(8, 1, false);
+        //			}
+        //			if (Cutscene.current != null && (Cutscene.current.isPlaying || Cutscene.current.isPause))
+        //			{
+        //				Cutscene.current.End(false);
+        //			}
+        //			Transform transform = UtilFun.GetMainCamera().transform;
+        //			if (transform != null)
+        //			{
+        //				transform.parent = null;
+        //			}
+        //			UtilFun.GetMainCamera().cullingMask = 0;
+        //			if (ScenesManager.IsChanging)
+        //			{
+        //				return;
+        //			}
+        //			PlayersManager.RestoreLayer(true);
+        //			PlayersManager.ChangeHairShader(false);
+        //			if (SaveDynamicObjs)
+        //			{
+        //				DynamicObjsDataManager.Instance.SaveCurObjsDataToMemory();
+        //			}
+        //			PalMain.ClearManagerData();
+        //			ScenesManager.IsChanging = true;
+        //			if (PalMain.backgroundAudio != null)
+        //			{
+        //				PalMain.backgroundAudio.PlayDefaultAudio = PlayDefaultAudio;
+        //			}
+        //			else
+        //			{
+        //				UnityEngine.Debug.LogError("PalMain.backgroundAudio==null");
+        //			}
+        //			if (SkillSEPreloader.s_preloadEnable)
+        //			{
+        //				SkillSEPreloader.Instance.unLoadAllSkillSE();
+        //			}
+        //			ScenesManager.Instance.ChangeMap(DestName, LevelIndex, new Action<int>(PalMain.Instance.OnLevelLoaded));
+        //		}
 
-        public static void LoadScene(int sceneId, bool PlayDefaultAudio = true, bool SaveDynamicObjs = true)
-        {
-            GameEntry.UI.CloseAllUIForm();//关闭所有UI
+        //		public static void OnReadySpawn()
+        //		{
+        //			if (PlayersManager.Player == null)
+        //			{
+        //				PlayersManager.SpawnPlayer(null, null, false);
+        //			}
+        //			PlayersManager.SetPlayerPosByDestObj(ScenesManager.Instance.NextDestObjName);
+        //			if (PlayersManager.Player != null)
+        //			{
+        //				PalMain.SetMainCamera(PlayersManager.Player);
+        //			}
+        //		}
 
-            Time.timeScale = 1f;
+        //		public static void OnLoadOver()
+        //		{
+        //			EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Remove(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));
+        //			PalMain.RefreshAllLandMarks();
+        //			DynamicObjsDataManager.Instance.LoadCurObjsDataFromMemory();
+        //			GameStateManager.CurGameState = GameState.Normal;
+        //			PalMain.Instance.SpecialProcessForLevel(ScenesManager.CurLoadedLevel);
+        //			PalMain.ShowMemory();
+        //			if (PalMain.LoadOverEvent != null)
+        //			{
+        //				PalMain.LoadOverEvent();
+        //			}
+        //		}
 
-            //PalBattleManager.Instance().OnSceneChangeClear();
-            //if (ScenesManager.CurLoadedLevel == 11 && LevelIndex != 11)
-            //{
-            //    FlagManager.SetFlag(8, 1, false);
-            //}
-            //if (Cutscene.current != null && (Cutscene.current.isPlaying || Cutscene.current.isPause))
-            //{
-            //    Cutscene.current.End(false);
-            //}
-            //Transform transform = UtilFun.GetMainCamera().transform;
-            //if (transform != null)
-            //{
-            //    transform.parent = null;
-            //}
-            //UtilFun.GetMainCamera().cullingMask = 0;
-            //if (ScenesManager.IsChanging)
-            //{
-            //    return;
-            //}
-            //PlayersManager.RestoreLayer(true);
-            //PlayersManager.ChangeHairShader(false);
-            //if (SaveDynamicObjs)
-            //{
-            //    DynamicObjsDataManager.Instance.SaveCurObjsDataToMemory();
-            //}
-            //PalMain.ClearManagerData();
-            //ScenesManager.IsChanging = true;
-            //if (PalMain.backgroundAudio != null)
-            //{
-            //    PalMain.backgroundAudio.PlayDefaultAudio = PlayDefaultAudio;
-            //}
-            //else
-            //{
-            //    UnityEngine.Debug.LogError("PalMain.backgroundAudio==null");
-            //}
-            //if (SkillSEPreloader.s_preloadEnable)
-            //{
-            //    SkillSEPreloader.Instance.unLoadAllSkillSE();
-            //}
-            //ScenesManager.Instance.ChangeMap(DestName, LevelIndex, new Action<int>(PalMain.Instance.OnLevelLoaded));
-            GameEntry.Scene.LoadScene(sceneId);
-        }
-
-        /// <summary>
-        /// 读取出生点
-        /// </summary>
-        public static void OnReadySpawn()
-        {
-            //if (PlayersManager.Player == null)
-            //{
-            //    PlayersManager.SpawnPlayer(null, null, false);
-            //}
-            //PlayersManager.SetPlayerPosByDestObj(ScenesManager.Instance.NextDestObjName);
-            //if (PlayersManager.Player != null)
-            //{
-            //    //PalMain.SetMainCamera(PlayersManager.Player);
-            //}
-        }
-
-        public static void OnLoadOver()
-        {
-            UnityEngine.Debug.Log("加载完毕");
-            //EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Remove(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));
-            //PalMain.RefreshAllLandMarks();
-            //DynamicObjsDataManager.Instance.LoadCurObjsDataFromMemory();
-            //GameStateManager.CurGameState = GameState.Normal;
-            //PalMain.Instance.SpecialProcessForLevel(ScenesManager.CurLoadedLevel);
-            //PalMain.ShowMemory();
-            //if (PalMain.LoadOverEvent != null)
-            //{
-            //    PalMain.LoadOverEvent();
-            //}
-        }
-
-        //		// Token: 0x060036EB RID: 14059 RVA: 0x0018C63C File Offset: 0x0018A83C
         //		public static void ShowMemory()
         //		{
         //			string value = "PalMain.ShowMemory: Current scene = " + SceneManager.GetActiveScene().buildIndex.ToString();
-        //			Console.WriteLine(value);
+        //			System.Console.WriteLine(value);
         //		}
 
-        //		// Token: 0x060036ED RID: 14061 RVA: 0x0018C6BC File Offset: 0x0018A8BC
+        //		public static void InitPermanentObject()
+        //		{
+        //			if (!UnityEngine.Object.FindObjectOfType(typeof(PalShroudObjectManager)))
+        //			{
+        //				new GameObject
+        //				{
+        //					name = "shroudMrg"
+        //				}.AddComponent<PalShroudObjectManager>();
+        //			}
+        //			PalMain.CreatePermanentObject<uScript_MasterComponent>("Template/System/_uScript", true);
+        //		}
+
         //		public static GameObject CreatePermanentObject<T>(string path, bool bRelative)
         //		{
         //			Type typeFromHandle = typeof(T);
@@ -1955,45 +2158,17 @@ namespace SoftStar.Pal6
         //			return gameObject;
         //		}
 
-        //		// Token: 0x17000435 RID: 1077
-        //		// (get) Token: 0x060036EE RID: 14062 RVA: 0x0018C77C File Offset: 0x0018A97C
-        //		public static Transform TempGameLayer
-        //		{
-        //			get
-        //			{
-        //				if (PalMain.tempGameLayer == null)
-        //				{
-        //					GameObject gameObject = GameObject.Find(SaveManager.TempGameLayerName);
-        //					if (gameObject != null)
-        //					{
-        //						PalMain.tempGameLayer = gameObject.transform;
-        //					}
-        //					else
-        //					{
-        //						gameObject = new GameObject(SaveManager.TempGameLayerName);
-        //						UtilFun.SetPosition(gameObject.transform, Vector3.zero);
-        //						gameObject.transform.rotation = Quaternion.identity;
-        //						PalMain.tempGameLayer = gameObject.transform;
-        //					}
-        //				}
-        //				return PalMain.tempGameLayer;
-        //			}
-        //		}
-
-        //		// Token: 0x060036EF RID: 14063 RVA: 0x0018C7FC File Offset: 0x0018A9FC
         //		public static void SetCtrlModel(GameObject go)
         //		{
         //			PlayerCtrlManager.SetCtrlModel(go);
         //		}
 
-        //		// Token: 0x060036F0 RID: 14064 RVA: 0x0018C804 File Offset: 0x0018AA04
         //		public static void RestoreModel()
         //		{
         //			PlayerCtrlManager.bCtrlOther = false;
         //			PlayerCtrlManager.RestoreModel();
         //		}
 
-        //		// Token: 0x060036F1 RID: 14065 RVA: 0x0018C814 File Offset: 0x0018AA14
         //		public static void SetYanZhaoActive(int ID, bool bActive)
         //		{
         //			GameObject gameObject = PlayersManager.FindMainChar(ID, true);
@@ -2018,7 +2193,6 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x060036F2 RID: 14066 RVA: 0x0018C8B0 File Offset: 0x0018AAB0
         //		public static void SetActiveWeapon(GameObject go, bool bActive, bool bAssort)
         //		{
         //			PalNPC component = go.GetComponent<PalNPC>();
@@ -2030,7 +2204,6 @@ namespace SoftStar.Pal6
         //			component.SetActiveWeaponAndAssort(bActive, bAssort, true);
         //		}
 
-        //		// Token: 0x060036F3 RID: 14067 RVA: 0x0018C8F0 File Offset: 0x0018AAF0
         //		public static GameObject GetChild(GameObject go, string path)
         //		{
         //			if (go == null)
@@ -2042,13 +2215,11 @@ namespace SoftStar.Pal6
         //			return (!(transform != null)) ? null : transform.gameObject;
         //		}
 
-        //		// Token: 0x060036F4 RID: 14068 RVA: 0x0018C93C File Offset: 0x0018AB3C
         //		public static void ToggleCtrl(bool bCon)
         //		{
         //			PlayerCtrlManager.bControl = bCon;
         //		}
 
-        //		// Token: 0x060036F5 RID: 14069 RVA: 0x0018C944 File Offset: 0x0018AB44
         //		public static void BeginMoveToMap()
         //		{
         //			if (!BigMap.Instance.OnMap)
@@ -2057,7 +2228,6 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x060036F6 RID: 14070 RVA: 0x0018C960 File Offset: 0x0018AB60
         //		public static void BeginMoveToGround()
         //		{
         //			if (BigMap.Instance.OnMap)
@@ -2066,13 +2236,11 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x060036F7 RID: 14071 RVA: 0x0018C97C File Offset: 0x0018AB7C
         //		public static void BackToStart()
         //		{
         //			PalMain.ChangeMap(null, 0, true, true);
         //		}
 
-        //		// Token: 0x060036F8 RID: 14072 RVA: 0x0018C988 File Offset: 0x0018AB88
         //		public int CreateNewTempObjects(object newO)
         //		{
         //			while (this.mTempPosition < this.mTempObjects.Count && this.mTempObjects[this.mTempPosition] != null)
@@ -2089,13 +2257,11 @@ namespace SoftStar.Pal6
         //			return this.mTempPosition++;
         //		}
 
-        //		// Token: 0x060036F9 RID: 14073 RVA: 0x0018CA38 File Offset: 0x0018AC38
         //		public object GetTempObject(int pos)
         //		{
         //			return this.mTempObjects[pos];
         //		}
 
-        //		// Token: 0x060036FA RID: 14074 RVA: 0x0018CA48 File Offset: 0x0018AC48
         //		public void RemoveTempObject(int pos)
         //		{
         //			if (pos < 0 || pos >= this.mTempObjects.Count)
@@ -2109,12 +2275,10 @@ namespace SoftStar.Pal6
         //			this.mTempObjects[pos] = null;
         //		}
 
-        //		// Token: 0x060036FB RID: 14075 RVA: 0x0018CAA0 File Offset: 0x0018ACA0
         //		public static void CreateCircleFile()
         //		{
         //		}
 
-        //		// Token: 0x060036FC RID: 14076 RVA: 0x0018CAA4 File Offset: 0x0018ACA4
         //		public static void SaveCircleFile()
         //		{
         //			SaveManager.Save("100");
@@ -2122,7 +2286,6 @@ namespace SoftStar.Pal6
         //			SaveManager.SaveGlobalData();
         //		}
 
-        //		// Token: 0x060036FD RID: 14077 RVA: 0x0018CAC4 File Offset: 0x0018ACC4
         //		public static void PutOffSlot(int ID, EquipSlotEnum slot)
         //		{
         //			GameObject gameObject = PlayersManager.FindMainChar(ID, true);
@@ -2130,7 +2293,6 @@ namespace SoftStar.Pal6
         //			component.PutOffEquip(slot);
         //		}
 
-        //		// Token: 0x060036FE RID: 14078 RVA: 0x0018CAE8 File Offset: 0x0018ACE8
         //		public static void ActiveSSAO(bool bActiveSSAO)
         //		{
         //			if (UtilFun.GetMainCamera() != null)
@@ -2143,13 +2305,11 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x060036FF RID: 14079 RVA: 0x0018CB24 File Offset: 0x0018AD24
         //		public static void SetDoReturnButtonEnabled(bool v)
         //		{
         //			UIConfig.DoReturnButtonEnabled = v;
         //		}
 
-        //		// Token: 0x06003700 RID: 14080 RVA: 0x0018CB2C File Offset: 0x0018AD2C
         //		public static void SetVisible(GameObject go, bool bVisible)
         //		{
         //			if (go == null)
@@ -2160,14 +2320,12 @@ namespace SoftStar.Pal6
         //			go.SetVisible(bVisible);
         //		}
 
-        //		// Token: 0x06003701 RID: 14081 RVA: 0x0018CB4C File Offset: 0x0018AD4C
         //		public static void ChangeHairShader(bool bUseAlpha, string[] paths)
         //		{
         //			PlayersManager.ChangeHairShader(bUseAlpha);
         //			UtilFun.ChangeHairShader(bUseAlpha, paths);
         //		}
 
-        //		// Token: 0x06003702 RID: 14082 RVA: 0x0018CB5C File Offset: 0x0018AD5C
         //		public void SaveDistCull()
         //		{
         //			this.m_lastGameState = GameState.None;
@@ -2188,7 +2346,6 @@ namespace SoftStar.Pal6
         //			this.CreateSkyCamera();
         //		}
 
-        //		// Token: 0x06003703 RID: 14083 RVA: 0x0018CBF8 File Offset: 0x0018ADF8
         //		public void SetLayer(Transform tr, int layer)
         //		{
         //			tr.gameObject.layer = layer;
@@ -2198,7 +2355,6 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x06003704 RID: 14084 RVA: 0x0018CC38 File Offset: 0x0018AE38
         //		public void SetDistCull(PalMain.DISTANCE_CULL dc, bool bFromInit, bool bNoSet = false)
         //		{
         //			if (!bFromInit)
@@ -2316,7 +2472,6 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x06003705 RID: 14085 RVA: 0x0018CF04 File Offset: 0x0018B104
         //		public void SavePostCam()
         //		{
         //			this.m_CamPosts.Clear();
@@ -2389,7 +2544,6 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x06003706 RID: 14086 RVA: 0x0018D18C File Offset: 0x0018B38C
         //		public void SetPostCam(PalMain.POST_CAM pc, bool bFromInit)
         //		{
         //			if (!bFromInit)
@@ -2499,7 +2653,6 @@ namespace SoftStar.Pal6
         //			PalMain.m_PostCam = pc;
         //		}
 
-        //		// Token: 0x06003707 RID: 14087 RVA: 0x0018D4B0 File Offset: 0x0018B6B0
         //		public void SaveLight()
         //		{
         //			this.m_Lights.Clear();
@@ -2545,7 +2698,6 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x06003708 RID: 14088 RVA: 0x0018D618 File Offset: 0x0018B818
         //		public void SetLight(PalMain.LIGHT lt, bool bFromInit)
         //		{
         //			if (!bFromInit)
@@ -2609,7 +2761,6 @@ namespace SoftStar.Pal6
         //			PalMain.m_Light = lt;
         //		}
 
-        //		// Token: 0x06003709 RID: 14089 RVA: 0x0018D814 File Offset: 0x0018BA14
         //		public void UpdateOpCull()
         //		{
         //			if (PalMain.m_DistCull == PalMain.DISTANCE_CULL.RESTORE)
@@ -2668,7 +2819,6 @@ namespace SoftStar.Pal6
         //			this.m_lastGameState = GameStateManager.CurGameState;
         //		}
 
-        //		// Token: 0x0600370A RID: 14090 RVA: 0x0018D9D4 File Offset: 0x0018BBD4
         //		public void UpdateDualCamera()
         //		{
         //			if (SceneManager.GetActiveScene().buildIndex == 0)
@@ -2693,25 +2843,21 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x0600370B RID: 14091 RVA: 0x0018DA58 File Offset: 0x0018BC58
         //		public bool GetDualCam()
         //		{
         //			return this.m_bDualCam != 0;
         //		}
 
-        //		// Token: 0x0600370C RID: 14092 RVA: 0x0018DA68 File Offset: 0x0018BC68
         //		public bool IsIntelGraphicCard()
         //		{
         //			return this.m_bIsIntel;
         //		}
 
-        //		// Token: 0x0600370D RID: 14093 RVA: 0x0018DA70 File Offset: 0x0018BC70
         //		public bool IsGDI()
         //		{
         //			return this.m_bIsGDI;
         //		}
 
-        //		// Token: 0x0600370E RID: 14094 RVA: 0x0018DA78 File Offset: 0x0018BC78
         //		public void CreateSkyCamera()
         //		{
         //			GameObject gameObject = GameObject.Find("/palUniStorm1.6v");
@@ -2814,7 +2960,7 @@ namespace SoftStar.Pal6
         //				zero.z = 1999f;
         //				gameObject3.transform.localPosition = zero;
         //				float num2 = UtilFun.GetMainCamera().fieldOfView / 2f;
-        //				float num3 = Mathf.Tan(0.017453292f * num2) * zero.z;
+        //				float num3 = Mathf.Tan(0.0174532924f * num2) * zero.z;
         //				float num4 = (float)Screen.width / (float)Screen.height;
         //				gameObject3.transform.localScale = new Vector3(num3 * 2f * num4, num3 * 2f, 1f);
         //				Renderer component6 = gameObject3.GetComponent<Renderer>();
@@ -2832,7 +2978,6 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x0600370F RID: 14095 RVA: 0x0018DE24 File Offset: 0x0018C024
         //		public void SaveDynamicLight()
         //		{
         //			Light[] array = UnityEngine.Object.FindObjectsOfType<Light>();
@@ -2858,7 +3003,6 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x06003710 RID: 14096 RVA: 0x0018DEF4 File Offset: 0x0018C0F4
         //		private bool FindParentIsMainActor(Transform obj)
         //		{
         //			while (obj != null)
@@ -2880,46 +3024,42 @@ namespace SoftStar.Pal6
         //			return false;
         //		}
 
-        //		// Token: 0x06003711 RID: 14097 RVA: 0x0018DF5C File Offset: 0x0018C15C
         //		public void UpdateDynamicLight()
         //		{
         //		}
 
-        //		// Token: 0x06003712 RID: 14098 RVA: 0x0018DF60 File Offset: 0x0018C160
         //		public static PalMain.PLAYER_RECOMMANDATION GetPlayerRecommandation()
         //		{
         //			return PalMain.m_PlayerRecommandation;
         //		}
 
-        //		// Token: 0x06003713 RID: 14099 RVA: 0x0018DF68 File Offset: 0x0018C168
         //		public static void SetPlayerRecommandation(PalMain.PLAYER_RECOMMANDATION rec)
         //		{
         //			PalMain.m_PlayerRecommandation = rec;
         //		}
 
-        //		// Token: 0x06003714 RID: 14100 RVA: 0x0018DF70 File Offset: 0x0018C170
-        //		public static PalMain.PLAYER_RECOMMANDATION DetectMachine()
-        //		{
-        //			string operatingSystem = SystemInfo.operatingSystem;
-        //			bool flag = operatingSystem.Contains("Windows XP");
-        //			bool flag2 = !operatingSystem.Contains("64bit");
-        //			PalMain.PLAYER_RECOMMANDATION result;
-        //			if (SystemInfo.graphicsMemorySize <= 512 || SystemInfo.maxTextureSize < 1800 || (flag && flag2) || SystemInfo.systemMemorySize < 3500)
-        //			{
-        //				result = PalMain.PLAYER_RECOMMANDATION.LOW;
-        //			}
-        //			else if (SystemInfo.graphicsMemorySize < 1500)
-        //			{
-        //				result = PalMain.PLAYER_RECOMMANDATION.MID;
-        //			}
-        //			else
-        //			{
-        //				result = PalMain.PLAYER_RECOMMANDATION.HIGH;
-        //			}
-        //			return result;
-        //		}
+        public static PalMain.PLAYER_RECOMMANDATION DetectMachine()
+        {
+            
+            string operatingSystem = SystemInfo.operatingSystem;
+            bool flag = operatingSystem.Contains("Windows XP");
+            bool flag2 = !operatingSystem.Contains("64bit");
+            PalMain.PLAYER_RECOMMANDATION result;
+            if (SystemInfo.graphicsMemorySize <= 512 || SystemInfo.maxTextureSize < 1800 || (flag && flag2) || SystemInfo.systemMemorySize < 3500)
+            {
+                result = PalMain.PLAYER_RECOMMANDATION.LOW;
+            }
+            else if (SystemInfo.graphicsMemorySize < 1500)
+            {
+                result = PalMain.PLAYER_RECOMMANDATION.MID;
+            }
+            else
+            {
+                result = PalMain.PLAYER_RECOMMANDATION.HIGH;
+            }
+            return result;
+        }
 
-        //		// Token: 0x06003715 RID: 14101 RVA: 0x0018DFFC File Offset: 0x0018C1FC
         //		public static PalMain.PlayerConfigs GetSettingsByLevel(PalMain.PLAYER_RECOMMANDATION rec)
         //		{
         //			PalMain.PlayerConfigs playerConfigs = new PalMain.PlayerConfigs();
@@ -2973,13 +3113,11 @@ namespace SoftStar.Pal6
         //			return playerConfigs;
         //		}
 
-        //		// Token: 0x06003716 RID: 14102 RVA: 0x0018E190 File Offset: 0x0018C390
         //		public static PalMain.PlayerConfigs FirstTimeLaunch103()
         //		{
         //			return PalMain.GetSettingsByLevel(PalMain.DetectMachine());
         //		}
 
-        //		// Token: 0x06003717 RID: 14103 RVA: 0x0018E19C File Offset: 0x0018C39C
         //		public static bool CheckNeedRiaseWarnning(PalMain.SETTING_ENUM setting, int value)
         //		{
         //			PalMain.PlayerConfigs settingsByLevel = PalMain.GetSettingsByLevel(PalMain.DetectMachine());
@@ -2990,7 +3128,6 @@ namespace SoftStar.Pal6
         //			return settingsByLevel.m_Settings[(int)setting] < value;
         //		}
 
-        //		// Token: 0x06003718 RID: 14104 RVA: 0x0018E1DC File Offset: 0x0018C3DC
         //		public static void UpdateCheckUnload()
         //		{
         //			PalMain.m_CurUnloadTime += Time.unscaledDeltaTime;
@@ -3021,13 +3158,11 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x06003719 RID: 14105 RVA: 0x0018E278 File Offset: 0x0018C478
         //		public static void UnloadUnusedAssets(PalMain.UNLOADPROIR proir = PalMain.UNLOADPROIR.LONG)
         //		{
         //			Resources.UnloadUnusedAssets();
         //		}
 
-        //		// Token: 0x0600371A RID: 14106 RVA: 0x0018E280 File Offset: 0x0018C480
         //		public static void AddFlagValue(int idx, [DefaultValue(1)] int AddValue = 1)
         //		{
         //			int num = FlagManager.GetFlag(idx);
@@ -3035,7 +3170,6 @@ namespace SoftStar.Pal6
         //			FlagManager.SetFlag(idx, num, false);
         //		}
 
-        //		// Token: 0x0600371B RID: 14107 RVA: 0x0018E2A0 File Offset: 0x0018C4A0
         //		public static void SetPosition(GameObject go, Vector3 pos)
         //		{
         //			NavMeshAgent componentInChildren = go.GetComponentInChildren<NavMeshAgent>();
@@ -3047,14 +3181,12 @@ namespace SoftStar.Pal6
         //			UtilFun.SetPosition(go.transform, pos);
         //		}
 
-        //		// Token: 0x0600371C RID: 14108 RVA: 0x0018E2DC File Offset: 0x0018C4DC
         //		public static string GetLangueStr(string str0, string str1)
         //		{
         //			uint curLangue = Langue.CurLangue;
         //			return (curLangue >= 1u) ? str1 : str0;
         //		}
 
-        //		// Token: 0x0600371D RID: 14109 RVA: 0x0018E300 File Offset: 0x0018C500
         //		public static void NoActiveUserWarning(bool backToTitle = false)
         //		{
         //			if (PalMain.s_waitForActiveUserWarning)
@@ -3071,7 +3203,7 @@ namespace SoftStar.Pal6
         //			{
         //				info = ((Langue.CurLangue != 0u) ? "請登入一名使用者，否則將無法讀存檔案" : "请登入一名使用者，否则将无法读存档案");
         //			}
-        //			UIDialogManager.Instance.ShowInfoDialog(info, UIDialogManager.ButtonEnum.Yes, delegate()
+        //			UIDialogManager.Instance.ShowInfoDialog(info, UIDialogManager.ButtonEnum.Yes, delegate
         //			{
         //				if ((int)UIDialogManager.Instance.Result == 2 && backToTitle)
         //				{
@@ -3082,7 +3214,6 @@ namespace SoftStar.Pal6
         //			});
         //		}
 
-        //		// Token: 0x0600371E RID: 14110 RVA: 0x0018E390 File Offset: 0x0018C590
         //		public static void NoControllerWarning()
         //		{
         //			if (PalMain.s_noControllerWarning)
@@ -3098,53 +3229,16 @@ namespace SoftStar.Pal6
         //			});
         //		}
 
-        //		// Token: 0x0600371F RID: 14111 RVA: 0x0018E3DC File Offset: 0x0018C5DC
+        //		[DebuggerHidden]
         //		public IEnumerator waitSkillPreload(Action _action, int level)
         //		{
-        //			if (SkillSEPreloader.Instance != null)
-        //			{
-        //				if (SkillSEPreloader.Instance.m_preloadThisScene)
-        //				{
-        //					this.m_skillPreloading = true;
-        //					float loadingValue = 0.1f / (float)PlayersManager.ActivePlayers.Count;
-        //					foreach (GameObject player in PlayersManager.ActivePlayers)
-        //					{
-        //						Console.WriteLine(string.Format("[Player] : name = {0}", player.ToString()));
-        //						PalNPC npc = player.gameObject.GetComponent<PalNPC>();
-        //						for (int i = 0; i < npc.m_SkillIDs.Count; i++)
-        //						{
-        //							Console.WriteLine(string.Format("[PreLoad Skill] : npc={0}, skillID={1}", npc.gameObject.ToString(), npc.m_SkillIDs[i].m_ID));
-        //							SkillSEPreloader.Instance.loadSkillSE(npc.m_SkillIDs[i].m_ID);
-        //							yield return null;
-        //						}
-        //						FightProperty fight = npc.Data.Fight;
-        //						if (fight != null)
-        //						{
-        //							int scriptID = -1;
-        //							int.TryParse(fight.BattleAIScript, out scriptID);
-        //							if (SkillSEPreloader.s_battleAISkillDic.ContainsKey(scriptID))
-        //							{
-        //								List<int> skillList = SkillSEPreloader.s_battleAISkillDic[scriptID];
-        //								for (int j = 0; j < skillList.Count; j++)
-        //								{
-        //									Console.WriteLine(string.Format("[PreLoad Skill] : npc={0}, scriptID={1}, skillID={2}", npc.gameObject.ToString(), scriptID, skillList[j]));
-        //									SkillSEPreloader.Instance.loadSkillSE(skillList[j]);
-        //									yield return null;
-        //								}
-        //							}
-        //						}
-        //						PalMain.LoadingValue += loadingValue;
-        //					}
-        //				}
-        //				this.m_skillPreloading = false;
-        //				SkillSEPreloader.Instance.m_preloadThisScene = false;
-        //			}
-        //			_action();
-        //			yield return null;
-        //			yield break;
+        //			PalMain.<waitSkillPreload>c__Iterator54 <waitSkillPreload>c__Iterator = new PalMain.<waitSkillPreload>c__Iterator54();
+        //			<waitSkillPreload>c__Iterator._action = _action;
+        //			<waitSkillPreload>c__Iterator.<$>_action = _action;
+        //			<waitSkillPreload>c__Iterator.<>f__this = this;
+        //			return <waitSkillPreload>c__Iterator;
         //		}
 
-        //		// Token: 0x06003720 RID: 14112 RVA: 0x0018E408 File Offset: 0x0018C608
         //		private void OnApplicationFocus(bool hasFocus)
         //		{
         //			if (hasFocus)
@@ -3153,13 +3247,11 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		// Token: 0x06003721 RID: 14113 RVA: 0x0018E41C File Offset: 0x0018C61C
         //		public void ForceRenew()
         //		{
         //			this.shouldRenewFrames = this.FOCUS_WAIT_FRAMES;
         //		}
 
-        //		// Token: 0x06003722 RID: 14114 RVA: 0x0018E42C File Offset: 0x0018C62C
         //		private void UpdateSpecialIssueForNonFocus()
         //		{
         //			if (this.shouldRenewFrames > 0)
@@ -3173,17 +3265,16 @@ namespace SoftStar.Pal6
         //						activeTerrain.gameObject.SetActive(false);
         //						activeTerrain.gameObject.SetActive(true);
         //					}
-        //					GameObject uiroot = UIManager.Instance.UIRoot;
-        //					if (uiroot != null)
+        //					GameObject uIRoot = UIManager.Instance.UIRoot;
+        //					if (uIRoot != null)
         //					{
-        //						uiroot.SetActive(false);
-        //						uiroot.SetActive(true);
+        //						uIRoot.SetActive(false);
+        //						uIRoot.SetActive(true);
         //					}
         //				}
         //			}
         //		}
 
-        //		// Token: 0x06003723 RID: 14115 RVA: 0x0018E4B0 File Offset: 0x0018C6B0
         //		public void ChangeLanguage(uint next)
         //		{
         //			Langue.ClearLanguageDictionary();
@@ -3192,8 +3283,10 @@ namespace SoftStar.Pal6
         //			PalBattleManager.Instance().GetMonsterSkillDataManager().ReParseLanguageData();
         //			PalBattleManager.Instance().GetStatusDataManager().ReParseLanguageData();
         //			PalMain.ReloadLangueUIAtlas("StringImage0");
-        //			foreach (NicknameBuffDebuffType nicknameBuffDebuffType in NicknameBuffDebuffTypeCache.GetDatasFromFile())
+        //			NicknameBuffDebuffType[] datasFromFile = NicknameBuffDebuffTypeCache.GetDatasFromFile();
+        //			for (int i = 0; i < datasFromFile.Length; i++)
         //			{
+        //				NicknameBuffDebuffType nicknameBuffDebuffType = datasFromFile[i];
         //				if (nicknameBuffDebuffType != null)
         //				{
         //					nicknameBuffDebuffType.mName.ReLoad();
@@ -3201,268 +3294,152 @@ namespace SoftStar.Pal6
         //					nicknameBuffDebuffType.mFunctionDesc.ReLoad();
         //				}
         //			}
-        //			foreach (ClothDecal clothDecal in ClothDecal.GetDatasFromFile())
+        //			ClothDecal[] datasFromFile2 = ClothDecal.GetDatasFromFile();
+        //			for (int j = 0; j < datasFromFile2.Length; j++)
         //			{
+        //				ClothDecal clothDecal = datasFromFile2[j];
         //				if (clothDecal != null)
         //				{
         //					clothDecal.TextureName.ReLoad();
         //				}
         //			}
-        //			foreach (ClothTexture clothTexture in ClothTexture.GetDatasFromFile())
+        //			ClothTexture[] datasFromFile3 = ClothTexture.GetDatasFromFile();
+        //			for (int k = 0; k < datasFromFile3.Length; k++)
         //			{
+        //				ClothTexture clothTexture = datasFromFile3[k];
         //				if (clothTexture != null)
         //				{
         //					clothTexture.ColorName.ReLoad();
         //				}
         //			}
-        //			foreach (SymbolNodeItemType symbolNodeItemType in SymbolNodeItemType.GetDatasFromFile())
+        //			SymbolNodeItemType[] datasFromFile4 = SymbolNodeItemType.GetDatasFromFile();
+        //			for (int l = 0; l < datasFromFile4.Length; l++)
         //			{
+        //				SymbolNodeItemType symbolNodeItemType = datasFromFile4[l];
         //				if (symbolNodeItemType != null)
         //				{
         //					symbolNodeItemType.mName.ReLoad();
         //					symbolNodeItemType.mDesc.ReLoad();
         //				}
         //			}
-        //			foreach (SymbolPanelItemType symbolPanelItemType in SymbolPanelItemType.GetDatasFromFile())
+        //			SymbolPanelItemType[] datasFromFile5 = SymbolPanelItemType.GetDatasFromFile();
+        //			for (int m = 0; m < datasFromFile5.Length; m++)
         //			{
+        //				SymbolPanelItemType symbolPanelItemType = datasFromFile5[m];
         //				if (symbolPanelItemType != null)
         //				{
         //					symbolPanelItemType.mName.ReLoad();
         //					symbolPanelItemType.mDesc.ReLoad();
         //				}
         //			}
-        //			foreach (MapData mapData in MapData.GetDatasFromFile())
+        //			MapData[] datasFromFile6 = MapData.GetDatasFromFile();
+        //			for (int n = 0; n < datasFromFile6.Length; n++)
         //			{
+        //				MapData mapData = datasFromFile6[n];
         //				if (mapData != null)
         //				{
         //					mapData.Name.ReLoad();
         //				}
         //			}
-        //			foreach (MusicData musicData in MusicData.GetDatasFromFile())
+        //			MusicData[] datasFromFile7 = MusicData.GetDatasFromFile();
+        //			for (int num = 0; num < datasFromFile7.Length; num++)
         //			{
+        //				MusicData musicData = datasFromFile7[num];
         //				if (musicData != null)
         //				{
         //					musicData.Name.ReLoad();
         //				}
         //			}
-        //			foreach (PlayerProperty.StaticData staticData in PlayerProperty.StaticData.GetDatasFromFile())
+        //			PlayerProperty.StaticData[] datasFromFile8 = PlayerProperty.StaticData.GetDatasFromFile();
+        //			for (int num2 = 0; num2 < datasFromFile8.Length; num2++)
         //			{
+        //				PlayerProperty.StaticData staticData = datasFromFile8[num2];
         //				if (staticData != null)
         //				{
         //					staticData.SkillGroupName0.ReLoad();
         //					staticData.SkillGroupName1.ReLoad();
         //				}
         //			}
-        //			foreach (SoulStarData soulStarData in SoulDataManager.GetDatasFromFile())
+        //			SoulStarData[] datasFromFile9 = SoulDataManager.GetDatasFromFile();
+        //			for (int num3 = 0; num3 < datasFromFile9.Length; num3++)
         //			{
+        //				SoulStarData soulStarData = datasFromFile9[num3];
         //				if (soulStarData != null)
         //				{
         //					soulStarData.NodeName.ReLoad();
         //					soulStarData.NodeDesc.ReLoad();
         //				}
         //			}
-        //			foreach (UIInformation_Help_Item.ItemClass itemClass in UIInformation_Help_Item.Items)
+        //			UIInformation_Help_Item.ItemClass[] items = UIInformation_Help_Item.Items;
+        //			for (int num4 = 0; num4 < items.Length; num4++)
         //			{
+        //				UIInformation_Help_Item.ItemClass itemClass = items[num4];
         //				itemClass.TitleLangue.ReLoad();
-        //				foreach (UIInformation_Help_Item.ItemClass itemClass2 in itemClass.SubItems)
+        //				UIInformation_Help_Item.ItemClass[] subItems = itemClass.SubItems;
+        //				for (int num5 = 0; num5 < subItems.Length; num5++)
         //				{
+        //					UIInformation_Help_Item.ItemClass itemClass2 = subItems[num5];
         //					itemClass2.TitleLangue.ReLoad();
         //				}
         //			}
-        //			foreach (UIInformation_StrangeNews_Item.TypeData typeData in UIInformation_StrangeNews_Item.Items)
+        //			UIInformation_StrangeNews_Item.TypeData[] items2 = UIInformation_StrangeNews_Item.Items;
+        //			for (int num6 = 0; num6 < items2.Length; num6++)
         //			{
+        //				UIInformation_StrangeNews_Item.TypeData typeData = items2[num6];
         //				typeData.TextLangue.ReLoad();
-        //				foreach (UIInformation_StrangeNews_Item.TitleData titleData in typeData.TitleDatas)
+        //				UIInformation_StrangeNews_Item.TitleData[] titleDatas = typeData.TitleDatas;
+        //				for (int num7 = 0; num7 < titleDatas.Length; num7++)
         //				{
+        //					UIInformation_StrangeNews_Item.TitleData titleData = titleDatas[num7];
         //					titleData.TextLangue.ReLoad();
-        //					foreach (UIInformation_StrangeNews_Item.ItemData itemData in titleData.ItemDatas)
+        //					UIInformation_StrangeNews_Item.ItemData[] itemDatas = titleData.ItemDatas;
+        //					for (int num8 = 0; num8 < itemDatas.Length; num8++)
         //					{
+        //						UIInformation_StrangeNews_Item.ItemData itemData = itemDatas[num8];
         //						itemData.TextLangue.ReLoad();
         //					}
         //				}
         //			}
-        //			foreach (KeyValuePair<uint, CharacterProperty.StaticData> keyValuePair in CharacterProperty.StaticData.GetDatasFromFile())
+        //			foreach (KeyValuePair<uint, CharacterProperty.StaticData> current in CharacterProperty.StaticData.GetDatasFromFile())
         //			{
-        //				keyValuePair.Value.ShowName.ReLoad();
+        //				current.Value.ShowName.ReLoad();
         //			}
-        //			foreach (KeyValuePair<uint, ClothItemType> keyValuePair2 in ClothItemTypeCache.GetDatasFromFile())
+        //			foreach (KeyValuePair<uint, ClothItemType> current2 in ClothItemTypeCache.GetDatasFromFile())
         //			{
-        //				keyValuePair2.Value.mName.ReLoad();
-        //				keyValuePair2.Value.mHistoryDesc.ReLoad();
-        //				keyValuePair2.Value.mFunctionDesc.ReLoad();
+        //				current2.Value.mName.ReLoad();
+        //				current2.Value.mHistoryDesc.ReLoad();
+        //				current2.Value.mFunctionDesc.ReLoad();
         //			}
-        //			foreach (KeyValuePair<uint, FashionClothItemType> keyValuePair3 in FashionClothItemTypeCache.GetDatasFromFile())
+        //			foreach (KeyValuePair<uint, FashionClothItemType> current3 in FashionClothItemTypeCache.GetDatasFromFile())
         //			{
-        //				keyValuePair3.Value.mName.ReLoad();
-        //				keyValuePair3.Value.mHistoryDesc.ReLoad();
-        //				keyValuePair3.Value.mFunctionDesc.ReLoad();
+        //				current3.Value.mName.ReLoad();
+        //				current3.Value.mHistoryDesc.ReLoad();
+        //				current3.Value.mFunctionDesc.ReLoad();
         //			}
-        //			foreach (KeyValuePair<uint, NormalItemType> keyValuePair4 in NormalItemTypeCache.GetDatasFromFile())
+        //			foreach (KeyValuePair<uint, NormalItemType> current4 in NormalItemTypeCache.GetDatasFromFile())
         //			{
-        //				keyValuePair4.Value.mName.ReLoad();
-        //				keyValuePair4.Value.mHistoryDesc.ReLoad();
-        //				keyValuePair4.Value.mFunctionDesc.ReLoad();
+        //				current4.Value.mName.ReLoad();
+        //				current4.Value.mHistoryDesc.ReLoad();
+        //				current4.Value.mFunctionDesc.ReLoad();
         //			}
-        //			foreach (KeyValuePair<uint, OrnamentItemType> keyValuePair5 in OrnamentItemTypeCache.GetDatasFromFile())
+        //			foreach (KeyValuePair<uint, OrnamentItemType> current5 in OrnamentItemTypeCache.GetDatasFromFile())
         //			{
-        //				keyValuePair5.Value.mName.ReLoad();
-        //				keyValuePair5.Value.mHistoryDesc.ReLoad();
-        //				keyValuePair5.Value.mFunctionDesc.ReLoad();
+        //				current5.Value.mName.ReLoad();
+        //				current5.Value.mHistoryDesc.ReLoad();
+        //				current5.Value.mFunctionDesc.ReLoad();
         //			}
-        //			foreach (KeyValuePair<uint, ShoesItemType> keyValuePair6 in ShoesItemTypeCache.GetDatasFromFile())
+        //			foreach (KeyValuePair<uint, ShoesItemType> current6 in ShoesItemTypeCache.GetDatasFromFile())
         //			{
-        //				keyValuePair6.Value.mName.ReLoad();
-        //				keyValuePair6.Value.mHistoryDesc.ReLoad();
-        //				keyValuePair6.Value.mFunctionDesc.ReLoad();
+        //				current6.Value.mName.ReLoad();
+        //				current6.Value.mHistoryDesc.ReLoad();
+        //				current6.Value.mFunctionDesc.ReLoad();
         //			}
-        //			foreach (KeyValuePair<uint, WeaponItemType> keyValuePair7 in WeaponItemTypeCache.GetDatasFromFile())
+        //			foreach (KeyValuePair<uint, WeaponItemType> current7 in WeaponItemTypeCache.GetDatasFromFile())
         //			{
-        //				keyValuePair7.Value.mName.ReLoad();
-        //				keyValuePair7.Value.mHistoryDesc.ReLoad();
-        //				keyValuePair7.Value.mFunctionDesc.ReLoad();
+        //				current7.Value.mName.ReLoad();
+        //				current7.Value.mHistoryDesc.ReLoad();
+        //				current7.Value.mFunctionDesc.ReLoad();
         //			}
-        //		}
-
-        //		// Token: 0x020007A3 RID: 1955
-        //		public class SceneOptiDistFogParams
-        //		{
-        //			// Token: 0x0600372A RID: 14122 RVA: 0x0018F5C4 File Offset: 0x0018D7C4
-        //			public SceneOptiDistFogParams(int id, float hi, float mid, float low)
-        //			{
-        //				this.m_LevelID = id;
-        //				this.m_CullDist_Hi = hi;
-        //				this.m_CullDist_Mid = mid;
-        //				this.m_CullDist_Low = low;
-        //			}
-
-        //			// Token: 0x04003170 RID: 12656
-        //			public int m_LevelID;
-
-        //			// Token: 0x04003171 RID: 12657
-        //			public float m_CullDist_Hi;
-
-        //			// Token: 0x04003172 RID: 12658
-        //			public float m_CullDist_Mid;
-
-        //			// Token: 0x04003173 RID: 12659
-        //			public float m_CullDist_Low;
-        //		}
-
-        //		// Token: 0x020007A4 RID: 1956
-        //		public enum PLAYER_RECOMMANDATION
-        //		{
-        //			// Token: 0x04003175 RID: 12661
-        //			LOW,
-        //			// Token: 0x04003176 RID: 12662
-        //			MID,
-        //			// Token: 0x04003177 RID: 12663
-        //			HIGH
-        //		}
-
-        //		// Token: 0x020007A5 RID: 1957
-        //		public enum SETTING_ENUM
-        //		{
-        //			// Token: 0x04003179 RID: 12665
-        //			SHI_YE,
-        //			// Token: 0x0400317A RID: 12666
-        //			YIN_YING,
-        //			// Token: 0x0400317B RID: 12667
-        //			HDR,
-        //			// Token: 0x0400317C RID: 12668
-        //			KANG_JU_CHI,
-        //			// Token: 0x0400317D RID: 12669
-        //			TIE_TU_JING_DU,
-        //			// Token: 0x0400317E RID: 12670
-        //			CHUI_ZHI_TONG_BU,
-        //			// Token: 0x0400317F RID: 12671
-        //			TI_JI_GUANG,
-        //			// Token: 0x04003180 RID: 12672
-        //			ZHI_BEI_FAN_WEI,
-        //			// Token: 0x04003181 RID: 12673
-        //			WU_SE_JU_LI,
-        //			// Token: 0x04003182 RID: 12674
-        //			JING_TONG_MEI_HUA,
-        //			// Token: 0x04003183 RID: 12675
-        //			ZHAN_DOU_TE_XIAO,
-        //			// Token: 0x04003184 RID: 12676
-        //			SHUI_MIAN_DAO_YING,
-        //			// Token: 0x04003185 RID: 12677
-        //			GAO_JI_GUANG_YUAN,
-        //			// Token: 0x04003186 RID: 12678
-        //			SETTING_MAX
-        //		}
-
-        //		// Token: 0x020007A6 RID: 1958
-        //		public class PlayerConfigs
-        //		{
-        //			// Token: 0x0600372B RID: 14123 RVA: 0x0018F5EC File Offset: 0x0018D7EC
-        //			public PlayerConfigs()
-        //			{
-        //				for (int i = 0; i < 13; i++)
-        //				{
-        //					this.m_Settings[i] = 0;
-        //				}
-        //			}
-
-        //			// Token: 0x04003187 RID: 12679
-        //			public int[] m_Settings = new int[13];
-        //		}
-
-        //		// Token: 0x020007A7 RID: 1959
-        //		public enum WatchType
-        //		{
-        //			// Token: 0x04003189 RID: 12681
-        //			FirstPerson,
-        //			// Token: 0x0400318A RID: 12682
-        //			ThirdPerson,
-        //			// Token: 0x0400318B RID: 12683
-        //			Custem
-        //		}
-
-        //		// Token: 0x020007A8 RID: 1960
-        //		public enum DISTANCE_CULL
-        //		{
-        //			// Token: 0x0400318D RID: 12685
-        //			LOW,
-        //			// Token: 0x0400318E RID: 12686
-        //			MID,
-        //			// Token: 0x0400318F RID: 12687
-        //			FULL,
-        //			// Token: 0x04003190 RID: 12688
-        //			RESTORE
-        //		}
-
-        //		// Token: 0x020007A9 RID: 1961
-        //		public enum POST_CAM
-        //		{
-        //			// Token: 0x04003192 RID: 12690
-        //			NONE,
-        //			// Token: 0x04003193 RID: 12691
-        //			MID,
-        //			// Token: 0x04003194 RID: 12692
-        //			FULL
-        //		}
-
-        //		// Token: 0x020007AA RID: 1962
-        //		public enum LIGHT
-        //		{
-        //			// Token: 0x04003196 RID: 12694
-        //			NONE,
-        //			// Token: 0x04003197 RID: 12695
-        //			FULL
-        //		}
-
-        //		// Token: 0x020007AB RID: 1963
-        //		public enum UNLOADPROIR
-        //		{
-        //			// Token: 0x04003199 RID: 12697
-        //			IMMEDIATE,
-        //			// Token: 0x0400319A RID: 12698
-        //			SHORT,
-        //			// Token: 0x0400319B RID: 12699
-        //			LONG,
-        //			// Token: 0x0400319C RID: 12700
-        //			VERYLONG
         //		}
     }
 }

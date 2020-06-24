@@ -93,7 +93,7 @@ public class InputManager
     public static void Initialize()
     {   
         InputManager.InitDefalutKeyMapping();    
-        PalMain.GameMain.updateHandles += InputManager.Update;
+        //PalMain.GameMain.updateHandles += InputManager.Update;
     }
 
     public static void InitDefalutKeyMapping()

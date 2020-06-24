@@ -30,11 +30,11 @@ public class MessageProcess : MonoBehaviour
 		{
 			return;
 		}
-		PalMain gameMain = PalMain.GameMain;
-		if (gameMain != null)
-		{
-			MessageProcess.instance = gameMain.gameObject.GetOrAddComponent<MessageProcess>();
-		}
+		//PalMain gameMain = PalMain.GameMain;
+		//if (gameMain != null)
+		//{
+		//	MessageProcess.instance = gameMain.gameObject.GetOrAddComponent<MessageProcess>();
+		//}
 	}
 
 	private void Start()

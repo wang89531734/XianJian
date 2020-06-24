@@ -1179,9 +1179,9 @@ namespace SoftStar.Pal6
                 {
                     if (FightProperty.StaticData.mDataPaths == null)
                     {
-                        string str = "." + PalMain.GameDifficulty.ToString();
+                        //string str = "." + PalMain.GameDifficulty.ToString();
                         List<string> list = new List<string>();
-                        list.Add(FightProperty.StaticData.DefaultDataPath + str);
+                        //list.Add(FightProperty.StaticData.DefaultDataPath + str);
                         string path = FightProperty.StaticData.DefaultDataPath + ".list";
                         if (File.Exists(path))
                         {
@@ -1189,11 +1189,11 @@ namespace SoftStar.Pal6
                             {
                                 do
                                 {
-                                    string text = streamReader.ReadLine() + str;
-                                    if (File.Exists(text))
-                                    {
-                                        list.Add(text);
-                                    }
+                                //    string text = streamReader.ReadLine() + str;
+                                    //if (File.Exists(text))
+                                    //{
+                                    //    list.Add(text);
+                                    //}
                                 }
                                 while (streamReader.EndOfStream);
                             }

@@ -18,7 +18,7 @@ public class UILogOnForm : UIFormBase
 
     public void OnNewGameBtn()
     {
-        PalMain.GameDifficulty = 0;//设置游戏难度
+        //PalMain.GameDifficulty = 0;//设置游戏难度
         SaveManager.GameDifficulty = 0;
         HPMPDPProperty.StaticData.Reset();
         FightProperty.StaticData.Reset();
@@ -52,8 +52,8 @@ public class UILogOnForm : UIFormBase
         {
             PlayerTeam.Instance.LoadTeam();
         }
-        PalMain.GameBeginTime = Time.fixedTime;
-        PalMain.GameTotleTime = 0f;
-        PalMain.LoadScene(2);//这里回头改成切换流程
+        //PalMain.GameBeginTime = Time.fixedTime;
+        //PalMain.GameTotleTime = 0f;
+        //PalMain.LoadScene(2);//这里回头改成切换流程
     }
 }
