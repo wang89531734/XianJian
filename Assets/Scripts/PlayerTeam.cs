@@ -45,7 +45,7 @@ public class PlayerTeam : MonoBehaviour
 	public void LoadTeam()
 	{
         //ScenesManager.Instance.OnLevelLoaded += new Action<int>(this.OnLoadTeam);
-        OnLoadTeam(1);//场景加载完执行这个
+        //OnLoadTeam(1);//场景加载完执行这个
         this.SetInitValue();
 	}
 

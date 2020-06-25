@@ -11,7 +11,7 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 {
 	private bool isPrefab;
 
-	public DOBJLayer dobjLayer;
+	//public DOBJLayer dobjLayer;
 
 	public GameObject model;
 
@@ -97,7 +97,7 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 		}
 		if (this.objType != ObjType.none && this.objType != ObjType.none0)
 		{
-            CharactersManager.AddCharacter(this);
+            //CharactersManager.AddCharacter(this);
         }
 		//if (base.GetComponent<SignSetActiveByState>() != null)
 		//{
@@ -204,9 +204,8 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
         {
             //this.CollectPrefabObjs(this.model);
         }
-
-        //this.LoadModelEnd(this);
-	}
+        this.LoadModelEnd(this);
+    }
 
 	public virtual void LoadOver()
 	{
@@ -217,25 +216,26 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 	}
 
     /// <summary>
-    /// 加载模型结束 应该类似第二种加载方法
+    /// 加载模型结束
     /// </summary>
     /// <param name="obj"></param>
 	public virtual void LoadModelEnd(UnityEngine.Object obj)
 	{
 		this.loadTime = DateTime.Now.TimeOfDay.Subtract(this.loadTime);
-		if (this.dobjLayer == null)
-		{
-			Transform parent = base.transform.parent;
-			if (parent == null)
-			{
-				return;
-			}
-			this.dobjLayer = parent.GetComponent<DOBJLayer>();
-			if (this.dobjLayer == null)
-			{
-				return;
-			}
-		}
+		//if (this.dobjLayer == null)
+		//{
+		//	Transform parent = base.transform.parent;
+		//	if (parent == null)
+		//	{
+		//		return;
+		//	}
+		//	this.dobjLayer = parent.GetComponent<DOBJLayer>();
+		//	if (this.dobjLayer == null)
+		//	{
+		//		return;
+		//	}
+		//}
+
 		if (this.model != null)
 		{
 			this.model.hideFlags = HideFlags.None;

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+/// <summary>
+/// 输入管理
+/// </summary>
 public class InputManager
 {
 	private class KeyDefinition
@@ -172,12 +175,6 @@ public class InputManager
 
 	private static float AxisKeyThreshold = 0.3f;
 
-	private static IUIInput m_top = null;
-
-	private static Stack<IUIInput> m_uiStack = new Stack<IUIInput>();
-
-	private static Stack<IUIInput> m_interactStack = new Stack<IUIInput>();
-
 	public static bool bActive = true;
 
 	private static Dictionary<KEY_ACTION, InputManager.KeyDefinition> GameKeyList = new Dictionary<KEY_ACTION, InputManager.KeyDefinition>();
@@ -186,81 +183,20 @@ public class InputManager
 
 	private static Vector3 m_MoveDir = Vector3.zero;
 
-	private static string SaveFileName = "InputSettings";
-
-	public static IUIInput CurrentTop
-	{
-		get
-		{
-			return InputManager.m_top;
-		}
-	}
-
-	public static IUIInput CurrentHandle
-	{
-		get
-		{
-			return InputManager.m_uiStack.Peek();
-		}
-	}
-
-	public static IUIInput CurrentInteract
-	{
-		get
-		{
-			return InputManager.m_interactStack.Peek();
-		}
-	}
-
 	public static void LockThisFrame()
 	{
 		InputManager.s_lockThisFrame = true;
 	}
 
-	public static void SetTopUI(IUIInput ui)
-	{
-		InputManager.m_top = ui;
-	}
-
-	public static void PushUI(IUIInput ui)
-	{
-		InputManager.m_uiStack.Push(ui);
-	}
-
-	public static void PopUI(IUIInput ui)
-	{
-		if (InputManager.m_uiStack.Count <= 0 || InputManager.m_uiStack.Peek() != ui)
-		{
-			Debug.LogError(string.Format("Pop UI not match! witch current={0} and poping target={1}", InputManager.CurrentHandle.ToString(), ui.ToString()));
-			return;
-		}
-		InputManager.m_uiStack.Pop();
-	}
-
-	public static void PushInteract(IUIInput interact)
-	{
-		InputManager.m_interactStack.Push(interact);
-	}
-
-	public static void PopInteract(IUIInput interact)
-	{
-		if (InputManager.m_interactStack.Count <= 0 || InputManager.m_interactStack.Peek() != interact)
-		{
-			Debug.LogError(string.Format("Pop Interact not match! witch current={0} and poping target={1}", InputManager.CurrentInteract.ToString(), interact.ToString()));
-			return;
-		}
-		InputManager.m_interactStack.Pop();
-	}
-
 	public static void Initialize()
-	{
-		if (!InputManager.Load())
-		{
-			InputManager.InitDefalutKeyMapping();
-		}
+	{	
+		InputManager.InitDefalutKeyMapping();		
 		PalMain.GameMain.updateHandles += new PalMain.void_func_float_float(InputManager.Update);
 	}
 
+    /// <summary>
+    /// 初始化默认按键映射
+    /// </summary>
 	public static void InitDefalutKeyMapping()
 	{
 		InputManager.GameKeyList.Add(KEY_ACTION.UP, new InputManager.KeyDefinition
@@ -785,26 +721,6 @@ public class InputManager
 	private static void Update(float curTime, float deltaTime)
 	{
 		InputManager.s_lockThisFrame = false;
-		if (InputManager.GetKeyDown(KEY_ACTION.Screenshot, false))//按下截屏键
-		{
-		//	MapData data = MapData.GetData(UtilFun.GetPalMapLevel(Application.loadedLevel));
-			//string text = (data != null) ? data.Name.get_string() : "Pal6";
-			//string text2 = Application.dataPath + "/Screen/";
-			//if (!Directory.Exists(text2))
-			//{
-			//	Directory.CreateDirectory(text2);
-			//}
-			//string text3 = text2;
-			//text2 = string.Concat(new string[]
-			//{
-			//	text3,
-			//	text,
-			//	"_",
-			//	DateTime.Now.ToLocalTime().ToString().Replace('/', '_').Replace(':', '_'),
-			//	".png"
-			//});
-			//Application.CaptureScreenshot(text2);
-		}
 	}
 
 	public static Vector3 GetDir()
@@ -815,60 +731,5 @@ public class InputManager
 		}
 		InputManager.UpdateDir();
 		return InputManager.m_MoveDir;
-	}
-
-	public static void Save()
-	{
-		string storeDirePath = InputManager.GetStoreDirePath();
-		using (BinaryWriter binaryWriter = new BinaryWriter(File.Open(storeDirePath, FileMode.Create)))
-		{
-			binaryWriter.Write(InputManager.GameKeyList.Count);
-			foreach (KeyValuePair<KEY_ACTION, InputManager.KeyDefinition> current in InputManager.GameKeyList)
-			{
-				binaryWriter.Write((int)current.Key);
-				binaryWriter.Write((int)current.Value.Code);
-				binaryWriter.Write(current.Value.Axis);
-				binaryWriter.Write((byte)current.Value.AxisDirection);
-			}
-		}
-	}
-
-	public static bool Load()
-	{
-		bool result = true;
-		string storeDirePath = InputManager.GetStoreDirePath();
-		if (!File.Exists(storeDirePath))
-		{
-			result = false;
-		}
-		else
-		{
-			using (BinaryReader binaryReader = new BinaryReader(File.OpenRead(storeDirePath)))
-			{
-				int num = binaryReader.ReadInt32();
-				for (int i = 0; i < num; i++)
-				{
-					KEY_ACTION key = (KEY_ACTION)binaryReader.ReadInt32();
-					KeyCode code = (KeyCode)binaryReader.ReadInt32();
-					string axis = binaryReader.ReadString();
-					AxisDirectionType axisDirection = (AxisDirectionType)binaryReader.ReadByte();
-					InputManager.GameKeyList[key] = new InputManager.KeyDefinition
-					{
-						Code = code,
-						Axis = axis,
-						AxisDirection = axisDirection
-					};
-				}
-			}
-		}
-		return result;
-	}
-
-	private static string GetStoreDirePath()
-	{
-		string text = Application.dataPath;
-		int length = text.LastIndexOf('/');
-		text = text.Substring(0, length);
-		return text + "/" + InputManager.SaveFileName;
 	}
 }

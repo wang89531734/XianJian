@@ -834,9 +834,9 @@ public class PlayersManager
 	public static GameObject LoadPlayer(int ID)
 	{
         GameObject gameObject = null;
-        GameEntry.Data.RoleDataManager.CreatePlayerByJobId(1, (Transform roleCtrl) =>
+        GameEntry.Data.RoleDataManager.CreatePlayerByJobId(1, (Transform trans) =>
         {
-            gameObject = roleCtrl.gameObject;
+            gameObject = trans.gameObject;
             //gameObject.ExcludeCloneName();
             //PlayersManager.PlayerInitSneakScript(gameObject, null);
         });

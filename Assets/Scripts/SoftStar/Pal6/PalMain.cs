@@ -2,7 +2,6 @@
 //using Glow11;
 //using SoftStar.BuffDebuff;
 using SoftStar.Item;
-//using SoftStar.Pal6.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,29 +11,33 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 //using UnityStandardAssets.ImageEffects;
+using YouYou;
 
 namespace SoftStar.Pal6
 {
     public class PalMain : MonoBehaviour
     {
-        //		public class SceneOptiDistFogParams
-        //		{
-        //			public int m_LevelID;
+        /// <summary>
+        /// 剔除距离
+        /// </summary>
+        public class SceneOptiDistFogParams
+        {
+            public int m_LevelID;
 
-        //			public float m_CullDist_Hi;
+            public float m_CullDist_Hi;
 
-        //			public float m_CullDist_Mid;
+            public float m_CullDist_Mid;
 
-        //			public float m_CullDist_Low;
+            public float m_CullDist_Low;
 
-        //			public SceneOptiDistFogParams(int id, float hi, float mid, float low)
-        //			{
-        //				this.m_LevelID = id;
-        //				this.m_CullDist_Hi = hi;
-        //				this.m_CullDist_Mid = mid;
-        //				this.m_CullDist_Low = low;
-        //			}
-        //		}
+            public SceneOptiDistFogParams(int id, float hi, float mid, float low)
+            {
+                this.m_LevelID = id;
+                this.m_CullDist_Hi = hi;
+                this.m_CullDist_Mid = mid;
+                this.m_CullDist_Low = low;
+            }
+        }
 
         public enum SETTING_ENUM
         {
@@ -54,18 +57,21 @@ namespace SoftStar.Pal6
             SETTING_MAX
         }
 
-        //		public class PlayerConfigs
-        //		{
-        //			public int[] m_Settings = new int[13];
+        /// <summary>
+        /// 玩家设置
+        /// </summary>
+        public class PlayerConfigs
+        {
+            public int[] m_Settings = new int[13];
 
-        //			public PlayerConfigs()
-        //			{
-        //				for (int i = 0; i < 13; i++)
-        //				{
-        //					this.m_Settings[i] = 0;
-        //				}
-        //			}
-        //		}
+            public PlayerConfigs()
+            {
+                for (int i = 0; i < 13; i++)
+                {
+                    this.m_Settings[i] = 0;
+                }
+            }
+        }
 
         public enum WatchType
         {
@@ -164,12 +170,6 @@ namespace SoftStar.Pal6
         public static Dictionary<int, int> ItemCount = new Dictionary<int, int>();
 
         public static Dictionary<int, List<IItem>> SceneItems = new Dictionary<int, List<IItem>>();
-
-        public float minFPS = 10f;
-
-        public static float MinFPS = 10f;
-
-        public static float MinDeltaTime;
 
         public bool m_bIgnoreEnemy;
 
@@ -290,33 +290,7 @@ namespace SoftStar.Pal6
 
         public event PalMain.void_func_float_float updateHandles;
 
-        //		public event PalMain.void_func_void onInputHandles
-        //		{
-        //			[MethodImpl(MethodImplOptions.Synchronized)]
-        //			add
-        //			{
-        //				this.onInputHandles = (PalMain.void_func_void)Delegate.Combine(this.onInputHandles, value);
-        //			}
-        //			[MethodImpl(MethodImplOptions.Synchronized)]
-        //			remove
-        //			{
-        //				this.onInputHandles = (PalMain.void_func_void)Delegate.Remove(this.onInputHandles, value);
-        //			}
-        //		}
-
-        //		public event PalMain.void_func_void onGUIHandles
-        //		{
-        //			[MethodImpl(MethodImplOptions.Synchronized)]
-        //			add
-        //			{
-        //				this.onGUIHandles = (PalMain.void_func_void)Delegate.Combine(this.onGUIHandles, value);
-        //			}
-        //			[MethodImpl(MethodImplOptions.Synchronized)]
-        //			remove
-        //			{
-        //				this.onGUIHandles = (PalMain.void_func_void)Delegate.Remove(this.onGUIHandles, value);
-        //			}
-        //		}
+        public event PalMain.void_func_void onInputHandles;
 
         //		public bool IsSkillPreloading
         //		{
@@ -437,37 +411,37 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		public static GameObject MainCamera
-        //		{
-        //			get
-        //			{
-        //				if (PalMain.m_MainCamera == null)
-        //				{
-        //					GameObject gameObject = GameObject.Find("/Main Camera Pal");
-        //					if (gameObject != null)
-        //					{
-        //						PalMain.m_MainCamera = gameObject;
-        //					}
-        //					else if (UtilFun.GetMainCamera() != null)
-        //					{
-        //						PalMain.m_MainCamera = UtilFun.GetMainCamera().gameObject;
-        //					}
-        //					if (PalMain.m_MainCamera != null)
-        //					{
-        //						PalMain.MainCameraTF = PalMain.m_MainCamera.transform;
-        //					}
-        //				}
-        //				return PalMain.m_MainCamera;
-        //			}
-        //			set
-        //			{
-        //				PalMain.m_MainCamera = value;
-        //				if (PalMain.m_MainCamera != null)
-        //				{
-        //					PalMain.MainCameraTF = PalMain.m_MainCamera.transform;
-        //				}
-        //			}
-        //		}
+        public static GameObject MainCamera
+        {
+            get
+            {
+                if (PalMain.m_MainCamera == null)
+                {
+                    GameObject gameObject = GameObject.Find("/Main Camera Pal");
+                    if (gameObject != null)
+                    {
+                        PalMain.m_MainCamera = gameObject;
+                    }
+                    else if (UtilFun.GetMainCamera() != null)
+                    {
+                        PalMain.m_MainCamera = UtilFun.GetMainCamera().gameObject;
+                    }
+                    if (PalMain.m_MainCamera != null)
+                    {
+                        PalMain.MainCameraTF = PalMain.m_MainCamera.transform;
+                    }
+                }
+                return PalMain.m_MainCamera;
+            }
+            set
+            {
+                PalMain.m_MainCamera = value;
+                if (PalMain.m_MainCamera != null)
+                {
+                    PalMain.MainCameraTF = PalMain.m_MainCamera.transform;
+                }
+            }
+        }
 
         public static PalMain GameMain
         {
@@ -788,57 +762,6 @@ namespace SoftStar.Pal6
         {
         }
 
-        //		public static void LoadOneLangueUIAtlas(string subname)
-        //		{
-        //			string path = subname.ToLanguagePath();
-        //			UIAtlas uIAtlas = FileLoader.LoadComponentFromFile<UIAtlas>(path, false);
-        //			FileLoader.SetNoUnload(path, true);
-        //			string path2 = ("AssetBundles/UI/" + subname + "_Empty").ToAssetBundlePath();
-        //			UIAtlas uIAtlas2 = FileLoader.LoadComponentFromFile<UIAtlas>(path2, false);
-        //			FileLoader.SetNoUnload(path2, true);
-        //			uIAtlas2.gameObject.name = subname + "_Empty";
-        //			NGUITools.SetCacheAtlas(subname, uIAtlas);
-        //			NGUITools.SetCacheAtlas(subname + "_Empty", uIAtlas2);
-        //			uIAtlas2.replacement = uIAtlas;
-        //		}
-
-        //		public static void ReleaseLangueUIAtlas(string subname)
-        //		{
-        //			string path = subname.ToLanguagePath();
-        //			FileLoader.SetNoUnload(path, false);
-        //			FileLoader.UnloadAssetBundle(path);
-        //			NGUITools.RemoveCacheAtlas(subname);
-        //		}
-
-        //		public static void ReloadLangueUIAtlas(string subname)
-        //		{
-        //			string path = subname.ToLanguagePath();
-        //			UIAtlas uIAtlas = FileLoader.LoadComponentFromFile<UIAtlas>(path, false);
-        //			FileLoader.SetNoUnload(path, true);
-        //			string name = subname + "_Empty";
-        //			UIAtlas cacheAtlas = NGUITools.GetCacheAtlas(name);
-        //			NGUITools.SetCacheAtlas(subname, uIAtlas);
-        //			cacheAtlas.replacement = uIAtlas;
-        //		}
-
-        //		public static void LoadUI()
-        //		{
-        //			string[] bigImageNames = UIManager.BigImageNames;
-        //			for (int i = 0; i < bigImageNames.Length; i++)
-        //			{
-        //				string str = bigImageNames[i];
-        //				FileLoader.LoadObjectFromFile<Texture>(("AssetBundles/UI/BigImage/" + str).ToAssetBundlePath(), false, true);
-        //				FileLoader.SetNoUnload(("AssetBundles/UI/BigImage/" + str).ToAssetBundlePath(), true);
-        //			}
-        //			FileLoader.LoadComponentFromFile<UIAtlas>("AssetBundles/UI/Menu0".ToAssetBundlePath(), false);
-        //			FileLoader.SetNoUnload("AssetBundles/UI/Menu0".ToAssetBundlePath(), true);
-        //			FileLoader.LoadComponentFromFile<UIAtlas>("AssetBundles/UI/Dialog0".ToAssetBundlePath(), false);
-        //			FileLoader.SetNoUnload("AssetBundles/UI/Dialog0".ToAssetBundlePath(), true);
-        //			FileLoader.LoadComponentFromFile<UIAtlas>("AssetBundles/UI/Dialog1".ToAssetBundlePath(), false);
-        //			FileLoader.SetNoUnload("AssetBundles/UI/Dialog1".ToAssetBundlePath(), true);
-        //			PalMain.LoadOneLangueUIAtlas("StringImage0");
-        //		}
-
         private void Initialize()
         {
             //try
@@ -871,7 +794,6 @@ namespace SoftStar.Pal6
             //}
             //optionConfig.Use_Start();
             //optionConfig.Use_Other();
-            //PalMain.LoadUI();
             //Physics.gravity = new Vector3(0f, -20f, 0f);
             //Physics2D.queriesHitTriggers = false;
             //QualitySettings.blendWeights = BlendWeights.FourBones;
@@ -906,8 +828,7 @@ namespace SoftStar.Pal6
             //    achievements[189].m_CurrentNum = ((FashionClothItemTypeCache.IsGetRate() < 1f) ? 0 : 1);
             //};
 
-            MouseEventManager.Initialize();
-            //ShaderPropertyIDManager.Initialize();
+            MouseEventManager.Initialize();    
             //MessageProcess.Initialize();
             //SetActiveByFlagManager.Initialize();
             //ScenesManager.Initialize();
@@ -920,7 +841,7 @@ namespace SoftStar.Pal6
             //PalBattleManager.Initialize();
             //EntityManager.Initialize();
             //MissionTick.Initialize();
-            //PlayersManager.Initialize();
+            PlayersManager.Initialize();
             //RenownManager.Initialize();
             //AnimWithoutClothSet.Initialize();
             //SlowLoopAnimSet.Initialize();
@@ -1330,67 +1251,49 @@ namespace SoftStar.Pal6
         //			PalMain.landMarks.AddRange(collection);
         //		}
 
-        //		private void UpdateMinFPS()
-        //		{
-        //			if (PalMain.MinFPS != this.minFPS)
-        //			{
-        //				PalMain.MinFPS = this.minFPS;
-        //				PalMain.MinDeltaTime = 1f / this.minFPS;
-        //			}
-        //		}
+        private void Update()
+        {
+            if (this.onInputHandles != null)
+            {
+                this.onInputHandles();
+            }
+            if (this.updateHandles != null)
+            {
+                this.updateHandles(Time.time, Time.deltaTime);
+            }
+            //this.m_QTEManager.Update();
+            //if (ScenesManager.IsChanging || ShowLoading.Instance != null)
+            //{
+            //    return;
+            //}
+            //this.UpdateOpCull();
+            //PalMain.UpdateCheckUnload();
+            //this.UpdateSpecialIssueForNonFocus();
+            //if (WaitForSonyCheck.Instance == null)
+            //{
+            //}
+            //FileLoader.Instance.Update();
+        }
 
-        //		private void Update()
-        //		{
-        //			this.UpdateMinFPS();
-        //			if (this.onInputHandles != null)
-        //			{
-        //				this.onInputHandles();
-        //			}
-        //			if (this.updateHandles != null)
-        //			{
-        //				this.updateHandles(Time.time, Time.deltaTime);
-        //			}
-        //			this.m_QTEManager.Update();
-        //			if (ScenesManager.IsChanging || ShowLoading.Instance != null)
-        //			{
-        //				return;
-        //			}
-        //			this.UpdateOpCull();
-        //			PalMain.UpdateCheckUnload();
-        //			this.UpdateSpecialIssueForNonFocus();
-        //			if (WaitForSonyCheck.Instance == null)
-        //			{
-        //			}
-        //			FileLoader.Instance.Update();
-        //		}
-
-        //		private void FixedUpdate()
-        //		{
-        //			BuffDebuffManager.GetInstance().FixedUpdate(Time.fixedTime);
-        //			if (DateTime.Now > this.mLastConfigSave)
-        //			{
-        //				this.mLastConfigSave = DateTime.Now.AddSeconds(1.0);
-        //				bool flag = false;
-        //				OptionConfig optionConfig = OptionConfig.GetInstance();
-        //				if (optionConfig.IsDirty)
-        //				{
-        //					optionConfig.Save();
-        //					flag = true;
-        //				}
-        //				if (flag)
-        //				{
-        //					SaveManager.SaveGlobalData();
-        //				}
-        //			}
-        //		}
-
-        //		private void OnGUI()
-        //		{
-        //			if (this.onGUIHandles != null)
-        //			{
-        //				this.onGUIHandles();
-        //			}
-        //		}
+        private void FixedUpdate()
+        {
+            //BuffDebuffManager.GetInstance().FixedUpdate(Time.fixedTime);
+            //if (DateTime.Now > this.mLastConfigSave)
+            //{
+            //    this.mLastConfigSave = DateTime.Now.AddSeconds(1.0);
+            //    bool flag = false;
+            //    OptionConfig optionConfig = OptionConfig.GetInstance();
+            //    if (optionConfig.IsDirty)
+            //    {
+            //        optionConfig.Save();
+            //        flag = true;
+            //    }
+            //    if (flag)
+            //    {
+            //        SaveManager.SaveGlobalData();
+            //    }
+            //}
+        }
 
         //		private void ReplaceMeshColliderFor7()
         //		{
@@ -1704,18 +1607,18 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		private void OnLevelLoaded(int level)
-        //		{
-        //			level = ScenesManager.CurLoadedLevel;
-        //			PlayerCtrlManager.OnLevelLoaded(level);
-        //			PalMain.OnReadySpawn();
-        //			EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Remove(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));
-        //			EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Combine(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));
-        //			EntityManager.OnLevelWasLoaded(level);
-        //			OptionConfig.GetInstance().Use_OnLevelLoaded();
-        //			OptionConfig.GetInstance().Use_CharacterEmission();
-        //			MapWatch.Instance.SetMap();
-        //		}
+        private void OnLevelLoaded()
+        {
+            //level = ScenesManager.CurLoadedLevel;
+            //PlayerCtrlManager.OnLevelLoaded(level);
+            //PalMain.OnReadySpawn();
+            //EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Remove(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));
+            //EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Combine(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));
+            //EntityManager.OnLevelWasLoaded(level);
+            //OptionConfig.GetInstance().Use_OnLevelLoaded();
+            //OptionConfig.GetInstance().Use_CharacterEmission();
+            //MapWatch.Instance.SetMap();
+        }
 
         //		[DebuggerHidden]
         //		public static IEnumerator Quit(float time)
@@ -1952,20 +1855,16 @@ namespace SoftStar.Pal6
         //			Footmark.Clear();
         //		}
 
+        /// <summary>
+        /// 切换地图
+        /// </summary>
+        /// <param name="DestName"></param>
+        /// <param name="LevelIndex"></param>
+        /// <param name="PlayDefaultAudio"></param>
+        /// <param name="SaveDynamicObjs"></param>
         public static void ChangeMap(string DestName, int LevelIndex, bool PlayDefaultAudio = true, bool SaveDynamicObjs = true)
         {
-            //if (!AssetBundleChecker.checkMapChange(DestName, LevelIndex))
-            //{
-            //    return;
-            //}
-            //Time.timeScale = 1f;
-            //UnityEngine.Debug.Log(string.Format("ChangeMap : DestName={0}, LevelIndex={1}, PlayDefaultAudio={2}, SaveDynamicObjs={3}", new object[]
-            //{
-            //            DestName,
-            //            LevelIndex,
-            //            PlayDefaultAudio,
-            //            SaveDynamicObjs
-            //}));
+            Time.timeScale = 1f;
             //PalBattleManager.Instance().OnSceneChangeClear();
             //if (ScenesManager.CurLoadedLevel == 11 && LevelIndex != 11)
             //{
@@ -1975,16 +1874,12 @@ namespace SoftStar.Pal6
             //{
             //    Cutscene.current.End(false);
             //}
-            //Transform transform = UtilFun.GetMainCamera().transform;
-            //if (transform != null)
-            //{
-            //    transform.parent = null;
-            //}
+            Transform transform = UtilFun.GetMainCamera().transform;
+            if (transform != null)
+            {
+                transform.parent = null;
+            }
             //UtilFun.GetMainCamera().cullingMask = 0;
-            //if (ScenesManager.IsChanging)
-            //{
-            //    return;
-            //}
             //PlayersManager.RestoreLayer(true);
             //PlayersManager.ChangeHairShader(false);
             //if (SaveDynamicObjs)
@@ -1992,7 +1887,7 @@ namespace SoftStar.Pal6
             //    DynamicObjsDataManager.Instance.SaveCurObjsDataToMemory();
             //}
             //PalMain.ClearManagerData();
-            //ScenesManager.IsChanging = true;
+
             //if (PalMain.backgroundAudio != null)
             //{
             //    PalMain.backgroundAudio.PlayDefaultAudio = PlayDefaultAudio;
@@ -2001,11 +1896,25 @@ namespace SoftStar.Pal6
             //{
             //    UnityEngine.Debug.LogError("PalMain.backgroundAudio==null");
             //}
+
             //if (SkillSEPreloader.s_preloadEnable)
             //{
             //    SkillSEPreloader.Instance.unLoadAllSkillSE();
             //}
-            //ScenesManager.Instance.ChangeMap(DestName, LevelIndex, new Action<int>(PalMain.Instance.OnLevelLoaded));
+
+            GameEntry.Scene.LoadScene(2,false, () =>
+            {
+                //EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Remove(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));
+                //PalMain.RefreshAllLandMarks();
+                //DynamicObjsDataManager.Instance.LoadCurObjsDataFromMemory();
+                //GameStateManager.CurGameState = GameState.Normal;
+                //PalMain.Instance.SpecialProcessForLevel(ScenesManager.CurLoadedLevel);
+                //PalMain.ShowMemory();
+                //if (PalMain.LoadOverEvent != null)
+                //{
+                //    PalMain.LoadOverEvent();
+                //}
+            });
         }
 
         //		public static void OnReadySpawn()
@@ -2018,20 +1927,6 @@ namespace SoftStar.Pal6
         //			if (PlayersManager.Player != null)
         //			{
         //				PalMain.SetMainCamera(PlayersManager.Player);
-        //			}
-        //		}
-
-        //		public static void OnLoadOver()
-        //		{
-        //			EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Remove(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));
-        //			PalMain.RefreshAllLandMarks();
-        //			DynamicObjsDataManager.Instance.LoadCurObjsDataFromMemory();
-        //			GameStateManager.CurGameState = GameState.Normal;
-        //			PalMain.Instance.SpecialProcessForLevel(ScenesManager.CurLoadedLevel);
-        //			PalMain.ShowMemory();
-        //			if (PalMain.LoadOverEvent != null)
-        //			{
-        //				PalMain.LoadOverEvent();
         //			}
         //		}
 
@@ -3177,173 +3072,6 @@ namespace SoftStar.Pal6
         //						uIRoot.SetActive(true);
         //					}
         //				}
-        //			}
-        //		}
-
-        //		public void ChangeLanguage(uint next)
-        //		{
-        //			Langue.ClearLanguageDictionary();
-        //			PalMain.ReleaseLangueUIAtlas("StringImage0");
-        //			Langue.CurLangue = next;
-        //			PalBattleManager.Instance().GetMonsterSkillDataManager().ReParseLanguageData();
-        //			PalBattleManager.Instance().GetStatusDataManager().ReParseLanguageData();
-        //			PalMain.ReloadLangueUIAtlas("StringImage0");
-        //			NicknameBuffDebuffType[] datasFromFile = NicknameBuffDebuffTypeCache.GetDatasFromFile();
-        //			for (int i = 0; i < datasFromFile.Length; i++)
-        //			{
-        //				NicknameBuffDebuffType nicknameBuffDebuffType = datasFromFile[i];
-        //				if (nicknameBuffDebuffType != null)
-        //				{
-        //					nicknameBuffDebuffType.mName.ReLoad();
-        //					nicknameBuffDebuffType.mHistoryDesc.ReLoad();
-        //					nicknameBuffDebuffType.mFunctionDesc.ReLoad();
-        //				}
-        //			}
-        //			ClothDecal[] datasFromFile2 = ClothDecal.GetDatasFromFile();
-        //			for (int j = 0; j < datasFromFile2.Length; j++)
-        //			{
-        //				ClothDecal clothDecal = datasFromFile2[j];
-        //				if (clothDecal != null)
-        //				{
-        //					clothDecal.TextureName.ReLoad();
-        //				}
-        //			}
-        //			ClothTexture[] datasFromFile3 = ClothTexture.GetDatasFromFile();
-        //			for (int k = 0; k < datasFromFile3.Length; k++)
-        //			{
-        //				ClothTexture clothTexture = datasFromFile3[k];
-        //				if (clothTexture != null)
-        //				{
-        //					clothTexture.ColorName.ReLoad();
-        //				}
-        //			}
-        //			SymbolNodeItemType[] datasFromFile4 = SymbolNodeItemType.GetDatasFromFile();
-        //			for (int l = 0; l < datasFromFile4.Length; l++)
-        //			{
-        //				SymbolNodeItemType symbolNodeItemType = datasFromFile4[l];
-        //				if (symbolNodeItemType != null)
-        //				{
-        //					symbolNodeItemType.mName.ReLoad();
-        //					symbolNodeItemType.mDesc.ReLoad();
-        //				}
-        //			}
-        //			SymbolPanelItemType[] datasFromFile5 = SymbolPanelItemType.GetDatasFromFile();
-        //			for (int m = 0; m < datasFromFile5.Length; m++)
-        //			{
-        //				SymbolPanelItemType symbolPanelItemType = datasFromFile5[m];
-        //				if (symbolPanelItemType != null)
-        //				{
-        //					symbolPanelItemType.mName.ReLoad();
-        //					symbolPanelItemType.mDesc.ReLoad();
-        //				}
-        //			}
-        //			MapData[] datasFromFile6 = MapData.GetDatasFromFile();
-        //			for (int n = 0; n < datasFromFile6.Length; n++)
-        //			{
-        //				MapData mapData = datasFromFile6[n];
-        //				if (mapData != null)
-        //				{
-        //					mapData.Name.ReLoad();
-        //				}
-        //			}
-        //			MusicData[] datasFromFile7 = MusicData.GetDatasFromFile();
-        //			for (int num = 0; num < datasFromFile7.Length; num++)
-        //			{
-        //				MusicData musicData = datasFromFile7[num];
-        //				if (musicData != null)
-        //				{
-        //					musicData.Name.ReLoad();
-        //				}
-        //			}
-        //			PlayerProperty.StaticData[] datasFromFile8 = PlayerProperty.StaticData.GetDatasFromFile();
-        //			for (int num2 = 0; num2 < datasFromFile8.Length; num2++)
-        //			{
-        //				PlayerProperty.StaticData staticData = datasFromFile8[num2];
-        //				if (staticData != null)
-        //				{
-        //					staticData.SkillGroupName0.ReLoad();
-        //					staticData.SkillGroupName1.ReLoad();
-        //				}
-        //			}
-        //			SoulStarData[] datasFromFile9 = SoulDataManager.GetDatasFromFile();
-        //			for (int num3 = 0; num3 < datasFromFile9.Length; num3++)
-        //			{
-        //				SoulStarData soulStarData = datasFromFile9[num3];
-        //				if (soulStarData != null)
-        //				{
-        //					soulStarData.NodeName.ReLoad();
-        //					soulStarData.NodeDesc.ReLoad();
-        //				}
-        //			}
-        //			UIInformation_Help_Item.ItemClass[] items = UIInformation_Help_Item.Items;
-        //			for (int num4 = 0; num4 < items.Length; num4++)
-        //			{
-        //				UIInformation_Help_Item.ItemClass itemClass = items[num4];
-        //				itemClass.TitleLangue.ReLoad();
-        //				UIInformation_Help_Item.ItemClass[] subItems = itemClass.SubItems;
-        //				for (int num5 = 0; num5 < subItems.Length; num5++)
-        //				{
-        //					UIInformation_Help_Item.ItemClass itemClass2 = subItems[num5];
-        //					itemClass2.TitleLangue.ReLoad();
-        //				}
-        //			}
-        //			UIInformation_StrangeNews_Item.TypeData[] items2 = UIInformation_StrangeNews_Item.Items;
-        //			for (int num6 = 0; num6 < items2.Length; num6++)
-        //			{
-        //				UIInformation_StrangeNews_Item.TypeData typeData = items2[num6];
-        //				typeData.TextLangue.ReLoad();
-        //				UIInformation_StrangeNews_Item.TitleData[] titleDatas = typeData.TitleDatas;
-        //				for (int num7 = 0; num7 < titleDatas.Length; num7++)
-        //				{
-        //					UIInformation_StrangeNews_Item.TitleData titleData = titleDatas[num7];
-        //					titleData.TextLangue.ReLoad();
-        //					UIInformation_StrangeNews_Item.ItemData[] itemDatas = titleData.ItemDatas;
-        //					for (int num8 = 0; num8 < itemDatas.Length; num8++)
-        //					{
-        //						UIInformation_StrangeNews_Item.ItemData itemData = itemDatas[num8];
-        //						itemData.TextLangue.ReLoad();
-        //					}
-        //				}
-        //			}
-        //			foreach (KeyValuePair<uint, CharacterProperty.StaticData> current in CharacterProperty.StaticData.GetDatasFromFile())
-        //			{
-        //				current.Value.ShowName.ReLoad();
-        //			}
-        //			foreach (KeyValuePair<uint, ClothItemType> current2 in ClothItemTypeCache.GetDatasFromFile())
-        //			{
-        //				current2.Value.mName.ReLoad();
-        //				current2.Value.mHistoryDesc.ReLoad();
-        //				current2.Value.mFunctionDesc.ReLoad();
-        //			}
-        //			foreach (KeyValuePair<uint, FashionClothItemType> current3 in FashionClothItemTypeCache.GetDatasFromFile())
-        //			{
-        //				current3.Value.mName.ReLoad();
-        //				current3.Value.mHistoryDesc.ReLoad();
-        //				current3.Value.mFunctionDesc.ReLoad();
-        //			}
-        //			foreach (KeyValuePair<uint, NormalItemType> current4 in NormalItemTypeCache.GetDatasFromFile())
-        //			{
-        //				current4.Value.mName.ReLoad();
-        //				current4.Value.mHistoryDesc.ReLoad();
-        //				current4.Value.mFunctionDesc.ReLoad();
-        //			}
-        //			foreach (KeyValuePair<uint, OrnamentItemType> current5 in OrnamentItemTypeCache.GetDatasFromFile())
-        //			{
-        //				current5.Value.mName.ReLoad();
-        //				current5.Value.mHistoryDesc.ReLoad();
-        //				current5.Value.mFunctionDesc.ReLoad();
-        //			}
-        //			foreach (KeyValuePair<uint, ShoesItemType> current6 in ShoesItemTypeCache.GetDatasFromFile())
-        //			{
-        //				current6.Value.mName.ReLoad();
-        //				current6.Value.mHistoryDesc.ReLoad();
-        //				current6.Value.mFunctionDesc.ReLoad();
-        //			}
-        //			foreach (KeyValuePair<uint, WeaponItemType> current7 in WeaponItemTypeCache.GetDatasFromFile())
-        //			{
-        //				current7.Value.mName.ReLoad();
-        //				current7.Value.mHistoryDesc.ReLoad();
-        //				current7.Value.mFunctionDesc.ReLoad();
         //			}
         //		}
     }

@@ -19,9 +19,9 @@ public class UILogOnForm : UIFormBase
     public void OnNewGameBtn()
     {
         PalMain.GameDifficulty = 0;//设置游戏难度
-        //SaveManager.GameDifficulty = 0;
-        //HPMPDPProperty.StaticData.Reset();
-        //FightProperty.StaticData.Reset();
+        SaveManager.GameDifficulty = 0;
+        HPMPDPProperty.StaticData.Reset();
+        FightProperty.StaticData.Reset();
         //PalMain.backgroundAudio.ChangeBackMusicImmediate(null);
         this.AfterSetGameDifficulty_NewStart();
     }
