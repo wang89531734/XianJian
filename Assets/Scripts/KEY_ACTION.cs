@@ -51,6 +51,9 @@ public enum KEY_ACTION
 	SKILL_SIXTH,
 	SKILL_SEVENTH,
 	SKILL_EIGHTH,
+    /// <summary>
+    /// ½ØÆÁ¼ü
+    /// </summary>
 	Screenshot,
 	FIGHT1,
 	CHAGNESTATE,

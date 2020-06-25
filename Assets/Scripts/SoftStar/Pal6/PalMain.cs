@@ -103,40 +103,40 @@ namespace SoftStar.Pal6
             VERYLONG
         }
 
-        //		public delegate void void_func_void();
+        public delegate void void_func_void();
 
-        //		public delegate void void_func_float_float(float currentTime, float deltaTime);
+        public delegate void void_func_float_float(float currentTime, float deltaTime);
 
-        //		public const int MoneyFlag = 2;
+        public const int MoneyFlag = 2;
 
-        //		private bool m_skillPreloading;
+        private bool m_skillPreloading;
 
-        //		private static float m_loadingValue = 0f;
+        private static float m_loadingValue = 0f;
 
-        //		public static bool mIsDLC = false;
+        public static bool mIsDLC = false;
 
-        //		private static uint _MoneyID = 0u;
+        private static uint _MoneyID = 0u;
 
         /// <summary>
         /// 游戏难度
         /// </summary>
         public static int GameDifficulty = 0;
 
-        //		public static int MapOffset = 4194304;
+        public static int MapOffset = 4194304;
 
-        //		public static float dyingRate = 0.1f;
+        public static float dyingRate = 0.1f;
 
-        //		public static string dyingZhanLi = string.Empty;
+        public static string dyingZhanLi = string.Empty;
 
-        //		public static string normalZhanli = string.Empty;
+        public static string normalZhanli = string.Empty;
 
-        //		public static int IgnoreLayer = 2;
+        public static int IgnoreLayer = 2;
 
-        //		public static int IgnoreMaskValue = (int)Mathf.Pow(2f, (float)PalMain.IgnoreLayer);
+        public static int IgnoreMaskValue = (int)Mathf.Pow(2f, (float)PalMain.IgnoreLayer);
 
-        //		public static List<string> dialogue = new List<string>();
+        public static List<string> dialogue = new List<string>();
 
-        //		public BattleFormationManager CurBattleFormationManager = new BattleFormationManager();
+        //public BattleFormationManager CurBattleFormationManager = new BattleFormationManager();
 
         /// <summary>
         /// 游戏开始时间
@@ -150,161 +150,145 @@ namespace SoftStar.Pal6
         [NonSerialized]
         public static float GameTotleTime;
 
-        //		[SerializeField]
-        //		private PalMain.WatchType mCurWatchType;
+        [SerializeField]
+        private PalMain.WatchType mCurWatchType;
 
-        //		public static string PlayerName = "Default";
+        public static string PlayerName = "Default";
 
-        //		public static List<Landmark> landMarks = new List<Landmark>();
+        //public static List<Landmark> landMarks = new List<Landmark>();
 
-        //		public static string mapInfoPrefix = "/Resources/MapData/";
+        public static string mapInfoPrefix = "/Resources/MapData/";
 
-        //		public static GameObject mapinfo = null;
+        public static GameObject mapinfo = null;
 
-        //		public static Dictionary<int, int> ItemCount = new Dictionary<int, int>();
+        public static Dictionary<int, int> ItemCount = new Dictionary<int, int>();
 
-        //		public static Dictionary<int, List<IItem>> SceneItems = new Dictionary<int, List<IItem>>();
+        public static Dictionary<int, List<IItem>> SceneItems = new Dictionary<int, List<IItem>>();
 
-        //		public float minFPS = 10f;
+        public float minFPS = 10f;
 
-        //		public static float MinFPS = 10f;
+        public static float MinFPS = 10f;
 
-        //		public static float MinDeltaTime;
+        public static float MinDeltaTime;
 
-        //		public bool m_bIgnoreEnemy;
+        public bool m_bIgnoreEnemy;
 
-        //		public static BackgroundAudio backgroundAudio;
+        //public static BackgroundAudio backgroundAudio;
 
-        //		public bool m_bVoiceBlance;
+        public bool m_bVoiceBlance;
 
-        //		private static GameObject mMainObj = null;
+        private static GameObject mMainObj = null;
 
-        //		private static GameObject m_MainCamera = null;
+        private static GameObject m_MainCamera = null;
 
-        //		public static Transform MainCameraTF = null;
+        public static Transform MainCameraTF = null;
 
         private static PalMain instance = null;
 
-        //		public static bool IsXP = false;
+        public static bool ForceLow = false;
 
-        //		public static bool IsWin32 = false;
+        public bool bPlayBeginMovie = true;
 
-        //		public static bool ForceLow = false;
+        private DateTime mLastConfigSave = DateTime.Now.AddSeconds(1.0);
 
-        //		public bool bPlayBeginMovie = true;
+        private static float CameraOptDistance = 60f;
 
-        //		private DateTime mLastConfigSave = DateTime.Now.AddSeconds(1.0);
+        public static Action LoadOverEvent = null;
 
-        //		private static float CameraOptDistance = 60f;
+        private static Transform tempGameLayer = null;
 
-        //		public static Action LoadOverEvent = null;
+        //public QTEManager m_QTEManager = new QTEManager();
 
-        //		private static Transform tempGameLayer = null;
+        private List<object> mTempObjects = new List<object>();
 
-        //		public QTEManager m_QTEManager = new QTEManager();
+        private int mTempPosition;
 
-        //		private List<object> mTempObjects = new List<object>();
+        [NonSerialized]
+        public float MoneyRate = 1f;
 
-        //		private int mTempPosition;
+        [NonSerialized]
+        public float DropAddRate;
 
-        //		[NonSerialized]
-        //		public float MoneyRate = 1f;
+        [NonSerialized]
+        public float DPRate = 1f;
 
-        //		[NonSerialized]
-        //		public float DropAddRate;
+        public static PalMain.DISTANCE_CULL m_DistCull = PalMain.DISTANCE_CULL.RESTORE;
 
-        //		[NonSerialized]
-        //		public float DPRate = 1f;
+        public static PalMain.POST_CAM m_PostCam = PalMain.POST_CAM.FULL;
 
-        //		public static PalMain.DISTANCE_CULL m_DistCull = PalMain.DISTANCE_CULL.RESTORE;
+        public static PalMain.LIGHT m_Light = PalMain.LIGHT.FULL;
 
-        //		public static PalMain.POST_CAM m_PostCam = PalMain.POST_CAM.FULL;
+        private List<Behaviour> m_CamPosts = new List<Behaviour>();
 
-        //		public static PalMain.LIGHT m_Light = PalMain.LIGHT.FULL;
+        private List<Light> m_Lights = new List<Light>();
 
-        //		private List<Behaviour> m_CamPosts = new List<Behaviour>();
+        private List<Light> m_LightsShadow = new List<Light>();
 
-        //		private List<Light> m_Lights = new List<Light>();
+        private List<Camera> m_Cams = new List<Camera>();
 
-        //		private List<Light> m_LightsShadow = new List<Light>();
+        public float m_FarClipPlane;
 
-        //		private List<Camera> m_Cams = new List<Camera>();
+        public bool m_bFog;
 
-        //		public float m_FarClipPlane;
+        public float m_FogStartDistance;
 
-        //		public bool m_bFog;
+        public float m_FogEndDistance;
 
-        //		public float m_FogStartDistance;
+        public float m_FogDensity;
 
-        //		public float m_FogEndDistance;
+        public float m_TreeDistance;
 
-        //		public float m_FogDensity;
+        public float m_DetailObjectDistance;
 
-        //		public float m_TreeDistance;
+        public float m_HeightmapPixelError;
 
-        //		public float m_DetailObjectDistance;
+        public float m_BasemapDistance;
 
-        //		public float m_HeightmapPixelError;
+        private float m_DualOffset = 0.2f;
 
-        //		public float m_BasemapDistance;
+        private int m_bDualCam;
 
-        //		private float m_DualOffset = 0.2f;
+        //public Dictionary<int, PalMain.SceneOptiDistFogParams> m_LevelCullOpParams = new Dictionary<int, PalMain.SceneOptiDistFogParams>();
 
-        //		private int m_bDualCam;
+        private bool m_bIsIntel;
 
-        //		public Dictionary<int, PalMain.SceneOptiDistFogParams> m_LevelCullOpParams = new Dictionary<int, PalMain.SceneOptiDistFogParams>();
+        private bool m_bIsGDI;
 
-        //		private bool m_bIsIntel;
+        //public GameState m_lastGameState = GameState.None;
 
-        //		private bool m_bIsGDI;
+        public Camera m_SkyCam;
 
-        //		public GameState m_lastGameState = GameState.None;
+        //private static PalMain.PLAYER_RECOMMANDATION m_PlayerRecommandation;
 
-        //		public Camera m_SkyCam;
+        public bool m_bZhuYuGame;
 
-        //		private static PalMain.PLAYER_RECOMMANDATION m_PlayerRecommandation;
+        public bool m_bGuHanJiang;
 
-        //		public bool m_bZhuYuGame;
+        public static PalMain.UNLOADPROIR m_CurPrior = PalMain.UNLOADPROIR.LONG;
 
-        //		public bool m_bGuHanJiang;
+        public static float m_CurUnloadTime = 0f;
 
-        //		public static PalMain.UNLOADPROIR m_CurPrior = PalMain.UNLOADPROIR.LONG;
+        public static float m_FixImmediateTime = 1f;
 
-        //		public static float m_CurUnloadTime = 0f;
+        public static float m_FixShortTime = 5f;
 
-        //		public static float m_FixImmediateTime = 1f;
+        public static float m_FixLongTime = 15f;
 
-        //		public static float m_FixShortTime = 5f;
+        public static float m_FixVeryLongTime = 30f;
 
-        //		public static float m_FixLongTime = 15f;
+        public static bool m_bHasUnload = false;
 
-        //		public static float m_FixVeryLongTime = 30f;
+        private static bool s_waitForActiveUserWarning = false;
 
-        //		public static bool m_bHasUnload = false;
+        private static bool s_noControllerWarning = false;
 
-        //		private static bool s_waitForActiveUserWarning = false;
+        private static float s_noControllerTimeCounter = 0f;
 
-        //		private static bool s_noControllerWarning = false;
+        public int FOCUS_WAIT_FRAMES = 3;
 
-        //		private static float s_noControllerTimeCounter = 0f;
+        private int shouldRenewFrames;
 
-        //		public int FOCUS_WAIT_FRAMES = 3;
-
-        //		private int shouldRenewFrames;
-
-        //		public event PalMain.void_func_float_float updateHandles
-        //		{
-        //			[MethodImpl(MethodImplOptions.Synchronized)]
-        //			add
-        //			{
-        //				this.updateHandles = (PalMain.void_func_float_float)Delegate.Combine(this.updateHandles, value);
-        //			}
-        //			[MethodImpl(MethodImplOptions.Synchronized)]
-        //			remove
-        //			{
-        //				this.updateHandles = (PalMain.void_func_float_float)Delegate.Remove(this.updateHandles, value);
-        //			}
-        //		}
+        public event PalMain.void_func_float_float updateHandles;
 
         //		public event PalMain.void_func_void onInputHandles
         //		{
@@ -931,7 +915,7 @@ namespace SoftStar.Pal6
             //DistanceCullManager.Initialize();
             //MoviesManager.Initialize();
             //CharactersManager.Initialize();
-            //InputManager.Initialize();
+            InputManager.Initialize();
             PlayerCtrlManager.Initialize();
             //PalBattleManager.Initialize();
             //EntityManager.Initialize();

@@ -250,13 +250,8 @@ MonoBehaviour:
     mLevel: 10
     m_SkillIDs: []
     m_ItemIDs: []
-  PackItemIDs:
-  - ParentID: 0
-    ChildID: 0
-    Number: 0
-  flagValues:
-  - flag: 1
-    Value: 0
+  PackItemIDs: []
+  flagValues: []
   startWeatherTime: 0.4
 --- !u!1 &1312360514
 GameObject:

@@ -7,13 +7,13 @@ using YouYou;
 
 public class RoleDataManager:IDisposable
 {
-    public void CreatePlayerByJobId(int jobId,BaseAction<PalNPC> onComplete=null)
+    public void CreatePlayerByJobId(int jobId,BaseAction<Transform> onComplete=null)
     {
-        GameEntry.Pool.GameObjectSpawn(1, (Transform trans) => 
+        GameEntry.Pool.GameObjectSpawn(jobId, (Transform trans) => 
         {
             PalNPC roleCtrl = trans.GetComponent<PalNPC>();
 
-            onComplete?.Invoke(roleCtrl);
+            onComplete?.Invoke(trans);
         });
     }
 

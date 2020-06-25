@@ -50,7 +50,8 @@ public class FlagManager
         //FlagManager.SetFlag(MissionManager.BranchLineToggleFlag, MissionManager.BranchLineToggleFlagInitValue, true);
         FlagManager.InitMapFlag();
 		FlagManager.Init2DCutsceneFlag();
-		FlagManager.SetFlag(4, 0, true);
+        //PlayerTeam.Instance.InitPlayerTeamFlags();
+        FlagManager.SetFlag(4, 0, true);
 		FlagManager.SetFlag(3, 0, true);
 		FlagManager.SetFlag(6, 1, true);
 		FlagManager.SetFlag(7, 0, true);
