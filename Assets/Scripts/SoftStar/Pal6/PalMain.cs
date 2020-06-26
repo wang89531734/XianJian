@@ -1839,21 +1839,21 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		public static void ClearManagerData()
-        //		{
-        //			GameObject gameObject = GameObject.Find("/FootMarks");
-        //			if (gameObject != null)
-        //			{
-        //				UnityEngine.Object.Destroy(gameObject);
-        //			}
-        //			SetActiveByFlagManager.Clear();
-        //			AnimCtrlScript.ClearAnimClipsDic();
-        //			PalMain.mapinfo = null;
-        //			DistanceCullManager.Instance.ClearMats();
-        //			CharactersManager.Clear();
-        //			DynamicObjsDataManager.Instance.ClearLayers();
-        //			Footmark.Clear();
-        //		}
+        public static void ClearManagerData()
+        {
+            //GameObject gameObject = GameObject.Find("/FootMarks");
+            //if (gameObject != null)
+            //{
+            //    UnityEngine.Object.Destroy(gameObject);
+            //}
+            //SetActiveByFlagManager.Clear();
+            //AnimCtrlScript.ClearAnimClipsDic();
+            //PalMain.mapinfo = null;
+            //DistanceCullManager.Instance.ClearMats();
+            //CharactersManager.Clear();
+            //DynamicObjsDataManager.Instance.ClearLayers();
+            //Footmark.Clear();
+        }
 
         /// <summary>
         /// 切换地图
@@ -1870,7 +1870,7 @@ namespace SoftStar.Pal6
             //{
             //    FlagManager.SetFlag(8, 1, false);
             //}
-            //if (Cutscene.current != null && (Cutscene.current.isPlaying || Cutscene.current.isPause))
+            //if (Cutscene.current != null && (Cutscene.current.isPlaying || Cutscene.current.isPause))//剧情动画
             //{
             //    Cutscene.current.End(false);
             //}
@@ -1881,7 +1881,7 @@ namespace SoftStar.Pal6
             }
             //UtilFun.GetMainCamera().cullingMask = 0;
             //PlayersManager.RestoreLayer(true);
-            //PlayersManager.ChangeHairShader(false);
+            //PlayersManager.ChangeHairShader(false);//改变头发着色器
             //if (SaveDynamicObjs)
             //{
             //    DynamicObjsDataManager.Instance.SaveCurObjsDataToMemory();
@@ -1904,16 +1904,16 @@ namespace SoftStar.Pal6
 
             GameEntry.Scene.LoadScene(2,false, () =>
             {
+                //level = ScenesManager.CurLoadedLevel;
+                //PlayerCtrlManager.OnLevelLoaded(level);
+                //PalMain.OnReadySpawn();
                 //EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Remove(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));
-                //PalMain.RefreshAllLandMarks();
-                //DynamicObjsDataManager.Instance.LoadCurObjsDataFromMemory();
-                //GameStateManager.CurGameState = GameState.Normal;
-                //PalMain.Instance.SpecialProcessForLevel(ScenesManager.CurLoadedLevel);
-                //PalMain.ShowMemory();
-                //if (PalMain.LoadOverEvent != null)
-                //{
-                //    PalMain.LoadOverEvent();
-                //}
+                //EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Combine(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));
+                //EntityManager.OnLevelWasLoaded(level);
+                //OptionConfig.GetInstance().Use_OnLevelLoaded();
+                //OptionConfig.GetInstance().Use_CharacterEmission();
+                //MapWatch.Instance.SetMap();
+                GameEntry.Procedure.ChangeState(ProcedureState.WorldMap);
             });
         }
 
@@ -1929,6 +1929,20 @@ namespace SoftStar.Pal6
         //				PalMain.SetMainCamera(PlayersManager.Player);
         //			}
         //		}
+
+        public static void OnLoadOver()
+        {
+            //EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Remove(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));
+            //PalMain.RefreshAllLandMarks();
+            //DynamicObjsDataManager.Instance.LoadCurObjsDataFromMemory();
+            //GameStateManager.CurGameState = GameState.Normal;
+            //PalMain.Instance.SpecialProcessForLevel(ScenesManager.CurLoadedLevel);
+            //PalMain.ShowMemory();
+            //if (PalMain.LoadOverEvent != null)
+            //{
+            //    PalMain.LoadOverEvent();
+            //}
+        }
 
         //		public static void ShowMemory()
         //		{

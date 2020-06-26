@@ -1,5 +1,8 @@
 using System;
 
+/// <summary>
+/// 物品类型
+/// </summary>
 public enum ObjType
 {
 	monster,
@@ -10,6 +13,9 @@ public enum ObjType
 	CanNotPay,
 	CanNotGet,
 	MainLine,
+    /// <summary>
+    /// 主线不能得到
+    /// </summary>
 	MainLineCanNotGet,
 	BranchCanGet0,
 	BranchCanNotGet0,
@@ -23,6 +29,9 @@ public enum ObjType
 	BranchCanNotGet4,
 	BranchCanGet5,
 	BranchCanNotGet5,
+    /// <summary>
+    /// 没有人
+    /// </summary>
 	none0,
 	Enter,
 	FuZhuang,
@@ -32,7 +41,10 @@ public enum ObjType
 	YaoDian,
 	ZaHuoDian,
 	BaoXiang,
-	none,
+    /// <summary>
+    /// 没有人
+    /// </summary>
+    none,
 	HuanHua,
 	CanContinue
 }

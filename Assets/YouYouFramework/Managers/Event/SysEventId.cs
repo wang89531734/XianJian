@@ -78,5 +78,15 @@ namespace YouYou
         /// 离开登陆流程
         /// </summary>
         public const ushort LeaveProcedureLogOn = 1302;
+
+        /// <summary>
+        /// 进去登陆流程
+        /// </summary>
+        public const ushort EnterProcedureWorldMap = 1303;
+
+        /// <summary>
+        /// 离开登陆流程
+        /// </summary>
+        public const ushort LeaveProcedureWorldMap = 1304;
     }
 }

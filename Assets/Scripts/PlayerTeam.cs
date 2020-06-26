@@ -44,21 +44,20 @@ public class PlayerTeam : MonoBehaviour
 
 	public void LoadTeam()
 	{
-        //ScenesManager.Instance.OnLevelLoaded += new Action<int>(this.OnLoadTeam);
-        //OnLoadTeam(1);//场景加载完执行这个
+        GameEntry.Event.CommonEvent.AddEventListener(SysEventId.EnterProcedureWorldMap, OnLoadTeam);
         this.SetInitValue();
 	}
 
-	public void SetInitValue()
+    public void SetInitValue()
 	{
         PalMain.SetMoney(this.money);
         this.InitTime();
 	}
 
-	public void OnLoadTeam(int Level)
+	private void OnLoadTeam(object userData)
 	{
 		//ScenesManager.Instance.OnLevelLoaded -= new Action<int>(this.OnLoadTeam);
-		//if (UniStormWeatherSystem.instance != null)
+		//if (UniStormWeatherSystem.instance != null)//暴风雨
 		//{
 		//	TimeManager.Initialize().timeStopped = UniStormWeatherSystem.instance.timeStopped;
 		//}

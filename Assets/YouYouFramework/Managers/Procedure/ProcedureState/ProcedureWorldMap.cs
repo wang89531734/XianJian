@@ -1,8 +1,3 @@
-//===================================================
-//作    者：边涯  http://www.u3dol.com
-//创建时间：
-//备    注：
-//===================================================
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +13,7 @@ namespace YouYou
         {
             base.OnEnter();
             GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureWorldMap");
-            GameEntry.Event.CommonEvent.Dispatch(SysEventId.EnterProcedureLogOn);
+            GameEntry.Event.CommonEvent.Dispatch(SysEventId.EnterProcedureWorldMap);
 
         }
 
