@@ -426,104 +426,109 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 		{
             SmoothFollow2.LeftCameraMove = true;
 		}
-  //      if (UICamera.hoveredObject != null && (InputManager.GetKeyDown(KEY_ACTION.MOUSE_LEFT, false) || InputManager.GetKeyDown(KEY_ACTION.MOUSE_RIGHT, false)))
-  //      {
-  //          this.bInUI = true;
-  //      }
-  //      if (this.bInUI && (InputManager.GetKeyUp(KEY_ACTION.MOUSE_LEFT, false) || InputManager.GetKeyUp(KEY_ACTION.MOUSE_RIGHT, false)))
-		//{
-		//	this.bInUI = false;
-		//}
-		//if (this.InsideFun != null)
-		//{
-		//	this.InsideFun();
-		//	return;
-		//}
-		//Vector3 position = Vector3.zero;
-  //      //if (this.curShakeType != ShakeType.None)
-  //      //{
-  //      //    position = base.transform.position;
-  //      //    base.transform.position = this.CamPos;
-  //      //}
-  //      if (this.bControl && !this.bInUI)
-		//{
-		//	if (this.CanScroll)
-		//	{
-		//		this.TargetCamDistance = this.GetTargetCamDistance();
-		//		this.CamDistance = this.TargetCamDistance;
-		//	}
-		//	this.AdjustFOV(this.CamDistance);
-		//	if (InputManager.GetKey(KEY_ACTION.CAMERA_LEFT, false))
-		//	{
-		//		this.CamAngleH -= this.horizontalRotSpeed * Time.smoothDeltaTime;
-		//	}
-		//	else if (InputManager.GetKey(KEY_ACTION.CAMERA_RIGHT, false))
-		//	{
-		//		this.CamAngleH += this.horizontalRotSpeed * Time.smoothDeltaTime;
-		//	}
-		//	if (Input.GetMouseButton(1))
-		//	{
-		//		this.GetHV();
-		//		this.bNeedReturn = false;
-		//	}
-		//	else if (Input.GetMouseButton(0))
-		//	{
-		//		this.GetHV();
-		//	}
-		//	if (this.bUseLeftReturn)
-		//	{
-		//		if (Input.GetMouseButtonDown(0))
-		//		{
-		//			if (!this.bNeedReturn)
-		//			{
-		//				this.lastAngleH = this.CamAngleH;
-		//			}
-		//			this.bNeedReturn = false;
-		//		}
-		//		else if (Input.GetMouseButtonUp(0))
-		//		{
-		//			this.bNeedReturn = true;
-		//		}
-		//		if (this.bNeedReturn)
-		//		{
-		//			this.CamAngleH = Mathf.LerpAngle(this.CamAngleH, this.lastAngleH, Time.deltaTime * this.ReturnSpeed);
-		//			if (Mathf.Abs(this.CamAngleH - this.lastAngleH) < 0.5f)
-		//			{
-		//				this.bNeedReturn = false;
-		//			}
-		//		}
-		//	}
-		//	if (this.bJolt)
-		//	{
-		//		this.MakeJolt();
-		//	}
-		//	this.TargetCamRot = Quaternion.Euler(this.angleV, this.CamAngleH, 0f);
-		//	this.CamRot = Quaternion.Lerp(this.CamRot, this.TargetCamRot, Time.deltaTime * this.rotationDamping);
-		//}
-		//this.FocalPos = this.GetLookAtPos(this.UseYSpeed);
-		//this.CamPos = this.FocalPos + this.CamRot * this.CenterOffset * this.CamDistance;
-		//this.CheckForCollision(ref this.CamPos, this.FocalPos, 0f, this.CameraRadius);
-		////if (this.curShakeType != ShakeType.None)
-		////{
-		////	if (this.shakeScript != null)
-		////	{
-		////		this.shakeScript.referPos = this.CamPos;
-		////	}
-		////	base.transform.position = position;
-		////}
-		////else
-		////{
-		////	base.transform.position = this.CamPos;
-		////}
-		//base.transform.rotation = this.CamRot;
-		//SmoothFollow2.CastRay(base.GetComponent<Camera>());
-	}
+        //      if (UICamera.hoveredObject != null && (InputManager.GetKeyDown(KEY_ACTION.MOUSE_LEFT, false) || InputManager.GetKeyDown(KEY_ACTION.MOUSE_RIGHT, false)))
+        //      {
+        //          this.bInUI = true;
+        //      }
+        //      if (this.bInUI && (InputManager.GetKeyUp(KEY_ACTION.MOUSE_LEFT, false) || InputManager.GetKeyUp(KEY_ACTION.MOUSE_RIGHT, false)))
+        //{
+        //	this.bInUI = false;
+        //}
+        //if (this.InsideFun != null)
+        //{
+        //	this.InsideFun();
+        //	return;
+        //}
+        //Vector3 position = Vector3.zero;
+        //      //if (this.curShakeType != ShakeType.None)
+        //      //{
+        //      //    position = base.transform.position;
+        //      //    base.transform.position = this.CamPos;
+        //      //}
+        if (this.bControl && !this.bInUI)
+        {
+            if (this.CanScroll)
+            {
+                this.TargetCamDistance = this.GetTargetCamDistance();
+                this.CamDistance = this.TargetCamDistance;
+            }
+            this.AdjustFOV(this.CamDistance);
+
+            //if (InputManager.GetKey(KEY_ACTION.CAMERA_LEFT, false))
+            //{
+            //    this.CamAngleH -= this.horizontalRotSpeed * Time.smoothDeltaTime;
+            //}
+            //else if (InputManager.GetKey(KEY_ACTION.CAMERA_RIGHT, false))
+            //{
+            //    this.CamAngleH += this.horizontalRotSpeed * Time.smoothDeltaTime;
+            //}
+            //if (Input.GetMouseButton(1))
+            //{
+            //    this.GetHV();
+            //    this.bNeedReturn = false;
+            //}
+            //else if (Input.GetMouseButton(0))
+            //{
+            //    this.GetHV();
+            //}
+            //if (this.bUseLeftReturn)
+            //{
+            //    if (Input.GetMouseButtonDown(0))
+            //    {
+            //        if (!this.bNeedReturn)
+            //        {
+            //            this.lastAngleH = this.CamAngleH;
+            //        }
+            //        this.bNeedReturn = false;
+            //    }
+            //    else if (Input.GetMouseButtonUp(0))
+            //    {
+            //        this.bNeedReturn = true;
+            //    }
+            //    if (this.bNeedReturn)
+            //    {
+            //        this.CamAngleH = Mathf.LerpAngle(this.CamAngleH, this.lastAngleH, Time.deltaTime * this.ReturnSpeed);
+            //        if (Mathf.Abs(this.CamAngleH - this.lastAngleH) < 0.5f)
+            //        {
+            //            this.bNeedReturn = false;
+            //        }
+            //    }
+            //}
+            //if (this.bJolt)
+            //{
+            //    this.MakeJolt();
+            //}
+            //this.TargetCamRot = Quaternion.Euler(this.angleV, this.CamAngleH, 0f);
+            //this.CamRot = Quaternion.Lerp(this.CamRot, this.TargetCamRot, Time.deltaTime * this.rotationDamping);
+        }
+        //this.FocalPos = this.GetLookAtPos(this.UseYSpeed);
+        //this.CamPos = this.FocalPos + this.CamRot * this.CenterOffset * this.CamDistance;
+        //this.CheckForCollision(ref this.CamPos, this.FocalPos, 0f, this.CameraRadius);
+        ////if (this.curShakeType != ShakeType.None)
+        ////{
+        ////	if (this.shakeScript != null)
+        ////	{
+        ////		this.shakeScript.referPos = this.CamPos;
+        ////	}
+        ////	base.transform.position = position;
+        ////}
+        ////else
+        ////{
+        ////	base.transform.position = this.CamPos;
+        ////}
+        //base.transform.rotation = this.CamRot;
+        //SmoothFollow2.CastRay(base.GetComponent<Camera>());
+    }
 
 	public void AdjustFOV()
 	{
 		this.AdjustFOV((base.transform.position - this.GetLookAtPos(false)).magnitude);
 	}
 
+    /// <summary>
+    /// 调整FOV
+    /// </summary>
+    /// <param name="camDis"></param>
 	public void AdjustFOV(float camDis)
 	{
 		float t = (camDis - this.MinDistance) / (this.MaxDistance - this.MinDistance);
