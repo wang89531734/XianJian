@@ -72,8 +72,6 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 
 	public float ReturnSpeed = 2f;
 
-	private bool bUseLeftReturn;
-
 	public float CameraRadius = 0.13f;
 
 	public static float CameraRadiusDefault = 0.16f;
@@ -215,7 +213,6 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 		this.lastAngleH = sf2.lastAngleH;
 		this.bNeedReturn = sf2.bNeedReturn;
 		this.ReturnSpeed = sf2.ReturnSpeed;
-		this.bUseLeftReturn = sf2.bUseLeftReturn;
 		this.CameraRadius = sf2.CameraRadius;
 		this.InsideFun = sf2.InsideFun;
 		this.horizontalRotSpeed = sf2.horizontalRotSpeed;
@@ -454,70 +451,71 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
             }
             this.AdjustFOV(this.CamDistance);
 
-            //if (InputManager.GetKey(KEY_ACTION.CAMERA_LEFT, false))
-            //{
-            //    this.CamAngleH -= this.horizontalRotSpeed * Time.smoothDeltaTime;
-            //}
-            //else if (InputManager.GetKey(KEY_ACTION.CAMERA_RIGHT, false))
-            //{
-            //    this.CamAngleH += this.horizontalRotSpeed * Time.smoothDeltaTime;
-            //}
-            //if (Input.GetMouseButton(1))
-            //{
-            //    this.GetHV();
-            //    this.bNeedReturn = false;
-            //}
-            //else if (Input.GetMouseButton(0))
-            //{
-            //    this.GetHV();
-            //}
-            //if (this.bUseLeftReturn)
-            //{
-            //    if (Input.GetMouseButtonDown(0))
-            //    {
-            //        if (!this.bNeedReturn)
-            //        {
-            //            this.lastAngleH = this.CamAngleH;
-            //        }
-            //        this.bNeedReturn = false;
-            //    }
-            //    else if (Input.GetMouseButtonUp(0))
-            //    {
-            //        this.bNeedReturn = true;
-            //    }
-            //    if (this.bNeedReturn)
-            //    {
-            //        this.CamAngleH = Mathf.LerpAngle(this.CamAngleH, this.lastAngleH, Time.deltaTime * this.ReturnSpeed);
-            //        if (Mathf.Abs(this.CamAngleH - this.lastAngleH) < 0.5f)
-            //        {
-            //            this.bNeedReturn = false;
-            //        }
-            //    }
-            //}
+            if (InputManager.GetKey(KEY_ACTION.CAMERA_LEFT, false))
+            {
+                this.CamAngleH -= this.horizontalRotSpeed * Time.smoothDeltaTime;
+            }
+            else if (InputManager.GetKey(KEY_ACTION.CAMERA_RIGHT, false))
+            {
+                this.CamAngleH += this.horizontalRotSpeed * Time.smoothDeltaTime;
+            }
+
+            if (Input.GetMouseButton(1))
+            {
+                this.GetHV();
+                this.bNeedReturn = false;
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                this.GetHV();
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (!this.bNeedReturn)
+                {
+                    this.lastAngleH = this.CamAngleH;
+                }
+                this.bNeedReturn = false;
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                this.bNeedReturn = true;
+            }
+
+            if (this.bNeedReturn)
+            {
+                this.CamAngleH = Mathf.LerpAngle(this.CamAngleH, this.lastAngleH, Time.deltaTime * this.ReturnSpeed);
+                if (Mathf.Abs(this.CamAngleH - this.lastAngleH) < 0.5f)
+                {
+                    this.bNeedReturn = false;
+                }
+            }
+
             //if (this.bJolt)
             //{
             //    this.MakeJolt();
             //}
-            //this.TargetCamRot = Quaternion.Euler(this.angleV, this.CamAngleH, 0f);
-            //this.CamRot = Quaternion.Lerp(this.CamRot, this.TargetCamRot, Time.deltaTime * this.rotationDamping);
+
+            this.TargetCamRot = Quaternion.Euler(this.angleV, this.CamAngleH, 0f);
+            this.CamRot = Quaternion.Lerp(this.CamRot, this.TargetCamRot, Time.deltaTime * this.rotationDamping);
         }
-        //this.FocalPos = this.GetLookAtPos(this.UseYSpeed);
-        //this.CamPos = this.FocalPos + this.CamRot * this.CenterOffset * this.CamDistance;
-        //this.CheckForCollision(ref this.CamPos, this.FocalPos, 0f, this.CameraRadius);
+        this.FocalPos = this.GetLookAtPos(this.UseYSpeed);
+        this.CamPos = this.FocalPos + this.CamRot * this.CenterOffset * this.CamDistance;
+        this.CheckForCollision(ref this.CamPos, this.FocalPos, 0f, this.CameraRadius);
         ////if (this.curShakeType != ShakeType.None)
         ////{
         ////	if (this.shakeScript != null)
         ////	{
         ////		this.shakeScript.referPos = this.CamPos;
         ////	}
-        ////	base.transform.position = position;
+        //	base.transform.position = position;
         ////}
         ////else
         ////{
-        ////	base.transform.position = this.CamPos;
+        base.transform.position = this.CamPos;
         ////}
-        //base.transform.rotation = this.CamRot;
-        //SmoothFollow2.CastRay(base.GetComponent<Camera>());
+        base.transform.rotation = this.CamRot;
     }
 
 	public void AdjustFOV()
@@ -545,10 +543,6 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 		this.angleV = eulerAngles.x;
 		this.CamAngleH = eulerAngles.y;
 		this.TargetCamDistance = (this.CamDistance = (base.transform.position - this.GetLookAtPos(false)).magnitude);
-	}
-
-	public static void CastRay(Camera camera)
-	{
 	}
 
 	private Quaternion GetTargetCamRot()
