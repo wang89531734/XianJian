@@ -24,11 +24,6 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 	[NonSerialized]
 	public bool HasLoad;
 
-    /// <summary>
-    /// 加载时间
-    /// </summary>
-	private TimeSpan loadTime;
-
 	public Action<PalGameObjectBase> DestroyEvent;
 
 	public GameObject Another;
@@ -159,15 +154,14 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
     /// </summary>
 	public virtual void LoadModel()
 	{
-		if (this.HasLoad && Application.isPlaying)
-		{
-			return;
-		}
-		this.HasLoad = true;
+        if (this.HasLoad)
+        {
+            return;
+        }
+        this.HasLoad = true;
         UnityEngine.Object temp = null;
         GameEntry.Data.RoleDataManager.CreatePlayerByJobId(10001, (Transform trans) =>
         {
-            this.loadTime = DateTime.Now.TimeOfDay;
             this.isPrefab = false;
             temp = trans.gameObject;
             this.CreateAndSetModel(temp);
@@ -180,30 +174,26 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
     /// <param name="temp"></param>
 	protected virtual void CreateAndSetModel(UnityEngine.Object temp)
 	{
-		if (temp == null)
-		{
-			//this.LoadModelEnd(this);
-			return;
-		}
-		if (this.model != null)
-		{
-			UnityEngine.Object.DestroyImmediate(this.model);
-		}
+		//if (temp == null)
+		//{
+		//	//this.LoadModelEnd(this);
+		//	return;
+		//}
 		this.model = (temp as GameObject);
 
         //if (this.model.GetComponent<AutoDestroyMaterials>() == null)
         //{
-        //	this.model.AddComponent<AutoDestroyMaterials>();
+        //    this.model.AddComponent<AutoDestroyMaterials>();
         //}
         this.model.transform.parent = base.transform;
         this.model.transform.localPosition = Vector3.zero;
         this.model.transform.localEulerAngles = Vector3.zero;
-        this.model.tag = base.gameObject.tag;
-        this.model.layer = base.gameObject.layer;
-        if (this.isPrefab)
-        {
-            //this.CollectPrefabObjs(this.model);
-        }
+        //this.model.tag = base.gameObject.tag;
+        //this.model.layer = base.gameObject.layer;
+        //if (this.isPrefab)
+        //{           
+        //    //this.CollectPrefabObjs(this.model);
+        //}
         this.LoadModelEnd(this);
     }
 
@@ -221,50 +211,49 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
     /// <param name="obj"></param>
 	public virtual void LoadModelEnd(UnityEngine.Object obj)
 	{
-		this.loadTime = DateTime.Now.TimeOfDay.Subtract(this.loadTime);
-		//if (this.dobjLayer == null)
-		//{
-		//	Transform parent = base.transform.parent;
-		//	if (parent == null)
-		//	{
-		//		return;
-		//	}
-		//	this.dobjLayer = parent.GetComponent<DOBJLayer>();
-		//	if (this.dobjLayer == null)
-		//	{
-		//		return;
-		//	}
-		//}
+        //if (this.dobjLayer == null)
+        //{
+        //	Transform parent = base.transform.parent;
+        //	if (parent == null)
+        //	{
+        //		return;
+        //	}
+        //	this.dobjLayer = parent.GetComponent<DOBJLayer>();
+        //	if (this.dobjLayer == null)
+        //	{
+        //		return;
+        //	}
+        //}
 
-		if (this.model != null)
-		{
-			this.model.hideFlags = HideFlags.None;
-			//if (EntityManager.Low)
-			//{
-			//	Renderer[] componentsInChildren = this.model.GetComponentsInChildren<Renderer>(true);
-			//	for (int i = 0; i < componentsInChildren.Length; i++)
-			//	{
-			//		for (int j = 0; j < componentsInChildren[i].materials.Length; j++)
-			//		{
-			//			if (componentsInChildren[i].materials[j] != null && componentsInChildren[i].materials[j].shader.name.Contains("/2-"))
-			//			{
-			//				string name = componentsInChildren[i].materials[j].shader.name;
-			//				int num = componentsInChildren[i].materials[j].shader.name.IndexOf("/2-");
-			//				int startIndex = componentsInChildren[i].materials[j].shader.name.IndexOf("/", num + 1);
-			//				string text = name.Substring(0, num) + name.Substring(startIndex);
-			//				Debug.LogWarning(this.model.name + componentsInChildren[i].name + text);
-			//				if (EntityManager.shadersScript != null && EntityManager.shadersScript.shaders.ContainsKey(text))
-			//				{
-			//					componentsInChildren[i].materials[j].shader = EntityManager.shadersScript.shaders[text];
-			//				}
-			//			}
-			//		}
-			//	}
-			//}
-		}
-		this.LoadOver();
-		//this.dobjLayer.JudgeLoadOver(this);
-	}
+        if (this.model != null)
+        {
+            this.model.hideFlags = HideFlags.None;
+            //if (EntityManager.Low)
+            //{
+            //	Renderer[] componentsInChildren = this.model.GetComponentsInChildren<Renderer>(true);
+            //	for (int i = 0; i < componentsInChildren.Length; i++)
+            //	{
+            //		for (int j = 0; j < componentsInChildren[i].materials.Length; j++)
+            //		{
+            //			if (componentsInChildren[i].materials[j] != null && componentsInChildren[i].materials[j].shader.name.Contains("/2-"))
+            //			{
+            //				string name = componentsInChildren[i].materials[j].shader.name;
+            //				int num = componentsInChildren[i].materials[j].shader.name.IndexOf("/2-");
+            //				int startIndex = componentsInChildren[i].materials[j].shader.name.IndexOf("/", num + 1);
+            //				string text = name.Substring(0, num) + name.Substring(startIndex);
+            //				Debug.LogWarning(this.model.name + componentsInChildren[i].name + text);
+            //				if (EntityManager.shadersScript != null && EntityManager.shadersScript.shaders.ContainsKey(text))
+            //				{
+            //					componentsInChildren[i].materials[j].shader = EntityManager.shadersScript.shaders[text];
+            //				}
+            //			}
+            //		}
+            //	}
+            //}
+        }
+        this.LoadOver();
+        //this.dobjLayer.JudgeLoadOver(this);
+    }
 
 	public virtual void OnDestroy()
 	{

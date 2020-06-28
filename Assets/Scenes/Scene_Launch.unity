@@ -217,7 +217,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCurWatchType: 0
-  minFPS: 10
   m_bIgnoreEnemy: 0
   m_bVoiceBlance: 0
   bPlayBeginMovie: 1
@@ -439,7 +438,7 @@ MonoBehaviour:
   bInUI: 0
   target: {fileID: 0}
   targetRoot: {fileID: 0}
-  height: 0
+  height: 1
   damping: 5
   rotationDamping: 100000000
   CenterOffset: {x: 0, y: 0, z: -1}

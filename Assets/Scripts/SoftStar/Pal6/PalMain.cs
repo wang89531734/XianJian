@@ -753,7 +753,7 @@ namespace SoftStar.Pal6
         //			return PalMain.instance != null;
         //		}
 
-        private void Awake()
+        private void Start()
         {
             this.Initialize();
         }

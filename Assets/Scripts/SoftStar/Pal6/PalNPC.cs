@@ -1011,10 +1011,10 @@ namespace SoftStar.Pal6
 
         public override void Awake()
         {
-            if (this.m_bDontLoadModel)
-            {
-                return;
-            }
+            //if (this.m_bDontLoadModel)
+            //{
+            //    return;
+            //}
             base.Awake();
             //if (base.gameObject.IsMonster())
             //{
@@ -1098,133 +1098,133 @@ namespace SoftStar.Pal6
         //			sphereCollider.isTrigger = true;
         //		}
 
-        //		public override void LoadModelEnd(UnityEngine.Object obj)
-        //		{
-        //			base.LoadModelEnd(obj);
-        //			if (this.MonsterGroups.Length == 0 && this.model != null && base.gameObject.GetComponent<Interact>() != null && this.model.GetComponent<MouseEnterCursor>() == null)
-        //			{
-        //				MouseEnterCursor mouseEnterCursor = this.model.AddComponent<MouseEnterCursor>();
-        //				mouseEnterCursor.curState = CursorTextureState.Talk;
-        //			}
-        //			if (this.model != null)
-        //			{
-        //				this.model.layer = SmoothFollow2.IgnoreLayer;
-        //				this.model.ExcludeCloneName();
-        //				Agent component = this.model.GetComponent<Agent>();
-        //				if (component != null)
-        //				{
-        //					component.palNPC = this;
-        //					if (component.agent != null && this.MonsterGroups.Length < 1)
-        //					{
-        //						component.agent.baseOffset = -0.1f;
-        //						if (!NPCHeight.Instance.SetHeight(component.agent))
-        //						{
-        //							component.gameObject.AddComponent<AdjustNavAgentOffset>();
-        //						}
-        //					}
-        //				}
-        //				if (Application.isPlaying && this.Data.CharacterID > -1 && this.Data.CharacterID < 8)
-        //				{
-        //					this.GetOriRes();
-        //				}
-        //				this.Weapons.Clear();
-        //				Transform[] props = GameObjectPath.GetProps(this.model.transform);
-        //				for (int i = 0; i < props.Length; i++)
-        //				{
-        //					Transform transform = props[i];
-        //					if (!(transform == null))
-        //					{
-        //						if (transform.childCount < 1)
-        //						{
-        //							this.Weapons.Add(null);
-        //						}
-        //						else
-        //						{
-        //							this.Weapons.Add(transform.GetChild(0).gameObject);
-        //						}
-        //					}
-        //				}
-        //				if (this.Weapons.Count < 1 || (this.Weapons[0] == null && this.Weapons.Count > 1 && this.Weapons[1] == null))
-        //				{
-        //					this.Weapons.Clear();
-        //					Transform[] boneProps = GameObjectPath.GetBoneProps(this.model.transform);
-        //					for (int j = 0; j < boneProps.Length; j++)
-        //					{
-        //						Transform transform2 = boneProps[j];
-        //						if (!(transform2 == null))
-        //						{
-        //							if (transform2.childCount < 1)
-        //							{
-        //								this.Weapons.Add(null);
-        //							}
-        //							else
-        //							{
-        //								this.Weapons.Add(transform2.GetChild(0).gameObject);
-        //							}
-        //						}
-        //					}
-        //				}
-        //				if (this.Data != null && this.Data.CharacterID < 8 && this.Data.CharacterID > -1)
-        //				{
-        //					this.SetActiveWeaponInNormal(true);
-        //				}
-        //				else if (base.GetComponent<SaveTarget>() == null)
-        //				{
-        //					this.InitDisCull();
-        //				}
-        //				AnimCtrlScript component2 = this.model.GetComponent<AnimCtrlScript>();
-        //				if (component2 != null)
-        //				{
-        //					component2.Start();
-        //				}
-        //				if (!OptionConfig.NeedOpt || (!string.IsNullOrEmpty(this.modelResourcePath) && this.modelResourcePath.Contains("NpcP6")))
-        //				{
-        //					ShroudInstance.Init(this.model);
-        //				}
-        //				else
-        //				{
-        //					ShroudInstance component3 = this.model.GetComponent<ShroudInstance>();
-        //					UnityEngine.Object.Destroy(component3);
-        //				}
-        //				UtilFun.SetActive(this.model, this.bEnableOnLoadModelEnd);
-        //				Vector3 position = this.model.transform.position;
-        //				position.y += 0.5f;
-        //				RaycastHit raycastHit;
-        //				if (Physics.Raycast(position, Vector3.down, out raycastHit, 200f, SmoothFollow2.MaskValue))
-        //				{
-        //					UtilFun.SetPosition(this.model.transform, raycastHit.point);
-        //				}
-        //				int characterID = this.Data.CharacterID;
-        //				if (characterID > -1 && characterID < 8 && characterID != 6)
-        //				{
-        //					this.footMark = this.model.AddComponent<Footmark>();
-        //					string text = this.model.name;
-        //					int num = text.IndexOf(' ');
-        //					if (num > -1)
-        //					{
-        //						text = text.Substring(0, num + 1);
-        //						this.model.name = text;
-        //					}
-        //				}
-        //				if (((characterID < 8 && characterID != 6) || (characterID > 3999 && characterID < 4020) || this.MonsterGroups.Length > 0) && (characterID != 0 || this.modelResourcePath.Contains("YueJinChao")))
-        //				{
-        //					Perception.ActivePerception(this);
-        //				}
-        //				if (characterID < 8 && characterID != 6 && SceneManager.GetActiveScene().buildIndex == 0)
-        //				{
-        //					PlayersManager.AddPlayerPerceptionRange(this);
-        //				}
-        //				if (this.MonsterGroups.Length > 0 && this.model != null)
-        //				{
-        //					this.AddColliderForGoToBattle();
-        //					MonsterStateScript.SetState(this.model, MonsterStateScript.MonsterState.None);
-        //				}
-        //				if (this.OnLoadModelEnd != null)
-        //				{
-        //					this.OnLoadModelEnd(this);
-        //				}
-        //			}
-        //		}
+        public override void LoadModelEnd(UnityEngine.Object obj)
+        {
+            base.LoadModelEnd(obj);
+            //if (this.MonsterGroups.Length == 0 && this.model != null && base.gameObject.GetComponent<Interact>() != null && this.model.GetComponent<MouseEnterCursor>() == null)
+            //{
+            //    MouseEnterCursor mouseEnterCursor = this.model.AddComponent<MouseEnterCursor>();
+            //    mouseEnterCursor.curState = CursorTextureState.Talk;
+            //}
+            if (this.model != null)
+            {
+                //this.model.layer = SmoothFollow2.IgnoreLayer;
+                //this.model.ExcludeCloneName();
+                //Agent component = this.model.GetComponent<Agent>();
+                //if (component != null)
+                //{
+                //    component.palNPC = this;
+                //    if (component.agent != null && this.MonsterGroups.Length < 1)
+                //    {
+                //        component.agent.baseOffset = -0.1f;
+                //        if (!NPCHeight.Instance.SetHeight(component.agent))
+                //        {
+                //            component.gameObject.AddComponent<AdjustNavAgentOffset>();
+                //        }
+                //    }
+                //}
+                //if (Application.isPlaying && this.Data.CharacterID > -1 && this.Data.CharacterID < 8)
+                //{
+                //    this.GetOriRes();
+                //}
+                //this.Weapons.Clear();
+                //Transform[] props = GameObjectPath.GetProps(this.model.transform);
+                //for (int i = 0; i < props.Length; i++)
+                //{
+                //    Transform transform = props[i];
+                //    if (!(transform == null))
+                //    {
+                //        if (transform.childCount < 1)
+                //        {
+                //            this.Weapons.Add(null);
+                //        }
+                //        else
+                //        {
+                //            this.Weapons.Add(transform.GetChild(0).gameObject);
+                //        }
+                //    }
+                //}
+                //if (this.Weapons.Count < 1 || (this.Weapons[0] == null && this.Weapons.Count > 1 && this.Weapons[1] == null))
+                //{
+                //    this.Weapons.Clear();
+                //    Transform[] boneProps = GameObjectPath.GetBoneProps(this.model.transform);
+                //    for (int j = 0; j < boneProps.Length; j++)
+                //    {
+                //        Transform transform2 = boneProps[j];
+                //        if (!(transform2 == null))
+                //        {
+                //            if (transform2.childCount < 1)
+                //            {
+                //                this.Weapons.Add(null);
+                //            }
+                //            else
+                //            {
+                //                this.Weapons.Add(transform2.GetChild(0).gameObject);
+                //            }
+                //        }
+                //    }
+                //}
+                //if (this.Data != null && this.Data.CharacterID < 8 && this.Data.CharacterID > -1)
+                //{
+                //    this.SetActiveWeaponInNormal(true);
+                //}
+                //else if (base.GetComponent<SaveTarget>() == null)
+                //{
+                //    this.InitDisCull();
+                //}
+                //AnimCtrlScript component2 = this.model.GetComponent<AnimCtrlScript>();
+                //if (component2 != null)
+                //{
+                //    component2.Start();
+                //}
+                //if (!OptionConfig.NeedOpt || (!string.IsNullOrEmpty(this.modelResourcePath) && this.modelResourcePath.Contains("NpcP6")))
+                //{
+                //    ShroudInstance.Init(this.model);
+                //}
+                //else
+                //{
+                //    ShroudInstance component3 = this.model.GetComponent<ShroudInstance>();
+                //    UnityEngine.Object.Destroy(component3);
+                //}
+                //UtilFun.SetActive(this.model, this.bEnableOnLoadModelEnd);
+                //Vector3 position = this.model.transform.position;
+                //position.y += 0.5f;
+                //RaycastHit raycastHit;
+                //if (Physics.Raycast(position, Vector3.down, out raycastHit, 200f, SmoothFollow2.MaskValue))
+                //{
+                //    UtilFun.SetPosition(this.model.transform, raycastHit.point);
+                //}
+                //int characterID = this.Data.CharacterID;
+                //if (characterID > -1 && characterID < 8 && characterID != 6)
+                //{
+                //    this.footMark = this.model.AddComponent<Footmark>();
+                //    string text = this.model.name;
+                //    int num = text.IndexOf(' ');
+                //    if (num > -1)
+                //    {
+                //        text = text.Substring(0, num + 1);
+                //        this.model.name = text;
+                //    }
+                //}
+                //if (((characterID < 8 && characterID != 6) || (characterID > 3999 && characterID < 4020) || this.MonsterGroups.Length > 0) && (characterID != 0 || this.modelResourcePath.Contains("YueJinChao")))
+                //{
+                //    Perception.ActivePerception(this);
+                //}
+                //if (characterID < 8 && characterID != 6 && SceneManager.GetActiveScene().buildIndex == 0)
+                //{
+                //    PlayersManager.AddPlayerPerceptionRange(this);
+                //}
+                //if (this.MonsterGroups.Length > 0 && this.model != null)
+                //{
+                //    this.AddColliderForGoToBattle();
+                //    MonsterStateScript.SetState(this.model, MonsterStateScript.MonsterState.None);
+                //}
+                if (this.OnLoadModelEnd != null)
+                {
+                    this.OnLoadModelEnd(this);
+                }
+            }
+        }
 
         public override void LoadModel()
         {
@@ -1284,16 +1284,16 @@ namespace SoftStar.Pal6
             //        }
             //    }
             //}
-            if (this.m_bDontLoadModel)
-            {
-                this.LoadModelEnd(this);
-                return;
-            }
-            Animator componentInChildren = base.GetComponentInChildren<Animator>();
-            if (componentInChildren != null)
-            {
-                this.model = componentInChildren.gameObject;
-            }
+            //if (this.m_bDontLoadModel)
+            //{
+            //    this.LoadModelEnd(this);
+            //    return;
+            //}
+            //Animator componentInChildren = base.GetComponentInChildren<Animator>();
+            //if (componentInChildren != null)
+            //{
+            //    this.model = componentInChildren.gameObject;
+            //}
             if (this.model == null)
             {
                 base.LoadModel();

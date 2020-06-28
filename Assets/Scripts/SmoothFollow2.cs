@@ -2,6 +2,7 @@ using SoftStar.Pal6;
 using System;
 using System.IO;
 using UnityEngine;
+using YouYou;
 
 public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 {
@@ -249,33 +250,35 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 	private void Start()
 	{
 		this.InitTarget();
-		SmoothFollow2.maskValue = (1 << SmoothFollow2.IgnoreLayer | 131072 | 262144 | 4 | 524288 | 512);
-		SmoothFollow2.maskValue = ~SmoothFollow2.maskValue;
-		if (!this.HVByLoadArchive && PlayersManager.Player != null)
-		{
-			this.InitAngle();
-		}
-		this.HVByLoadArchive = false;
-		//GameStateManager.AddInitStateFun(GameState.Normal, new GameStateManager.void_fun(this.InNormal));
-		//GameStateManager.AddEndStateFun(GameState.Normal, new GameStateManager.void_fun(this.OutNormal));
-		PlayersManager.OnTabPlayer -= new Action<int>(this.OnTabPlayer);
-		PlayersManager.OnTabPlayer += new Action<int>(this.OnTabPlayer);
-	}
+        SmoothFollow2.maskValue = (1 << SmoothFollow2.IgnoreLayer | 131072 | 262144 | 4 | 524288 | 512);
+        SmoothFollow2.maskValue = ~SmoothFollow2.maskValue;
+        if (!this.HVByLoadArchive && PlayersManager.Player != null)
+        {
+            this.InitAngle();
+        }
+        this.HVByLoadArchive = false;
+        GameEntry.Event.CommonEvent.AddEventListener(SysEventId.EnterProcedureWorldMap, InNormal);
+        GameEntry.Event.CommonEvent.AddEventListener(SysEventId.LeaveProcedureWorldMap, OutNormal);
+        //////GameStateManager.AddInitStateFun(GameState.Normal, new GameStateManager.void_fun(this.InNormal));
+        //////GameStateManager.AddEndStateFun(GameState.Normal, new GameStateManager.void_fun(this.OutNormal));
+        //PlayersManager.OnTabPlayer -= new Action<int>(this.OnTabPlayer);
+        //PlayersManager.OnTabPlayer += new Action<int>(this.OnTabPlayer);
+    }
 
-	private void OnDestroy()
+    private void OnDestroy()
 	{
 		//GameStateManager.RemoveInitStateFun(GameState.Normal, new GameStateManager.void_fun(this.InNormal));
 		//GameStateManager.RemoveEndStateFun(GameState.Normal, new GameStateManager.void_fun(this.OutNormal));
 		PlayersManager.OnTabPlayer -= new Action<int>(this.OnTabPlayer);
 	}
 
-	private void InNormal()
+	private void InNormal(object userData)
 	{
 		base.enabled = true;
 		this.InitPlayerForward();
 	}
 
-	private void OutNormal()
+	private void OutNormal(object userData)
 	{
 		base.enabled = false;
 	}
@@ -308,78 +311,82 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 			return;
 		}
 		Transform transform = this.targetRoot;
-		Animator componentInChildren = this.targetRoot.GetComponentInChildren<Animator>();
-		if (componentInChildren != null)
-		{
-			transform = componentInChildren.transform;
-		}
-		this.target = null;
-		if (this.target == null)
-		{
-			this.target = transform.Find("Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Spine2/Bip01 Neck/Bip01 Head");
-		}
-		if (this.target == null)
-		{
-			this.target = transform.Find("Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01 Head");
-		}
-		if (this.target == null)
-		{
-			this.target = transform.Find("Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 Spine3/Bip001 Neck/Bip001 Head");
-		}
-		if (this.target == null)
-		{
-			this.target = transform.Find("Bip001/Bip001 Spine/Bip001 Spine1/Bip001 Neck/Bip001 Head");
-		}
-		if (this.target == null)
-		{
-			this.target = transform.Find("Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Neck/Bip001 Head");
-		}
-		if (this.target == null)
-		{
-			this.target = transform.Find("char_astrella_reference/char_astrella_Hips1/char_astrella_Spine/char_astrella_Spine1/char_astrella_Spine2/char_astrella_Neck/char_astrella_Head");
-		}
-		if (this.target == null)
-		{
-			this.target = this.FindHead();
-		}
-		if (this.target == null)
-		{
-			Debug.LogError("Error : 无法找到 Head");
-			return;
-		}
-		this.curY = this.target.position.y;
-		string name = this.targetRoot.name;
-		switch (name)
-		{
-		case "YueJinChao":
-			this.baseHeight = 1.559f;
-			goto IL_280;
-		case "YueQi":
-			this.baseHeight = 1.3982f;
-			goto IL_280;
-		case "XianQing":
-			this.baseHeight = 1.6169f;
-			goto IL_280;
-		case "LuoWenRen":
-			this.baseHeight = 1.5489f;
-			goto IL_280;
-		case "JuShiFang":
-			this.baseHeight = 1.5183f;
-			goto IL_280;
-		case "MingXiu":
-			this.baseHeight = 1.4548f;
-			goto IL_280;
-		}
-		this.baseHeight = 1.56f;
-		IL_280:
-		this.target = this.targetRoot;
-		base.GetComponent<Camera>().fieldOfView = this.fieldOfView;
-		base.GetComponent<Camera>().nearClipPlane = 0.1f;
-		this.CamPos = base.transform.position;
-		this.FocalPos = this.target.position;
-		//Vector3 lastTargetPos = Util.RelativeMatrix(this.target, this.targetRoot).MultiplyPoint(Vector3.zero);
-		//this.LastTargetPos = lastTargetPos;
-	}
+        //Animator componentInChildren = this.targetRoot.GetComponentInChildren<Animator>();
+        //if (componentInChildren != null)
+        //{
+        //	transform = componentInChildren.transform;
+        //}
+        this.target = null;
+        if (this.target == null)
+        {
+            this.target = transform.Find("all/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Spine2/Bip01 Neck/Bip01 Head");
+        }
+        //if (this.target == null)
+        //{
+        //	this.target = transform.Find("Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Spine2/Bip01 Neck/Bip01 Head");
+        //}
+        //if (this.target == null)
+        //{
+        //	this.target = transform.Find("Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01 Head");
+        //}
+        //if (this.target == null)
+        //{
+        //	this.target = transform.Find("Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 Spine3/Bip001 Neck/Bip001 Head");
+        //}
+        //if (this.target == null)
+        //{
+        //	this.target = transform.Find("Bip001/Bip001 Spine/Bip001 Spine1/Bip001 Neck/Bip001 Head");
+        //}
+        //if (this.target == null)
+        //{
+        //	this.target = transform.Find("Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Neck/Bip001 Head");
+        //}
+        //if (this.target == null)
+        //{
+        //	this.target = transform.Find("char_astrella_reference/char_astrella_Hips1/char_astrella_Spine/char_astrella_Spine1/char_astrella_Spine2/char_astrella_Neck/char_astrella_Head");
+        //}
+        //if (this.target == null)
+        //{
+        //	this.target = this.FindHead();
+        //}
+        if (this.target == null)
+        {
+        	Debug.LogError("Error : 无法找到 Head");
+        	return;
+        }
+        this.curY = this.target.position.y;
+        string name = this.targetRoot.name;
+        //switch (name)
+        //{
+        //    case "YueJinChao":
+        //        this.baseHeight = 1.559f;
+        //        goto IL_280;
+        //    case "YueQi":
+        //        this.baseHeight = 1.3982f;
+        //        goto IL_280;
+        //    case "XianQing":
+        //        this.baseHeight = 1.6169f;
+        //        goto IL_280;
+        //    case "LuoWenRen":
+        //        this.baseHeight = 1.5489f;
+        //        goto IL_280;
+        //    case "JuShiFang":
+        //        this.baseHeight = 1.5183f;
+        //        goto IL_280;
+        //    case "MingXiu":
+        //        this.baseHeight = 1.4548f;
+        //        goto IL_280;
+        //}
+        this.baseHeight = 1.56f;
+        //IL_280:
+        this.target = this.targetRoot;
+        base.GetComponent<Camera>().fieldOfView = this.fieldOfView;
+        base.GetComponent<Camera>().nearClipPlane = 0.1f;
+        this.CamPos = base.transform.position;
+        this.FocalPos = this.target.position;
+        Vector3 lastTargetPos = Util.RelativeMatrix(this.target, this.targetRoot).MultiplyPoint(Vector3.zero);
+        this.LastTargetPos = lastTargetPos;
+    }
 
 	public void InitAngle()
 	{
@@ -411,105 +418,105 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 			return;
 		}
 		if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonUp(0))
-		{
+		{          
 			SmoothFollow2.LeftCameraMove = false;
 			SmoothFollow2.lastMousePos = Input.mousePosition;
 		}
 		else if (Input.GetMouseButton(0) && Vector3.SqrMagnitude(Input.mousePosition - SmoothFollow2.lastMousePos) > 4f)
 		{
-			SmoothFollow2.LeftCameraMove = true;
+            SmoothFollow2.LeftCameraMove = true;
 		}
-		//if (UICamera.hoveredObject != null && (InputManager.GetKeyDown(KEY_ACTION.MOUSE_LEFT, false) || InputManager.GetKeyDown(KEY_ACTION.MOUSE_RIGHT, false)))
+  //      if (UICamera.hoveredObject != null && (InputManager.GetKeyDown(KEY_ACTION.MOUSE_LEFT, false) || InputManager.GetKeyDown(KEY_ACTION.MOUSE_RIGHT, false)))
+  //      {
+  //          this.bInUI = true;
+  //      }
+  //      if (this.bInUI && (InputManager.GetKeyUp(KEY_ACTION.MOUSE_LEFT, false) || InputManager.GetKeyUp(KEY_ACTION.MOUSE_RIGHT, false)))
 		//{
-		//	this.bInUI = true;
+		//	this.bInUI = false;
 		//}
-		if (this.bInUI && (InputManager.GetKeyUp(KEY_ACTION.MOUSE_LEFT, false) || InputManager.GetKeyUp(KEY_ACTION.MOUSE_RIGHT, false)))
-		{
-			this.bInUI = false;
-		}
-		if (this.InsideFun != null)
-		{
-			this.InsideFun();
-			return;
-		}
-		Vector3 position = Vector3.zero;
-		//if (this.curShakeType != ShakeType.None)
+		//if (this.InsideFun != null)
 		//{
-		//	position = base.transform.position;
-		//	base.transform.position = this.CamPos;
+		//	this.InsideFun();
+		//	return;
 		//}
-		if (this.bControl && !this.bInUI)
-		{
-			if (this.CanScroll)
-			{
-				this.TargetCamDistance = this.GetTargetCamDistance();
-				this.CamDistance = this.TargetCamDistance;
-			}
-			this.AdjustFOV(this.CamDistance);
-			if (InputManager.GetKey(KEY_ACTION.CAMERA_LEFT, false))
-			{
-				this.CamAngleH -= this.horizontalRotSpeed * Time.smoothDeltaTime;
-			}
-			else if (InputManager.GetKey(KEY_ACTION.CAMERA_RIGHT, false))
-			{
-				this.CamAngleH += this.horizontalRotSpeed * Time.smoothDeltaTime;
-			}
-			if (Input.GetMouseButton(1))
-			{
-				this.GetHV();
-				this.bNeedReturn = false;
-			}
-			else if (Input.GetMouseButton(0))
-			{
-				this.GetHV();
-			}
-			if (this.bUseLeftReturn)
-			{
-				if (Input.GetMouseButtonDown(0))
-				{
-					if (!this.bNeedReturn)
-					{
-						this.lastAngleH = this.CamAngleH;
-					}
-					this.bNeedReturn = false;
-				}
-				else if (Input.GetMouseButtonUp(0))
-				{
-					this.bNeedReturn = true;
-				}
-				if (this.bNeedReturn)
-				{
-					this.CamAngleH = Mathf.LerpAngle(this.CamAngleH, this.lastAngleH, Time.deltaTime * this.ReturnSpeed);
-					if (Mathf.Abs(this.CamAngleH - this.lastAngleH) < 0.5f)
-					{
-						this.bNeedReturn = false;
-					}
-				}
-			}
-			if (this.bJolt)
-			{
-				this.MakeJolt();
-			}
-			this.TargetCamRot = Quaternion.Euler(this.angleV, this.CamAngleH, 0f);
-			this.CamRot = Quaternion.Lerp(this.CamRot, this.TargetCamRot, Time.deltaTime * this.rotationDamping);
-		}
-		this.FocalPos = this.GetLookAtPos(this.UseYSpeed);
-		this.CamPos = this.FocalPos + this.CamRot * this.CenterOffset * this.CamDistance;
-		this.CheckForCollision(ref this.CamPos, this.FocalPos, 0f, this.CameraRadius);
-		//if (this.curShakeType != ShakeType.None)
+		//Vector3 position = Vector3.zero;
+  //      //if (this.curShakeType != ShakeType.None)
+  //      //{
+  //      //    position = base.transform.position;
+  //      //    base.transform.position = this.CamPos;
+  //      //}
+  //      if (this.bControl && !this.bInUI)
 		//{
-		//	if (this.shakeScript != null)
+		//	if (this.CanScroll)
 		//	{
-		//		this.shakeScript.referPos = this.CamPos;
+		//		this.TargetCamDistance = this.GetTargetCamDistance();
+		//		this.CamDistance = this.TargetCamDistance;
 		//	}
-		//	base.transform.position = position;
+		//	this.AdjustFOV(this.CamDistance);
+		//	if (InputManager.GetKey(KEY_ACTION.CAMERA_LEFT, false))
+		//	{
+		//		this.CamAngleH -= this.horizontalRotSpeed * Time.smoothDeltaTime;
+		//	}
+		//	else if (InputManager.GetKey(KEY_ACTION.CAMERA_RIGHT, false))
+		//	{
+		//		this.CamAngleH += this.horizontalRotSpeed * Time.smoothDeltaTime;
+		//	}
+		//	if (Input.GetMouseButton(1))
+		//	{
+		//		this.GetHV();
+		//		this.bNeedReturn = false;
+		//	}
+		//	else if (Input.GetMouseButton(0))
+		//	{
+		//		this.GetHV();
+		//	}
+		//	if (this.bUseLeftReturn)
+		//	{
+		//		if (Input.GetMouseButtonDown(0))
+		//		{
+		//			if (!this.bNeedReturn)
+		//			{
+		//				this.lastAngleH = this.CamAngleH;
+		//			}
+		//			this.bNeedReturn = false;
+		//		}
+		//		else if (Input.GetMouseButtonUp(0))
+		//		{
+		//			this.bNeedReturn = true;
+		//		}
+		//		if (this.bNeedReturn)
+		//		{
+		//			this.CamAngleH = Mathf.LerpAngle(this.CamAngleH, this.lastAngleH, Time.deltaTime * this.ReturnSpeed);
+		//			if (Mathf.Abs(this.CamAngleH - this.lastAngleH) < 0.5f)
+		//			{
+		//				this.bNeedReturn = false;
+		//			}
+		//		}
+		//	}
+		//	if (this.bJolt)
+		//	{
+		//		this.MakeJolt();
+		//	}
+		//	this.TargetCamRot = Quaternion.Euler(this.angleV, this.CamAngleH, 0f);
+		//	this.CamRot = Quaternion.Lerp(this.CamRot, this.TargetCamRot, Time.deltaTime * this.rotationDamping);
 		//}
-		//else
-		//{
-		//	base.transform.position = this.CamPos;
-		//}
-		base.transform.rotation = this.CamRot;
-		SmoothFollow2.CastRay(base.GetComponent<Camera>());
+		//this.FocalPos = this.GetLookAtPos(this.UseYSpeed);
+		//this.CamPos = this.FocalPos + this.CamRot * this.CenterOffset * this.CamDistance;
+		//this.CheckForCollision(ref this.CamPos, this.FocalPos, 0f, this.CameraRadius);
+		////if (this.curShakeType != ShakeType.None)
+		////{
+		////	if (this.shakeScript != null)
+		////	{
+		////		this.shakeScript.referPos = this.CamPos;
+		////	}
+		////	base.transform.position = position;
+		////}
+		////else
+		////{
+		////	base.transform.position = this.CamPos;
+		////}
+		//base.transform.rotation = this.CamRot;
+		//SmoothFollow2.CastRay(base.GetComponent<Camera>());
 	}
 
 	public void AdjustFOV()
@@ -558,25 +565,28 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 		this.angleV = Mathf.Clamp(this.angleV, this.m_minVerticalAngle, this.m_maxVerticalAngle);
 	}
 
+    /// <summary>
+    ///制造摇晃
+    /// </summary>
 	private void MakeJolt()
 	{
-		//Vector3 vector = Util.RelativeMatrix(this.target, this.targetRoot).MultiplyPoint(Vector3.zero);
-		//Vector3 vector2 = vector - this.LastTargetPos;
-		//vector2.x *= this.offsetScale.x;
-		//vector2.y *= this.offsetScale.y;
-		//vector2.z *= this.offsetScale.z;
-		//this.LastTargetPos = vector;
-		Vector3 vector3 = new Vector3(0f, 0f, this.CamDistance);
-		//vector2 *= this.CamDistance;
-		//Quaternion quaternion = Quaternion.FromToRotation(vector3, vector3 + vector2);
-		//float num = quaternion.eulerAngles.x;
-		//if (num > 350f)
-		//{
-		//	num -= 360f;
-		//}
-		//this.angleV -= num;
-		//this.CamAngleH += quaternion.eulerAngles.y;
-	}
+        Vector3 vector = Util.RelativeMatrix(this.target, this.targetRoot).MultiplyPoint(Vector3.zero);
+        Vector3 vector2 = vector - this.LastTargetPos;
+        vector2.x *= this.offsetScale.x;
+        vector2.y *= this.offsetScale.y;
+        vector2.z *= this.offsetScale.z;
+        this.LastTargetPos = vector;
+        Vector3 vector3 = new Vector3(0f, 0f, this.CamDistance);
+        vector2 *= this.CamDistance;
+        Quaternion quaternion = Quaternion.FromToRotation(vector3, vector3 + vector2);
+        float num = quaternion.eulerAngles.x;
+        if (num > 350f)
+        {
+            num -= 360f;
+        }
+        this.angleV -= num;
+        this.CamAngleH += quaternion.eulerAngles.y;
+    }
 
 	private float GetTargetCamDistance()
 	{
