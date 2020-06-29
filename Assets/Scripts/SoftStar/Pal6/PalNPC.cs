@@ -348,6 +348,9 @@ namespace SoftStar.Pal6
             }
         }
 
+        /// <summary>
+        /// 技能信息
+        /// </summary>
         [Serializable]
         public class SkillInfo
         {

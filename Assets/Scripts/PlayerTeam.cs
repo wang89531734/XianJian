@@ -6,8 +6,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using YouYou;
 
+/// <summary>
+/// 玩家队伍
+/// </summary>
 public class PlayerTeam : MonoBehaviour
 {
+    /// <summary>
+    /// 金钱
+    /// </summary>
 	public int money = 1000;
 
 	[SerializeField]
@@ -42,12 +48,18 @@ public class PlayerTeam : MonoBehaviour
         }
 	}
 
+    /// <summary>
+    /// 加载队伍
+    /// </summary>
 	public void LoadTeam()
 	{
         GameEntry.Event.CommonEvent.AddEventListener(SysEventId.EnterProcedureWorldMap, OnLoadTeam);
         this.SetInitValue();
 	}
 
+    /// <summary>
+    /// 设置初始化值
+    /// </summary>
     public void SetInitValue()
 	{
         PalMain.SetMoney(this.money);
@@ -56,21 +68,24 @@ public class PlayerTeam : MonoBehaviour
 
 	private void OnLoadTeam(object userData)
 	{
-		//ScenesManager.Instance.OnLevelLoaded -= new Action<int>(this.OnLoadTeam);
-		//if (UniStormWeatherSystem.instance != null)//暴风雨
-		//{
-		//	TimeManager.Initialize().timeStopped = UniStormWeatherSystem.instance.timeStopped;
-		//}
-		//else
-		//{
-		//	Debug.LogWarning("Warn : UniStormWeatherSystem.instance==null");
-		//}
-		this.InitTeam();
+        GameEntry.Event.CommonEvent.RemoveEventListener(SysEventId.EnterProcedureWorldMap, OnLoadTeam);
+        //if (UniStormWeatherSystem.instance != null)//暴风雨系统
+        //{
+        //	TimeManager.Initialize().timeStopped = UniStormWeatherSystem.instance.timeStopped;
+        //}
+        //else
+        //{
+        //	Debug.LogWarning("Warn : UniStormWeatherSystem.instance==null");
+        //}
+        this.InitTeam();
 		//this.InitPlayerLevel();
 		//this.InitSkill();
 		//this.InitItem();		
 	}
 
+    /// <summary>
+    /// 初始化队伍
+    /// </summary>
 	public void InitTeam()
 	{
 		PlayersManager.ActivePlayers.Clear();
@@ -80,7 +95,7 @@ public class PlayerTeam : MonoBehaviour
 			{
 				PlayersManager.AddPlayer(this.data[i].mCharacterID, true);
 			}
-		}
+        }
 		//PlayersManager.SetPlayer(0, true);
 		//PlayersManager.SetPlayerPosByDestObj("SceneEnter");
 		//PlayerCtrlManager.Reset();

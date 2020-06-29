@@ -5,7 +5,7 @@ using System.Diagnostics;
 using UnityEngine;
 
 //[RequireComponent(typeof(NavMeshAgent))]
-//[RequireComponent(typeof(Locomotion))]
+[RequireComponent(typeof(Locomotion))]
 [RequireComponent(typeof(AnimCtrlScript))]
 [RequireComponent(typeof(CharacterController))]
 public class Agent : MonoBehaviour
@@ -31,9 +31,9 @@ public class Agent : MonoBehaviour
 
 	private bool m_NeedEnableAgent = true;
 
-	//public ControlMode m_curCtrlMode = ControlMode.None;
+    public ControlMode m_curCtrlMode = ControlMode.None;
 
-	protected bool controlByAgent = true;
+    protected bool controlByAgent = true;
 
 	public float RunSpeed = 10f;
 
@@ -57,9 +57,9 @@ public class Agent : MonoBehaviour
 
 	public float ActionRadius = 1.5f;
 
-	//public Locomotion locomotion;
+    public Locomotion locomotion;
 
-	public Transform destObj;
+    public Transform destObj;
 
 	protected Vector3 destOffsetDir;
 
@@ -146,66 +146,66 @@ public class Agent : MonoBehaviour
 		}
 	}
 
-	//public ControlMode curCtrlMode
-	//{
-	//	get
-	//	{
-	//		return this.m_curCtrlMode;
-	//	}
-	//	set
-	//	{
-	//		this.m_curCtrlMode = value;
-	//		if (this.m_curCtrlMode == ControlMode.ControlByAgent)
-	//		{
-	//			if (this.agent != null)
-	//			{
-	//				this.agent.enabled = true;
-	//				this.agent.updatePosition = true;
-	//				this.agent.updateRotation = true;
-	//				this.animatorMoveClient = base.gameObject.GetComponent<AnimatorMoveClient>();
-	//				if (this.animatorMoveClient == null)
-	//				{
-	//					this.animatorMoveClient = base.gameObject.AddComponent<AnimatorMoveClient>();
-	//				}
-	//				AnimatorMoveClient expr_81 = this.animatorMoveClient;
-	//				expr_81.apply = (AnimatorMoveClient.AnimatorMoveApplyFunc)Delegate.Remove(expr_81.apply, new AnimatorMoveClient.AnimatorMoveApplyFunc(this.NavAgentMove));
-	//				AnimatorMoveClient expr_A8 = this.animatorMoveClient;
-	//				expr_A8.apply = (AnimatorMoveClient.AnimatorMoveApplyFunc)Delegate.Combine(expr_A8.apply, new AnimatorMoveClient.AnimatorMoveApplyFunc(this.NavAgentMove));
-	//			}
-	//		}
-	//		else
-	//		{
-	//			if (this.agent != null)
-	//			{
-	//				this.agent.enabled = false;
-	//				this.agent.updatePosition = false;
-	//				this.agent.updateRotation = false;
-	//			}
-	//			if (this.animator == null)
-	//			{
-	//				this.animator = base.GetComponent<Animator>();
-	//			}
-	//			if (this.animator != null)
-	//			{
-	//				//if (this.m_curCtrlMode == ControlMode.None)
-	//				//{
-	//				//	this.animator.SetApplyRootMotion(false);
-	//				//}
-	//				//else if (this.m_curCtrlMode != ControlMode.ControlByCutscene)
-	//				//{
-	//				//	this.SetApplyRootMotion();
-	//				//}
-	//			}
-	//			if (this.animatorMoveClient != null)
-	//			{
-	//				AnimatorMoveClient expr_177 = this.animatorMoveClient;
-	//				expr_177.apply = (AnimatorMoveClient.AnimatorMoveApplyFunc)Delegate.Remove(expr_177.apply, new AnimatorMoveClient.AnimatorMoveApplyFunc(this.NavAgentMove));
-	//			}
-	//		}
-	//	}
-	//}
+    public ControlMode curCtrlMode
+    {
+        get
+        {
+            return this.m_curCtrlMode;
+        }
+        set
+        {
+            this.m_curCtrlMode = value;
+            if (this.m_curCtrlMode == ControlMode.ControlByAgent)
+            {
+                //if (this.agent != null)
+                //{
+                //    this.agent.enabled = true;
+                //    this.agent.updatePosition = true;
+                //    this.agent.updateRotation = true;
+                //    this.animatorMoveClient = base.gameObject.GetComponent<AnimatorMoveClient>();
+                //    if (this.animatorMoveClient == null)
+                //    {
+                //        this.animatorMoveClient = base.gameObject.AddComponent<AnimatorMoveClient>();
+                //    }
+                //    AnimatorMoveClient expr_81 = this.animatorMoveClient;
+                //    expr_81.apply = (AnimatorMoveClient.AnimatorMoveApplyFunc)Delegate.Remove(expr_81.apply, new AnimatorMoveClient.AnimatorMoveApplyFunc(this.NavAgentMove));
+                //    AnimatorMoveClient expr_A8 = this.animatorMoveClient;
+                //    expr_A8.apply = (AnimatorMoveClient.AnimatorMoveApplyFunc)Delegate.Combine(expr_A8.apply, new AnimatorMoveClient.AnimatorMoveApplyFunc(this.NavAgentMove));
+                //}
+            }
+            else
+            {
+                //if (this.agent != null)
+                //{
+                //    this.agent.enabled = false;
+                //    this.agent.updatePosition = false;
+                //    this.agent.updateRotation = false;
+                //}
+                if (this.animator == null)
+                {
+                    this.animator = base.GetComponent<Animator>();
+                }
+                if (this.animator != null)
+                {
+                    //if (this.m_curCtrlMode == ControlMode.None)
+                    //{
+                    //	this.animator.SetApplyRootMotion(false);
+                    //}
+                    //else if (this.m_curCtrlMode != ControlMode.ControlByCutscene)
+                    //{
+                    //	this.SetApplyRootMotion();
+                    //}
+                }
+                if (this.animatorMoveClient != null)
+                {
+                    AnimatorMoveClient expr_177 = this.animatorMoveClient;
+                    expr_177.apply = (AnimatorMoveClient.AnimatorMoveApplyFunc)Delegate.Remove(expr_177.apply, new AnimatorMoveClient.AnimatorMoveApplyFunc(this.NavAgentMove));
+                }
+            }
+        }
+    }
 
-	public float SecondJumpMinDistanceFromGroud
+    public float SecondJumpMinDistanceFromGroud
 	{
 		get
 		{
@@ -252,14 +252,14 @@ public class Agent : MonoBehaviour
 	private void Start()
 	{
 		//this.agent = base.GetComponent<NavMeshAgent>();
-		this.animator = base.GetComponentInChildren<Animator>();
+		this.animator = base.GetComponent<Animator>();
 		if (this.animator != null)
 		{
-			this.animator.SetFloat("VerticalSpeed", 0f);
+			//this.animator.SetFloat("VerticalSpeed", 0f);
 		}
-		//this.locomotion = base.GetComponent<Locomotion>();
-		//this.locomotion.RotSpeed = this.RotSpeed;
-		this.animCtrl = base.GetComponent<AnimCtrlScript>();
+        this.locomotion = base.GetComponent<Locomotion>();
+        //this.locomotion.RotSpeed = this.RotSpeed;
+        this.animCtrl = base.GetComponent<AnimCtrlScript>();
 		if (this.animCtrl == null)
 		{
 			this.animCtrl = this.animator.gameObject.AddComponent<AnimCtrlScript>();

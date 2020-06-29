@@ -470,27 +470,27 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
                 this.GetHV();
             }
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (!this.bNeedReturn)
-                {
-                    this.lastAngleH = this.CamAngleH;
-                }
-                this.bNeedReturn = false;
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                this.bNeedReturn = true;
-            }
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    if (!this.bNeedReturn)
+            //    {
+            //        this.lastAngleH = this.CamAngleH;
+            //    }
+            //    this.bNeedReturn = false;
+            //}
+            //else if (Input.GetMouseButtonUp(0))
+            //{
+            //    this.bNeedReturn = true;
+            //}
 
-            if (this.bNeedReturn)
-            {
-                this.CamAngleH = Mathf.LerpAngle(this.CamAngleH, this.lastAngleH, Time.deltaTime * this.ReturnSpeed);
-                if (Mathf.Abs(this.CamAngleH - this.lastAngleH) < 0.5f)
-                {
-                    this.bNeedReturn = false;
-                }
-            }
+            //if (this.bNeedReturn)
+            //{
+            //    this.CamAngleH = Mathf.LerpAngle(this.CamAngleH, this.lastAngleH, Time.deltaTime * this.ReturnSpeed);
+            //    if (Mathf.Abs(this.CamAngleH - this.lastAngleH) < 0.5f)
+            //    {
+            //        this.bNeedReturn = false;
+            //    }
+            //}
 
             //if (this.bJolt)
             //{

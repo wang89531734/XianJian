@@ -930,22 +930,23 @@ public static class UtilFun
 		}
 		GameObject gameObject = null;
 		PalGameObjectBase component = go.GetComponent<PalGameObjectBase>();
-		if (component != null)
-		{
-			if (component.model == null)
+        if (component != null)
+        {          
+            if (component.model == null)
 			{
-				Animator componentInChildren = component.GetComponentInChildren<Animator>();
+                Animator componentInChildren = component.GetComponentInChildren<Animator>();
 				if (componentInChildren != null)
 				{
-					component.model = componentInChildren.gameObject;
+                    UnityEngine.Debug.LogError(go.name + "GetModelObj 参数go为Null");
+                    component.model = componentInChildren.gameObject;
 				}
 			}
 			gameObject = component.model;
 		}
-		if (gameObject == null)
-		{
-			gameObject = go;
-		}
+		//if (gameObject == null)
+		//{
+		//	gameObject = go;
+		//}
 		if (NeedActive && !gameObject.activeSelf)
 		{
 			UtilFun.SetActive(gameObject, true);

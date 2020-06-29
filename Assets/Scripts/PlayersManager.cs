@@ -6,6 +6,9 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using YouYou;
 
+/// <summary>
+/// 玩家管理
+/// </summary>
 public class PlayersManager
 {
 	private class AfterSetPlayer : IDisposable
@@ -32,16 +35,20 @@ public class PlayersManager
 	public static GameObject curCtrlModel = null;
 
     /// <summary>
-    /// 激活玩家
+    /// 激活玩家列表
     /// </summary>
 	public static List<GameObject> ActivePlayers = new List<GameObject>();
 
+    /// <summary>
+    /// 所有玩家列表
+    /// </summary>
 	public static List<GameObject> AllPlayers = new List<GameObject>();
 
-	//private static List<PerceptionRange> AllPlayersPerceptionRange = new List<PerceptionRange>();
+    private static int PlayerIndex = 0;
 
-	private static int PlayerIndex = 0;
-
+    /// <summary>
+    /// 添加玩家回调
+    /// </summary>
 	public static Action<int> OnAddPlayer = null;
 
 	private static Transform tempDestTF = null;
@@ -94,7 +101,7 @@ public class PlayersManager
 		{
 			if (i != 6)
 			{
-				GameObject gameObject = PlayersManager.FindMainChar(i, true);
+				GameObject gameObject = PlayersManager.FindMainChar(i);
 				if (!(gameObject == null))
 				{
 					PalNPC component = gameObject.GetComponent<PalNPC>();
@@ -106,7 +113,7 @@ public class PlayersManager
 				}
 			}
 		}
-		GameObject gameObject2 = PlayersManager.FindMainChar(0, true);
+		GameObject gameObject2 = PlayersManager.FindMainChar(0);
 		if (gameObject2 != null)
 		{
 			PalNPC component2 = gameObject2.GetComponent<PalNPC>();
@@ -120,7 +127,7 @@ public class PlayersManager
 				//expr_BF.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(expr_BF.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.OnLoadModelEnd));
 			}
 		}
-		GameObject gameObject3 = PlayersManager.FindMainChar(5, true);
+		GameObject gameObject3 = PlayersManager.FindMainChar(5);
 		if (gameObject3 != null)
 		{
 			PalNPC component3 = gameObject3.GetComponent<PalNPC>();
@@ -134,7 +141,7 @@ public class PlayersManager
 				//expr_11D.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(expr_11D.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.OnLoadModelEnd));
 			}
 		}
-		GameObject gameObject4 = PlayersManager.FindMainChar(3, true);
+		GameObject gameObject4 = PlayersManager.FindMainChar(3);
 		if (gameObject4 != null)
 		{
 			//ModelChangeScript component4 = gameObject4.GetComponent<ModelChangeScript>();
@@ -144,7 +151,7 @@ public class PlayersManager
 			//	expr_16C.OnSetModeEnd = (Action<PalNPC>)Delegate.Combine(expr_16C.OnSetModeEnd, new Action<PalNPC>(PlayersManager.OnSetModeEnd));
 			//}
 		}
-		GameObject gameObject5 = PlayersManager.FindMainChar(4, true);
+		GameObject gameObject5 = PlayersManager.FindMainChar(4);
 		if (gameObject5 != null)
 		{
 			PalNPC component5 = gameObject5.GetComponent<PalNPC>();
@@ -163,7 +170,7 @@ public class PlayersManager
 				//expr_1FB.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(expr_1FB.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.OnLoadModelEnd));
 			}
 		}
-		GameObject gameObject6 = PlayersManager.FindMainChar(7, true);
+		GameObject gameObject6 = PlayersManager.FindMainChar(7);
 		if (gameObject6 != null)
 		{
 			PlayersManager.PlayerInitSneakScript(gameObject6, null);
@@ -282,7 +289,7 @@ public class PlayersManager
 			}
 		}
 		PlayersManager.ActivePlayers.Clear();
-		GameObject gameObject = PlayersManager.FindMainChar(3, true);
+		GameObject gameObject = PlayersManager.FindMainChar(3);
 		if (gameObject != null)
 		{
 			//ModelChangeScript component3 = gameObject.GetComponent<ModelChangeScript>();
@@ -486,6 +493,11 @@ public class PlayersManager
 		//model.SetHeadLight(true);
 	}
 
+    /// <summary>
+    /// 设置玩家
+    /// </summary>
+    /// <param name="newPlayerIndex"></param>
+    /// <param name="SetPos"></param>
 	public static void SetPlayer(int newPlayerIndex, bool SetPos = true)
 	{
 		using (new PlayersManager.AfterSetPlayer())
@@ -716,6 +728,11 @@ public class PlayersManager
 		}
 	}
 
+    /// <summary>
+    /// 获取玩家
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns></returns>
 	public static GameObject GetPlayer(int ID)
 	{
 		GameObject result = null;
@@ -730,7 +747,13 @@ public class PlayersManager
 		return result;
 	}
 
-	public static GameObject FindMainChar(int ID, bool NeedAddToAllPlayers = true)
+    /// <summary>
+    /// 查找主要角色
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <param name="NeedAddToAllPlayers"></param>
+    /// <returns></returns>
+	public static GameObject FindMainChar(int ID)
 	{
 		for (int i = 0; i < PlayersManager.AllPlayers.Count; i++)
 		{
@@ -743,18 +766,15 @@ public class PlayersManager
 				}
 			}
 		}
-		GameObject gameObject2 = GameObject.Find("/" + ID.ToString());
-		if (gameObject2 == null)
-		{
-			gameObject2 = GameObject.Find(ID.ToString());
-		}
-		if (NeedAddToAllPlayers && gameObject2 != null && ID != 6)
-		{
-			PlayersManager.AllPlayers.Add(gameObject2);
-		}
-		return gameObject2;
+		return null;
 	}
 
+    /// <summary>
+    /// 添加玩家
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <param name="bSetLevel"></param>
+    /// <returns></returns>
 	public static GameObject AddPlayer(int ID, bool bSetLevel = true)
 	{
 		GameObject player = PlayersManager.GetPlayer(ID);
@@ -763,7 +783,8 @@ public class PlayersManager
 			Debug.Log("PlayersManager.AddPlayer 已经存在" + ID.ToString());
 			return player;
 		}
-		GameObject gameObject = PlayersManager.FindMainChar(ID, true);
+
+		GameObject gameObject = PlayersManager.FindMainChar(ID);
 		if (gameObject != null && gameObject.GetComponent<PalNPC>() != null)
 		{
 			PlayersManager.AddPlayer(gameObject, bSetLevel);
@@ -777,6 +798,7 @@ public class PlayersManager
 			}
 			return gameObject;
 		}
+
 		GameObject gameObject2 = PlayersManager.LoadPlayer(ID);
 		if (gameObject2 != null)
 		{
@@ -786,6 +808,7 @@ public class PlayersManager
 			}
 			PlayersManager.AddPlayer(gameObject2, bSetLevel);
 		}
+
 		if (PlayersManager.OnAddPlayer != null)
 		{
 			PlayersManager.OnAddPlayer(ID);
@@ -1174,7 +1197,7 @@ public class PlayersManager
 				for (int k = 0; k < num2; k++)
 				{
 					int iD = _reader.ReadInt32();
-					GameObject newPlayer = PlayersManager.FindMainChar(iD, true);
+					GameObject newPlayer = PlayersManager.FindMainChar(iD);
 					PlayersManager.AddPlayer(newPlayer, false);
 				}
 				PlayersManager.SetPlayer(PlayersManager.TempPlayerIndex, false);

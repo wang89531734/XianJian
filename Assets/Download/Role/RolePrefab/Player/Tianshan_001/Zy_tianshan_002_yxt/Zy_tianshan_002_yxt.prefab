@@ -1173,10 +1173,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400070}
-  - component: {fileID: 11100000}
   - component: {fileID: 5072095640261416519}
   - component: {fileID: -8616195002245247210}
   - component: {fileID: 9130334115667961214}
+  - component: {fileID: 5725741238782168986}
   m_Layer: 0
   m_Name: Zy_tianshan_002_yxt
   m_TagString: Untagged
@@ -1200,22 +1200,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &11100000
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100070}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 7a928ec099ef32548bf5ae4d312477d5, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 7a928ec099ef32548bf5ae4d312477d5, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 1
 --- !u!114 &5072095640261416519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1266,6 +1250,7 @@ MonoBehaviour:
   charCtrller: {fileID: 0}
   bControl: 1
   SpeedK: 1
+  m_curCtrlMode: 3
   RunSpeed: 10
   WalkSpeed: 2
   AniRunSpeed: 7
@@ -1276,6 +1261,7 @@ MonoBehaviour:
   jumpPower: 1
   MaxJumpPower: 2
   ActionRadius: 1.5
+  locomotion: {fileID: 0}
   destObj: {fileID: 0}
   JudgeStopDistance: 7
   VerticalSpeed: 0
@@ -1297,3 +1283,22 @@ MonoBehaviour:
   SlowDegree: 0.68
   JumpMoveRatioWhenSlide: 0.3
   CrossZhuoDiTime: 0.08
+--- !u!95 &5725741238782168986
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100070}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
