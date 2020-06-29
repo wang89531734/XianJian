@@ -171,10 +171,7 @@ public class PlayersManager
 			}
 		}
 		GameObject gameObject6 = PlayersManager.FindMainChar(7);
-		if (gameObject6 != null)
-		{
-			PlayersManager.PlayerInitSneakScript(gameObject6, null);
-		}
+
 		//ScenesManager.Instance.OnChangeMap -= new Action<int>(PlayersManager.OnChangeMap);
 		//ScenesManager.Instance.OnChangeMap += new Action<int>(PlayersManager.OnChangeMap);
 		FlagManager.OnSetFlag = (Action<int, int>)Delegate.Remove(FlagManager.OnSetFlag, new Action<int, int>(PlayersManager.OnSetFlag));
@@ -517,11 +514,11 @@ public class PlayersManager
 					}
 					else
 					{
-						SneakAttack[] componentsInChildren = component.GetComponentsInChildren<SneakAttack>(true);
-						if (componentsInChildren != null && componentsInChildren.Length > 0 && componentsInChildren[0] != null)
-						{
-							componentsInChildren[0].enabled = true;
-						}
+						//SneakAttack[] componentsInChildren = component.GetComponentsInChildren<SneakAttack>(true);
+						//if (componentsInChildren != null && componentsInChildren.Length > 0 && componentsInChildren[0] != null)
+						//{
+						//	componentsInChildren[0].enabled = true;
+						//}
 						GameObject model = component.model;
 						if (model != null)
 						{
@@ -578,11 +575,11 @@ public class PlayersManager
 					{
 						Debug.LogError("Error : " + PlayersManager.Player.name + " npc == null 690行");
 					}
-					SneakAttack component5 = component4.GetComponent<SneakAttack>();
-					if (component5 != null)
-					{
-						component5.enabled = false;
-					}
+					//SneakAttack component5 = component4.GetComponent<SneakAttack>();
+					//if (component5 != null)
+					//{
+					//	component5.enabled = false;
+					//}
 					if (component4 != null && component4.Data != null && component4.Data.CharacterID == 0)
 					{
 						if (component4.model == null)
@@ -645,11 +642,11 @@ public class PlayersManager
 					{
 						Debug.LogError("Error : " + PlayersManager.Player.name + "  npc==null  784行");
 					}
-					SneakAttack[] componentsInChildren2 = component8.GetComponentsInChildren<SneakAttack>(true);
-					if (componentsInChildren2 != null && componentsInChildren2.Length > 0 && componentsInChildren2[0] != null)
-					{
-						componentsInChildren2[0].enabled = true;
-					}
+					////SneakAttack[] componentsInChildren2 = component8.GetComponentsInChildren<SneakAttack>(true);
+					//if (componentsInChildren2 != null && componentsInChildren2.Length > 0 && componentsInChildren2[0] != null)
+					//{
+					//	componentsInChildren2[0].enabled = true;
+					//}
 					GameObject model2 = component8.model;
 					if (model2 == null)
 					{
@@ -866,39 +863,11 @@ public class PlayersManager
         return gameObject;
     }
 
-	public static void PlayerInitSneakScript(GameObject newPlayer, PalNPC npc = null)
-	{
-		if (npc == null)
-		{
-			npc = newPlayer.GetComponent<PalNPC>();
-		}
-		if (!newPlayer.name.ToLower().Contains("jiguanxiong"))
-		{
-			newPlayer.AddComponent<InitSneakScript>();
-			SneakAttack[] componentsInChildren = newPlayer.GetComponentsInChildren<SneakAttack>();
-			if (componentsInChildren == null || componentsInChildren.Length < 1)
-			{
-				int characterID = npc.Data.CharacterID;
-				if (characterID != 6 && characterID != 7)
-				{
-					if (characterID == 0 || characterID == 2 || characterID == 3)
-					{
-						newPlayer.AddComponent<JinQiXi>();
-					}
-					else
-					{
-						newPlayer.AddComponent<YuanQiXi>();
-					}
-				}
-			}
-		}
-	}
-
     /// <summary>
     /// 添加玩家
     /// </summary>
     /// <param name="newPlayer"></param>
-    /// <param name="bSetLevel"></param>
+    /// <param name="bSetLevel">设置等级</param>
 	public static void AddPlayer(GameObject newPlayer, bool bSetLevel = true)
 	{
 		if (newPlayer == null)
@@ -909,66 +878,67 @@ public class PlayersManager
 		PalNPC component = newPlayer.GetComponent<PalNPC>();
 		if (component == null)
 		{
-			return;
+            Debug.Log("Log : PlayersManager.AddPlayer 已经存在 " + newPlayer.name);
+            return;
 		}
-		//PlayersManager.PlayerInitSneakScript(newPlayer, component);
-		if (!PlayersManager.ActivePlayers.Contains(newPlayer))
-		{
-            //newPlayer.transform.parent = null;
-            //if (newPlayer.GetComponent<DontDestroyOnLevelChange>() == null)
-            //{
-            //	newPlayer.AddComponent<DontDestroyOnLevelChange>();
-            //}
-            //if (newPlayer.GetComponent<SavePrefabTarget>() == null)
-            //{
-            //	SavePrefabTarget savePrefabTarget = newPlayer.AddComponent<SavePrefabTarget>();
-            //}
-            if (component.model == null)
-            {
-                PalNPC expr_8C = component;
-                expr_8C.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(expr_8C.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.WaitLoadOverThanSetActiveFalse));
-            }
-            else
-            {
-                Debug.Log("执行");
-                //ShroudInstance component2 = component.model.GetComponent<ShroudInstance>();
-                //if (component2 != null)
-                //{
-                //    component2.blendWeightK = 100f;
-                //}
-                //AnimCtrlScript component3 = component.model.GetComponent<AnimCtrlScript>();
-                //component3.ActiveAnimCrossFade("ZhanLi", false, 0f, true);
-                //if (component.Data.CharacterID == 2)
-                //{
-                //	if (!component.animator.GetCurrentAnimatorStateInfo(0).IsName("yidongState.ZhanLi"))
-                //	{
-                //		LateSetActive.Init(component.model, false, 0.01f);
-                //	}
-                //	else
-                //	{
-                //		UtilFun.SetActive(component.model, false);
-                //	}
-                //}
-                //else
-                //{
-                //	UtilFun.SetActive(component.model, false);
-                //}
-            }
-            if (bSetLevel)
-            {
-                //PlayersManager.SetLevel(newPlayer);
-            }
-            PlayersManager.ActivePlayers.Add(newPlayer);
-            if (component.Data != null)
-            {
-                //FlagManager.SetBoolFlag((ulong)(34048L + (long)component.Data.CharacterID), true);
-            }
-        }
-		else
-		{
-			Debug.Log("Log : PlayersManager.AddPlayer 已经存在 " + newPlayer.name);
-		}
-	}
+ 
+        //if (!PlayersManager.ActivePlayers.Contains(newPlayer))
+        //{
+        //          //newPlayer.transform.parent = null;
+        //          //if (newPlayer.GetComponent<DontDestroyOnLevelChange>() == null)
+        //          //{
+        //          //	newPlayer.AddComponent<DontDestroyOnLevelChange>();
+        //          //}
+        //          //if (newPlayer.GetComponent<SavePrefabTarget>() == null)
+        //          //{
+        //          //	SavePrefabTarget savePrefabTarget = newPlayer.AddComponent<SavePrefabTarget>();
+        //          //}
+        //          if (component.model == null)
+        //          {
+        //              PalNPC expr_8C = component;
+        //              expr_8C.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(expr_8C.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.WaitLoadOverThanSetActiveFalse));
+        //          }
+        //          else
+        //          {
+        //              Debug.Log("执行");
+        //              //ShroudInstance component2 = component.model.GetComponent<ShroudInstance>();
+        //              //if (component2 != null)
+        //              //{
+        //              //    component2.blendWeightK = 100f;
+        //              //}
+        //              //AnimCtrlScript component3 = component.model.GetComponent<AnimCtrlScript>();
+        //              //component3.ActiveAnimCrossFade("ZhanLi", false, 0f, true);
+        //              //if (component.Data.CharacterID == 2)
+        //              //{
+        //              //	if (!component.animator.GetCurrentAnimatorStateInfo(0).IsName("yidongState.ZhanLi"))
+        //              //	{
+        //              //		LateSetActive.Init(component.model, false, 0.01f);
+        //              //	}
+        //              //	else
+        //              //	{
+        //              //		UtilFun.SetActive(component.model, false);
+        //              //	}
+        //              //}
+        //              //else
+        //              //{
+        //              //	UtilFun.SetActive(component.model, false);
+        //              //}
+        //          }
+        //          if (bSetLevel)
+        //          {
+        //              //PlayersManager.SetLevel(newPlayer);
+        //          }
+        //          PlayersManager.ActivePlayers.Add(newPlayer);
+        //          if (component.Data != null)
+        //          {
+        //              //FlagManager.SetBoolFlag((ulong)(34048L + (long)component.Data.CharacterID), true);
+        //          }
+        //      }
+        //else
+        //{
+        //	Debug.Log("Log : PlayersManager.AddPlayer 已经存在 " + newPlayer.name);
+        //}
+    }
 
 	private static void WaitLoadOverThanSetActiveFalse(PalNPC npc)
 	{

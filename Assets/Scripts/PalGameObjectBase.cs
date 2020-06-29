@@ -332,8 +332,6 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 		Agent component2 = this.model2.GetComponent<Agent>();
 		component2.palNPC = component;
 		//component.perception = component2.perception;
-		SneakScript orAddComponent = this.model2.GetOrAddComponent<SneakScript>();
-		orAddComponent.hostNpc = component;
 		GameObject gameObject = this.model;
 		this.model = this.model2;
 		this.model2 = gameObject;

@@ -162,7 +162,7 @@ public class PlayerTeam : MonoBehaviour
 	{
 		for (int i = 0; i < this.data.Length; i++)
 		{
-			GameObject gameObject = PlayersManager.FindMainChar(this.data[i].mCharacterID, true);
+			GameObject gameObject = PlayersManager.FindMainChar(this.data[i].mCharacterID);
 			if (gameObject != null)
 			{
 				PalNPC component = gameObject.GetComponent<PalNPC>();

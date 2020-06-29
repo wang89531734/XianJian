@@ -791,7 +791,6 @@ public class Agent : MonoBehaviour
 		this.IsJump = false;
 		//SlideDown orAddComponent = base.gameObject.GetOrAddComponent<SlideDown>();
 		//orAddComponent.enabled = true;
-		SneakAttack.canQiXi = true;
 		//LateSetDoNotOpenMainMenu.Instance.Set(false, 0.4f);
 		//this.palNPC.footMark.OnJumpFinish();
 	}

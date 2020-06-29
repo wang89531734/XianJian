@@ -51,8 +51,6 @@ public class PlayerCtrlManager
 
     public static int maskValue = 0;
 
-    private static SneakAttack sneakAttack = null;
-
     public static bool CanJumpSecond = true;
 
     private static Agent m_agentObj;

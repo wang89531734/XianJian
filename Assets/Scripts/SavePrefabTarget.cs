@@ -57,7 +57,7 @@ public class SavePrefabTarget : SaveTarget
 		GameObject gameObject = null;
 		if (num >= 0)
 		{
-			gameObject = PlayersManager.FindMainChar(num, true);
+			gameObject = PlayersManager.FindMainChar(num);
 		}
 		if (gameObject == null)
 		{
