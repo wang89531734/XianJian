@@ -15,10 +15,19 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 
 	public GameObject model;
 
+    /// <summary>
+    /// 物体类型
+    /// </summary>
 	public ObjType objType = ObjType.none;
 
+    /// <summary>
+    /// 当前物体类型
+    /// </summary>
 	protected ObjType m_curObjType = ObjType.none;
 
+    /// <summary>
+    /// 当前物体类型改变
+    /// </summary>
 	public Action<PalGameObjectBase> OnCurObjTypeChange;
 
 	[NonSerialized]
@@ -90,10 +99,10 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 		{
 			this.m_curObjType = this.objType;
 		}
-		if (this.objType != ObjType.none && this.objType != ObjType.none0)
-		{
-            //CharactersManager.AddCharacter(this);
-        }
+		//if (this.objType != ObjType.none && this.objType != ObjType.none0)
+		//{
+  //          //CharactersManager.AddCharacter(this);
+  //      }
 		//if (base.GetComponent<SignSetActiveByState>() != null)
 		//{
 		//	//CharactersManager.AddObj(this);

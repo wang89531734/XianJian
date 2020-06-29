@@ -389,7 +389,6 @@ public class PlayerCtrlManager
     {
         if (PlayerCtrlManager.agentObj == null)
         {
-            UnityEngine.Debug.Log("执行");
             return;
         }
         //if (!PlayerCtrlManager.bControl || PlayerCtrlManager.agentObj == null || !PlayerCtrlManager.agentObj.animator)

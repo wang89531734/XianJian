@@ -61,6 +61,9 @@ namespace SoftStar.Pal6
             [NonSerialized]
             public int LoadDP;
 
+            /// <summary>
+            /// 拥有者
+            /// </summary>
             public GameObject Owner
             {
                 get
@@ -1027,11 +1030,6 @@ namespace SoftStar.Pal6
 
         public override void Start()
         {
-            //if (this.IsMainCharAndExist())
-            //{
-            //    UnityEngine.Object.DestroyImmediate(base.gameObject);
-            //    return;
-            //}
             //if (this.IsDataInit)
             //{
             //    return;
@@ -1049,38 +1047,9 @@ namespace SoftStar.Pal6
             //this.BuffDebuffData = new BuffDebuffManager.BuffDebuffOwner();
             //this.BuffDebuffData.Owner = this;
             //this.patrol = base.GetComponent<Patrol>();
-            this.IsDataInit = true;
+            //this.IsDataInit = true;
         }
-
-        //		private bool IsMainCharAndExist()
-        //		{
-        //			if (StartInit.IsFirstStart)
-        //			{
-        //				return false;
-        //			}
-        //			int num = 0;
-        //			if (int.TryParse(base.name, out num) && num >= 0 && num <= 7)
-        //			{
-        //				for (int i = 0; i < PlayersManager.AllPlayers.Count; i++)
-        //				{
-        //					GameObject gameObject = PlayersManager.AllPlayers[i];
-        //					if (!(gameObject == null))
-        //					{
-        //						if (gameObject.name == base.name && gameObject != base.gameObject)
-        //						{
-        //							return true;
-        //						}
-        //					}
-        //				}
-        //				if (num == 6 && SceneManager.GetActiveScene().buildIndex == 0)
-        //				{
-        //					UnityEngine.Debug.LogError(string.Format("[Error] : Try to load JiGuanXiong again in Title, don't load and exist.", new object[0]));
-        //					return true;
-        //				}
-        //			}
-        //			return false;
-        //		}
-
+       
         //		private void AddColliderForGoToBattle()
         //		{
         //			SphereCollider sphereCollider = this.model.GetComponent<SphereCollider>();
@@ -1229,6 +1198,9 @@ namespace SoftStar.Pal6
             }
         }
 
+        /// <summary>
+        /// 加载模型
+        /// </summary>
         public override void LoadModel()
         {
             //if (SkillSEPreloader.s_preloadEnable && ScenesManager.IsChanging && SkillSEPreloader.Instance != null)
@@ -1287,16 +1259,19 @@ namespace SoftStar.Pal6
             //        }
             //    }
             //}
+
             //if (this.m_bDontLoadModel)
             //{
             //    this.LoadModelEnd(this);
             //    return;
             //}
+
             //Animator componentInChildren = base.GetComponentInChildren<Animator>();
             //if (componentInChildren != null)
             //{
             //    this.model = componentInChildren.gameObject;
             //}
+
             if (this.model == null)
             {
                 base.LoadModel();
