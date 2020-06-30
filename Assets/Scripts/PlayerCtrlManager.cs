@@ -152,15 +152,11 @@ public class PlayerCtrlManager
         {
             if (PlayerCtrlManager.m_agentObj == null && PlayersManager.Player != null)
             {
-                GameObject modelObj = PlayersManager.Player.GetModelObj(false);                
-                //PlayerCtrlManager.m_agentObj = modelObj.GetComponent<Agent>();
-                //if (m_agentObj == null)
-                //{
-                //    UnityEngine.Debug.Log(modelObj.name+ "modelObj.name");
-                //    UnityEngine.Debug.Log("m_agentObj==null");
-                //}
-                //PlayerCtrlManager.PlayerModelTF = PlayerCtrlManager.m_agentObj.transform;
-                //PlayerCtrlManager.sneakAttack = PlayersManager.Player.GetComponent<SneakAttack>();
+                GameObject modelObj = PlayersManager.Player.GetModelObj(false);
+                PlayerCtrlManager.m_agentObj = modelObj.GetComponentInChildren<Agent>();
+
+                PlayerCtrlManager.PlayerModelTF = PlayerCtrlManager.m_agentObj.transform;
+
                 if (PlayerCtrlManager.m_agentObj)
                 {
                     PlayerCtrlManager.SetAgentProperty(PlayerCtrlManager.m_agentObj);
@@ -373,7 +369,6 @@ public class PlayerCtrlManager
     //		if (currentAnimatorStateInfo.IsName("yidongState.ZhanLi") || currentAnimatorStateInfo.IsName("yidongState.YiDong") || currentAnimatorStateInfo.IsName("yidongState.ZhuoDi") || currentAnimatorStateInfo.IsName("yidongState.ZhuoDiPao") || currentAnimatorStateInfo.IsName("yidongState.XiuXian") || currentAnimatorStateInfo.IsName("yidongState.YuanDiZou"))
     //		{
     //			UIManager.Instance.DoNotOpenMainMenu = true;
-    //			SneakAttack.canQiXi = false;
     //			agentObj.IsJump = true;
     //			agentObj.animCtrl.ActiveAnimCrossFade("TiaoQi", false, 0.03f, true);
     //			animator.SetFloat("VerticalSpeed", 10f);
@@ -459,7 +454,7 @@ public class PlayerCtrlManager
                 //    }
             }
         }
-        //SneakAttack.SneakUpdate();
+
         //if (InputManager.GetKeyDown(KEY_ACTION.JUMP, false) && PlayerCtrlManager.ProcessSpaceKey != null)
         //{
         //    SlideDown instance = SlideDown.Instance;

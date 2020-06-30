@@ -183,17 +183,18 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
     /// <param name="temp"></param>
 	protected virtual void CreateAndSetModel(UnityEngine.Object temp)
 	{
-		//if (temp == null)
-		//{
-		//	//this.LoadModelEnd(this);
-		//	return;
-		//}
-		this.model = (temp as GameObject);
+        if (temp == null)
+        {
+            this.LoadModelEnd(this);
+            return;
+        }
+        this.model = (temp as GameObject);
 
         //if (this.model.GetComponent<AutoDestroyMaterials>() == null)
         //{
         //    this.model.AddComponent<AutoDestroyMaterials>();
         //}
+
         this.model.transform.parent = base.transform;
         this.model.transform.localPosition = Vector3.zero;
         this.model.transform.localEulerAngles = Vector3.zero;
@@ -203,6 +204,7 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
         //{           
         //    //this.CollectPrefabObjs(this.model);
         //}
+
         this.LoadModelEnd(this);
     }
 

@@ -1072,6 +1072,7 @@ namespace SoftStar.Pal6
 
         public override void LoadModelEnd(UnityEngine.Object obj)
         {
+            UnityEngine.Debug.Log("执行");
             base.LoadModelEnd(obj);
             //if (this.MonsterGroups.Length == 0 && this.model != null && base.gameObject.GetComponent<Interact>() != null && this.model.GetComponent<MouseEnterCursor>() == null)
             //{
@@ -1080,21 +1081,23 @@ namespace SoftStar.Pal6
             //}
             if (this.model != null)
             {
+                UnityEngine.Debug.Log("执行");
                 //this.model.layer = SmoothFollow2.IgnoreLayer;
                 //this.model.ExcludeCloneName();
-                //Agent component = this.model.GetComponent<Agent>();
-                //if (component != null)
-                //{
-                //    component.palNPC = this;
-                //    if (component.agent != null && this.MonsterGroups.Length < 1)
-                //    {
-                //        component.agent.baseOffset = -0.1f;
-                //        if (!NPCHeight.Instance.SetHeight(component.agent))
-                //        {
-                //            component.gameObject.AddComponent<AdjustNavAgentOffset>();
-                //        }
-                //    }
-                //}
+                Agent component = this.model.GetComponent<Agent>();
+                if (component != null)
+                {
+                    component.palNPC = this;
+                    if (component.agent != null && this.MonsterGroups.Length < 1)
+                    {
+                        component.agent.baseOffset = -0.1f;
+                        //if (!NPCHeight.Instance.SetHeight(component.agent))
+                        //{
+                        //    component.gameObject.AddComponent<AdjustNavAgentOffset>();
+                        //}
+                    }
+                }
+
                 //if (Application.isPlaying && this.Data.CharacterID > -1 && this.Data.CharacterID < 8)
                 //{
                 //    this.GetOriRes();

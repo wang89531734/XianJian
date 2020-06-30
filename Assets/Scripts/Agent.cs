@@ -3,8 +3,9 @@ using System;
 using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.AI;
 
-//[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Locomotion))]
 [RequireComponent(typeof(AnimCtrlScript))]
 [RequireComponent(typeof(CharacterController))]
@@ -14,9 +15,9 @@ public class Agent : MonoBehaviour
 
 	public PalNPC palNPC;
 
-	//public NavMeshAgent agent;
+    public NavMeshAgent agent;
 
-	public Animator animator;
+    public Animator animator;
 
 	public AnimCtrlScript animCtrl;
 

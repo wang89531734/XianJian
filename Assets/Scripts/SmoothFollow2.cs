@@ -291,6 +291,7 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 			Debug.LogError("SmoothFollow2 Init参数为null");
 			return;
 		}
+        Debug.Log(go.name);
 		this.targetRoot = go.transform;
 		this.target = null;
 		this.InitTarget();
