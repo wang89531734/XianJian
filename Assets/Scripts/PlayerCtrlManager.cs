@@ -152,6 +152,7 @@ public class PlayerCtrlManager
         {
             if (PlayerCtrlManager.m_agentObj == null && PlayersManager.Player != null)
             {
+                UnityEngine.Debug.Log("执行");
                 GameObject modelObj = PlayersManager.Player.GetModelObj(false);
                 PlayerCtrlManager.m_agentObj = modelObj.GetComponentInChildren<Agent>();
 
@@ -301,10 +302,10 @@ public class PlayerCtrlManager
     {
         //PlayerCtrlManager.SetJumpEvent(true);
         //PlayerCtrlManager.bControl = true;
-        //if (PlayerCtrlManager.agentObj != null)
-        //{
-        //    PlayerCtrlManager.SetAgentProperty(PlayerCtrlManager.agentObj);
-        //}
+        if (PlayerCtrlManager.agentObj != null)
+        {
+            PlayerCtrlManager.SetAgentProperty(PlayerCtrlManager.agentObj);
+        }
         //SmoothFollow2[] componentsInChildren = PalMain.MainCamera.GetComponentsInChildren<SmoothFollow2>(true);
         //for (int i = 0; i < componentsInChildren.Length; i++)
         //{
