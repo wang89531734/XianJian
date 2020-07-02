@@ -184,66 +184,6 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 		}
 	}
 
-	public void CopyFrom(SmoothFollow2 sf2)
-	{
-		this.bControl = sf2.bControl;
-		this.bInUI = sf2.bInUI;
-		this.target = sf2.target;
-		this.targetRoot = sf2.targetRoot;
-		this.baseHeight = sf2.baseHeight;
-		this.height = sf2.height;
-		this.damping = sf2.damping;
-		this.rotationDamping = sf2.rotationDamping;
-		this.CenterOffset = sf2.CenterOffset;
-		this.CamDistance = sf2.CamDistance;
-		this.fieldOfView = sf2.fieldOfView;
-		this.CamPos = sf2.CamPos;
-		this.CamRot = sf2.CamRot;
-		this.FocalPos = sf2.FocalPos;
-		this.LastTargetPos = sf2.LastTargetPos;
-		this.LastWantedRotation = sf2.LastWantedRotation;
-		this.charCtrl = sf2.charCtrl;
-		this.CanScroll = sf2.CanScroll;
-		//this.shakeScript = sf2.shakeScript;
-		//this.curShakeType = sf2.curShakeType;
-		this.HVByLoadArchive = sf2.HVByLoadArchive;
-		this.offsetScale = sf2.offsetScale;
-		this.TargetCamRot = sf2.TargetCamRot;
-		this.bJolt = sf2.bJolt;
-		this.lastAngleH = sf2.lastAngleH;
-		this.bNeedReturn = sf2.bNeedReturn;
-		this.ReturnSpeed = sf2.ReturnSpeed;
-		this.CameraRadius = sf2.CameraRadius;
-		this.InsideFun = sf2.InsideFun;
-		this.horizontalRotSpeed = sf2.horizontalRotSpeed;
-		this.verticalRotSpeed = sf2.verticalRotSpeed;
-		this.angleH = sf2.angleH;
-		this.angleV = sf2.angleV;
-		this.maxVerticalAngle = sf2.maxVerticalAngle;
-		this.minVerticalAngle = sf2.minVerticalAngle;
-		this.m_maxVerticalAngle = sf2.m_maxVerticalAngle;
-		this.m_minVerticalAngle = sf2.m_minVerticalAngle;
-		this.TargetCamDistance = sf2.TargetCamDistance;
-		this.MaxDistance = sf2.MaxDistance;
-		this.MinDistance = sf2.MinDistance;
-		this.currentDistance = sf2.currentDistance;
-		this.elasticSpeed = sf2.elasticSpeed;
-		this.ray = sf2.ray;
-		this.cullPlayer = sf2.cullPlayer;
-		this.posOrig = sf2.posOrig;
-		this.posEnd = sf2.posEnd;
-		this.YSpeed = sf2.YSpeed;
-		this.UseYSpeed = sf2.UseYSpeed;
-		this.curY = sf2.curY;
-		this.BigMap_maxVerticalAngle = sf2.BigMap_maxVerticalAngle;
-		this.BigMap_verticalRotSpeed = sf2.BigMap_verticalRotSpeed;
-		this.BigMap_CamDistanceSpeed = sf2.BigMap_CamDistanceSpeed;
-		this.BigMap_maxVerticalAngleK = sf2.BigMap_maxVerticalAngleK;
-		this.lastDistance = sf2.lastDistance;
-		this.lastVerticalAngle = sf2.lastVerticalAngle;
-		this.MiddleEvent = sf2.MiddleEvent;
-	}
-
 	private void Start()
 	{
 		this.InitTarget();
@@ -291,7 +231,7 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 			Debug.LogError("SmoothFollow2 Init参数为null");
 			return;
 		}
-        Debug.Log(go.name);
+
 		this.targetRoot = go.transform;
 		this.target = null;
 		this.InitTarget();
@@ -302,81 +242,17 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 		this.ResetData();
 	}
 
+    /// <summary>
+    /// 初始化目标
+    /// </summary>
 	public void InitTarget()
 	{
 		if (this.targetRoot == null)
 		{
 			return;
 		}
-		Transform transform = this.targetRoot;
-        //Animator componentInChildren = this.targetRoot.GetComponentInChildren<Animator>();
-        //if (componentInChildren != null)
-        //{
-        //	transform = componentInChildren.transform;
-        //}
-        this.target = null;
-        if (this.target == null)
-        {
-            this.target = transform.Find("all/Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Spine2/Bip01 Neck/Bip01 Head");
-        }
-        //if (this.target == null)
-        //{
-        //	this.target = transform.Find("Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Spine2/Bip01 Neck/Bip01 Head");
-        //}
-        //if (this.target == null)
-        //{
-        //	this.target = transform.Find("Bip01/Bip01 Pelvis/Bip01 Spine/Bip01 Spine1/Bip01 Neck/Bip01 Head");
-        //}
-        //if (this.target == null)
-        //{
-        //	this.target = transform.Find("Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 Spine3/Bip001 Neck/Bip001 Head");
-        //}
-        //if (this.target == null)
-        //{
-        //	this.target = transform.Find("Bip001/Bip001 Spine/Bip001 Spine1/Bip001 Neck/Bip001 Head");
-        //}
-        //if (this.target == null)
-        //{
-        //	this.target = transform.Find("Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Neck/Bip001 Head");
-        //}
-        //if (this.target == null)
-        //{
-        //	this.target = transform.Find("char_astrella_reference/char_astrella_Hips1/char_astrella_Spine/char_astrella_Spine1/char_astrella_Spine2/char_astrella_Neck/char_astrella_Head");
-        //}
-        //if (this.target == null)
-        //{
-        //	this.target = this.FindHead();
-        //}
-        if (this.target == null)
-        {
-        	Debug.LogError("Error : 无法找到 Head");
-        	return;
-        }
-        this.curY = this.target.position.y;
-        string name = this.targetRoot.name;
-        //switch (name)
-        //{
-        //    case "YueJinChao":
-        //        this.baseHeight = 1.559f;
-        //        goto IL_280;
-        //    case "YueQi":
-        //        this.baseHeight = 1.3982f;
-        //        goto IL_280;
-        //    case "XianQing":
-        //        this.baseHeight = 1.6169f;
-        //        goto IL_280;
-        //    case "LuoWenRen":
-        //        this.baseHeight = 1.5489f;
-        //        goto IL_280;
-        //    case "JuShiFang":
-        //        this.baseHeight = 1.5183f;
-        //        goto IL_280;
-        //    case "MingXiu":
-        //        this.baseHeight = 1.4548f;
-        //        goto IL_280;
-        //}
+        //this.curY = this.target.position.y;
         this.baseHeight = 1.56f;
-        //IL_280:
         this.target = this.targetRoot;
         base.GetComponent<Camera>().fieldOfView = this.fieldOfView;
         base.GetComponent<Camera>().nearClipPlane = 0.1f;
@@ -386,7 +262,7 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
         this.LastTargetPos = lastTargetPos;
     }
 
-	public void InitAngle()
+    public void InitAngle()
 	{
 		this.CamAngleH = PlayersManager.Player.GetModelObj(true).transform.eulerAngles.y;
 		this.CamAngleV = 10f;

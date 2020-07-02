@@ -71,14 +71,7 @@ public class PlayersManager
 			{
 				return PlayersManager.curCtrlModel;
 			}
-			if (PlayersManager.ActivePlayers.Count < 1)
-			{
-				GameObject gameObject = GameObject.FindWithTag("Player");
-				if (gameObject != null)
-				{
-					PlayersManager.ActivePlayers.Add(gameObject);
-				}
-			}
+	
 			if (PlayersManager.PlayerIndex < 0 || PlayersManager.PlayerIndex >= PlayersManager.ActivePlayers.Count)
 			{
 				return null;
@@ -789,7 +782,7 @@ public class PlayersManager
 			{
 				PlayersManager.SetPlayer(ID, false);
 			}
-			if (ID != 6 && PlayersManager.OnAddPlayer != null)
+			if (PlayersManager.OnAddPlayer != null)
 			{
 				PlayersManager.OnAddPlayer(ID);
 			}
@@ -854,7 +847,7 @@ public class PlayersManager
 	public static GameObject LoadPlayer(int ID)
 	{
         GameObject gameObject = null;
-        GameEntry.Data.RoleDataManager.CreatePlayerByJobId(1, (Transform trans) =>
+        GameEntry.Data.RoleDataManager.CreatePlayerByJobId(ID+1, (Transform trans) =>
         {
             gameObject = trans.gameObject;
             //gameObject.ExcludeCloneName();
@@ -894,7 +887,7 @@ public class PlayersManager
             //    //PlayersManager.SetLevel(newPlayer);
             //}
 
-            //PlayersManager.ActivePlayers.Add(newPlayer);
+            PlayersManager.ActivePlayers.Add(newPlayer);
 
             //if (component.Data != null)
             //{

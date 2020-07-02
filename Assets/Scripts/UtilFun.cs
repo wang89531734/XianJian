@@ -943,11 +943,13 @@ public static class UtilFun
 			}
 			gameObject = component.model;
 		}
-		//if (gameObject == null)
-		//{
-		//	gameObject = go;
-		//}
-		if (NeedActive && !gameObject.activeSelf)
+
+        if (gameObject == null)
+        {
+            gameObject = go;
+        }
+
+        if (NeedActive && !gameObject.activeSelf)
 		{
 			UtilFun.SetActive(gameObject, true);
 		}

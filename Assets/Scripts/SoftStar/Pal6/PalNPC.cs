@@ -1072,7 +1072,6 @@ namespace SoftStar.Pal6
 
         public override void LoadModelEnd(UnityEngine.Object obj)
         {
-            UnityEngine.Debug.Log("执行");
             base.LoadModelEnd(obj);
             //if (this.MonsterGroups.Length == 0 && this.model != null && base.gameObject.GetComponent<Interact>() != null && this.model.GetComponent<MouseEnterCursor>() == null)
             //{
@@ -1081,7 +1080,6 @@ namespace SoftStar.Pal6
             //}
             if (this.model != null)
             {
-                UnityEngine.Debug.Log("执行");
                 //this.model.layer = SmoothFollow2.IgnoreLayer;
                 //this.model.ExcludeCloneName();
                 Agent component = this.model.GetComponent<Agent>();

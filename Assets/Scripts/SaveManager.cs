@@ -500,23 +500,23 @@ public class SaveManager : MonoBehaviour
 		writer.Write(DateTime.Now.ToBinary());
 		writer.Write(PalMain.GameTotleTime + (Time.fixedTime - PalMain.GameBeginTime));
 		writer.Write(PalMain.GameDifficulty);
-		List<GameObject> activePlayers = PlayersManager.ActivePlayers;
-		writer.Write(activePlayers.Count);
-		foreach (GameObject current in activePlayers)
-		{
-			PalNPC component = current.GetComponent<PalNPC>();
-			if (component == null)
-			{
-				writer.Write(0uL);
-				writer.Write(string.Empty);
-				writer.Write(0);
-			}
-			else
-			{
-				//component.Data.CharacterCommon.ShowName.Serialize(writer);
-				//writer.Write(component.Data.Level);
-			}
-		}
+		//List<GameObject> activePlayers = PlayersManager.ActivePlayers;
+		//writer.Write(activePlayers.Count);
+		//foreach (GameObject current in activePlayers)
+		//{
+		//	PalNPC component = current.GetComponent<PalNPC>();
+		//	if (component == null)
+		//	{
+		//		writer.Write(0uL);
+		//		writer.Write(string.Empty);
+		//		writer.Write(0);
+		//	}
+		//	else
+		//	{
+		//		//component.Data.CharacterCommon.ShowName.Serialize(writer);
+		//		//writer.Write(component.Data.Level);
+		//	}
+		//}
 		//int idx = (!PalMain.IsDLC) ? MissionManager.MainLineFlag : MissionManager.BranchLineFlag;
 		//int flag = FlagManager.GetFlag(idx);
 		//Mission curMission = MissionManager.GetCurMission(flag);

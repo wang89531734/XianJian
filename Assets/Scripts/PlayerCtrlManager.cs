@@ -152,11 +152,10 @@ public class PlayerCtrlManager
         {
             if (PlayerCtrlManager.m_agentObj == null && PlayersManager.Player != null)
             {
-                UnityEngine.Debug.Log("执行");
                 GameObject modelObj = PlayersManager.Player.GetModelObj(false);
-                PlayerCtrlManager.m_agentObj = modelObj.GetComponentInChildren<Agent>();
+                PlayerCtrlManager.m_agentObj = modelObj.GetComponent<Agent>();
 
-                PlayerCtrlManager.PlayerModelTF = PlayerCtrlManager.m_agentObj.transform;
+                //PlayerCtrlManager.PlayerModelTF = PlayerCtrlManager.m_agentObj.transform;
 
                 if (PlayerCtrlManager.m_agentObj)
                 {
@@ -189,9 +188,13 @@ public class PlayerCtrlManager
         }
     }
 
+    /// <summary>
+    /// 设置替身属性
+    /// </summary>
+    /// <param name="agent"></param>
     private static void SetAgentProperty(Agent agent)
     {
-        //agent.curCtrlMode = ControlMode.ControlByPlayer;
+        agent.curCtrlMode = ControlMode.ControlByPlayer;
         //if (agent.charCtrller == null)
         //{
         //    agent.charCtrller = agent.GetComponent<CharacterController>();
@@ -300,10 +303,12 @@ public class PlayerCtrlManager
 
     private static void OnInit(object userData)
     {
-        //PlayerCtrlManager.SetJumpEvent(true);
-        //PlayerCtrlManager.bControl = true;
+        PlayerCtrlManager.SetJumpEvent(true);
+        PlayerCtrlManager.bControl = true;
+
         if (PlayerCtrlManager.agentObj != null)
         {
+            UnityEngine.Debug.Log("执行OnInit");
             PlayerCtrlManager.SetAgentProperty(PlayerCtrlManager.agentObj);
         }
         //SmoothFollow2[] componentsInChildren = PalMain.MainCamera.GetComponentsInChildren<SmoothFollow2>(true);
@@ -344,18 +349,22 @@ public class PlayerCtrlManager
         //}
     }
 
-    //	public static void SetJumpEvent(bool bActive)
-    //	{
-    //		if (bActive)
-    //		{
-    //			PlayerCtrlManager.ProcessSpaceKey = (PlayerCtrlManager.void_fun_Agent)Delegate.Remove(PlayerCtrlManager.ProcessSpaceKey, new PlayerCtrlManager.void_fun_Agent(PlayerCtrlManager.JumpEvent));
-    //			PlayerCtrlManager.ProcessSpaceKey = (PlayerCtrlManager.void_fun_Agent)Delegate.Combine(PlayerCtrlManager.ProcessSpaceKey, new PlayerCtrlManager.void_fun_Agent(PlayerCtrlManager.JumpEvent));
-    //		}
-    //		else
-    //		{
-    //			PlayerCtrlManager.ProcessSpaceKey = (PlayerCtrlManager.void_fun_Agent)Delegate.Remove(PlayerCtrlManager.ProcessSpaceKey, new PlayerCtrlManager.void_fun_Agent(PlayerCtrlManager.JumpEvent));
-    //		}
-    //	}
+    /// <summary>
+    /// 设计跳跃事件
+    /// </summary>
+    /// <param name="bActive"></param>
+    public static void SetJumpEvent(bool bActive)
+    {
+        //if (bActive)
+        //{
+        //    PlayerCtrlManager.ProcessSpaceKey = (PlayerCtrlManager.void_fun_Agent)Delegate.Remove(PlayerCtrlManager.ProcessSpaceKey, new PlayerCtrlManager.void_fun_Agent(PlayerCtrlManager.JumpEvent));
+        //    PlayerCtrlManager.ProcessSpaceKey = (PlayerCtrlManager.void_fun_Agent)Delegate.Combine(PlayerCtrlManager.ProcessSpaceKey, new PlayerCtrlManager.void_fun_Agent(PlayerCtrlManager.JumpEvent));
+        //}
+        //else
+        //{
+        //    PlayerCtrlManager.ProcessSpaceKey = (PlayerCtrlManager.void_fun_Agent)Delegate.Remove(PlayerCtrlManager.ProcessSpaceKey, new PlayerCtrlManager.void_fun_Agent(PlayerCtrlManager.JumpEvent));
+        //}
+    }
 
     //	public static void JumpEvent(Agent agentObj)
     //	{

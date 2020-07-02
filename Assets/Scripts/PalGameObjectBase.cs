@@ -198,7 +198,7 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
         this.model.transform.parent = base.transform;
         this.model.transform.localPosition = Vector3.zero;
         this.model.transform.localEulerAngles = Vector3.zero;
-        //this.model.tag = base.gameObject.tag;
+        this.model.tag = base.gameObject.tag;
         //this.model.layer = base.gameObject.layer;
         //if (this.isPrefab)
         //{           

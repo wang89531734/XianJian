@@ -1176,7 +1176,6 @@ GameObject:
   - component: {fileID: 5072095640261416519}
   - component: {fileID: -8616195002245247210}
   - component: {fileID: 9130334115667961214}
-  - component: {fileID: 5725741238782168986}
   m_Layer: 0
   m_Name: Zy_tianshan_002_yxt
   m_TagString: Untagged
@@ -1231,7 +1230,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &9130334115667961214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1245,6 +1244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   palNPC: {fileID: 0}
+  agent: {fileID: 0}
   animator: {fileID: 0}
   animCtrl: {fileID: 0}
   charCtrller: {fileID: 0}
@@ -1283,22 +1283,3 @@ MonoBehaviour:
   SlowDegree: 0.68
   JumpMoveRatioWhenSlide: 0.3
   CrossZhuoDiTime: 0.08
---- !u!95 &5725741238782168986
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100070}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
