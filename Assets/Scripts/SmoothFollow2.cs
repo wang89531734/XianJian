@@ -8,8 +8,6 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 {
 	public bool bControl = true;
 
-	public bool bInUI;
-
 	public Transform target;
 
 	public Transform targetRoot;
@@ -48,11 +46,11 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 
 	public bool CanScroll = true;
 
-	//public PalShake shakeScript;
+    //public PalShake shakeScript;
 
-	//public ShakeType curShakeType;
+    //public ShakeType curShakeType;
 
-	public static bool LeftCameraMove = false;
+    public static bool LeftCameraMove = false;
 
 	private static Vector3 lastMousePos = Vector3.zero;
 
@@ -78,6 +76,9 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 
 	public Vector2 FOV_Range = new Vector2(35f, 60f);
 
+    /// <summary>
+    /// 内部 应该是控制大小
+    /// </summary>
 	public Action InsideFun;
 
 	private static string guiDisplayStr;
@@ -291,8 +292,9 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 		{
 			return;
 		}
+
 		if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonUp(0))
-		{          
+		{
 			SmoothFollow2.LeftCameraMove = false;
 			SmoothFollow2.lastMousePos = Input.mousePosition;
 		}
@@ -300,26 +302,21 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 		{
             SmoothFollow2.LeftCameraMove = true;
 		}
-        //      if (UICamera.hoveredObject != null && (InputManager.GetKeyDown(KEY_ACTION.MOUSE_LEFT, false) || InputManager.GetKeyDown(KEY_ACTION.MOUSE_RIGHT, false)))
-        //      {
-        //          this.bInUI = true;
-        //      }
-        //      if (this.bInUI && (InputManager.GetKeyUp(KEY_ACTION.MOUSE_LEFT, false) || InputManager.GetKeyUp(KEY_ACTION.MOUSE_RIGHT, false)))
-        //{
-        //	this.bInUI = false;
-        //}
-        //if (this.InsideFun != null)
-        //{
-        //	this.InsideFun();
-        //	return;
-        //}
+
+        if (this.InsideFun != null)
+        {
+            this.InsideFun();
+            return;
+        }
+
         //Vector3 position = Vector3.zero;
-        //      //if (this.curShakeType != ShakeType.None)
-        //      //{
-        //      //    position = base.transform.position;
-        //      //    base.transform.position = this.CamPos;
-        //      //}
-        if (this.bControl && !this.bInUI)
+        //if (this.curShakeType != ShakeType.None)
+        //{
+        //    position = base.transform.position;
+        //    base.transform.position = this.CamPos;
+        //}
+
+        if (this.bControl)
         {
             if (this.CanScroll)
             {
@@ -347,32 +344,32 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
                 this.GetHV();
             }
 
-            //if (Input.GetMouseButtonDown(0))
-            //{
-            //    if (!this.bNeedReturn)
-            //    {
-            //        this.lastAngleH = this.CamAngleH;
-            //    }
-            //    this.bNeedReturn = false;
-            //}
-            //else if (Input.GetMouseButtonUp(0))
-            //{
-            //    this.bNeedReturn = true;
-            //}
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (!this.bNeedReturn)
+                {
+                    this.lastAngleH = this.CamAngleH;
+                }
+                this.bNeedReturn = false;
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                this.bNeedReturn = true;
+            }
 
-            //if (this.bNeedReturn)
-            //{
-            //    this.CamAngleH = Mathf.LerpAngle(this.CamAngleH, this.lastAngleH, Time.deltaTime * this.ReturnSpeed);
-            //    if (Mathf.Abs(this.CamAngleH - this.lastAngleH) < 0.5f)
-            //    {
-            //        this.bNeedReturn = false;
-            //    }
-            //}
+            if (this.bNeedReturn)
+            {
+                this.CamAngleH = Mathf.LerpAngle(this.CamAngleH, this.lastAngleH, Time.deltaTime * this.ReturnSpeed);
+                if (Mathf.Abs(this.CamAngleH - this.lastAngleH) < 0.5f)
+                {
+                    this.bNeedReturn = false;
+                }
+            }
 
-            //if (this.bJolt)
-            //{
-            //    this.MakeJolt();
-            //}
+            if (this.bJolt)
+            {
+                this.MakeJolt();
+            }
 
             this.TargetCamRot = Quaternion.Euler(this.angleV, this.CamAngleH, 0f);
             this.CamRot = Quaternion.Lerp(this.CamRot, this.TargetCamRot, Time.deltaTime * this.rotationDamping);
@@ -464,6 +461,10 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
         this.CamAngleH += quaternion.eulerAngles.y;
     }
 
+    /// <summary>
+    /// 获取目标摄像机距离
+    /// </summary>
+    /// <returns></returns>
 	private float GetTargetCamDistance()
 	{
 		return Mathf.Clamp(this.TargetCamDistance - Input.GetAxis("Mouse ScrollWheel"), this.MinDistance, this.MaxDistance);

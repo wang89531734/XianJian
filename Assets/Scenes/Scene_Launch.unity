@@ -270,81 +270,6 @@ MonoBehaviour:
   PackItemIDs: []
   flagValues: []
   startWeatherTime: 0.4
---- !u!1 &1172195043
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1172195044}
-  - component: {fileID: 1172195045}
-  m_Layer: 0
-  m_Name: SmoothFollow2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1172195044
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1172195043}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1524469894}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1172195045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1172195043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15cb7f7f8d583c34f9e8998de97ceb78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bControl: 1
-  bInUI: 0
-  target: {fileID: 0}
-  targetRoot: {fileID: 0}
-  height: 1
-  damping: 5
-  rotationDamping: 100000000
-  CenterOffset: {x: 0, y: 0, z: -1}
-  CamDistance: 1
-  fieldOfView: 45
-  CamRot: {x: 0, y: 0, z: 0, w: 1}
-  CanScroll: 1
-  offsetScale: {x: 1, y: 0.23, z: 1}
-  TargetCamRot: {x: 0, y: 0, z: 0, w: 1}
-  bJolt: 1
-  bNeedReturn: 0
-  ReturnSpeed: 2
-  CameraRadius: 0.13
-  FOV_Range: {x: 35, y: 60}
-  horizontalRotSpeed: 200
-  verticalRotSpeed: 250
-  maxVerticalAngle: 60
-  minVerticalAngle: -55
-  MaxDistance: 12.3
-  MinDistance: 0.8
-  elasticSpeed: 4
-  YSpeed: 5
-  UseYSpeed: 1
-  BigMap_maxVerticalAngle: 75
-  BigMap_verticalRotSpeed: 800
-  BigMap_CamDistanceSpeed: 40
-  BigMap_maxVerticalAngleK: 2
 --- !u!1 &1312360514
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,8 +417,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1172195044}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
