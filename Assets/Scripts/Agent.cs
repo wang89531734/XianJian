@@ -17,7 +17,7 @@ public class Agent : MonoBehaviour
 
     public NavMeshAgent agent;
 
-    public Animator animator;
+    public Animation animator;
 
 	public AnimCtrlScript animCtrl;
 
@@ -184,7 +184,7 @@ public class Agent : MonoBehaviour
                 //}
                 if (this.animator == null)
                 {
-                    this.animator = base.GetComponent<Animator>();
+                    this.animator = base.GetComponent<Animation>();
                 }
                 if (this.animator != null)
                 {
@@ -247,13 +247,13 @@ public class Agent : MonoBehaviour
 				bActive = false;
 			}
 		}
-		this.animator.SetApplyRootMotion(bActive);
+		//this.animator.SetApplyRootMotion(bActive);
 	}
 
 	private void Start()
 	{
 		//this.agent = base.GetComponent<NavMeshAgent>();
-		this.animator = base.GetComponent<Animator>();
+		this.animator = base.GetComponent<Animation>();
 		if (this.animator != null)
 		{
 			//this.animator.SetFloat("VerticalSpeed", 0f);
@@ -423,7 +423,7 @@ public class Agent : MonoBehaviour
 		//this.curCtrlMode = ControlMode.ControlByAgent;
 		if (destActor != null)
 		{
-			this.animator.SetBool("Move", true);
+			//this.animator.SetBool("Move", true);
 			//this.landmark = destActor.GetComponent<Landmark>();
 			//if (this.landmark != null)
 			//{
@@ -436,7 +436,7 @@ public class Agent : MonoBehaviour
 		}
 		else
 		{
-			this.animator.SetBool("Move", true);
+			//this.animator.SetBool("Move", true);
 			this.SetDestination(destPos);
 		}
 		//AnimatorValueRestore component = base.GetComponent<AnimatorValueRestore>();
@@ -494,10 +494,10 @@ public class Agent : MonoBehaviour
 		//this.locomotion.Do(0f, 0f, base.transform, this.agent.desiredVelocity);
 	}
 
-	public float GetSpeed()
-	{
-		return this.animator.GetFloat("Speed");
-	}
+	//public float GetSpeed()
+	//{
+	//	return this.animator.GetFloat("Speed");
+	//}
 
 	//public bool AgentDone()
 	//{
@@ -550,14 +550,14 @@ public class Agent : MonoBehaviour
 
 	private void NavAgentMove()
 	{
-		if (!float.IsNaN(this.animator.deltaPosition.x) && Time.deltaTime != 0f)
-		{
-			//this.agent.velocity = this.animator.deltaPosition / Time.deltaTime;
-		}
-		else
-		{
-			//this.agent.velocity = Vector3.zero;
-		}
+		//if (!float.IsNaN(this.animator.deltaPosition.x) && Time.deltaTime != 0f)
+		//{
+		//	//this.agent.velocity = this.animator.deltaPosition / Time.deltaTime;
+		//}
+		//else
+		//{
+		//	//this.agent.velocity = Vector3.zero;
+		//}
 		//if (this.agent.desiredVelocity.magnitude > 0f)
 		//{
 		//	float num = (-Vector3.Dot(base.transform.forward, this.agent.desiredVelocity) + 2f) * 2f;
@@ -608,11 +608,11 @@ public class Agent : MonoBehaviour
 	{
 		if (!this.IsInSky && this.charCtrller != null && !this.charCtrller.isGrounded && this.charCtrller.velocity.y < -this.XiaLuoSpeed)
 		{
-			AnimatorStateInfo currentAnimatorStateInfo = this.animator.GetCurrentAnimatorStateInfo(0);
-			if (!currentAnimatorStateInfo.IsName("yidongState.TiaoQi") && !currentAnimatorStateInfo.IsName("yidongState.ZhiKong") && !currentAnimatorStateInfo.IsName("yidongState.ZhuoDi"))
-			{
-				return true;
-			}
+			//AnimatorStateInfo currentAnimatorStateInfo = this.animator.GetCurrentAnimatorStateInfo(0);
+			//if (!currentAnimatorStateInfo.IsName("yidongState.TiaoQi") && !currentAnimatorStateInfo.IsName("yidongState.ZhiKong") && !currentAnimatorStateInfo.IsName("yidongState.ZhuoDi"))
+			//{
+			//	return true;
+			//}
 		}
 		return false;
 	}
@@ -632,7 +632,7 @@ public class Agent : MonoBehaviour
 		AnimatorMoveClient expr_7E = this.animatorMoveClient;
 		expr_7E.apply = (AnimatorMoveClient.AnimatorMoveApplyFunc)Delegate.Combine(expr_7E.apply, new AnimatorMoveClient.AnimatorMoveApplyFunc(this.JumpProcessMove));
 		this.VerticalSpeed = -2f;
-		this.animator.SetFloat("VerticalSpeed", this.VerticalSpeed);
+		//this.animator.SetFloat("VerticalSpeed", this.VerticalSpeed);
 		//this.animCtrl.ActiveAnimCrossFade("ZhiKong", false, 0.1f, true);
 		//this.locomotion.ZhiKongSpeedVec = Vector3.zero;
 		this.CanSecondJump = true;
@@ -643,18 +643,18 @@ public class Agent : MonoBehaviour
 
 	public virtual void OnJumpEvent(float JumpSpeedK)
 	{
-		AnimatorStateInfo currentAnimatorStateInfo = this.animator.GetCurrentAnimatorStateInfo(0);
-		if (currentAnimatorStateInfo.IsName("yidongState.TiaoQi"))
-		{
-			if (this.IsInSky)
-			{
-				return;
-			}
-		}
-		else if (currentAnimatorStateInfo.IsName("yidongState.TiaoQi") && !this.CanSecondJump)
-		{
-			return;
-		}
+		//AnimatorStateInfo currentAnimatorStateInfo = this.animator.GetCurrentAnimatorStateInfo(0);
+		//if (currentAnimatorStateInfo.IsName("yidongState.TiaoQi"))
+		//{
+		//	if (this.IsInSky)
+		//	{
+		//		return;
+		//	}
+		//}
+		//else if (currentAnimatorStateInfo.IsName("yidongState.TiaoQi") && !this.CanSecondJump)
+		//{
+		//	return;
+		//}
 		if (JumpSpeedK < 0.001f)
 		{
 			JumpSpeedK = 1f;
@@ -671,7 +671,7 @@ public class Agent : MonoBehaviour
 		expr_D0.apply = (AnimatorMoveClient.AnimatorMoveApplyFunc)Delegate.Remove(expr_D0.apply, new AnimatorMoveClient.AnimatorMoveApplyFunc(this.JumpProcessMove));
 		AnimatorMoveClient expr_F7 = this.animatorMoveClient;
 		expr_F7.apply = (AnimatorMoveClient.AnimatorMoveApplyFunc)Delegate.Combine(expr_F7.apply, new AnimatorMoveClient.AnimatorMoveApplyFunc(this.JumpProcessMove));
-		this.animator.SetFloat("VerticalSpeed", this.VerticalSpeed);
+		//this.animator.SetFloat("VerticalSpeed", this.VerticalSpeed);
 		//Vector3 curMoveDir = PlayerCtrlManager.GetCurMoveDir();
 		//this.locomotion.ZhiKongSpeedVec = curMoveDir.normalized;
 		//this.locomotion.ZhiKongSpeedVec.y = 0f;
@@ -706,10 +706,10 @@ public class Agent : MonoBehaviour
 
 	public virtual void JumpProcess()
 	{
-		float @float = this.animator.GetFloat("Height");
-		float float2 = this.animator.GetFloat("ColliderHeight");
-		this.charCtrller.height = this.orgColliderHeight * float2;
-		this.tempCtrlCenter.y = this.orgHeight + @float;
+		//float @float = this.animator.GetFloat("Height");
+		//float float2 = this.animator.GetFloat("ColliderHeight");
+		//this.charCtrller.height = this.orgColliderHeight * float2;
+		//this.tempCtrlCenter.y = this.orgHeight + @float;
 		this.charCtrller.center = this.tempCtrlCenter;
 	}
 
@@ -726,30 +726,30 @@ public class Agent : MonoBehaviour
 
 	private void JumpProcessMove()
 	{
-		AnimatorStateInfo currentAnimatorStateInfo = this.animator.GetCurrentAnimatorStateInfo(0);
-		AnimatorStateInfo nextAnimatorStateInfo = this.animator.GetNextAnimatorStateInfo(0);
+		//AnimatorStateInfo currentAnimatorStateInfo = this.animator.GetCurrentAnimatorStateInfo(0);
+		//AnimatorStateInfo nextAnimatorStateInfo = this.animator.GetNextAnimatorStateInfo(0);
 		float num = -Physics.gravity.y * this.gravityK;
 		if (!this.charCtrller.isGrounded)
 		{
-			this.animator.SetFloat("VerticalSpeed", this.VerticalSpeed);
+			//this.animator.SetFloat("VerticalSpeed", this.VerticalSpeed);
 		}
-		if (!this.IsInSky && currentAnimatorStateInfo.IsName("yidongState.ZhiKong"))
-		{
-			this.IsInSky = true;
-		}
-		if (((this.IsInSky && !this.charCtrller.isGrounded && !this.animator.GetBool("ZhuoDi")) || (this.IsInSky && this.charCtrller.isGrounded)) && !nextAnimatorStateInfo.IsName("yidongState.ZhuoDi") && !currentAnimatorStateInfo.IsName("yidongState.ZhuoDi"))
-		{
-			this.IsUsedInSky = true;
-			RaycastHit raycastHit;
-			//if (this.charCtrller.velocity.y < 0f && Physics.Raycast(base.transform.position, Vector3.down, out raycastHit, float.PositiveInfinity, Cutscene.MaskValue) && raycastHit.distance < this.ZhuoDiDistance)
-			//{
-			//	this.JumpFinish();
-			//}
-		}
-		if (this.IsUsedInSky && this.charCtrller.isGrounded && !currentAnimatorStateInfo.IsName("yidongState.TiaoQi4") && !nextAnimatorStateInfo.IsName("yidongState.TiaoQi4"))
-		{
-			this.JumpFinish();
-		}
+		//if (!this.IsInSky && currentAnimatorStateInfo.IsName("yidongState.ZhiKong"))
+		//{
+		//	this.IsInSky = true;
+		//}
+		//if (((this.IsInSky && !this.charCtrller.isGrounded && !this.animator.GetBool("ZhuoDi")) || (this.IsInSky && this.charCtrller.isGrounded)) && !nextAnimatorStateInfo.IsName("yidongState.ZhuoDi") && !currentAnimatorStateInfo.IsName("yidongState.ZhuoDi"))
+		//{
+		//	this.IsUsedInSky = true;
+		//	RaycastHit raycastHit;
+		//	//if (this.charCtrller.velocity.y < 0f && Physics.Raycast(base.transform.position, Vector3.down, out raycastHit, float.PositiveInfinity, Cutscene.MaskValue) && raycastHit.distance < this.ZhuoDiDistance)
+		//	//{
+		//	//	this.JumpFinish();
+		//	//}
+		//}
+		//if (this.IsUsedInSky && this.charCtrller.isGrounded && !currentAnimatorStateInfo.IsName("yidongState.TiaoQi4") && !nextAnimatorStateInfo.IsName("yidongState.TiaoQi4"))
+		//{
+		//	this.JumpFinish();
+		//}
 		Vector3 motion = base.transform.forward;
 		//SlideDown instance = SlideDown.Instance;
 		//if (instance != null && instance.enabled)
@@ -759,7 +759,7 @@ public class Agent : MonoBehaviour
 		//	this.locomotion.ZhiKongSpeedVec = normalized * magnitude * this.JumpMoveRatioWhenSlide;
 		//}
 		//motion = this.locomotion.ZhiKongSpeedVec * Time.deltaTime;
-		base.transform.rotation = this.animator.rootRotation;
+		//base.transform.rotation = this.animator.rootRotation;
 		this.VerticalSpeed += -num * Time.deltaTime;
 		motion.y = this.VerticalSpeed * Time.deltaTime;
 		if (this.charCtrller.Move(motion) == CollisionFlags.Below)
@@ -773,15 +773,15 @@ public class Agent : MonoBehaviour
 		this.IsUsedInSky = false;
 		this.IsInSky = false;
 		this.CanSlowByKeyUp = false;
-		bool @bool = this.animator.GetBool("Move");
-		if (@bool)
-		{
-			this.animator.CrossFade("ZhuoDi", this.CrossZhuoDiTime);
-		}
-		else
-		{
-			this.animator.CrossFade("ZhuoDi", 0.025f);
-		}
+		//bool @bool = this.animator.GetBool("Move");
+		//if (@bool)
+		//{
+		//	this.animator.CrossFade("ZhuoDi", this.CrossZhuoDiTime);
+		//}
+		//else
+		//{
+		//	this.animator.CrossFade("ZhuoDi", 0.025f);
+		//}
 		this.ZhuoDiTime = 100f;
 		//this.locomotion.ZhiKongSpeedVec = Vector3.zero;
 		if (this.bJumpStart)

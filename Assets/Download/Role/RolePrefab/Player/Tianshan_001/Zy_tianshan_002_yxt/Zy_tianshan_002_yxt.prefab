@@ -1176,6 +1176,7 @@ GameObject:
   - component: {fileID: 5072095640261416519}
   - component: {fileID: -8616195002245247210}
   - component: {fileID: 9130334115667961214}
+  - component: {fileID: -4063222292588238470}
   m_Layer: 0
   m_Name: Zy_tianshan_002_yxt
   m_TagString: Untagged
@@ -1283,3 +1284,19 @@ MonoBehaviour:
   SlowDegree: 0.68
   JumpMoveRatioWhenSlide: 0.3
   CrossZhuoDiTime: 0.08
+--- !u!111 &-4063222292588238470
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100070}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 7a928ec099ef32548bf5ae4d312477d5, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 7a928ec099ef32548bf5ae4d312477d5, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

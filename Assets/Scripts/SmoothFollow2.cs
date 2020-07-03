@@ -70,7 +70,9 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 
 	public float ReturnSpeed = 2f;
 
-	public float CameraRadius = 0.13f;
+    private bool bUseLeftReturn;
+
+    public float CameraRadius = 0.13f;
 
 	public static float CameraRadiusDefault = 0.16f;
 
@@ -344,25 +346,27 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
                 this.GetHV();
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (this.bUseLeftReturn)//左键旋转会返回
             {
-                if (!this.bNeedReturn)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    this.lastAngleH = this.CamAngleH;
-                }
-                this.bNeedReturn = false;
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                this.bNeedReturn = true;
-            }
-
-            if (this.bNeedReturn)
-            {
-                this.CamAngleH = Mathf.LerpAngle(this.CamAngleH, this.lastAngleH, Time.deltaTime * this.ReturnSpeed);
-                if (Mathf.Abs(this.CamAngleH - this.lastAngleH) < 0.5f)
-                {
+                    if (!this.bNeedReturn)
+                    {
+                        this.lastAngleH = this.CamAngleH;
+                    }
                     this.bNeedReturn = false;
+                }
+                else if (Input.GetMouseButtonUp(0))
+                {
+                    this.bNeedReturn = true;
+                }
+                if (this.bNeedReturn)
+                {
+                    this.CamAngleH = Mathf.LerpAngle(this.CamAngleH, this.lastAngleH, Time.deltaTime * this.ReturnSpeed);
+                    if (Mathf.Abs(this.CamAngleH - this.lastAngleH) < 0.5f)
+                    {
+                        this.bNeedReturn = false;
+                    }
                 }
             }
 
