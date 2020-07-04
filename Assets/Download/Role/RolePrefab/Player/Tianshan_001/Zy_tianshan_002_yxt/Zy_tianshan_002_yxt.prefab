@@ -1177,6 +1177,7 @@ GameObject:
   - component: {fileID: -8616195002245247210}
   - component: {fileID: 9130334115667961214}
   - component: {fileID: -4063222292588238470}
+  - component: {fileID: -4085867525628788377}
   m_Layer: 0
   m_Name: Zy_tianshan_002_yxt
   m_TagString: Untagged
@@ -1300,3 +1301,23 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &-4085867525628788377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c389c9098225f7c469ba209cb9d0b04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityK: 1.5
+  playerAnimType: 1
+  m_AnguarSpeedDampTime: 0.2
+  m_DirectionResponseTime: 0.5
+  ZhiKongSpeedVec: {x: 0, y: 0, z: 0}
+  ZhiKongMag: 0
+  firstShang: 0
+  RotSpeed: 6

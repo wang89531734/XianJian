@@ -621,7 +621,6 @@ public class PlayerCtrlManager
 
             if (dir != Vector3.zero)
             {
-                UnityEngine.Debug.Log("执行dir=" + dir);
                 //if (!animator.GetBool(PlayerCtrlManager.MoveID))
                 //{
                 //    animator.SetBool(PlayerCtrlManager.MoveID, true);
@@ -642,35 +641,36 @@ public class PlayerCtrlManager
                 }
 
                 vector2.y = 0f;
-                //PlayerCtrlManager.angle = Vector3.Angle(Vector3.forward, vector2);
-                //PlayerCtrlManager.cross = Vector3.Cross(Vector3.forward, vector2);
-                //if (PlayerCtrlManager.cross.y < -0.001f)
-                //{
-                //    PlayerCtrlManager.angle = 360f - PlayerCtrlManager.angle;
-                //}
-                //PlayerCtrlManager.referentialShift = Quaternion.AngleAxis(PlayerCtrlManager.angle, Vector3.up);
-                //PlayerCtrlManager.moveDirection = PlayerCtrlManager.referentialShift * dir;
-                //PlayerCtrlManager.moveDirection.y = 0f;
-                //if (!PlayerCtrlManager.agentObj.IsInSky)
-                //{
-                //    //float num3 = Vector3.Angle(forward, PlayerCtrlManager.moveDirection);
-                //    PlayerCtrlManager.speed = Mathf.Lerp(PlayerCtrlManager.speed, PlayerCtrlManager.agentObj.CurSpeed, Time.deltaTime * PlayerCtrlManager.agentObj.dampSpeed);
-                //    float num4 = PlayerCtrlManager.speed;
-                //    //if (PlayerCtrlManager.UseSunddenlyTurn && (!InputManager.GetKey(KEY_ACTION.MOUSE_RIGHT, false) || PlayerCtrlManager.agentObj.CurSpeed > PlayerCtrlManager.agentObj.WalkSpeed) && num3 > 135f && !PlayerCtrlManager.agentObj.IsInSky)
-                //    //{
-                //    //    PlayerCtrlManager.agentObj.transform.forward = PlayerCtrlManager.moveDirection;
-                //    ////    num3 = 0f;
-                //    //}
-                //    //if (PlayerCtrlManager.agentObj.CurSpeed <= PlayerCtrlManager.agentObj.WalkSpeed && InputManager.GetKey(KEY_ACTION.MOUSE_RIGHT, false) && num3 > 100f && num4 > 0f)
-                //    //{
-                //    //    num4 *= -1f;
-                //    //}
-                //    //if (Vector3.Cross(forward, PlayerCtrlManager.moveDirection).y < 0f)
-                //    //{
-                //    //    num3 *= -1f;
-                //    //}
-                //    //locomotion.Do(num4, num3, PlayerCtrlManager.agentObj.transform, PlayerCtrlManager.moveDirection);
-                //}
+                PlayerCtrlManager.angle = Vector3.Angle(Vector3.forward, vector2);
+                PlayerCtrlManager.cross = Vector3.Cross(Vector3.forward, vector2);
+                if (PlayerCtrlManager.cross.y < -0.001f)
+                {
+                    PlayerCtrlManager.angle = 360f - PlayerCtrlManager.angle;
+                }
+                PlayerCtrlManager.referentialShift = Quaternion.AngleAxis(PlayerCtrlManager.angle, Vector3.up);
+                PlayerCtrlManager.moveDirection = PlayerCtrlManager.referentialShift * dir;
+                PlayerCtrlManager.moveDirection.y = 0f;
+                if (!PlayerCtrlManager.agentObj.IsInSky)
+                {
+                    UnityEngine.Debug.Log("IsInSky=" + dir);
+                    float num3 = Vector3.Angle(forward, PlayerCtrlManager.moveDirection);
+                    PlayerCtrlManager.speed = Mathf.Lerp(PlayerCtrlManager.speed, PlayerCtrlManager.agentObj.CurSpeed, Time.deltaTime * PlayerCtrlManager.agentObj.dampSpeed);
+                    float num4 = PlayerCtrlManager.speed;
+                    if (PlayerCtrlManager.UseSunddenlyTurn && (!InputManager.GetKey(KEY_ACTION.MOUSE_RIGHT, false) || PlayerCtrlManager.agentObj.CurSpeed > PlayerCtrlManager.agentObj.WalkSpeed) && num3 > 135f && !PlayerCtrlManager.agentObj.IsInSky)
+                    {
+                        PlayerCtrlManager.agentObj.transform.forward = PlayerCtrlManager.moveDirection;
+                        num3 = 0f;
+                    }
+                    if (PlayerCtrlManager.agentObj.CurSpeed <= PlayerCtrlManager.agentObj.WalkSpeed && InputManager.GetKey(KEY_ACTION.MOUSE_RIGHT, false) && num3 > 100f && num4 > 0f)
+                    {
+                        num4 *= -1f;
+                    }
+                    if (Vector3.Cross(forward, PlayerCtrlManager.moveDirection).y < 0f)
+                    {
+                        num3 *= -1f;
+                    }
+                    locomotion.Do(num4, num3, PlayerCtrlManager.agentObj.transform, PlayerCtrlManager.moveDirection);
+                }
             }
             else
             {

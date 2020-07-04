@@ -169,7 +169,7 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
         }
         this.HasLoad = true;
         UnityEngine.Object temp = null;
-        GameEntry.Data.RoleDataManager.CreatePlayerByJobId(10001, (Transform trans) =>
+        GameEntry.Data.RoleDataManager.CreatePlayerByJobId(10002, (Transform trans) =>
         {
             this.isPrefab = false;
             temp = trans.gameObject;
