@@ -254,9 +254,17 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 		{
 			return;
 		}
-        //this.curY = this.target.position.y;
+
+        //Transform transform = this.targetRoot;
+        //Animator componentInChildren = this.targetRoot.GetComponentInChildren<Animator>();
+        //if (componentInChildren != null)
+        //{
+        //    transform = componentInChildren.transform;
+        //}
+     
         this.baseHeight = 1.56f;
         this.target = this.targetRoot;
+        this.curY = this.target.position.y;
         base.GetComponent<Camera>().fieldOfView = this.fieldOfView;
         base.GetComponent<Camera>().nearClipPlane = 0.1f;
         this.CamPos = base.transform.position;

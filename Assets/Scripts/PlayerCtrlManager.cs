@@ -115,12 +115,12 @@ public class PlayerCtrlManager
                     if (PlayerCtrlManager.agentObj != null)
                     {
                         PlayerCtrlManager.agentObj.curCtrlMode = ControlMode.ControlByPlayer;
-                        //PlayerCtrlManager.agentObj.IsInSky = false;
+                        PlayerCtrlManager.agentObj.IsInSky = false;
                     }
                 }
                 else if (PlayerCtrlManager.agentObj != null && PlayerCtrlManager.agentObj.animator != null)
                 {
-                    //PlayerCtrlManager.agentObj.animator.SetBool("YuanDiZou", false);
+                    PlayerCtrlManager.agentObj.animator.SetBool("YuanDiZou", false);
                 }
             }
         }
@@ -194,25 +194,25 @@ public class PlayerCtrlManager
     private static void SetAgentProperty(Agent agent)
     {
         agent.curCtrlMode = ControlMode.ControlByPlayer;
-        //if (agent.charCtrller == null)
-        //{
-        //    agent.charCtrller = agent.GetComponent<CharacterController>();
-        //}
-        //if (agent.charCtrller != null && !agent.charCtrller.enabled)
-        //{
-        //    agent.charCtrller.enabled = true;
-        //    agent.charCtrller.detectCollisions = true;
-        //}
+        if (agent.charCtrller == null)
+        {
+            agent.charCtrller = agent.GetComponent<CharacterController>();
+        }
+        if (agent.charCtrller != null && !agent.charCtrller.enabled)
+        {
+            agent.charCtrller.enabled = true;
+            agent.charCtrller.detectCollisions = true;
+        }
         //agent.gameObject.layer = 8;
-        //Animator animator = agent.animator;
-        //if (animator != null)
-        //{
-        //    //animator.Play("ZhanLi");
-        //    //animator.SetFloat("Speed", 0f);
-        //    //animator.SetBool("Move", false);
-        //    //animator.speed = 1f;
-        //}
-        //agent.IsJump = false;
+        Animator animator = agent.animator;
+        if (animator != null)
+        {
+            animator.Play("ZhanLi");
+            animator.SetFloat("Speed", 0f);
+            animator.SetBool("Move", false);
+            animator.speed = 1f;
+        }
+        agent.IsJump = false;
         SmoothFollow2 orAddComponent = PalMain.MainCamera.GetOrAddComponent<SmoothFollow2>();
         orAddComponent.Init(agent.gameObject);
         //if (agent.name == "YueJinChao" && animator != null)
@@ -231,11 +231,6 @@ public class PlayerCtrlManager
         //    }
         //}
     }
-
-    //	public static void Reset()
-    //	{
-    //		PlayerCtrlManager.m_agentObj = null;
-    //	}
 
     //	public static void SetCtrlModel(GameObject go)
     //	{
@@ -294,7 +289,8 @@ public class PlayerCtrlManager
         GameEntry.Event.CommonEvent.AddEventListener(SysEventId.EnterProcedureWorldMap, OnInit);
         GameEntry.Event.CommonEvent.AddEventListener(SysEventId.LeaveProcedureWorldMap, OnExit);
         PalMain.GameMain.updateHandles += new PalMain.void_func_float_float(PlayerCtrlManager.Update);
-        //PlayerCtrlManager.MoveID = Animator.StringToHash("Move");
+        PlayerCtrlManager.MoveID = Animator.StringToHash("Move");
+        UnityEngine.Debug.Log("执行OnInit"+ MoveID);
         GameEntry.Event.CommonEvent.AddEventListener(SysEventId.OnSceneLoaded, LoadOver);
         //PlayerCtrlManager.maskValue = 393220;
         //PlayerCtrlManager.maskValue = ~PlayerCtrlManager.maskValue;
@@ -307,16 +303,15 @@ public class PlayerCtrlManager
 
         if (PlayerCtrlManager.agentObj != null)
         {
-            UnityEngine.Debug.Log("执行OnInit");
             PlayerCtrlManager.SetAgentProperty(PlayerCtrlManager.agentObj);
         }
-        //SmoothFollow2[] componentsInChildren = PalMain.MainCamera.GetComponentsInChildren<SmoothFollow2>(true);
-        //for (int i = 0; i < componentsInChildren.Length; i++)
-        //{
-        //    componentsInChildren[i].enabled = true;
-        //}
-        //PlayerCtrlManager.bCanTab = true;
-        //PlayerCtrlManager.bCtrlOther = false;
+        SmoothFollow2[] componentsInChildren = PalMain.MainCamera.GetComponentsInChildren<SmoothFollow2>(true);
+        for (int i = 0; i < componentsInChildren.Length; i++)
+        {
+            componentsInChildren[i].enabled = true;
+        }
+        PlayerCtrlManager.bCanTab = true;
+        PlayerCtrlManager.bCtrlOther = false;
     }
 
     public static void OnExit(object userData)
@@ -391,15 +386,12 @@ public class PlayerCtrlManager
 
     private static void Update(float curTime, float deltaTime)
     {
-        if (!PlayerCtrlManager.bControl || PlayerCtrlManager.agentObj == null)
+        if (!PlayerCtrlManager.bControl || PlayerCtrlManager.agentObj == null || !PlayerCtrlManager.agentObj.animator)
         {
             return;
         }
-        //if (!PlayerCtrlManager.bControl || PlayerCtrlManager.agentObj == null || !PlayerCtrlManager.agentObj.animator)
-        //{
-        //    return;
-        //}
 
+        Animator animator = PlayerCtrlManager.agentObj.animator;
         Locomotion locomotion = PlayerCtrlManager.agentObj.locomotion;
         if (InputManager.GetKeyDown(KEY_ACTION.MOUSE_RIGHT, false) || InputManager.GetKeyUp(KEY_ACTION.MOUSE_RIGHT, false) || InputManager.GetKeyDown(KEY_ACTION.CAMERA_LEFT, false) || InputManager.GetKeyDown(KEY_ACTION.CAMERA_RIGHT, false) || InputManager.GetKeyUp(KEY_ACTION.CAMERA_LEFT, false) || InputManager.GetKeyUp(KEY_ACTION.CAMERA_RIGHT, false))
         {
@@ -408,7 +400,7 @@ public class PlayerCtrlManager
 
         if (Input.anyKeyDown)
         {        
-            //if (PlayerCtrlManager.CanChangeState && InputManager.GetKeyDown(KEY_ACTION.CHAGNESTATE, false))
+            //if (PlayerCtrlManager.CanChangeState && InputManager.GetKeyDown(KEY_ACTION.CHAGNESTATE, false))//疑似改变状态
             //{
             //    //AnimCtrlScript component = animator.GetComponent<AnimCtrlScript>();
             //    //if (component != null)
