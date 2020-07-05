@@ -571,15 +571,16 @@ public class Agent : MonoBehaviour
 		{
 			this.Fall();
 		}
-		//if (this.IsInSky && this.locomotion.ZhiKongSpeedVec != Vector3.zero)
-		//{
-		//	float num = Vector3.Angle(base.transform.forward, this.locomotion.ZhiKongSpeedVec);
-		//	if (num > 1f)
-		//	{
-		//		base.transform.forward = Vector3.Lerp(base.transform.forward, this.locomotion.ZhiKongSpeedVec, this.JumpTurnBodySpeed * Time.deltaTime);
-		//	}
-		//}
-	}
+
+        if (this.IsInSky && this.locomotion.ZhiKongSpeedVec != Vector3.zero)
+        {
+            float num = Vector3.Angle(base.transform.forward, this.locomotion.ZhiKongSpeedVec);
+            if (num > 1f)
+            {
+                base.transform.forward = Vector3.Lerp(base.transform.forward, this.locomotion.ZhiKongSpeedVec, this.JumpTurnBodySpeed * Time.deltaTime);
+            }
+        }
+    }
 
 	//[DebuggerHidden]
 	//private IEnumerator TurnBodyOnJump()

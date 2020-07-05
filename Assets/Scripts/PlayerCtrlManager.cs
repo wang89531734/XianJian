@@ -85,6 +85,9 @@ public class PlayerCtrlManager
 
     private static Vector3 tempDirection = Vector3.zero;
 
+    /// <summary>
+    /// 角度
+    /// </summary>
     private static float angle = 0f;
 
     private static Vector3 cross = Vector3.up;
@@ -290,7 +293,6 @@ public class PlayerCtrlManager
         GameEntry.Event.CommonEvent.AddEventListener(SysEventId.LeaveProcedureWorldMap, OnExit);
         PalMain.GameMain.updateHandles += new PalMain.void_func_float_float(PlayerCtrlManager.Update);
         PlayerCtrlManager.MoveID = Animator.StringToHash("Move");
-        UnityEngine.Debug.Log("执行OnInit"+ MoveID);
         GameEntry.Event.CommonEvent.AddEventListener(SysEventId.OnSceneLoaded, LoadOver);
         //PlayerCtrlManager.maskValue = 393220;
         //PlayerCtrlManager.maskValue = ~PlayerCtrlManager.maskValue;
@@ -399,8 +401,9 @@ public class PlayerCtrlManager
         }
 
         if (Input.anyKeyDown)
-        {        
-            //if (PlayerCtrlManager.CanChangeState && InputManager.GetKeyDown(KEY_ACTION.CHAGNESTATE, false))//疑似改变状态
+        {
+            //疑似改变状态
+            //if (PlayerCtrlManager.CanChangeState && InputManager.GetKeyDown(KEY_ACTION.CHAGNESTATE, false))
             //{
             //    //AnimCtrlScript component = animator.GetComponent<AnimCtrlScript>();
             //    //if (component != null)
@@ -409,11 +412,13 @@ public class PlayerCtrlManager
             //    //}
             //}
 
+            //改变角色
             //if (PlayerCtrlManager.bCanTab && InputManager.GetKeyDown(KEY_ACTION.TAB, false) && GameStateManager.CurGameState != GameState.Battle && (PlayerCtrlManager.charCtrler.isGrounded || Physics.Raycast(PlayerCtrlManager.agentObj.transform.position, Vector3.down, 0.07f)) && !PlayerCtrlManager.agentObj.IsJump)
             //{
             //    PlayersManager.TabPlayer();
             //}
 
+            //疑似调查
             if (InputManager.GetKeyDown(KEY_ACTION.ACTION, false) && !PlayerCtrlManager.agentObj.IsJump)
             {
                 //    PalNPC palNPC = PlayerCtrlManager.agentObj.palNPC;
@@ -459,6 +464,7 @@ public class PlayerCtrlManager
             }
         }
 
+        //疑似跳跃
         //if (InputManager.GetKeyDown(KEY_ACTION.JUMP, false) && PlayerCtrlManager.ProcessSpaceKey != null)
         //{
         //    SlideDown instance = SlideDown.Instance;
@@ -494,7 +500,6 @@ public class PlayerCtrlManager
 
         if (!InputManager.GetKey(KEY_ACTION.WALK, false))
         {
-            //UnityEngine.Debug.Log("执行");
             //if (PlayerCtrlManager.agentObj.CurSpeed < PlayerCtrlManager.agentObj.RunSpeed - 0.01f)
             //{
             //    PlayerCtrlManager.agentObj.CurSpeed = Mathf.Lerp(PlayerCtrlManager.agentObj.CurSpeed, PlayerCtrlManager.agentObj.RunSpeed, PlayerCtrlManager.agentObj.dampSpeed * Time.deltaTime);
@@ -586,7 +591,7 @@ public class PlayerCtrlManager
 
         if (PlayerCtrlManager.CurControlModel == PlayerCtrlManager.PlayerControlModel.Keyboard || PlayerCtrlManager.CurControlModel == PlayerCtrlManager.PlayerControlModel.Mouse2 || PlayerCtrlManager.CurControlModel == PlayerCtrlManager.PlayerControlModel.Mouse1 || PlayerCtrlManager.CurControlModel == PlayerCtrlManager.PlayerControlModel.Auto)
         {
-            Vector3 forward = PlayerCtrlManager.agentObj.transform.forward;
+            Vector3 forward = animator.transform.forward;
             forward.y = 0f;
             Vector3 dir = InputManager.GetDir();
             if (PlayerCtrlManager.CurControlModel == PlayerCtrlManager.PlayerControlModel.Auto)
@@ -613,25 +618,22 @@ public class PlayerCtrlManager
 
             if (dir != Vector3.zero)
             {
-                //if (!animator.GetBool(PlayerCtrlManager.MoveID))
-                //{
-                //    animator.SetBool(PlayerCtrlManager.MoveID, true);
-                //}
+                if (!animator.GetBool(PlayerCtrlManager.MoveID))
+                {
+                    animator.SetBool(PlayerCtrlManager.MoveID, true);
+                }
                 dir.Normalize();
-                UnityEngine.Debug.Log("执行dir=" + dir);
                 Vector3 vector2;
-
                 if (InputManager.GetKey(KEY_ACTION.MOUSE_RIGHT, false) || InputManager.GetKey(KEY_ACTION.CAMERA_LEFT, false) || InputManager.GetKey(KEY_ACTION.CAMERA_RIGHT, false))
                 {
                     vector2 = PlayerCtrlManager.MainCam.forward;
-                    //animator.SetBool("YuanDiZou", false);
+                    animator.SetBool("YuanDiZou", false);
                     PlayerCtrlManager.RRoundUp = true;
                 }
                 else
                 {
                     vector2 = PlayerCtrlManager.LastForward;
                 }
-
                 vector2.y = 0f;
                 PlayerCtrlManager.angle = Vector3.Angle(Vector3.forward, vector2);
                 PlayerCtrlManager.cross = Vector3.Cross(Vector3.forward, vector2);
@@ -644,7 +646,6 @@ public class PlayerCtrlManager
                 PlayerCtrlManager.moveDirection.y = 0f;
                 if (!PlayerCtrlManager.agentObj.IsInSky)
                 {
-                    UnityEngine.Debug.Log("IsInSky=" + dir);
                     float num3 = Vector3.Angle(forward, PlayerCtrlManager.moveDirection);
                     PlayerCtrlManager.speed = Mathf.Lerp(PlayerCtrlManager.speed, PlayerCtrlManager.agentObj.CurSpeed, Time.deltaTime * PlayerCtrlManager.agentObj.dampSpeed);
                     float num4 = PlayerCtrlManager.speed;
@@ -670,106 +671,112 @@ public class PlayerCtrlManager
             }
         }
 
-        //if (PlayerCtrlManager.CurControlModel == PlayerCtrlManager.PlayerControlModel.None)
-        //{
-        //    float @float = animator.GetFloat("Speed");
-        //    if (Mathf.Abs(@float) > 0.01f)
-        //    {
-        //        PlayerCtrlManager.speed = 0f;
-        //        locomotion.Do(0f, 0f, PlayerCtrlManager.agentObj.transform, PlayerCtrlManager.moveDirection);
-        //    }
-        //    else
-        //    {
-        //        animator.SetFloat("Speed", 0f);
-        //        bool @bool = animator.GetBool(PlayerCtrlManager.MoveID);
-        //        if (@bool)
-        //        {
-        //            animator.SetBool(PlayerCtrlManager.MoveID, false);
-        //        }
-        //    }
-        //    if ((InputManager.GetKey(KEY_ACTION.MOUSE_RIGHT, false) || InputManager.GetKey(KEY_ACTION.CAMERA_LEFT, false) || InputManager.GetKey(KEY_ACTION.CAMERA_RIGHT, false)) && !PlayerCtrlManager.agentObj.IsJump)
-        //    {
-        //        if (PlayerCtrlManager.RRoundUp)
-        //        {
-        //            PlayerCtrlManager.RRoundUp = false;
-        //        }
-        //        PlayerCtrlManager.TempForward = PlayerCtrlManager.MainCam.forward;
-        //        PlayerCtrlManager.TempForward.y = 0f;
-        //        Vector3 forward2 = PlayerCtrlManager.agentObj.transform.forward;
-        //        forward2.y = 0f;
-        //        float num5 = Vector3.Angle(PlayerCtrlManager.TempForward, forward2);
-        //        if (num5 > 0.4f)
-        //        {
-        //            animator.SetBool("YuanDiZou", true);
-        //            num5 = ((num5 <= 100f) ? num5 : 100f);
-        //            PlayerCtrlManager.lookAtWeight = num5 / 100f;
-        //            if (Vector3.Cross(forward2, PlayerCtrlManager.TempForward).y < 0f)
-        //            {
-        //                num5 = -num5;
-        //            }
-        //            Transform transform3 = PlayerCtrlManager.agentObj.transform;
-        //            Transform transform4 = GameObjectPath.GetEyeObjs(transform3)[0];
-        //            float num6 = transform4.position.y - transform3.position.y;
-        //            Quaternion rotation = Quaternion.AngleAxis(num5, transform3.up);
-        //            Vector3 target = rotation * transform3.forward * 10f + transform3.position;
-        //            target.y = transform3.position.y + num6;
-        //            component4.target = target;
-        //        }
-        //        else if (num5 < 0.01f)
-        //        {
-        //            animator.SetBool("YuanDiZou", false);
-        //            PlayerCtrlManager.RRoundUp = true;
-        //        }
-        //        PlayerCtrlManager.agentObj.transform.forward = Vector3.RotateTowards(PlayerCtrlManager.agentObj.transform.forward, PlayerCtrlManager.TempForward, deltaTime * locomotion.ORotSpeed, deltaTime * locomotion.ORotSpeed);
-        //    }
-        //    else if (!PlayerCtrlManager.agentObj.IsInSky)
-        //    {
-        //        if (PlayerCtrlManager.XiuXianDelay <= 0f)
-        //        {
-        //            float layerWeight = animator.GetLayerWeight(1);
-        //            if (layerWeight <= 0f)
-        //            {
-        //                animator.CrossFade("yidongState.XiuXian", 0.05f);
-        //            }
-        //            PlayerCtrlManager.XiuXianDelay = UnityEngine.Random.Range(10f, 25f);
-        //        }
-        //        else if (GameStateManager.CurGameState == GameState.Normal)
-        //        {
-        //            PlayerCtrlManager.XiuXianDelay -= Time.deltaTime;
-        //        }
-        //    }
-        //    if (InputManager.GetKeyUp(KEY_ACTION.MOUSE_RIGHT, false) || InputManager.GetKeyUp(KEY_ACTION.CAMERA_LEFT, false) || InputManager.GetKeyUp(KEY_ACTION.CAMERA_RIGHT, false))
-        //    {
-        //        animator.SetBool("YuanDiZou", false);
-        //        PlayerCtrlManager.RRoundUp = true;
-        //    }
-        //    if (PlayerCtrlManager.RRoundUp)
-        //    {
-        //        PlayerCtrlManager.lookAtWeight -= deltaTime;
-        //        if (PlayerCtrlManager.lookAtWeight <= 0f)
-        //        {
-        //            PlayerCtrlManager.RRoundUp = false;
-        //            PlayerCtrlManager.lookAtWeight = 0f;
-        //            component4.lookAtWeight = 0f;
-        //        }
-        //    }
-        //}
-        //else
-        //{
-        //    PlayerCtrlManager.lookAtWeight = 0f;
-        //    component4.lookAtWeight = 0f;
-        //    if (PlayerCtrlManager.XiuXianDelay <= 0f)
-        //    {
-        //        PlayerCtrlManager.XiuXianDelay = UnityEngine.Random.Range(10f, 25f);
-        //    }
-        //}
+        if (PlayerCtrlManager.CurControlModel == PlayerCtrlManager.PlayerControlModel.None)
+        {
+            //float @float = animator.GetFloat("Speed");
+            //if (Mathf.Abs(@float) > 0.01f)
+            //{
+            //    PlayerCtrlManager.speed = 0f;
+            //    locomotion.Do(0f, 0f, PlayerCtrlManager.agentObj.transform, PlayerCtrlManager.moveDirection);
+            //}
+            //else
+            //{
+            //    animator.SetFloat("Speed", 0f);
+            //    bool @bool = animator.GetBool(PlayerCtrlManager.MoveID);
+            //    if (@bool)
+            //    {
+            //        animator.SetBool(PlayerCtrlManager.MoveID, false);
+            //    }
+            //}
+
+            if ((InputManager.GetKey(KEY_ACTION.MOUSE_RIGHT, false) || InputManager.GetKey(KEY_ACTION.CAMERA_LEFT, false) || InputManager.GetKey(KEY_ACTION.CAMERA_RIGHT, false)) && !PlayerCtrlManager.agentObj.IsJump)
+            {
+                if (PlayerCtrlManager.RRoundUp)
+                {
+                    PlayerCtrlManager.RRoundUp = false;
+                }
+                PlayerCtrlManager.TempForward = PlayerCtrlManager.MainCam.forward;
+                PlayerCtrlManager.TempForward.y = 0f;
+                Vector3 forward2 = PlayerCtrlManager.agentObj.transform.forward;
+                forward2.y = 0f;
+                float num5 = Vector3.Angle(PlayerCtrlManager.TempForward, forward2);
+                if (num5 > 0.4f)
+                {
+                    animator.SetBool("YuanDiZou", true);
+                    num5 = ((num5 <= 100f) ? num5 : 100f);
+                    PlayerCtrlManager.lookAtWeight = num5 / 100f;
+                    if (Vector3.Cross(forward2, PlayerCtrlManager.TempForward).y < 0f)
+                    {
+                        num5 = -num5;
+                    }
+                    Transform transform3 = PlayerCtrlManager.agentObj.transform;
+                    //Transform transform4 = GameObjectPath.GetEyeObjs(transform3)[0];
+                    //float num6 = transform4.position.y - transform3.position.y;
+                    Quaternion rotation = Quaternion.AngleAxis(num5, transform3.up);
+                    Vector3 target = rotation * transform3.forward * 10f + transform3.position;
+                    target.y = transform3.position.y;
+                    //target.y = transform3.position.y + num6;
+                    //component4.target = target;
+                }
+                else if (num5 < 0.01f)
+                {
+                    animator.SetBool("YuanDiZou", false);
+                    PlayerCtrlManager.RRoundUp = true;
+                }
+                PlayerCtrlManager.agentObj.transform.forward = Vector3.RotateTowards(PlayerCtrlManager.agentObj.transform.forward, PlayerCtrlManager.TempForward, deltaTime * locomotion.ORotSpeed, deltaTime * locomotion.ORotSpeed);
+            }
+            else if (!PlayerCtrlManager.agentObj.IsInSky)
+            {
+                //if (PlayerCtrlManager.XiuXianDelay <= 0f)
+                //{
+                //    float layerWeight = animator.GetLayerWeight(1);
+                //    if (layerWeight <= 0f)
+                //    {
+                //        animator.CrossFade("yidongState.XiuXian", 0.05f);
+                //    }
+                //    PlayerCtrlManager.XiuXianDelay = UnityEngine.Random.Range(10f, 25f);
+                //}
+                //else if (GameStateManager.CurGameState == GameState.Normal)
+                //{
+                //    PlayerCtrlManager.XiuXianDelay -= Time.deltaTime;
+                //}
+            }
+
+            //if (InputManager.GetKeyUp(KEY_ACTION.MOUSE_RIGHT, false) || InputManager.GetKeyUp(KEY_ACTION.CAMERA_LEFT, false) || InputManager.GetKeyUp(KEY_ACTION.CAMERA_RIGHT, false))
+            //{
+            //    animator.SetBool("YuanDiZou", false);
+            //    PlayerCtrlManager.RRoundUp = true;
+            //}
+
+            //if (PlayerCtrlManager.RRoundUp)
+            //{
+            //    PlayerCtrlManager.lookAtWeight -= deltaTime;
+            //    if (PlayerCtrlManager.lookAtWeight <= 0f)
+            //    {
+            //        PlayerCtrlManager.RRoundUp = false;
+            //        PlayerCtrlManager.lookAtWeight = 0f;
+            //        component4.lookAtWeight = 0f;
+            //    }
+            //}
+        }
+        else
+        {
+            PlayerCtrlManager.lookAtWeight = 0f;
+            //component4.lookAtWeight = 0f;
+            if (PlayerCtrlManager.XiuXianDelay <= 0f)
+            {
+                PlayerCtrlManager.XiuXianDelay = UnityEngine.Random.Range(10f, 25f);
+            }
+        }
+
         //if (PlayerCtrlManager.lookAtWeight > 0f)
         //{
         //    component4.lookAtWeight = PlayerCtrlManager.lookAtWeight;
         //}
+
         //if (GameStateManager.CurGameState == GameState.Normal)
         //{
-        //    PlayerCtrlManager.agentObj.AgentUpdate();
+        PlayerCtrlManager.agentObj.AgentUpdate();
         //    if (PlayerCtrlManager.agentObj.IsInSky)
         //    {
         //        PlayerCtrlManager.CheckReset();
