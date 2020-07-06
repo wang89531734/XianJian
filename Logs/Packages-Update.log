@@ -58,3 +58,14 @@ The following packages were 已更新:
   com.unity.timeline 从版本 1.1.0 到 1.2.6
 The following packages were 已移除:
   com.unity.package-manager-ui@2.2.0
+
+=== Mon Jul  6 21:51:55 2020
+
+Packages were changed.
+Update Mode: resetToDefaultDependencies
+
+The following packages were updated:
+  com.unity.timeline from version 1.2.6 to 1.2.14
+The following packages were removed:
+  com.unity.ext.nunit@1.0.0
+  com.unity.render-pipelines.universal@7.3.1
