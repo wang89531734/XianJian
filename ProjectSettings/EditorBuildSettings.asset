@@ -32,4 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Download/Scenes/GameScene_YuXi.unity
     guid: ca9ed2e1fcf7715489776176bb84e452
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 9b0dbe24cdc58cf48b7e89d871b784ed,
+      type: 2}
