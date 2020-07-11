@@ -3,7 +3,6 @@
 //创建时间：
 //备    注：
 //===================================================
-using SoftStar.Pal6;
 using System;
 using System.Collections;
 using System.Collections.Generic;
