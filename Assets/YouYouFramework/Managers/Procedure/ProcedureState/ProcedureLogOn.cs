@@ -16,7 +16,7 @@ namespace YouYou
             base.OnEnter();
             GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureLogOn");
             GameEntry.Event.CommonEvent.Dispatch(SysEventId.EnterProcedureLogOn);
-            PalMain.Instance.ReStart();
+            Debug.Log("加载主菜单UI");
             GameEntry.UI.OpenUIForm(101);
         }
 

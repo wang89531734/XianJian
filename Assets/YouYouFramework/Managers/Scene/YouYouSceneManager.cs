@@ -18,12 +18,12 @@ namespace YouYou
         /// <summary>
         /// 当前加载的场景编号
         /// </summary>
-        private int m_CurrLoadSceneId;
+        public int m_CurrLoadSceneId;
 
         /// <summary>
         /// 当前场景数据实体
         /// </summary>
-        private Sys_Scene? m_CurrSceneEntity;
+        public Sys_Scene? m_CurrSceneEntity;
 
         /// <summary>
         /// 当前场景明细

@@ -225,6 +225,15 @@ namespace YouYou
             get;
             private set;
         }
+
+        /// <summary>
+        /// 角色管理器
+        /// </summary>
+        public static RoleManager Role
+        {
+            get;
+            private set;
+        }
         #endregion
 
         #region InitManagers 初始化管理器
@@ -245,6 +254,7 @@ namespace YouYou
             Scene = new YouYouSceneManager();
             Resource = new AddressableManager();
             UI = new YouYouUIManager();
+            Role = new RoleManager();
 
             Logger.Init();
             Event.Init();
@@ -258,6 +268,7 @@ namespace YouYou
             Scene.Init();
             Resource.Init();
             UI.Init();
+            Role.Init();
 
             //进入第一个流程
             Procedure.ChangeState(ProcedureState.Preload);
