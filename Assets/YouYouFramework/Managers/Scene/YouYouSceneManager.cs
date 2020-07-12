@@ -96,6 +96,8 @@ namespace YouYou
                 return;
             }
 
+            GameEntry.Procedure.ChangeState(ProcedureState.ChangeScene);
+
             //停止BGM
             //GameEntry.Audio.StopBGM();
 

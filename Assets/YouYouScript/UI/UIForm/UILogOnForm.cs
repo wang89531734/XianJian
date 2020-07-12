@@ -17,27 +17,11 @@ public class UILogOnForm : UIFormBase
 
     public void OnNewGameBtn()
     {
-        //PalMain.GameDifficulty = 0;//设置游戏难度
-        //SaveManager.GameDifficulty = 0;
-        //HPMPDPProperty.StaticData.Reset();
-        //FightProperty.StaticData.Reset();
-        ////PalMain.backgroundAudio.ChangeBackMusicImmediate(null);
-        //this.AfterSetGameDifficulty_NewStart();
-        GameEntry.Scene.LoadScene(2, false, () =>
-        {
-            //level = ScenesManager.CurLoadedLevel;
-            //PlayerCtrlManager.OnLevelLoaded(level);
-            //PalMain.OnReadySpawn();
-            //EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Remove(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));
-            //EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Combine(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));
-            //EntityManager.OnLevelWasLoaded(level);
-            //OptionConfig.GetInstance().Use_OnLevelLoaded();
-            //OptionConfig.GetInstance().Use_CharacterEmission();
-            //MapWatch.Instance.SetMap();
-            GameEntry.Procedure.ChangeState(ProcedureState.WorldMap);
-        }); 
-        //PalMain.GameBeginTime = Time.fixedTime;
-        //PalMain.GameTotleTime = 0f;
+        base.StartCoroutine(DoTalk());
+        //GameEntry.Scene.LoadScene(2, false, () =>
+        //{
+        //    GameEntry.Procedure.ChangeState(ProcedureState.WorldMap);
+        //}); 
     }
 
     public void OnLoadBtn()
@@ -58,5 +42,33 @@ public class UILogOnForm : UIFormBase
     public void OnSystembackBtn()
     {
         //SystemPlane.SetActive(false);
+    }
+
+    public IEnumerator DoTalk()
+    {
+        //GameTalk.StartTalk(true);
+        //yield return base.StartCoroutine(GameTalk.WaitFadeTime(1f, 2f));
+        //GameTalk.AddItem(901, 3, false);
+        //GameTalk.AddItem(921, 3, false);
+        //GameTalk.AddMoney(200, false);
+        //GameTalk.FlagOFF(61);
+        //GameTalk.FlagOFF(62);
+        //GameTalk.FlagOFF(63);
+        //GameTalk.FlagOFF(64);
+        //GameObject listener = GameObject.Find("Menu Listener");
+        //if (listener != null && listener.GetComponent<AudioListener>() != null)
+        //{
+        //    listener.GetComponent<AudioListener>().enabled = false;
+        //}
+        //if (!GameTalk.GetFlag(1001))
+        //{
+        //    GameTalk.FlagON(1001);
+        //}
+        //GameTalk.StartTalk(false);
+        //GameTalk.HideAllNpc(1);
+        //GameTalk.PlayStory(100, "ME0000");
+        //yield return base.StartCoroutine(GameTalk.IsPlayStoryEnd());
+        yield return null;
+        yield break;
     }
 }
