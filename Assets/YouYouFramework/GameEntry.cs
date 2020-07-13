@@ -234,6 +234,24 @@ namespace YouYou
             get;
             private set;
         }
+
+        /// <summary>
+        /// GameTalk管理器
+        /// </summary>
+        public static GameTalk GameTalk
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// GameTalk管理器
+        /// </summary>
+        public static ExploreSystem ExploreSystem
+        {
+            get;
+            private set;
+        }
         #endregion
 
         #region InitManagers 初始化管理器
@@ -255,6 +273,8 @@ namespace YouYou
             Resource = new AddressableManager();
             UI = new YouYouUIManager();
             Role = new RoleManager();
+            GameTalk = new GameTalk();
+            ExploreSystem = new ExploreSystem();
 
             Logger.Init();
             Event.Init();
@@ -269,7 +289,8 @@ namespace YouYou
             Resource.Init();
             UI.Init();
             Role.Init();
-
+            GameTalk.Init();
+            ExploreSystem.Init();
             //进入第一个流程
             Procedure.ChangeState(ProcedureState.Preload);
         }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4828424870629250840}
   - component: {fileID: 7697018035714872915}
   - component: {fileID: 8686399080009569391}
+  - component: {fileID: 8347746077149852062}
   m_Layer: 0
   m_Name: RoleCtrl
   m_TagString: Untagged
@@ -62,3 +63,124 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8347746077149852062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6737525416784522626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bb4fa5a7af5c24080ad9aefd5e619a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MoveSpeed: 1
+  m_MotionID: 0
+  m_TalkMotionID: 0
+  m_TurnMotion: 0
+  m_WaitMotion: 0
+  m_QuestID: 0
+  m_EnterTalk: 0
+  m_DontRemoveScript: 0
+  m_BaseState: 0
+  animCtrl:
+    baseC: {fileID: 0}
+    climb: {fileID: 0}
+  m_ClimbState: 11
+  m_PickTarget: {fileID: 0}
+  m_RunSpeed: 1
+  m_AtuoMoveSpeed: 0
+  m_WalkMultiplier: 1
+  m_DashMultiplier: 1.5
+  m_JumpHeight: 1.5
+  m_Gravity: 50
+  m_DownGravity: 0.4
+  m_MaxVelocityChange: 1
+  m_IsDash: 0
+  m_bPlayNormalMotion: 0
+  m_PreMoveVelocity: {x: 0, y: 0, z: 0}
+  m_AutoMoveDist: 0.5
+  m_AutoMoveStopDist: 0.5
+  m_WaterWaveTime: 0.5
+  m_SlowMove: 0
+  m_Reverse: 0
+  m_NoJump: 0
+  m_AutoMove: 0
+  m_WalkInWater: 0
+  m_DoJump: 0
+  m_WalkMask: 0
+  m_LMouseDown: 0
+  m_EnterTalkEvent: 0
+  m_AnimSpeed: 1
+  m_WalkSpeed: 0.25
+  m_TurnDir: 0
+  m_RotateSpeed: 15
+  m_CanMoveDelta: 0.4
+  m_IdleBlendSpeed: 0.2
+  m_WalkBlendSpeed: 0.1
+  m_RuuBlendSpeed: 0.5
+  m_IsRun: 1
+  m_LockControl: 0
+  m_footWidth: 4.5
+  m_GroundStickyEffect: 5
+  m_IsAutoMove: 0
+  m_UseCurves: 0
+  m_Slide: 0
+  m_SprintJump: 0
+  m_SlideLoop: 0
+  m_MarthTarget: 0
+  m_FootIK: 0
+  m_JumpNeedLenthMin: 1.5
+  m_JumpNeedLenthMax: 4
+  m_SlideMatchTargetStart: 0.11
+  m_SlideMatchTargetStop: 0.4
+  m_SprintJumpMatchTargetStart: 0.4
+  m_SprintJumpMatchTargetStop: 0.51
+  m_SprintJumpTime: 0.8
+  m_ClimbMatchTargetStart: 0.19
+  m_ClimbMatchTargetStop: 0.3
+  m_ClimbBackJumpMatchTargetStart: 0.19
+  m_ClimbBackJumpMatchTargetStop: 0.3
+  m_SlideLoopMatchTargetStart: 0.19
+  m_SlideLoopMatchTargetStop: 0.3
+  m_MouseAttackTime: 0
+  m_MouseMaxAttackTime: 0.13
+  m_ResearchTargetTime: 0
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 311
+  wallRunLayers:
+    serializedVersion: 2
+    m_Bits: 311
+  groundedDistance: 3
+  groundedTime: 0
+  groundedMaxTime: 0.5
+  m_AutoMoveTargetPos: {x: 0, y: 0, z: 0}
+  m_CameraViewTarget: {fileID: 0}
+  m_MoveTargetObj: {fileID: 0}
+  m_FaceTargetObj: {fileID: 0}
+  m_ActionTarget: {x: 0, y: 0, z: 0}
+  m_Velocity: {x: 0, y: 0, z: 0}
+  climbLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  climbSpeed: 0.7
+  climbCheckRadius: 0.4
+  climbCheckDistance: 3
+  climbOffsetToWall: 0.2
+  heightOffsetToEdge: 1
+  smoothDistanceSpeed: 2
+  cornerSideOffset: 0.4
+  setFloatDampTime: 0.15
+  bWalk: 0
+  m_UpdateAutoMoveTime: 0
+  m_StartIdleTime: 15
+  m_UpdateIdleTime: 0
+  m_Controller: {fileID: 0}
+  m_CheckSlop: 0
+  m_SlopDownSpeed: 10
+  _Gravity: {x: 0, y: -11.81, z: 0}
+  _MinSlideAngle: 60
+  horizontal: 0
+  vertical: 0
