@@ -15,8 +15,8 @@ public class PlayerTeam : MonoBehaviour
     [SerializeField]
     private List<ItemD> PackItemIDs = new List<ItemD>();
 
-    //[SerializeField]
-    //private List<FlagValue> flagValues = new List<FlagValue>();
+    [SerializeField]
+    private List<FlagValue> flagValues = new List<FlagValue>();
 
     public float startWeatherTime = 0.4f;
 
@@ -50,14 +50,14 @@ public class PlayerTeam : MonoBehaviour
         }
     }
 
-    //	public static void ReStart()
-    //	{
-    //		if (PlayerTeam.instance != null)
-    //		{
-    //			UnityEngine.Object.Destroy(PlayerTeam.instance.gameObject);
-    //			PlayerTeam.instance = null;
-    //		}
-    //	}
+    public static void ReStart()
+    {
+        if (PlayerTeam.instance != null)
+        {
+            UnityEngine.Object.Destroy(PlayerTeam.instance.gameObject);
+            PlayerTeam.instance = null;
+        }
+    }
 
     private void Start()
     {
@@ -74,60 +74,61 @@ public class PlayerTeam : MonoBehaviour
 
     public void LoadTeam()
     {
-        //ScenesManager.Instance.OnLevelLoaded += new Action<int>(this.OnLoadTeam);
-        //this.SetInitValue();
+        ScenesManager.Instance.OnLevelLoaded += new Action<int>(this.OnLoadTeam);
+        this.SetInitValue();
     }
 
-    //	public void SetInitValue()
-    //	{
-    //		PalMain.SetMoney(this.money);
-    //		this.InitTime();
-    //	}
+    public void SetInitValue()
+    {
+        PalMain.SetMoney(this.money);
+        //this.InitTime();
+    }
 
-    //	public void OnLoadTeam(int Level)
-    //	{
-    //		ScenesManager.Instance.OnLevelLoaded -= new Action<int>(this.OnLoadTeam);
-    //		if (UniStormWeatherSystem.instance != null)
-    //		{
-    //			TimeManager.Initialize().timeStopped = UniStormWeatherSystem.instance.timeStopped;
-    //		}
-    //		else
-    //		{
-    //			Debug.LogWarning("Warn : UniStormWeatherSystem.instance==null");
-    //		}
-    //		this.InitTeam();
-    //		this.InitPlayerLevel();
-    //		this.InitSkill();
-    //		this.InitItem();
-    //		if (base.gameObject != null)
-    //		{
-    //			UnityEngine.Object.Destroy(base.gameObject);
-    //		}
-    //	}
+    public void OnLoadTeam(int Level)
+    {
+        Debug.Log("执行");
+        ScenesManager.Instance.OnLevelLoaded -= new Action<int>(this.OnLoadTeam);
+        //if (UniStormWeatherSystem.instance != null)
+        //{
+        //    TimeManager.Initialize().timeStopped = UniStormWeatherSystem.instance.timeStopped;
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("Warn : UniStormWeatherSystem.instance==null");
+        //}
+        //this.InitTeam();
+        //this.InitPlayerLevel();
+        //this.InitSkill();
+        //this.InitItem();
+        if (base.gameObject != null)
+        {
+            UnityEngine.Object.Destroy(base.gameObject);
+        }
+    }
 
-    //	public void InitTeam()
-    //	{
-    //		PlayersManager.ActivePlayers.Clear();
-    //		for (int i = 0; i < this.data.Length; i++)
-    //		{
-    //			GameObject x;
-    //			if (this.data[i].Enqueue)
-    //			{
-    //				x = PlayersManager.AddPlayer(this.data[i].mCharacterID, true);
-    //			}
-    //			else
-    //			{
-    //				x = PlayersManager.FindMainChar(this.data[i].mCharacterID, true);
-    //			}
-    //			if (x == null)
-    //			{
-    //				Debug.LogError("InitTeam null gameobject " + i.ToString());
-    //			}
-    //		}
-    //		PlayersManager.SetPlayer(0, true);
-    //		PlayersManager.SetPlayerPosByDestObj("SceneEnter");
-    //		PlayerCtrlManager.Reset();
-    //	}
+    //public void InitTeam()
+    //{
+    //    PlayersManager.ActivePlayers.Clear();
+    //    for (int i = 0; i < this.data.Length; i++)
+    //    {
+    //        GameObject x;
+    //        if (this.data[i].Enqueue)
+    //        {
+    //            x = PlayersManager.AddPlayer(this.data[i].mCharacterID, true);
+    //        }
+    //        else
+    //        {
+    //            x = PlayersManager.FindMainChar(this.data[i].mCharacterID, true);
+    //        }
+    //        if (x == null)
+    //        {
+    //            Debug.LogError("InitTeam null gameobject " + i.ToString());
+    //        }
+    //    }
+    //    PlayersManager.SetPlayer(0, true);
+    //    PlayersManager.SetPlayerPosByDestObj("SceneEnter");
+    //    PlayerCtrlManager.Reset();
+    //}
 
     //	public void InitPlayerLevel()
     //	{
@@ -202,13 +203,13 @@ public class PlayerTeam : MonoBehaviour
     //		}
     //	}
 
-    //	public void InitPlayerTeamFlags()
-    //	{
-    //		for (int i = 0; i < this.flagValues.Count; i++)
-    //		{
-    //			PalMain.SetFlag(this.flagValues[i].flag, this.flagValues[i].Value);
-    //		}
-    //	}
+    public void InitPlayerTeamFlags()
+    {
+        for (int i = 0; i < this.flagValues.Count; i++)
+        {
+            PalMain.SetFlag(this.flagValues[i].flag, this.flagValues[i].Value);
+        }
+    }
 
     //	public static void InitPickItemFlag()
     //	{

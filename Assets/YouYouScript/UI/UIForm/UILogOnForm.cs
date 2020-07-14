@@ -64,7 +64,7 @@ public class UILogOnForm : UIFormBase
         }
         PalMain.GameBeginTime = Time.fixedTime;
         PalMain.GameTotleTime = 0f;
-        //PalMain.ChangeMap("SceneEnter", 1, true, true);
+        PalMain.ChangeMap("SceneEnter", 1, true, true);
     }
 
     public IEnumerator DoTalk()
