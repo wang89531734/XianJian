@@ -112,11 +112,9 @@ namespace SoftStar.Pal6
 
         //		private static float m_loadingValue = 0f;
 
-        //		public static bool mIsDLC = false;
-
         //		private static uint _MoneyID = 0u;
 
-        //		public static int GameDifficulty = 0;
+        public static int GameDifficulty = 0;
 
         //		public static int MapOffset = 4194304;
 
@@ -134,11 +132,11 @@ namespace SoftStar.Pal6
 
         //		public BattleFormationManager CurBattleFormationManager = new BattleFormationManager();
 
-        //		[NonSerialized]
-        //		public static float GameBeginTime;
+        [NonSerialized]
+        public static float GameBeginTime;
 
-        //		[NonSerialized]
-        //		public static float GameTotleTime;
+        [NonSerialized]
+        public static float GameTotleTime;
 
         //		[SerializeField]
         //		private PalMain.WatchType mCurWatchType;
@@ -351,27 +349,6 @@ namespace SoftStar.Pal6
         //			get
         //			{
         //				return false;
-        //			}
-        //		}
-
-        //		public static bool IsDLC
-        //		{
-        //			get
-        //			{
-        //				return PalMain.IsBranch();
-        //			}
-        //			set
-        //			{
-        //				if (value)
-        //				{
-        //					PalMain.ActiveBranch();
-        //					PalMain.mIsDLC = true;
-        //				}
-        //				else
-        //				{
-        //					PalMain.InActiveBranch();
-        //					PalMain.mIsDLC = false;
-        //				}
         //			}
         //		}
 
@@ -589,7 +566,6 @@ namespace SoftStar.Pal6
         public void ReStart()
         {
             //UIManager.Instance.DoNotOpenMainMenu = false;
-            //PalMain.IsDLC = false;
             //PlayerTeam.ReStart();
             //PlayersManager.Restart();
             //PlayerCtrlManager.Reset();
@@ -792,19 +768,8 @@ namespace SoftStar.Pal6
             {
                 return 1;
             }
-            UnityEngine.Object @object = UnityEngine.Object.Instantiate(Resources.Load("Template/System/Main"));
-            if (!@object)
-            {
-                UnityEngine.Debug.LogError("Error : PalMain初始化失败");
-                return 0;
-            }
-            UnityEngine.Object object2 = @object;
-            if (object2 == null)
-            {
-                UnityEngine.Debug.LogError("main_Obj == null");
-                return 0;
-            }
-            GameObject gameObject = object2 as GameObject;
+            string path = "/Resources/Template/System/Main.prefab";
+            GameObject gameObject = FileLoader.LoadObjectFromFile<GameObject>(path.ToAssetBundlePath(), true, true);
             gameObject.name = "Main";
             PalMain.instance = gameObject.GetComponent<PalMain>();
             if (PalMain.instance == null)
@@ -871,10 +836,8 @@ namespace SoftStar.Pal6
 
             Physics.gravity = new Vector3(0f, -20f, 0f);
             Physics2D.queriesHitTriggers = false;
-
-            UnityEngine.Object.DontDestroyOnLoad(base.gameObject);
             PalMain.instance = this;
-            //PalMain.InitPermanentObject();
+
             //ItemManager.GetInstance().OnBeforeRemoveItem += new Action<IItem>(this.PutOffItem);
             //ItemPackage orCreatePackage = ItemManager.GetInstance().GetOrCreatePackage(1u);
             //orCreatePackage.OnItemAdded += delegate (IItem obj)
@@ -895,9 +858,8 @@ namespace SoftStar.Pal6
             //    FashionClothItemTypeCache.SetIsGet(obj.ItemType.TypeID, true);
             //    achievements[189].m_CurrentNum = ((FashionClothItemTypeCache.IsGetRate() < 1f) ? 0 : 1);
             //};
-            //ProceduralMaterial.substanceProcessorUsage = ProceduralProcessorUsage.All;
+
             //MouseEventManager.Initialize();
-            //ShaderPropertyIDManager.Initialize();
             //MessageProcess.Initialize();
             //SetActiveByFlagManager.Initialize();
             //ScenesManager.Initialize();
@@ -905,7 +867,7 @@ namespace SoftStar.Pal6
             //DistanceCullManager.Initialize();
             //MoviesManager.Initialize();
             //CharactersManager.Initialize();
-            //InputManager.Initialize();
+            InputManager.Initialize();
             //PlayerCtrlManager.Initialize();
             //PalBattleManager.Initialize();
             //EntityManager.Initialize();
@@ -2016,18 +1978,6 @@ namespace SoftStar.Pal6
         //		{
         //			string value = "PalMain.ShowMemory: Current scene = " + SceneManager.GetActiveScene().buildIndex.ToString();
         //			System.Console.WriteLine(value);
-        //		}
-
-        //		public static void InitPermanentObject()
-        //		{
-        //			if (!UnityEngine.Object.FindObjectOfType(typeof(PalShroudObjectManager)))
-        //			{
-        //				new GameObject
-        //				{
-        //					name = "shroudMrg"
-        //				}.AddComponent<PalShroudObjectManager>();
-        //			}
-        //			PalMain.CreatePermanentObject<uScript_MasterComponent>("Template/System/_uScript", true);
         //		}
 
         //		public static GameObject CreatePermanentObject<T>(string path, bool bRelative)

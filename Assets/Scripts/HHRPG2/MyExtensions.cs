@@ -138,6 +138,7 @@ public static class MyExtensions
 
     public static string ToAssetBundlePath(this string path)
     {
+        Debug.Log(path.ToAssetBundleFolder() + ".unity3d");
         return path.ToAssetBundleFolder() + ".unity3d";
     }
 
