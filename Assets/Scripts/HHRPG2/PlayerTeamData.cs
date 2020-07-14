@@ -1,4 +1,4 @@
-//using SoftStar.Item;
+using SoftStar.Item;
 using SoftStar.Pal6;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ public class PlayerTeamData
 
 	public int mLevel = 1;
 
-	//public List<PalNPC.SkillInfo> m_SkillIDs = new List<PalNPC.SkillInfo>();
+    public List<PalNPC.SkillInfo> m_SkillIDs = new List<PalNPC.SkillInfo>();
 
-	//public List<ItemD> m_ItemIDs = new List<ItemD>();
+    public List<ItemD> m_ItemIDs = new List<ItemD>();
 }

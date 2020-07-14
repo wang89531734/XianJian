@@ -345,15 +345,15 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		[Serializable]
-        //		public class SkillInfo
-        //		{
-        //			public int m_ID;
+        [Serializable]
+        public class SkillInfo
+        {
+            public int m_ID;
 
-        //			public bool m_bOpen = true;
+            public bool m_bOpen = true;
 
-        //			public int m_CurrentExp;
-        //		}
+            public int m_CurrentExp;
+        }
 
         //		public enum NPCState
         //		{

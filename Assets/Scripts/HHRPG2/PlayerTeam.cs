@@ -1,5 +1,5 @@
 using Funfia.File;
-//using SoftStar.Item;
+using SoftStar.Item;
 using SoftStar.Pal6;
 using System;
 using System.Collections.Generic;
@@ -12,8 +12,8 @@ public class PlayerTeam : MonoBehaviour
     [SerializeField]
     private PlayerTeamData[] data;
 
-    //[SerializeField]
-    //private List<ItemD> PackItemIDs = new List<ItemD>();
+    [SerializeField]
+    private List<ItemD> PackItemIDs = new List<ItemD>();
 
     //[SerializeField]
     //private List<FlagValue> flagValues = new List<FlagValue>();
