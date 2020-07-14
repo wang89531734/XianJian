@@ -46,7 +46,6 @@ public class UILogOnForm : UIFormBase
 
     public IEnumerator DoTalk()
     {
-        GameTalk.StartTalk(true);
         //yield return base.StartCoroutine(GameTalk.WaitFadeTime(1f, 2f));
         //GameTalk.AddItem(901, 3, false);
         //GameTalk.AddItem(921, 3, false);
@@ -65,7 +64,6 @@ public class UILogOnForm : UIFormBase
         //{
         //    GameTalk.FlagON(1001);
         //}
-        GameTalk.StartTalk(false);
         //GameTalk.HideAllNpc(1);
         //GameTalk.PlayStory(100, "ME0000");
         //yield return base.StartCoroutine(GameTalk.IsPlayStoryEnd());
