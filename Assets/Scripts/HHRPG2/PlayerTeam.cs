@@ -109,18 +109,9 @@ public class PlayerTeam : MonoBehaviour
         PlayersManager.ActivePlayers.Clear();
         for (int i = 0; i < this.data.Length; i++)
         {
-            GameObject x;
             if (this.data[i].Enqueue)
             {
-                x = PlayersManager.AddPlayer(this.data[i].mCharacterID, true);
-            }
-            else
-            {
-                x = PlayersManager.FindMainChar(this.data[i].mCharacterID, true);
-            }
-            if (x == null)
-            {
-                Debug.LogError("InitTeam null gameobject " + i.ToString());
+                PlayersManager.AddPlayer(this.data[i].mCharacterID, true);
             }
         }
         //PlayersManager.SetPlayer(0, true);
