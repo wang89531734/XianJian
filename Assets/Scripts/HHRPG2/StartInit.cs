@@ -38,7 +38,6 @@ namespace SoftStar.Pal6
         private void OnLevelLoadOver()
         {
             PalMain.LoadOverEvent = (Action)Delegate.Remove(PalMain.LoadOverEvent, new Action(this.OnLevelLoadOver));
-            GameStateManager.CurGameState = GameState.Start;
         }
 
         private void Init()
@@ -51,7 +50,7 @@ namespace SoftStar.Pal6
             PalMain.Instance.ReStart();
             if (StartInit.IsFirstStart)
             {
-                GameStateManager.CurGameState = GameState.Start;
+  
             }
             else
             {

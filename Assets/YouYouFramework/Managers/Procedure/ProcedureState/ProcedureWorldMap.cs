@@ -15,7 +15,8 @@ namespace YouYou
             GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureWorldMap");
             GameEntry.Event.CommonEvent.Dispatch(SysEventId.EnterProcedureWorldMap);
             Debug.Log("加载角色");
-            GameEntry.Role.CreatePlayer();
+            //GameEntry.Role.CreatePlayer();
+            PlayerTeam.Instance.LoadTeam();
         }
 
         public override void OnUpdate()

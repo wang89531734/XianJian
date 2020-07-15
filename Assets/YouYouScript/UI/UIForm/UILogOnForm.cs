@@ -16,14 +16,20 @@ public class UILogOnForm : UIFormBase
 
     }
 
+    private void EndState_Start()
+    {
+       
+    }
+
+    private void InitState_Start()
+    {
+
+    }
+
     public void OnNewGameBtn()
     {
         SetGameDifficulty(0);
-        //base.StartCoroutine(DoTalk());
-        //GameEntry.Scene.LoadScene(2, false, () =>
-        //{
-        //    GameEntry.Procedure.ChangeState(ProcedureState.WorldMap);
-        //});
+        //base.StartCoroutine(DoTalk());      
     }
 
     public void OnLoadBtn()
@@ -58,13 +64,13 @@ public class UILogOnForm : UIFormBase
 
     public void AfterSetGameDifficulty_NewStart()
     {
-        if (PlayerTeam.Instance != null)
-        {
-            PlayerTeam.Instance.LoadTeam();
-        }
         PalMain.GameBeginTime = Time.fixedTime;
         PalMain.GameTotleTime = 0f;
-        PalMain.ChangeMap("SceneEnter", 1, true, true);
+        GameEntry.Scene.LoadScene(2, false, () =>
+        {
+            GameEntry.Procedure.ChangeState(ProcedureState.WorldMap);
+        });
+        //PalMain.ChangeMap("SceneEnter", 1, true, true);
     }
 
     public IEnumerator DoTalk()

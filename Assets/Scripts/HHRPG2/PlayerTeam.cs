@@ -74,8 +74,8 @@ public class PlayerTeam : MonoBehaviour
 
     public void LoadTeam()
     {
-        ScenesManager.Instance.OnLevelLoaded += new Action<int>(this.OnLoadTeam);
         this.SetInitValue();
+        this.OnLoadTeam(1);
     }
 
     public void SetInitValue()
@@ -86,8 +86,6 @@ public class PlayerTeam : MonoBehaviour
 
     public void OnLoadTeam(int Level)
     {
-        Debug.Log("执行");
-        ScenesManager.Instance.OnLevelLoaded -= new Action<int>(this.OnLoadTeam);
         //if (UniStormWeatherSystem.instance != null)
         //{
         //    TimeManager.Initialize().timeStopped = UniStormWeatherSystem.instance.timeStopped;
@@ -96,7 +94,7 @@ public class PlayerTeam : MonoBehaviour
         //{
         //    Debug.LogWarning("Warn : UniStormWeatherSystem.instance==null");
         //}
-        //this.InitTeam();
+        this.InitTeam();
         //this.InitPlayerLevel();
         //this.InitSkill();
         //this.InitItem();
@@ -106,29 +104,29 @@ public class PlayerTeam : MonoBehaviour
         }
     }
 
-    //public void InitTeam()
-    //{
-    //    PlayersManager.ActivePlayers.Clear();
-    //    for (int i = 0; i < this.data.Length; i++)
-    //    {
-    //        GameObject x;
-    //        if (this.data[i].Enqueue)
-    //        {
-    //            x = PlayersManager.AddPlayer(this.data[i].mCharacterID, true);
-    //        }
-    //        else
-    //        {
-    //            x = PlayersManager.FindMainChar(this.data[i].mCharacterID, true);
-    //        }
-    //        if (x == null)
-    //        {
-    //            Debug.LogError("InitTeam null gameobject " + i.ToString());
-    //        }
-    //    }
-    //    PlayersManager.SetPlayer(0, true);
-    //    PlayersManager.SetPlayerPosByDestObj("SceneEnter");
-    //    PlayerCtrlManager.Reset();
-    //}
+    public void InitTeam()
+    {
+        PlayersManager.ActivePlayers.Clear();
+        for (int i = 0; i < this.data.Length; i++)
+        {
+            GameObject x;
+            if (this.data[i].Enqueue)
+            {
+                x = PlayersManager.AddPlayer(this.data[i].mCharacterID, true);
+            }
+            else
+            {
+                x = PlayersManager.FindMainChar(this.data[i].mCharacterID, true);
+            }
+            if (x == null)
+            {
+                Debug.LogError("InitTeam null gameobject " + i.ToString());
+            }
+        }
+        //PlayersManager.SetPlayer(0, true);
+        //PlayersManager.SetPlayerPosByDestObj("SceneEnter");
+        //PlayerCtrlManager.Reset();
+    }
 
     //	public void InitPlayerLevel()
     //	{
