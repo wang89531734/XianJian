@@ -1015,32 +1015,34 @@ namespace SoftStar.Pal6
             //}
         }
 
-        //		public override void Start()
-        //		{
-        //			if (this.IsMainCharAndExist())
-        //			{
-        //				UnityEngine.Object.DestroyImmediate(base.gameObject);
-        //				return;
-        //			}
-        //			if (this.IsDataInit)
-        //			{
-        //				return;
-        //			}
-        //			base.Start();
-        //			if (this.Data != null)
-        //			{
-        //				this.Data.Owner = base.gameObject;
-        //				this.Data.Reset();
-        //			}
-        //			if (this.model == null)
-        //			{
-        //				this.LoadModel();
-        //			}
-        //			this.BuffDebuffData = new BuffDebuffManager.BuffDebuffOwner();
-        //			this.BuffDebuffData.Owner = this;
-        //			this.patrol = base.GetComponent<Patrol>();
-        //			this.IsDataInit = true;
-        //		}
+        public override void Start()
+        {
+            //if (this.IsMainCharAndExist())
+            //{
+            //    UnityEngine.Object.DestroyImmediate(base.gameObject);
+            //    return;
+            //}
+
+            if (this.IsDataInit)
+            {
+                return;
+            }
+            base.Start();
+            if (this.Data != null)
+            {
+                this.Data.Owner = base.gameObject;
+                this.Data.Reset();
+            }
+            if (this.model == null)
+            {
+                this.LoadModel();
+            }
+
+            //this.BuffDebuffData = new BuffDebuffManager.BuffDebuffOwner();
+            //this.BuffDebuffData.Owner = this;
+            //this.patrol = base.GetComponent<Patrol>();
+            this.IsDataInit = true;
+        }
 
         //		private bool IsMainCharAndExist()
         //		{
@@ -1091,211 +1093,212 @@ namespace SoftStar.Pal6
         //			sphereCollider.isTrigger = true;
         //		}
 
-        //		public override void LoadModelEnd(UnityEngine.Object obj)
-        //		{
-        //			base.LoadModelEnd(obj);
-        //			if (this.MonsterGroups.Length == 0 && this.model != null && base.gameObject.GetComponent<Interact>() != null && this.model.GetComponent<MouseEnterCursor>() == null)
-        //			{
-        //				MouseEnterCursor mouseEnterCursor = this.model.AddComponent<MouseEnterCursor>();
-        //				mouseEnterCursor.curState = CursorTextureState.Talk;
-        //			}
-        //			if (this.model != null)
-        //			{
-        //				this.model.layer = SmoothFollow2.IgnoreLayer;
-        //				this.model.ExcludeCloneName();
-        //				Agent component = this.model.GetComponent<Agent>();
-        //				if (component != null)
-        //				{
-        //					component.palNPC = this;
-        //					if (component.agent != null && this.MonsterGroups.Length < 1)
-        //					{
-        //						component.agent.baseOffset = -0.1f;
-        //						if (!NPCHeight.Instance.SetHeight(component.agent))
-        //						{
-        //							component.gameObject.AddComponent<AdjustNavAgentOffset>();
-        //						}
-        //					}
-        //				}
-        //				if (Application.isPlaying && this.Data.CharacterID > -1 && this.Data.CharacterID < 8)
-        //				{
-        //					this.GetOriRes();
-        //				}
-        //				this.Weapons.Clear();
-        //				Transform[] props = GameObjectPath.GetProps(this.model.transform);
-        //				for (int i = 0; i < props.Length; i++)
-        //				{
-        //					Transform transform = props[i];
-        //					if (!(transform == null))
-        //					{
-        //						if (transform.childCount < 1)
-        //						{
-        //							this.Weapons.Add(null);
-        //						}
-        //						else
-        //						{
-        //							this.Weapons.Add(transform.GetChild(0).gameObject);
-        //						}
-        //					}
-        //				}
-        //				if (this.Weapons.Count < 1 || (this.Weapons[0] == null && this.Weapons.Count > 1 && this.Weapons[1] == null))
-        //				{
-        //					this.Weapons.Clear();
-        //					Transform[] boneProps = GameObjectPath.GetBoneProps(this.model.transform);
-        //					for (int j = 0; j < boneProps.Length; j++)
-        //					{
-        //						Transform transform2 = boneProps[j];
-        //						if (!(transform2 == null))
-        //						{
-        //							if (transform2.childCount < 1)
-        //							{
-        //								this.Weapons.Add(null);
-        //							}
-        //							else
-        //							{
-        //								this.Weapons.Add(transform2.GetChild(0).gameObject);
-        //							}
-        //						}
-        //					}
-        //				}
-        //				if (this.Data != null && this.Data.CharacterID < 8 && this.Data.CharacterID > -1)
-        //				{
-        //					this.SetActiveWeaponInNormal(true);
-        //				}
-        //				else if (base.GetComponent<SaveTarget>() == null)
-        //				{
-        //					this.InitDisCull();
-        //				}
-        //				AnimCtrlScript component2 = this.model.GetComponent<AnimCtrlScript>();
-        //				if (component2 != null)
-        //				{
-        //					component2.Start();
-        //				}
-        //				if (!OptionConfig.NeedOpt || (!string.IsNullOrEmpty(this.modelResourcePath) && this.modelResourcePath.Contains("NpcP6")))
-        //				{
-        //					ShroudInstance.Init(this.model);
-        //				}
-        //				else
-        //				{
-        //					ShroudInstance component3 = this.model.GetComponent<ShroudInstance>();
-        //					UnityEngine.Object.Destroy(component3);
-        //				}
-        //				UtilFun.SetActive(this.model, this.bEnableOnLoadModelEnd);
-        //				Vector3 position = this.model.transform.position;
-        //				position.y += 0.5f;
-        //				RaycastHit raycastHit;
-        //				if (Physics.Raycast(position, Vector3.down, out raycastHit, 200f, SmoothFollow2.MaskValue))
-        //				{
-        //					UtilFun.SetPosition(this.model.transform, raycastHit.point);
-        //				}
-        //				int characterID = this.Data.CharacterID;
-        //				if (characterID > -1 && characterID < 8 && characterID != 6)
-        //				{
-        //					this.footMark = this.model.AddComponent<Footmark>();
-        //					string text = this.model.name;
-        //					int num = text.IndexOf(' ');
-        //					if (num > -1)
-        //					{
-        //						text = text.Substring(0, num + 1);
-        //						this.model.name = text;
-        //					}
-        //				}
-        //				if (((characterID < 8 && characterID != 6) || (characterID > 3999 && characterID < 4020) || this.MonsterGroups.Length > 0) && (characterID != 0 || this.modelResourcePath.Contains("YueJinChao")))
-        //				{
-        //					Perception.ActivePerception(this);
-        //				}
-        //				if (characterID < 8 && characterID != 6 && SceneManager.GetActiveScene().buildIndex == 0)
-        //				{
-        //					PlayersManager.AddPlayerPerceptionRange(this);
-        //				}
-        //				if (this.MonsterGroups.Length > 0 && this.model != null)
-        //				{
-        //					this.AddColliderForGoToBattle();
-        //					MonsterStateScript.SetState(this.model, MonsterStateScript.MonsterState.None);
-        //				}
-        //				if (this.OnLoadModelEnd != null)
-        //				{
-        //					this.OnLoadModelEnd(this);
-        //				}
-        //			}
-        //		}
+        public override void LoadModelEnd(UnityEngine.Object obj)
+        {
+            base.LoadModelEnd(obj);
+            //if (this.MonsterGroups.Length == 0 && this.model != null && base.gameObject.GetComponent<Interact>() != null && this.model.GetComponent<MouseEnterCursor>() == null)
+            //{
+            //    //MouseEnterCursor mouseEnterCursor = this.model.AddComponent<MouseEnterCursor>();
+            //    //mouseEnterCursor.curState = CursorTextureState.Talk;
+            //}
 
-        //		public override void LoadModel()
-        //		{
-        //			if (SkillSEPreloader.s_preloadEnable && ScenesManager.IsChanging && SkillSEPreloader.Instance != null)
-        //			{
-        //				if (this.Data != null)
-        //				{
-        //					this.Data.Owner = base.gameObject;
-        //					this.Data.Reset();
-        //				}
-        //				FightProperty fight = this.Data.Fight;
-        //				if (fight != null)
-        //				{
-        //					int num = -1;
-        //					int.TryParse(fight.BattleAIScript, out num);
-        //					if (SkillSEPreloader.s_battleAISkillDic.ContainsKey(num))
-        //					{
-        //						List<int> list = SkillSEPreloader.s_battleAISkillDic[num];
-        //						for (int i = 0; i < list.Count; i++)
-        //						{
-        //							System.Console.WriteLine(string.Format("[PreLoad Skill] : npc={0}, scriptID={1}, skillID={2}", base.gameObject.ToString(), num, list[i]));
-        //							SkillSEPreloader.Instance.loadSkillSE(list[i]);
-        //						}
-        //					}
-        //					SkillSEPreloader.Instance.m_preloadThisScene = true;
-        //				}
-        //				else if (this.MonsterGroups.Length != 0)
-        //				{
-        //					PalBattleManager palBattleManager = PalBattleManager.Instance();
-        //					if (palBattleManager == null)
-        //					{
-        //						return;
-        //					}
-        //					MonsterGroupDataManager monsterGroupDataManager = palBattleManager.GetMonsterGroupDataManager();
-        //					if (monsterGroupDataManager == null)
-        //					{
-        //						return;
-        //					}
-        //					int[] monsterGroups = this.MonsterGroups;
-        //					for (int j = 0; j < monsterGroups.Length; j++)
-        //					{
-        //						int id = monsterGroups[j];
-        //						MonsterGroupDataManager.MonsterGroupData data = monsterGroupDataManager.GetData(id);
-        //						foreach (int current in data.mMonsters)
-        //						{
-        //							if (SkillSEPreloader.s_battleAISkillDic.ContainsKey(current))
-        //							{
-        //								List<int> list2 = SkillSEPreloader.s_battleAISkillDic[current];
-        //								for (int k = 0; k < list2.Count; k++)
-        //								{
-        //									System.Console.WriteLine(string.Format("[PreLoad Skill] : npc={0}, scriptID={1}, skillID={2}", base.gameObject.ToString(), current, list2[k]));
-        //									SkillSEPreloader.Instance.loadSkillSE(list2[k]);
-        //								}
-        //							}
-        //						}
-        //						SkillSEPreloader.Instance.m_preloadThisScene = true;
-        //					}
-        //				}
-        //			}
-        //			if (this.m_bDontLoadModel)
-        //			{
-        //				this.LoadModelEnd(this);
-        //				return;
-        //			}
-        //			Animator componentInChildren = base.GetComponentInChildren<Animator>();
-        //			if (componentInChildren != null)
-        //			{
-        //				this.model = componentInChildren.gameObject;
-        //			}
-        //			if (this.model == null)
-        //			{
-        //				base.LoadModel();
-        //			}
-        //			else
-        //			{
-        //				this.LoadModelEnd(this);
-        //			}
-        //		}
+            if (this.model != null)
+            {
+                //this.model.layer = SmoothFollow2.IgnoreLayer;
+                //this.model.ExcludeCloneName();
+                //Agent component = this.model.GetComponent<Agent>();
+                //if (component != null)
+                //{
+                //    component.palNPC = this;
+                //    if (component.agent != null && this.MonsterGroups.Length < 1)
+                //    {
+                //        component.agent.baseOffset = -0.1f;
+                //        if (!NPCHeight.Instance.SetHeight(component.agent))
+                //        {
+                //            component.gameObject.AddComponent<AdjustNavAgentOffset>();
+                //        }
+                //    }
+                //}
+                //if (Application.isPlaying && this.Data.CharacterID > -1 && this.Data.CharacterID < 8)
+                //{
+                //    this.GetOriRes();
+                //}
+                //this.Weapons.Clear();
+                //Transform[] props = GameObjectPath.GetProps(this.model.transform);
+                //for (int i = 0; i < props.Length; i++)
+                //{
+                //    Transform transform = props[i];
+                //    if (!(transform == null))
+                //    {
+                //        if (transform.childCount < 1)
+                //        {
+                //            this.Weapons.Add(null);
+                //        }
+                //        else
+                //        {
+                //            this.Weapons.Add(transform.GetChild(0).gameObject);
+                //        }
+                //    }
+                //}
+                //if (this.Weapons.Count < 1 || (this.Weapons[0] == null && this.Weapons.Count > 1 && this.Weapons[1] == null))
+                //{
+                //    this.Weapons.Clear();
+                //    Transform[] boneProps = GameObjectPath.GetBoneProps(this.model.transform);
+                //    for (int j = 0; j < boneProps.Length; j++)
+                //    {
+                //        Transform transform2 = boneProps[j];
+                //        if (!(transform2 == null))
+                //        {
+                //            if (transform2.childCount < 1)
+                //            {
+                //                this.Weapons.Add(null);
+                //            }
+                //            else
+                //            {
+                //                this.Weapons.Add(transform2.GetChild(0).gameObject);
+                //            }
+                //        }
+                //    }
+                //}
+                //if (this.Data != null && this.Data.CharacterID < 8 && this.Data.CharacterID > -1)
+                //{
+                //    this.SetActiveWeaponInNormal(true);
+                //}
+                //else if (base.GetComponent<SaveTarget>() == null)
+                //{
+                //    this.InitDisCull();
+                //}
+                //AnimCtrlScript component2 = this.model.GetComponent<AnimCtrlScript>();
+                //if (component2 != null)
+                //{
+                //    component2.Start();
+                //}
+                //if (!OptionConfig.NeedOpt || (!string.IsNullOrEmpty(this.modelResourcePath) && this.modelResourcePath.Contains("NpcP6")))
+                //{
+                //    ShroudInstance.Init(this.model);
+                //}
+                //else
+                //{
+                //    ShroudInstance component3 = this.model.GetComponent<ShroudInstance>();
+                //    UnityEngine.Object.Destroy(component3);
+                //}
+                //UtilFun.SetActive(this.model, this.bEnableOnLoadModelEnd);
+                //Vector3 position = this.model.transform.position;
+                //position.y += 0.5f;
+                //RaycastHit raycastHit;
+                //if (Physics.Raycast(position, Vector3.down, out raycastHit, 200f, SmoothFollow2.MaskValue))
+                //{
+                //    UtilFun.SetPosition(this.model.transform, raycastHit.point);
+                //}
+                //int characterID = this.Data.CharacterID;
+                //if (characterID > -1 && characterID < 8 && characterID != 6)
+                //{
+                //    this.footMark = this.model.AddComponent<Footmark>();
+                //    string text = this.model.name;
+                //    int num = text.IndexOf(' ');
+                //    if (num > -1)
+                //    {
+                //        text = text.Substring(0, num + 1);
+                //        this.model.name = text;
+                //    }
+                //}
+                //if (((characterID < 8 && characterID != 6) || (characterID > 3999 && characterID < 4020) || this.MonsterGroups.Length > 0) && (characterID != 0 || this.modelResourcePath.Contains("YueJinChao")))
+                //{
+                //    Perception.ActivePerception(this);
+                //}
+                //if (characterID < 8 && characterID != 6 && SceneManager.GetActiveScene().buildIndex == 0)
+                //{
+                //    PlayersManager.AddPlayerPerceptionRange(this);
+                //}
+                //if (this.MonsterGroups.Length > 0 && this.model != null)
+                //{
+                //    this.AddColliderForGoToBattle();
+                //    MonsterStateScript.SetState(this.model, MonsterStateScript.MonsterState.None);
+                //}
+                if (this.OnLoadModelEnd != null)
+                {
+                    this.OnLoadModelEnd(this);
+                }
+            }
+        }
+
+        public override void LoadModel()
+        {
+            //if (SkillSEPreloader.s_preloadEnable && ScenesManager.IsChanging && SkillSEPreloader.Instance != null)
+            //{
+            //    if (this.Data != null)
+            //    {
+            //        this.Data.Owner = base.gameObject;
+            //        this.Data.Reset();
+            //    }
+            //    FightProperty fight = this.Data.Fight;
+            //    if (fight != null)
+            //    {
+            //        int num = -1;
+            //        int.TryParse(fight.BattleAIScript, out num);
+            //        if (SkillSEPreloader.s_battleAISkillDic.ContainsKey(num))
+            //        {
+            //            List<int> list = SkillSEPreloader.s_battleAISkillDic[num];
+            //            for (int i = 0; i < list.Count; i++)
+            //            {
+            //                System.Console.WriteLine(string.Format("[PreLoad Skill] : npc={0}, scriptID={1}, skillID={2}", base.gameObject.ToString(), num, list[i]));
+            //                SkillSEPreloader.Instance.loadSkillSE(list[i]);
+            //            }
+            //        }
+            //        SkillSEPreloader.Instance.m_preloadThisScene = true;
+            //    }
+            //    else if (this.MonsterGroups.Length != 0)
+            //    {
+            //        PalBattleManager palBattleManager = PalBattleManager.Instance();
+            //        if (palBattleManager == null)
+            //        {
+            //            return;
+            //        }
+            //        MonsterGroupDataManager monsterGroupDataManager = palBattleManager.GetMonsterGroupDataManager();
+            //        if (monsterGroupDataManager == null)
+            //        {
+            //            return;
+            //        }
+            //        int[] monsterGroups = this.MonsterGroups;
+            //        for (int j = 0; j < monsterGroups.Length; j++)
+            //        {
+            //            int id = monsterGroups[j];
+            //            MonsterGroupDataManager.MonsterGroupData data = monsterGroupDataManager.GetData(id);
+            //            foreach (int current in data.mMonsters)
+            //            {
+            //                if (SkillSEPreloader.s_battleAISkillDic.ContainsKey(current))
+            //                {
+            //                    List<int> list2 = SkillSEPreloader.s_battleAISkillDic[current];
+            //                    for (int k = 0; k < list2.Count; k++)
+            //                    {
+            //                        System.Console.WriteLine(string.Format("[PreLoad Skill] : npc={0}, scriptID={1}, skillID={2}", base.gameObject.ToString(), current, list2[k]));
+            //                        SkillSEPreloader.Instance.loadSkillSE(list2[k]);
+            //                    }
+            //                }
+            //            }
+            //            SkillSEPreloader.Instance.m_preloadThisScene = true;
+            //        }
+            //    }
+            //}
+            if (this.m_bDontLoadModel)
+            {
+                this.LoadModelEnd(this);
+                return;
+            }
+            Animator componentInChildren = base.GetComponentInChildren<Animator>();
+            if (componentInChildren != null)
+            {
+                this.model = componentInChildren.gameObject;
+            }
+            if (this.model == null)
+            {
+                base.LoadModel();
+            }
+            else
+            {
+                this.LoadModelEnd(this);
+            }
+        }
 
         //		private void OnDrawGizmos()
         //		{

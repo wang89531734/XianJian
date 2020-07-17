@@ -8,6 +8,9 @@ using UnityEngine;
 
 public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 {
+    /// <summary>
+    /// 立即加载
+    /// </summary>
 	public static bool LoadImmediately;
 
 	private bool isPrefab;
@@ -24,9 +27,6 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 
 	[SerializeField]
 	protected string modelResourcePath;
-
-	[SerializeField]
-	protected string modelResourcePath2;
 
 	[NonSerialized]
 	public bool HasLoad;
@@ -125,26 +125,13 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 
 	public virtual void SetModelResourcePath(string path, int index = 1)
 	{
-		if (index != 1)
-		{
-			if (index == 2)
-			{
-				if (this.modelResourcePath2 != path)
-				{
-					this.modelResourcePath2 = path;
-				}
-			}
-		}
-		else if (this.modelResourcePath != path)
-		{
-			this.modelResourcePath = path;
-			this.LoadModel();
-		}
-	}
+        this.modelResourcePath = path;
+        this.LoadModel();
+    }
 
 	public string GetModelResourcePath(int index = 1)
 	{
-		return (index >= 2) ? this.modelResourcePath2 : this.modelResourcePath;
+		return this.modelResourcePath;
 	}
 
 	public bool HasBundle()
@@ -208,7 +195,6 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 		if (temp == null)
 		{
 			string text = base.name + "load failed";
-			//SoftStar.Pal6.Console.Log(text);
 			Debug.LogError(text);
 			this.LoadModelEnd(this);
 			return;
@@ -220,7 +206,7 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 		this.model = (temp as GameObject);
 		if (this.model == null)
 		{
-			//SoftStar.Pal6.Console.Log("GameObject.Instantiate failed");
+			
 		}
 		else
 		{
@@ -228,15 +214,16 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 			//{
 			//	this.model.AddComponent<AutoDestroyMaterials>();
 			//}
+
 			this.model.transform.parent = base.transform;
 			this.model.transform.localPosition = Vector3.zero;
 			this.model.transform.localEulerAngles = Vector3.zero;
 			this.model.tag = base.gameObject.tag;
 			this.model.layer = base.gameObject.layer;
-			if (this.isPrefab)
-			{
-				this.CollectPrefabObjs(this.model);
-			}
+			//if (this.isPrefab)
+			//{
+			//	this.CollectPrefabObjs(this.model);
+			//}
 		}
 		this.LoadModelEnd(this);
 	}
@@ -245,8 +232,8 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 	{
 		if (this.model != null)
 		{
-			//UtilFun.SetActive(this.model, true);
-		}
+            UtilFun.SetActive(this.model, true);
+        }
 	}
 
 	public virtual void LoadModelEnd(UnityEngine.Object obj)
@@ -267,29 +254,7 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 		}
 		if (this.model != null)
 		{
-			this.model.hideFlags = HideFlags.None;
-			//if (EntityManager.Low)
-			//{
-			//	Renderer[] componentsInChildren = this.model.GetComponentsInChildren<Renderer>(true);
-			//	for (int i = 0; i < componentsInChildren.Length; i++)
-			//	{
-			//		for (int j = 0; j < componentsInChildren[i].materials.Length; j++)
-			//		{
-			//			if (componentsInChildren[i].materials[j] != null && componentsInChildren[i].materials[j].shader.name.Contains("/2-"))
-			//			{
-			//				string name = componentsInChildren[i].materials[j].shader.name;
-			//				int num = componentsInChildren[i].materials[j].shader.name.IndexOf("/2-");
-			//				int startIndex = componentsInChildren[i].materials[j].shader.name.IndexOf("/", num + 1);
-			//				string text = name.Substring(0, num) + name.Substring(startIndex);
-			//				Debug.LogWarning(this.model.name + componentsInChildren[i].name + text);
-			//				if (EntityManager.shadersScript != null && EntityManager.shadersScript.shaders.ContainsKey(text))
-			//				{
-			//					componentsInChildren[i].materials[j].shader = EntityManager.shadersScript.shaders[text];
-			//				}
-			//			}
-			//		}
-			//	}
-			//}
+			this.model.hideFlags = HideFlags.None;			
 		}
 		this.LoadOver();
 		this.dobjLayer.JudgeLoadOver(this);

@@ -1857,26 +1857,18 @@ public static class UtilFun
     //		return Path.Combine(actorName, animName).ToAnimationPath();
     //	}
 
-    //	public static void SetActive(GameObject go, bool bActive)
-    //	{
-    //		if (go != null && go.activeSelf != bActive)
-    //		{
-    //			try
-    //			{
-    //				go.SetActive(bActive);
-    //			}
-    //			catch (Exception ex)
-    //			{
-    //				UnityEngine.Debug.Log("Exception catched:\n");
-    //				UnityEngine.Debug.Log(ex.Message + "\n" + ex.StackTrace);
-    //			}
-    //		}
-    //	}
+    public static void SetActive(GameObject go, bool bActive)
+    {
+        if (go != null && go.activeSelf != bActive)
+        {
+            go.SetActive(bActive);
+        }
+    }
 
-    //	public static void SetActive(this Transform tf, bool bActive)
-    //	{
-    //		UtilFun.SetActive(tf.gameObject, bActive);
-    //	}
+    public static void SetActive(this Transform tf, bool bActive)
+    {
+        UtilFun.SetActive(tf.gameObject, bActive);
+    }
 
     //	public static string RemoveSceneQualityLevel(this string SceneName)
     //	{
