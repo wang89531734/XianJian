@@ -1,5 +1,5 @@
 //using SoftStar.BuffDebuff;
-//using SoftStar.Item;
+using SoftStar.Item;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,337 +13,337 @@ namespace SoftStar.Pal6
 {
     public class PalNPC : PalAnimatorObject, ISaveInterface
     {
-        //		[Serializable]
-        //		public class CharacterData : ISaveInterface
-        //		{
-        //			[NonSerialized]
-        //			private GameObject mOwner;
+        [Serializable]
+        public class CharacterData : ISaveInterface
+        {
+            [NonSerialized]
+            private GameObject mOwner;
 
-        //			[NonSerialized]
-        //			private PlayerBaseProperty mPlayerBase;
+            //[NonSerialized]
+            //private PlayerBaseProperty mPlayerBase;
 
-        //			[NonSerialized]
-        //			private HPMPDPProperty mHPMPDP;
+            //[NonSerialized]
+            //private HPMPDPProperty mHPMPDP;
 
-        //			[NonSerialized]
-        //			private FightProperty mFight;
+            //[NonSerialized]
+            //private FightProperty mFight;
 
-        //			[NonSerialized]
-        //			private CharacterProperty mCharacter;
+            //[NonSerialized]
+            //private CharacterProperty mCharacter;
 
-        //			[NonSerialized]
-        //			private PlayerProperty mPlayer;
+            //[NonSerialized]
+            //private PlayerProperty mPlayer;
 
-        //			[NonSerialized]
-        //			private SocialNPCProperty mSocialNPC;
+            //[NonSerialized]
+            //private SocialNPCProperty mSocialNPC;
 
-        //			[NonSerialized]
-        //			private MonsterProperty mMonster;
+            //[NonSerialized]
+            //private MonsterProperty mMonster;
 
-        //			[SerializeField]
-        //			private int mCharacterID;
+            [SerializeField]
+            private int mCharacterID;
 
-        //			[SerializeField]
-        //			private int mLevel;
+            [SerializeField]
+            private int mLevel;
 
-        //			[NonSerialized]
-        //			private int mExp;
+            [NonSerialized]
+            private int mExp;
 
-        //			[NonSerialized]
-        //			private int mSoul;
+            [NonSerialized]
+            private int mSoul;
 
-        //			[NonSerialized]
-        //			public int LoadHP;
+            [NonSerialized]
+            public int LoadHP;
 
-        //			[NonSerialized]
-        //			public int LoadMP;
+            [NonSerialized]
+            public int LoadMP;
 
-        //			[NonSerialized]
-        //			public int LoadDP;
+            [NonSerialized]
+            public int LoadDP;
 
-        //			public GameObject Owner
-        //			{
-        //				get
-        //				{
-        //					return this.mOwner;
-        //				}
-        //				set
-        //				{
-        //					this.mOwner = value;
-        //				}
-        //			}
+            public GameObject Owner
+            {
+                get
+                {
+                    return this.mOwner;
+                }
+                set
+                {
+                    this.mOwner = value;
+                }
+            }
 
-        //			public PlayerBaseProperty PlayerBase
-        //			{
-        //				get
-        //				{
-        //					return this.mPlayerBase;
-        //				}
-        //			}
+            //public PlayerBaseProperty PlayerBase
+            //{
+            //    get
+            //    {
+            //        return this.mPlayerBase;
+            //    }
+            //}
 
-        //			public HPMPDPProperty HPMPDP
-        //			{
-        //				get
-        //				{
-        //					return this.mHPMPDP;
-        //				}
-        //			}
+            //public HPMPDPProperty HPMPDP
+            //{
+            //    get
+            //    {
+            //        return this.mHPMPDP;
+            //    }
+            //}
 
-        //			public FightProperty Fight
-        //			{
-        //				get
-        //				{
-        //					return this.mFight;
-        //				}
-        //			}
+            //public FightProperty Fight
+            //{
+            //    get
+            //    {
+            //        return this.mFight;
+            //    }
+            //}
 
-        //			public CharacterProperty CharacterCommon
-        //			{
-        //				get
-        //				{
-        //					return this.mCharacter;
-        //				}
-        //			}
+            //public CharacterProperty CharacterCommon
+            //{
+            //    get
+            //    {
+            //        return this.mCharacter;
+            //    }
+            //}
 
-        //			public PlayerProperty Player
-        //			{
-        //				get
-        //				{
-        //					return this.mPlayer;
-        //				}
-        //			}
+            //public PlayerProperty Player
+            //{
+            //    get
+            //    {
+            //        return this.mPlayer;
+            //    }
+            //}
 
-        //			public SocialNPCProperty SocialNPC
-        //			{
-        //				get
-        //				{
-        //					if (this.mSocialNPC == null)
-        //					{
-        //						string message = "Error : 严重错误！！！ npc[" + ((!(this.Owner != null)) ? this.CharacterID.ToString() : this.Owner.name) + "] SocialNPC==null";
-        //						UnityEngine.Debug.LogError(message);
-        //					}
-        //					return this.mSocialNPC;
-        //				}
-        //			}
+            //public SocialNPCProperty SocialNPC
+            //{
+            //    get
+            //    {
+            //        if (this.mSocialNPC == null)
+            //        {
+            //            string message = "Error : 严重错误！！！ npc[" + ((!(this.Owner != null)) ? this.CharacterID.ToString() : this.Owner.name) + "] SocialNPC==null";
+            //            UnityEngine.Debug.LogError(message);
+            //        }
+            //        return this.mSocialNPC;
+            //    }
+            //}
 
-        //			public MonsterProperty Monster
-        //			{
-        //				get
-        //				{
-        //					return this.mMonster;
-        //				}
-        //			}
+            //public MonsterProperty Monster
+            //{
+            //    get
+            //    {
+            //        return this.mMonster;
+            //    }
+            //}
 
-        //			public int CharacterID
-        //			{
-        //				get
-        //				{
-        //					return this.mCharacterID;
-        //				}
-        //			}
+            public int CharacterID
+            {
+                get
+                {
+                    return this.mCharacterID;
+                }
+            }
 
-        //			public int Level
-        //			{
-        //				get
-        //				{
-        //					return this.mLevel;
-        //				}
-        //				private set
-        //				{
-        //					if (this.mLevel != value)
-        //					{
-        //						if (this.mPlayerBase != null)
-        //						{
-        //							uint characterID = (uint)this.mCharacterID;
-        //							int oldLevel = this.mLevel;
-        //							this.mLevel = value;
-        //							this.mPlayerBase.ChangeLevel(characterID, this.mLevel);
-        //							ChangeLevelScript.OnChangeLevel(characterID, oldLevel, this.mLevel, this.mOwner);
-        //						}
-        //						else
-        //						{
-        //							this.mLevel = value;
-        //						}
-        //						if (this.mHPMPDP != null)
-        //						{
-        //							this.mHPMPDP.HP = this.mHPMPDP.HPRange;
-        //							this.mHPMPDP.MP = this.mHPMPDP.MPRange;
-        //						}
-        //					}
-        //				}
-        //			}
+            public int Level
+            {
+                get
+                {
+                    return this.mLevel;
+                }
+                private set
+                {
+                    if (this.mLevel != value)
+                    {
+                        //if (this.mPlayerBase != null)
+                        //{
+                        //    uint characterID = (uint)this.mCharacterID;
+                        //    int oldLevel = this.mLevel;
+                        //    this.mLevel = value;
+                        //    this.mPlayerBase.ChangeLevel(characterID, this.mLevel);
+                        //    ChangeLevelScript.OnChangeLevel(characterID, oldLevel, this.mLevel, this.mOwner);
+                        //}
+                        //else
+                        //{
+                        //    this.mLevel = value;
+                        //}
+                        //if (this.mHPMPDP != null)
+                        //{
+                        //    this.mHPMPDP.HP = this.mHPMPDP.HPRange;
+                        //    this.mHPMPDP.MP = this.mHPMPDP.MPRange;
+                        //}
+                    }
+                }
+            }
 
-        //			public int Exp
-        //			{
-        //				get
-        //				{
-        //					return this.mExp;
-        //				}
-        //				set
-        //				{
-        //					if (this.mExp != value)
-        //					{
-        //						try
-        //						{
-        //							this.mExp = value;
-        //							this.Level = PlayerBaseProperty.LevelData.FindLevel(this.mExp);
-        //						}
-        //						catch (Exception ex)
-        //						{
-        //							UnityEngine.Debug.LogException(ex);
-        //							UIDialogManager.Instance.ShowNoForceInfoDialog(ex.ToString(), 60f);
-        //						}
-        //					}
-        //				}
-        //			}
+            public int Exp
+            {
+                get
+                {
+                    return this.mExp;
+                }
+                set
+                {
+                    if (this.mExp != value)
+                    {
+                        try
+                        {
+                            this.mExp = value;
+                           // this.Level = PlayerBaseProperty.LevelData.FindLevel(this.mExp);
+                        }
+                        catch (Exception ex)
+                        {
+                            UnityEngine.Debug.LogException(ex);
+                          //  UIDialogManager.Instance.ShowNoForceInfoDialog(ex.ToString(), 60f);
+                        }
+                    }
+                }
+            }
 
-        //			public int NeedExp
-        //			{
-        //				get
-        //				{
-        //					return PlayerBaseProperty.LevelData.GetLevelExp(this.mLevel) - this.mExp;
-        //				}
-        //			}
+            //public int NeedExp
+            //{
+            //    get
+            //    {
+            //        return PlayerBaseProperty.LevelData.GetLevelExp(this.mLevel) - this.mExp;
+            //    }
+            //}
 
-        //			public int Soul
-        //			{
-        //				get
-        //				{
-        //					return this.mSoul;
-        //				}
-        //				set
-        //				{
-        //					this.mSoul = value;
-        //				}
-        //			}
+            public int Soul
+            {
+                get
+                {
+                    return this.mSoul;
+                }
+                set
+                {
+                    this.mSoul = value;
+                }
+            }
 
-        //			public void initialization(GameObject inOwner, int inCharacterID, int inLevel)
-        //			{
-        //				this.mOwner = inOwner;
-        //				this.mCharacterID = inCharacterID;
-        //				this.Reset();
-        //				this.Level = inLevel;
-        //			}
+            public void initialization(GameObject inOwner, int inCharacterID, int inLevel)
+            {
+                this.mOwner = inOwner;
+                this.mCharacterID = inCharacterID;
+                this.Reset();
+                this.Level = inLevel;
+            }
 
-        //			public void initialization(GameObject inOwner, uint inCharacterID, int inLevel)
-        //			{
-        //				this.initialization(inOwner, (int)inCharacterID, inLevel);
-        //			}
+            public void initialization(GameObject inOwner, uint inCharacterID, int inLevel)
+            {
+                this.initialization(inOwner, (int)inCharacterID, inLevel);
+            }
 
-        //			public void Reset()
-        //			{
-        //				uint num = (uint)this.mCharacterID;
-        //				if (this.mPlayerBase != null)
-        //				{
-        //					this.mPlayerBase = null;
-        //				}
-        //				PlayerBaseProperty.PlayerBaseData data = PlayerBaseProperty.GetData(num, this.Level);
-        //				if (data != null)
-        //				{
-        //					this.mPlayerBase = new PlayerBaseProperty(data);
-        //				}
-        //				if (this.mHPMPDP != null)
-        //				{
-        //					this.mHPMPDP.UnLink();
-        //					this.mHPMPDP = null;
-        //				}
-        //				HPMPDPProperty.StaticData data2 = HPMPDPProperty.StaticData.GetData(num);
-        //				if (data2 != null)
-        //				{
-        //					this.mHPMPDP = new HPMPDPProperty(data2);
-        //				}
-        //				if (this.mFight != null)
-        //				{
-        //					this.mFight.UnLink();
-        //					this.mFight = null;
-        //				}
-        //				FightProperty.StaticData data3 = FightProperty.StaticData.GetData(num);
-        //				if (data3 != null)
-        //				{
-        //					this.mFight = new FightProperty(data3);
-        //				}
-        //				if (this.mHPMPDP != null)
-        //				{
-        //					this.mHPMPDP.LinkPlayerBase = this.mPlayerBase;
-        //					this.mHPMPDP.SetWithoutEvents(this.mHPMPDP.HPRange, 0, 0);
-        //				}
-        //				if (this.mFight != null)
-        //				{
-        //					this.mFight.LinkPlayerBase = this.mPlayerBase;
-        //				}
-        //				CharacterProperty.StaticData data4 = CharacterProperty.StaticData.GetData(num);
-        //				if (data4 != null)
-        //				{
-        //					this.mCharacter = new CharacterProperty(data4);
-        //				}
-        //				else
-        //				{
-        //					this.mCharacter = null;
-        //				}
-        //				PlayerProperty.StaticData data5 = PlayerProperty.StaticData.GetData(num);
-        //				if (data5 != null)
-        //				{
-        //					this.mPlayer = new PlayerProperty(data5);
-        //				}
-        //				else
-        //				{
-        //					this.mPlayer = null;
-        //				}
-        //				SocialNPCProperty.StaticData data6 = SocialNPCProperty.StaticData.GetData(num);
-        //				if (data6 != null)
-        //				{
-        //					this.mSocialNPC = new SocialNPCProperty(data6);
-        //				}
-        //				else
-        //				{
-        //					this.mSocialNPC = null;
-        //				}
-        //				MonsterProperty.StaticData data7 = MonsterProperty.StaticData.GetData(num);
-        //				if (data7 != null)
-        //				{
-        //					this.mMonster = new MonsterProperty(data7);
-        //				}
-        //				else
-        //				{
-        //					this.mMonster = null;
-        //				}
-        //			}
+            public void Reset()
+            {
+                uint num = (uint)this.mCharacterID;
+                //if (this.mPlayerBase != null)
+                //{
+                //    this.mPlayerBase = null;
+                //}
+                //PlayerBaseProperty.PlayerBaseData data = PlayerBaseProperty.GetData(num, this.Level);
+                //if (data != null)
+                //{
+                //    this.mPlayerBase = new PlayerBaseProperty(data);
+                //}
+                //if (this.mHPMPDP != null)
+                //{
+                //    this.mHPMPDP.UnLink();
+                //    this.mHPMPDP = null;
+                //}
+                //HPMPDPProperty.StaticData data2 = HPMPDPProperty.StaticData.GetData(num);
+                //if (data2 != null)
+                //{
+                //    this.mHPMPDP = new HPMPDPProperty(data2);
+                //}
+                //if (this.mFight != null)
+                //{
+                //    this.mFight.UnLink();
+                //    this.mFight = null;
+                //}
+                //FightProperty.StaticData data3 = FightProperty.StaticData.GetData(num);
+                //if (data3 != null)
+                //{
+                //    this.mFight = new FightProperty(data3);
+                //}
+                //if (this.mHPMPDP != null)
+                //{
+                //    this.mHPMPDP.LinkPlayerBase = this.mPlayerBase;
+                //    this.mHPMPDP.SetWithoutEvents(this.mHPMPDP.HPRange, 0, 0);
+                //}
+                //if (this.mFight != null)
+                //{
+                //    this.mFight.LinkPlayerBase = this.mPlayerBase;
+                //}
+                //CharacterProperty.StaticData data4 = CharacterProperty.StaticData.GetData(num);
+                //if (data4 != null)
+                //{
+                //    this.mCharacter = new CharacterProperty(data4);
+                //}
+                //else
+                //{
+                //    this.mCharacter = null;
+                //}
+                //PlayerProperty.StaticData data5 = PlayerProperty.StaticData.GetData(num);
+                //if (data5 != null)
+                //{
+                //    this.mPlayer = new PlayerProperty(data5);
+                //}
+                //else
+                //{
+                //    this.mPlayer = null;
+                //}
+                //SocialNPCProperty.StaticData data6 = SocialNPCProperty.StaticData.GetData(num);
+                //if (data6 != null)
+                //{
+                //    this.mSocialNPC = new SocialNPCProperty(data6);
+                //}
+                //else
+                //{
+                //    this.mSocialNPC = null;
+                //}
+                //MonsterProperty.StaticData data7 = MonsterProperty.StaticData.GetData(num);
+                //if (data7 != null)
+                //{
+                //    this.mMonster = new MonsterProperty(data7);
+                //}
+                //else
+                //{
+                //    this.mMonster = null;
+                //}
+            }
 
-        //			public void Save(BinaryWriter writer)
-        //			{
-        //				writer.Write(this.mCharacterID);
-        //				if (this.mHPMPDP != null)
-        //				{
-        //					writer.Write(this.mHPMPDP.HP);
-        //					writer.Write(this.mHPMPDP.MP);
-        //					writer.Write(this.mHPMPDP.DP);
-        //				}
-        //				else
-        //				{
-        //					writer.Write(0);
-        //					writer.Write(0);
-        //					writer.Write(0);
-        //				}
-        //				writer.Write(this.mExp);
-        //				writer.Write(this.mSoul);
-        //			}
+            public void Save(BinaryWriter writer)
+            {
+                writer.Write(this.mCharacterID);
+                //if (this.mHPMPDP != null)
+                //{
+                //    writer.Write(this.mHPMPDP.HP);
+                //    writer.Write(this.mHPMPDP.MP);
+                //    writer.Write(this.mHPMPDP.DP);
+                //}
+                //else
+                //{
+                //    writer.Write(0);
+                //    writer.Write(0);
+                //    writer.Write(0);
+                //}
+                writer.Write(this.mExp);
+                writer.Write(this.mSoul);
+            }
 
-        //			public void Load(BinaryReader reader)
-        //			{
-        //				this.mCharacterID = reader.ReadInt32();
-        //				this.LoadHP = reader.ReadInt32();
-        //				this.LoadMP = reader.ReadInt32();
-        //				this.LoadDP = reader.ReadInt32();
-        //				if (SaveManager.VersionNum < 21u)
-        //				{
-        //					this.mLevel = reader.ReadInt32();
-        //				}
-        //				this.mExp = reader.ReadInt32();
-        //				this.mLevel = PlayerBaseProperty.LevelData.FindLevel(this.mExp);
-        //				this.mSoul = reader.ReadInt32();
-        //				this.Reset();
-        //			}
-        //		}
+            public void Load(BinaryReader reader)
+            {
+                this.mCharacterID = reader.ReadInt32();
+                this.LoadHP = reader.ReadInt32();
+                this.LoadMP = reader.ReadInt32();
+                this.LoadDP = reader.ReadInt32();
+                //if (SaveManager.VersionNum < 21u)
+                //{
+                //    this.mLevel = reader.ReadInt32();
+                //}
+                this.mExp = reader.ReadInt32();
+              //  this.mLevel = PlayerBaseProperty.LevelData.FindLevel(this.mExp);
+                this.mSoul = reader.ReadInt32();
+                this.Reset();
+            }
+        }
 
         [Serializable]
         public class SkillInfo
@@ -355,138 +355,138 @@ namespace SoftStar.Pal6
             public int m_CurrentExp;
         }
 
-        //		public enum NPCState
-        //		{
-        //			Default,
-        //			Patrol,
-        //			Guard,
-        //			Die
-        //		}
+        public enum NPCState
+        {
+            Default,
+            Patrol,
+            Guard,
+            Die
+        }
 
-        //		public delegate void void_fun_TF(PalNPC npc);
+        public delegate void void_fun_TF(PalNPC npc);
 
-        //		[HideInInspector, SerializeField]
-        //		public PalNPC.CharacterData Data;
+        [HideInInspector, SerializeField]
+        public PalNPC.CharacterData Data;
 
-        //		[NonSerialized]
-        //		public BuffDebuffManager.BuffDebuffOwner BuffDebuffData;
+        //[NonSerialized]
+        //public BuffDebuffManager.BuffDebuffOwner BuffDebuffData;
 
-        //		public int[] MonsterGroups;
+        public int[] MonsterGroups;
 
-        //		public int mBattleFieldID;
+        public int mBattleFieldID;
 
-        //		public AudioClip m_BeHitSound;
+        public AudioClip m_BeHitSound;
 
-        //		private static int[] mAdvanceSkillIDs = new int[]
-        //		{
-        //			101,
-        //			3088,
-        //			104,
-        //			2078,
-        //			107,
-        //			2084,
-        //			114,
-        //			3090,
-        //			2102,
-        //			116,
-        //			3097,
-        //			3096
-        //		};
+        private static int[] mAdvanceSkillIDs = new int[]
+        {
+                    101,
+                    3088,
+                    104,
+                    2078,
+                    107,
+                    2084,
+                    114,
+                    3090,
+                    2102,
+                    116,
+                    3097,
+                    3096
+        };
 
-        //		public List<PalNPC.SkillInfo> m_SkillIDs = new List<PalNPC.SkillInfo>();
+        public List<PalNPC.SkillInfo> m_SkillIDs = new List<PalNPC.SkillInfo>();
 
-        //		[NonSerialized]
-        //		public float ExpRate = 1f;
+        [NonSerialized]
+        public float ExpRate = 1f;
 
-        //		[NonSerialized]
-        //		public int ImmunityAllBadBattleStates;
+        [NonSerialized]
+        public int ImmunityAllBadBattleStates;
 
-        //		[NonSerialized]
-        //		public float FengYinAddRate;
+        [NonSerialized]
+        public float FengYinAddRate;
 
-        //		[NonSerialized]
-        //		public float MiaoShouAddRate;
+        [NonSerialized]
+        public float MiaoShouAddRate;
 
-        //		[NonSerialized]
-        //		public float BreakAddRate;
+        [NonSerialized]
+        public float BreakAddRate;
 
-        //		[NonSerialized]
-        //		public List<GameObject> Weapons = new List<GameObject>(2);
+        [NonSerialized]
+        public List<GameObject> Weapons = new List<GameObject>(2);
 
-        //		[NonSerialized]
-        //		public GameObject ornament;
+        [NonSerialized]
+        public GameObject ornament;
 
-        //		[NonSerialized]
-        //		public Texture oriMainTex;
+        [NonSerialized]
+        public Texture oriMainTex;
 
-        //		[NonSerialized]
-        //		public Texture oriSpecTex;
+        [NonSerialized]
+        public Texture oriSpecTex;
 
-        //		private Material m_oriAssortMat;
+        private Material m_oriAssortMat;
 
-        //		private GameObject weaponAssortObj;
+        private GameObject weaponAssortObj;
 
-        //		[NonSerialized]
-        //		private uint[] mLoadEquipSlots;
+        [NonSerialized]
+        private uint[] mLoadEquipSlots;
 
-        //		[NonSerialized]
-        //		private Dictionary<EquipSlotEnum, ItemWatcher> mEquipSlots = new Dictionary<EquipSlotEnum, ItemWatcher>();
+        //[NonSerialized]
+        //private Dictionary<EquipSlotEnum, ItemWatcher> mEquipSlots = new Dictionary<EquipSlotEnum, ItemWatcher>();
 
-        //		private AchievementManager.ACHIEVEMENT_INDEX mCurrentAchievement = (AchievementManager.ACHIEVEMENT_INDEX)(-1);
+        //private AchievementManager.ACHIEVEMENT_INDEX mCurrentAchievement = (AchievementManager.ACHIEVEMENT_INDEX)(-1);
 
-        //		protected PalNPC.NPCState state;
+        protected PalNPC.NPCState state;
 
-        //		public PalNPC.void_fun_TF OnLoadModelEnd;
+        public PalNPC.void_fun_TF OnLoadModelEnd;
 
-        //		public bool bEnableOnLoadModelEnd = true;
+        public bool bEnableOnLoadModelEnd = true;
 
-        //		private Animator m_animator;
+        private Animator m_animator;
 
-        //		public Patrol patrol;
+        //public Patrol patrol;
 
-        //		public NPCMode curNPCMode = NPCMode.fight;
+        //public NPCMode curNPCMode = NPCMode.fight;
 
-        //		public NPCPersonalityType personalityType;
+        //public NPCPersonalityType personalityType;
 
-        //		public Perception perception;
+        //public Perception perception;
 
-        //		public float hatred = 50f;
+        public float hatred = 50f;
 
-        //		public float CurFightDistance = 0.5f;
+        public float CurFightDistance = 0.5f;
 
-        //		public string PrefabID = string.Empty;
+        public string PrefabID = string.Empty;
 
-        //		private bool IsDataInit;
+        private bool IsDataInit;
 
-        //		private Footmark m_FootMark;
+        //private Footmark m_FootMark;
 
-        //		public float BattleColR = 1.67f;
+        public float BattleColR = 1.67f;
 
-        //		public float BattleColH = 0.1f;
+        public float BattleColH = 0.1f;
 
-        //		public List<Interact> interActs = new List<Interact>();
+        //public List<Interact> interActs = new List<Interact>();
 
-        //		private int m_SkillGroup;
+        private int m_SkillGroup;
 
-        //		private bool m_bDontLoadModel;
+        private bool m_bDontLoadModel;
 
-        //		private Action ProcessCore;
+        private Action ProcessCore;
 
-        //		public static float interval = 1f;
+        public static float interval = 1f;
 
-        //		private float curTime = 0.23f;
+        private float curTime = 0.23f;
 
-        //		private Transform modelTF;
+        private Transform modelTF;
 
-        //		private bool isMonster;
+        private bool isMonster;
 
-        //		public static bool SevereCull = true;
+        public static bool SevereCull = true;
 
-        //		public static float CullCamOffsetRatio = 0.35f;
+        public static float CullCamOffsetRatio = 0.35f;
 
-        //		private List<string> uScriptsName = new List<string>();
+        private List<string> uScriptsName = new List<string>();
 
-        //		private string curAnimName;
+        private string curAnimName;
 
         //		public string ShowName
         //		{
@@ -1002,18 +1002,18 @@ namespace SoftStar.Pal6
         //			return num3 != 0L;
         //		}
 
-        //		public override void Awake()
-        //		{
-        //			if (this.m_bDontLoadModel)
-        //			{
-        //				return;
-        //			}
-        //			base.Awake();
-        //			if (base.gameObject.IsMonster())
-        //			{
-        //				CharactersManager.AddMonster(this);
-        //			}
-        //		}
+        public override void Awake()
+        {
+            if (this.m_bDontLoadModel)
+            {
+                return;
+            }
+            base.Awake();
+            //if (base.gameObject.IsMonster())
+            //{
+            //    CharactersManager.AddMonster(this);
+            //}
+        }
 
         //		public override void Start()
         //		{

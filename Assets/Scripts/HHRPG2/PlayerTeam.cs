@@ -114,7 +114,7 @@ public class PlayerTeam : MonoBehaviour
                 PlayersManager.AddPlayer(this.data[i].mCharacterID, true);
             }
         }
-        PlayersManager.SetPlayer(0, true);
+        //PlayersManager.SetPlayer(0, true);
         //PlayersManager.SetPlayerPosByDestObj("SceneEnter");
         //PlayerCtrlManager.Reset();
     }

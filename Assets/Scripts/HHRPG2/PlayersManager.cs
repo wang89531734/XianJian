@@ -855,46 +855,49 @@ public class PlayersManager
             //{
             //    SavePrefabTarget savePrefabTarget = newPlayer.AddComponent<SavePrefabTarget>();
             //}
-            //if (component.model == null)
-            //{
-            //    //PalNPC expr_8C = component;
-            //    //expr_8C.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(expr_8C.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.WaitLoadOverThanSetActiveFalse));
-            ////}
-            //else
-            //{
-            //    ShroudInstance component2 = component.model.GetComponent<ShroudInstance>();
-            //    if (component2 != null)
-            //    {
-            //        component2.blendWeightK = 100f;
-            //    }
-            //    AnimCtrlScript component3 = component.model.GetComponent<AnimCtrlScript>();
-            //    component3.ActiveAnimCrossFade("ZhanLi", false, 0f, true);
-            //    if (component.Data.CharacterID == 2)
-            //    {
-            //        if (!component.animator.GetCurrentAnimatorStateInfo(0).IsName("yidongState.ZhanLi"))
-            //        {
-            //            LateSetActive.Init(component.model, false, 0.01f);
-            //        }
-            //        else
-            //        {
-            //            UtilFun.SetActive(component.model, false);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        UtilFun.SetActive(component.model, false);
-            //    }
-            //}
-            //if (bSetLevel)
-            //{
-            //    PlayersManager.SetLevel(newPlayer);
-            //}
-            //PlayersManager.ActivePlayers.Add(newPlayer);
-            //if (component.Data != null)
-            //{
-            //    FlagManager.SetBoolFlag((ulong)(34048L + (long)component.Data.CharacterID), true);
-            //}
-        }
+            if (component.model == null)
+            {
+                //PalNPC expr_8C = component;
+                //expr_8C.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(expr_8C.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.WaitLoadOverThanSetActiveFalse));
+            }
+            else
+            {
+                    //ShroudInstance component2 = component.model.GetComponent<ShroudInstance>();
+                    //if (component2 != null)
+                    //{
+                    //    component2.blendWeightK = 100f;
+                    //}
+                    //AnimCtrlScript component3 = component.model.GetComponent<AnimCtrlScript>();
+                    //component3.ActiveAnimCrossFade("ZhanLi", false, 0f, true);
+                    //if (component.Data.CharacterID == 2)
+                    //{
+                    //    if (!component.animator.GetCurrentAnimatorStateInfo(0).IsName("yidongState.ZhanLi"))
+                    //    {
+                    //        LateSetActive.Init(component.model, false, 0.01f);
+                    //    }
+                    //    else
+                    //    {
+                    //        UtilFun.SetActive(component.model, false);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    UtilFun.SetActive(component.model, false);
+                    //}
+            }
+
+                //if (bSetLevel)
+                //{
+                //    PlayersManager.SetLevel(newPlayer);
+                //}
+
+                PlayersManager.ActivePlayers.Add(newPlayer);
+
+                //if (component.Data != null)
+                //{
+                //    FlagManager.SetBoolFlag((ulong)(34048L + (long)component.Data.CharacterID), true);
+                //}
+            }
         else
         {
             Debug.Log("Log : PlayersManager.AddPlayer 已经存在 " + newPlayer.name);

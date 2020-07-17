@@ -99,10 +99,12 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 		{
 			this.m_curObjType = this.objType;
 		}
+
 		if (this.objType != ObjType.none && this.objType != ObjType.none0)
 		{
-			//CharactersManager.AddCharacter(this);
-		}
+            CharactersManager.AddCharacter(this);
+        }
+
 		//if (base.GetComponent<SignSetActiveByState>() != null)
 		//{
 		//	CharactersManager.AddObj(this);
