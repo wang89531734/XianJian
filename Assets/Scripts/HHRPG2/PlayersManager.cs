@@ -35,6 +35,8 @@ public class PlayersManager
 
     public static List<GameObject> AllPlayers = new List<GameObject>();
 
+    private static List<PerceptionRange> AllPlayersPerceptionRange = new List<PerceptionRange>();
+
     private static int PlayerIndex = 0;
 
     private static string PlayerTemplatePath = "/Resources/Template/Character/";
@@ -85,8 +87,8 @@ public class PlayersManager
 
     public static void Initialize()
     {
-        PlayersManager.AllPlayers.Clear();  
-
+        PlayersManager.AllPlayers.Clear();
+        PlayersManager.AllPlayersPerceptionRange.Clear();
         GameObject gameObject2 = PlayersManager.FindMainChar(0, true);
         if (gameObject2 != null)
         {
@@ -146,12 +148,6 @@ public class PlayersManager
                 PalNPC expr_1FB = component5;
                // expr_1FB.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(expr_1FB.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.OnLoadModelEnd));
             }
-        }
-
-        GameObject gameObject6 = PlayersManager.FindMainChar(7, true);
-        if (gameObject6 != null)
-        {
-            //PlayersManager.PlayerInitSneakScript(gameObject6, null);
         }
         //ScenesManager.Instance.OnChangeMap -= new Action<int>(PlayersManager.OnChangeMap);
         //ScenesManager.Instance.OnChangeMap += new Action<int>(PlayersManager.OnChangeMap);
@@ -1255,4 +1251,22 @@ public class PlayersManager
     //			PlayersManager.ResetPlayersInteract(flagValue > 0);
     //		}
     //	}
+
+    public static void AddPlayerPerceptionRange(PalNPC npc)
+    {
+        PerceptionRange[] componentsInChildren = npc.model.GetComponentsInChildren<PerceptionRange>();
+        for (int i = 0; i < componentsInChildren.Length; i++)
+        {
+            PlayersManager.AllPlayersPerceptionRange.Add(componentsInChildren[i]);
+        }
+    }
+
+    public static void SetAllPlayersPerceptionRange(bool enable)
+    {
+        for (int i = 0; i < PlayersManager.AllPlayersPerceptionRange.Count; i++)
+        {
+            Collider component = PlayersManager.AllPlayersPerceptionRange[i].GetComponent<Collider>();
+            component.enabled = enable;
+        }
+    }
 }

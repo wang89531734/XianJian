@@ -24,7 +24,7 @@ public class Agent : MonoBehaviour
     public CharacterController charCtrller;
 
     [NonSerialized]
-    //public Perception perception;
+    public Perception perception;
 
     public bool bControl = true;
 
@@ -32,7 +32,7 @@ public class Agent : MonoBehaviour
 
     private bool m_NeedEnableAgent = true;
 
-    //public ControlMode m_curCtrlMode = ControlMode.None;
+    public ControlMode m_curCtrlMode = ControlMode.None;
 
     protected bool controlByAgent = true;
 

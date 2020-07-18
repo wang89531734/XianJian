@@ -448,7 +448,7 @@ namespace SoftStar.Pal6
 
         //public NPCPersonalityType personalityType;
 
-        //public Perception perception;
+        public Perception perception;
 
         public float hatred = 50f;
 
@@ -603,17 +603,17 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		public Animator animator
-        //		{
-        //			get
-        //			{
-        //				if (this.m_animator == null && this.model != null)
-        //				{
-        //					this.m_animator = this.model.GetComponent<Animator>();
-        //				}
-        //				return this.m_animator;
-        //			}
-        //		}
+        public Animator animator
+        {
+            get
+            {
+                if (this.m_animator == null && this.model != null)
+                {
+                    this.m_animator = this.model.GetComponent<Animator>();
+                }
+                return this.m_animator;
+            }
+        }
 
         //		public Footmark footMark
         //		{

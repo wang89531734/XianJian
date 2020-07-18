@@ -921,37 +921,37 @@ public static class UtilFun
     //		return null;
     //	}
 
-    //	public static GameObject GetModelObj(this GameObject go, bool NeedActive = false)
-    //	{
-    //		if (go == null)
-    //		{
-    //			UnityEngine.Debug.LogError("GetModelObj 参数go为Null");
-    //			return null;
-    //		}
-    //		GameObject gameObject = null;
-    //		PalGameObjectBase component = go.GetComponent<PalGameObjectBase>();
-    //		if (component != null)
-    //		{
-    //			if (component.model == null)
-    //			{
-    //				Animator componentInChildren = component.GetComponentInChildren<Animator>();
-    //				if (componentInChildren != null)
-    //				{
-    //					component.model = componentInChildren.gameObject;
-    //				}
-    //			}
-    //			gameObject = component.model;
-    //		}
-    //		if (gameObject == null)
-    //		{
-    //			gameObject = go;
-    //		}
-    //		if (NeedActive && !gameObject.activeSelf)
-    //		{
-    //			UtilFun.SetActive(gameObject, true);
-    //		}
-    //		return gameObject;
-    //	}
+    public static GameObject GetModelObj(this GameObject go, bool NeedActive = false)
+    {
+        if (go == null)
+        {
+            UnityEngine.Debug.LogError("GetModelObj 参数go为Null");
+            return null;
+        }
+        GameObject gameObject = null;
+        PalGameObjectBase component = go.GetComponent<PalGameObjectBase>();
+        if (component != null)
+        {
+            if (component.model == null)
+            {
+                Animator componentInChildren = component.GetComponentInChildren<Animator>();
+                if (componentInChildren != null)
+                {
+                    component.model = componentInChildren.gameObject;
+                }
+            }
+            gameObject = component.model;
+        }
+        if (gameObject == null)
+        {
+            gameObject = go;
+        }
+        if (NeedActive && !gameObject.activeSelf)
+        {
+            UtilFun.SetActive(gameObject, true);
+        }
+        return gameObject;
+    }
 
     //	public static string GetModelResourcePath(string modelResourcePath)
     //	{

@@ -137,34 +137,33 @@ public class PlayerCtrlManager
 		}
 	}
 
-	//private static CharacterController charCtrler
-	//{
-	//	get
-	//	{
-	//		return PlayerCtrlManager.agentObj.GetComponent<CharacterController>();
-	//	}
-	//}
+    private static CharacterController charCtrler
+    {
+        get
+        {
+            return PlayerCtrlManager.agentObj.GetComponent<CharacterController>();
+        }
+    }
 
-	//public static Agent agentObj
-	//{
-	//	get
-	//	{
-	//		if (PlayerCtrlManager.m_agentObj == null && PlayersManager.Player != null)
-	//		{
-	//			GameObject modelObj = PlayersManager.Player.GetModelObj(false);
-	//			PlayerCtrlManager.m_agentObj = modelObj.GetComponent<Agent>();
-	//			PlayerCtrlManager.PlayerModelTF = PlayerCtrlManager.m_agentObj.transform;
-	//			PlayerCtrlManager.sneakAttack = PlayersManager.Player.GetComponent<SneakAttack>();
-	//			if (PlayerCtrlManager.m_agentObj)
-	//			{
-	//				PlayerCtrlManager.SetAgentProperty(PlayerCtrlManager.m_agentObj);
-	//			}
-	//		}
-	//		return PlayerCtrlManager.m_agentObj;
-	//	}
-	//}
+    public static Agent agentObj
+    {
+        get
+        {
+            if (PlayerCtrlManager.m_agentObj == null && PlayersManager.Player != null)
+            {
+                GameObject modelObj = PlayersManager.Player.GetModelObj(false);
+                PlayerCtrlManager.m_agentObj = modelObj.GetComponent<Agent>();
+                PlayerCtrlManager.PlayerModelTF = PlayerCtrlManager.m_agentObj.transform;
+                if (PlayerCtrlManager.m_agentObj)
+                {
+                    PlayerCtrlManager.SetAgentProperty(PlayerCtrlManager.m_agentObj);
+                }
+            }
+            return PlayerCtrlManager.m_agentObj;
+        }
+    }
 
-	private static PlayerCtrlManager.PlayerControlModel CurControlModel
+    private static PlayerCtrlManager.PlayerControlModel CurControlModel
 	{
 		get
 		{
@@ -186,48 +185,48 @@ public class PlayerCtrlManager
 		}
 	}
 
-	//private static void SetAgentProperty(Agent agent)
-	//{
-	//	agent.curCtrlMode = ControlMode.ControlByPlayer;
-	//	if (agent.charCtrller == null)
-	//	{
-	//		agent.charCtrller = agent.GetComponent<CharacterController>();
-	//	}
-	//	if (agent.charCtrller != null && !agent.charCtrller.enabled)
-	//	{
-	//		agent.charCtrller.enabled = true;
-	//		agent.charCtrller.detectCollisions = true;
-	//	}
-	//	agent.gameObject.layer = 8;
-	//	Animator animator = agent.animator;
-	//	if (animator != null)
-	//	{
-	//		animator.Play("ZhanLi");
-	//		animator.SetFloat("Speed", 0f);
-	//		animator.SetBool("Move", false);
-	//		animator.speed = 1f;
-	//	}
-	//	agent.IsJump = false;
-	//	SmoothFollow2 orAddComponent = PalMain.MainCamera.GetOrAddComponent<SmoothFollow2>();
-	//	orAddComponent.Init(agent.gameObject);
-	//	if (agent.name == "YueJinChao" && animator != null)
-	//	{
-	//		float layerWeight = animator.GetLayerWeight(1);
-	//		if (layerWeight < 0.5f && agent.palNPC != null)
-	//		{
-	//			List<GameObject> weapons = agent.palNPC.Weapons;
-	//			foreach (GameObject current in weapons)
-	//			{
-	//				if (!(current == null))
-	//				{
-	//					UtilFun.YueJinChaoShenSuo(current.transform, Vector3.zero);
-	//				}
-	//			}
-	//		}
-	//	}
-	//}
+    private static void SetAgentProperty(Agent agent)
+    {
+        //agent.curCtrlMode = ControlMode.ControlByPlayer;
+        //if (agent.charCtrller == null)
+        //{
+        //    agent.charCtrller = agent.GetComponent<CharacterController>();
+        //}
+        //if (agent.charCtrller != null && !agent.charCtrller.enabled)
+        //{
+        //    agent.charCtrller.enabled = true;
+        //    agent.charCtrller.detectCollisions = true;
+        //}
+        //agent.gameObject.layer = 8;
+        //Animator animator = agent.animator;
+        //if (animator != null)
+        //{
+        //    animator.Play("ZhanLi");
+        //    animator.SetFloat("Speed", 0f);
+        //    animator.SetBool("Move", false);
+        //    animator.speed = 1f;
+        //}
+        //agent.IsJump = false;
+        //SmoothFollow2 orAddComponent = PalMain.MainCamera.GetOrAddComponent<SmoothFollow2>();
+        //orAddComponent.Init(agent.gameObject);
+        //if (agent.name == "YueJinChao" && animator != null)
+        //{
+        //    float layerWeight = animator.GetLayerWeight(1);
+        //    if (layerWeight < 0.5f && agent.palNPC != null)
+        //    {
+        //        List<GameObject> weapons = agent.palNPC.Weapons;
+        //        foreach (GameObject current in weapons)
+        //        {
+        //            if (!(current == null))
+        //            {
+        //                UtilFun.YueJinChaoShenSuo(current.transform, Vector3.zero);
+        //            }
+        //        }
+        //    }
+        //}
+    }
 
-	public static void Reset()
+    public static void Reset()
 	{
 		//PlayerCtrlManager.m_agentObj = null;
 	}
@@ -296,7 +295,7 @@ public class PlayerCtrlManager
 		PlayerCtrlManager.maskValue = ~PlayerCtrlManager.maskValue;
 	}
 
-	private static void OnInit()
+	public static void OnInit()
 	{
 		PlayerCtrlManager.SetJumpEvent(true);
 		PlayerCtrlManager.bControl = true;
@@ -368,7 +367,6 @@ public class PlayerCtrlManager
 	//	if (currentAnimatorStateInfo.IsName("yidongState.ZhanLi") || currentAnimatorStateInfo.IsName("yidongState.YiDong") || currentAnimatorStateInfo.IsName("yidongState.ZhuoDi") || currentAnimatorStateInfo.IsName("yidongState.ZhuoDiPao") || currentAnimatorStateInfo.IsName("yidongState.XiuXian") || currentAnimatorStateInfo.IsName("yidongState.YuanDiZou"))
 	//	{
 	//		UIManager.Instance.DoNotOpenMainMenu = true;
-	//		SneakAttack.canQiXi = false;
 	//		agentObj.IsJump = true;
 	//		agentObj.animCtrl.ActiveAnimCrossFade("TiaoQi", false, 0.03f, true);
 	//		animator.SetFloat("VerticalSpeed", 10f);
@@ -450,7 +448,7 @@ public class PlayerCtrlManager
 	//			}
 	//		}
 	//	}
-	//	SneakAttack.SneakUpdate();
+
 	//	if (InputManager.GetKeyDown(KEY_ACTION.JUMP, false) && PlayerCtrlManager.ProcessSpaceKey != null)
 	//	{
 	//		SlideDown instance = SlideDown.Instance;
