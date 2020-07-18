@@ -35,19 +35,17 @@ public class PlayersManager
 
     public static List<GameObject> AllPlayers = new List<GameObject>();
 
-    //	private static List<PerceptionRange> AllPlayersPerceptionRange = new List<PerceptionRange>();
-
     private static int PlayerIndex = 0;
 
     private static string PlayerTemplatePath = "/Resources/Template/Character/";
 
     public static Action<int> OnAddPlayer = null;
 
-    //	private static Transform tempDestTF = null;
+    private static Transform tempDestTF = null;
 
-    //	private static int TempPlayersCount = 0;
+    private static int TempPlayersCount = 0;
 
-    //	private static int TempPlayerIndex = 0;
+    private static int TempPlayerIndex = 0;
 
     public static event Action<int> OnTabPlayer;
 
@@ -85,93 +83,81 @@ public class PlayersManager
         PlayersManager.OnRemovePlayer = null;
     }
 
-    //	public static void Initialize()
-    //	{
-    //		PlayersManager.AllPlayers.Clear();
-    //		PlayersManager.AllPlayersPerceptionRange.Clear();
-    //		for (int i = 0; i < 8; i++)
-    //		{
-    //			if (i != 6)
-    //			{
-    //				GameObject gameObject = PlayersManager.FindMainChar(i, true);
-    //				if (!(gameObject == null))
-    //				{
-    //					PalNPC component = gameObject.GetComponent<PalNPC>();
-    //					if (!(component == null))
-    //					{
-    //						PalNPC expr_59 = component;
-    //						expr_59.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(expr_59.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.SetClothFar));
-    //					}
-    //				}
-    //			}
-    //		}
-    //		GameObject gameObject2 = PlayersManager.FindMainChar(0, true);
-    //		if (gameObject2 != null)
-    //		{
-    //			PalNPC component2 = gameObject2.GetComponent<PalNPC>();
-    //			if (component2 == null)
-    //			{
-    //				Debug.Log("PlayersManager.Initialize: NPC 0 is null");
-    //			}
-    //			else
-    //			{
-    //				PalNPC expr_BF = component2;
-    //				expr_BF.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(expr_BF.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.OnLoadModelEnd));
-    //			}
-    //		}
-    //		GameObject gameObject3 = PlayersManager.FindMainChar(5, true);
-    //		if (gameObject3 != null)
-    //		{
-    //			PalNPC component3 = gameObject3.GetComponent<PalNPC>();
-    //			if (component3 == null)
-    //			{
-    //				Debug.Log("PlayersManager.Initialize: NPC 5 is null");
-    //			}
-    //			else
-    //			{
-    //				PalNPC expr_11D = component3;
-    //				expr_11D.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(expr_11D.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.OnLoadModelEnd));
-    //			}
-    //		}
-    //		GameObject gameObject4 = PlayersManager.FindMainChar(3, true);
-    //		if (gameObject4 != null)
-    //		{
-    //			ModelChangeScript component4 = gameObject4.GetComponent<ModelChangeScript>();
-    //			if (component4 != null)
-    //			{
-    //				ModelChangeScript expr_16C = component4;
-    //				expr_16C.OnSetModeEnd = (Action<PalNPC>)Delegate.Combine(expr_16C.OnSetModeEnd, new Action<PalNPC>(PlayersManager.OnSetModeEnd));
-    //			}
-    //		}
-    //		GameObject gameObject5 = PlayersManager.FindMainChar(4, true);
-    //		if (gameObject5 != null)
-    //		{
-    //			PalNPC component5 = gameObject5.GetComponent<PalNPC>();
-    //			if (component5 == null)
-    //			{
-    //				Debug.Log("PlayersManager.Initialize: NPC 4 is null");
-    //			}
-    //			else if (component5.model != null)
-    //			{
-    //				Agent component6 = component5.model.GetComponent<Agent>();
-    //				component6.CrossZhuoDiTime = 0.12f;
-    //			}
-    //			else
-    //			{
-    //				PalNPC expr_1FB = component5;
-    //				expr_1FB.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(expr_1FB.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.OnLoadModelEnd));
-    //			}
-    //		}
-    //		GameObject gameObject6 = PlayersManager.FindMainChar(7, true);
-    //		if (gameObject6 != null)
-    //		{
-    //			PlayersManager.PlayerInitSneakScript(gameObject6, null);
-    //		}
-    //		ScenesManager.Instance.OnChangeMap -= new Action<int>(PlayersManager.OnChangeMap);
-    //		ScenesManager.Instance.OnChangeMap += new Action<int>(PlayersManager.OnChangeMap);
-    //		FlagManager.OnSetFlag = (Action<int, int>)Delegate.Remove(FlagManager.OnSetFlag, new Action<int, int>(PlayersManager.OnSetFlag));
-    //		FlagManager.OnSetFlag = (Action<int, int>)Delegate.Combine(FlagManager.OnSetFlag, new Action<int, int>(PlayersManager.OnSetFlag));
-    //	}
+    public static void Initialize()
+    {
+        PlayersManager.AllPlayers.Clear();  
+
+        GameObject gameObject2 = PlayersManager.FindMainChar(0, true);
+        if (gameObject2 != null)
+        {
+            PalNPC component2 = gameObject2.GetComponent<PalNPC>();
+            if (component2 == null)
+            {
+                Debug.Log("PlayersManager.Initialize: NPC 0 is null");
+            }
+            else
+            {
+                PalNPC expr_BF = component2;
+                expr_BF.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(expr_BF.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.OnLoadModelEnd));
+            }
+        }
+
+        GameObject gameObject3 = PlayersManager.FindMainChar(5, true);
+        if (gameObject3 != null)
+        {
+            PalNPC component3 = gameObject3.GetComponent<PalNPC>();
+            if (component3 == null)
+            {
+                Debug.Log("PlayersManager.Initialize: NPC 5 is null");
+            }
+            else
+            {
+                PalNPC expr_11D = component3;
+                expr_11D.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(expr_11D.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.OnLoadModelEnd));
+            }
+        }
+
+        GameObject gameObject4 = PlayersManager.FindMainChar(3, true);
+        if (gameObject4 != null)
+        {
+            //ModelChangeScript component4 = gameObject4.GetComponent<ModelChangeScript>();
+            //if (component4 != null)
+            //{
+            //    ModelChangeScript expr_16C = component4;
+            //    expr_16C.OnSetModeEnd = (Action<PalNPC>)Delegate.Combine(expr_16C.OnSetModeEnd, new Action<PalNPC>(PlayersManager.OnSetModeEnd));
+            //}
+        }
+
+        GameObject gameObject5 = PlayersManager.FindMainChar(4, true);
+        if (gameObject5 != null)
+        {
+            PalNPC component5 = gameObject5.GetComponent<PalNPC>();
+            if (component5 == null)
+            {
+                Debug.Log("PlayersManager.Initialize: NPC 4 is null");
+            }
+            else if (component5.model != null)
+            {
+               // Agent component6 = component5.model.GetComponent<Agent>();
+               // component6.CrossZhuoDiTime = 0.12f;
+            }
+            else
+            {
+                PalNPC expr_1FB = component5;
+               // expr_1FB.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(expr_1FB.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.OnLoadModelEnd));
+            }
+        }
+
+        GameObject gameObject6 = PlayersManager.FindMainChar(7, true);
+        if (gameObject6 != null)
+        {
+            //PlayersManager.PlayerInitSneakScript(gameObject6, null);
+        }
+        //ScenesManager.Instance.OnChangeMap -= new Action<int>(PlayersManager.OnChangeMap);
+        //ScenesManager.Instance.OnChangeMap += new Action<int>(PlayersManager.OnChangeMap);
+        //  FlagManager.OnSetFlag = (Action<int, int>)Delegate.Remove(FlagManager.OnSetFlag, new Action<int, int>(PlayersManager.OnSetFlag));
+        // FlagManager.OnSetFlag = (Action<int, int>)Delegate.Combine(FlagManager.OnSetFlag, new Action<int, int>(PlayersManager.OnSetFlag));
+    }
 
     //	public static void BeforeLoadData()
     //	{
@@ -189,28 +175,28 @@ public class PlayersManager
     //		}
     //	}
 
-    //	private static void OnChangeMap(int mapIndex)
-    //	{
-    //		for (int i = 0; i < PlayersManager.AllPlayers.Count; i++)
-    //		{
-    //			GameObject gameObject = PlayersManager.AllPlayers[i];
-    //			if (!(gameObject == null))
-    //			{
-    //				PalNPC component = gameObject.GetComponent<PalNPC>();
-    //				if (!(component == null))
-    //				{
-    //					if (component.perception == null)
-    //					{
-    //						Debug.LogError("Error : PlayersManager.OnChangeMap " + component.name + " perception == null");
-    //					}
-    //					else
-    //					{
-    //						component.perception.Clear();
-    //					}
-    //				}
-    //			}
-    //		}
-    //	}
+    private static void OnChangeMap(int mapIndex)
+    {
+        for (int i = 0; i < PlayersManager.AllPlayers.Count; i++)
+        {
+            GameObject gameObject = PlayersManager.AllPlayers[i];
+            if (!(gameObject == null))
+            {
+                PalNPC component = gameObject.GetComponent<PalNPC>();
+                if (!(component == null))
+                {
+                    //if (component.perception == null)
+                    //{
+                    //    Debug.LogError("Error : PlayersManager.OnChangeMap " + component.name + " perception == null");
+                    //}
+                    //else
+                    //{
+                    //    component.perception.Clear();
+                    //}
+                }
+            }
+        }
+    }
 
     //	public static void ChangeHairShader(bool bUseAlpha)
     //	{
@@ -222,38 +208,26 @@ public class PlayersManager
     //		PlayersManager.AddNeedComponent(npc);
     //	}
 
-    //	private static void OnLoadModelEnd(PalNPC npc)
-    //	{
-    //		switch (npc.Data.CharacterID)
-    //		{
-    //		case 0:
-    //			FlagManager.SetFlag(6, 1, true);
-    //			SetActiveChildByFlag.Init(npc.gameObject, 6, "yanzhao");
-    //			break;
-    //		case 4:
-    //		{
-    //			Agent component = npc.model.GetComponent<Agent>();
-    //			component.CrossZhuoDiTime = 0.12f;
-    //			break;
-    //		}
-    //		case 5:
-    //			FlagManager.SetFlag(7, 0, true);
-    //			SetActiveChildByFlag.Init(npc.gameObject, 7, "YanZhao");
-    //			break;
-    //		}
-    //	}
-
-    //	private static void SetClothFar(PalNPC npc)
-    //	{
-    //		ShroudInstance[] components = npc.model.GetComponents<ShroudInstance>();
-    //		ShroudInstance[] array = components;
-    //		for (int i = 0; i < array.Length; i++)
-    //		{
-    //			ShroudInstance shroudInstance = array[i];
-    //			shroudInstance.m_blendStartDistance = 300f;
-    //			shroudInstance.m_blendEndDistance = 400f;
-    //		}
-    //	}
+    private static void OnLoadModelEnd(PalNPC npc)
+    {
+        //switch (npc.Data.CharacterID)
+        //{
+        //    case 0:
+        //        FlagManager.SetFlag(6, 1, true);
+        //     // SetActiveChildByFlag.Init(npc.gameObject, 6, "yanzhao");
+        //        break;
+        //    case 4:
+        //        {
+        //          //  Agent component = npc.model.GetComponent<Agent>();
+        //           // component.CrossZhuoDiTime = 0.12f;
+        //            break;
+        //        }
+        //    case 5:
+        //        FlagManager.SetFlag(7, 0, true);
+        //       // SetActiveChildByFlag.Init(npc.gameObject, 7, "YanZhao");
+        //        break;
+        //}
+    }
 
     //	public static void Restart()
     //	{
@@ -1279,24 +1253,6 @@ public class PlayersManager
     //		if (idx == MissionManager.BranchLineToggleFlag)
     //		{
     //			PlayersManager.ResetPlayersInteract(flagValue > 0);
-    //		}
-    //	}
-
-    //	public static void AddPlayerPerceptionRange(PalNPC npc)
-    //	{
-    //		PerceptionRange[] componentsInChildren = npc.model.GetComponentsInChildren<PerceptionRange>();
-    //		for (int i = 0; i < componentsInChildren.Length; i++)
-    //		{
-    //			PlayersManager.AllPlayersPerceptionRange.Add(componentsInChildren[i]);
-    //		}
-    //	}
-
-    //	public static void SetAllPlayersPerceptionRange(bool enable)
-    //	{
-    //		for (int i = 0; i < PlayersManager.AllPlayersPerceptionRange.Count; i++)
-    //		{
-    //			Collider component = PlayersManager.AllPlayersPerceptionRange[i].GetComponent<Collider>();
-    //			component.enabled = enable;
     //		}
     //	}
 }

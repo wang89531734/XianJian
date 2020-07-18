@@ -871,7 +871,7 @@ namespace SoftStar.Pal6
             //PalBattleManager.Initialize();
             //EntityManager.Initialize();
             //MissionTick.Initialize();
-            //PlayersManager.Initialize();
+            PlayersManager.Initialize();
             //RenownManager.Initialize();
             //AnimWithoutClothSet.Initialize();
             //SlowLoopAnimSet.Initialize();
