@@ -189,16 +189,17 @@ public class PlayerCtrlManager
     private static void SetAgentProperty(Agent agent)
     {
         agent.curCtrlMode = ControlMode.ControlByPlayer;
-        UnityEngine.Debug.Log("执行");
-        //if (agent.charCtrller == null)
-        //{
-        //    agent.charCtrller = agent.GetComponent<CharacterController>();
-        //}
-        //if (agent.charCtrller != null && !agent.charCtrller.enabled)
-        //{
-        //    agent.charCtrller.enabled = true;
-        //    agent.charCtrller.detectCollisions = true;
-        //}
+
+        if (agent.charCtrller == null)
+        {
+            agent.charCtrller = agent.GetComponent<CharacterController>();
+        }
+
+        if (agent.charCtrller != null && !agent.charCtrller.enabled)
+        {
+            agent.charCtrller.enabled = true;
+            agent.charCtrller.detectCollisions = true;
+        }
         //agent.gameObject.layer = 8;
         //Animator animator = agent.animator;
         //if (animator != null)
