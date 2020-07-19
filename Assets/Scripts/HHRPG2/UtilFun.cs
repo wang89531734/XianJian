@@ -1,9 +1,9 @@
-//using Funfia;
-//using Funfia.File;
-//using SoftStar;
-//using SoftStar.Item;
-//using SoftStar.Pal6;
-//using System;
+using Funfia;
+using Funfia.File;
+using SoftStar;
+using SoftStar.Item;
+using SoftStar.Pal6;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,12 +16,12 @@ using UnityEngine.SceneManagement;
 
 public static class UtilFun
 {
-    //	public enum BindSlot
-    //	{
-    //		Hand,
-    //		Back,
-    //		Default
-    //	}
+    public enum BindSlot
+    {
+        Hand,
+        Back,
+        Default
+    }
 
     //	private static string[] AssortObjPaths = new string[]
     //	{
@@ -931,7 +931,7 @@ public static class UtilFun
         GameObject gameObject = null;
         PalGameObjectBase component = go.GetComponent<PalGameObjectBase>();
         if (component != null)
-        {
+        {          
             if (component.model == null)
             {
                 Animator componentInChildren = component.GetComponentInChildren<Animator>();
@@ -942,10 +942,12 @@ public static class UtilFun
             }
             gameObject = component.model;
         }
+
         if (gameObject == null)
         {
             gameObject = go;
         }
+
         if (NeedActive && !gameObject.activeSelf)
         {
             UtilFun.SetActive(gameObject, true);
@@ -1905,26 +1907,26 @@ public static class UtilFun
     //		return <LoadLevelAsync>c__Iterator;
     //	}
 
-    //	public static bool IsMonster(this GameObject go)
-    //	{
-    //		if (go == null)
-    //		{
-    //			UnityEngine.Debug.LogError("go为null");
-    //			return false;
-    //		}
-    //		PalNPC palNPC = go.GetComponent<PalNPC>();
-    //		if (palNPC == null)
-    //		{
-    //			go = go.GetModelObj(false);
-    //			Agent component = go.GetComponent<Agent>();
-    //			if (component == null)
-    //			{
-    //				return false;
-    //			}
-    //			palNPC = component.palNPC;
-    //		}
-    //		return !(palNPC == null) && palNPC.MonsterGroups.Length >= 1;
-    //	}
+    public static bool IsMonster(this GameObject go)
+    {
+        if (go == null)
+        {
+            UnityEngine.Debug.LogError("go为null");
+            return false;
+        }
+        PalNPC palNPC = go.GetComponent<PalNPC>();
+        if (palNPC == null)
+        {
+            go = go.GetModelObj(false);
+            Agent component = go.GetComponent<Agent>();
+            if (component == null)
+            {
+                return false;
+            }
+            palNPC = component.palNPC;
+        }
+        return !(palNPC == null) && palNPC.MonsterGroups.Length >= 1;
+    }
 
     //	public static GameObject Instantiate(this GameObject go)
     //	{
@@ -2818,16 +2820,16 @@ public static class UtilFun
     //		return result;
     //	}
 
-    //	public static Camera GetMainCamera()
-    //	{
-    //		Camera result = null;
-    //		GameObject[] array = GameObject.FindGameObjectsWithTag("MainCamera");
-    //		if (array.Length != 0)
-    //		{
-    //			result = array[0].GetComponent<Camera>();
-    //		}
-    //		return result;
-    //	}
+    public static Camera GetMainCamera()
+    {
+        Camera result = null;
+        GameObject[] array = GameObject.FindGameObjectsWithTag("MainCamera");
+        if (array.Length != 0)
+        {
+            result = array[0].GetComponent<Camera>();
+        }
+        return result;
+    }
 
     //	[DllImport("WinHelper", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
     //	public static extern void WinMessageBox(string text, string caption, int type);

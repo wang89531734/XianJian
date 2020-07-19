@@ -14,9 +14,9 @@ public class CharactersManager : MonoBehaviour
 
 	public Dictionary<ObjType, Texture> TypeIcons = new Dictionary<ObjType, Texture>();
 
-	//public Dictionary<PalGameObjectBase, MapTarget> Characters = new Dictionary<PalGameObjectBase, MapTarget>(6);
+    public Dictionary<PalGameObjectBase, MapTarget> Characters = new Dictionary<PalGameObjectBase, MapTarget>(6);
 
-	public List<PalGameObjectBase> Monsters = new List<PalGameObjectBase>();
+    public List<PalGameObjectBase> Monsters = new List<PalGameObjectBase>();
 
 	public List<PalGameObjectBase> Triggers = new List<PalGameObjectBase>();
 
@@ -157,15 +157,15 @@ public class CharactersManager : MonoBehaviour
 
 	public static void AddCharacter(PalGameObjectBase npc)
 	{
-		//Dictionary<PalGameObjectBase, MapTarget> characters = CharactersManager.Instance.Characters;
-		//if (characters.ContainsKey(npc))
-		//{
-		//	Debug.LogError("已经在Characters中包含了");
-		//	return;
-		//}
-		//MapTarget value = MapTarget.CreateNew(npc);
-	//	characters.Add(npc, value);
-		npc.DestroyEvent = (Action<PalGameObjectBase>)Delegate.Combine(npc.DestroyEvent, new Action<PalGameObjectBase>(CharactersManager.Instance.ObjdestroyEvent));
+        Dictionary<PalGameObjectBase, MapTarget> characters = CharactersManager.Instance.Characters;
+        if (characters.ContainsKey(npc))
+        {
+            Debug.LogError("已经在Characters中包含了");
+            return;
+        }
+        MapTarget value = MapTarget.CreateNew(npc);
+        characters.Add(npc, value);
+        npc.DestroyEvent = (Action<PalGameObjectBase>)Delegate.Combine(npc.DestroyEvent, new Action<PalGameObjectBase>(CharactersManager.Instance.ObjdestroyEvent));
 	}
 
 	public static void AddMonster(PalGameObjectBase monster)

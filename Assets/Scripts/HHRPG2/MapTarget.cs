@@ -33,51 +33,52 @@ public class MapTarget : MonoBehaviour
 
 	public static MapTarget CreateNew(PalGameObjectBase Gob)
 	{
-		if (Gob == null)
-		{
-			return null;
-		}
-		//Transform transform = MapWatch.Instance.Points.transform;
-		string name = Gob.name + "_MT";
-		//Transform transform2 = transform.Find(name);
-		//if (transform2 != null)
-		//{
-		//	MapTarget component = transform2.GetComponent<MapTarget>();
-		//	if (component != null && component.Gob == Gob)
-		//	{
-		//		Debug.LogError("Error : 已经存在一个对应 " + Gob.name + " 的MapTarget 删除掉");
-		//		UnityEngine.Object.Destroy(transform2.gameObject);
-		//	}
-		//}
-		GameObject gameObject = FileLoader.LoadObjectFromFile<GameObject>("UI/MapTarget".ToAssetBundlePath(), true, true);
-		GameObject gameObject2;
-		if (gameObject == null)
-		{
-			Debug.LogError("Error : MapTarget UI/MapTarget 没有找到");
-			gameObject2 = new GameObject(name);
-		}
-		else
-		{
-			gameObject2 = gameObject;
-		}
-		gameObject2.name = name;
-		//if (MapWatch.Instance != null)
-		//{
-		//	gameObject2.transform.parent = MapWatch.Instance.Points.transform;
-		//}
-		//else
-		//{
-		//	Debug.LogError("没有找到MapWatch.Instance");
-		//}
-		gameObject2.transform.localScale = new Vector3(100f, 100f, 1f);
-		MapTarget mapTarget = gameObject2.GetComponent<MapTarget>();
-		if (mapTarget == null)
-		{
-			mapTarget = gameObject2.AddComponent<MapTarget>();
-		}
-		mapTarget.Init(Gob);
-		return mapTarget;
-	}
+        //if (Gob == null)
+        //{
+        //	return null;
+        //}
+        ////Transform transform = MapWatch.Instance.Points.transform;
+        //string name = Gob.name + "_MT";
+        ////Transform transform2 = transform.Find(name);
+        ////if (transform2 != null)
+        ////{
+        ////	MapTarget component = transform2.GetComponent<MapTarget>();
+        ////	if (component != null && component.Gob == Gob)
+        ////	{
+        ////		Debug.LogError("Error : 已经存在一个对应 " + Gob.name + " 的MapTarget 删除掉");
+        ////		UnityEngine.Object.Destroy(transform2.gameObject);
+        ////	}
+        ////}
+        //GameObject gameObject = FileLoader.LoadObjectFromFile<GameObject>("UI/MapTarget".ToAssetBundlePath(), true, true);
+        //GameObject gameObject2;
+        //if (gameObject == null)
+        //{
+        //	Debug.LogError("Error : MapTarget UI/MapTarget 没有找到");
+        //	gameObject2 = new GameObject(name);
+        //}
+        //else
+        //{
+        //	gameObject2 = gameObject;
+        //}
+        //gameObject2.name = name;
+        ////if (MapWatch.Instance != null)
+        ////{
+        ////	gameObject2.transform.parent = MapWatch.Instance.Points.transform;
+        ////}
+        ////else
+        ////{
+        ////	Debug.LogError("没有找到MapWatch.Instance");
+        ////}
+        //gameObject2.transform.localScale = new Vector3(100f, 100f, 1f);
+        //MapTarget mapTarget = gameObject2.GetComponent<MapTarget>();
+        //if (mapTarget == null)
+        //{
+        //	mapTarget = gameObject2.AddComponent<MapTarget>();
+        //}
+        //mapTarget.Init(Gob);
+        //return mapTarget;
+        return null;
+    }
 
 	private void ObjdestroyEvent(PalGameObjectBase obj)
 	{

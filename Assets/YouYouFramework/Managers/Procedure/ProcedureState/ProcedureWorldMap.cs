@@ -18,7 +18,6 @@ namespace YouYou
             //GameEntry.Role.CreatePlayer();
             PlayerTeam.Instance.LoadTeam();
             PlayerCtrlManager.OnLevelLoaded(1);
-            PlayerCtrlManager.OnInit();
             //level = ScenesManager.CurLoadedLevel;          
             //PalMain.OnReadySpawn();
             //EntityManager.OnLoadOver = (EntityManager.void_fun)Delegate.Remove(EntityManager.OnLoadOver, new EntityManager.void_fun(PalMain.OnLoadOver));

@@ -707,6 +707,7 @@ public class PlayersManager
                 }
             }
         }
+
         GameObject gameObject2 = GameObject.Find("/" + ID.ToString());
         if (gameObject2 == null)
         {
@@ -727,6 +728,7 @@ public class PlayersManager
             Debug.Log("PlayersManager.AddPlayer 已经存在" + ID.ToString());
             return player;
         }
+
         GameObject gameObject = PlayersManager.FindMainChar(ID, true);
         if (gameObject != null && gameObject.GetComponent<PalNPC>() != null)
         {
@@ -741,6 +743,7 @@ public class PlayersManager
             }
             return gameObject;
         }
+
         GameObject gameObject2 = PlayersManager.LoadPlayer(ID);
         if (gameObject2 != null)
         {
@@ -761,38 +764,38 @@ public class PlayersManager
         return gameObject2;
     }
 
-    //	private static void SetLevel(GameObject go)
-    //	{
-    //		PalNPC component = go.GetComponent<PalNPC>();
-    //		int level = component.Data.Level;
-    //		GameObject gameObject = go;
-    //		for (int i = 0; i < PlayersManager.ActivePlayers.Count; i++)
-    //		{
-    //			GameObject gameObject2 = PlayersManager.ActivePlayers[i];
-    //			PalNPC component2 = gameObject2.GetComponent<PalNPC>();
-    //			if (level < component2.Data.Level)
-    //			{
-    //				level = component2.Data.Level;
-    //				gameObject = gameObject2;
-    //			}
-    //		}
-    //		if (gameObject != go)
-    //		{
-    //			PalNPC component3 = go.GetComponent<PalNPC>();
-    //			component3.Data.Exp = PlayerBaseProperty.LevelData.GetLevelExp(level - 1);
-    //			Debug.Log(string.Concat(new string[]
-    //			{
-    //				"Log : 对角色",
-    //				go.name,
-    //				"进行等级设置，参照了",
-    //				gameObject.name,
-    //				"的等级(",
-    //				level.ToString(),
-    //				"级)  其经验为:",
-    //				component3.Data.Exp.ToString()
-    //			}));
-    //		}
-    //	}
+    private static void SetLevel(GameObject go)
+    {
+        PalNPC component = go.GetComponent<PalNPC>();
+        int level = component.Data.Level;
+        GameObject gameObject = go;
+        for (int i = 0; i < PlayersManager.ActivePlayers.Count; i++)
+        {
+            GameObject gameObject2 = PlayersManager.ActivePlayers[i];
+            PalNPC component2 = gameObject2.GetComponent<PalNPC>();
+            if (level < component2.Data.Level)
+            {
+                level = component2.Data.Level;
+                gameObject = gameObject2;
+            }
+        }
+        if (gameObject != go)
+        {
+            PalNPC component3 = go.GetComponent<PalNPC>();
+            //component3.Data.Exp = PlayerBaseProperty.LevelData.GetLevelExp(level - 1);
+            //Debug.Log(string.Concat(new string[]
+            //{
+            //        "Log : 对角色",
+            //        go.name,
+            //        "进行等级设置，参照了",
+            //        gameObject.name,
+            //        "的等级(",
+            //        level.ToString(),
+            //        "级)  其经验为:",
+            //        component3.Data.Exp.ToString()
+            //}));
+        }
+    }
 
     public static GameObject LoadPlayer(int ID)
     {
@@ -817,70 +820,62 @@ public class PlayersManager
         if (!PlayersManager.ActivePlayers.Contains(newPlayer))
         {
             newPlayer.transform.parent = null;
-            //if (newPlayer.GetComponent<DontDestroyOnLevelChange>() == null)
-            //{
-            //    newPlayer.AddComponent<DontDestroyOnLevelChange>();
-            //}
-            //if (newPlayer.GetComponent<SavePrefabTarget>() == null)
-            //{
-            //    SavePrefabTarget savePrefabTarget = newPlayer.AddComponent<SavePrefabTarget>();
-            //}
+            if (newPlayer.GetComponent<SavePrefabTarget>() == null)
+            {
+                SavePrefabTarget savePrefabTarget = newPlayer.AddComponent<SavePrefabTarget>();
+            }
+
             if (component.model == null)
             {
-                //PalNPC expr_8C = component;
-                //expr_8C.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(expr_8C.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.WaitLoadOverThanSetActiveFalse));
+                PalNPC palNPC = component;
+                palNPC.OnLoadModelEnd = (PalNPC.void_fun_TF)Delegate.Combine(palNPC.OnLoadModelEnd, new PalNPC.void_fun_TF(PlayersManager.WaitLoadOverThanSetActiveFalse));
             }
             else
             {
-                    //ShroudInstance component2 = component.model.GetComponent<ShroudInstance>();
-                    //if (component2 != null)
-                    //{
-                    //    component2.blendWeightK = 100f;
-                    //}
-                    //AnimCtrlScript component3 = component.model.GetComponent<AnimCtrlScript>();
-                    //component3.ActiveAnimCrossFade("ZhanLi", false, 0f, true);
-                    //if (component.Data.CharacterID == 2)
-                    //{
-                    //    if (!component.animator.GetCurrentAnimatorStateInfo(0).IsName("yidongState.ZhanLi"))
-                    //    {
-                    //        LateSetActive.Init(component.model, false, 0.01f);
-                    //    }
-                    //    else
-                    //    {
-                    //        UtilFun.SetActive(component.model, false);
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    UtilFun.SetActive(component.model, false);
-                    //}
+                AnimCtrlScript component3 = component.model.GetComponent<AnimCtrlScript>();
+                component3.ActiveAnimCrossFade("ZhanLi", false, 0f, true);
+                if (component.Data.CharacterID == 2)
+                {
+                    if (!component.animator.GetCurrentAnimatorStateInfo(0).IsName("yidongState.ZhanLi"))
+                    {
+                        //LateSetActive.Init(component.model, false, 0.01f);
+                    }
+                    else
+                    { 
+                        UtilFun.SetActive(component.model, false);
+                    }
+                }
+                else
+                {
+                    UtilFun.SetActive(component.model, false);
+                }
             }
 
-                //if (bSetLevel)
-                //{
-                //    PlayersManager.SetLevel(newPlayer);
-                //}
-
-                PlayersManager.ActivePlayers.Add(newPlayer);
-
-                //if (component.Data != null)
-                //{
-                //    FlagManager.SetBoolFlag((ulong)(34048L + (long)component.Data.CharacterID), true);
-                //}
+            if (bSetLevel)
+            {
+                PlayersManager.SetLevel(newPlayer);
             }
+
+            PlayersManager.ActivePlayers.Add(newPlayer);
+
+            if (component.Data != null)
+            {
+                FlagManager.SetBoolFlag((ulong)(34048L + (long)component.Data.CharacterID), true);
+            }
+        }
         else
         {
             Debug.Log("Log : PlayersManager.AddPlayer 已经存在 " + newPlayer.name);
         }
     }
 
-    //	private static void WaitLoadOverThanSetActiveFalse(PalNPC npc)
-    //	{
-    //		if (PlayersManager.Player != null && npc != null && PlayersManager.Player != npc.gameObject)
-    //		{
-    //			UtilFun.SetActive(npc.model, false);
-    //		}
-    //	}
+    private static void WaitLoadOverThanSetActiveFalse(PalNPC npc)
+    {
+        if (PlayersManager.Player != null && npc != null && PlayersManager.Player != npc.gameObject)
+        {
+            UtilFun.SetActive(npc.model, false);
+        }
+    }
 
     //	public static void RemovePlayer(int ID, bool bActive = false)
     //	{

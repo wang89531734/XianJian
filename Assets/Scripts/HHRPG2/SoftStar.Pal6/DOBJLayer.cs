@@ -223,6 +223,10 @@ namespace SoftStar.Pal6
 			}
 		}
 
+        /// <summary>
+        /// 判断加载完毕
+        /// </summary>
+        /// <param name="obj"></param>
 		public void JudgeLoadOver(PalGameObjectBase obj)
 		{
 			//if (!EntityManager.LoadTogether)

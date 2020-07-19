@@ -114,25 +114,25 @@ public class PlayerTeam : MonoBehaviour
                 PlayersManager.AddPlayer(this.data[i].mCharacterID, true);
             }
         }
-        //PlayersManager.SetPlayer(0, true);
+        PlayersManager.SetPlayer(0, true);
         //PlayersManager.SetPlayerPosByDestObj("SceneEnter");
-        //PlayerCtrlManager.Reset();
+        PlayerCtrlManager.Reset();
     }
 
-    //	public void InitPlayerLevel()
-    //	{
-    //		for (int i = 0; i < this.data.Length; i++)
-    //		{
-    //			GameObject gameObject = PlayersManager.FindMainChar(this.data[i].mCharacterID, true);
-    //			if (gameObject != null)
-    //			{
-    //				PalNPC component = gameObject.GetComponent<PalNPC>();
-    //				PalNPC.CharacterData characterData = component.Data;
-    //				characterData.Exp = PlayerBaseProperty.LevelData.GetLevelExp(this.data[i].mLevel - 1);
-    //				characterData.HPMPDP.HP = this.data[i].HP;
-    //			}
-    //		}
-    //	}
+    //public void InitPlayerLevel()
+    //{
+    //    for (int i = 0; i < this.data.Length; i++)
+    //    {
+    //        GameObject gameObject = PlayersManager.FindMainChar(this.data[i].mCharacterID, true);
+    //        if (gameObject != null)
+    //        {
+    //            PalNPC component = gameObject.GetComponent<PalNPC>();
+    //            PalNPC.CharacterData characterData = component.Data;
+    //            characterData.Exp = PlayerBaseProperty.LevelData.GetLevelExp(this.data[i].mLevel - 1);
+    //            characterData.HPMPDP.HP = this.data[i].HP;
+    //        }
+    //    }
+    //}
 
     //	public void InitItem()
     //	{

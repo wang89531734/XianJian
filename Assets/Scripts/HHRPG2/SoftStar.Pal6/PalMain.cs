@@ -66,53 +66,53 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		public enum WatchType
-        //		{
-        //			FirstPerson,
-        //			ThirdPerson,
-        //			Custem
-        //		}
+        public enum WatchType
+        {
+            FirstPerson,
+            ThirdPerson,
+            Custem
+        }
 
-        //		public enum DISTANCE_CULL
-        //		{
-        //			LOW,
-        //			MID,
-        //			FULL,
-        //			RESTORE
-        //		}
+        public enum DISTANCE_CULL
+        {
+            LOW,
+            MID,
+            FULL,
+            RESTORE
+        }
 
-        //		public enum POST_CAM
-        //		{
-        //			NONE,
-        //			MID,
-        //			FULL
-        //		}
+        public enum POST_CAM
+        {
+            NONE,
+            MID,
+            FULL
+        }
 
-        //		public enum LIGHT
-        //		{
-        //			NONE,
-        //			FULL
-        //		}
+        public enum LIGHT
+        {
+            NONE,
+            FULL
+        }
 
-        //		public enum UNLOADPROIR
-        //		{
-        //			IMMEDIATE,
-        //			SHORT,
-        //			LONG,
-        //			VERYLONG
-        //		}
+        public enum UNLOADPROIR
+        {
+            IMMEDIATE,
+            SHORT,
+            LONG,
+            VERYLONG
+        }
 
-        //		public delegate void void_func_void();
+        public delegate void void_func_void();
 
-        //		public delegate void void_func_float_float(float currentTime, float deltaTime);
+        public delegate void void_func_float_float(float currentTime, float deltaTime);
 
-        //		public const int MoneyFlag = 2;
+        public const int MoneyFlag = 2;
 
-        //		private bool m_skillPreloading;
+        private bool m_skillPreloading;
 
-        //		private static float m_loadingValue = 0f;
+        private static float m_loadingValue = 0f;
 
-        //		private static uint _MoneyID = 0u;
+        private static uint _MoneyID = 0u;
 
         public static int GameDifficulty = 0;
 
@@ -167,9 +167,9 @@ namespace SoftStar.Pal6
 
         //		private static GameObject mMainObj = null;
 
-        //		private static GameObject m_MainCamera = null;
+        private static GameObject m_MainCamera = null;
 
-        //		public static Transform MainCameraTF = null;
+        public static Transform MainCameraTF = null;
 
         private static PalMain instance = null;
 
@@ -282,19 +282,7 @@ namespace SoftStar.Pal6
 
         //		private int shouldRenewFrames;
 
-        //		public event PalMain.void_func_float_float updateHandles
-        //		{
-        //			[MethodImpl(MethodImplOptions.Synchronized)]
-        //			add
-        //			{
-        //				this.updateHandles = (PalMain.void_func_float_float)Delegate.Combine(this.updateHandles, value);
-        //			}
-        //			[MethodImpl(MethodImplOptions.Synchronized)]
-        //			remove
-        //			{
-        //				this.updateHandles = (PalMain.void_func_float_float)Delegate.Remove(this.updateHandles, value);
-        //			}
-        //		}
+        public event PalMain.void_func_float_float updateHandles;
 
         //		public event PalMain.void_func_void onInputHandles
         //		{
@@ -422,37 +410,37 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		public static GameObject MainCamera
-        //		{
-        //			get
-        //			{
-        //				if (PalMain.m_MainCamera == null)
-        //				{
-        //					GameObject gameObject = GameObject.Find("/Main Camera Pal");
-        //					if (gameObject != null)
-        //					{
-        //						PalMain.m_MainCamera = gameObject;
-        //					}
-        //					else if (UtilFun.GetMainCamera() != null)
-        //					{
-        //						PalMain.m_MainCamera = UtilFun.GetMainCamera().gameObject;
-        //					}
-        //					if (PalMain.m_MainCamera != null)
-        //					{
-        //						PalMain.MainCameraTF = PalMain.m_MainCamera.transform;
-        //					}
-        //				}
-        //				return PalMain.m_MainCamera;
-        //			}
-        //			set
-        //			{
-        //				PalMain.m_MainCamera = value;
-        //				if (PalMain.m_MainCamera != null)
-        //				{
-        //					PalMain.MainCameraTF = PalMain.m_MainCamera.transform;
-        //				}
-        //			}
-        //		}
+        public static GameObject MainCamera
+        {
+            get
+            {
+                if (PalMain.m_MainCamera == null)
+                {
+                    GameObject gameObject = GameObject.Find("/Main Camera Pal");
+                    if (gameObject != null)
+                    {
+                        PalMain.m_MainCamera = gameObject;
+                    }
+                    else if (UtilFun.GetMainCamera() != null)
+                    {
+                        PalMain.m_MainCamera = UtilFun.GetMainCamera().gameObject;
+                    }
+                    if (PalMain.m_MainCamera != null)
+                    {
+                        PalMain.MainCameraTF = PalMain.m_MainCamera.transform;
+                    }
+                }
+                return PalMain.m_MainCamera;
+            }
+            set
+            {
+                PalMain.m_MainCamera = value;
+                if (PalMain.m_MainCamera != null)
+                {
+                    PalMain.MainCameraTF = PalMain.m_MainCamera.transform;
+                }
+            }
+        }
 
         public static PalMain GameMain
         {
@@ -770,7 +758,10 @@ namespace SoftStar.Pal6
             }
             string path = "/Resources/Template/System/Main.prefab";
             GameObject gameObject = FileLoader.LoadObjectFromFile<GameObject>(path.ToAssetBundlePath(), true, true);
+            string path2 = "/Resources/Template/System/Main Camera Pal.prefab";
+            GameObject gameObject2 = FileLoader.LoadObjectFromFile<GameObject>(path2.ToAssetBundlePath(), true, true);
             gameObject.name = "Main";
+            gameObject2.name = "Main Camera Pal";
             PalMain.instance = gameObject.GetComponent<PalMain>();
             if (PalMain.instance == null)
             {
@@ -1282,58 +1273,49 @@ namespace SoftStar.Pal6
         //			}
         //		}
 
-        //		private void Update()
-        //		{
-        //			this.UpdateMinFPS();
-        //			if (this.onInputHandles != null)
-        //			{
-        //				this.onInputHandles();
-        //			}
-        //			if (this.updateHandles != null)
-        //			{
-        //				this.updateHandles(Time.time, Time.deltaTime);
-        //			}
-        //			this.m_QTEManager.Update();
-        //			if (ScenesManager.IsChanging || ShowLoading.Instance != null)
-        //			{
-        //				return;
-        //			}
-        //			this.UpdateOpCull();
-        //			PalMain.UpdateCheckUnload();
-        //			this.UpdateSpecialIssueForNonFocus();
-        //			if (WaitForSonyCheck.Instance == null)
-        //			{
-        //			}
-        //			FileLoader.Instance.Update();
-        //		}
+        private void Update()
+        {
+            //if (this.onInputHandles != null)
+            //{
+            //    this.onInputHandles();
+            //}
+            if (this.updateHandles != null)
+            {
+                this.updateHandles(Time.time, Time.deltaTime);
+            }
+            //this.m_QTEManager.Update();
+            //if (ScenesManager.IsChanging || ShowLoading.Instance != null)
+            //{
+            //    return;
+            //}
+            //this.UpdateOpCull();
+            //PalMain.UpdateCheckUnload();
+            //this.UpdateSpecialIssueForNonFocus();
+            //if (WaitForSonyCheck.Instance == null)
+            //{
+            //}
+            FileLoader.Instance.Update();
+        }
 
-        //		private void FixedUpdate()
-        //		{
-        //			BuffDebuffManager.GetInstance().FixedUpdate(Time.fixedTime);
-        //			if (DateTime.Now > this.mLastConfigSave)
-        //			{
-        //				this.mLastConfigSave = DateTime.Now.AddSeconds(1.0);
-        //				bool flag = false;
-        //				OptionConfig optionConfig = OptionConfig.GetInstance();
-        //				if (optionConfig.IsDirty)
-        //				{
-        //					optionConfig.Save();
-        //					flag = true;
-        //				}
-        //				if (flag)
-        //				{
-        //					SaveManager.SaveGlobalData();
-        //				}
-        //			}
-        //		}
-
-        //		private void OnGUI()
-        //		{
-        //			if (this.onGUIHandles != null)
-        //			{
-        //				this.onGUIHandles();
-        //			}
-        //		}
+        private void FixedUpdate()
+        {
+            //BuffDebuffManager.GetInstance().FixedUpdate(Time.fixedTime);
+            //if (DateTime.Now > this.mLastConfigSave)
+            //{
+            //    this.mLastConfigSave = DateTime.Now.AddSeconds(1.0);
+            //    bool flag = false;
+            //    OptionConfig optionConfig = OptionConfig.GetInstance();
+            //    if (optionConfig.IsDirty)
+            //    {
+            //        optionConfig.Save();
+            //        flag = true;
+            //    }
+            //    if (flag)
+            //    {
+            //        SaveManager.SaveGlobalData();
+            //    }
+            //}
+        }
 
         //		private void ReplaceMeshColliderFor7()
         //		{

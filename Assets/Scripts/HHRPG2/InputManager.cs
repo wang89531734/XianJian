@@ -6,181 +6,181 @@ using UnityEngine;
 
 public class InputManager
 {
-    //	private class KeyDefinition
-    //	{
-    //		private static float AxisRepeatTime = 0.5f;
+    private class KeyDefinition
+    {
+        //private static float AxisRepeatTime = 0.5f;
 
-    //		private static float AxisRepeatDelay = 1f;
+        //private static float AxisRepeatDelay = 1f;
 
-    //		public KeyCode Code;
+        public KeyCode Code;
 
-    //		public string Axis = string.Empty;
+        //public string Axis = string.Empty;
 
-    //		public AxisDirectionType AxisDirection;
+        //public AxisDirectionType AxisDirection;
 
-    //		private float m_lastAxisTime;
+        //private float m_lastAxisTime;
 
-    //		private bool m_lastAxisState;
+        //private bool m_lastAxisState;
 
-    //		private bool m_currentAxisState;
+        //private bool m_currentAxisState;
 
-    //		public bool HasCode
-    //		{
-    //			get
-    //			{
-    //				return this.Code != KeyCode.None && this.Code != KeyCode.None;
-    //			}
-    //		}
+        //public bool HasCode
+        //{
+        //    get
+        //    {
+        //        return this.Code != KeyCode.None && this.Code != KeyCode.None;
+        //    }
+        //}
 
-    //		public bool HasAxis
-    //		{
-    //			get
-    //			{
-    //				return this.Axis != null && this.Axis != string.Empty;
-    //			}
-    //		}
+        //public bool HasAxis
+        //{
+        //    get
+        //    {
+        //        return this.Axis != null && this.Axis != string.Empty;
+        //    }
+        //}
 
-    //		public bool AxisActive
-    //		{
-    //			get
-    //			{
-    //				return this.HasAxis && this.getAxisActive(true);
-    //			}
-    //		}
+        //public bool AxisActive
+        //{
+        //    get
+        //    {
+        //        return this.HasAxis && this.getAxisActive(true);
+        //    }
+        //}
 
-    //		public bool AxisActive_SinglePad
-    //		{
-    //			get
-    //			{
-    //				return this.HasAxis && this.getAxisActive(false);
-    //			}
-    //		}
+        //public bool AxisActive_SinglePad
+        //{
+        //    get
+        //    {
+        //        return this.HasAxis && this.getAxisActive(false);
+        //    }
+        //}
 
-    //		public bool AxisDown
-    //		{
-    //			get
-    //			{
-    //				return this.AxisActive && !this.m_lastAxisState;
-    //			}
-    //		}
+        //public bool AxisDown
+        //{
+        //    get
+        //    {
+        //        return this.AxisActive && !this.m_lastAxisState;
+        //    }
+        //}
 
-    //		public bool AxisUp
-    //		{
-    //			get
-    //			{
-    //				return !this.AxisActive && this.m_lastAxisState;
-    //			}
-    //		}
+        //public bool AxisUp
+        //{
+        //    get
+        //    {
+        //        return !this.AxisActive && this.m_lastAxisState;
+        //    }
+        //}
 
-    //		public bool AxisDown_SinglePad
-    //		{
-    //			get
-    //			{
-    //				return this.AxisActive_SinglePad && !this.m_lastAxisState;
-    //			}
-    //		}
+        //public bool AxisDown_SinglePad
+        //{
+        //    get
+        //    {
+        //        return this.AxisActive_SinglePad && !this.m_lastAxisState;
+        //    }
+        //}
 
-    //		public bool AxisUp_SinglePad
-    //		{
-    //			get
-    //			{
-    //				return !this.AxisActive_SinglePad && this.m_lastAxisState;
-    //			}
-    //		}
+        //public bool AxisUp_SinglePad
+        //{
+        //    get
+        //    {
+        //        return !this.AxisActive_SinglePad && this.m_lastAxisState;
+        //    }
+        //}
 
-    //		public float GetAxis
-    //		{
-    //			get
-    //			{
-    //				return this.getAxis(true);
-    //			}
-    //		}
+        //public float GetAxis
+        //{
+        //    get
+        //    {
+        //        return this.getAxis(true);
+        //    }
+        //}
 
-    //		public float GetAxis_SinglePad
-    //		{
-    //			get
-    //			{
-    //				return this.getAxis(false);
-    //			}
-    //		}
+        //public float GetAxis_SinglePad
+        //{
+        //    get
+        //    {
+        //        return this.getAxis(false);
+        //    }
+        //}
 
-    //		public float AxisRaw
-    //		{
-    //			get
-    //			{
-    //				return this.getAxisRaw(true);
-    //			}
-    //		}
+        //public float AxisRaw
+        //{
+        //    get
+        //    {
+        //        return this.getAxisRaw(true);
+        //    }
+        //}
 
-    //		public float AxisRaw_SinglePad
-    //		{
-    //			get
-    //			{
-    //				return this.getAxisRaw(false);
-    //			}
-    //		}
+        //public float AxisRaw_SinglePad
+        //{
+        //    get
+        //    {
+        //        return this.getAxisRaw(false);
+        //    }
+        //}
 
-    //		private float getAxisRaw(bool global = false)
-    //		{
-    //			float axisRaw;
-    //			if (global)
-    //			{
-    //				axisRaw = Input.GetAxisRaw(this.Axis);
-    //			}
-    //			else
-    //			{
-    //				axisRaw = Input.GetAxisRaw(this.Axis);
-    //			}
-    //			return axisRaw;
-    //		}
+        //private float getAxisRaw(bool global = false)
+        //{
+        //    float axisRaw;
+        //    if (global)
+        //    {
+        //        axisRaw = Input.GetAxisRaw(this.Axis);
+        //    }
+        //    else
+        //    {
+        //        axisRaw = Input.GetAxisRaw(this.Axis);
+        //    }
+        //    return axisRaw;
+        //}
 
-    //		private float getAxis(bool global = false)
-    //		{
-    //			float axis;
-    //			if (global)
-    //			{
-    //				axis = Input.GetAxis(this.Axis);
-    //			}
-    //			else
-    //			{
-    //				axis = Input.GetAxis(this.Axis);
-    //			}
-    //			return axis;
-    //		}
+        //private float getAxis(bool global = false)
+        //{
+        //    float axis;
+        //    if (global)
+        //    {
+        //        axis = Input.GetAxis(this.Axis);
+        //    }
+        //    else
+        //    {
+        //        axis = Input.GetAxis(this.Axis);
+        //    }
+        //    return axis;
+        //}
 
-    //		private bool getAxisActive(bool global = false)
-    //		{
-    //			float axis = this.getAxis(global);
-    //			if (this.m_lastAxisTime == 0f || this.m_lastAxisTime != Time.time)
-    //			{
-    //				this.m_lastAxisTime = Time.time;
-    //				this.m_lastAxisState = this.m_currentAxisState;
-    //			}
-    //			if ((axis > InputManager.AxisKeyThreshold && this.AxisDirection == AxisDirectionType.Positive) || (axis < -InputManager.AxisKeyThreshold && this.AxisDirection == AxisDirectionType.Negative) || (Mathf.Abs(axis) > InputManager.AxisKeyThreshold && this.AxisDirection == AxisDirectionType.Both))
-    //			{
-    //				this.m_currentAxisState = true;
-    //				return true;
-    //			}
-    //			this.m_currentAxisState = false;
-    //			return false;
-    //		}
-    //	}
+        //private bool getAxisActive(bool global = false)
+        //{
+        //    float axis = this.getAxis(global);
+        //    if (this.m_lastAxisTime == 0f || this.m_lastAxisTime != Time.time)
+        //    {
+        //        this.m_lastAxisTime = Time.time;
+        //        this.m_lastAxisState = this.m_currentAxisState;
+        //    }
+        //    if ((axis > InputManager.AxisKeyThreshold && this.AxisDirection == AxisDirectionType.Positive) || (axis < -InputManager.AxisKeyThreshold && this.AxisDirection == AxisDirectionType.Negative) || (Mathf.Abs(axis) > InputManager.AxisKeyThreshold && this.AxisDirection == AxisDirectionType.Both))
+        //    {
+        //        this.m_currentAxisState = true;
+        //        return true;
+        //    }
+        //    this.m_currentAxisState = false;
+        //    return false;
+        //}
+    }
 
-    //	private static bool s_lockThisFrame = false;
+    private static bool s_lockThisFrame = false;
 
-    //	private static float AxisActiveThreshold = 0.1f;
+    private static float AxisActiveThreshold = 0.1f;
 
-    //	private static float AxisKeyThreshold = 0.3f;
+    private static float AxisKeyThreshold = 0.3f;
 
-    //	public static bool bActive = true;
+    public static bool bActive = true;
 
-    //	private static Dictionary<KEY_ACTION, InputManager.KeyDefinition> GameKeyList = new Dictionary<KEY_ACTION, InputManager.KeyDefinition>();
+    private static Dictionary<KEY_ACTION, InputManager.KeyDefinition> GameKeyList = new Dictionary<KEY_ACTION, InputManager.KeyDefinition>();
 
-    //	public static KeyDirection curKeyDir = KeyDirection.NONE;
+    public static KeyDirection curKeyDir = KeyDirection.NONE;
 
-    //	private static Vector3 m_MoveDir = Vector3.zero;
+    private static Vector3 m_MoveDir = Vector3.zero;
 
-    //	private static string SaveFileName = "InputSettings";
+    private static string SaveFileName = "InputSettings";
 
     //	public static void LockThisFrame()
     //	{
@@ -224,224 +224,222 @@ public class InputManager
 
     public static void Initialize()
     {
-        //if (!InputManager.Load())
-        //{
-        //    InputManager.InitDefalutKeyMapping();
-        //}
-        //PalMain.GameMain.updateHandles += new PalMain.void_func_float_float(InputManager.Update);
+        GameKeyList.Clear();
+        InputManager.InitDefalutKeyMapping();
+        PalMain.GameMain.updateHandles += new PalMain.void_func_float_float(InputManager.Update);
     }
 
-    //	public static void InitDefalutKeyMapping()
-    //	{
-    //		InputManager.GameKeyList.Add(KEY_ACTION.UP, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.W
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.DOWN, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.S
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.LEFT, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.A
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.RIGHT, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.D
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.UPARROW, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.UpArrow
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.DOWNARROW, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.DownArrow
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.LEFTARROW, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.LeftArrow
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.RIGHTARROW, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.RightArrow
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.CAMERA_LEFT, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.Q
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.CAMERA_RIGHT, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.E
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.MOUSE_RIGHT, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.Mouse1
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.MOUSE_LEFT, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.Mouse0
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.JUMP, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.Space
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.CONFIRM, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.Space
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.CANCEL, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.Escape
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.MENU, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.Escape
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.TAB, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.Tab
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.ACTION, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.F
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.MAP, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.M
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.BigMap, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.T
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.WALK, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.LeftShift
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.AUTO_WALK, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.R
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.OTHER, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.BackQuote
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.UI_SAVE, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.C
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.UI_LOAD, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.L
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.UI_QUEUE, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.F1
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.UI_STATE, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.F2
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.UI_EQUIP, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.F3
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.UI_Symbol, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.F4
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.UI_ITEM, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.F5
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.UI_SKILL, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.F6
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.UI_SOUL, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.F7
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.UI_Compound, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.F8
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.UI_Information, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.F9
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.UI_System, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.F10
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.BATTLE_FIRST, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.F1
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.BATTLE_SECOND, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.F2
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.BATTLE_THIRD, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.F3
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.BATTLE_FOURTH, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.F4
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.BATTLE_FIFTH, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.F6
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.SKILL_FIRST, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.Alpha1
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.SKILL_SECOND, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.Alpha2
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.SKILL_THIRD, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.Alpha3
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.SKILL_FOURTH, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.Alpha4
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.SKILL_FIFTH, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.Alpha5
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.SKILL_SIXTH, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.Alpha6
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.SKILL_SEVENTH, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.Alpha7
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.SKILL_EIGHTH, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.Alpha8
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.Screenshot, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.F12
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.CHAGNESTATE, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.J
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.FIGHT1, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.Z
-    //		});
-    //		InputManager.GameKeyList.Add(KEY_ACTION.TAB_SNEAK, new InputManager.KeyDefinition
-    //		{
-    //			Code = KeyCode.LeftControl
-    //		});
-    //	}
+    public static void InitDefalutKeyMapping()
+    {
+        InputManager.GameKeyList.Add(KEY_ACTION.UP, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.W
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.DOWN, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.S
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.LEFT, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.A
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.RIGHT, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.D
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.UPARROW, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.UpArrow
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.DOWNARROW, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.DownArrow
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.LEFTARROW, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.LeftArrow
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.RIGHTARROW, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.RightArrow
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.CAMERA_LEFT, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.Q
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.CAMERA_RIGHT, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.E
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.MOUSE_RIGHT, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.Mouse1
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.MOUSE_LEFT, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.Mouse0
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.JUMP, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.Space
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.CONFIRM, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.Space
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.CANCEL, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.Escape
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.MENU, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.Escape
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.TAB, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.Tab
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.ACTION, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.F
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.MAP, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.M
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.BigMap, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.T
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.WALK, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.LeftShift
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.AUTO_WALK, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.R
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.OTHER, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.BackQuote
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.UI_SAVE, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.C
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.UI_LOAD, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.L
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.UI_QUEUE, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.F1
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.UI_STATE, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.F2
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.UI_EQUIP, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.F3
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.UI_Symbol, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.F4
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.UI_ITEM, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.F5
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.UI_SKILL, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.F6
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.UI_SOUL, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.F7
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.UI_Compound, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.F8
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.UI_Information, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.F9
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.UI_System, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.F10
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.BATTLE_FIRST, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.F1
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.BATTLE_SECOND, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.F2
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.BATTLE_THIRD, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.F3
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.BATTLE_FOURTH, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.F4
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.BATTLE_FIFTH, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.F6
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.SKILL_FIRST, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.Alpha1
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.SKILL_SECOND, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.Alpha2
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.SKILL_THIRD, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.Alpha3
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.SKILL_FOURTH, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.Alpha4
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.SKILL_FIFTH, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.Alpha5
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.SKILL_SIXTH, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.Alpha6
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.SKILL_SEVENTH, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.Alpha7
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.SKILL_EIGHTH, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.Alpha8
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.Screenshot, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.F12
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.CHAGNESTATE, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.J
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.FIGHT1, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.Z
+        });
+        InputManager.GameKeyList.Add(KEY_ACTION.TAB_SNEAK, new InputManager.KeyDefinition
+        {
+            Code = KeyCode.LeftControl
+        });
+    }
 
     //	public static bool GetKeyDown(KEY_ACTION key, bool isGlobal = false)
     //	{
@@ -752,30 +750,10 @@ public class InputManager
     //		}
     //	}
 
-    //	private static void Update(float curTime, float deltaTime)
-    //	{
-    //		InputManager.s_lockThisFrame = false;
-    //		if (InputManager.GetKeyDown(KEY_ACTION.Screenshot, false))
-    //		{
-    //			MapData data = MapData.GetData(UtilFun.GetPalMapLevel(Application.loadedLevel));
-    //			string text = (data != null) ? data.Name.get_string() : "Pal6";
-    //			string text2 = Application.dataPath + "/Screen/";
-    //			if (!Directory.Exists(text2))
-    //			{
-    //				Directory.CreateDirectory(text2);
-    //			}
-    //			string text3 = text2;
-    //			text2 = string.Concat(new string[]
-    //			{
-    //				text3,
-    //				text,
-    //				"_",
-    //				DateTime.Now.ToLocalTime().ToString().Replace('/', '_').Replace(':', '_'),
-    //				".png"
-    //			});
-    //			Application.CaptureScreenshot(text2);
-    //		}
-    //	}
+    private static void Update(float curTime, float deltaTime)
+    {
+        InputManager.s_lockThisFrame = false;
+    }
 
     //	public static Vector3 GetDir()
     //	{
@@ -801,44 +779,5 @@ public class InputManager
     //				binaryWriter.Write((byte)current.Value.AxisDirection);
     //			}
     //		}
-    //	}
-
-    //	public static bool Load()
-    //	{
-    //		bool result = true;
-    //		string storeDirePath = InputManager.GetStoreDirePath();
-    //		if (!File.Exists(storeDirePath))
-    //		{
-    //			result = false;
-    //		}
-    //		else
-    //		{
-    //			using (BinaryReader binaryReader = new BinaryReader(File.OpenRead(storeDirePath)))
-    //			{
-    //				int num = binaryReader.ReadInt32();
-    //				for (int i = 0; i < num; i++)
-    //				{
-    //					KEY_ACTION key = (KEY_ACTION)binaryReader.ReadInt32();
-    //					KeyCode code = (KeyCode)binaryReader.ReadInt32();
-    //					string axis = binaryReader.ReadString();
-    //					AxisDirectionType axisDirection = (AxisDirectionType)binaryReader.ReadByte();
-    //					InputManager.GameKeyList[key] = new InputManager.KeyDefinition
-    //					{
-    //						Code = code,
-    //						Axis = axis,
-    //						AxisDirection = axisDirection
-    //					};
-    //				}
-    //			}
-    //		}
-    //		return result;
-    //	}
-
-    //	private static string GetStoreDirePath()
-    //	{
-    //		string text = Application.dataPath;
-    //		int length = text.LastIndexOf('/');
-    //		text = text.Substring(0, length);
-    //		return text + "/" + InputManager.SaveFileName;
     //	}
 }

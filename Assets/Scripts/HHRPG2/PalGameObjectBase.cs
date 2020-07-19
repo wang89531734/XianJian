@@ -168,11 +168,11 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 			this.isPrefab = false;
 			if (!PalGameObjectBase.LoadImmediately)
 			{
-				FileLoader.LoadAssetBundleFromFileAsync(text2, new Action<UnityEngine.Object, string>(this.OnLoadOver), true);
+                FileLoader.LoadAssetBundleFromFileAsync(text2, new Action<UnityEngine.Object, string>(this.OnLoadOver), true);
 			}
 			else
 			{
-				AssetBundle bundle = FileLoader.LoadAssetBundleFromFile(text2);
+                AssetBundle bundle = FileLoader.LoadAssetBundleFromFile(text2);
 				temp = UnityEngine.Object.Instantiate(bundle.MainAsset5());
 				this.CreateAndSetModel(temp);
 			}
@@ -192,18 +192,20 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 
 	protected virtual void CreateAndSetModel(UnityEngine.Object temp)
 	{
-		if (temp == null)
+        if (temp == null)
 		{
 			string text = base.name + "load failed";
 			Debug.LogError(text);
 			this.LoadModelEnd(this);
 			return;
 		}
+
 		if (this.model != null)
 		{
 			UnityEngine.Object.DestroyImmediate(this.model);
 		}
-		this.model = (temp as GameObject);
+
+        this.model = (temp as GameObject);
 		if (this.model == null)
 		{
 			
@@ -220,11 +222,11 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 			this.model.transform.localEulerAngles = Vector3.zero;
 			this.model.tag = base.gameObject.tag;
 			this.model.layer = base.gameObject.layer;
-			//if (this.isPrefab)
-			//{
-			//	this.CollectPrefabObjs(this.model);
-			//}
-		}
+            if (this.isPrefab)
+            {
+                this.CollectPrefabObjs(this.model);
+            }
+        }
 		this.LoadModelEnd(this);
 	}
 
@@ -234,31 +236,19 @@ public class PalGameObjectBase : MonoBehaviour, IEditComponentHelper
 		{
             UtilFun.SetActive(this.model, true);
         }
-	}
+        PlayerCtrlManager.OnInit();
+    }
 
 	public virtual void LoadModelEnd(UnityEngine.Object obj)
 	{
 		this.loadTime = DateTime.Now.TimeOfDay.Subtract(this.loadTime);
-		if (this.dobjLayer == null)
-		{
-			Transform parent = base.transform.parent;
-			if (parent == null)
-			{
-				return;
-			}
-			this.dobjLayer = parent.GetComponent<DOBJLayer>();
-			if (this.dobjLayer == null)
-			{
-				return;
-			}
-		}
-		if (this.model != null)
-		{
-			this.model.hideFlags = HideFlags.None;			
-		}
-		this.LoadOver();
-		this.dobjLayer.JudgeLoadOver(this);
-	}
+        if (this.model != null)
+        {
+            this.model.hideFlags = HideFlags.None;
+        }
+        this.LoadOver();
+        //this.dobjLayer.JudgeLoadOver(this);
+    }
 
 	public virtual void OnDestroy()
 	{

@@ -442,7 +442,7 @@ namespace SoftStar.Pal6
 
         private Animator m_animator;
 
-        //public Patrol patrol;
+        public Patrol patrol;
 
         //public NPCMode curNPCMode = NPCMode.fight;
 
@@ -731,11 +731,11 @@ namespace SoftStar.Pal6
         //			UtilFun.BindOrnamentToProp(this.model.transform, this.ornament.transform, false);
         //		}
 
-        //		public void GetOriRes()
-        //		{
-        //			this.model.GetOriTex(out this.oriMainTex, out this.oriSpecTex);
-        //			this.oriAssortMat = this.WeaponAssortObj.GetMat();
-        //		}
+        public void GetOriRes()
+        {
+            //this.model.GetOriTex(out this.oriMainTex, out this.oriSpecTex);
+            //this.oriAssortMat = this.WeaponAssortObj.GetMat();
+        }
 
         //		public void RestoreAssortMat()
         //		{
@@ -1027,12 +1027,14 @@ namespace SoftStar.Pal6
             {
                 return;
             }
+
             base.Start();
             if (this.Data != null)
             {
                 this.Data.Owner = base.gameObject;
                 this.Data.Reset();
             }
+
             if (this.model == null)
             {
                 this.LoadModel();
@@ -1040,7 +1042,7 @@ namespace SoftStar.Pal6
 
             //this.BuffDebuffData = new BuffDebuffManager.BuffDebuffOwner();
             //this.BuffDebuffData.Owner = this;
-            //this.patrol = base.GetComponent<Patrol>();
+            this.patrol = base.GetComponent<Patrol>();
             this.IsDataInit = true;
         }
 
@@ -1105,24 +1107,26 @@ namespace SoftStar.Pal6
             if (this.model != null)
             {
                 //this.model.layer = SmoothFollow2.IgnoreLayer;
-                //this.model.ExcludeCloneName();
-                //Agent component = this.model.GetComponent<Agent>();
-                //if (component != null)
-                //{
-                //    component.palNPC = this;
-                //    if (component.agent != null && this.MonsterGroups.Length < 1)
-                //    {
-                //        component.agent.baseOffset = -0.1f;
-                //        if (!NPCHeight.Instance.SetHeight(component.agent))
-                //        {
-                //            component.gameObject.AddComponent<AdjustNavAgentOffset>();
-                //        }
-                //    }
-                //}
-                //if (Application.isPlaying && this.Data.CharacterID > -1 && this.Data.CharacterID < 8)
-                //{
-                //    this.GetOriRes();
-                //}
+                this.model.ExcludeCloneName();
+                Agent component = this.model.GetComponent<Agent>();
+                if (component != null)
+                {
+                    component.palNPC = this;
+                    if (component.agent != null)//&& this.MonsterGroups.Length < 1
+                    {
+                        UnityEngine.Debug.Log("执行");
+                        component.agent.baseOffset = -0.1f;
+                        //if (!NPCHeight.Instance.SetHeight(component.agent))
+                        //{
+                        //    component.gameObject.AddComponent<AdjustNavAgentOffset>();
+                        //}
+                    }
+                }
+
+                if (Application.isPlaying && this.Data.CharacterID > -1 && this.Data.CharacterID < 8)
+                {
+                    this.GetOriRes();
+                }
                 //this.Weapons.Clear();
                 //Transform[] props = GameObjectPath.GetProps(this.model.transform);
                 //for (int i = 0; i < props.Length; i++)
@@ -1140,6 +1144,7 @@ namespace SoftStar.Pal6
                 //        }
                 //    }
                 //}
+
                 //if (this.Weapons.Count < 1 || (this.Weapons[0] == null && this.Weapons.Count > 1 && this.Weapons[1] == null))
                 //{
                 //    this.Weapons.Clear();
@@ -1160,6 +1165,7 @@ namespace SoftStar.Pal6
                 //        }
                 //    }
                 //}
+
                 //if (this.Data != null && this.Data.CharacterID < 8 && this.Data.CharacterID > -1)
                 //{
                 //    this.SetActiveWeaponInNormal(true);
@@ -1168,11 +1174,13 @@ namespace SoftStar.Pal6
                 //{
                 //    this.InitDisCull();
                 //}
+
                 //AnimCtrlScript component2 = this.model.GetComponent<AnimCtrlScript>();
                 //if (component2 != null)
                 //{
                 //    component2.Start();
                 //}
+
                 //if (!OptionConfig.NeedOpt || (!string.IsNullOrEmpty(this.modelResourcePath) && this.modelResourcePath.Contains("NpcP6")))
                 //{
                 //    ShroudInstance.Init(this.model);
@@ -1182,6 +1190,7 @@ namespace SoftStar.Pal6
                 //    ShroudInstance component3 = this.model.GetComponent<ShroudInstance>();
                 //    UnityEngine.Object.Destroy(component3);
                 //}
+
                 //UtilFun.SetActive(this.model, this.bEnableOnLoadModelEnd);
                 //Vector3 position = this.model.transform.position;
                 //position.y += 0.5f;
@@ -1202,19 +1211,23 @@ namespace SoftStar.Pal6
                 //        this.model.name = text;
                 //    }
                 //}
+
                 //if (((characterID < 8 && characterID != 6) || (characterID > 3999 && characterID < 4020) || this.MonsterGroups.Length > 0) && (characterID != 0 || this.modelResourcePath.Contains("YueJinChao")))
                 //{
                 //    Perception.ActivePerception(this);
                 //}
+
                 //if (characterID < 8 && characterID != 6 && SceneManager.GetActiveScene().buildIndex == 0)
                 //{
                 //    PlayersManager.AddPlayerPerceptionRange(this);
                 //}
+
                 //if (this.MonsterGroups.Length > 0 && this.model != null)
                 //{
                 //    this.AddColliderForGoToBattle();
                 //    MonsterStateScript.SetState(this.model, MonsterStateScript.MonsterState.None);
                 //}
+
                 if (this.OnLoadModelEnd != null)
                 {
                     this.OnLoadModelEnd(this);
@@ -1280,16 +1293,19 @@ namespace SoftStar.Pal6
             //        }
             //    }
             //}
+
             if (this.m_bDontLoadModel)
             {
                 this.LoadModelEnd(this);
                 return;
             }
+
             Animator componentInChildren = base.GetComponentInChildren<Animator>();
             if (componentInChildren != null)
             {
                 this.model = componentInChildren.gameObject;
             }
+
             if (this.model == null)
             {
                 base.LoadModel();
