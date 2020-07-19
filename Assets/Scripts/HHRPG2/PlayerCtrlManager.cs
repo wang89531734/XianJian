@@ -201,17 +201,18 @@ public class PlayerCtrlManager
             agent.charCtrller.detectCollisions = true;
         }
         //agent.gameObject.layer = 8;
-        //Animator animator = agent.animator;
-        //if (animator != null)
-        //{
-        //    animator.Play("ZhanLi");
-        //    animator.SetFloat("Speed", 0f);
-        //    animator.SetBool("Move", false);
-        //    animator.speed = 1f;
-        //}
-        //agent.IsJump = false;
-        //SmoothFollow2 orAddComponent = PalMain.MainCamera.GetOrAddComponent<SmoothFollow2>();
-        //orAddComponent.Init(agent.gameObject);
+        Animator animator = agent.animator;
+        if (animator != null)
+        {      
+            animator.Play("ZhanLi");
+            animator.SetFloat("Speed", 0f);
+            animator.SetBool("Move", false);
+            animator.speed = 1f;
+        }
+        agent.IsJump = false;
+        SmoothFollow2 orAddComponent = PalMain.MainCamera.GetOrAddComponent<SmoothFollow2>();
+        orAddComponent.Init(agent.gameObject);
+        orAddComponent.InNormal();
         //if (agent.name == "YueJinChao" && animator != null)
         //{
         //    float layerWeight = animator.GetLayerWeight(1);
@@ -388,85 +389,90 @@ public class PlayerCtrlManager
         }
         //Animator animator = PlayerCtrlManager.agentObj.animator;
         //Locomotion locomotion = PlayerCtrlManager.agentObj.locomotion;
-        //if (InputManager.GetKeyDown(KEY_ACTION.MOUSE_RIGHT, false) || InputManager.GetKeyUp(KEY_ACTION.MOUSE_RIGHT, false) || InputManager.GetKeyDown(KEY_ACTION.CAMERA_LEFT, false) || InputManager.GetKeyDown(KEY_ACTION.CAMERA_RIGHT, false) || InputManager.GetKeyUp(KEY_ACTION.CAMERA_LEFT, false) || InputManager.GetKeyUp(KEY_ACTION.CAMERA_RIGHT, false))
-        //{
-        //    PlayerCtrlManager.LastForward = PlayerCtrlManager.MainCam.forward;
-        //}
-        //if (Input.anyKeyDown)
-        //{
-        //    if (PlayerCtrlManager.CanChangeState && InputManager.GetKeyDown(KEY_ACTION.CHAGNESTATE, false))
-        //    {
-        //        AnimCtrlScript component = animator.GetComponent<AnimCtrlScript>();
-        //        if (component != null)
-        //        {
-        //            component.ActiveBattle(animator.GetLayerWeight(1) <= 0.5f);
-        //        }
-        //    }
-        //    if (PlayerCtrlManager.bCanTab && InputManager.GetKeyDown(KEY_ACTION.TAB, false) && GameStateManager.CurGameState != GameState.Battle && (PlayerCtrlManager.charCtrler.isGrounded || Physics.Raycast(PlayerCtrlManager.agentObj.transform.position, Vector3.down, 0.07f)) && !PlayerCtrlManager.agentObj.IsJump)
-        //    {
-        //        PlayersManager.TabPlayer();
-        //    }
-        //    if (InputManager.GetKeyDown(KEY_ACTION.ACTION, false) && !PlayerCtrlManager.agentObj.IsJump)
-        //    {
-        //        PalNPC palNPC = PlayerCtrlManager.agentObj.palNPC;
-        //        if (palNPC != null && palNPC.perception != null)
-        //        {
-        //            if (palNPC.interActs.Count < 1)
-        //            {
-        //                Transform transform = null;
-        //                float num = 10000f;
-        //                foreach (Transform current in palNPC.perception.hostsCanBeSeen)
-        //                {
-        //                    Vector3 vector = current.gameObject.GetModelObj(false).transform.position - PlayerCtrlManager.agentObj.transform.position;
-        //                    if (vector.magnitude < num)
-        //                    {
-        //                        num = vector.magnitude;
-        //                        transform = current;
-        //                    }
-        //                }
-        //                if (transform != null)
-        //                {
-        //                    Interact component2 = transform.GetComponent<Interact>();
-        //                    if (component2 != null)
-        //                    {
-        //                        float num2 = PlayerCtrlManager.agentObj.ActionRadius;
-        //                        MouseEnterCursor componentInChildren = component2.GetComponentInChildren<MouseEnterCursor>();
-        //                        if (componentInChildren != null && CursorScriptTemp.Instance.tempTypeDic.ContainsKey(componentInChildren.curState))
-        //                        {
-        //                            num2 = CursorScriptTemp.Instance.tempTypeDic[componentInChildren.curState].dis;
-        //                        }
-        //                        if (num < num2)
-        //                        {
-        //                            component2.InterAct();
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //            else
-        //            {
-        //                Interact.LastInteractNPC = palNPC.gameObject;
-        //                palNPC.interActs[0].InterAct();
-        //            }
-        //        }
-        //    }
-        //}
 
-        //if (InputManager.GetKeyDown(KEY_ACTION.JUMP, false) && PlayerCtrlManager.ProcessSpaceKey != null)
-        //{
-        //    SlideDown instance = SlideDown.Instance;
-        //    if (instance != null)
-        //    {
-        //        if (instance.CanJump())
-        //        {
-        //            SlideDown.Instance.enabled = false;
-        //            PlayerCtrlManager.ProcessSpaceKey(PlayerCtrlManager.agentObj);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        PlayerCtrlManager.ProcessSpaceKey(PlayerCtrlManager.agentObj);
-        //    }
-        //}
+        if (InputManager.GetKeyDown(KEY_ACTION.MOUSE_RIGHT, false) || InputManager.GetKeyUp(KEY_ACTION.MOUSE_RIGHT, false) || InputManager.GetKeyDown(KEY_ACTION.CAMERA_LEFT, false) || InputManager.GetKeyDown(KEY_ACTION.CAMERA_RIGHT, false) || InputManager.GetKeyUp(KEY_ACTION.CAMERA_LEFT, false) || InputManager.GetKeyUp(KEY_ACTION.CAMERA_RIGHT, false))
+        {
+            PlayerCtrlManager.LastForward = PlayerCtrlManager.MainCam.forward;
+        }
+
+        if (Input.anyKeyDown)
+        {
+            //if (PlayerCtrlManager.CanChangeState && InputManager.GetKeyDown(KEY_ACTION.CHAGNESTATE, false))
+            //{
+            //    AnimCtrlScript component = animator.GetComponent<AnimCtrlScript>();
+            //    if (component != null)
+            //    {
+            //        component.ActiveBattle(animator.GetLayerWeight(1) <= 0.5f);
+            //    }
+            //}
+
+            //if (PlayerCtrlManager.bCanTab && InputManager.GetKeyDown(KEY_ACTION.TAB, false) && GameStateManager.CurGameState != GameState.Battle && (PlayerCtrlManager.charCtrler.isGrounded || Physics.Raycast(PlayerCtrlManager.agentObj.transform.position, Vector3.down, 0.07f)) && !PlayerCtrlManager.agentObj.IsJump)
+            //{
+            //    PlayersManager.TabPlayer();
+            //}
+
+            //if (InputManager.GetKeyDown(KEY_ACTION.ACTION, false) && !PlayerCtrlManager.agentObj.IsJump)
+            //{
+            //    PalNPC palNPC = PlayerCtrlManager.agentObj.palNPC;
+            //    if (palNPC != null && palNPC.perception != null)
+            //    {
+            //        if (palNPC.interActs.Count < 1)
+            //        {
+            //            Transform transform = null;
+            //            float num = 10000f;
+            //            foreach (Transform current in palNPC.perception.hostsCanBeSeen)
+            //            {
+            //                Vector3 vector = current.gameObject.GetModelObj(false).transform.position - PlayerCtrlManager.agentObj.transform.position;
+            //                if (vector.magnitude < num)
+            //                {
+            //                    num = vector.magnitude;
+            //                    transform = current;
+            //                }
+            //            }
+            //            if (transform != null)
+            //            {
+            //                Interact component2 = transform.GetComponent<Interact>();
+            //                if (component2 != null)
+            //                {
+            //                    float num2 = PlayerCtrlManager.agentObj.ActionRadius;
+            //                    MouseEnterCursor componentInChildren = component2.GetComponentInChildren<MouseEnterCursor>();
+            //                    if (componentInChildren != null && CursorScriptTemp.Instance.tempTypeDic.ContainsKey(componentInChildren.curState))
+            //                    {
+            //                        num2 = CursorScriptTemp.Instance.tempTypeDic[componentInChildren.curState].dis;
+            //                    }
+            //                    if (num < num2)
+            //                    {
+            //                        component2.InterAct();
+            //                    }
+            //                }
+            //            }
+            //        }
+            //        else
+            //        {
+            //            Interact.LastInteractNPC = palNPC.gameObject;
+            //            palNPC.interActs[0].InterAct();
+            //        }
+            //    }
+            //}
+        }
+
+        if (InputManager.GetKeyDown(KEY_ACTION.JUMP, false) && PlayerCtrlManager.ProcessSpaceKey != null)
+        {
+            //SlideDown instance = SlideDown.Instance;
+            //if (instance != null)
+            //{
+            //    if (instance.CanJump())
+            //    {
+            //        SlideDown.Instance.enabled = false;
+            //        PlayerCtrlManager.ProcessSpaceKey(PlayerCtrlManager.agentObj);
+            //    }
+            //}
+            //else
+            //{
+            //    PlayerCtrlManager.ProcessSpaceKey(PlayerCtrlManager.agentObj);
+            //}
+        }
+
         //if (PlayerCtrlManager.agentObj.IsInSky && PlayerCtrlManager.agentObj.CanSmallMove && InputManager.curKeyDir != KeyDirection.NONE)
         //{
         //    PlayerCtrlManager.agentObj.CanSmallMove = false;
@@ -477,40 +483,44 @@ public class PlayerCtrlManager
         //    locomotion.ZhiKongSpeedVec *= PlayerCtrlManager.agentObj.SmallMoveSpeed;
         //    PlayerCtrlManager.agentObj.CanSlowByKeyUp = true;
         //}
+
         //if (PlayerCtrlManager.agentObj.IsInSky && PlayerCtrlManager.agentObj.CanSlowByKeyUp && InputManager.curKeyDir == KeyDirection.NONE)
         //{
         //    PlayerCtrlManager.agentObj.SlowDownVel();
         //}
-        //if (!InputManager.GetKey(KEY_ACTION.WALK, false))
-        //{
-        //    if (PlayerCtrlManager.agentObj.CurSpeed < PlayerCtrlManager.agentObj.RunSpeed - 0.01f)
-        //    {
-        //        PlayerCtrlManager.agentObj.CurSpeed = Mathf.Lerp(PlayerCtrlManager.agentObj.CurSpeed, PlayerCtrlManager.agentObj.RunSpeed, PlayerCtrlManager.agentObj.dampSpeed * Time.deltaTime);
-        //    }
-        //    else if (PlayerCtrlManager.agentObj.CurSpeed > PlayerCtrlManager.agentObj.RunSpeed)
-        //    {
-        //        PlayerCtrlManager.agentObj.CurSpeed = PlayerCtrlManager.agentObj.RunSpeed;
-        //    }
-        //}
-        //else if (PlayerCtrlManager.agentObj.CurSpeed > PlayerCtrlManager.agentObj.WalkSpeed + 0.01f)
-        //{
-        //    PlayerCtrlManager.agentObj.CurSpeed = Mathf.Lerp(PlayerCtrlManager.agentObj.CurSpeed, PlayerCtrlManager.agentObj.WalkSpeed, PlayerCtrlManager.agentObj.dampSpeed * 0.7f * Time.deltaTime);
-        //}
-        //else if (PlayerCtrlManager.agentObj.CurSpeed < PlayerCtrlManager.agentObj.WalkSpeed)
-        //{
-        //    PlayerCtrlManager.agentObj.CurSpeed = PlayerCtrlManager.agentObj.WalkSpeed;
-        //}
-        //if (InputManager.GetKeyDown(KEY_ACTION.MOUSE_LEFT, false))
-        //{
-        //    if (PlayerCtrlManager.CurControlModel == PlayerCtrlManager.PlayerControlModel.Mouse1)
-        //    {
-        //        MessageProcess.Instance.AddMess(Message.Style.EndAction, new Action(PlayerCtrlManager.OnMouseMove));
-        //    }
-        //    else
-        //    {
-        //        MessageProcess.Instance.AddMess(Message.Style.Action, new Action(PlayerCtrlManager.OnMouseMove));
-        //    }
-        //}
+
+        if (!InputManager.GetKey(KEY_ACTION.WALK, false))
+        {
+            if (PlayerCtrlManager.agentObj.CurSpeed < PlayerCtrlManager.agentObj.RunSpeed - 0.01f)
+            {
+                PlayerCtrlManager.agentObj.CurSpeed = Mathf.Lerp(PlayerCtrlManager.agentObj.CurSpeed, PlayerCtrlManager.agentObj.RunSpeed, PlayerCtrlManager.agentObj.dampSpeed * Time.deltaTime);
+            }
+            else if (PlayerCtrlManager.agentObj.CurSpeed > PlayerCtrlManager.agentObj.RunSpeed)
+            {
+                PlayerCtrlManager.agentObj.CurSpeed = PlayerCtrlManager.agentObj.RunSpeed;
+            }
+        }
+        else if (PlayerCtrlManager.agentObj.CurSpeed > PlayerCtrlManager.agentObj.WalkSpeed + 0.01f)
+        {
+            PlayerCtrlManager.agentObj.CurSpeed = Mathf.Lerp(PlayerCtrlManager.agentObj.CurSpeed, PlayerCtrlManager.agentObj.WalkSpeed, PlayerCtrlManager.agentObj.dampSpeed * 0.7f * Time.deltaTime);
+        }
+        else if (PlayerCtrlManager.agentObj.CurSpeed < PlayerCtrlManager.agentObj.WalkSpeed)
+        {
+            PlayerCtrlManager.agentObj.CurSpeed = PlayerCtrlManager.agentObj.WalkSpeed;
+        }
+
+        if (InputManager.GetKeyDown(KEY_ACTION.MOUSE_LEFT, false))
+        {
+            if (PlayerCtrlManager.CurControlModel == PlayerCtrlManager.PlayerControlModel.Mouse1)
+            {
+                //MessageProcess.Instance.AddMess(Message.Style.EndAction, new Action(PlayerCtrlManager.OnMouseMove));
+            }
+            else
+            {
+                //MessageProcess.Instance.AddMess(Message.Style.Action, new Action(PlayerCtrlManager.OnMouseMove));
+            }
+        }
+
         //if (PlayerCtrlManager.MouseLeftDown && InputManager.GetKey(KEY_ACTION.MOUSE_LEFT, false) && PlayerCtrlManager.CurControlModel != PlayerCtrlManager.PlayerControlModel.Mouse1 && PlayerCtrlManager.CurControlModel != PlayerCtrlManager.PlayerControlModel.Mouse2)
         //{
         //    if (Vector3.SqrMagnitude(Input.mousePosition - PlayerCtrlManager.MouseLeftDownPos) > 4f)
@@ -530,6 +540,7 @@ public class PlayerCtrlManager
         //        PalMain.Instance.StartCoroutine(PlayerCtrlManager.DelayShow());
         //    }
         //}
+
         //if (InputManager.GetKeyUp(KEY_ACTION.MOUSE_LEFT, false))
         //{
         //    UnityEngine.Debug.Log("MouseLeftDown = false");

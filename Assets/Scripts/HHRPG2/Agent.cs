@@ -253,70 +253,71 @@ public class Agent : MonoBehaviour
     //		this.animator.SetApplyRootMotion(bActive);
     //	}
 
-    //	private void Start()
-    //	{
-    //		this.agent = base.GetComponent<NavMeshAgent>();
-    //		this.animator = base.GetComponentInChildren<Animator>();
-    //		if (this.animator != null)
-    //		{
-    //			this.animator.SetFloat("VerticalSpeed", 0f);
-    //		}
-    //		this.locomotion = base.GetComponent<Locomotion>();
-    //		this.locomotion.RotSpeed = this.RotSpeed;
-    //		this.animCtrl = base.GetComponent<AnimCtrlScript>();
-    //		if (this.animCtrl == null)
-    //		{
-    //			this.animCtrl = this.animator.gameObject.AddComponent<AnimCtrlScript>();
-    //		}
-    //		this.charCtrller = base.GetComponent<CharacterController>();
-    //		if (this.animator != null)
-    //		{
-    //			this.SetApplyRootMotion();
-    //			this.animEvent = this.animator.GetComponent<AnimEvent>();
-    //			if (this.animEvent == null)
-    //			{
-    //				this.animEvent = this.animator.gameObject.AddComponent<AnimEvent>();
-    //			}
-    //			AnimEvent expr_EF = this.animEvent;
-    //			expr_EF.OnJumpStart = (AnimEvent.void_fun)Delegate.Remove(expr_EF.OnJumpStart, new AnimEvent.void_fun(this.OnJumpStart));
-    //			AnimEvent expr_117 = this.animEvent;
-    //			expr_117.OnJumpStart = (AnimEvent.void_fun)Delegate.Combine(expr_117.OnJumpStart, new AnimEvent.void_fun(this.OnJumpStart));
-    //			AnimEvent expr_13F = this.animEvent;
-    //			expr_13F.OnJumpOver = (AnimEvent.void_fun)Delegate.Remove(expr_13F.OnJumpOver, new AnimEvent.void_fun(this.OnJumpOver));
-    //			AnimEvent expr_167 = this.animEvent;
-    //			expr_167.OnJumpOver = (AnimEvent.void_fun)Delegate.Combine(expr_167.OnJumpOver, new AnimEvent.void_fun(this.OnJumpOver));
-    //			AnimEvent expr_18F = this.animEvent;
-    //			expr_18F.OnJumpEvent = (AnimEvent.void_fun_float)Delegate.Remove(expr_18F.OnJumpEvent, new AnimEvent.void_fun_float(this.OnJumpEvent));
-    //			AnimEvent expr_1B7 = this.animEvent;
-    //			expr_1B7.OnJumpEvent = (AnimEvent.void_fun_float)Delegate.Combine(expr_1B7.OnJumpEvent, new AnimEvent.void_fun_float(this.OnJumpEvent));
-    //		}
-    //		this.agent.enabled = false;
-    //		if (this.NeedEnableAgent && (!(PlayerCtrlManager.agentObj != null) || !(PlayerCtrlManager.agentObj == this)))
-    //		{
-    //			this.agent.enabled = true;
-    //		}
-    //		if (((this.palNPC != null && this.palNPC.Data != null && this.palNPC.Data.CharacterID < 8) || this.palNPC == null) && this.palNPC != null && PlayersManager.Player != this.palNPC.gameObject)
-    //		{
-    //			this.curCtrlMode = ControlMode.None;
-    //		}
-    //		if (this.palNPC != null && this.palNPC.MonsterGroups.Length < 1)
-    //		{
-    //			this.agent.baseOffset = -0.1f;
-    //			if (!NPCHeight.Instance.SetHeight(this.agent))
-    //			{
-    //				base.gameObject.AddComponent<AdjustNavAgentOffset>();
-    //			}
-    //		}
-    //		GameObjectEvent x = base.GetComponent<GameObjectEvent>();
-    //		if (x == null)
-    //		{
-    //			x = base.gameObject.AddComponent<GameObjectEvent>();
-    //		}
-    //		if (this.XiaLuoSpeed < 9f)
-    //		{
-    //			this.XiaLuoSpeed = 9f;
-    //		}
-    //	}
+    private void Start()
+    {
+        this.agent = base.GetComponent<NavMeshAgent>();
+        this.animator = base.GetComponentInChildren<Animator>();
+        if (this.animator != null)
+        {
+            this.animator.SetFloat("VerticalSpeed", 0f);
+        }
+        //this.locomotion = base.GetComponent<Locomotion>();
+        //this.locomotion.RotSpeed = this.RotSpeed;
+        //this.animCtrl = base.GetComponent<AnimCtrlScript>();
+        //if (this.animCtrl == null)
+        //{
+        //    this.animCtrl = this.animator.gameObject.AddComponent<AnimCtrlScript>();
+        //}
+
+        this.charCtrller = base.GetComponent<CharacterController>();
+        //if (this.animator != null)
+        //{
+        //    this.SetApplyRootMotion();
+        //    this.animEvent = this.animator.GetComponent<AnimEvent>();
+        //    if (this.animEvent == null)
+        //    {
+        //        this.animEvent = this.animator.gameObject.AddComponent<AnimEvent>();
+        //    }
+        //    AnimEvent expr_EF = this.animEvent;
+        //    expr_EF.OnJumpStart = (AnimEvent.void_fun)Delegate.Remove(expr_EF.OnJumpStart, new AnimEvent.void_fun(this.OnJumpStart));
+        //    AnimEvent expr_117 = this.animEvent;
+        //    expr_117.OnJumpStart = (AnimEvent.void_fun)Delegate.Combine(expr_117.OnJumpStart, new AnimEvent.void_fun(this.OnJumpStart));
+        //    AnimEvent expr_13F = this.animEvent;
+        //    expr_13F.OnJumpOver = (AnimEvent.void_fun)Delegate.Remove(expr_13F.OnJumpOver, new AnimEvent.void_fun(this.OnJumpOver));
+        //    AnimEvent expr_167 = this.animEvent;
+        //    expr_167.OnJumpOver = (AnimEvent.void_fun)Delegate.Combine(expr_167.OnJumpOver, new AnimEvent.void_fun(this.OnJumpOver));
+        //    AnimEvent expr_18F = this.animEvent;
+        //    expr_18F.OnJumpEvent = (AnimEvent.void_fun_float)Delegate.Remove(expr_18F.OnJumpEvent, new AnimEvent.void_fun_float(this.OnJumpEvent));
+        //    AnimEvent expr_1B7 = this.animEvent;
+        //    expr_1B7.OnJumpEvent = (AnimEvent.void_fun_float)Delegate.Combine(expr_1B7.OnJumpEvent, new AnimEvent.void_fun_float(this.OnJumpEvent));
+        //}
+        //this.agent.enabled = false;
+        //if (this.NeedEnableAgent && (!(PlayerCtrlManager.agentObj != null) || !(PlayerCtrlManager.agentObj == this)))
+        //{
+        //    this.agent.enabled = true;
+        //}
+        //if (((this.palNPC != null && this.palNPC.Data != null && this.palNPC.Data.CharacterID < 8) || this.palNPC == null) && this.palNPC != null && PlayersManager.Player != this.palNPC.gameObject)
+        //{
+        //    this.curCtrlMode = ControlMode.None;
+        //}
+        //if (this.palNPC != null && this.palNPC.MonsterGroups.Length < 1)
+        //{
+        //    this.agent.baseOffset = -0.1f;
+        //    if (!NPCHeight.Instance.SetHeight(this.agent))
+        //    {
+        //        base.gameObject.AddComponent<AdjustNavAgentOffset>();
+        //    }
+        //}
+        //GameObjectEvent x = base.GetComponent<GameObjectEvent>();
+        //if (x == null)
+        //{
+        //    x = base.gameObject.AddComponent<GameObjectEvent>();
+        //}
+        //if (this.XiaLuoSpeed < 9f)
+        //{
+        //    this.XiaLuoSpeed = 9f;
+        //}
+    }
 
     //	protected void SetDestination0()
     //	{

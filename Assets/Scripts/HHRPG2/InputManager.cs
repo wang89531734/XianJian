@@ -8,162 +8,162 @@ public class InputManager
 {
     private class KeyDefinition
     {
-        //private static float AxisRepeatTime = 0.5f;
+        private static float AxisRepeatTime = 0.5f;
 
-        //private static float AxisRepeatDelay = 1f;
+        private static float AxisRepeatDelay = 1f;
 
         public KeyCode Code;
 
-        //public string Axis = string.Empty;
+        public string Axis = string.Empty;
 
-        //public AxisDirectionType AxisDirection;
+        public AxisDirectionType AxisDirection;
 
-        //private float m_lastAxisTime;
+        private float m_lastAxisTime;
 
-        //private bool m_lastAxisState;
+        private bool m_lastAxisState;
 
-        //private bool m_currentAxisState;
+        private bool m_currentAxisState;
 
-        //public bool HasCode
-        //{
-        //    get
-        //    {
-        //        return this.Code != KeyCode.None && this.Code != KeyCode.None;
-        //    }
-        //}
+        public bool HasCode
+        {
+            get
+            {
+                return this.Code != KeyCode.None && this.Code != KeyCode.None;
+            }
+        }
 
-        //public bool HasAxis
-        //{
-        //    get
-        //    {
-        //        return this.Axis != null && this.Axis != string.Empty;
-        //    }
-        //}
+        public bool HasAxis
+        {
+            get
+            {
+                return this.Axis != null && this.Axis != string.Empty;
+            }
+        }
 
-        //public bool AxisActive
-        //{
-        //    get
-        //    {
-        //        return this.HasAxis && this.getAxisActive(true);
-        //    }
-        //}
+        public bool AxisActive
+        {
+            get
+            {
+                return this.HasAxis && this.getAxisActive(true);
+            }
+        }
 
-        //public bool AxisActive_SinglePad
-        //{
-        //    get
-        //    {
-        //        return this.HasAxis && this.getAxisActive(false);
-        //    }
-        //}
+        public bool AxisActive_SinglePad
+        {
+            get
+            {
+                return this.HasAxis && this.getAxisActive(false);
+            }
+        }
 
-        //public bool AxisDown
-        //{
-        //    get
-        //    {
-        //        return this.AxisActive && !this.m_lastAxisState;
-        //    }
-        //}
+        public bool AxisDown
+        {
+            get
+            {
+                return this.AxisActive && !this.m_lastAxisState;
+            }
+        }
 
-        //public bool AxisUp
-        //{
-        //    get
-        //    {
-        //        return !this.AxisActive && this.m_lastAxisState;
-        //    }
-        //}
+        public bool AxisUp
+        {
+            get
+            {
+                return !this.AxisActive && this.m_lastAxisState;
+            }
+        }
 
-        //public bool AxisDown_SinglePad
-        //{
-        //    get
-        //    {
-        //        return this.AxisActive_SinglePad && !this.m_lastAxisState;
-        //    }
-        //}
+        public bool AxisDown_SinglePad
+        {
+            get
+            {
+                return this.AxisActive_SinglePad && !this.m_lastAxisState;
+            }
+        }
 
-        //public bool AxisUp_SinglePad
-        //{
-        //    get
-        //    {
-        //        return !this.AxisActive_SinglePad && this.m_lastAxisState;
-        //    }
-        //}
+        public bool AxisUp_SinglePad
+        {
+            get
+            {
+                return !this.AxisActive_SinglePad && this.m_lastAxisState;
+            }
+        }
 
-        //public float GetAxis
-        //{
-        //    get
-        //    {
-        //        return this.getAxis(true);
-        //    }
-        //}
+        public float GetAxis
+        {
+            get
+            {
+                return this.getAxis(true);
+            }
+        }
 
-        //public float GetAxis_SinglePad
-        //{
-        //    get
-        //    {
-        //        return this.getAxis(false);
-        //    }
-        //}
+        public float GetAxis_SinglePad
+        {
+            get
+            {
+                return this.getAxis(false);
+            }
+        }
 
-        //public float AxisRaw
-        //{
-        //    get
-        //    {
-        //        return this.getAxisRaw(true);
-        //    }
-        //}
+        public float AxisRaw
+        {
+            get
+            {
+                return this.getAxisRaw(true);
+            }
+        }
 
-        //public float AxisRaw_SinglePad
-        //{
-        //    get
-        //    {
-        //        return this.getAxisRaw(false);
-        //    }
-        //}
+        public float AxisRaw_SinglePad
+        {
+            get
+            {
+                return this.getAxisRaw(false);
+            }
+        }
 
-        //private float getAxisRaw(bool global = false)
-        //{
-        //    float axisRaw;
-        //    if (global)
-        //    {
-        //        axisRaw = Input.GetAxisRaw(this.Axis);
-        //    }
-        //    else
-        //    {
-        //        axisRaw = Input.GetAxisRaw(this.Axis);
-        //    }
-        //    return axisRaw;
-        //}
+        private float getAxisRaw(bool global = false)
+        {
+            float axisRaw;
+            if (global)
+            {
+                axisRaw = Input.GetAxisRaw(this.Axis);
+            }
+            else
+            {
+                axisRaw = Input.GetAxisRaw(this.Axis);
+            }
+            return axisRaw;
+        }
 
-        //private float getAxis(bool global = false)
-        //{
-        //    float axis;
-        //    if (global)
-        //    {
-        //        axis = Input.GetAxis(this.Axis);
-        //    }
-        //    else
-        //    {
-        //        axis = Input.GetAxis(this.Axis);
-        //    }
-        //    return axis;
-        //}
+        private float getAxis(bool global = false)
+        {
+            float axis;
+            if (global)
+            {
+                axis = Input.GetAxis(this.Axis);
+            }
+            else
+            {
+                axis = Input.GetAxis(this.Axis);
+            }
+            return axis;
+        }
 
-        //private bool getAxisActive(bool global = false)
-        //{
-        //    float axis = this.getAxis(global);
-        //    if (this.m_lastAxisTime == 0f || this.m_lastAxisTime != Time.time)
-        //    {
-        //        this.m_lastAxisTime = Time.time;
-        //        this.m_lastAxisState = this.m_currentAxisState;
-        //    }
-        //    if ((axis > InputManager.AxisKeyThreshold && this.AxisDirection == AxisDirectionType.Positive) || (axis < -InputManager.AxisKeyThreshold && this.AxisDirection == AxisDirectionType.Negative) || (Mathf.Abs(axis) > InputManager.AxisKeyThreshold && this.AxisDirection == AxisDirectionType.Both))
-        //    {
-        //        this.m_currentAxisState = true;
-        //        return true;
-        //    }
-        //    this.m_currentAxisState = false;
-        //    return false;
-        //}
+        private bool getAxisActive(bool global = false)
+        {
+            float axis = this.getAxis(global);
+            if (this.m_lastAxisTime == 0f || this.m_lastAxisTime != Time.time)
+            {
+                this.m_lastAxisTime = Time.time;
+                this.m_lastAxisState = this.m_currentAxisState;
+            }
+            if ((axis > InputManager.AxisKeyThreshold && this.AxisDirection == AxisDirectionType.Positive) || (axis < -InputManager.AxisKeyThreshold && this.AxisDirection == AxisDirectionType.Negative) || (Mathf.Abs(axis) > InputManager.AxisKeyThreshold && this.AxisDirection == AxisDirectionType.Both))
+            {
+                this.m_currentAxisState = true;
+                return true;
+            }
+            this.m_currentAxisState = false;
+            return false;
+        }
     }
 
     private static bool s_lockThisFrame = false;
@@ -441,110 +441,110 @@ public class InputManager
         });
     }
 
-    //	public static bool GetKeyDown(KEY_ACTION key, bool isGlobal = false)
-    //	{
-    //		if (!InputManager.bActive || InputManager.s_lockThisFrame)
-    //		{
-    //			return false;
-    //		}
-    //		if (InputManager.GameKeyList[key].HasCode)
-    //		{
-    //			bool keyDown;
-    //			if (isGlobal)
-    //			{
-    //				keyDown = Input.GetKeyDown(InputManager.GameKeyList[key].Code);
-    //			}
-    //			else
-    //			{
-    //				keyDown = Input.GetKeyDown(InputManager.GameKeyList[key].Code);
-    //			}
-    //			return keyDown;
-    //		}
-    //		if (InputManager.GameKeyList[key].HasAxis)
-    //		{
-    //			bool axisDown;
-    //			if (isGlobal)
-    //			{
-    //				axisDown = InputManager.GameKeyList[key].AxisDown;
-    //			}
-    //			else
-    //			{
-    //				axisDown = InputManager.GameKeyList[key].AxisDown;
-    //			}
-    //			return axisDown;
-    //		}
-    //		return false;
-    //	}
+    public static bool GetKeyDown(KEY_ACTION key, bool isGlobal = false)
+    {
+        if (!InputManager.bActive || InputManager.s_lockThisFrame)
+        {
+            return false;
+        }
+        if (InputManager.GameKeyList[key].HasCode)
+        {
+            bool keyDown;
+            if (isGlobal)
+            {
+                keyDown = Input.GetKeyDown(InputManager.GameKeyList[key].Code);
+            }
+            else
+            {
+                keyDown = Input.GetKeyDown(InputManager.GameKeyList[key].Code);
+            }
+            return keyDown;
+        }
+        if (InputManager.GameKeyList[key].HasAxis)
+        {
+            bool axisDown;
+            if (isGlobal)
+            {
+                axisDown = InputManager.GameKeyList[key].AxisDown;
+            }
+            else
+            {
+                axisDown = InputManager.GameKeyList[key].AxisDown;
+            }
+            return axisDown;
+        }
+        return false;
+    }
 
-    //	public static bool GetKeyUp(KEY_ACTION key, bool isGlobal = false)
-    //	{
-    //		if (!InputManager.bActive || InputManager.s_lockThisFrame)
-    //		{
-    //			return false;
-    //		}
-    //		if (InputManager.GameKeyList[key].HasCode)
-    //		{
-    //			bool keyUp;
-    //			if (isGlobal)
-    //			{
-    //				keyUp = Input.GetKeyUp(InputManager.GameKeyList[key].Code);
-    //			}
-    //			else
-    //			{
-    //				keyUp = Input.GetKeyUp(InputManager.GameKeyList[key].Code);
-    //			}
-    //			return keyUp;
-    //		}
-    //		if (InputManager.GameKeyList[key].HasAxis)
-    //		{
-    //			bool axisUp;
-    //			if (isGlobal)
-    //			{
-    //				axisUp = InputManager.GameKeyList[key].AxisUp;
-    //			}
-    //			else
-    //			{
-    //				axisUp = InputManager.GameKeyList[key].AxisUp;
-    //			}
-    //			return axisUp;
-    //		}
-    //		return false;
-    //	}
+    public static bool GetKeyUp(KEY_ACTION key, bool isGlobal = false)
+    {
+        if (!InputManager.bActive || InputManager.s_lockThisFrame)
+        {
+            return false;
+        }
+        if (InputManager.GameKeyList[key].HasCode)
+        {
+            bool keyUp;
+            if (isGlobal)
+            {
+                keyUp = Input.GetKeyUp(InputManager.GameKeyList[key].Code);
+            }
+            else
+            {
+                keyUp = Input.GetKeyUp(InputManager.GameKeyList[key].Code);
+            }
+            return keyUp;
+        }
+        if (InputManager.GameKeyList[key].HasAxis)
+        {
+            bool axisUp;
+            if (isGlobal)
+            {
+                axisUp = InputManager.GameKeyList[key].AxisUp;
+            }
+            else
+            {
+                axisUp = InputManager.GameKeyList[key].AxisUp;
+            }
+            return axisUp;
+        }
+        return false;
+    }
 
-    //	public static bool GetKey(KEY_ACTION key, bool isGlobal = false)
-    //	{
-    //		if (!InputManager.bActive || InputManager.s_lockThisFrame)
-    //		{
-    //			return false;
-    //		}
-    //		if (InputManager.GameKeyList[key].HasCode)
-    //		{
-    //			bool key2;
-    //			if (isGlobal)
-    //			{
-    //				key2 = Input.GetKey(InputManager.GameKeyList[key].Code);
-    //			}
-    //			else
-    //			{
-    //				key2 = Input.GetKey(InputManager.GameKeyList[key].Code);
-    //			}
-    //			return key2;
-    //		}
-    //		if (InputManager.GameKeyList[key].HasAxis)
-    //		{
-    //			bool axisActive;
-    //			if (isGlobal)
-    //			{
-    //				axisActive = InputManager.GameKeyList[key].AxisActive;
-    //			}
-    //			else
-    //			{
-    //				axisActive = InputManager.GameKeyList[key].AxisActive;
-    //			}
-    //			return axisActive;
-    //		}
-    //		return false;
-    //	}
+    public static bool GetKey(KEY_ACTION key, bool isGlobal = false)
+    {
+        if (!InputManager.bActive || InputManager.s_lockThisFrame)
+        {
+            return false;
+        }
+        if (InputManager.GameKeyList[key].HasCode)
+        {
+            bool key2;
+            if (isGlobal)
+            {
+                key2 = Input.GetKey(InputManager.GameKeyList[key].Code);
+            }
+            else
+            {
+                key2 = Input.GetKey(InputManager.GameKeyList[key].Code);
+            }
+            return key2;
+        }
+        if (InputManager.GameKeyList[key].HasAxis)
+        {
+            bool axisActive;
+            if (isGlobal)
+            {
+                axisActive = InputManager.GameKeyList[key].AxisActive;
+            }
+            else
+            {
+                axisActive = InputManager.GameKeyList[key].AxisActive;
+            }
+            return axisActive;
+        }
+        return false;
+    }
 
     //	public static float GetAxis(KEY_ACTION key, bool isGlobal = false)
     //	{

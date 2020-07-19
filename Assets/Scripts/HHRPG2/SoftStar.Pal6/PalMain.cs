@@ -858,7 +858,7 @@ namespace SoftStar.Pal6
             //DistanceCullManager.Initialize();
             //CharactersManager.Initialize();
             InputManager.Initialize();
-            //PlayerCtrlManager.Initialize();
+            PlayerCtrlManager.Initialize();
             //PalBattleManager.Initialize();
             //EntityManager.Initialize();
             //MissionTick.Initialize();
@@ -1275,10 +1275,12 @@ namespace SoftStar.Pal6
 
         private void Update()
         {
+
             //if (this.onInputHandles != null)
             //{
             //    this.onInputHandles();
             //}
+           
             if (this.updateHandles != null)
             {
                 this.updateHandles(Time.time, Time.deltaTime);

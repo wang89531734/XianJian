@@ -269,7 +269,7 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 		PlayersManager.OnTabPlayer -= new Action<int>(this.OnTabPlayer);
 	}
 
-	private void InNormal()
+	public void InNormal()
 	{
 		base.enabled = true;
 		this.InitPlayerForward();
@@ -377,9 +377,9 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 		base.GetComponent<Camera>().nearClipPlane = 0.1f;
 		this.CamPos = base.transform.position;
 		this.FocalPos = this.target.position;
-	//	Vector3 lastTargetPos = Util.RelativeMatrix(this.target, this.targetRoot).MultiplyPoint(Vector3.zero);
-		//this.LastTargetPos = lastTargetPos;
-	}
+        Vector3 lastTargetPos = Util.RelativeMatrix(this.target, this.targetRoot).MultiplyPoint(Vector3.zero);
+        this.LastTargetPos = lastTargetPos;
+    }
 
 	public void InitAngle()
 	{
@@ -410,6 +410,7 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 		{
 			return;
 		}
+
 		if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonUp(0))
 		{
 			SmoothFollow2.LeftCameraMove = false;
@@ -419,25 +420,20 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 		{
 			SmoothFollow2.LeftCameraMove = true;
 		}
-		//if (UICamera.hoveredObject != null && (InputManager.GetKeyDown(KEY_ACTION.MOUSE_LEFT, false) || InputManager.GetKeyDown(KEY_ACTION.MOUSE_RIGHT, false)))
-		//{
-		//	this.bInUI = true;
-		//}
-		//if (this.bInUI && (InputManager.GetKeyUp(KEY_ACTION.MOUSE_LEFT, false) || InputManager.GetKeyUp(KEY_ACTION.MOUSE_RIGHT, false)))
-		//{
-		//	this.bInUI = false;
-		//}
+	
 		if (this.InsideFun != null)
 		{
 			this.InsideFun();
 			return;
 		}
 		Vector3 position = Vector3.zero;
+
 		if (this.curShakeType != ShakeType.None)
 		{
 			position = base.transform.position;
 			base.transform.position = this.CamPos;
 		}
+
 		if (this.bControl && !this.bInUI)
 		{
 			if (this.CanScroll)
@@ -445,24 +441,28 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 				this.TargetCamDistance = this.GetTargetCamDistance();
 				this.CamDistance = this.TargetCamDistance;
 			}
+
 			this.AdjustFOV(this.CamDistance);
-			//if (InputManager.GetKey(KEY_ACTION.CAMERA_LEFT, false))
-			//{
-			//	this.CamAngleH -= this.horizontalRotSpeed * Time.smoothDeltaTime;
-			//}
-			//else if (InputManager.GetKey(KEY_ACTION.CAMERA_RIGHT, false))
-			//{
-			//	this.CamAngleH += this.horizontalRotSpeed * Time.smoothDeltaTime;
-			//}
-			if (Input.GetMouseButton(1))
+
+            if (InputManager.GetKey(KEY_ACTION.CAMERA_LEFT, false))
+            {
+                this.CamAngleH -= this.horizontalRotSpeed * Time.smoothDeltaTime;
+            }
+            else if (InputManager.GetKey(KEY_ACTION.CAMERA_RIGHT, false))
+            {
+                this.CamAngleH += this.horizontalRotSpeed * Time.smoothDeltaTime;
+            }
+ 
+            if (Input.GetMouseButton(1))
 			{
-				this.GetHV();
+                this.GetHV();
 				this.bNeedReturn = false;
 			}
 			else if (Input.GetMouseButton(0))
 			{
 				this.GetHV();
 			}
+
 			if (this.bUseLeftReturn)
 			{
 				if (Input.GetMouseButtonDown(0))
@@ -477,6 +477,7 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 				{
 					this.bNeedReturn = true;
 				}
+
 				if (this.bNeedReturn)
 				{
 					this.CamAngleH = Mathf.LerpAngle(this.CamAngleH, this.lastAngleH, Time.deltaTime * this.ReturnSpeed);
@@ -486,6 +487,7 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 					}
 				}
 			}
+
 			if (this.bJolt)
 			{
 				this.MakeJolt();
@@ -560,23 +562,23 @@ public class SmoothFollow2 : MonoBehaviour, ISaveInterface
 
 	private void MakeJolt()
 	{
-		//Vector3 vector = Util.RelativeMatrix(this.target, this.targetRoot).MultiplyPoint(Vector3.zero);
-		//Vector3 vector2 = vector - this.LastTargetPos;
-		//vector2.x *= this.offsetScale.x;
-		//vector2.y *= this.offsetScale.y;
-		//vector2.z *= this.offsetScale.z;
-		//this.LastTargetPos = vector;
-		Vector3 vector3 = new Vector3(0f, 0f, this.CamDistance);
-	//	vector2 *= this.CamDistance;
-		//Quaternion quaternion = Quaternion.FromToRotation(vector3, vector3 + vector2);
-		//float num = quaternion.eulerAngles.x;
-		//if (num > 350f)
-		//{
-		//	num -= 360f;
-		//}
-		//this.angleV -= num;
-		//this.CamAngleH += quaternion.eulerAngles.y;
-	}
+        Vector3 vector = Util.RelativeMatrix(this.target, this.targetRoot).MultiplyPoint(Vector3.zero);
+        Vector3 vector2 = vector - this.LastTargetPos;
+        vector2.x *= this.offsetScale.x;
+        vector2.y *= this.offsetScale.y;
+        vector2.z *= this.offsetScale.z;
+        this.LastTargetPos = vector;
+        Vector3 vector3 = new Vector3(0f, 0f, this.CamDistance);
+        vector2 *= this.CamDistance;
+        Quaternion quaternion = Quaternion.FromToRotation(vector3, vector3 + vector2);
+        float num = quaternion.eulerAngles.x;
+        if (num > 350f)
+        {
+            num -= 360f;
+        }
+        this.angleV -= num;
+        this.CamAngleH += quaternion.eulerAngles.y;
+    }
 
 	private float GetTargetCamDistance()
 	{
