@@ -1,5 +1,4 @@
-﻿using SoftStar.Pal6;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +27,6 @@ public class UILogOnForm : UIFormBase
 
     public void OnNewGameBtn()
     {
-        SetGameDifficulty(0);
         //base.StartCoroutine(DoTalk());      
     }
 
@@ -51,28 +49,7 @@ public class UILogOnForm : UIFormBase
     {
         //SystemPlane.SetActive(false);
     }
-
-    public void SetGameDifficulty(int v)
-    {
-        PalMain.GameDifficulty = v;
-        //SaveManager.GameDifficulty = v;
-        //HPMPDPProperty.StaticData.Reset();
-        //FightProperty.StaticData.Reset();
-        //PalMain.backgroundAudio.ChangeBackMusicImmediate(null);
-        AfterSetGameDifficulty_NewStart();
-    }
-
-    public void AfterSetGameDifficulty_NewStart()
-    {
-        PalMain.GameBeginTime = Time.fixedTime;
-        PalMain.GameTotleTime = 0f;
-        GameEntry.Scene.LoadScene(2, false, () =>
-        {
-            GameEntry.Procedure.ChangeState(ProcedureState.WorldMap);
-        });
-        //PalMain.ChangeMap("SceneEnter", 1, true, true);
-    }
-
+   
     public IEnumerator DoTalk()
     {
         //yield return base.StartCoroutine(GameTalk.WaitFadeTime(1f, 2f));
