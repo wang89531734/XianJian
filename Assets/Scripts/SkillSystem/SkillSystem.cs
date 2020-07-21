@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using YouYou;
 
 public class SkillSystem
 {
@@ -230,7 +231,7 @@ public class SkillSystem
 		int num = 0;
 		for (int i = currentLevel; i <= newlevel; i++)
 		{
-			S_Level levelData = Swd6Application.instance.m_GameDataSystem.GetLevelData(roleId, i);
+			S_Level levelData = GameEntry.Instance.m_GameDataSystem.GetLevelData(roleId, i);
 			if (levelData.LearnSkillID != 0)
 			{
 				if (!this.CheckSkill(roleId, levelData.LearnSkillID))
@@ -1086,21 +1087,21 @@ public class SkillSystem
 			}
 		}
 		float num5 = float.Parse("0.02");
-		if (Swd6Application.instance.m_SaveloadSystem.m_Version >= num5)
-		{
-			for (int n = 0; n < num; n++)
-			{
-				for (int num6 = 1; num6 <= 4; num6++)
-				{
-					num4 = stream.ReadInt();
-					for (int num7 = 0; num7 < num4; num7++)
-					{
-						int num3 = stream.ReadInt();
-						int learnTime = stream.ReadInt();
-						this.SetSkillPlateSlotData(n, num6, num3, learnTime);
-					}
-				}
-			}
-		}
+		//if (Swd6Application.instance.m_SaveloadSystem.m_Version >= num5)
+		//{
+		//	for (int n = 0; n < num; n++)
+		//	{
+		//		for (int num6 = 1; num6 <= 4; num6++)
+		//		{
+		//			num4 = stream.ReadInt();
+		//			for (int num7 = 0; num7 < num4; num7++)
+		//			{
+		//				int num3 = stream.ReadInt();
+		//				int learnTime = stream.ReadInt();
+		//				this.SetSkillPlateSlotData(n, num6, num3, learnTime);
+		//			}
+		//		}
+		//	}
+		//}
 	}
 }

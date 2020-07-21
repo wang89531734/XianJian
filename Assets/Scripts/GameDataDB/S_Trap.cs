@@ -64,9 +64,6 @@ public class S_Trap : I_BaseDBF
 
 	public void ParseJson(string JsonString, IConverter Converter, I_BaseDBF Record)
 	{
-		if (Swd6Application.instance != null && Swd6Application.instance.m_DBFLog)
-		{
-			Debug.Log("Trap_" + this.GUID);
-		}
+		
 	}
 }

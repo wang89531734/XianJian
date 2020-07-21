@@ -42,10 +42,6 @@ public class S_Treasure : I_BaseDBF
 
 	public void ParseJson(string JsonString, IConverter Converter, I_BaseDBF Record)
 	{
-		if (Swd6Application.instance != null && Swd6Application.instance.m_DBFLog)
-		{
-			Debug.Log("Treasure_" + this.GUID);
-		}
 		if (!(Record is S_Treasure))
 		{
 			return;

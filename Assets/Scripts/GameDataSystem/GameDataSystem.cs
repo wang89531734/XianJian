@@ -493,16 +493,16 @@ public class GameDataSystem
     //	return true;
     //}
 
-    //public S_Level GetLevelData(int roleId, int level)
-    //{
-    //	int num = (roleId - 1) * 150 + level;
-    //	S_Level data = GameDataDB.LevelDB.GetData(num);
-    //	if (data == null)
-    //	{
-    //		Debug.Log("讀取升級表錯誤_" + num);
-    //	}
-    //	return data;
-    //}
+    public S_Level GetLevelData(int roleId, int level)
+    {
+        int num = (roleId - 1) * 150 + level;
+        S_Level data = GameDataDB.LevelDB.GetData(num);
+        if (data == null)
+        {
+            Debug.Log("讀取升級表錯誤_" + num);
+        }
+        return data;
+    }
 
     //public void LevelUp(int roleId, int level, bool autoSetExp, ref S_LevelUpInfo levelUpInfo)
     //{
