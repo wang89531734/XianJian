@@ -44,7 +44,7 @@ public abstract class GameApplication : MonoBehaviour
 	protected abstract void initialize();
 
     /// <summary>
-    /// ��ͣ
+    /// 暂停
     /// </summary>
 	public virtual void Pause()
 	{
@@ -53,7 +53,7 @@ public abstract class GameApplication : MonoBehaviour
 	}
 
     /// <summary>
-    /// ���¿�ʼ
+    /// 重新开始
     /// </summary>
 	public virtual void ReStart()
 	{
@@ -62,7 +62,7 @@ public abstract class GameApplication : MonoBehaviour
 	}
 
     /// <summary>
-    /// �����Ϸ״̬
+    /// 添加游戏状态
     /// </summary>
     /// <param name="gameState"></param>
     public void AddGameState(GameState gameState)
@@ -71,7 +71,7 @@ public abstract class GameApplication : MonoBehaviour
     }
 
     /// <summary>
-    /// �л�״̬
+    /// 改变状态
     /// </summary>
     /// <param name="nextStateName"></param>
     /// <returns></returns>
@@ -83,7 +83,7 @@ public abstract class GameApplication : MonoBehaviour
     }
 
     /// <summary>
-    /// ����״̬
+    /// 加入游戏状态
     /// </summary>
     /// <param name="pushStateName"></param>
     /// <returns></returns>
@@ -95,7 +95,7 @@ public abstract class GameApplication : MonoBehaviour
     }
 
     /// <summary>
-    /// ����״̬
+    /// 移除游戏状态
     /// </summary>
     public void PopState()
 	{
@@ -103,7 +103,7 @@ public abstract class GameApplication : MonoBehaviour
     }
 
     /// <summary>
-    /// �õ���Ϸ״̬����
+    /// 获取游戏状态名称
     /// </summary>
     /// <param name="stateName"></param>
     /// <returns></returns>
@@ -113,7 +113,7 @@ public abstract class GameApplication : MonoBehaviour
     }
 
     /// <summary>
-    /// �õ���ǰ��Ϸ״̬
+    /// 获取当前游戏状态
     /// </summary>
     /// <returns></returns>
     public GameState GetCurrentGameState()

@@ -17,10 +17,6 @@ public class Swd6Application : GameApplication
     [HideInInspector]
     public bool m_Is64BitOS = true;
 
-    //public ENUM_ResourceType m_ResourceType;
-
-    //public ENUM_LanguageType m_NowLanguageType;
-
     public bool m_IsStoryTest = true;
 
     public bool m_DBFLog;
@@ -28,8 +24,6 @@ public class Swd6Application : GameApplication
     public bool m_Password;
 
     public int m_ChapID = 100;
-
-    public string m_StartScene = string.Empty;
 
     private byte[] m_CaptureImageData;
 
@@ -74,31 +68,29 @@ public class Swd6Application : GameApplication
 
     private static bool _crackDetected;
 
-    private bool ShowCrackDetected;
-
     private Resolution[] m_DefaultResolutions;
 
     private Resolution[] m_Resolutions;
 
-    //	public static Swd6Application instance
-    //	{
-    //		get
-    //		{
-    //			return GameApplication._instance as Swd6Application;
-    //		}
-    //	}
+    public static Swd6Application instance
+    {
+        get
+        {
+            return GameApplication._instance as Swd6Application;
+        }
+    }
 
-    //	public GameObjSystem m_GameObjSystem
-    //	{
-    //		get;
-    //		private set;
-    //	}
+    //public GameObjSystem m_GameObjSystem
+    //{
+    //    get;
+    //    private set;
+    //}
 
-    //	public GameDataSystem m_GameDataSystem
-    //	{
-    //		get;
-    //		private set;
-    //	}
+    public GameDataSystem m_GameDataSystem
+    {
+        get;
+        private set;
+    }
 
     //	public ExploreSystem m_ExploreSystem
     //	{
@@ -190,11 +182,11 @@ public class Swd6Application : GameApplication
     //		private set;
     //	}
 
-    //	public StorySystem m_StorySystem
-    //	{
-    //		get;
-    //		private set;
-    //	}
+    public StorySystem m_StorySystem
+    {
+        get;
+        private set;
+    }
 
     //	public MusicSystem m_MusicControlSystem
     //	{
@@ -255,56 +247,52 @@ public class Swd6Application : GameApplication
     //		this.m_QualitySettingSystem.UpdateSceneQuality();
     //	}
 
-    //	public virtual bool IsDLC()
-    //	{
-    //		return this.m_ChapID == 101;
-    //	}
-
     //	public bool CheckDLC()
     //	{
     //		float num = float.Parse("1.04");
     //		return num >= 1.04f;
     //	}
 
-    //	public override void Update()
-    //	{
-    //		if (this.GamePause)
-    //		{
-    //			return;
-    //		}
-    //		base.Update();
-    //		if (this.m_InitializeOK)
-    //		{
-    //			if (this.m_ResourceType == ENUM_ResourceType.Runtime)
-    //			{
-    //				this.UpdateSonySystem();
-    //				this.UpdateCK();
-    //			}
-    //			if (this.m_GameDataSystem != null)
-    //			{
-    //				this.m_GameDataSystem.Update();
-    //			}
-    //			if (this.m_QuestSystem != null)
-    //			{
-    //				this.m_QuestSystem.Update();
-    //			}
-    //			if (this.m_AchievementSystem != null)
-    //			{
-    //				this.m_AchievementSystem.Update();
-    //			}
-    //			GameInput.Update();
-    //			GameCursor.Update();
-    //			this.UpdateInput();
-    //			if (this.m_UpdateResizeTime > 0f)
-    //			{
-    //				this.m_UpdateResizeTime -= Time.deltaTime;
-    //				if (this.m_UpdateResizeTime <= 0f)
-    //				{
-    //					this.m_UpdateResizeTime = 0f;
-    //				}
-    //			}
-    //		}
-    //	}
+    public override void Update()
+    {
+        if (this.GamePause)
+        {
+            return;
+        }
+        base.Update();
+        if (this.m_InitializeOK)
+        {
+            //if (this.m_ResourceType == ENUM_ResourceType.Runtime)
+            //{
+            //    this.UpdateSonySystem();
+            //    this.UpdateCK();
+            //}
+
+            if (this.m_GameDataSystem != null)
+            {
+                this.m_GameDataSystem.Update();
+            }
+
+            //if (this.m_QuestSystem != null)
+            //{
+            //    this.m_QuestSystem.Update();
+            //}
+            //if (this.m_AchievementSystem != null)
+            //{
+            //    this.m_AchievementSystem.Update();
+            //}
+            GameInput.Update();
+            //GameCursor.Update();
+            //if (this.m_UpdateResizeTime > 0f)
+            //{
+            //    this.m_UpdateResizeTime -= Time.deltaTime;
+            //    if (this.m_UpdateResizeTime <= 0f)
+            //    {
+            //        this.m_UpdateResizeTime = 0f;
+            //    }
+            //}
+        }
+    }
 
     //	private void UpdateSonySystem()
     //	{
@@ -446,167 +434,128 @@ public class Swd6Application : GameApplication
     //		}
     //	}
 
-    //	public void UpdateInput()
-    //	{
-    //		if (GameInput.GetKeyActionDown(KEY_ACTION.SCREENSHOT))
-    //		{
-    //			this.m_UserBehavior.EventInfo.Counter(this.m_GameDataSystem.m_MapInfo.MapID, CounterType.Screenshot);
-    //			base.StartCoroutine(this.m_SaveloadSystem.SaveAlbumScreenShot());
-    //		}
-    //	}
-
-    //	public override void OnGUI()
-    //	{
-    //		base.OnGUI();
-    //		if (this.ShowCrackDetected)
-    //		{
-    //			GUI.Box(new Rect(0f, 0f, (float)Screen.width, (float)Screen.height), string.Empty);
-    //			if (GUI.Button(new Rect(0f, 0f, (float)(Screen.width - 10), (float)(Screen.height - 10)), GameDataDB.StrID(1209)))
-    //			{
-    //				Application.Quit();
-    //			}
-    //		}
-    //	}
-
     protected override void initialize()
     {
         base.StartCoroutine(this.InitializeNormalGame());
     }
 
-    //	protected void InitSystemSettings()
-    //	{
-    //		GameInput.Initialize();
-    //		this.m_QualitySettingSystem = new QualitySettingSystem();
-    //		this.m_QualitySettingSystem.Initialize();
-    //		this.m_NormalSettingSystem = new NormalSettingSystem();
-    //		this.m_NormalSettingSystem.Initialize();
-    //		this.m_SoundSettingSystem = new SoundSettingSystem();
-    //		this.m_SoundSettingSystem.Initialize();
-    //		this.m_ControlSettingSystem = new ControlSettingSystem();
-    //		this.m_ControlSettingSystem.Initialize();
-    //		this.LoadSettings();
-    //		this.m_QualitySettingSystem.SetFirstGameQuality();
-    //		this.m_ControlSettingSystem.UpdateControlSetting();
-    //		this.SaveSettings(false);
-    //	}
+    /// <summary>
+    /// 初始化系统设置
+    /// </summary>
+    protected void InitSystemSettings()
+    {
+        GameInput.Initialize();
+        //this.m_QualitySettingSystem = new QualitySettingSystem();
+        //this.m_QualitySettingSystem.Initialize();
+        //this.m_NormalSettingSystem = new NormalSettingSystem();
+        //this.m_NormalSettingSystem.Initialize();
+        //this.m_SoundSettingSystem = new SoundSettingSystem();
+        //this.m_SoundSettingSystem.Initialize();
+        //this.m_ControlSettingSystem = new ControlSettingSystem();
+        //this.m_ControlSettingSystem.Initialize();
+        //this.LoadSettings();
+        //this.m_QualitySettingSystem.SetFirstGameQuality();
+        //this.m_ControlSettingSystem.UpdateControlSetting();
+        //this.SaveSettings(false);
+    }
 
     private IEnumerator InitializeNormalGame()
     {
-        //this.InitSystemSettings();
-        //yield return null;
-        //new ResourceManager();
-        //yield return null;
+        this.InitSystemSettings();
+        yield return null;
         //GameCursor.Init();
-        //this.ReadGameDB();
-        //this.InitGUI();
-        //this.InitGameSystem();
-        //this.InitGameState();
-        //this.InitRequiredObject();
-        //this.m_InitializeOK = true;
-        //if (this.m_StartScene != string.Empty)
-        //{
-        //    AsyncOperation async = Application.LoadLevelAsync(this.m_StartScene);
-        //    while (!async.isDone)
-        //    {
-        //        yield return 1;
-        //    }
-        //    this.SwitchState("ExploreState");
-        //}
-        //else
-        //{
-        //    AsyncOperation async2 = Application.LoadLevelAsync("Logo");
-        //    while (!async2.isDone)
-        //    {
-        //        yield return 1;
-        //    }
-        //    this.SwitchState("LogoState");
-        //}
+        this.ReadGameDB();
+        this.InitGameSystem();
+        this.InitGameState();
+        this.InitRequiredObject();
+        this.m_InitializeOK = true;
+        this.SwitchState("MenuState");
+
         UnityEngine.Debug.Log("初始化完成!!");
         yield break;
     }
 
-    //	protected virtual void ReadGameDB()
-    //	{
-    //		string mapBlockPath = Application.dataPath + "/../DBF/";
-    //		string dBF_Path = Application.dataPath + "/../DBF/";
-    //		string languagePath = Application.dataPath + "/../DBF/";
-    //		GameDataDB.SetConevrt(new SwdJsonCovertor());
-    //		GameDataDB.Initialize(mapBlockPath, dBF_Path, languagePath);
-    //		GameDataDB.LoadDBF();
-    //		GameDataDB.LoadLanguage();
-    //	}
+    protected virtual void ReadGameDB()
+    {
+        string mapBlockPath = Application.dataPath + "/../DBF/";
+        string dbf_Path = Application.dataPath + "/../DBF/";
+        string languagePath = Application.dataPath + "/../DBF/";
+        GameDataDB.SetConevrt(new SwdJsonCovertor());
+        //GameDataDB.Initialize(mapBlockPath, dbf_Path, languagePath);
+        //GameDataDB.LoadDBF();
+        //GameDataDB.LoadLanguage();
+    }
 
-    //	protected virtual void InitGameState()
-    //	{
-    //		base.AddGameState(new LogoState("LogoState", "Logo", this));
-    //		base.AddGameState(new LoadingState("LoadingState", "Loading", this));
-    //		base.AddGameState(new MenuState("MenuState", "Main", this));
-    //		base.AddGameState(new ExploreState("ExploreState", string.Empty, this));
-    //		base.AddGameState(new StoryState("StoryState", string.Empty, this));
-    //		base.AddGameState(new FightState("FightState", string.Empty, this));
-    //		base.AddGameState(new BigMapState("BigMapState", string.Empty, this));
-    //		base.AddGameState(new GameMenuState("GameMenuState", string.Empty, this));
-    //		base.AddGameState(new GameEndState("GameEndState", string.Empty, this));
-    //		base.AddGameState(new SmallTrapGameState("SmallTrapGameState", string.Empty, this));
-    //	}
+    protected virtual void InitGameState()
+    {
+        //base.AddGameState(new LoadingState("LoadingState", "Loading", this));
+        base.AddGameState(new MenuState("MenuState", "Main", this));
+        //base.AddGameState(new ExploreState("ExploreState", string.Empty, this));
+        //base.AddGameState(new StoryState("StoryState", string.Empty, this));
+        //base.AddGameState(new FightState("FightState", string.Empty, this));
+        //base.AddGameState(new BigMapState("BigMapState", string.Empty, this));
+        //base.AddGameState(new GameMenuState("GameMenuState", string.Empty, this));
+        //base.AddGameState(new GameEndState("GameEndState", string.Empty, this));
+        //base.AddGameState(new SmallTrapGameState("SmallTrapGameState", string.Empty, this));
+    }
 
-    //	protected virtual void InitGameSystem()
-    //	{
-    //		this.m_GameObjSystem = new GameObjSystem();
-    //		this.m_GameObjSystem.Initialize();
-    //		this.m_GameDataSystem = new GameDataSystem();
-    //		this.m_GameDataSystem.Initialize();
-    //		this.m_ExploreSystem = new ExploreSystem();
-    //		this.m_ExploreSystem.Initialize(this);
-    //		this.m_GameMenuSystem = new GameMenuSystem();
-    //		this.m_GameMenuSystem.Initialize(this);
-    //		this.m_QuestSystem = new QuestSystem();
-    //		this.m_QuestSystem.Initialize(this);
-    //		this.m_IdentifySystem = new IdentifySystem();
-    //		this.m_IdentifySystem.Initialize(this);
-    //		this.m_ItemSystem = new ItemSystem();
-    //		this.m_ItemSystem.Initialize(this);
-    //		this.m_SaveloadSystem = new SaveloadSystem();
-    //		this.m_SaveloadSystem.Initialize();
-    //		this.m_SkillSystem = new SkillSystem();
-    //		this.m_SkillSystem.Initialize();
-    //		this.m_MobGuardSystem = new MobGuardSystem();
-    //		this.m_MobGuardSystem.Initialize();
-    //		this.m_AchievementSystem = new AchievementSystem();
-    //		this.m_AchievementSystem.Initialize();
-    //		this.m_InheritSystem = new InheritSystem();
-    //		this.m_InheritSystem.Initialize(this);
-    //		this.m_MapPathSystem = new MapPathSystem();
-    //		this.m_MapPathSystem.Initialize();
-    //		this.m_FormationSystem = new FormationSystem();
-    //		this.m_FormationSystem.Initialize();
-    //		this.m_BigMapSystem = new BigMapSystem();
-    //		this.m_BigMapSystem.Initialize();
-    //		this.m_SmallTrapGameSystem = new SmallTrapGameSystem();
-    //		this.m_WOPSystem = new WOPSystem();
-    //		this.m_WOPSystem.Initialize();
-    //		if (this.m_WOPSystem.IsDebug())
-    //		{
-    //			this.m_WOPSystem.InitForNewGame();
-    //		}
-    //		this.m_StorySystem = new StorySystem();
-    //		this.m_StorySystem.Initialize();
-    //		this.m_MusicControlSystem = new MusicSystem();
-    //		this.m_MovieSystem = new MovieSystem();
-    //		this.m_UserBehavior = new UserBehavior();
-    //		this.m_UserBehavior.DirectoryPath = Application.dataPath + "/../Launcher/UBData/";
-    //		if (this.m_NormalSettingSystem.GetNormalSetting().m_IsDlC)
-    //		{
-    //			this.m_ChapID = 101;
-    //		}
-    //		else
-    //		{
-    //			this.m_ChapID = 100;
-    //		}
-    //		this.InitChapterData(this.m_ChapID);
-    //		this.InitDLCItem();
-    //		this.SetGameEnviromentInfo();
-    //	}
+    protected virtual void InitGameSystem()
+    {
+        //this.m_GameObjSystem = new GameObjSystem();
+        //this.m_GameObjSystem.Initialize();
+        this.m_GameDataSystem = new GameDataSystem();
+        this.m_GameDataSystem.Initialize();
+        //this.m_ExploreSystem = new ExploreSystem();
+        //this.m_ExploreSystem.Initialize(this);
+        //this.m_GameMenuSystem = new GameMenuSystem();
+        //this.m_GameMenuSystem.Initialize(this);
+        //this.m_QuestSystem = new QuestSystem();
+        //this.m_QuestSystem.Initialize(this);
+        //this.m_IdentifySystem = new IdentifySystem();
+        //this.m_IdentifySystem.Initialize(this);
+        //this.m_ItemSystem = new ItemSystem();
+        //this.m_ItemSystem.Initialize(this);
+        //this.m_SaveloadSystem = new SaveloadSystem();
+        //this.m_SaveloadSystem.Initialize();
+        //this.m_SkillSystem = new SkillSystem();
+        //this.m_SkillSystem.Initialize();
+        //this.m_MobGuardSystem = new MobGuardSystem();
+        //this.m_MobGuardSystem.Initialize();
+        //this.m_AchievementSystem = new AchievementSystem();
+        //this.m_AchievementSystem.Initialize();
+        //this.m_InheritSystem = new InheritSystem();
+        //this.m_InheritSystem.Initialize(this);
+        //this.m_MapPathSystem = new MapPathSystem();
+        //this.m_MapPathSystem.Initialize();
+        //this.m_FormationSystem = new FormationSystem();
+        //this.m_FormationSystem.Initialize();
+        //this.m_BigMapSystem = new BigMapSystem();
+        //this.m_BigMapSystem.Initialize();
+        //this.m_SmallTrapGameSystem = new SmallTrapGameSystem();
+        //this.m_WOPSystem = new WOPSystem();
+        //this.m_WOPSystem.Initialize();
+        //if (this.m_WOPSystem.IsDebug())
+        //{
+        //    this.m_WOPSystem.InitForNewGame();
+        //}
+        this.m_StorySystem = new StorySystem();
+        this.m_StorySystem.Initialize();
+        //this.m_MusicControlSystem = new MusicSystem();
+        //this.m_MovieSystem = new MovieSystem();
+        //this.m_UserBehavior = new UserBehavior();
+        //this.m_UserBehavior.DirectoryPath = Application.dataPath + "/../Launcher/UBData/";
+        //if (this.m_NormalSettingSystem.GetNormalSetting().m_IsDlC)
+        //{
+        //    this.m_ChapID = 101;
+        //}
+        //else
+        //{
+        //    this.m_ChapID = 100;
+        //}
+        //this.InitChapterData(this.m_ChapID);
+        //this.InitDLCItem();
+        //this.SetGameEnviromentInfo();
+    }
 
     //	protected void InitDLCItem()
     //	{
@@ -666,114 +615,25 @@ public class Swd6Application : GameApplication
     //		Dictionary<KEY_ACTION, KeyCode> keyList = this.m_ControlSettingSystem.GetKeyList();
     //		this.m_UserBehavior.EnviromentInfo.SetOperationSetting(keyList);
     //		this.m_UserBehavior.Save();
-    //	}
+    //	} 
 
-    //	protected virtual void InitGUI()
-    //	{
-    //		if (this.m_UIRoot == null)
-    //		{
-    //			return;
-    //		}
-    //		UnityEngine.Object.DontDestroyOnLoad(this.m_UIRoot.gameObject);
-    //		GUIManager instance = GUIManager.instance;
-    //		instance.PreLoadGUI_ForNGUI("TalkDialogGUI");
-    //		instance.AddGUI(typeof(UI_TalkDialog).Name, UI_TalkDialog.Instance);
-    //		instance.PreLoadGUI_ForNGUI("BubbleDialogGUI");
-    //		instance.AddGUI(typeof(UI_BubbleDialog).Name, UI_BubbleDialog.Instance);
-    //		instance.PreLoadGUI_ForNGUI("ExploreGUI");
-    //		instance.AddGUI(typeof(UI_Explore).Name, UI_Explore.Instance);
-    //		instance.PreLoadGUI_ForNGUI("FightGUI");
-    //		instance.AddGUI(typeof(UI_Fight).Name, UI_Fight.Instance);
-    //		instance.PreLoadGUI_ForNGUI("StoryFullScreenSubtitleGUI");
-    //		instance.AddGUI(typeof(UI_FullScreenSubtitle).Name, UI_FullScreenSubtitle.Instance);
-    //		instance.PreLoadGUI_ForNGUI("StorySubtitleGUI");
-    //		instance.AddGUI(typeof(UI_Subtitle).Name, UI_Subtitle.Instance);
-    //		instance.PreLoadGUI_ForNGUI("StoryTextureGUI");
-    //		instance.AddGUI(typeof(UI_StoryTexture).Name, UI_StoryTexture.Instance);
-    //		instance.PreLoadGUI_ForNGUI("FadeGUI");
-    //		instance.AddGUI(typeof(UI_Fade).Name, UI_Fade.Instance);
-    //		instance.PreLoadGUI_ForNGUI("LogoGUI");
-    //		instance.AddGUI(typeof(UI_Logo).Name, UI_Logo.Instance);
-    //		instance.PreLoadGUI_ForNGUI("PauseGUI");
-    //		instance.AddGUI(typeof(UI_Pause).Name, UI_Pause.Instance);
-    //		instance.PreLoadGUI_ForNGUI("TitleMenuGUI");
-    //		instance.AddGUI(typeof(UI_TitleMenu).Name, UI_TitleMenu.Instance);
-    //		instance.PreLoadGUI_ForNGUI("FinishFightGUI");
-    //		instance.AddGUI(typeof(UI_FinishFight).Name, UI_FinishFight.Instance);
-    //		instance.PreLoadGUI_ForNGUI("FightEffectInGUI");
-    //		instance.AddGUI(typeof(UI_FightEffectIn).Name, UI_FightEffectIn.Instance);
-    //		instance.PreLoadGUI_ForNGUI("MessageGUI");
-    //		instance.AddGUI(typeof(UI_Message).Name, UI_Message.Instance);
-    //		instance.PreLoadGUI_ForNGUI("LoadingGUI");
-    //		instance.AddGUI(typeof(UI_Loading).Name, UI_Loading.Instance);
-    //		instance.PreLoadGUI_ForNGUI("MiniMapGUI");
-    //		instance.AddGUI(typeof(UI_MiniMap).Name, UI_MiniMap.Instance);
-    //		instance.PreLoadGUI_ForNGUI("ZoneMapGUI");
-    //		instance.AddGUI(typeof(UI_ZoneMap).Name, UI_ZoneMap.Instance);
-    //		instance.PreLoadGUI_ForNGUI("GameMakeNameGUI");
-    //		instance.AddGUI(typeof(UI_GameMakeNameMenu).Name, UI_GameMakeNameMenu.Instance);
-    //		instance.PreLoadGUI_ForNGUI("UnlockGUI");
-    //		instance.AddGUI(typeof(UI_UnlockGame).Name, UI_UnlockGame.Instance);
-    //		instance.PreLoadGUI_ForNGUI("GameMainMenuGUI");
-    //		instance.AddGUI(typeof(UI_GameMainMenu).Name, UI_GameMainMenu.Instance);
-    //		instance.PreLoadGUI_ForNGUI("GameSaveLoadGUI");
-    //		instance.AddGUI(typeof(UI_GameSaveLoadMenu).Name, UI_GameSaveLoadMenu.Instance);
-    //		instance.PreLoadGUI_ForNGUI("GameRoleGUI");
-    //		instance.AddGUI(typeof(UI_GameRoleMenu).Name, UI_GameRoleMenu.Instance);
-    //		instance.PreLoadGUI_ForNGUI("GameSkillGUI");
-    //		instance.AddGUI(typeof(UI_GameSkillMenu).Name, UI_GameSkillMenu.Instance);
-    //		instance.PreLoadGUI_ForNGUI("QuestMenuGUIManager");
-    //		instance.AddGUI(typeof(UI_GameQuestMenuGroup).Name, UI_GameQuestMenuGroup.Instance);
-    //		instance.PreLoadGUI_ForNGUI("GameFormationGroup");
-    //		instance.AddGUI(typeof(UI_FormationGroup).Name, UI_FormationGroup.Instance);
-    //		instance.PreLoadGUI_ForNGUI("GameItemGUI");
-    //		instance.AddGUI(typeof(UI_GameItemMenu).Name, UI_GameItemMenu.Instance);
-    //		instance.PreLoadGUI_ForNGUI("GameCollectionGUI");
-    //		instance.AddGUI(typeof(UI_GameCollectionMenu).Name, UI_GameCollectionMenu.Instance);
-    //		instance.PreLoadGUI_ForNGUI("GameSettingMenuUI");
-    //		instance.AddGUI(typeof(UI_GameSystemSettingMenu).Name, UI_GameSystemSettingMenu.Instance);
-    //		instance.PreLoadGUI_ForNGUI("NpcShopMenu");
-    //		instance.AddGUI(typeof(UI_NpcShopMenu).Name, UI_NpcShopMenu.Instance);
-    //		instance.PreLoadGUI_ForNGUI("WOPRefineMenu");
-    //		instance.AddGUI(typeof(UI_WOPRefineMenu).Name, UI_WOPRefineMenu.Instance);
-    //		instance.PreLoadGUI_ForNGUI("WOPMonsterCompositeMenu");
-    //		instance.AddGUI(typeof(UI_WOPMonsterConpositeMenu).Name, UI_WOPMonsterConpositeMenu.Instance);
-    //		instance.PreLoadGUI_ForNGUI("WOPManufactureMenu");
-    //		instance.AddGUI(typeof(UI_WOPManufactureMenu).Name, UI_WOPManufactureMenu.Instance);
-    //		instance.PreLoadGUI_ForNGUI("WOPMenu");
-    //		instance.AddGUI(typeof(UI_WOPMenu).Name, UI_WOPMenu.Instance);
-    //		instance.PreLoadGUI_ForNGUI("UI_GameHelp");
-    //		instance.AddGUI(typeof(UI_Help).Name, UI_Help.Instance);
-    //		instance.PreLoadGUI_ForNGUI("GameMobGuardGUI");
-    //		instance.AddGUI(typeof(GameMobGuardMenuUI).Name, GameMobGuardMenuUI.Instance);
-    //		instance.PreLoadGUI_ForNGUI("GameAlbumGUI");
-    //		instance.AddGUI(typeof(UI_GameAlbum).Name, UI_GameAlbum.Instance);
-    //		instance.PreLoadGUI_ForNGUI("GameGMFightStatisticsGUI");
-    //		instance.AddGUI(typeof(UI_GameGMFightStatistics).Name, UI_GameGMFightStatistics.Instance);
-    //		instance.PreLoadGUI_ForNGUI("UI_GameReStoryMenu");
-    //		instance.AddGUI(typeof(UI_GameReviewStory).Name, UI_GameReviewStory.Instance);
-    //		instance.PreLoadGUI_ForNGUI("UI_Version");
-    //		instance.AddGUI(typeof(UI_VersionMenu).Name, UI_VersionMenu.Instance);
-    //		GUIManager.instance.Initialize();
-    //	}
-
-    //	protected virtual void InitRequiredObject()
-    //	{
-    //		this.m_ShroudMgr = ResourceManager.Instance.GetOther("ShroudMgr");
-    //		if (this.m_ShroudMgr != null)
-    //		{
-    //			UnityEngine.Object.DontDestroyOnLoad(this.m_ShroudMgr);
-    //		}
-    //		GameObject other = ResourceManager.Instance.GetOther("MainMenuSky");
-    //		if (other != null)
-    //		{
-    //			this.m_MainMenuSky = other.GetComponent<Sky>();
-    //			if (this.m_MainMenuSky != null)
-    //			{
-    //				UnityEngine.Object.DontDestroyOnLoad(other);
-    //			}
-    //		}
-    //	}
+    protected virtual void InitRequiredObject()
+    {
+        //this.m_ShroudMgr = ResourceManager.Instance.GetOther("ShroudMgr");
+        //if (this.m_ShroudMgr != null)
+        //{
+        //    UnityEngine.Object.DontDestroyOnLoad(this.m_ShroudMgr);
+        //}
+        //GameObject other = ResourceManager.Instance.GetOther("MainMenuSky");
+        //if (other != null)
+        //{
+        //    this.m_MainMenuSky = other.GetComponent<Sky>();
+        //    if (this.m_MainMenuSky != null)
+        //    {
+        //        UnityEngine.Object.DontDestroyOnLoad(other);
+        //    }
+        //}
+    }
 
     //	public void changeStateByLoading(string stateName)
     //	{
@@ -918,50 +778,50 @@ public class Swd6Application : GameApplication
     //		}
     //	}
 
-    //	public void ChangeToStoryState(int mapID, string storyName)
-    //	{
-    //		string text = "StoryState";
-    //		StoryState storyState = base.GetGameStateByName(text) as StoryState;
-    //		if (storyState == null)
-    //		{
-    //			UnityEngine.Debug.LogError("Can not get StoryState");
-    //			return;
-    //		}
-    //		GameState currentGameState = base.GetCurrentGameState();
-    //		if (currentGameState == null)
-    //		{
-    //			UnityEngine.Debug.LogError("Can not get currentGameState");
-    //			return;
-    //		}
-    //		storyState.SetStoryName(storyName);
-    //		if (mapID == 100 && currentGameState is MenuState)
-    //		{
-    //			base.StartCoroutine(base.PushState(text));
-    //		}
-    //		else if (mapID == this.m_GameDataSystem.m_MapInfo.MapID)
-    //		{
-    //			if (currentGameState is StoryState)
-    //			{
-    //				storyState.CreateNewStory();
-    //			}
-    //			else if (currentGameState is ExploreState)
-    //			{
-    //				base.StartCoroutine(base.PushState(text));
-    //			}
-    //			else if (currentGameState is FightState)
-    //			{
-    //				this.SwitchState(text);
-    //			}
-    //			else if (currentGameState is MenuState)
-    //			{
-    //				base.StartCoroutine(base.PushState(text));
-    //			}
-    //		}
-    //		else
-    //		{
-    //			this.ChangeMap(text, mapID, 0f, 0f, 0f, 0f);
-    //		}
-    //	}
+    public void ChangeToStoryState(int mapID, string storyName)
+    {
+        string text = "StoryState";
+        //StoryState storyState = base.GetGameStateByName(text) as StoryState;
+        //if (storyState == null)
+        //{
+        //    UnityEngine.Debug.LogError("Can not get StoryState");
+        //    return;
+        //}
+        GameState currentGameState = base.GetCurrentGameState();
+        if (currentGameState == null)
+        {
+            UnityEngine.Debug.LogError("Can not get currentGameState");
+            return;
+        }
+       // storyState.SetStoryName(storyName);
+        //if (mapID == 100 && currentGameState is MenuState)
+        //{
+        //    base.StartCoroutine(base.PushState(text));
+        //}
+        //else if (mapID == this.m_GameDataSystem.m_MapInfo.MapID)
+        //{
+        //    if (currentGameState is StoryState)
+        //    {
+        //        storyState.CreateNewStory();
+        //    }
+        //    else if (currentGameState is ExploreState)
+        //    {
+        //        base.StartCoroutine(base.PushState(text));
+        //    }
+        //    else if (currentGameState is FightState)
+        //    {
+        //        this.SwitchState(text);
+        //    }
+        //    else if (currentGameState is MenuState)
+        //    {
+        //        base.StartCoroutine(base.PushState(text));
+        //    }
+        //}
+        //else
+        //{
+        //    //this.ChangeMap(text, mapID, 0f, 0f, 0f, 0f);
+        //}
+    }
 
     //	public void GameEnd()
     //	{
@@ -978,10 +838,14 @@ public class Swd6Application : GameApplication
     //		base.StartCoroutine(base.PushState("UTFightState"));
     //	}
 
-    //	public void SwitchState(string stateName)
-    //	{
-    //		base.StartCoroutine(base.ChangeState(stateName));
-    //	}
+    /// <summary>
+    /// 切换状态
+    /// </summary>
+    /// <param name="stateName"></param>
+    public void SwitchState(string stateName)
+    {
+        base.StartCoroutine(base.ChangeState(stateName));
+    }
 
     //	public void FadeAndPopState(float time)
     //	{
@@ -1086,23 +950,16 @@ public class Swd6Application : GameApplication
     //		this.m_GameDataSystem.InitRoleData(chapId);
     //	}
 
-    //	public void StartNewGame()
-    //	{
-    //		GameObject gameObject = GameObject.Find("NewGameObject");
-    //		this.m_GameDataSystem.InitRoleData(this.m_ChapID);
-    //		if (gameObject != null)
-    //		{
-    //			if (!this.IsDLC())
-    //			{
-    //				gameObject.SendMessage("DoTalk", SendMessageOptions.DontRequireReceiver);
-    //			}
-    //			else
-    //			{
-    //				gameObject.SendMessage("DoTalkDLC", SendMessageOptions.DontRequireReceiver);
-    //			}
-    //		}
-    //		this.NewGameRecord();
-    //	}
+    public void StartNewGame()
+    {
+        GameObject gameObject = GameObject.Find("NewGameObject");
+        //this.m_GameDataSystem.InitRoleData(this.m_ChapID);
+        if (gameObject != null)
+        {
+            gameObject.SendMessage("DoTalk", SendMessageOptions.DontRequireReceiver);
+        }
+        //this.NewGameRecord();
+    }
 
     //	public void NewGameRecord()
     //	{
