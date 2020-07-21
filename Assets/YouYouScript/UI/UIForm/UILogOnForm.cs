@@ -27,7 +27,7 @@ public class UILogOnForm : UIFormBase
 
     public void OnNewGameBtn()
     {
-        Swd6Application.instance.StartNewGame();
+        GameEntry.Instance.StartNewGame();
     }
 
     public void OnLoadBtn()

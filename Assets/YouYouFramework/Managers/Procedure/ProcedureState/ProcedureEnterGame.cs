@@ -18,12 +18,7 @@ namespace YouYou
         {
             base.OnEnter();
             Debug.Log("OnEnter ProcedureEnterGame");
-
-            string name = GameEntry.Procedure.GetData<string>("name");
-            int code = GameEntry.Procedure.GetData<int>("code");
-
-            Debug.Log("name=" + name);
-            Debug.Log("code=" + code);
+            GameEntry.UI.OpenUIForm(101);
         }
 
         public override void OnUpdate()
@@ -35,6 +30,7 @@ namespace YouYou
         {
             base.OnLeave();
             Debug.Log("OnLeave ProcedureEnterGame");
+            GameEntry.UI.CloseUIForm(101);
         }
 
         public override void OnDestroy()

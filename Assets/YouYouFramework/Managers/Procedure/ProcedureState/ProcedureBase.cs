@@ -34,5 +34,17 @@ namespace YouYou
         {
 
         }
+
+        public override void Pause()
+        {
+            Time.timeScale = 0f;
+            GameEntry.isPause = true;
+        }
+
+        public override void ReStart()
+        {
+            Time.timeScale = 1f;
+            GameEntry.isPause = false;
+        }
     }
 }

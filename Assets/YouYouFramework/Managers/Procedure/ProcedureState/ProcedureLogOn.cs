@@ -14,14 +14,7 @@ namespace YouYou
         {
             base.OnEnter();
             GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureLogOn");
-            GameEntry.Event.CommonEvent.Dispatch(SysEventId.EnterProcedureLogOn);
-            Debug.Log("加载主菜单UI");
-            GameEntry.UI.OpenUIForm(101);
-        }
-
-        private void OnLogonBGOpen(UIFormBase uiFormBase)
-        {
-            GameEntry.Event.CommonEvent.Dispatch(SysEventId.CloseCheckVersionUI);
+            GameEntry.Procedure.ChangeState(ProcedureState.EnterGame);
         }
 
         public override void OnUpdate()
@@ -33,8 +26,7 @@ namespace YouYou
         {
             base.OnLeave();
             GameEntry.Log(LogCategory.Procedure, "OnLeave ProcedureLogOn");
-            GameEntry.Event.CommonEvent.Dispatch(SysEventId.LeaveProcedureLogOn);
-            GameEntry.UI.CloseUIForm(101);
+
         }
     }
 }

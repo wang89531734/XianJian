@@ -40,5 +40,15 @@ namespace YouYou
         /// 状态机销毁时调用
         /// </summary>
         public virtual void OnDestroy() { }
+
+        /// <summary>
+        /// 状态机暂停
+        /// </summary>
+        public virtual void Pause() { }
+
+        /// <summary>
+        /// 状态机重新开始
+        /// </summary>
+        public virtual void ReStart() { }
     }
 }

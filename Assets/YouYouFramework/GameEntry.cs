@@ -68,6 +68,9 @@ namespace YouYou
         [SerializeField]
         public UIGroup[] UIGroups;
 
+        [HideInInspector]
+        public bool m_InitializeOK;
+
         #region 时间缩放
         [CustomValueDrawer("SetTimeScale")]
         public float timeScale;
@@ -234,6 +237,15 @@ namespace YouYou
             get;
             private set;
         }
+
+        /// <summary>
+        /// 角色管理器
+        /// </summary>
+        public static GameInputManager Input
+        {
+            get;
+            private set;
+        }
         #endregion
 
         #region InitManagers 初始化管理器
@@ -255,6 +267,7 @@ namespace YouYou
             Resource = new AddressableManager();
             UI = new YouYouUIManager();
             Role = new RoleManager();
+            Input = new GameInputManager();
 
             Logger.Init();
             Event.Init();
@@ -269,7 +282,10 @@ namespace YouYou
             Resource.Init();
             UI.Init();
             Role.Init();
+            Input.Init();
             //进入第一个流程
+
+            new ResourcesManager();
             Procedure.ChangeState(ProcedureState.Preload);
         }
         #endregion
@@ -304,6 +320,8 @@ namespace YouYou
 
 
         #endregion
+
+        public static bool isPause;
 
         /// <summary>
         /// 单例
@@ -349,7 +367,12 @@ namespace YouYou
 
         void Start()
         {
-            InitManagers();
+            InitManagers();     
+            
+            ReadGameDB();
+            //this.InitRequiredObject();
+            InitGameSystem();
+            this.m_InitializeOK = true;
 
             UnityEngine.Time.timeScale = timeScale = 1;
             Application.targetFrameRate = ParamsSettings.GetGradeParamData(ConstDefine.targetFrameRate, CurrDeviceGrade);
@@ -434,6 +457,154 @@ namespace YouYou
 #if DEBUG_LOG_ERROR && DEBUG_MODEL
             Debug.LogError("[youyou]" + (args.Length == 0 ? message : string.Format(message, args)));
 #endif
+        }
+
+        public void ReadGameDB()
+        {
+            string mapBlockPath = Application.dataPath + "/../DBF/";
+            string dbf_Path = Application.dataPath + "/../DBF/";
+            string languagePath = Application.dataPath + "/../DBF/";
+            GameDataDB.SetConevrt(new SwdJsonCovertor());
+            GameDataDB.Initialize(mapBlockPath, dbf_Path, languagePath);
+            GameDataDB.LoadDBF();
+            GameDataDB.LoadLanguage();
+        }
+
+        public GameObject m_ShroudMgr;
+
+        //protected virtual void InitRequiredObject()
+        //{
+        //    this.m_ShroudMgr = ResourcesManager.Instance.GetOther("ShroudMgr");
+        //    if (this.m_ShroudMgr != null)
+        //    {
+        //        UnityEngine.Object.DontDestroyOnLoad(this.m_ShroudMgr);
+        //    }
+        //    GameObject other = ResourcesManager.Instance.GetOther("MainMenuSky");
+        //    if (other != null)
+        //    {
+        //        //this.m_MainMenuSky = other.GetComponent<Sky>();
+        //        //if (this.m_MainMenuSky != null)
+        //        //{
+        //        //    UnityEngine.Object.DontDestroyOnLoad(other);
+        //        //}
+        //    }
+        //}
+
+        public GameDataSystem m_GameDataSystem { get; private set; }
+
+        public ItemSystem m_ItemSystem { get; private set; }
+
+        public QuestSystem m_QuestSystem { get; private set; }
+
+        public SkillSystem m_SkillSystem { get; private set; }
+
+        public IdentifySystem m_IdentifySystem { get; private set; }
+
+        public ExploreSystem m_ExploreSystem { get; private set; }
+
+        private void InitGameSystem()
+        {
+            //this.m_GameObjSystem = new GameObjSystem();
+            //this.m_GameObjSystem.Initialize();
+            this.m_GameDataSystem = new GameDataSystem();
+            this.m_GameDataSystem.Initialize();
+            this.m_ExploreSystem = new ExploreSystem();
+            this.m_ExploreSystem.Initialize();
+            //this.m_GameMenuSystem = new GameMenuSystem();
+            //this.m_GameMenuSystem.Initialize(this);
+            this.m_QuestSystem = new QuestSystem();
+            this.m_QuestSystem.Initialize();
+            this.m_IdentifySystem = new IdentifySystem();
+            this.m_IdentifySystem.Initialize();
+            this.m_ItemSystem = new ItemSystem();
+            this.m_ItemSystem.Initialize();
+            //this.m_SaveloadSystem = new SaveloadSystem();
+            //this.m_SaveloadSystem.Initialize();
+            this.m_SkillSystem = new SkillSystem();
+            this.m_SkillSystem.Initialize();
+            //this.m_MobGuardSystem = new MobGuardSystem();
+            //this.m_MobGuardSystem.Initialize();
+            //this.m_AchievementSystem = new AchievementSystem();
+            //this.m_AchievementSystem.Initialize();
+            //this.m_InheritSystem = new InheritSystem();
+            //this.m_InheritSystem.Initialize(this);
+            //this.m_MapPathSystem = new MapPathSystem();
+            //this.m_MapPathSystem.Initialize();
+            //this.m_FormationSystem = new FormationSystem();
+            //this.m_FormationSystem.Initialize();
+            //this.m_BigMapSystem = new BigMapSystem();
+            //this.m_BigMapSystem.Initialize();
+            //this.m_SmallTrapGameSystem = new SmallTrapGameSystem();
+            //this.m_WOPSystem = new WOPSystem();
+            //this.m_WOPSystem.Initialize();
+            //if (this.m_WOPSystem.IsDebug())
+            //{
+            //    this.m_WOPSystem.InitForNewGame();
+            //}
+            //this.m_StorySystem = new StorySystem();
+            //this.m_StorySystem.Initialize();
+            //this.m_MusicControlSystem = new MusicSystem();
+            //this.m_UserBehavior = new UserBehavior();
+            //this.m_UserBehavior.DirectoryPath = Application.dataPath + "/../Launcher/UBData/";
+            //if (this.m_NormalSettingSystem.GetNormalSetting().m_IsDlC)
+            //{
+            //    this.m_ChapID = 101;
+            //}
+            //else
+            //{
+            //    this.m_ChapID = 100;
+            //}
+            //this.InitChapterData(this.m_ChapID);
+            //this.InitDLCItem();
+            //this.SetGameEnviromentInfo();
+        }
+
+        public void StartNewGame()
+        {
+            this.m_GameDataSystem.InitRoleData();
+            base.StartCoroutine(DoTalk());
+        }
+
+        public IEnumerator DoTalk()
+        {
+            Debug.Log("执行");
+            //GameTalk.StartTalk(true);
+            //yield return base.StartCoroutine(GameTalk.WaitFadeTime(1f, 2f));
+            //GameTalk.AddItem(901, 3, false);
+            //GameTalk.AddItem(921, 3, false);
+            //GameTalk.AddMoney(200, false);
+            //GameTalk.FlagOFF(61);
+            //GameTalk.FlagOFF(62);
+            //GameTalk.FlagOFF(63);
+            //GameTalk.FlagOFF(64);
+            //GameObject listener = GameObject.Find("Menu Listener");
+            //if (listener != null && listener.GetComponent<AudioListener>() != null)
+            //{
+            //    listener.GetComponent<AudioListener>().enabled = false;
+            //}
+            //if (!GameTalk.GetFlag(1001))
+            //{
+            //    GameTalk.FlagON(1001);
+            //}
+            //GameTalk.StartTalk(false);
+            //GameTalk.HideAllNpc(1);
+            //GameTalk.PlayStory(100, "ME0000");
+            //yield return base.StartCoroutine(GameTalk.IsPlayStoryEnd());
+            yield return null;
+            yield break;
+        }
+
+        public void InitNewGame()
+        {
+            //this.m_GameObjSystem.Clear();
+            this.m_QuestSystem.Clear();
+            this.m_SkillSystem.Clear();
+            this.m_ItemSystem.Clear();
+            //this.m_MobGuardSystem.Clear();
+            //this.m_AchievementSystem.InitForNewGame();
+            //this.m_WOPSystem.InitForNewGame();
+            //this.m_FormationSystem.ClearFormation();
+            //this.m_GameObjSystem.Initialize();
         }
     }
 }
