@@ -105,7 +105,7 @@ public class ExploreSystem
 
     private GameObject m_PlayerGameObj;
 
-    //private M_PlayerController m_PlyerController;
+    private M_PlayerController m_PlyerController;
 
     public GameObject m_MoveTargetPoint;
 
@@ -147,236 +147,236 @@ public class ExploreSystem
         private set;
     }
 
-    //	public GameObject PlayerObj
-    //	{
-    //		get
-    //		{
-    //			return this.m_PlayerGameObj;
-    //		}
-    //		set
-    //		{
-    //			this.m_PlayerGameObj = value;
-    //			if (this.m_PlayerGameObj == null)
-    //			{
-    //				return;
-    //			}
-    //			this.m_PlayerGameObj.tag = "Player";
-    //			this.m_PlyerController = this.m_PlayerGameObj.GetComponent<M_PlayerController>();
-    //		}
-    //	}
+    public GameObject PlayerObj
+    {
+        get
+        {
+            return this.m_PlayerGameObj;
+        }
+        set
+        {
+            this.m_PlayerGameObj = value;
+            if (this.m_PlayerGameObj == null)
+            {
+                return;
+            }
+            this.m_PlayerGameObj.tag = "Player";
+            //this.m_PlyerController = this.m_PlayerGameObj.GetComponent<M_PlayerController>();
+        }
+    }
 
-    //	public GameObject AmberPigObj
-    //	{
-    //		get
-    //		{
-    //			return this.m_AmberPigGameObj;
-    //		}
-    //		set
-    //		{
-    //			this.m_AmberPigGameObj = value;
-    //			if (this.m_AmberPigGameObj != null)
-    //			{
-    //				this.m_AmberPigController = this.m_AmberPigGameObj.GetComponent<M_AmberPigController>();
-    //			}
-    //		}
-    //	}
+    public GameObject AmberPigObj
+    {
+        get
+        {
+            return this.m_AmberPigGameObj;
+        }
+        set
+        {
+            this.m_AmberPigGameObj = value;
+            if (this.m_AmberPigGameObj != null)
+            {
+                //this.m_AmberPigController = this.m_AmberPigGameObj.GetComponent<M_AmberPigController>();
+            }
+        }
+    }
 
-    //	public bool IsUseActionSkill
-    //	{
-    //		get
-    //		{
-    //			return this.m_bUseActionSkill;
-    //		}
-    //	}
+    public bool IsUseActionSkill
+    {
+        get
+        {
+            return this.m_bUseActionSkill;
+        }
+    }
 
-    //	public M_PlayerController PlayerController
-    //	{
-    //		get
-    //		{
-    //			return this.m_PlyerController;
-    //		}
-    //		set
-    //		{
-    //			this.m_PlyerController = value;
-    //		}
-    //	}
+    public M_PlayerController PlayerController
+    {
+        get
+        {
+            return this.m_PlyerController;
+        }
+        set
+        {
+            this.m_PlyerController = value;
+        }
+    }
 
-    //	public float BattleStep
-    //	{
-    //		get
-    //		{
-    //			return this.m_BattleStepCount;
-    //		}
-    //		set
-    //		{
-    //			this.m_BattleStepCount = value;
-    //		}
-    //	}
+    public float BattleStep
+    {
+        get
+        {
+            return this.m_BattleStepCount;
+        }
+        set
+        {
+            this.m_BattleStepCount = value;
+        }
+    }
 
-    //	public int BattleID
-    //	{
-    //		get
-    //		{
-    //			return this.m_BattleID;
-    //		}
-    //		set
-    //		{
-    //			this.m_BattleID = value;
-    //		}
-    //	}
+    public int BattleID
+    {
+        get
+        {
+            return this.m_BattleID;
+        }
+        set
+        {
+            this.m_BattleID = value;
+        }
+    }
 
-    //	public Vector3 PlayerChangePos
-    //	{
-    //		get
-    //		{
-    //			return this.m_PlayerChangePos;
-    //		}
-    //		set
-    //		{
-    //			this.m_PlayerChangePos = value;
-    //		}
-    //	}
+    public Vector3 PlayerChangePos
+    {
+        get
+        {
+            return this.m_PlayerChangePos;
+        }
+        set
+        {
+            this.m_PlayerChangePos = value;
+        }
+    }
 
-    //	public float PlayerChangeDir
-    //	{
-    //		get
-    //		{
-    //			return this.m_PlayerChangeDir;
-    //		}
-    //		set
-    //		{
-    //			this.m_PlayerChangeDir = value;
-    //		}
-    //	}
+    public float PlayerChangeDir
+    {
+        get
+        {
+            return this.m_PlayerChangeDir;
+        }
+        set
+        {
+            this.m_PlayerChangeDir = value;
+        }
+    }
 
-    //	public string PlayerChangePoint
-    //	{
-    //		get
-    //		{
-    //			return this.m_PlayerChangePoint;
-    //		}
-    //		set
-    //		{
-    //			this.m_PlayerChangePoint = value;
-    //		}
-    //	}
+    public string PlayerChangePoint
+    {
+        get
+        {
+            return this.m_PlayerChangePoint;
+        }
+        set
+        {
+            this.m_PlayerChangePoint = value;
+        }
+    }
 
-    //	public bool LockPlayer
-    //	{
-    //		get
-    //		{
-    //			return this.m_bLockPlayer;
-    //		}
-    //		set
-    //		{
-    //			this.m_bLockPlayer = value;
-    //			if (this.m_PlyerController != null)
-    //			{
-    //				this.m_PlyerController.LockControl = this.m_bLockPlayer;
-    //			}
-    //			if (!this.m_bLockPlayer)
-    //			{
-    //				if (Swd6Application.instance.m_QuestSystem != null)
-    //				{
-    //					Swd6Application.instance.m_QuestSystem.Dirty();
-    //				}
-    //				this.TalkTarget = null;
-    //			}
-    //			else
-    //			{
-    //				UI_ZoneMap.Instance.Hide();
-    //			}
-    //			GameInput.Clear();
-    //		}
-    //	}
+    public bool LockPlayer
+    {
+        get
+        {
+            return this.m_bLockPlayer;
+        }
+        set
+        {
+            this.m_bLockPlayer = value;
+            //if (this.m_PlyerController != null)
+            //{
+            //    this.m_PlyerController.LockControl = this.m_bLockPlayer;
+            //}
+            //if (!this.m_bLockPlayer)
+            //{
+            //    if (Swd6Application.instance.m_QuestSystem != null)
+            //    {
+            //        Swd6Application.instance.m_QuestSystem.Dirty();
+            //    }
+            //    this.TalkTarget = null;
+            //}
+            //else
+            //{
+            //    UI_ZoneMap.Instance.Hide();
+            //}
+            //GameInput.Clear();
+        }
+    }
 
-    //	public GameObject TalkTarget
-    //	{
-    //		get
-    //		{
-    //			return this.m_TalkTarget;
-    //		}
-    //		set
-    //		{
-    //			if (value == null && this.m_TalkTarget && this.m_TalkTarget.GetComponent<M_GameRoleBase>() != null)
-    //			{
-    //				this.m_TalkTarget.GetComponent<M_GameRoleBase>().Talk = false;
-    //			}
-    //			this.m_TalkTarget = value;
-    //		}
-    //	}
+    public GameObject TalkTarget
+    {
+        get
+        {
+            return this.m_TalkTarget;
+        }
+        set
+        {
+            if (value == null && this.m_TalkTarget && this.m_TalkTarget.GetComponent<M_GameRoleBase>() != null)
+            {
+                this.m_TalkTarget.GetComponent<M_GameRoleBase>().Talk = false;
+            }
+            this.m_TalkTarget = value;
+        }
+    }
 
-    //	public GameObject ActionTarget
-    //	{
-    //		get
-    //		{
-    //			return this.m_ActionTarget;
-    //		}
-    //		set
-    //		{
-    //			this.m_ActionTarget = value;
-    //		}
-    //	}
+    public GameObject ActionTarget
+    {
+        get
+        {
+            return this.m_ActionTarget;
+        }
+        set
+        {
+            this.m_ActionTarget = value;
+        }
+    }
 
-    //	public bool ResumeMusic
-    //	{
-    //		get
-    //		{
-    //			return this.m_bResumeMusic;
-    //		}
-    //		set
-    //		{
-    //			this.m_bResumeMusic = value;
-    //		}
-    //	}
+    public bool ResumeMusic
+    {
+        get
+        {
+            return this.m_bResumeMusic;
+        }
+        set
+        {
+            this.m_bResumeMusic = value;
+        }
+    }
 
-    //	public bool NavMesh
-    //	{
-    //		get
-    //		{
-    //			return this.m_bNavMesh;
-    //		}
-    //		set
-    //		{
-    //			this.m_bNavMesh = value;
-    //		}
-    //	}
+    public bool NavMesh
+    {
+        get
+        {
+            return this.m_bNavMesh;
+        }
+        set
+        {
+            this.m_bNavMesh = value;
+        }
+    }
 
-    //	public bool AutoPath
-    //	{
-    //		get
-    //		{
-    //			return this.m_bAutoPath;
-    //		}
-    //		set
-    //		{
-    //			this.m_bAutoPath = value;
-    //		}
-    //	}
+    public bool AutoPath
+    {
+        get
+        {
+            return this.m_bAutoPath;
+        }
+        set
+        {
+            this.m_bAutoPath = value;
+        }
+    }
 
-    //	public bool Run
-    //	{
-    //		get
-    //		{
-    //			return this.m_IsRun;
-    //		}
-    //		set
-    //		{
-    //			this.m_IsRun = value;
-    //		}
-    //	}
+    public bool Run
+    {
+        get
+        {
+            return this.m_IsRun;
+        }
+        set
+        {
+            this.m_IsRun = value;
+        }
+    }
 
-    //	public bool OpenMainMenu
-    //	{
-    //		get
-    //		{
-    //			return this.m_OpenMainMenu;
-    //		}
-    //		set
-    //		{
-    //			this.m_OpenMainMenu = value;
-    //		}
-    //	}
+    public bool OpenMainMenu
+    {
+        get
+        {
+            return this.m_OpenMainMenu;
+        }
+        set
+        {
+            this.m_OpenMainMenu = value;
+        }
+    }
 
     public void Initialize()
     {
@@ -430,70 +430,57 @@ public class ExploreSystem
     //		this.ClearAllEffect();
     //	}
 
-    //	public void Begin()
-    //	{
-    //		bool lockPlayer = this.LockPlayer;
-    //		this.LoadMapDate();
-    //		this.LoadEventPrefab();
-    //		if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
-    //		{
-    //			GameObject gameObject = GameObject.Find("Player");
-    //			if (gameObject != null)
-    //			{
-    //				UnityEngine.Object.DestroyObject(gameObject);
-    //			}
-    //			gameObject = GameObject.Find("PlayerTest");
-    //			if (gameObject != null)
-    //			{
-    //				UnityEngine.Object.DestroyObject(gameObject);
-    //			}
-    //		}
-    //		if (this.PlayerChangePoint != string.Empty)
-    //		{
-    //			GameObject gameObject2 = GameObject.Find(this.PlayerChangePoint);
-    //			if (gameObject2 != null)
-    //			{
-    //				this.PlayerChangePos = gameObject2.transform.position;
-    //				this.PlayerChangeDir = gameObject2.transform.eulerAngles.y;
-    //			}
-    //			this.PlayerChangePoint = string.Empty;
-    //		}
-    //		this.PlayerObj = this.m_GameApp.m_GameObjSystem.CreatePlayerGameObj(this.m_GameApp.m_GameDataSystem.m_PlayerID, this.PlayerChangePos, this.PlayerChangeDir);
-    //		this.m_PrePlayerPos = this.PlayerController.Pos;
-    //		this.m_PrePosUpdateTime = 0f;
-    //		this.m_PlayerUpdateTime = 1f;
-    //		this.PlayerController.m_NoJump = false;
-    //		this.m_PlyerController.m_Controller.enabled = false;
-    //		this.AmberPigObj = this.m_GameApp.m_GameObjSystem.CreateAmberPigGameObj();
-    //		this.EnableMainCamera(true);
-    //		this.SetCameraLookTarget(true);
-    //		this.SetAmberPigTargetPos();
-    //		this.m_GameApp.m_GameObjSystem.LoadMapObj(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
-    //		GameMapMobSystem.Instance.SetTarget(this.PlayerObj);
-    //		ExploreMiniMapSystem.Instance.CreateMapData(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
-    //		this.m_GameApp.m_SaveloadSystem.m_Loading = false;
-    //		if (this.m_PlayMusicDelayTime <= 0f)
-    //		{
-    //			this.PlayMusic();
-    //		}
-    //		GameInput.Clear();
-    //		this.m_HideMap = 0;
-    //		this.m_RainEffect = null;
-    //		this.ClearNoFightData(true);
-    //		this.m_GameApp.m_GameDataSystem.ReLoadObjData();
-    //		if (this.m_GameApp.m_GameDataSystem.GetFlag(52))
-    //		{
-    //			this.SetPlayerPointLight(true);
-    //		}
-    //		if (this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID == 64 && !this.m_GameApp.m_GameDataSystem.GetFlag(56))
-    //		{
-    //			this.SetMapRainEffect();
-    //		}
-    //		this.LockPlayer = lockPlayer;
-    //		this.ClearBattleInfo();
-    //		this.SpecialSetting();
-    //		this.ChangeSky();
-    //	}
+    public void Begin()
+    {
+        bool lockPlayer = this.LockPlayer;
+        //this.LoadMapDate();
+        //this.LoadEventPrefab();
+        //if (this.PlayerChangePoint != string.Empty)
+        //{
+        //    GameObject gameObject2 = GameObject.Find(this.PlayerChangePoint);
+        //    if (gameObject2 != null)
+        //    {
+        //        this.PlayerChangePos = gameObject2.transform.position;
+        //        this.PlayerChangeDir = gameObject2.transform.eulerAngles.y;
+        //    }
+        //    this.PlayerChangePoint = string.Empty;
+        //}
+        //this.PlayerObj = this.m_GameApp.m_GameObjSystem.CreatePlayerGameObj(this.m_GameApp.m_GameDataSystem.m_PlayerID, this.PlayerChangePos, this.PlayerChangeDir);
+        //this.m_PrePlayerPos = this.PlayerController.Pos;
+        //this.m_PrePosUpdateTime = 0f;
+        //this.m_PlayerUpdateTime = 1f;
+        //this.PlayerController.m_NoJump = false;
+        //this.m_PlyerController.m_Controller.enabled = false;
+        //this.AmberPigObj = this.m_GameApp.m_GameObjSystem.CreateAmberPigGameObj();
+        //this.EnableMainCamera(true);
+        //this.SetCameraLookTarget(true);
+        //this.SetAmberPigTargetPos();
+        //this.m_GameApp.m_GameObjSystem.LoadMapObj(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
+        //GameMapMobSystem.Instance.SetTarget(this.PlayerObj);
+        //ExploreMiniMapSystem.Instance.CreateMapData(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
+        //this.m_GameApp.m_SaveloadSystem.m_Loading = false;
+        //if (this.m_PlayMusicDelayTime <= 0f)
+        //{
+        //    this.PlayMusic();
+        //}
+        //GameInput.Clear();
+        //this.m_HideMap = 0;
+        //this.m_RainEffect = null;
+        //this.ClearNoFightData(true);
+        //this.m_GameApp.m_GameDataSystem.ReLoadObjData();
+        //if (this.m_GameApp.m_GameDataSystem.GetFlag(52))
+        //{
+        //    this.SetPlayerPointLight(true);
+        //}
+        //if (this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID == 64 && !this.m_GameApp.m_GameDataSystem.GetFlag(56))
+        //{
+        //    this.SetMapRainEffect();
+        //}
+        //this.LockPlayer = lockPlayer;
+        //this.ClearBattleInfo();
+        //this.SpecialSetting();
+        //this.ChangeSky();
+    }
 
     //	public void End()
     //	{
@@ -795,31 +782,31 @@ public class ExploreSystem
     //		}
     //	}
 
-    //	public void Update()
-    //	{
-    //		this.UpdaeInput();
-    //		this.UpdateLoadPlayer();
-    //		this.UpdateCursor();
-    //		this.UpdaeReStartPos();
-    //		this.UpdaePlayMusic();
-    //		this.UpdaeNoFighCDTime();
-    //		this.UpdaeNoFighTime();
-    //		this.UpdateUnloadResource();
-    //		this.UpdateHideUI();
-    //		if (this.m_OpenMenuTime > 0f)
-    //		{
-    //			this.m_OpenMenuTime -= Time.deltaTime;
-    //			if (this.m_OpenMenuTime <= 0f)
-    //			{
-    //				this.m_OpenMenuTime = 0f;
-    //			}
-    //		}
-    //		if (this.m_RainEffect != null)
-    //		{
-    //			this.m_RainEffect.transform.position = this.PlayerObj.transform.position;
-    //		}
-    //		Swd6Application.instance.m_GameObjSystem.UpdateAllMapObj();
-    //	}
+    public void Update()
+    {
+        //this.UpdaeInput();
+        //this.UpdateLoadPlayer();
+        //this.UpdateCursor();
+        //this.UpdaeReStartPos();
+        //this.UpdaePlayMusic();
+        //this.UpdaeNoFighCDTime();
+        //this.UpdaeNoFighTime();
+        //this.UpdateUnloadResource();
+        //this.UpdateHideUI();
+        //if (this.m_OpenMenuTime > 0f)
+        //{
+        //    this.m_OpenMenuTime -= Time.deltaTime;
+        //    if (this.m_OpenMenuTime <= 0f)
+        //    {
+        //        this.m_OpenMenuTime = 0f;
+        //    }
+        //}
+        //if (this.m_RainEffect != null)
+        //{
+        //    this.m_RainEffect.transform.position = this.PlayerObj.transform.position;
+        //}
+        //Swd6Application.instance.m_GameObjSystem.UpdateAllMapObj();
+    }
 
     //	public void UpdateLoadPlayer()
     //	{

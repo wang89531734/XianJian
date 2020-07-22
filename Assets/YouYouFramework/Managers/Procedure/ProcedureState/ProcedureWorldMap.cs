@@ -13,20 +13,29 @@ namespace YouYou
         {
             base.OnEnter();
             GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureWorldMap");
-            GameEntry.Event.CommonEvent.Dispatch(SysEventId.EnterProcedureWorldMap);
-            Debug.Log("加载角色");        
+            Debug.Log("加载角色");
+            Debug.Log("显示主UI");
+            //this.gameApplication.m_StorySystem.StoryEnd();
+            GameEntry.Instance.m_ExploreSystem.Begin();
+            //if (!Swd6Application.instance.m_ExploreSystem.m_PlayStory && UI_Fade.Instance != null)
+            //{
+            //    UI_Fade.Instance.DelayFadeTo(0f, 1.5f, 0.3f);
+            //}
         }
 
         public override void OnUpdate()
         {
             base.OnUpdate();
+            GameEntry.Instance.m_ExploreSystem.Update();
         }
 
         public override void OnLeave()
         {
             base.OnLeave();
             GameEntry.Log(LogCategory.Procedure, "OnLeave ProcedureWorldMap");
-            GameEntry.Event.CommonEvent.Dispatch(SysEventId.LeaveProcedureLogOn);
+            //UI_Explore.Instance.Hide();
+            //UI_BubbleDialog.Instance.Close();
+            //this.gameApplication.m_ExploreSystem.End();
         }
     }
 }

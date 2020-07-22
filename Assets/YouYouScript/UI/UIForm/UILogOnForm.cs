@@ -28,6 +28,10 @@ public class UILogOnForm : UIFormBase
     public void OnNewGameBtn()
     {
         GameEntry.Instance.StartNewGame();
+        GameEntry.Scene.LoadScene(2, false, () =>
+        {
+            GameEntry.Procedure.ChangeState(ProcedureState.WorldMap);
+        });       
     }
 
     public void OnLoadBtn()

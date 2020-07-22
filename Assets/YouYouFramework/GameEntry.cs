@@ -558,7 +558,7 @@ namespace YouYou
         public void StartNewGame()
         {
             this.m_GameDataSystem.InitRoleData();
-            base.StartCoroutine(DoTalk());
+            //base.StartCoroutine(DoTalk());
         }
 
         public IEnumerator DoTalk()
