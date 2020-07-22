@@ -64,8 +64,8 @@ public class GameDataSystem
 			{
 				this.m_Money = 0;
 			}
-			//Swd6Application.instance.m_QuestSystem.Dirty();
-		}
+            GameEntry.Instance.m_QuestSystem.Dirty();
+        }
 	}
 
 	public void Initialize()
@@ -133,46 +133,46 @@ public class GameDataSystem
         this.m_ActionSkillList.Add(4);
     }
 
-	//public void AddDLCItem()
-	//{
-	//	if (Swd6Application.instance.CheckDLCItem(100))
-	//	{
-	//		if (Swd6Application.instance.m_ItemSystem.GetDataByItemID(12) == null)
-	//		{
-	//			Swd6Application.instance.m_ItemSystem.AddItem(12, 1, ENUM_ItemState.New, false);
-	//		}
-	//		if (Swd6Application.instance.m_ItemSystem.GetDataByItemID(32) == null)
-	//		{
-	//			Swd6Application.instance.m_ItemSystem.AddItem(32, 1, ENUM_ItemState.New, false);
-	//		}
-	//		if (Swd6Application.instance.m_ItemSystem.GetDataByItemID(52) == null)
-	//		{
-	//			Swd6Application.instance.m_ItemSystem.AddItem(52, 1, ENUM_ItemState.New, false);
-	//		}
-	//		if (Swd6Application.instance.m_ItemSystem.GetDataByItemID(72) == null)
-	//		{
-	//			Swd6Application.instance.m_ItemSystem.AddItem(72, 1, ENUM_ItemState.New, false);
-	//		}
-	//		if (Swd6Application.instance.m_ItemSystem.GetDataByItemID(301) == null)
-	//		{
-	//			Swd6Application.instance.m_ItemSystem.AddItem(301, 1, ENUM_ItemState.New, false);
-	//		}
-	//		if (Swd6Application.instance.m_ItemSystem.GetDataByItemID(302) == null)
-	//		{
-	//			Swd6Application.instance.m_ItemSystem.AddItem(302, 1, ENUM_ItemState.New, false);
-	//		}
-	//		if (Swd6Application.instance.m_ItemSystem.GetDataByItemID(303) == null)
-	//		{
-	//			Swd6Application.instance.m_ItemSystem.AddItem(303, 1, ENUM_ItemState.New, false);
-	//		}
-	//		if (Swd6Application.instance.m_ItemSystem.GetDataByItemID(304) == null)
-	//		{
-	//			Swd6Application.instance.m_ItemSystem.AddItem(304, 1, ENUM_ItemState.New, false);
-	//		}
-	//	}
-	//}
+    public void AddDLCItem()
+    {
+        //if (Swd6Application.instance.CheckDLCItem(100))
+        //{
+        //    if (Swd6Application.instance.m_ItemSystem.GetDataByItemID(12) == null)
+        //    {
+        //        Swd6Application.instance.m_ItemSystem.AddItem(12, 1, ENUM_ItemState.New, false);
+        //    }
+        //    if (Swd6Application.instance.m_ItemSystem.GetDataByItemID(32) == null)
+        //    {
+        //        Swd6Application.instance.m_ItemSystem.AddItem(32, 1, ENUM_ItemState.New, false);
+        //    }
+        //    if (Swd6Application.instance.m_ItemSystem.GetDataByItemID(52) == null)
+        //    {
+        //        Swd6Application.instance.m_ItemSystem.AddItem(52, 1, ENUM_ItemState.New, false);
+        //    }
+        //    if (Swd6Application.instance.m_ItemSystem.GetDataByItemID(72) == null)
+        //    {
+        //        Swd6Application.instance.m_ItemSystem.AddItem(72, 1, ENUM_ItemState.New, false);
+        //    }
+        //    if (Swd6Application.instance.m_ItemSystem.GetDataByItemID(301) == null)
+        //    {
+        //        Swd6Application.instance.m_ItemSystem.AddItem(301, 1, ENUM_ItemState.New, false);
+        //    }
+        //    if (Swd6Application.instance.m_ItemSystem.GetDataByItemID(302) == null)
+        //    {
+        //        Swd6Application.instance.m_ItemSystem.AddItem(302, 1, ENUM_ItemState.New, false);
+        //    }
+        //    if (Swd6Application.instance.m_ItemSystem.GetDataByItemID(303) == null)
+        //    {
+        //        Swd6Application.instance.m_ItemSystem.AddItem(303, 1, ENUM_ItemState.New, false);
+        //    }
+        //    if (Swd6Application.instance.m_ItemSystem.GetDataByItemID(304) == null)
+        //    {
+        //        Swd6Application.instance.m_ItemSystem.AddItem(304, 1, ENUM_ItemState.New, false);
+        //    }
+        //}
+    }
 
-	public void InitRoleData()
+    public void InitRoleData()
 	{
 		this.Reset();
         GameEntry.Instance.InitNewGame();
@@ -183,10 +183,10 @@ public class GameDataSystem
             this.SetStartData(this.m_TeamRoleList[j], this.m_TeamRoleList[j], this.m_TeamRoleList[j]);
             num++;
         }
-        //Swd6Application.instance.m_SkillSystem.InitDefaultHotKeySkill();
-        //this.m_RoldData[0].BaseRoleData.IsJoin = true;
+        GameEntry.Instance.m_SkillSystem.InitDefaultHotKeySkill();
+        this.m_RoldData[0].BaseRoleData.IsJoin = true;
         this.m_DefaultPlayerID = 1;
-        //this.AddRole(1, false);
+        this.AddRole(1, false);
         //NormalSetting normalSetting = Swd6Application.instance.m_NormalSettingSystem.GetNormalSetting();
         //if (normalSetting.m_bEnableTeach)
         //{
@@ -194,7 +194,7 @@ public class GameDataSystem
         //	this.FlagON(76);
         //	this.FlagON(77);
         //}
-        //this.AddDLCItem();
+        this.AddDLCItem();
         this.m_PlayerID = this.m_DefaultPlayerID;
 		this.m_FightPlayerID = this.m_DefaultPlayerID;
 		//this.FlagON(24);
@@ -405,28 +405,28 @@ public class GameDataSystem
     //	return this.m_GameFlag.Get(flag);
     //}
 
-    //public void FlagON(int flag)
-    //{
-    //	this.m_GameFlag.ON(flag);
-    //	if (flag >= this.GetMinID() && flag <= this.GetMaxID())
-    //	{
-    //		if (this.m_RoldData[flag - 1].BaseRoleData.IsJoin || flag != 7)
-    //		{
-    //		}
-    //		if (!Swd6Application.instance.IsDLC())
-    //		{
-    //			this.FlagON(30 + flag);
-    //		}
-    //		this.m_RoldData[flag - 1].BaseRoleData.IsJoin = true;
-    //		this.UpdatePartyRole();
-    //		Swd6Application.instance.m_FormationSystem.UnlockFormation(flag);
-    //		Swd6Application.instance.m_FormationSystem.AutoSetUnitData();
-    //	}
-    //	if (Swd6Application.instance.m_QuestSystem != null)
-    //	{
-    //		Swd6Application.instance.m_QuestSystem.Dirty();
-    //	}
-    //}
+    public void FlagON(int flag)
+    {
+        this.m_GameFlag.ON(flag);
+        if (flag >= this.GetMinID() && flag <= this.GetMaxID())
+        {
+            if (this.m_RoldData[flag - 1].BaseRoleData.IsJoin || flag != 7)
+            {
+            }
+            //if (!Swd6Application.instance.IsDLC())
+            //{
+            //    this.FlagON(30 + flag);
+            //}
+            //this.m_RoldData[flag - 1].BaseRoleData.IsJoin = true;
+            //this.UpdatePartyRole();
+            //Swd6Application.instance.m_FormationSystem.UnlockFormation(flag);
+            //Swd6Application.instance.m_FormationSystem.AutoSetUnitData();
+        }
+        //if (Swd6Application.instance.m_QuestSystem != null)
+        //{
+        //    Swd6Application.instance.m_QuestSystem.Dirty();
+        //}
+    }
 
     //public void FlagOFF(int flag)
     //{
@@ -572,36 +572,36 @@ public class GameDataSystem
     //	return result;
     //}
 
-    //public S_MapData AddMapData(int mapid)
-    //{
-    //	S_MapData s_MapData;
-    //	if (!this.m_MapData.ContainsKey(mapid))
-    //	{
-    //		s_MapData = GameDataDB.MapDB.GetData(mapid);
-    //		if (s_MapData != null)
-    //		{
-    //			this.m_MapData.Add(mapid, s_MapData);
-    //		}
-    //	}
-    //	else
-    //	{
-    //		s_MapData = this.m_MapData[mapid];
-    //	}
-    //	return s_MapData;
-    //}
+    public S_MapData AddMapData(int mapid)
+    {
+        S_MapData s_MapData;
+        if (!this.m_MapData.ContainsKey(mapid))
+        {
+            s_MapData = GameDataDB.MapDB.GetData(mapid);
+            if (s_MapData != null)
+            {
+                this.m_MapData.Add(mapid, s_MapData);
+            }
+        }
+        else
+        {
+            s_MapData = this.m_MapData[mapid];
+        }
+        return s_MapData;
+    }
 
-    //public S_MapData GetMapData(int mapid)
-    //{
-    //	if (!this.m_MapData.ContainsKey(mapid))
-    //	{
-    //		this.AddMapData(mapid);
-    //	}
-    //	if (this.m_MapData.ContainsKey(mapid))
-    //	{
-    //		return this.m_MapData[mapid];
-    //	}
-    //	return null;
-    //}
+    public S_MapData GetMapData(int mapid)
+    {
+        if (!this.m_MapData.ContainsKey(mapid))
+        {
+            this.AddMapData(mapid);
+        }
+        if (this.m_MapData.ContainsKey(mapid))
+        {
+            return this.m_MapData[mapid];
+        }
+        return null;
+    }
 
     public void ClearMapData()
     {
@@ -680,23 +680,23 @@ public class GameDataSystem
     //	}
     //}
 
-    //public void AddRole(int roleId, bool showMsg)
-    //{
-    //	if (roleId > 10)
-    //	{
-    //		Debug.LogError("id error!!");
-    //		return;
-    //	}
-    //	if (showMsg && roleId > 1)
-    //	{
-    //		string str = this.m_RoldData[roleId - 1].BaseRoleData.FamilyName + this.m_RoldData[roleId - 1].BaseRoleData.Name;
-    //		UI_Message.Instance.AddSysMsg(str + GameDataDB.StrID(1060), 3f);
-    //	}
-    //	this.FlagON(roleId);
-    //	this.m_RoldData[roleId - 1].BaseRoleData.IsJoin = true;
-    //	this.m_RoldData[roleId - 1].BaseRoleData.IsFight = this.CheckCanFight();
-    //	this.UpdatePartyRole();
-    //}
+    public void AddRole(int roleId, bool showMsg)
+    {
+        if (roleId > 10)
+        {
+            Debug.LogError("id error!!");
+            return;
+        }
+        if (showMsg && roleId > 1)
+        {
+            string str = this.m_RoldData[roleId - 1].BaseRoleData.FamilyName + this.m_RoldData[roleId - 1].BaseRoleData.Name;
+            //UI_Message.Instance.AddSysMsg(str + GameDataDB.StrID(1060), 3f);
+        }
+        this.FlagON(roleId);
+        this.m_RoldData[roleId - 1].BaseRoleData.IsJoin = true;
+        //this.m_RoldData[roleId - 1].BaseRoleData.IsFight = this.CheckCanFight();
+        //this.UpdatePartyRole();
+    }
 
     //public void RemoveRole(int roleId, bool showMsg)
     //{

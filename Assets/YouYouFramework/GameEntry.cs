@@ -502,10 +502,14 @@ namespace YouYou
 
         public ExploreSystem m_ExploreSystem { get; private set; }
 
+        public GameObjSystem m_GameObjSystem { get; private set; }
+
+        public StorySystem m_StorySystem { get; private set; }
+
         private void InitGameSystem()
         {
-            //this.m_GameObjSystem = new GameObjSystem();
-            //this.m_GameObjSystem.Initialize();
+            this.m_GameObjSystem = new GameObjSystem();
+            this.m_GameObjSystem.Initialize();
             this.m_GameDataSystem = new GameDataSystem();
             this.m_GameDataSystem.Initialize();
             this.m_ExploreSystem = new ExploreSystem();
@@ -541,19 +545,11 @@ namespace YouYou
             //{
             //    this.m_WOPSystem.InitForNewGame();
             //}
-            //this.m_StorySystem = new StorySystem();
-            //this.m_StorySystem.Initialize();
+            this.m_StorySystem = new StorySystem();
+            this.m_StorySystem.Initialize();
             //this.m_MusicControlSystem = new MusicSystem();
             //this.m_UserBehavior = new UserBehavior();
-            //this.m_UserBehavior.DirectoryPath = Application.dataPath + "/../Launcher/UBData/";
-            //if (this.m_NormalSettingSystem.GetNormalSetting().m_IsDlC)
-            //{
-            //    this.m_ChapID = 101;
-            //}
-            //else
-            //{
-            //    this.m_ChapID = 100;
-            //}
+            //this.m_UserBehavior.DirectoryPath = Application.dataPath + "/../Launcher/UBData/";      
             //this.InitChapterData(this.m_ChapID);
             //this.InitDLCItem();
             //this.SetGameEnviromentInfo();
@@ -567,7 +563,6 @@ namespace YouYou
 
         public IEnumerator DoTalk()
         {
-            Debug.Log("执行");
             //GameTalk.StartTalk(true);
             //yield return base.StartCoroutine(GameTalk.WaitFadeTime(1f, 2f));
             //GameTalk.AddItem(901, 3, false);
@@ -587,8 +582,8 @@ namespace YouYou
             //    GameTalk.FlagON(1001);
             //}
             //GameTalk.StartTalk(false);
-            //GameTalk.HideAllNpc(1);
-            //GameTalk.PlayStory(100, "ME0000");
+            GameTalk.HideAllNpc(1);
+            GameTalk.PlayStory(100, "ME0000");
             //yield return base.StartCoroutine(GameTalk.IsPlayStoryEnd());
             yield return null;
             yield break;
@@ -596,7 +591,7 @@ namespace YouYou
 
         public void InitNewGame()
         {
-            //this.m_GameObjSystem.Clear();
+            this.m_GameObjSystem.Clear();
             this.m_QuestSystem.Clear();
             this.m_SkillSystem.Clear();
             this.m_ItemSystem.Clear();
@@ -605,6 +600,34 @@ namespace YouYou
             //this.m_WOPSystem.InitForNewGame();
             //this.m_FormationSystem.ClearFormation();
             //this.m_GameObjSystem.Initialize();
+        }
+
+        /// <summary>
+        /// 切换到剧情流程
+        /// </summary>
+        /// <param name="mapID"></param>
+        /// <param name="storyName"></param>
+        public void ChangeToStoryState(int mapID, string storyName)
+        {
+            GameEntry.Procedure.SetData("m_StoryName", storyName);
+            if (GameEntry.Scene.m_CurrLoadSceneId != mapID && mapID!=100)
+            {
+                Debug.Log("切换状态");
+                //要加载场景
+                //this.ChangeMap(text, mapID, 0f, 0f, 0f, 0f);
+            }
+            else if(GameEntry.Procedure.CurrProcedureState != ProcedureState.SelectRole)
+            {
+                //切换状态
+                Debug.Log("切换状态");
+                GameEntry.Procedure.ChangeState(ProcedureState.SelectRole);
+            }
+            else
+            {
+                Debug.Log("执行剧情");
+                //开始
+                //storyState.CreateNewStory();
+            }
         }
     }
 }

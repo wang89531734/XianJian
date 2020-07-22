@@ -1,5 +1,8 @@
 using System;
 
+/// <summary>
+/// ½ÇÉ«ÊôĞÔ
+/// </summary>
 public class S_RoleAttr
 {
 	public S_RoleAttr_Plus sAttrPlus;

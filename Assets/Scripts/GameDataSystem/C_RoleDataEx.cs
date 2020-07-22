@@ -516,55 +516,49 @@ public class C_RoleDataEx : S_RoleData
             roleAttr.sAttrPlus.Element[i] = 0;
         }
         int gUID = data.GUID;
+        Debug.Log(gUID);
         switch (gUID)
         {
             case 701:
                 roleAttr.sAttrPlus.AddMaxRatioHP += (int)data.MItem.AttrEffect[data2.Level - 1];
-                return;
+                break;
             case 702:
                 roleAttr.sAttrPlus.AddMaxRatioMP += (int)data.MItem.AttrEffect[data2.Level - 1];
-                return;
+                break;
             case 703:
                 roleAttr.sAttrPlus.AddRatioAttack += (int)data.MItem.AttrEffect[data2.Level - 1];
-                return;
+                break;
             case 704:
                 roleAttr.sAttrPlus.AddRatioDef += (int)data.MItem.AttrEffect[data2.Level - 1];
-                return;
+                break;
             case 705:
                 roleAttr.sAttrPlus.AddRatioMAtk += (int)data.MItem.AttrEffect[data2.Level - 1];
-                return;
+                break;
             case 706:
                 roleAttr.sAttrPlus.AddRatioMDef += (int)data.MItem.AttrEffect[data2.Level - 1];
-                return;
+                break;
             case 707:
                 roleAttr.sAttrPlus.AddAgi += (int)data.MItem.AttrEffect[data2.Level - 1];
-                return;
+                break;
             case 708:
                 roleAttr.sAttrPlus.AddBlock += (int)data.MItem.AttrEffect[data2.Level - 1];
-                return;
+                break;
             case 709:
                 roleAttr.sAttrPlus.AddCritical += (int)data.MItem.AttrEffect[data2.Level - 1];
-                return;
-            case 710:
-            case 711:
-            case 712:
-            case 713:
-            case 714:
-            case 715:
-                IL_113:
-                if (gUID != 726)
+                break;
+            default:
+                if (gUID == 726)
                 {
-                    return;
+                    for (int j = 0; j < 4; j++)
+                    {
+                        roleAttr.sAttrPlus.Element[j] += (int)data.MItem.AttrEffect[data2.Level - 1];
+                    }
                 }
-                for (int j = 0; j < 4; j++)
-                {
-                    roleAttr.sAttrPlus.Element[j] += (int)data.MItem.AttrEffect[data2.Level - 1];
-                }
-                return;
+                break;
             case 716:
                 {
-                    //int currentMapOpenTreasuerCount = GameEntry.Instance.m_GameObjSystem.GetCurrentMapOpenTreasuerCount();
-                    //int currentMapTreasuerCount = GameEntry.Instance.m_GameObjSystem.GetCurrentMapTreasuerCount();
+                    //int currentMapOpenTreasuerCount = Swd6Application.instance.m_GameObjSystem.GetCurrentMapOpenTreasuerCount();
+                    //int currentMapTreasuerCount = Swd6Application.instance.m_GameObjSystem.GetCurrentMapTreasuerCount();
                     //if (currentMapTreasuerCount > 0)
                     //{
                     //    float num = (float)currentMapOpenTreasuerCount / (float)currentMapTreasuerCount;
@@ -572,12 +566,12 @@ public class C_RoleDataEx : S_RoleData
                     //    roleAttr.sAttrPlus.AddRatioAttack += (int)num;
                     //    roleAttr.sAttrPlus.AddRatioMAtk += (int)num;
                     //}
-                    return;
+                    break;
                 }
             case 717:
                 {
-                    //int currentMapOpenTreasuerCount2 = GameEntry.Instance.m_GameObjSystem.GetCurrentMapOpenTreasuerCount();
-                    //int currentMapTreasuerCount2 = GameEntry.Instance.m_GameObjSystem.GetCurrentMapTreasuerCount();
+                    //int currentMapOpenTreasuerCount2 = Swd6Application.instance.m_GameObjSystem.GetCurrentMapOpenTreasuerCount();
+                    //int currentMapTreasuerCount2 = Swd6Application.instance.m_GameObjSystem.GetCurrentMapTreasuerCount();
                     //if (currentMapTreasuerCount2 > 0)
                     //{
                     //    float num2 = (float)currentMapOpenTreasuerCount2 / (float)currentMapTreasuerCount2;
@@ -585,10 +579,9 @@ public class C_RoleDataEx : S_RoleData
                     //    roleAttr.sAttrPlus.AddRatioDef += (int)num2;
                     //    roleAttr.sAttrPlus.AddRatioMDef += (int)num2;
                     //}
-                    return;
+                    break;
                 }
         }
-        //goto IL_113;
     }
 
     private void CalRoleAttr_Finial(S_RoleAttr roleAttr)

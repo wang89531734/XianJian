@@ -66,6 +66,12 @@ public class S_BaseRoleData
 		this.AtkElement = new int[4];
 	}
 
+    /// <summary>
+    /// 设置开始数据
+    /// </summary>
+    /// <param name="startData"></param>
+    /// <param name="roldId"></param>
+    /// <param name="setEquip"></param>
 	public void SetStartData(S_StartRoleData startData, int roldId, bool setEquip)
 	{
 		int id = (roldId - 1) * 150 + startData.Level;

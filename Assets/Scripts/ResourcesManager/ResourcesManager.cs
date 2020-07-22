@@ -89,7 +89,7 @@ public class ResourcesManager
         this.m_MusicLoader = new ResourceLoader("/../Assetbundles/Music/", "Assets/Assetbundles/Music/Music/", ".mp3");
         this.m_VoiceLoader = new ResourceLoader("/../Assetbundles/Voice/", "Assets/Assetbundles/Music/Voice/", ".ogg");
         this.m_SoundLoader = new ResourceLoader("/../Assetbundles/Sound/", "Assets/Assetbundles/Music/Sound/", ".ogg");
-        this.GetShaderList();
+        //this.GetShaderList();
     }
 
 	public void Clear()
