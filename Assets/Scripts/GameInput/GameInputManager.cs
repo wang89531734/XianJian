@@ -144,7 +144,7 @@ public class GameInputManager : ManagerBase, IDisposable
 		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.RTrigger, "RTriggers");
 	}
 
-	public static void Clear()
+	public void Clear()
 	{
 		GameInputManager.m_MoveDir = Vector3.zero;
 		for (int i = 0; i < 4; i++)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using UnityEngine;
+using YouYou;
 
 public class ExploreSystem
 {
@@ -270,23 +271,23 @@ public class ExploreSystem
         set
         {
             this.m_bLockPlayer = value;
-            //if (this.m_PlyerController != null)
-            //{
-            //    this.m_PlyerController.LockControl = this.m_bLockPlayer;
-            //}
-            //if (!this.m_bLockPlayer)
-            //{
-            //    if (Swd6Application.instance.m_QuestSystem != null)
-            //    {
-            //        Swd6Application.instance.m_QuestSystem.Dirty();
-            //    }
-            //    this.TalkTarget = null;
-            //}
-            //else
-            //{
-            //    UI_ZoneMap.Instance.Hide();
-            //}
-            //GameInput.Clear();
+            if (this.m_PlyerController != null)
+            {
+                this.m_PlyerController.LockControl = this.m_bLockPlayer;
+            }
+            if (!this.m_bLockPlayer)
+            {
+                if (GameEntry.Instance.m_QuestSystem != null)
+                {
+                    GameEntry.Instance.m_QuestSystem.Dirty();
+                }
+                this.TalkTarget = null;
+            }
+            else
+            {
+                //UI_ZoneMap.Instance.Hide();//区域地图
+            }
+            GameEntry.Input.Clear();
         }
     }
 
@@ -433,25 +434,25 @@ public class ExploreSystem
     public void Begin()
     {
         bool lockPlayer = this.LockPlayer;
-        //this.LoadMapDate();
-        //this.LoadEventPrefab();
-        //if (this.PlayerChangePoint != string.Empty)
-        //{
-        //    GameObject gameObject2 = GameObject.Find(this.PlayerChangePoint);
-        //    if (gameObject2 != null)
-        //    {
-        //        this.PlayerChangePos = gameObject2.transform.position;
-        //        this.PlayerChangeDir = gameObject2.transform.eulerAngles.y;
-        //    }
-        //    this.PlayerChangePoint = string.Empty;
-        //}
-        //this.PlayerObj = this.m_GameApp.m_GameObjSystem.CreatePlayerGameObj(this.m_GameApp.m_GameDataSystem.m_PlayerID, this.PlayerChangePos, this.PlayerChangeDir);
-        //this.m_PrePlayerPos = this.PlayerController.Pos;
-        //this.m_PrePosUpdateTime = 0f;
-        //this.m_PlayerUpdateTime = 1f;
-        //this.PlayerController.m_NoJump = false;
-        //this.m_PlyerController.m_Controller.enabled = false;
-        //this.AmberPigObj = this.m_GameApp.m_GameObjSystem.CreateAmberPigGameObj();
+        this.LoadMapDate();
+        this.LoadEventPrefab();
+        if (this.PlayerChangePoint != string.Empty)
+        {
+            GameObject gameObject2 = GameObject.Find(this.PlayerChangePoint);
+            if (gameObject2 != null)
+            {
+                this.PlayerChangePos = gameObject2.transform.position;
+                this.PlayerChangeDir = gameObject2.transform.eulerAngles.y;
+            }
+            this.PlayerChangePoint = string.Empty;
+        }
+        this.PlayerObj = GameEntry.Instance.m_GameObjSystem.CreatePlayerGameObj(GameEntry.Instance.m_GameDataSystem.m_PlayerID, this.PlayerChangePos, this.PlayerChangeDir);
+        this.m_PrePlayerPos = this.PlayerController.Pos;
+        this.m_PrePosUpdateTime = 0f;
+        this.m_PlayerUpdateTime = 1f;
+        this.PlayerController.m_NoJump = false;
+        this.m_PlyerController.m_Controller.enabled = false;
+        this.AmberPigObj = GameEntry.Instance.m_GameObjSystem.CreateAmberPigGameObj();
         //this.EnableMainCamera(true);
         //this.SetCameraLookTarget(true);
         //this.SetAmberPigTargetPos();
@@ -463,9 +464,9 @@ public class ExploreSystem
         //{
         //    this.PlayMusic();
         //}
-        //GameInput.Clear();
-        //this.m_HideMap = 0;
-        //this.m_RainEffect = null;
+        GameEntry.Input.Clear();
+        this.m_HideMap = 0;
+        this.m_RainEffect = null;
         //this.ClearNoFightData(true);
         //this.m_GameApp.m_GameDataSystem.ReLoadObjData();
         //if (this.m_GameApp.m_GameDataSystem.GetFlag(52))
@@ -476,7 +477,7 @@ public class ExploreSystem
         //{
         //    this.SetMapRainEffect();
         //}
-        //this.LockPlayer = lockPlayer;
+        this.LockPlayer = lockPlayer;
         //this.ClearBattleInfo();
         //this.SpecialSetting();
         //this.ChangeSky();
@@ -580,67 +581,71 @@ public class ExploreSystem
     //		}
     //	}
 
-    //	public void ResetData()
-    //	{
-    //		this.m_GameApp.m_GameDataSystem.FlagOFF(40);
-    //		this.m_GameApp.m_GameDataSystem.FlagOFF(41);
-    //		this.m_NoFightTime = 0f;
-    //		this.m_NoFightCDTime = 0f;
-    //		UI_Explore.Instance.HideBuffer();
-    //	}
+    public void ResetData()
+    {
+        GameEntry.Instance.m_GameDataSystem.FlagOFF(40);
+        GameEntry.Instance.m_GameDataSystem.FlagOFF(41);
+        this.m_NoFightTime = 0f;
+        this.m_NoFightCDTime = 0f;
+        //UI_Explore.Instance.HideBuffer();
+    }
 
-    //	public void LoadMapDate()
-    //	{
-    //		this.m_MapData = GameDataDB.MapDB.GetData(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
-    //		if (this.m_MapData == null)
-    //		{
-    //			UnityEngine.Debug.Log("載入地圖dbf錯誤_" + this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
-    //			return;
-    //		}
-    //		this.ResetData();
-    //		if (this.m_MapData.emType == ENUM_MapType.Maze)
-    //		{
-    //			this.m_GameApp.m_GameDataSystem.FlagON(41);
-    //		}
-    //		if (this.m_MapData.emType != ENUM_MapType.Maze)
-    //		{
-    //			UI_Explore.Instance.SetActionSkill(this.m_GameApp.m_GameDataSystem.m_PlayerID);
-    //		}
-    //		else
-    //		{
-    //			UI_Explore.Instance.SetActionSkill(this.m_GameApp.m_GameDataSystem.m_PlayerID);
-    //		}
-    //	}
+    public void LoadMapDate()
+    {
+        GameEntry.Instance.m_GameDataSystem.m_MapInfo.MapID = 1;
+        this.m_MapData = GameDataDB.MapDB.GetData(GameEntry.Instance.m_GameDataSystem.m_MapInfo.MapID);
+        if (this.m_MapData == null)
+        {
+            UnityEngine.Debug.Log("載入地圖dbf錯誤_" + GameEntry.Instance.m_GameDataSystem.m_MapInfo.MapID);
+            return;
+        }
+        UnityEngine.Debug.Log(m_MapData.Name + "" + m_MapData.Desc);
+        this.ResetData();
+        if (this.m_MapData.emType == ENUM_MapType.Maze)
+        {
+            //this.m_GameApp.m_GameDataSystem.FlagON(41);
+        }
 
-    //	public void LoadEventPrefab()
-    //	{
-    //		if (this.m_MapData == null)
-    //		{
-    //			return;
-    //		}
-    //		string[] ignoreName = new string[]
-    //		{
-    //			"Extra_Mask_MAP78",
-    //			"Extra_Mask_MAP66_01",
-    //			"Extra_Mask_MAP59_01"
-    //		};
-    //		string name;
-    //		for (int i = 1; i <= 5; i++)
-    //		{
-    //			name = this.m_MapData.Name + "_Event_" + i.ToString();
-    //			GameObject mapEvent = ResourceManager.Instance.GetMapEvent(name);
-    //			if (mapEvent != null)
-    //			{
-    //				TransformTool.SetLayerRecursively(mapEvent.transform, 2, ignoreName);
-    //			}
-    //		}
-    //		name = this.m_MapData.Name + "_SoundEvent";
-    //		if (this.m_MapSoundEvent != null)
-    //		{
-    //			UnityEngine.Object.Destroy(this.m_MapSoundEvent);
-    //		}
-    //		this.m_MapSoundEvent = ResourceManager.Instance.GetMapSoundEvent(name);
-    //	}
+        if (this.m_MapData.emType != ENUM_MapType.Maze)
+        {
+            //UI_Explore.Instance.SetActionSkill(this.m_GameApp.m_GameDataSystem.m_PlayerID);
+        }
+        else
+        {
+            //UI_Explore.Instance.SetActionSkill(this.m_GameApp.m_GameDataSystem.m_PlayerID);
+        }
+    }
+
+    public void LoadEventPrefab()
+    {
+        if (this.m_MapData == null)
+        {
+            return;
+        }
+        string[] ignoreName = new string[]
+        {
+                "Extra_Mask_MAP78",
+                "Extra_Mask_MAP66_01",
+                "Extra_Mask_MAP59_01"
+        };
+        string name;
+        for (int i = 1; i <= 5; i++)
+        {
+            name = this.m_MapData.Name + "_Event_" + i.ToString();
+            GameObject mapEvent = ResourcesManager.Instance.GetMapEvent(name);
+            if (mapEvent != null)
+            {
+                //TransformTool.SetLayerRecursively(mapEvent.transform, 2, ignoreName);
+            }
+        }
+
+        name = this.m_MapData.Name + "_SoundEvent";
+        if (this.m_MapSoundEvent != null)
+        {
+            UnityEngine.Object.Destroy(this.m_MapSoundEvent);
+        }
+        //this.m_MapSoundEvent = ResourcesManager.Instance.GetMapSoundEvent(name);
+    }
 
     //	public void ResetMapSoundVolume()
     //	{
@@ -1510,31 +1515,31 @@ public class ExploreSystem
     //		}
     //	}
 
-    //	public void SwitchPlayer()
-    //	{
-    //		Vector3 position = this.PlayerObj.transform.position;
-    //		float y = this.PlayerObj.transform.eulerAngles.y;
-    //		this.m_GameApp.m_GameObjSystem.RemovePlayerGameObj();
-    //		this.PlayerObj = this.m_GameApp.m_GameObjSystem.CreatePlayerGameObj(this.m_GameApp.m_GameDataSystem.m_PlayerID, position, y);
-    //		this.m_GameApp.m_GameObjSystem.ClearPlayer3MaterailData();
-    //		if (!this.m_UseNoFightItem)
-    //		{
-    //			this.ClearNoFightData(true);
-    //		}
-    //		GameMath.CastObjectOnTerrain(this.PlayerObj, 0.5f);
-    //		this.PlayerObj.transform.position += new Vector3(0f, 0.1f, 0f);
-    //		this.SetCameraLookTarget(false);
-    //		this.SetAmberPigTargetPos();
-    //		GameMapMobSystem.Instance.SetTarget(this.PlayerObj);
-    //		if (this.m_GameApp.m_GameDataSystem.GetFlag(52))
-    //		{
-    //			this.SetPlayerPointLight(true);
-    //		}
-    //		if (this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID == 64 && !this.m_GameApp.m_GameDataSystem.GetFlag(56))
-    //		{
-    //			this.SetMapRainEffect();
-    //		}
-    //	}
+    public void SwitchPlayer()
+    {
+        Vector3 position = this.PlayerObj.transform.position;
+        float y = this.PlayerObj.transform.eulerAngles.y;
+        //this.m_GameApp.m_GameObjSystem.RemovePlayerGameObj();
+        //this.PlayerObj = this.m_GameApp.m_GameObjSystem.CreatePlayerGameObj(this.m_GameApp.m_GameDataSystem.m_PlayerID, position, y);
+        //this.m_GameApp.m_GameObjSystem.ClearPlayer3MaterailData();
+        //if (!this.m_UseNoFightItem)
+        //{
+        //    this.ClearNoFightData(true);
+        //}
+        //GameMath.CastObjectOnTerrain(this.PlayerObj, 0.5f);
+        //this.PlayerObj.transform.position += new Vector3(0f, 0.1f, 0f);
+        //this.SetCameraLookTarget(false);
+        //this.SetAmberPigTargetPos();
+        //GameMapMobSystem.Instance.SetTarget(this.PlayerObj);
+        //if (this.m_GameApp.m_GameDataSystem.GetFlag(52))
+        //{
+        //    this.SetPlayerPointLight(true);
+        //}
+        //if (this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID == 64 && !this.m_GameApp.m_GameDataSystem.GetFlag(56))
+        //{
+        //    this.SetMapRainEffect();
+        //}
+    }
 
     //	public void EnterFight(int battleId, bool bHit)
     //	{

@@ -5,50 +5,50 @@ using UnityEngine;
 
 public class GameObjSystem
 {
-    //	private struct Player3EffectParam
-    //	{
-    //		public float m_DetailBumpTiling;
+    private struct Player3EffectParam
+    {
+        public float m_DetailBumpTiling;
 
-    //		public float m_DissolveTiling;
+        public float m_DissolveTiling;
 
-    //		public float m_BlendHeight;
+        public float m_BlendHeight;
 
-    //		public float m_DissolveRange;
+        public float m_DissolveRange;
 
-    //		public Player3EffectParam(float detailBumpTiling, float dissolveTiling, float blendHeight, float dissolveRange)
-    //		{
-    //			this.m_DetailBumpTiling = detailBumpTiling;
-    //			this.m_DissolveTiling = dissolveTiling;
-    //			this.m_BlendHeight = blendHeight;
-    //			this.m_DissolveRange = dissolveRange;
-    //		}
-    //	}
+        public Player3EffectParam(float detailBumpTiling, float dissolveTiling, float blendHeight, float dissolveRange)
+        {
+            this.m_DetailBumpTiling = detailBumpTiling;
+            this.m_DissolveTiling = dissolveTiling;
+            this.m_BlendHeight = blendHeight;
+            this.m_DissolveRange = dissolveRange;
+        }
+    }
 
-    //	private const string m_PlayerPrefPath = "Player";
+    private const string m_PlayerPrefPath = "Player";
 
-    //	private bool m_IsHide;
+    private bool m_IsHide;
 
-    //	private int m_ChangeEffect;
+    private int m_ChangeEffect;
 
-    //	private float m_EffectValue;
+    private float m_EffectValue;
 
-    //	private GameObject m_PlayerGameObj;
+    private GameObject m_PlayerGameObj;
 
-    //	private GameObject m_AmberPigGameObj;
+    private GameObject m_AmberPigGameObj;
 
-    //	private ShroudInstance m_ShroudInstance;
+    //private ShroudInstance m_ShroudInstance;
 
-    //	private Dictionary<int, S_GameObjData> m_AllGameObjData = new Dictionary<int, S_GameObjData>();
+    private Dictionary<int, S_GameObjData> m_AllGameObjData = new Dictionary<int, S_GameObjData>();
 
-    //	private List<S_GameObjData> m_CurrentGameObjList = new List<S_GameObjData>();
+    private List<S_GameObjData> m_CurrentGameObjList = new List<S_GameObjData>();
 
-    //	private List<GameObject> m_PhysicClothList = new List<GameObject>();
+    private List<GameObject> m_PhysicClothList = new List<GameObject>();
 
-    //	private List<GameObject> m_PlayerObjList = new List<GameObject>();
+    private List<GameObject> m_PlayerObjList = new List<GameObject>();
 
-    //	private List<string> m_Player3OrgMaterialList = new List<string>();
+    private List<string> m_Player3OrgMaterialList = new List<string>();
 
-    //	private List<Material> m_Player3MaterialList = new List<Material>();
+    private List<Material> m_Player3MaterialList = new List<Material>();
 
     //	private string[] Player3MeshName = new string[]
     //	{
@@ -194,17 +194,17 @@ public class GameObjSystem
     //		new GameObjSystem.Player3EffectParam(1f, 1f, 0.08f, 0.05f)
     //	};
 
-    //	public GameObject PlayerObj
-    //	{
-    //		get
-    //		{
-    //			return this.m_PlayerGameObj;
-    //		}
-    //		set
-    //		{
-    //			this.m_PlayerGameObj = value;
-    //		}
-    //	}
+    public GameObject PlayerObj
+    {
+        get
+        {
+            return this.m_PlayerGameObj;
+        }
+        set
+        {
+            this.m_PlayerGameObj = value;
+        }
+    }
 
     public void Initialize()
     {
@@ -894,93 +894,93 @@ public class GameObjSystem
     //		return num;
     //	}
 
-    //	public GameObject CreatePlayerGameObj(int id, Vector3 pos, float dir)
-    //	{
-    //		if (this.PlayerObj != null)
-    //		{
-    //			return this.PlayerObj;
-    //		}
-    //		string text = "Player" + id;
-    //		string name = "Player" + id + "_Map";
-    //		GameObject characterRoot = ResourceManager.Instance.GetCharacterRoot(name);
-    //		if (characterRoot == null)
-    //		{
-    //			Debug.Log("CreatePlayerGameObj::無法建立Root物件_" + id);
-    //			return null;
-    //		}
-    //		GameObject gameObject = this.GetPlayerCosCloth(id);
-    //		if (gameObject == null)
-    //		{
-    //			gameObject = ResourceManager.Instance.GetCharacterModel(text);
-    //			if (gameObject == null)
-    //			{
-    //				Debug.Log("CreatePlayerGameObj::無法建立Model物件_" + id);
-    //				return null;
-    //			}
-    //		}
-    //		RendererTool.ChangeSenceMaterialSetting(text, gameObject);
-    //		gameObject.transform.parent = characterRoot.transform;
-    //		Animator component = gameObject.GetComponent<Animator>();
-    //		if (component == null)
-    //		{
-    //			Debug.Log("CreatePlayerGameObj::找不到Animator_" + id);
-    //			return null;
-    //		}
-    //		component.enabled = false;
-    //		Avatar avatar = component.avatar;
-    //		UnityEngine.Object.Destroy(component);
-    //		string name2 = "Player" + id + "_Map";
-    //		component = characterRoot.GetComponent<Animator>();
-    //		component.runtimeAnimatorController = ResourceManager.Instance.GetAnimatorController(name2);
-    //		component.avatar = avatar;
-    //		component.applyRootMotion = false;
-    //		SphereCollider component2 = gameObject.GetComponent<SphereCollider>();
-    //		if (component2 != null)
-    //		{
-    //			UnityEngine.Object.Destroy(component2);
-    //		}
-    //		CapsuleCollider component3 = gameObject.GetComponent<CapsuleCollider>();
-    //		if (component3 != null)
-    //		{
-    //			component3.enabled = true;
-    //			component3.isTrigger = true;
-    //		}
-    //		FaceFXControllerScript component4 = gameObject.GetComponent<FaceFXControllerScript>();
-    //		if (component4 != null)
-    //		{
-    //			UnityEngine.Object.Destroy(component4);
-    //		}
-    //		Animation component5 = gameObject.GetComponent<Animation>();
-    //		if (component5 != null)
-    //		{
-    //			UnityEngine.Object.Destroy(component5);
-    //		}
-    //		this.m_ShroudInstance = gameObject.GetComponent<ShroudInstance>();
-    //		if (this.m_ShroudInstance != null)
-    //		{
-    //			this.m_ShroudInstance.ReduceBlendWeight_StoryEnable();
-    //		}
-    //		CharacterController component6 = gameObject.GetComponent<CharacterController>();
-    //		UnityEngine.Object.DestroyObject(component6);
-    //		characterRoot.transform.position = pos;
-    //		characterRoot.transform.eulerAngles = new Vector3(0f, dir, 0f);
-    //		characterRoot.name = "Player";
-    //		component.applyRootMotion = true;
-    //		TransformTool.SetLayerRecursively(characterRoot.transform, 2);
-    //		gameObject.tag = "Player";
-    //		this.PlayerObj = characterRoot;
-    //		GameObjState state = new GameObjState();
-    //		S_GameObjData objData = new S_GameObjData(id, 0, pos, dir, 1, state, this.PlayerObj);
-    //		this.AddGameObjData(objData);
-    //		if (!this.PlayerObj.GetComponent<AudioListener>())
-    //		{
-    //			this.PlayerObj.AddComponent<AudioListener>();
-    //		}
-    //		this.m_PhysicClothList.Clear();
-    //		this.m_PlayerObjList.Clear();
-    //		this.m_IsHide = false;
-    //		return this.PlayerObj;
-    //	}
+    public GameObject CreatePlayerGameObj(int id, Vector3 pos, float dir)
+    {
+        if (this.PlayerObj != null)
+        {
+            return this.PlayerObj;
+        }
+        string text = "Player" + id;
+        string name = "Player" + id + "_Map";
+        GameObject characterRoot = ResourcesManager.Instance.GetCharacterRoot(name);
+        if (characterRoot == null)
+        {
+            Debug.Log("CreatePlayerGameObj::無法建立Root物件_" + id);
+            return null;
+        }
+        //GameObject gameObject = this.GetPlayerCosCloth(id);
+        //if (gameObject == null)
+        //{
+        //    gameObject = ResourceManager.Instance.GetCharacterModel(text);
+        //    if (gameObject == null)
+        //    {
+        //        Debug.Log("CreatePlayerGameObj::無法建立Model物件_" + id);
+        //        return null;
+        //    }
+        //}
+        //RendererTool.ChangeSenceMaterialSetting(text, gameObject);
+        //gameObject.transform.parent = characterRoot.transform;
+        //Animator component = gameObject.GetComponent<Animator>();
+        //if (component == null)
+        //{
+        //    Debug.Log("CreatePlayerGameObj::找不到Animator_" + id);
+        //    return null;
+        //}
+        //component.enabled = false;
+        //Avatar avatar = component.avatar;
+        //UnityEngine.Object.Destroy(component);
+        //string name2 = "Player" + id + "_Map";
+        //component = characterRoot.GetComponent<Animator>();
+        //component.runtimeAnimatorController = ResourceManager.Instance.GetAnimatorController(name2);
+        //component.avatar = avatar;
+        //component.applyRootMotion = false;
+        //SphereCollider component2 = gameObject.GetComponent<SphereCollider>();
+        //if (component2 != null)
+        //{
+        //    UnityEngine.Object.Destroy(component2);
+        //}
+        //CapsuleCollider component3 = gameObject.GetComponent<CapsuleCollider>();
+        //if (component3 != null)
+        //{
+        //    component3.enabled = true;
+        //    component3.isTrigger = true;
+        //}
+        //FaceFXControllerScript component4 = gameObject.GetComponent<FaceFXControllerScript>();
+        //if (component4 != null)
+        //{
+        //    UnityEngine.Object.Destroy(component4);
+        //}
+        //Animation component5 = gameObject.GetComponent<Animation>();
+        //if (component5 != null)
+        //{
+        //    UnityEngine.Object.Destroy(component5);
+        //}
+        //this.m_ShroudInstance = gameObject.GetComponent<ShroudInstance>();
+        //if (this.m_ShroudInstance != null)
+        //{
+        //    this.m_ShroudInstance.ReduceBlendWeight_StoryEnable();
+        //}
+        //CharacterController component6 = gameObject.GetComponent<CharacterController>();
+        //UnityEngine.Object.DestroyObject(component6);
+        //characterRoot.transform.position = pos;
+        //characterRoot.transform.eulerAngles = new Vector3(0f, dir, 0f);
+        //characterRoot.name = "Player";
+        //component.applyRootMotion = true;
+        //TransformTool.SetLayerRecursively(characterRoot.transform, 2);
+        //gameObject.tag = "Player";
+        //this.PlayerObj = characterRoot;
+        //GameObjState state = new GameObjState();
+        //S_GameObjData objData = new S_GameObjData(id, 0, pos, dir, 1, state, this.PlayerObj);
+        //this.AddGameObjData(objData);
+        if (!this.PlayerObj.GetComponent<AudioListener>())
+        {
+            this.PlayerObj.AddComponent<AudioListener>();
+        }
+        this.m_PhysicClothList.Clear();
+        this.m_PlayerObjList.Clear();
+        this.m_IsHide = false;
+        return this.PlayerObj;
+    }
 
     //	public GameObject CreatePlayerShowObj(int id, int itemId)
     //	{
@@ -1403,10 +1403,10 @@ public class GameObjSystem
     //		}
     //	}
 
-    //	public GameObject CreateAmberPigGameObj()
-    //	{
-    //		return null;
-    //	}
+    public GameObject CreateAmberPigGameObj()
+    {
+        return null;
+    }
 
     //	public void RemoveAmberGameObj()
     //	{

@@ -428,32 +428,32 @@ public class GameDataSystem
         //}
     }
 
-    //public void FlagOFF(int flag)
-    //{
-    //	this.m_GameFlag.OFF(flag);
-    //	if (flag >= this.GetMinID() && flag <= this.GetMaxID())
-    //	{
-    //		this.m_RoldData[flag - 1].BaseRoleData.IsFight = false;
-    //		this.UpdatePartyRole();
-    //		if (flag == this.m_FightPlayerID)
-    //		{
-    //			this.m_FightPlayerID = this.m_DefaultPlayerID;
-    //		}
-    //		if (flag == this.m_PlayerID)
-    //		{
-    //			this.m_PlayerID = this.m_DefaultPlayerID;
-    //			if (UI_Explore.Instance != null)
-    //			{
-    //				UI_Explore.Instance.SetActionSkill(this.m_DefaultPlayerID);
-    //			}
-    //			Swd6Application.instance.m_ExploreSystem.SwitchPlayer();
-    //		}
-    //	}
-    //	if (Swd6Application.instance.m_QuestSystem != null)
-    //	{
-    //		Swd6Application.instance.m_QuestSystem.Dirty();
-    //	}
-    //}
+    public void FlagOFF(int flag)
+    {
+        this.m_GameFlag.OFF(flag);
+        if (flag >= this.GetMinID() && flag <= this.GetMaxID())
+        {
+            this.m_RoldData[flag - 1].BaseRoleData.IsFight = false;
+            //this.UpdatePartyRole();
+            if (flag == this.m_FightPlayerID)
+            {
+                this.m_FightPlayerID = this.m_DefaultPlayerID;
+            }
+            if (flag == this.m_PlayerID)
+            {
+                this.m_PlayerID = this.m_DefaultPlayerID;
+                //if (UI_Explore.Instance != null)
+                //{
+                //    UI_Explore.Instance.SetActionSkill(this.m_DefaultPlayerID);
+                //}
+                GameEntry.Instance.m_ExploreSystem.SwitchPlayer();
+            }
+        }
+        if (GameEntry.Instance.m_QuestSystem != null)
+        {
+            GameEntry.Instance.m_QuestSystem.Dirty();
+        }
+    }
 
     //public void FlagSet(int flag, bool val)
     //{

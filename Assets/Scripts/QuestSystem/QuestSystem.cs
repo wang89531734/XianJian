@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using YouYou;
 
+/// <summary>
+/// 任务系统
+/// </summary>
 public class QuestSystem
 {
     private static QuestSystem _instance;
@@ -154,10 +157,10 @@ public class QuestSystem
 
     public void Dirty()
     {
-        //if (GameEntry.Instance.m_ExploreSystem.PlayerObj == null)
-        //{
-        //    return;
-        //}
+        if (GameEntry.Instance.m_ExploreSystem.PlayerObj == null)
+        {
+            return;
+        }
         this.m_Dirty = true;
     }
 

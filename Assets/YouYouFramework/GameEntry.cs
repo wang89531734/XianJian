@@ -494,6 +494,9 @@ namespace YouYou
 
         public ItemSystem m_ItemSystem { get; private set; }
 
+        /// <summary>
+        /// 任务系统
+        /// </summary>
         public QuestSystem m_QuestSystem { get; private set; }
 
         public SkillSystem m_SkillSystem { get; private set; }
