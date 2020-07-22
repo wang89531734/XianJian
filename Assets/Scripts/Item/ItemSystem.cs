@@ -112,34 +112,34 @@ public class ItemSystem
             return null;
         }
         ItemData itemData = this.GetDataByItemID(data.ID);
-        if (itemData == null)
-        {
-            do
-            {
-                data.SerialID = ++this.m_SerialID;
-            }
-            while (this.GetDataBySerialID(this.m_SerialID) != null);
-            if (data.Count > data2.MaxHeap)
-            {
-                data.Count = data2.MaxHeap;
-            }
-            this.m_ItemData.Add(data.SerialID, data);
-            itemData = this.m_ItemData[data.SerialID];
-            this.AutoSetFightItemHotkey(data.ID, true, true);
-        }
-        else
-        {
-            itemData.New = data.New;
-            itemData.GetTime = data.GetTime;
-            itemData.Count += data.Count;
-            if (itemData.Count + itemData.EquipCount > data2.MaxHeap)
-            {
-                itemData.Count = data2.MaxHeap;
-            }
-        }
+        //if (itemData == null)
+        //{
+        //    do
+        //    {
+        //        data.SerialID = ++this.m_SerialID;
+        //    }
+        //    while (this.GetDataBySerialID(this.m_SerialID) != null);
+        //    if (data.Count > data2.MaxHeap)
+        //    {
+        //        data.Count = data2.MaxHeap;
+        //    }
+        //    this.m_ItemData.Add(data.SerialID, data);
+        //    itemData = this.m_ItemData[data.SerialID];
+        //    this.AutoSetFightItemHotkey(data.ID, true, true);
+        //}
+        //else
+        //{
+        //    itemData.New = data.New;
+        //    itemData.GetTime = data.GetTime;
+        //    itemData.Count += data.Count;
+        //    if (itemData.Count + itemData.EquipCount > data2.MaxHeap)
+        //    {
+        //        itemData.Count = data2.MaxHeap;
+        //    }
+        //}
         if (data2.emItemType == ENUM_ItemType.Equip)
         {
-            Swd6Application.instance.m_IdentifySystem.AddIdentify(data.ID, ENUM_IdentifyType.Equipment, 100f, 0);
+            GameEntry.Instance.m_IdentifySystem.AddIdentify(data.ID, ENUM_IdentifyType.Equipment, 100f, 0);
         }
         return itemData;
     }
@@ -321,20 +321,20 @@ public class ItemSystem
     //		return null;
     //	}
 
-    //	public ItemData GetDataByItemID(int id)
-    //	{
-    //		int itemTotalCount = this.GetItemTotalCount();
-    //		this.ResetByOrder();
-    //		for (int i = 0; i < itemTotalCount; i++)
-    //		{
-    //			ItemData dataByOrder = this.GetDataByOrder();
-    //			if (dataByOrder != null && dataByOrder.ID == id && dataByOrder.MaxRefineSoul == 0)
-    //			{
-    //				return dataByOrder;
-    //			}
-    //		}
-    //		return null;
-    //	}
+    public ItemData GetDataByItemID(int id)
+    {
+        //int itemTotalCount = this.GetItemTotalCount();
+        //this.ResetByOrder();
+        //for (int i = 0; i < itemTotalCount; i++)
+        //{
+        //    ItemData dataByOrder = this.GetDataByOrder();
+        //    if (dataByOrder != null && dataByOrder.ID == id && dataByOrder.MaxRefineSoul == 0)
+        //    {
+        //        return dataByOrder;
+        //    }
+        //}
+        return null;
+    }
 
     //	public List<int> GetSmithItemListByItemID(int id)
     //	{

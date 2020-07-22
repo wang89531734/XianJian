@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using YouYou;
 
 public class IdentifySystem
 {
@@ -201,7 +202,7 @@ public class IdentifySystem
 				if (data3.Exp >= this.m_MItemLevelExp[data3.Level - 1])
 				{
 					data3.Level++;
-					Swd6Application.instance.m_GameDataSystem.ReLoadObjData();
+                    //GameEntry.Instance.m_GameDataSystem.ReLoadObjData();
 					if (data3.Level >= data2.MItem.MaxLevel)
 					{
 						data3.Level = data2.MItem.MaxLevel;
@@ -452,7 +453,7 @@ public class IdentifySystem
 		List<int> mobList = this.GetMobList(race);
 		for (int i = 0; i < mobList.Count; i++)
 		{
-			IdentifyData data = Swd6Application.instance.m_IdentifySystem.GetData(mobList[i]);
+			IdentifyData data = GameEntry.Instance.m_IdentifySystem.GetData(mobList[i]);
 			if (data != null)
 			{
 				S_Item data2 = GameDataDB.ItemDB.GetData(data.ID);
@@ -474,21 +475,21 @@ public class IdentifySystem
 		List<int> equipList = this.GetEquipList(type);
 		for (int i = 0; i < equipList.Count; i++)
 		{
-			IdentifyData data = Swd6Application.instance.m_IdentifySystem.GetData(equipList[i]);
+			IdentifyData data = GameEntry.Instance.m_IdentifySystem.GetData(equipList[i]);
 			if (data != null)
 			{
 				S_Item data2 = GameDataDB.ItemDB.GetData(data.ID);
-				if (Swd6Application.instance.CheckDLC())
-				{
-					if (data2.EquipShowVer == 0)
-					{
-						goto IL_8A;
-					}
-				}
-				else if (data2.EquipShowVer != 1)
-				{
-					goto IL_8A;
-				}
+				//if (GameEntry.Instance.CheckDLC())
+				//{
+				//	if (data2.EquipShowVer == 0)
+				//	{
+				//		goto IL_8A;
+				//	}
+				//}
+				//else if (data2.EquipShowVer != 1)
+				//{
+				//	goto IL_8A;
+				//}
 				if (data.New)
 				{
 					num++;
@@ -536,17 +537,17 @@ public class IdentifySystem
 				{
 					if (data.EquipShowVer != 0)
 					{
-						if (Swd6Application.instance.CheckDLC())
-						{
-							if (version > 0 && data.EquipShowVer != version)
-							{
-								goto IL_98;
-							}
-						}
-						else if (data.EquipShowVer != 1)
-						{
-							goto IL_98;
-						}
+						//if (GameEntry.Instance.CheckDLC())
+						//{
+						//	if (version > 0 && data.EquipShowVer != version)
+						//	{
+						//		goto IL_98;
+						//	}
+						//}
+						//else if (data.EquipShowVer != 1)
+						//{
+						//	goto IL_98;
+						//}
 						num++;
 					}
 				}
@@ -571,17 +572,17 @@ public class IdentifySystem
 					{
 						if (data2.EquipShowVer != 0)
 						{
-							if (Swd6Application.instance.CheckDLC())
-							{
-								if (version > 0 && data2.EquipShowVer != version)
-								{
-									goto IL_AC;
-								}
-							}
-							else if (data2.EquipShowVer != 1)
-							{
-								goto IL_AC;
-							}
+							//if (GameEntry.Instance.CheckDLC())
+							//{
+							//	if (version > 0 && data2.EquipShowVer != version)
+							//	{
+							//		goto IL_AC;
+							//	}
+							//}
+							//else if (data2.EquipShowVer != 1)
+							//{
+							//	goto IL_AC;
+							//}
 							num++;
 						}
 					}

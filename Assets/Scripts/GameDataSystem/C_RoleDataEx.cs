@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using YouYou;
 
 public class C_RoleDataEx : S_RoleData
 {
@@ -206,8 +207,8 @@ public class C_RoleDataEx : S_RoleData
         this.CalRoleAttr();
         if (showmsg)
         {
-            UI_Message.Instance.ClearSysMsg();
-            UI_Message.Instance.AddSysMsg(msg, 3f);
+            //UI_Message.Instance.ClearSysMsg();
+            //UI_Message.Instance.AddSysMsg(msg, 3f);
         }
     }
 
@@ -366,7 +367,7 @@ public class C_RoleDataEx : S_RoleData
 
     private void CalRoleAttrPlus_OnPassiveSkill(S_RoleAttr roleAttr)
     {
-        List<int> passiveSkillList = Swd6Application.instance.m_SkillSystem.GetPassiveSkillList(this.BaseRoleData.ID);
+        List<int> passiveSkillList = GameEntry.Instance.m_SkillSystem.GetPassiveSkillList(this.BaseRoleData.ID);
         for (int i = 0; i < passiveSkillList.Count; i++)
         {
             S_Skill data = GameDataDB.SkillDB.GetData(passiveSkillList[i]);
@@ -433,7 +434,7 @@ public class C_RoleDataEx : S_RoleData
 
     public void ResetFormationData()
     {
-        this.m_FormationData = Swd6Application.instance.m_FormationSystem.GetDefaultFormationData();
+        //this.m_FormationData = GameEntry.Instance.m_FormationSystem.GetDefaultFormationData();
         this.m_FormationUnitIdx = -1;
     }
 
@@ -496,7 +497,7 @@ public class C_RoleDataEx : S_RoleData
     private void DoMitemAttrPlus(S_RoleAttr roleAttr, int AttrPlusID, ItemData itemData)
     {
         S_Item data = GameDataDB.ItemDB.GetData(itemData.ID);
-        IdentifyData data2 = Swd6Application.instance.m_IdentifySystem.GetData(itemData.ID);
+        IdentifyData data2 = GameEntry.Instance.m_IdentifySystem.GetData(itemData.ID);
         if (data2 == null)
         {
             return;
@@ -562,32 +563,32 @@ public class C_RoleDataEx : S_RoleData
                 return;
             case 716:
                 {
-                    int currentMapOpenTreasuerCount = Swd6Application.instance.m_GameObjSystem.GetCurrentMapOpenTreasuerCount();
-                    int currentMapTreasuerCount = Swd6Application.instance.m_GameObjSystem.GetCurrentMapTreasuerCount();
-                    if (currentMapTreasuerCount > 0)
-                    {
-                        float num = (float)currentMapOpenTreasuerCount / (float)currentMapTreasuerCount;
-                        num = data.MItem.AttrEffect[data2.Level - 1] * num;
-                        roleAttr.sAttrPlus.AddRatioAttack += (int)num;
-                        roleAttr.sAttrPlus.AddRatioMAtk += (int)num;
-                    }
+                    //int currentMapOpenTreasuerCount = GameEntry.Instance.m_GameObjSystem.GetCurrentMapOpenTreasuerCount();
+                    //int currentMapTreasuerCount = GameEntry.Instance.m_GameObjSystem.GetCurrentMapTreasuerCount();
+                    //if (currentMapTreasuerCount > 0)
+                    //{
+                    //    float num = (float)currentMapOpenTreasuerCount / (float)currentMapTreasuerCount;
+                    //    num = data.MItem.AttrEffect[data2.Level - 1] * num;
+                    //    roleAttr.sAttrPlus.AddRatioAttack += (int)num;
+                    //    roleAttr.sAttrPlus.AddRatioMAtk += (int)num;
+                    //}
                     return;
                 }
             case 717:
                 {
-                    int currentMapOpenTreasuerCount2 = Swd6Application.instance.m_GameObjSystem.GetCurrentMapOpenTreasuerCount();
-                    int currentMapTreasuerCount2 = Swd6Application.instance.m_GameObjSystem.GetCurrentMapTreasuerCount();
-                    if (currentMapTreasuerCount2 > 0)
-                    {
-                        float num2 = (float)currentMapOpenTreasuerCount2 / (float)currentMapTreasuerCount2;
-                        num2 = data.MItem.AttrEffect[data2.Level - 1] * num2;
-                        roleAttr.sAttrPlus.AddRatioDef += (int)num2;
-                        roleAttr.sAttrPlus.AddRatioMDef += (int)num2;
-                    }
+                    //int currentMapOpenTreasuerCount2 = GameEntry.Instance.m_GameObjSystem.GetCurrentMapOpenTreasuerCount();
+                    //int currentMapTreasuerCount2 = GameEntry.Instance.m_GameObjSystem.GetCurrentMapTreasuerCount();
+                    //if (currentMapTreasuerCount2 > 0)
+                    //{
+                    //    float num2 = (float)currentMapOpenTreasuerCount2 / (float)currentMapTreasuerCount2;
+                    //    num2 = data.MItem.AttrEffect[data2.Level - 1] * num2;
+                    //    roleAttr.sAttrPlus.AddRatioDef += (int)num2;
+                    //    roleAttr.sAttrPlus.AddRatioMDef += (int)num2;
+                    //}
                     return;
                 }
         }
-        goto IL_113;
+        //goto IL_113;
     }
 
     private void CalRoleAttr_Finial(S_RoleAttr roleAttr)
@@ -771,10 +772,10 @@ public class C_RoleDataEx : S_RoleData
 
     public ItemData GetEquipItemData(ENUM_EquipPosition Pos)
     {
-        if (this.BaseRoleData.EquipID[(int)Pos] > 0)
-        {
-            return Swd6Application.instance.m_ItemSystem.GetDataBySerialID(this.BaseRoleData.EquipID[(int)Pos]);
-        }
+        //if (this.BaseRoleData.EquipID[(int)Pos] > 0)
+        //{
+        //    return GameEntry.Instance.m_ItemSystem.GetDataBySerialID(this.BaseRoleData.EquipID[(int)Pos]);
+        //}
         return null;
     }
 

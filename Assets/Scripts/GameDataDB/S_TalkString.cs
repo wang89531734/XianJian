@@ -20,10 +20,6 @@ public class S_TalkString : I_BaseDBF
 
 	public void ParseJson(string JsonString, IConverter Converter, I_BaseDBF Record)
 	{
-		if (Swd6Application.instance != null && Swd6Application.instance.m_DBFLog)
-		{
-			Debug.Log("TalkString_" + this.GUID);
-		}
 		this.Str = GameDataDB.TransStringByLanguageType(this.Str);
 		if (this.Str != null)
 		{

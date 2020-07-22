@@ -37,10 +37,6 @@ public class S_FormationData : I_BaseDBF
 
 	public void ParseJson(string JsonString, IConverter Converter, I_BaseDBF Record)
 	{
-		if (Swd6Application.instance != null && Swd6Application.instance.m_DBFLog)
-		{
-			Debug.Log("FormationData_" + this.GUID);
-		}
 		Dictionary<string, string> dictionary = Converter.deserializeObject<Dictionary<string, string>>(JsonString);
 		for (int i = 0; i < 4; i++)
 		{

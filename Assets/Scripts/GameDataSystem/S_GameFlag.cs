@@ -58,7 +58,7 @@ public class S_GameFlag
 	{
 		byte[] expr_0E_cp_0 = this.flagState;
 		int expr_0E_cp_1 = flag >> 3;
-		expr_0E_cp_0[expr_0E_cp_1] &= 255 - this.flagMask[flag & 7];
+		expr_0E_cp_0[expr_0E_cp_1] &= (byte)(255 - this.flagMask[flag & 7]);
 	}
 
 	public void Set(int flag, bool val)

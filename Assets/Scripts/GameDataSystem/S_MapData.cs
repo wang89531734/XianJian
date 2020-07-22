@@ -79,10 +79,6 @@ public class S_MapData : I_BaseDBF
 
 	public void ParseJson(string JsonString, IConverter Converter, I_BaseDBF Record)
 	{
-		if (Swd6Application.instance != null && Swd6Application.instance.m_DBFLog)
-		{
-			Debug.Log("MapData_" + this.GUID);
-		}
 		this.Name = GameDataDB.TransStringByLanguageType(this.Name);
 		this.Desc = GameDataDB.TransStringByLanguageType(this.Desc);
 		this.LoadInfo = GameDataDB.TransStringByLanguageType(this.LoadInfo);

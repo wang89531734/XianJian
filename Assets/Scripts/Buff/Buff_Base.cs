@@ -58,13 +58,13 @@ public abstract class Buff_Base
 		{
 			return;
 		}
-		this.m_BuffEffect = EffectSystem.Instance.CreateEffect(this.m_TargetCharacter.m_ModelTransform, this.m_BuffData.EffectPoint, this.m_BuffData.EffectName, true, true);
-		if (this.m_BuffEffect == null)
-		{
-			return;
-		}
-		this.m_BuffEffect.name = this.m_BuffData.EffectName;
-		TransformTool.SetLayerRecursively(this.m_BuffEffect.transform, 11);
+		//this.m_BuffEffect = EffectSystem.Instance.CreateEffect(this.m_TargetCharacter.m_ModelTransform, this.m_BuffData.EffectPoint, this.m_BuffData.EffectName, true, true);
+		//if (this.m_BuffEffect == null)
+		//{
+		//	return;
+		//}
+		//this.m_BuffEffect.name = this.m_BuffData.EffectName;
+		//TransformTool.SetLayerRecursively(this.m_BuffEffect.transform, 11);
 	}
 
 	protected void RemoveBuffEffect()
@@ -103,7 +103,7 @@ public abstract class Buff_Base
 		this.RemoveBuffEffect();
 		if (this.m_TargetCharacter != null && this.m_TargetCharacter.m_RoleModel.activeSelf)
 		{
-			this.m_TargetCharacter.StartCoroutine(this.m_TargetCharacter.RemoveBuff(this.m_BuffData.GroupID));
+			//this.m_TargetCharacter.StartCoroutine(this.m_TargetCharacter.RemoveBuff(this.m_BuffData.GroupID));
 		}
 		if (this.m_BuffData.EndCallID <= 0)
 		{
@@ -127,17 +127,17 @@ public abstract class Buff_Base
 		M_Character m_Character = null;
 		if (data2.emTarget == ENUM_UseTarget.Enemy)
 		{
-			if (this.m_SourceCharacter is M_Player || this.m_SourceCharacter is M_Guard)
-			{
-				if (this.m_TargetCharacter is M_Mob)
-				{
-					m_Character = this.m_TargetCharacter;
-				}
-			}
-			else if (this.m_TargetCharacter is M_Player)
-			{
-				m_Character = this.m_TargetCharacter;
-			}
+			//if (this.m_SourceCharacter is M_Player || this.m_SourceCharacter is M_Guard)
+			//{
+			//	if (this.m_TargetCharacter is M_Mob)
+			//	{
+			//		m_Character = this.m_TargetCharacter;
+			//	}
+			//}
+			//else if (this.m_TargetCharacter is M_Player)
+			//{
+			//	m_Character = this.m_TargetCharacter;
+			//}
 		}
 		else
 		{
@@ -147,19 +147,19 @@ public abstract class Buff_Base
 		{
 			return;
 		}
-		FightCommand fightCommand;
-		if (data2.ActDataName == null || data2.ActDataName == "0")
-		{
-			fightCommand = new FightCommand_NoActDataSkill(this.m_SourceCharacter, m_Character, this.m_BuffData.EndCallID);
-		}
-		else
-		{
-			fightCommand = new FightCommand_EndCallSkill(this.m_SourceCharacter, m_Character, this.m_BuffData.EndCallID);
-		}
-		if (fightCommand != null)
-		{
-			this.m_SourceCharacter.DoCommand(fightCommand);
-		}
+		//FightCommand fightCommand;
+		//if (data2.ActDataName == null || data2.ActDataName == "0")
+		//{
+		//	fightCommand = new FightCommand_NoActDataSkill(this.m_SourceCharacter, m_Character, this.m_BuffData.EndCallID);
+		//}
+		//else
+		//{
+		//	fightCommand = new FightCommand_EndCallSkill(this.m_SourceCharacter, m_Character, this.m_BuffData.EndCallID);
+		//}
+		//if (fightCommand != null)
+		//{
+		//	this.m_SourceCharacter.DoCommand(fightCommand);
+		//}
 	}
 
 	public virtual void Relieve()
@@ -172,7 +172,7 @@ public abstract class Buff_Base
 		this.RemoveBuffEffect();
 		if (this.m_TargetCharacter != null && this.m_TargetCharacter.m_RoleModel.activeSelf)
 		{
-			this.m_TargetCharacter.StartCoroutine(this.m_TargetCharacter.RemoveBuff(this.m_BuffData.GroupID));
+			//this.m_TargetCharacter.StartCoroutine(this.m_TargetCharacter.RemoveBuff(this.m_BuffData.GroupID));
 		}
 	}
 }

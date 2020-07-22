@@ -1,4 +1,4 @@
-using ICSharpCode.SharpZipLib.GZip;
+//using ICSharpCode.SharpZipLib.GZip;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -206,9 +206,9 @@ public class GameFileStream : IDisposable
 				}
 				int count = (int)(this.m_MemoryStream.Length - this.m_HeaderLength);
 				MemoryStream memoryStream = new MemoryStream();
-				GZipOutputStream gZipOutputStream = new GZipOutputStream(memoryStream);
-				gZipOutputStream.Write(array, (int)this.m_HeaderLength, count);
-				gZipOutputStream.Close();
+				//GZipOutputStream gZipOutputStream = new GZipOutputStream(memoryStream);
+				//gZipOutputStream.Write(array, (int)this.m_HeaderLength, count);
+				//gZipOutputStream.Close();
 				byte[] array2 = memoryStream.ToArray();
 				int count2 = array2.Length;
 				this.m_Stream.Write(array2, 0, count2);
@@ -319,15 +319,15 @@ public class GameFileStream : IDisposable
 	public void Decompress()
 	{
 		byte[] array = new byte[4096];
-		GZipInputStream gZipInputStream = new GZipInputStream(this.m_MemoryStream);
+		//GZipInputStream gZipInputStream = new GZipInputStream(this.m_MemoryStream);
 		MemoryStream memoryStream = new MemoryStream();
 		int num = 0;
 		int num2;
-		while ((num2 = gZipInputStream.Read(array, 0, array.Length)) != 0)
-		{
-			memoryStream.Write(array, 0, num2);
-			num += num2;
-		}
+		//while ((num2 = gZipInputStream.Read(array, 0, array.Length)) != 0)
+		//{
+		//	memoryStream.Write(array, 0, num2);
+		//	num += num2;
+		//}
 		this.m_MemoryStream.Close();
 		this.m_MemoryStream = memoryStream;
 		this.m_MemoryStream.Seek(0L, SeekOrigin.Begin);

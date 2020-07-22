@@ -154,10 +154,10 @@ public class QuestSystem
 
     public void Dirty()
     {
-        if (GameEntry.m_ExploreSystem.PlayerObj == null)
-        {
-            return;
-        }
+        //if (GameEntry.Instance.m_ExploreSystem.PlayerObj == null)
+        //{
+        //    return;
+        //}
         this.m_Dirty = true;
     }
 

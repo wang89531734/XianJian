@@ -44,10 +44,6 @@ public class S_PartnerTalk : I_BaseDBF
 		{
 			return;
 		}
-		if (Swd6Application.instance != null && Swd6Application.instance.m_DBFLog)
-		{
-			Debug.Log("PartnerTalk_" + this.GUID);
-		}
 		this.TalkMsg = GameDataDB.TransStringByLanguageType(this.TalkMsg);
 		Dictionary<string, string> dictionary = Converter.deserializeObject<Dictionary<string, string>>(JsonString);
 		for (int i = 0; i < 5; i++)
