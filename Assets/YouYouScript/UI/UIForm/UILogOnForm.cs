@@ -27,30 +27,11 @@ public class UILogOnForm : UIFormBase
 
     public void OnNewGameBtn()
     {
-        //GameEntry.Instance.StartNewGame();
-        //GameEntry.Scene.LoadScene(2, false, () =>
-        //{
-        //    GameEntry.Procedure.ChangeState(ProcedureState.WorldMap);
-        //});
-
-
-
-
-        string path = Application.dataPath + "/../assetbundles/Scene/MAP01.unity3d";
-        AssetBundle assetBundle = AssetBundle.LoadFromFile(path);
-        if (assetBundle != null)
+        GameEntry.Instance.StartNewGame();
+        GameEntry.Scene.LoadScene(2, false, () =>
         {
-            UnityEngine.Object mainAsset = assetBundle.LoadAsset("BuildPlayer-MAP01");
-    
-            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("BuildPlayer-MAP01", UnityEngine.SceneManagement.LoadSceneMode.Additive);
-        }
-
-
-
-
-
-
-
+            GameEntry.Procedure.ChangeState(ProcedureState.WorldMap);
+        });
     }
 
     public void OnLoadBtn()
