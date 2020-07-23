@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using YouYou;
 
 [RequireComponent(typeof(M_GameRoleMotion))]
 public abstract class M_GameRoleBase : MonoBehaviour
@@ -159,7 +160,6 @@ public abstract class M_GameRoleBase : MonoBehaviour
 					//ExploreMiniMapSystem.Instance.RemoveQuestIcon(this.RoleID);
 				}
 				this.m_RoleState.Set(ENUM_GameObjFlag.Disable);
-				UnityEngine.Object.DestroyObject(base.gameObject);
 				this.m_GameObjData.GameObj = null;
 				this.m_GameObjData.RoleBase = null;
 			}
@@ -544,94 +544,91 @@ public abstract class M_GameRoleBase : MonoBehaviour
 
 	private void Start()
 	{
-		//if (Swd6Application.instance)
-		//{
-		//	Swd6Application instance = Swd6Application.instance;
-		//	int mapID = instance.m_GameDataSystem.m_MapInfo.MapID;
-		//	string text = base.gameObject.name;
-		//	if (base.gameObject.transform.parent != null)
-		//	{
-		//		text = base.gameObject.transform.parent.name;
-		//	}
-		//	this.m_StartPos = base.gameObject.transform.position;
-		//	this.m_StartDir = base.gameObject.transform.eulerAngles.y;
-		//	if (text.Contains("NPC_"))
-		//	{
-		//		text = text.Replace("NPC_", string.Empty);
-		//		this.RoleID = int.Parse(text);
-		//		this.m_NpcData = GameDataDB.NpcDB.GetData(this.RoleID);
-		//		if (this.m_NpcData == null)
-		//		{
-		//			UnityEngine.Debug.Log("找不到NPC資料_" + this.RoleID);
-		//		}
-		//		if (!instance.m_GameObjSystem.CheckGameObjData(this.RoleID))
-		//		{
-		//			int num = (int)this.m_RoleState.Get();
-		//			string text2 = string.Format(string.Concat(new object[]
-		//			{
-		//				base.gameObject.name,
-		//				"+",
-		//				this.RoleID,
-		//				"+",
-		//				mapID,
-		//				"+",
-		//				num.ToString("X")
-		//			}), new object[0]);
-		//			this.LoadPrefabModel();
-		//			this.m_GameObjData = new S_GameObjData(this.RoleID, mapID, this.GetPos(), this.GetDir(), this.m_NpcData.Motion, this.m_RoleState, base.gameObject);
-		//			instance.m_GameObjSystem.AddGameObjData(this.m_GameObjData);
-		//		}
-		//		else
-		//		{
-		//			this.m_GameObjData = instance.m_GameObjSystem.GetObjData(this.RoleID);
-		//			if (this.m_GameObjData != null)
-		//			{
-		//				this.LoadPrefabModel();
-		//				this.m_GameObjData.GameObj = base.gameObject;
-		//				this.m_RoleState = this.m_GameObjData.State;
-		//				if (mapID != this.m_GameObjData.MapId)
-		//				{
-		//					UnityEngine.Object.Destroy(base.gameObject);
-		//					return;
-		//				}
-		//				if (this.m_GameObjData.Pos == Vector3.zero)
-		//				{
-		//					this.m_GameObjData.Pos = this.GetPos();
-		//				}
-		//				this.SetPos(this.m_GameObjData.Pos);
-		//				if (this.m_GameObjData.Dir != 1000f)
-		//				{
-		//					this.Dir = this.m_GameObjData.Dir;
-		//				}
-		//				if (this.m_GameObjData.Dir2 != 1000f)
-		//				{
-		//					this.Dir2 = this.m_GameObjData.Dir2;
-		//				}
-		//				if (this.HideRole)
-		//				{
-		//					this.HideRole = true;
-		//				}
-		//				if (this.HideRole2)
-		//				{
-		//					this.HideRole2 = true;
-		//				}
-		//				if (this.NoCollider)
-		//				{
-		//					this.NoCollider = true;
-		//				}
-		//				if (this.DisableRole)
-		//				{
-		//					if (this.Open)
-		//					{
-		//						ExploreMiniMapSystem.Instance.ChangeToOpenIcon(this.RoleID);
-		//					}
-		//					UnityEngine.Object.Destroy(base.gameObject);
-		//				}
-		//			}
-		//		}
-		//	}
-		//}
-		if (this.m_NpcData != null)
+        int mapID = GameEntry.Instance.m_GameDataSystem.m_MapInfo.MapID;
+        string text = base.gameObject.name;
+        if (base.gameObject.transform.parent != null)
+        {
+            text = base.gameObject.transform.parent.name;
+        }
+        this.m_StartPos = base.gameObject.transform.position;
+        this.m_StartDir = base.gameObject.transform.eulerAngles.y;
+        if (text.Contains("NPC_"))
+        {
+            text = text.Replace("NPC_", string.Empty);
+            this.RoleID = int.Parse(text);
+            this.m_NpcData = GameDataDB.NpcDB.GetData(this.RoleID);
+            if (this.m_NpcData == null)
+            {
+                UnityEngine.Debug.Log("找不到NPC資料_" + this.RoleID);
+            }
+            //    if (!instance.m_GameObjSystem.CheckGameObjData(this.RoleID))
+            //    {
+            //        int num = (int)this.m_RoleState.Get();
+            //        string text2 = string.Format(string.Concat(new object[]
+            //        {
+            //                base.gameObject.name,
+            //                "+",
+            //                this.RoleID,
+            //                "+",
+            //                mapID,
+            //                "+",
+            //                num.ToString("X")
+            //        }), new object[0]);
+            //        this.LoadPrefabModel();
+            //        this.m_GameObjData = new S_GameObjData(this.RoleID, mapID, this.GetPos(), this.GetDir(), this.m_NpcData.Motion, this.m_RoleState, base.gameObject);
+            //        instance.m_GameObjSystem.AddGameObjData(this.m_GameObjData);
+            //    }
+            //    else
+            //    {
+            //        this.m_GameObjData = instance.m_GameObjSystem.GetObjData(this.RoleID);
+            //        if (this.m_GameObjData != null)
+            //        {
+            //            this.LoadPrefabModel();
+            //            this.m_GameObjData.GameObj = base.gameObject;
+            //            this.m_RoleState = this.m_GameObjData.State;
+            //            if (mapID != this.m_GameObjData.MapId)
+            //            {
+            //                UnityEngine.Object.Destroy(base.gameObject);
+            //                return;
+            //            }
+            //            if (this.m_GameObjData.Pos == Vector3.zero)
+            //            {
+            //                this.m_GameObjData.Pos = this.GetPos();
+            //            }
+            //            this.SetPos(this.m_GameObjData.Pos);
+            //            if (this.m_GameObjData.Dir != 1000f)
+            //            {
+            //                this.Dir = this.m_GameObjData.Dir;
+            //            }
+            //            if (this.m_GameObjData.Dir2 != 1000f)
+            //            {
+            //                this.Dir2 = this.m_GameObjData.Dir2;
+            //            }
+            //            if (this.HideRole)
+            //            {
+            //                this.HideRole = true;
+            //            }
+            //            if (this.HideRole2)
+            //            {
+            //                this.HideRole2 = true;
+            //            }
+            //            if (this.NoCollider)
+            //            {
+            //                this.NoCollider = true;
+            //            }
+            //            if (this.DisableRole)
+            //            {
+            //                if (this.Open)
+            //                {
+            //                    ExploreMiniMapSystem.Instance.ChangeToOpenIcon(this.RoleID);
+            //                }
+            //                UnityEngine.Object.Destroy(base.gameObject);
+            //            }
+            //        }
+            //    }
+        }
+
+        if (this.m_NpcData != null)
 		{
 			this.m_RoleMotion = base.GetComponent<M_GameRoleMotion>();
 			if (this.m_RoleMotion != null)

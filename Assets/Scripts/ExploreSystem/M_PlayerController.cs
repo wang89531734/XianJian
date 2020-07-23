@@ -211,9 +211,9 @@ public class M_PlayerController : M_GameRoleBase
 
 	private RaycastHit groundHit;
 
-	//private M_AStarAI m_AstarAI;
+    private M_AStarAI m_AstarAI;
 
-	private GameObject m_WeaponObj;
+    private GameObject m_WeaponObj;
 
 	private bool m_ShowWeaponEffect;
 
@@ -502,41 +502,41 @@ public class M_PlayerController : M_GameRoleBase
 
 	private void Start()
 	{
-		//this.m_AstarAI = base.GetComponent<M_AStarAI>();
-		this.m_Animator = (this.m_Anim = base.GetComponent<Animator>());
-		Rigidbody[] componentsInChildren = base.gameObject.GetComponentsInChildren<Rigidbody>();
-		this.cRigidbody = componentsInChildren[0];
-		this.cRigidbody.isKinematic = false;
-		this.cacheDist = this.climbCheckDistance;
-		this.rayHitComparer = new M_PlayerController.RayHitComparer();
-		if (!base.gameObject.GetComponent<Rigidbody>())
-		{
-			Rigidbody rigidbody = base.gameObject.AddComponent<Rigidbody>();
-			rigidbody.useGravity = false;
-			rigidbody.isKinematic = true;
-		}
-		//if (Swd6Application.instance != null)
-		//{
-		//	base.RoleID = Swd6Application.instance.m_GameDataSystem.m_PlayerID;
-		//}
-		this.m_RoleMotion = base.gameObject.AddComponent<M_GameRoleMotion>();
-		if (this.m_RoleMotion != null)
-		{
-			this.m_RoleMotion.Init(base.RoleID, 1);
-		}
-		//ShroudInstance[] componentsInChildren2 = base.GetComponentsInChildren<ShroudInstance>();
-		//this.m_ShroudInstance = componentsInChildren2[0];
-		//if (this.m_ShroudInstance != null)
-		//{
-		//	this.m_ShroudInstance.ReduceBlendWeight();
-		//}
-		this.m_RunSpeed = 1f;
-		S_StartRoleData data = GameDataDB.StartRoleDB.GetData(base.RoleID);
-		if (data != null)
-		{
-			this.m_RunSpeed = data.MoveSpeed;
-		}
-	}
+        this.m_AstarAI = base.GetComponent<M_AStarAI>();
+        this.m_Animator = (this.m_Anim = base.GetComponent<Animator>());
+        //Rigidbody[] componentsInChildren = base.gameObject.GetComponentsInChildren<Rigidbody>();
+        //this.cRigidbody = componentsInChildren[0];
+        //this.cRigidbody.isKinematic = false;
+        //this.cacheDist = this.climbCheckDistance;
+        //this.rayHitComparer = new M_PlayerController.RayHitComparer();
+        //if (!base.gameObject.GetComponent<Rigidbody>())
+        //{
+        //	Rigidbody rigidbody = base.gameObject.AddComponent<Rigidbody>();
+        //	rigidbody.useGravity = false;
+        //	rigidbody.isKinematic = true;
+        //}
+        ////if (Swd6Application.instance != null)
+        ////{
+        ////	base.RoleID = Swd6Application.instance.m_GameDataSystem.m_PlayerID;
+        ////}
+        //this.m_RoleMotion = base.gameObject.AddComponent<M_GameRoleMotion>();
+        //if (this.m_RoleMotion != null)
+        //{
+        //	this.m_RoleMotion.Init(base.RoleID, 1);
+        //}
+        ////ShroudInstance[] componentsInChildren2 = base.GetComponentsInChildren<ShroudInstance>();
+        ////this.m_ShroudInstance = componentsInChildren2[0];
+        ////if (this.m_ShroudInstance != null)
+        ////{
+        ////	this.m_ShroudInstance.ReduceBlendWeight();
+        ////}
+        //this.m_RunSpeed = 1f;
+        //S_StartRoleData data = GameDataDB.StartRoleDB.GetData(base.RoleID);
+        //if (data != null)
+        //{
+        //	this.m_RunSpeed = data.MoveSpeed;
+        //}
+    }
 
 	public bool IsGround()
 	{

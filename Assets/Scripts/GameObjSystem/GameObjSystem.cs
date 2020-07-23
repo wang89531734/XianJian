@@ -972,10 +972,10 @@ public class GameObjSystem
         //GameObjState state = new GameObjState();
         //S_GameObjData objData = new S_GameObjData(id, 0, pos, dir, 1, state, this.PlayerObj);
         //this.AddGameObjData(objData);
-        if (!this.PlayerObj.GetComponent<AudioListener>())
-        {
-            this.PlayerObj.AddComponent<AudioListener>();
-        }
+        //if (!this.PlayerObj.GetComponent<AudioListener>())
+        //{
+        //    this.PlayerObj.AddComponent<AudioListener>();
+        //}
         this.m_PhysicClothList.Clear();
         this.m_PlayerObjList.Clear();
         this.m_IsHide = false;
@@ -1146,37 +1146,37 @@ public class GameObjSystem
     //		}
     //	}
 
-    //	public GameObject GetPlayerCosCloth(int roleId)
-    //	{
-    //		if (roleId == 0)
-    //		{
-    //			return null;
-    //		}
-    //		C_RoleDataEx roleData = Swd6Application.instance.m_GameDataSystem.GetRoleData(roleId);
-    //		if (roleData == null)
-    //		{
-    //			return null;
-    //		}
-    //		ItemData equipItemData = roleData.GetEquipItemData(ENUM_EquipPosition.CosCloth);
-    //		if (equipItemData == null)
-    //		{
-    //			return null;
-    //		}
-    //		if (equipItemData.ID == 0)
-    //		{
-    //			return null;
-    //		}
-    //		S_Item data = GameDataDB.ItemDB.GetData(equipItemData.ID);
-    //		if (data == null)
-    //		{
-    //			return null;
-    //		}
-    //		if (data.Equip.Materail.Count == 0)
-    //		{
-    //			return null;
-    //		}
-    //		return ResourceManager.Instance.GetCharacterModel(data.Equip.Materail[0].MeshName);
-    //	}
+    //public GameObject GetPlayerCosCloth(int roleId)
+    //{
+    //    if (roleId == 0)
+    //    {
+    //        return null;
+    //    }
+    //    //C_RoleDataEx roleData = Swd6Application.instance.m_GameDataSystem.GetRoleData(roleId);
+    //    //if (roleData == null)
+    //    //{
+    //    //    return null;
+    //    //}
+    //    ItemData equipItemData = roleData.GetEquipItemData(ENUM_EquipPosition.CosCloth);
+    //    if (equipItemData == null)
+    //    {
+    //        return null;
+    //    }
+    //    if (equipItemData.ID == 0)
+    //    {
+    //        return null;
+    //    }
+    //    S_Item data = GameDataDB.ItemDB.GetData(equipItemData.ID);
+    //    if (data == null)
+    //    {
+    //        return null;
+    //    }
+    //    if (data.Equip.Materail.Count == 0)
+    //    {
+    //        return null;
+    //    }
+    //    //return ResourcesManager.Instance.GetCharacterModel(data.Equip.Materail[0].MeshName);
+    //}
 
     //	public int GetPlayerWhatCosCloth(int roleId)
     //	{

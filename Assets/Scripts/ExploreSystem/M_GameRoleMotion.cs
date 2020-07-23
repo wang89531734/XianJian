@@ -131,8 +131,8 @@ public class M_GameRoleMotion : MonoBehaviour
 			}
 			else
 			{
-				//this.m_Animator.cullingMode = AnimatorCullingMode.BasedOnRenderers;
-			}
+               // this.m_Animator.cullingMode = AnimatorCullingMode.BasedOnRenderers;
+            }
 		}
 	}
 

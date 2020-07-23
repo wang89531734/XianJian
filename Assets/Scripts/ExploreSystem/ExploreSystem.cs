@@ -447,37 +447,37 @@ public class ExploreSystem
             this.PlayerChangePoint = string.Empty;
         }
         this.PlayerObj = GameEntry.Instance.m_GameObjSystem.CreatePlayerGameObj(GameEntry.Instance.m_GameDataSystem.m_PlayerID, this.PlayerChangePos, this.PlayerChangeDir);
-        this.m_PrePlayerPos = this.PlayerController.Pos;
-        this.m_PrePosUpdateTime = 0f;
-        this.m_PlayerUpdateTime = 1f;
-        this.PlayerController.m_NoJump = false;
-        this.m_PlyerController.m_Controller.enabled = false;
-        this.AmberPigObj = GameEntry.Instance.m_GameObjSystem.CreateAmberPigGameObj();
-        //this.EnableMainCamera(true);
-        //this.SetCameraLookTarget(true);
-        //this.SetAmberPigTargetPos();
-        //this.m_GameApp.m_GameObjSystem.LoadMapObj(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
-        //GameMapMobSystem.Instance.SetTarget(this.PlayerObj);
-        //ExploreMiniMapSystem.Instance.CreateMapData(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
-        //this.m_GameApp.m_SaveloadSystem.m_Loading = false;
-        //if (this.m_PlayMusicDelayTime <= 0f)
-        //{
-        //    this.PlayMusic();
-        //}
-        GameEntry.Input.Clear();
-        this.m_HideMap = 0;
-        this.m_RainEffect = null;
-        //this.ClearNoFightData(true);
-        //this.m_GameApp.m_GameDataSystem.ReLoadObjData();
-        //if (this.m_GameApp.m_GameDataSystem.GetFlag(52))
-        //{
-        //    this.SetPlayerPointLight(true);
-        //}
-        //if (this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID == 64 && !this.m_GameApp.m_GameDataSystem.GetFlag(56))
-        //{
-        //    this.SetMapRainEffect();
-        //}
-        this.LockPlayer = lockPlayer;
+        //this.m_PrePlayerPos = this.PlayerController.Pos;
+        //this.m_PrePosUpdateTime = 0f;
+        //this.m_PlayerUpdateTime = 1f;
+        //this.PlayerController.m_NoJump = false;
+        //this.m_PlyerController.m_Controller.enabled = false;
+        //this.AmberPigObj = GameEntry.Instance.m_GameObjSystem.CreateAmberPigGameObj();
+        ////this.EnableMainCamera(true);
+        ////this.SetCameraLookTarget(true);
+        ////this.SetAmberPigTargetPos();
+        ////this.m_GameApp.m_GameObjSystem.LoadMapObj(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
+        ////GameMapMobSystem.Instance.SetTarget(this.PlayerObj);
+        ////ExploreMiniMapSystem.Instance.CreateMapData(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
+        ////this.m_GameApp.m_SaveloadSystem.m_Loading = false;
+        ////if (this.m_PlayMusicDelayTime <= 0f)
+        ////{
+        ////    this.PlayMusic();
+        ////}
+        //GameEntry.Input.Clear();
+        //this.m_HideMap = 0;
+        //this.m_RainEffect = null;
+        ////this.ClearNoFightData(true);
+        ////this.m_GameApp.m_GameDataSystem.ReLoadObjData();
+        ////if (this.m_GameApp.m_GameDataSystem.GetFlag(52))
+        ////{
+        ////    this.SetPlayerPointLight(true);
+        ////}
+        ////if (this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID == 64 && !this.m_GameApp.m_GameDataSystem.GetFlag(56))
+        ////{
+        ////    this.SetMapRainEffect();
+        ////}
+        //this.LockPlayer = lockPlayer;
         //this.ClearBattleInfo();
         //this.SpecialSetting();
         //this.ChangeSky();
