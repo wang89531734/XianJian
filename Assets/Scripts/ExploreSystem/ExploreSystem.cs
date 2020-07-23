@@ -435,7 +435,7 @@ public class ExploreSystem
     {
         bool lockPlayer = this.LockPlayer;
         this.LoadMapDate();
-        this.LoadEventPrefab();
+        //this.LoadEventPrefab();
         if (this.PlayerChangePoint != string.Empty)
         {
             GameObject gameObject2 = GameObject.Find(this.PlayerChangePoint);
@@ -601,6 +601,8 @@ public class ExploreSystem
         }
         UnityEngine.Debug.Log(m_MapData.Name + "" + m_MapData.Desc);
         this.ResetData();
+
+        UnityEngine.Debug.Log(this.m_MapData.emType);
         if (this.m_MapData.emType == ENUM_MapType.Maze)
         {
             //this.m_GameApp.m_GameDataSystem.FlagON(41);

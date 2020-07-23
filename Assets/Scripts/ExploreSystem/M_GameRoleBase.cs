@@ -544,6 +544,7 @@ public abstract class M_GameRoleBase : MonoBehaviour
 
 	private void Start()
 	{
+        UnityEngine.Debug.Log("找不到NPC資料_" + this.RoleID);
         int mapID = GameEntry.Instance.m_GameDataSystem.m_MapInfo.MapID;
         string text = base.gameObject.name;
         if (base.gameObject.transform.parent != null)

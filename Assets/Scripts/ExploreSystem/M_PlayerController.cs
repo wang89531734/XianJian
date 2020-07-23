@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using YouYou;
 
 public class M_PlayerController : M_GameRoleBase
 {
@@ -507,18 +508,17 @@ public class M_PlayerController : M_GameRoleBase
         //Rigidbody[] componentsInChildren = base.gameObject.GetComponentsInChildren<Rigidbody>();
         //this.cRigidbody = componentsInChildren[0];
         //this.cRigidbody.isKinematic = false;
-        //this.cacheDist = this.climbCheckDistance;
-        //this.rayHitComparer = new M_PlayerController.RayHitComparer();
-        //if (!base.gameObject.GetComponent<Rigidbody>())
-        //{
-        //	Rigidbody rigidbody = base.gameObject.AddComponent<Rigidbody>();
-        //	rigidbody.useGravity = false;
-        //	rigidbody.isKinematic = true;
-        //}
-        ////if (Swd6Application.instance != null)
-        ////{
-        ////	base.RoleID = Swd6Application.instance.m_GameDataSystem.m_PlayerID;
-        ////}
+        this.cacheDist = this.climbCheckDistance;
+        this.rayHitComparer = new M_PlayerController.RayHitComparer();
+        if (!base.gameObject.GetComponent<Rigidbody>())
+        {
+            Rigidbody rigidbody = base.gameObject.AddComponent<Rigidbody>();
+            rigidbody.useGravity = false;
+            rigidbody.isKinematic = true;
+        }
+       
+        base.RoleID = GameEntry.Instance.m_GameDataSystem.m_PlayerID;
+        
         //this.m_RoleMotion = base.gameObject.AddComponent<M_GameRoleMotion>();
         //if (this.m_RoleMotion != null)
         //{
@@ -538,7 +538,7 @@ public class M_PlayerController : M_GameRoleBase
         //}
     }
 
-	public bool IsGround()
+    public bool IsGround()
 	{
 		return false;
 	}
@@ -656,31 +656,31 @@ public class M_PlayerController : M_GameRoleBase
 		//	this.m_Controller.velocity.y = 0f;
 		//	this.grounded = Physics.Raycast(base.transform.position + base.transform.up * this.m_Controller.center.y, base.transform.up * -1f, out this.groundHit, this.groundedDistance, this.groundLayers);
 		//}
-		this.m_Velocity = this.cRigidbody.velocity;
-		switch (this.m_BaseState)
-		{
-		case M_PlayerController.BaseState.Base:
-			this.UpdateSupportMove();
-			this.UpdateAutoMoveTime();
-			this.UpdateBaseInput();
-			this.UpdateIdleMotion();
-			this.UpdatePlayerTalk();
-			base.UpdateTurn();
-			this.UpdateSlopMovement(Time.deltaTime);
-			break;
-		case M_PlayerController.BaseState.Combat:
-			this.UpdateCombat();
-			break;
-		case M_PlayerController.BaseState.Jump:
-			this.UpdateJump();
-			break;
-		case M_PlayerController.BaseState.Falling:
-			this.UpdateFalling();
-			break;
-		case M_PlayerController.BaseState.TalkTurn:
-			this.UpdateTalkTurn();
-			break;
-		}
+		//this.m_Velocity = this.cRigidbody.velocity;
+		//switch (this.m_BaseState)
+		//{
+		//case M_PlayerController.BaseState.Base:
+		//	this.UpdateSupportMove();
+		//	this.UpdateAutoMoveTime();
+		//	this.UpdateBaseInput();
+		//	this.UpdateIdleMotion();
+		//	this.UpdatePlayerTalk();
+		//	base.UpdateTurn();
+		//	this.UpdateSlopMovement(Time.deltaTime);
+		//	break;
+		//case M_PlayerController.BaseState.Combat:
+		//	this.UpdateCombat();
+		//	break;
+		//case M_PlayerController.BaseState.Jump:
+		//	this.UpdateJump();
+		//	break;
+		//case M_PlayerController.BaseState.Falling:
+		//	this.UpdateFalling();
+		//	break;
+		//case M_PlayerController.BaseState.TalkTurn:
+		//	this.UpdateTalkTurn();
+		//	break;
+		//}
 		//if (Swd6Application.instance != null)
 		//{
 		//	Swd6Application.instance.m_GameObjSystem.UpdatePlayerMaterailEffect(base.gameObject);
