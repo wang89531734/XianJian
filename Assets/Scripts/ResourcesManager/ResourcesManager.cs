@@ -421,17 +421,17 @@ public class ResourcesManager
         return UnityEngine.Object.Instantiate(resourceObj) as GameObject;
     }
 
-    //public GameObject GetCharacterModel(string name)
-    //{
-    //    UnityEngine.Object resourceObj = this.m_CharacterModelLoader.GetResourceObj(name);
-    //    if (resourceObj == null)
-    //    {
-    //        return null;
-    //    }
-    //    GameObject gameObject = UnityEngine.Object.Instantiate(resourceObj) as GameObject;
-    //    TransformTool.CreatePoint09(gameObject);
-    //    return gameObject;
-    //}
+    public GameObject GetCharacterModel(string name)
+    {
+        UnityEngine.Object resourceObj = this.m_CharacterModelLoader.GetResourceObj(name);
+        if (resourceObj == null)
+        {
+            return null;
+        }
+        GameObject gameObject = UnityEngine.Object.Instantiate(resourceObj) as GameObject;
+        TransformTool.CreatePoint09(gameObject);
+        return gameObject;
+    }
 
     public GameObject GetCharacterModel_UI(string name)
     {
