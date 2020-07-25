@@ -505,9 +505,9 @@ public class M_PlayerController : M_GameRoleBase
 	{
         this.m_AstarAI = base.GetComponent<M_AStarAI>();
         this.m_Animator = (this.m_Anim = base.GetComponent<Animator>());
-        Rigidbody[] componentsInChildren = base.gameObject.GetComponentsInChildren<Rigidbody>();
-        this.cRigidbody = componentsInChildren[0];
-        this.cRigidbody.isKinematic = false;
+        //Rigidbody[] componentsInChildren = base.gameObject.GetComponentsInChildren<Rigidbody>();
+        //this.cRigidbody = componentsInChildren[0];
+        //this.cRigidbody.isKinematic = false;
         this.cacheDist = this.climbCheckDistance;
         this.rayHitComparer = new M_PlayerController.RayHitComparer();
         if (!base.gameObject.GetComponent<Rigidbody>())

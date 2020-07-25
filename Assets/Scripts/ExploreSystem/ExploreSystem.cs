@@ -112,7 +112,7 @@ public class ExploreSystem
 
     public GameObject m_RainEffect;
 
-    //public List<S_GameObjData> m_GhostEyeObjList = new List<S_GameObjData>();
+    public List<S_GameObjData> m_GhostEyeObjList = new List<S_GameObjData>();
 
     public int m_EffectSerialID;
 
@@ -275,6 +275,7 @@ public class ExploreSystem
             {
                 this.m_PlyerController.LockControl = this.m_bLockPlayer;
             }
+
             if (!this.m_bLockPlayer)
             {
                 if (GameEntry.Instance.m_QuestSystem != null)
@@ -435,27 +436,27 @@ public class ExploreSystem
     {
         bool lockPlayer = this.LockPlayer;
         this.LoadMapDate();
-        this.LoadEventPrefab();
-        if (this.PlayerChangePoint != string.Empty)
-        {
-            GameObject gameObject2 = GameObject.Find(this.PlayerChangePoint);
-            if (gameObject2 != null)
-            {
-                this.PlayerChangePos = gameObject2.transform.position;
-                this.PlayerChangeDir = gameObject2.transform.eulerAngles.y;
-            }
-            this.PlayerChangePoint = string.Empty;
-        }
+        //this.LoadEventPrefab();
+        //if (this.PlayerChangePoint != string.Empty)
+        //{
+        //    GameObject gameObject2 = GameObject.Find(this.PlayerChangePoint);
+        //    if (gameObject2 != null)
+        //    {
+        //        this.PlayerChangePos = gameObject2.transform.position;
+        //        this.PlayerChangeDir = gameObject2.transform.eulerAngles.y;
+        //    }
+        //    this.PlayerChangePoint = string.Empty;
+        //}
         this.PlayerObj = GameEntry.Instance.m_GameObjSystem.CreatePlayerGameObj(GameEntry.Instance.m_GameDataSystem.m_PlayerID, this.PlayerChangePos, this.PlayerChangeDir);
-        this.m_PrePlayerPos = this.PlayerController.Pos;
-        this.m_PrePosUpdateTime = 0f;
-        this.m_PlayerUpdateTime = 1f;
-        this.PlayerController.m_NoJump = false;
-        this.m_PlyerController.m_Controller.enabled = false;
-        this.AmberPigObj = GameEntry.Instance.m_GameObjSystem.CreateAmberPigGameObj();
-        this.EnableMainCamera(true);
-        this.SetCameraLookTarget(true);
-        this.SetAmberPigTargetPos();
+        //this.m_PrePlayerPos = this.PlayerController.Pos;
+        //this.m_PrePosUpdateTime = 0f;
+        //this.m_PlayerUpdateTime = 1f;
+        //this.PlayerController.m_NoJump = false;
+        //this.m_PlyerController.m_Controller.enabled = false;
+        //this.AmberPigObj = GameEntry.Instance.m_GameObjSystem.CreateAmberPigGameObj();
+        //this.EnableMainCamera(true);
+        //this.SetCameraLookTarget(true);
+        //this.SetAmberPigTargetPos();
         //this.m_GameApp.m_GameObjSystem.LoadMapObj(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
         //GameMapMobSystem.Instance.SetTarget(this.PlayerObj);
         //ExploreMiniMapSystem.Instance.CreateMapData(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
@@ -464,9 +465,9 @@ public class ExploreSystem
         //{
         //    this.PlayMusic();
         //}
-        GameEntry.Input.Clear();
-        this.m_HideMap = 0;
-        this.m_RainEffect = null;
+        //GameEntry.Input.Clear();
+        //this.m_HideMap = 0;
+        //this.m_RainEffect = null;
         //this.ClearNoFightData(true);
         //this.m_GameApp.m_GameDataSystem.ReLoadObjData();
         //if (this.m_GameApp.m_GameDataSystem.GetFlag(52))
@@ -608,14 +609,7 @@ public class ExploreSystem
             //this.m_GameApp.m_GameDataSystem.FlagON(41);
         }
 
-        if (this.m_MapData.emType != ENUM_MapType.Maze)
-        {
-            //UI_Explore.Instance.SetActionSkill(this.m_GameApp.m_GameDataSystem.m_PlayerID);
-        }
-        else
-        {
-            //UI_Explore.Instance.SetActionSkill(this.m_GameApp.m_GameDataSystem.m_PlayerID);
-        }
+        //UI_Explore.Instance.SetActionSkill(this.m_GameApp.m_GameDataSystem.m_PlayerID);
     }
 
     public void LoadEventPrefab()

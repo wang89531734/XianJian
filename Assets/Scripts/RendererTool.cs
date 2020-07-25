@@ -72,7 +72,8 @@ public class RendererTool
 		S_SenceMaterialSetting data2 = GameDataDB.SenceMaterialSettingDB.GetData(id);
 		if (data2 == null)
 		{
-			id = mapID * 100;
+            Debug.Log("ChangeSenceMaterialSetting::無法建立Model物件_" + id);
+            id = mapID * 100;
 			data2 = GameDataDB.SenceMaterialSettingDB.GetData(id);
 			if (data2 == null)
 			{
@@ -81,7 +82,8 @@ public class RendererTool
 		}
 		if (data2.Settings.ContainsKey(roleName))
 		{
-			foreach (Transform transform in gameObject.transform)
+            Debug.Log("ChangeSenceMaterialSetting::無法建立Model物件_" + id);
+            foreach (Transform transform in gameObject.transform)
 			{
 				SkinnedMeshRenderer component = transform.GetComponent<SkinnedMeshRenderer>();
 				if (component != null)
@@ -94,7 +96,8 @@ public class RendererTool
 		}
 		else if (data2.Settings.ContainsKey("Common"))
 		{
-			foreach (Transform transform2 in gameObject.transform)
+            Debug.Log("ChangeSenceMaterialSetting::無法建立Model物件_" + id);
+            foreach (Transform transform2 in gameObject.transform)
 			{
 				SkinnedMeshRenderer component2 = transform2.GetComponent<SkinnedMeshRenderer>();
 				if (component2 != null)

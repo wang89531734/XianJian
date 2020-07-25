@@ -895,6 +895,13 @@ public class GameObjSystem
     //		return num;
     //	}
 
+    /// <summary>
+    /// 创建玩家物体
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="pos"></param>
+    /// <param name="dir"></param>
+    /// <returns></returns>
     public GameObject CreatePlayerGameObj(int id, Vector3 pos, float dir)
     {
         if (this.PlayerObj != null)
@@ -946,40 +953,40 @@ public class GameObjSystem
             component3.enabled = true;
             component3.isTrigger = true;
         }
-        //FaceFXControllerScript component4 = gameObject.GetComponent<FaceFXControllerScript>();
-        //if (component4 != null)
-        //{
-        //    UnityEngine.Object.Destroy(component4);
-        //}
-        Animation component5 = gameObject.GetComponent<Animation>();
-        if (component5 != null)
+        FaceFXControllerScript component4 = gameObject.GetComponent<FaceFXControllerScript>();
+        if (component4 != null)
         {
-            UnityEngine.Object.Destroy(component5);
+            UnityEngine.Object.Destroy(component4);
         }
-        //this.m_ShroudInstance = gameObject.GetComponent<ShroudInstance>();
-        //if (this.m_ShroudInstance != null)
+        //Animation component5 = gameObject.GetComponent<Animation>();
+        //if (component5 != null)
         //{
-        //    this.m_ShroudInstance.ReduceBlendWeight_StoryEnable();
+        //    UnityEngine.Object.Destroy(component5);
         //}
-        CharacterController component6 = gameObject.GetComponent<CharacterController>();
-        UnityEngine.Object.DestroyObject(component6);
-        characterRoot.transform.position = pos;
-        characterRoot.transform.eulerAngles = new Vector3(0f, dir, 0f);
-        characterRoot.name = "Player";
-        component.applyRootMotion = true;
-        TransformTool.SetLayerRecursively(characterRoot.transform, 2);
-        gameObject.tag = "Player";
-        this.PlayerObj = characterRoot;
-        GameObjState state = new GameObjState();
-        S_GameObjData objData = new S_GameObjData(id, 0, pos, dir, 1, state, this.PlayerObj);
-        this.AddGameObjData(objData);
-        if (!this.PlayerObj.GetComponent<AudioListener>())
-        {
-            this.PlayerObj.AddComponent<AudioListener>();
-        }
-        this.m_PhysicClothList.Clear();
-        this.m_PlayerObjList.Clear();
-        this.m_IsHide = false;
+        ////this.m_ShroudInstance = gameObject.GetComponent<ShroudInstance>();
+        ////if (this.m_ShroudInstance != null)
+        ////{
+        ////    this.m_ShroudInstance.ReduceBlendWeight_StoryEnable();
+        ////}
+        //CharacterController component6 = gameObject.GetComponent<CharacterController>();
+        //UnityEngine.Object.DestroyObject(component6);
+        //characterRoot.transform.position = pos;
+        //characterRoot.transform.eulerAngles = new Vector3(0f, dir, 0f);
+        //characterRoot.name = "Player";
+        //component.applyRootMotion = true;
+        //TransformTool.SetLayerRecursively(characterRoot.transform, 2);
+        //gameObject.tag = "Player";
+        //this.PlayerObj = characterRoot;
+        //GameObjState state = new GameObjState();
+        //S_GameObjData objData = new S_GameObjData(id, 0, pos, dir, 1, state, this.PlayerObj);
+        //this.AddGameObjData(objData);
+        //if (!this.PlayerObj.GetComponent<AudioListener>())
+        //{
+        //    this.PlayerObj.AddComponent<AudioListener>();
+        //}
+        //this.m_PhysicClothList.Clear();
+        //this.m_PlayerObjList.Clear();
+        //this.m_IsHide = false;
         return this.PlayerObj;
     }
 
