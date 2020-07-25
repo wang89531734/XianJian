@@ -7,8 +7,6 @@ public class GameInputManager : ManagerBase, IDisposable
 {
 	private static Dictionary<KEY_ACTION, KeyCode> GameKeyList = new Dictionary<KEY_ACTION, KeyCode>();
 
-	private static Dictionary<JOYSTICK_KEY, string> JostickKeyList = new Dictionary<JOYSTICK_KEY, string>();
-
 	private static float m_DirKeySpeed = 6f;
 
 	private static Vector3 m_MoveDir = Vector3.zero;
@@ -43,7 +41,7 @@ public class GameInputManager : ManagerBase, IDisposable
 
 	private static bool m_Initialize = false;
 
-	public static bool KeyInput
+	public bool KeyInput
 	{
 		get
 		{
@@ -87,7 +85,6 @@ public class GameInputManager : ManagerBase, IDisposable
     public override void Init()
     {
         GameInputManager.InitDefalutKeyMapping();
-        //GameInputManager.InitDefalutJoystickKeyMapping();
         GameInputManager.m_Initialize = true;
     }
 
@@ -119,29 +116,6 @@ public class GameInputManager : ManagerBase, IDisposable
 		GameInputManager.GameKeyList.Add(KEY_ACTION.DOWN, KeyCode.S);
 		GameInputManager.GameKeyList.Add(KEY_ACTION.LEFT, KeyCode.A);
 		GameInputManager.GameKeyList.Add(KEY_ACTION.RIGHT, KeyCode.D);
-	}
-
-	public static void InitDefalutJoystickKeyMapping()
-	{
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.A, "A_1");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.B, "B_1");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.X, "X_1");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.Y, "Y_1");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.LB, "LB_1");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.RB, "RB_1");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.BACK, "Back_1");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.START, "Start_1");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.L3, "LS_1");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.R3, "RS_1");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.L_XAxis, "L_XAxis_1");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.L_YAxis, "L_YAxis_1");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.Trigger, "Triggers_1");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.R_XAxis, "R_XAxis_1");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.R_YAxis, "R_YAxis_1");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.DPad_XAxis, "DPad_XAxis_1");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.DPad_YAxis, "DPad_YAxis_1");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.LTrigger, "LTriggers");
-		GameInputManager.JostickKeyList.Add(JOYSTICK_KEY.RTrigger, "RTriggers");
 	}
 
 	public void Clear()
@@ -176,7 +150,7 @@ public class GameInputManager : ManagerBase, IDisposable
 		return !GameInputManager.IsDelayInput() && Input.GetKeyDown(key);
 	}
 
-	public static bool GetKey(KeyCode key)
+	public bool GetKey(KeyCode key)
 	{
 		if (!GameInputManager.m_IsDelayPress)
 		{
@@ -310,7 +284,6 @@ public class GameInputManager : ManagerBase, IDisposable
 
 	public static void Update()
 	{
-		//GameInputManager.GetJoyDpadInput();
 		GameInputManager.GetDirKeyUp();
 		GameInputManager.GetKeyUp();
 	}
@@ -352,19 +325,19 @@ public class GameInputManager : ManagerBase, IDisposable
 		return GameInputManager.GameKeyList[keyIndex];
 	}
 
-	public static bool GetKeyAction(KEY_ACTION key)
+	public bool GetKeyAction(KEY_ACTION key)
 	{
-		return GameInputManager.m_Initialize && !GameInputManager.IsDelayInput() && GameInputManager.GetKey(GameInputManager.GameKeyList[key]);
+		return GameInputManager.m_Initialize && !GameInputManager.IsDelayInput() && this.GetKey(GameInputManager.GameKeyList[key]);
 	}
 
-	public static bool GetKeyActionPress(KEY_ACTION key)
+	public bool GetKeyActionPress(KEY_ACTION key)
 	{
-		return GameInputManager.m_Initialize && !GameInputManager.IsDelayInput() && (GameInputManager.GetJoyKeyActionPress(key) || Input.GetKey(GameInputManager.GameKeyList[key]));
+		return GameInputManager.m_Initialize && !GameInputManager.IsDelayInput() && (Input.GetKey(GameInputManager.GameKeyList[key]));
 	}
 
-	public static bool GetKeyActionDown(KEY_ACTION key)
+	public bool GetKeyActionDown(KEY_ACTION key)
 	{
-		return GameInputManager.m_Initialize && !GameInputManager.IsDelayInput() && (GameInputManager.GetJoyKeyActionDown(key) || GameInputManager.GetKeyDown(GameInputManager.GameKeyList[key]));
+		return GameInputManager.m_Initialize && !GameInputManager.IsDelayInput() && (GameInputManager.GetKeyDown(GameInputManager.GameKeyList[key]));
 	}
 
 	public static bool GetKeyActionUp(KEY_ACTION key)
@@ -392,9 +365,9 @@ public class GameInputManager : ManagerBase, IDisposable
 		}
 	}
 
-	public static Vector3 GetDirKeyMoveVector()
+	public Vector3 GetDirKeyMoveVector()
 	{
-		if (GameInputManager.GetKeyActionPress(KEY_ACTION.UP) || GameInputManager.GetKeyActionPress(KEY_ACTION.UPARROW))
+		if (GetKeyActionPress(KEY_ACTION.UP) || GetKeyActionPress(KEY_ACTION.UPARROW))
 		{
 			GameInputManager.m_MoveDir.y = GameInputManager.m_MoveDir.y + Time.deltaTime * GameInputManager.m_DirKeySpeed;
 			if (GameInputManager.m_MoveDir.y > 1f)
@@ -412,7 +385,7 @@ public class GameInputManager : ManagerBase, IDisposable
 				GameInputManager.m_MoveDir.y = 0f;
 			}
 		}
-		if (GameInputManager.GetKeyActionPress(KEY_ACTION.DOWN) || GameInputManager.GetKeyActionPress(KEY_ACTION.DOWNARROW))
+		if (GetKeyActionPress(KEY_ACTION.DOWN) || GetKeyActionPress(KEY_ACTION.DOWNARROW))
 		{
 			GameInputManager.m_MoveDir.y = GameInputManager.m_MoveDir.y - Time.deltaTime * GameInputManager.m_DirKeySpeed;
 			if (GameInputManager.m_MoveDir.y < -1f)
@@ -430,7 +403,7 @@ public class GameInputManager : ManagerBase, IDisposable
 				GameInputManager.m_MoveDir.y = 0f;
 			}
 		}
-		if (GameInputManager.GetKeyActionPress(KEY_ACTION.LEFT) || GameInputManager.GetKeyActionPress(KEY_ACTION.LEFTARROW))
+		if (GetKeyActionPress(KEY_ACTION.LEFT) || GetKeyActionPress(KEY_ACTION.LEFTARROW))
 		{
 			GameInputManager.m_MoveDir.x = GameInputManager.m_MoveDir.x - Time.deltaTime * GameInputManager.m_DirKeySpeed;
 			if (GameInputManager.m_MoveDir.x < -1f)
@@ -448,7 +421,7 @@ public class GameInputManager : ManagerBase, IDisposable
 				GameInputManager.m_MoveDir.x = 0f;
 			}
 		}
-		if (GameInputManager.GetKeyActionPress(KEY_ACTION.RIGHT) || GameInputManager.GetKeyActionPress(KEY_ACTION.RIGHTARROW))
+		if (GetKeyActionPress(KEY_ACTION.RIGHT) || GetKeyActionPress(KEY_ACTION.RIGHTARROW))
 		{
 			GameInputManager.m_MoveDir.x = GameInputManager.m_MoveDir.x + Time.deltaTime * GameInputManager.m_DirKeySpeed;
 			if (GameInputManager.m_MoveDir.x > 1f)
@@ -469,373 +442,99 @@ public class GameInputManager : ManagerBase, IDisposable
 		return GameInputManager.m_MoveDir;
 	}
 
-	public static bool IsPressUpKey()
+	public bool IsPressUpKey()
 	{
 		float y = GameInputManager.m_DPadDir.y;
-		return GameInputManager.GetKeyAction(KEY_ACTION.UP) || GameInputManager.GetKeyAction(KEY_ACTION.UPARROW) || y > 0f;
+		return GetKeyAction(KEY_ACTION.UP) || GetKeyAction(KEY_ACTION.UPARROW) || y > 0f;
 	}
 
-	public static bool IsPressDownKey()
+	public bool IsPressDownKey()
 	{
 		float y = GameInputManager.m_DPadDir.y;
-		return GameInputManager.GetKeyAction(KEY_ACTION.DOWN) || GameInputManager.GetKeyAction(KEY_ACTION.DOWNARROW) || y < 0f;
+		return GetKeyAction(KEY_ACTION.DOWN) || GetKeyAction(KEY_ACTION.DOWNARROW) || y < 0f;
 	}
 
-	public static bool IsPressLeftKey()
+	public bool IsPressLeftKey()
 	{
 		float x = GameInputManager.m_DPadDir.x;
-		return GameInputManager.GetKeyAction(KEY_ACTION.LEFT) || GameInputManager.GetKeyAction(KEY_ACTION.LEFTARROW) || x < 0f;
+		return GetKeyAction(KEY_ACTION.LEFT) || GetKeyAction(KEY_ACTION.LEFTARROW) || x < 0f;
 	}
 
-	public static bool IsPressRightKey()
+	public bool IsPressRightKey()
 	{
 		float x = GameInputManager.m_DPadDir.x;
-		return GameInputManager.GetKeyAction(KEY_ACTION.RIGHT) || GameInputManager.GetKeyAction(KEY_ACTION.RIGHTARROW) || x > 0f;
+		return GetKeyAction(KEY_ACTION.RIGHT) || GetKeyAction(KEY_ACTION.RIGHTARROW) || x > 0f;
 	}
 
-	public static bool IsPressMenuTabKey()
+	public bool IsPressMenuTabKey()
 	{
-		return GameInputManager.GetKeyActionDown(KEY_ACTION.TAB) || GameInputManager.GetJoyKeyDown(JOYSTICK_KEY.BACK);
+		return GetKeyActionDown(KEY_ACTION.TAB);
 	}
 
-	public static bool IsPressAllConfirmKey()
+	public bool IsPressAllConfirmKey()
 	{
-		return !GameInputManager.IsDelayInput() && (Input.GetMouseButtonDown(0) || GameInputManager.GetKeyActionDown(KEY_ACTION.CONFIRM) || Input.GetKeyDown(KeyCode.Space) || GameInputManager.GetJoyKeyDown(JOYSTICK_KEY.A));
+		return !GameInputManager.IsDelayInput() && (Input.GetMouseButtonDown(0) || GetKeyActionDown(KEY_ACTION.CONFIRM) || Input.GetKeyDown(KeyCode.Space));
 	}
 
-	public static bool IsPressConfirmKey()
+	public bool IsPressConfirmKey()
 	{
 		if (GameInputManager.IsDelayInput())
 		{
 			return false;
 		}
-		if (GameInputManager.GetKeyActionDown(KEY_ACTION.CONFIRM) || Input.GetKeyDown(KeyCode.Space) || GameInputManager.GetJoyKeyDown(JOYSTICK_KEY.A))
+		if (GetKeyActionDown(KEY_ACTION.CONFIRM) || Input.GetKeyDown(KeyCode.Space))
 		{
-			GameInputManager.KeyInput = true;
+			KeyInput = true;
 			return true;
 		}
 		return false;
 	}
 
-	public static bool IsPressMouseConfirmKey()
+	public bool IsPressMouseConfirmKey()
 	{
 		return !GameInputManager.IsDelayInput() && Input.GetMouseButtonDown(0);
 	}
 
-	public static bool IsPressCancelKey()
+	public bool IsPressCancelKey()
 	{
 		if (GameInputManager.IsDelayInput())
 		{
 			return false;
 		}
-		if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape) || GameInputManager.GetJoyKeyDown(JOYSTICK_KEY.B))
+		if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
 		{
-			GameInputManager.KeyInput = true;
-			if (GameInputManager.IsPressMouseCancelKey())
+			KeyInput = true;
+			if (IsPressMouseCancelKey())
 			{
-				GameInputManager.KeyInput = false;
+				KeyInput = false;
 			}
 			return true;
 		}
 		return false;
 	}
 
-	public static bool IsPressKeyboardCancelKey()
+	public bool IsPressKeyboardCancelKey()
 	{
 		if (GameInputManager.IsDelayInput())
 		{
 			return false;
 		}
-		if (Input.GetKeyDown(KeyCode.Escape) || GameInputManager.GetJoyKeyDown(JOYSTICK_KEY.B))
+		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			GameInputManager.KeyInput = true;
+			KeyInput = true;
 			return true;
 		}
 		return false;
 	}
 
-	public static bool IsPressMouseCancelKey()
+	public bool IsPressMouseCancelKey()
 	{
 		return !GameInputManager.IsDelayInput() && Input.GetMouseButtonDown(1);
 	}
 
-	public static bool IsPressDirKeyDown()
+	public bool IsPressDirKeyDown()
 	{
-		return GameInputManager.GetKeyActionDown(KEY_ACTION.UP) || GameInputManager.GetKeyActionDown(KEY_ACTION.UPARROW) || (GameInputManager.GetKeyActionDown(KEY_ACTION.DOWN) || GameInputManager.GetKeyActionDown(KEY_ACTION.DOWNARROW)) || (GameInputManager.GetKeyActionDown(KEY_ACTION.LEFT) || GameInputManager.GetKeyActionDown(KEY_ACTION.LEFTARROW)) || (GameInputManager.GetKeyActionDown(KEY_ACTION.RIGHT) || GameInputManager.GetKeyActionDown(KEY_ACTION.RIGHTARROW));
-	}
-
-	public static bool GetJoyKeyPressDown(JOYSTICK_KEY key)
-	{
-		if (!GameInputManager.m_IsJoyPad)
-		{
-			return false;
-		}
-		if (key == JOYSTICK_KEY.LTrigger)
-		{
-			return GameInputManager.GetJoyPressLTriggerAxis() != 0f;
-		}
-		if (key != JOYSTICK_KEY.RTrigger)
-		{
-			return Input.GetButton(GameInputManager.JostickKeyList[key]);
-		}
-		return GameInputManager.GetJoyPressRTriggerAxis() != 0f;
-	}
-
-	public static bool GetJoyKeyDown(JOYSTICK_KEY key)
-	{
-		if (!GameInputManager.m_IsJoyPad)
-		{
-			return false;
-		}
-		if (key == JOYSTICK_KEY.LTrigger)
-		{
-			return GameInputManager.GetJoyLTriggerAxis() != 0f;
-		}
-		if (key != JOYSTICK_KEY.RTrigger)
-		{
-			return Input.GetButtonDown(GameInputManager.JostickKeyList[key]);
-		}
-		return GameInputManager.GetJoyRTriggerAxis() != 0f;
-	}
-
-	public static bool GetJoyKeyActionDown(KEY_ACTION key)
-	{
-        if (!GameInputManager.m_IsJoyPad)
-        {
-            return false;
-        }
-        switch (key)
-        {
-            case KEY_ACTION.CONFIRM:
-                return GameInputManager.GetJoyKeyDown(JOYSTICK_KEY.A);
-            default:
-                switch (key)
-                {
-                    case KEY_ACTION.MENU:
-                        return GameInputManager.GetJoyKeyDown(JOYSTICK_KEY.START);
-                    case KEY_ACTION.CANCEL:
-                        return GameInputManager.GetJoyKeyDown(JOYSTICK_KEY.B);
-                    case KEY_ACTION.SCREENSHOT:
-                        return GameInputManager.GetJoyKeyDown(JOYSTICK_KEY.L3);
-                    case KEY_ACTION.QSAVE:
-                        if (GameInputManager.GetJoyKeyPressDown(JOYSTICK_KEY.RTrigger) && GameInputManager.GetJoyKeyDown(JOYSTICK_KEY.A))
-                        {
-                            return true;
-                        }
-                        break;
-                    case KEY_ACTION.QLOAD:
-                        if (GameInputManager.GetJoyKeyPressDown(JOYSTICK_KEY.RTrigger) && GameInputManager.GetJoyKeyDown(JOYSTICK_KEY.B))
-                        {
-                            return true;
-                        }
-                        break;
-                    case KEY_ACTION.SNAP:
-                        return GameInputManager.GetJoyKeyDown(JOYSTICK_KEY.R3);
-                }
-                return false;
-            case KEY_ACTION.ACTION:
-                return GameInputManager.GetJoyKeyDown(JOYSTICK_KEY.X);
-            case KEY_ACTION.ROLE_LEFT:
-                return GameInputManager.GetJoyKeyDown(JOYSTICK_KEY.LB);
-            case KEY_ACTION.ROLE_RIGHT:
-                return GameInputManager.GetJoyKeyDown(JOYSTICK_KEY.RB);
-            case KEY_ACTION.MAP:
-                return GameInputManager.GetJoyKeyDown(JOYSTICK_KEY.Y);
-        }
-    }
-
-	public static bool GetJoyKeyActionPress(KEY_ACTION key)
-	{
-		if (!GameInputManager.m_IsJoyPad)
-		{
-			return false;
-		}
-		if (key != KEY_ACTION.CAMERA_IN)
-		{
-			if (key == KEY_ACTION.CAMERA_OUT)
-			{
-				float axis = Input.GetAxis(GameInputManager.JostickKeyList[JOYSTICK_KEY.DPad_YAxis]);
-				if (axis < 0f)
-				{
-					return true;
-				}
-			}
-		}
-		else
-		{
-			float axis = Input.GetAxis(GameInputManager.JostickKeyList[JOYSTICK_KEY.DPad_YAxis]);
-			if (axis > 0f)
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public static float GetJoyDpadXAxis()
-	{
-		if (!GameInputManager.m_IsJoyPad)
-		{
-			return 0f;
-		}
-		return GameInputManager.GetAxis(GameInputManager.JostickKeyList[JOYSTICK_KEY.DPad_XAxis]);
-	}
-
-	public static float GetJoyDpadYAxis()
-	{
-		if (!GameInputManager.m_IsJoyPad)
-		{
-			return 0f;
-		}
-		return GameInputManager.GetAxis(GameInputManager.JostickKeyList[JOYSTICK_KEY.DPad_YAxis]);
-	}
-
-	public static bool GetJoyDpadInput()
-	{
-		if (!GameInputManager.m_IsJoyPad)
-		{
-			return false;
-		}
-		Vector2 vector = new Vector2(0f, 0f);
-		vector.x = Input.GetAxis(GameInputManager.JostickKeyList[JOYSTICK_KEY.DPad_XAxis]);
-		vector.y = Input.GetAxis(GameInputManager.JostickKeyList[JOYSTICK_KEY.DPad_YAxis]);
-		if (vector == Vector2.zero)
-		{
-			if (GameInputManager.m_IsPressDPad)
-			{
-				GameInputManager.m_PressTime = 0f;
-				GameInputManager.m_FirstPress = false;
-				GameInputManager.m_IsPressDPad = false;
-			}
-			GameInputManager.m_DPadDir = vector;
-			return true;
-		}
-		if (vector.x != 0f)
-		{
-			GameInputManager.m_DPadDir.x = GameInputManager.GetJoyDpadXAxis();
-		}
-		if (vector.y != 0f)
-		{
-			GameInputManager.m_DPadDir.y = GameInputManager.GetJoyDpadYAxis();
-		}
-		GameInputManager.m_IsPressDPad = true;
-		return false;
-	}
-
-	public static Vector3 GetJoyLAxis()
-	{
-		if (!GameInputManager.m_Initialize)
-		{
-			return new Vector3(0f, 0f, 0f);
-		}
-		if (!GameInputManager.m_IsJoyPad)
-		{
-			return new Vector3(0f, 0f, 0f);
-		}
-		return new Vector3(Input.GetAxis(GameInputManager.JostickKeyList[JOYSTICK_KEY.L_XAxis]), Input.GetAxis(GameInputManager.JostickKeyList[JOYSTICK_KEY.L_YAxis]), 0f);
-	}
-
-	public static Vector3 GetJoyRAxis()
-	{
-		if (!GameInputManager.m_Initialize)
-		{
-			return new Vector3(0f, 0f, 0f);
-		}
-		if (!GameInputManager.m_IsJoyPad)
-		{
-			return new Vector3(0f, 0f, 0f);
-		}
-		return new Vector3(Input.GetAxis(GameInputManager.JostickKeyList[JOYSTICK_KEY.R_XAxis]), Input.GetAxis(GameInputManager.JostickKeyList[JOYSTICK_KEY.R_YAxis]), 0f);
-	}
-
-	public static float GetJoyLTriggerAxis()
-	{
-		if (!GameInputManager.m_IsJoyPad)
-		{
-			return 0f;
-		}
-		Vector3 vector = new Vector3(Input.GetAxis(GameInputManager.JostickKeyList[JOYSTICK_KEY.LTrigger]), 0f, 0f);
-		if (GameInputManager.m_IsLTrigger)
-		{
-			if (vector.x == 0f)
-			{
-				GameInputManager.m_IsLTrigger = false;
-			}
-			return 0f;
-		}
-		if (vector.x > 0f)
-		{
-			GameInputManager.m_IsLTrigger = true;
-			return vector.x;
-		}
-		return 0f;
-	}
-
-	public static float GetJoyRTriggerAxis()
-	{
-		if (!GameInputManager.m_IsJoyPad)
-		{
-			return 0f;
-		}
-		Vector3 vector = new Vector3(Input.GetAxis(GameInputManager.JostickKeyList[JOYSTICK_KEY.RTrigger]), 0f, 0f);
-		if (GameInputManager.m_IsRTrigger)
-		{
-			if (vector.x == 0f)
-			{
-				GameInputManager.m_IsRTrigger = false;
-			}
-			return 0f;
-		}
-		if (vector.x > 0f)
-		{
-			GameInputManager.m_IsRTrigger = true;
-			return vector.x;
-		}
-		return 0f;
-	}
-
-	public static float GetJoyPressLTriggerAxis()
-	{
-		if (!GameInputManager.m_IsJoyPad)
-		{
-			return 0f;
-		}
-		Vector3 vector = new Vector3(Input.GetAxis(GameInputManager.JostickKeyList[JOYSTICK_KEY.LTrigger]), 0f, 0f);
-		return vector.x;
-	}
-
-	public static float GetJoyPressRTriggerAxis()
-	{
-		if (!GameInputManager.m_IsJoyPad)
-		{
-			return 0f;
-		}
-		Vector3 vector = new Vector3(Input.GetAxis(GameInputManager.JostickKeyList[JOYSTICK_KEY.RTrigger]), 0f, 0f);
-		return vector.x;
-	}
-
-	public static bool IsJoyPressUpKey()
-	{
-		float y = GameInputManager.m_DPadDir.y;
-		return y > 0f;
-	}
-
-	public static bool IsJoyPressDownKey()
-	{
-		float y = GameInputManager.m_DPadDir.y;
-		return y < 0f;
-	}
-
-	public static bool IsJoyPressLeftKey()
-	{
-		float x = GameInputManager.m_DPadDir.x;
-		return x < 0f;
-	}
-
-	public static bool IsJoyPressRightKey()
-	{
-		float x = GameInputManager.m_DPadDir.x;
-		return x > 0f;
+		return GetKeyActionDown(KEY_ACTION.UP) || GetKeyActionDown(KEY_ACTION.UPARROW) || (GetKeyActionDown(KEY_ACTION.DOWN) || GetKeyActionDown(KEY_ACTION.DOWNARROW)) || (GetKeyActionDown(KEY_ACTION.LEFT) || GetKeyActionDown(KEY_ACTION.LEFTARROW)) || (GetKeyActionDown(KEY_ACTION.RIGHT) || GetKeyActionDown(KEY_ACTION.RIGHTARROW));
 	}
 
 	public static void MoveCursorToGui(GameObject guiObj)

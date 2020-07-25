@@ -102,7 +102,7 @@ public class ExploreSystem
 
     private GameObject m_MainCameraGameObj;
 
-    //private M_PlayerMouseOrbit m_PlayerMouseOrbit;
+    private M_PlayerMouseOrbit m_PlayerMouseOrbit;
 
     private GameObject m_PlayerGameObj;
 
@@ -162,7 +162,7 @@ public class ExploreSystem
                 return;
             }
             this.m_PlayerGameObj.tag = "Player";
-            //this.m_PlyerController = this.m_PlayerGameObj.GetComponent<M_PlayerController>();
+            this.m_PlyerController = this.m_PlayerGameObj.GetComponent<M_PlayerController>();
         }
     }
 
@@ -455,7 +455,7 @@ public class ExploreSystem
         this.AmberPigObj = GameEntry.Instance.m_GameObjSystem.CreateAmberPigGameObj();
         this.EnableMainCamera(true);
         this.SetCameraLookTarget(true);
-        //this.SetAmberPigTargetPos();
+        this.SetAmberPigTargetPos();
         //this.m_GameApp.m_GameObjSystem.LoadMapObj(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
         //GameMapMobSystem.Instance.SetTarget(this.PlayerObj);
         //ExploreMiniMapSystem.Instance.CreateMapData(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
@@ -791,8 +791,8 @@ public class ExploreSystem
 
     public void Update()
     {
-        //this.UpdaeInput();
-        //this.UpdateLoadPlayer();
+        this.UpdaeInput();
+        this.UpdateLoadPlayer();
         //this.UpdateCursor();
         //this.UpdaeReStartPos();
         //this.UpdaePlayMusic();
@@ -815,20 +815,20 @@ public class ExploreSystem
         //Swd6Application.instance.m_GameObjSystem.UpdateAllMapObj();
     }
 
-    //	public void UpdateLoadPlayer()
-    //	{
-    //		if (this.m_PlayerUpdateTime > 0f)
-    //		{
-    //			this.m_PlayerUpdateTime -= Time.deltaTime;
-    //			if (this.m_PlayerUpdateTime <= 0f)
-    //			{
-    //				this.m_PlayerUpdateTime = 0f;
-    //				this.m_PlyerController.m_Controller.enabled = true;
-    //				GameMath.CastObjectOnTerrain(this.PlayerObj, 0.5f);
-    //				this.PlayerObj.transform.position += new Vector3(0f, 0.1f, 0f);
-    //			}
-    //		}
-    //	}
+    public void UpdateLoadPlayer()
+    {
+        if (this.m_PlayerUpdateTime > 0f)
+        {
+            this.m_PlayerUpdateTime -= Time.deltaTime;
+            if (this.m_PlayerUpdateTime <= 0f)
+            {
+                this.m_PlayerUpdateTime = 0f;
+                this.m_PlyerController.m_Controller.enabled = true;
+                GameMath.CastObjectOnTerrain(this.PlayerObj, 0.5f);
+                this.PlayerObj.transform.position += new Vector3(0f, 0.1f, 0f);
+            }
+        }
+    }
 
     //	private void UpdateHideUI()
     //	{
@@ -977,79 +977,80 @@ public class ExploreSystem
     //		return <QuickSave>c__Iterator;
     //	}
 
-    //	private void UpdaeInput()
-    //	{
-    //		if (this.m_GameApp.gameStateService.getCurrentState().name != "ExploreState")
-    //		{
-    //			return;
-    //		}
-    //		if (this.PlayerController == null)
-    //		{
-    //			return;
-    //		}
-    //		if (this.PlayerController.IsJump())
-    //		{
-    //			return;
-    //		}
-    //		if (Input.GetKeyDown(KeyCode.H) || GameInput.GetJoyKeyDown(JOYSTICK_KEY.LTrigger))
-    //		{
-    //			GameObject gameObject = GameObject.Find("Main Camera");
-    //			if (gameObject == null)
-    //			{
-    //				gameObject = GameObject.FindWithTag("MainCamera");
-    //			}
-    //			M_PlayerMouseOrbit x = gameObject.GetComponent<M_PlayerMouseOrbit>();
-    //			if (x == null)
-    //			{
-    //				x = gameObject.AddComponent<M_PlayerMouseOrbit>();
-    //			}
-    //			if (UI_Explore.Instance.IsVisible())
-    //			{
-    //				UI_Explore.Instance.Hide();
-    //				UI_MiniMap.Instance.Hide();
-    //			}
-    //			else
-    //			{
-    //				UI_Explore.Instance.Show();
-    //				UI_MiniMap.Instance.Show();
-    //			}
-    //		}
-    //		if (!this.LockPlayer)
-    //		{
-    //			if (GameInput.GetKeyActionDown(KEY_ACTION.QSAVE))
-    //			{
-    //				this.m_GameApp.m_GameObjSystem.PauseNpcObj();
-    //				GameMapMobSystem.Instance.Pause();
-    //				this.m_GameApp.StartCoroutine(this.QuickSave());
-    //				this.LockPlayer = true;
-    //			}
-    //			if (GameInput.GetKeyActionDown(KEY_ACTION.QLOAD))
-    //			{
-    //				this.m_GameApp.m_GameObjSystem.PauseNpcObj();
-    //				GameMapMobSystem.Instance.Pause();
-    //				UI_GameSaveLoadMenu.Instance.OpenLoad();
-    //				this.LockPlayer = true;
-    //			}
-    //		}
-    //		if (!GameInput.GetKeyActionDown(KEY_ACTION.MENU))
-    //		{
-    //			if (GameInput.GetKeyActionDown(KEY_ACTION.MAP))
-    //			{
-    //				UI_ZoneMap.Instance.Open();
-    //			}
-    //			return;
-    //		}
-    //		if (UI_ZoneMap.Instance.IsVisible())
-    //		{
-    //			return;
-    //		}
-    //		if (UI_GameSaveLoadMenu.Instance.IsVisible())
-    //		{
-    //			return;
-    //		}
-    //		GameInput.KeyInput = true;
-    //		this.OpenGameMainMenu();
-    //	}
+    private void UpdaeInput()
+    {      
+        if (GameEntry.Procedure.CurrProcedureState != ProcedureState.WorldMap)
+        {
+            return;
+        }
+        if (this.PlayerController == null)
+        {
+            return;
+        }
+        if (this.PlayerController.IsJump())
+        {
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            GameObject gameObject = GameObject.Find("Main Camera");
+            if (gameObject == null)
+            {
+                gameObject = GameObject.FindWithTag("MainCamera");
+            }
+            M_PlayerMouseOrbit x = gameObject.GetComponent<M_PlayerMouseOrbit>();
+            if (x == null)
+            {
+                x = gameObject.AddComponent<M_PlayerMouseOrbit>();
+            }
+            //if (UI_Explore.Instance.IsVisible())
+            //{
+            //    UI_Explore.Instance.Hide();
+            //    UI_MiniMap.Instance.Hide();
+            //}
+            //else
+            //{
+            //    UI_Explore.Instance.Show();
+            //    UI_MiniMap.Instance.Show();
+            //}
+        }
+
+        //if (!this.LockPlayer)
+        //{
+        //    if (GameInput.GetKeyActionDown(KEY_ACTION.QSAVE))
+        //    {
+        //        this.m_GameApp.m_GameObjSystem.PauseNpcObj();
+        //        GameMapMobSystem.Instance.Pause();
+        //        this.m_GameApp.StartCoroutine(this.QuickSave());
+        //        this.LockPlayer = true;
+        //    }
+        //    if (GameInput.GetKeyActionDown(KEY_ACTION.QLOAD))
+        //    {
+        //        this.m_GameApp.m_GameObjSystem.PauseNpcObj();
+        //        GameMapMobSystem.Instance.Pause();
+        //        UI_GameSaveLoadMenu.Instance.OpenLoad();
+        //        this.LockPlayer = true;
+        //    }
+        //}
+        //if (!GameInput.GetKeyActionDown(KEY_ACTION.MENU))
+        //{
+        //    if (GameInput.GetKeyActionDown(KEY_ACTION.MAP))
+        //    {
+        //        UI_ZoneMap.Instance.Open();
+        //    }
+        //    return;
+        //}
+        //if (UI_ZoneMap.Instance.IsVisible())
+        //{
+        //    return;
+        //}
+        //if (UI_GameSaveLoadMenu.Instance.IsVisible())
+        //{
+        //    return;
+        //}
+        GameEntry.Input.KeyInput = true;
+        //this.OpenGameMainMenu();
+    }
 
     //	private void GetAllItem()
     //	{
@@ -1223,21 +1224,23 @@ public class ExploreSystem
         {
             UnityEngine.Object.Destroy(component);
         }
+
         //M_MouseOrbit component2 = gameObject.GetComponent<M_MouseOrbit>();
         //if (component2 != null)
         //{
         //    component2.enabled = false;
         //}
-        //this.m_PlayerMouseOrbit = gameObject.GetComponent<M_PlayerMouseOrbit>();
-        //if (this.m_PlayerMouseOrbit == null)
-        //{
-        //    this.m_PlayerMouseOrbit = gameObject.AddComponent<M_PlayerMouseOrbit>();
-        //}
-        //if (bInit)
-        //{
-        //    this.m_PlayerMouseOrbit.Init();
-        //    this.m_PlayerMouseOrbit.SetNormalMode();
-        //}
+
+        this.m_PlayerMouseOrbit = gameObject.GetComponent<M_PlayerMouseOrbit>();
+        if (this.m_PlayerMouseOrbit == null)
+        {
+            this.m_PlayerMouseOrbit = gameObject.AddComponent<M_PlayerMouseOrbit>();
+        }
+        if (bInit)
+        {
+            this.m_PlayerMouseOrbit.Init();
+            this.m_PlayerMouseOrbit.SetNormalMode();
+        }
         //DepthOfFieldScatter component3 = gameObject.GetComponent<DepthOfFieldScatter>();
         Transform[] componentsInChildren = GameEntry.Instance.m_GameObjSystem.PlayerObj.transform.GetComponentsInChildren<Transform>();
         Transform[] array = componentsInChildren;
@@ -1250,39 +1253,39 @@ public class ExploreSystem
                 //{
                 //    component3.focalTransform = transform;
                 //}
-                //this.m_PlayerMouseOrbit.m_Target = transform;
+                this.m_PlayerMouseOrbit.m_Target = transform;
                 break;
             }
         }
         //gameObject.camera.orthographic = false;
-        //int num = 198656;
-        //num = ~num;
+        int num = 198656;
+        num = ~num;
         //gameObject.camera.cullingMask = num;
-        //this.SetCameraDofEffectLookTarget(GameEntry.Instance.m_GameObjSystem.PlayerObj);
+        this.SetCameraDofEffectLookTarget(GameEntry.Instance.m_GameObjSystem.PlayerObj);
     }
 
-    //	public void SetAmberPigTargetPos()
-    //	{
-    //		if (this.m_GameApp.m_GameObjSystem.PlayerObj == null)
-    //		{
-    //			return;
-    //		}
-    //		if (this.AmberPigObj == null)
-    //		{
-    //			return;
-    //		}
-    //		Transform[] componentsInChildren = this.m_GameApp.m_GameObjSystem.PlayerObj.transform.GetComponentsInChildren<Transform>();
-    //		Transform[] array = componentsInChildren;
-    //		for (int i = 0; i < array.Length; i++)
-    //		{
-    //			Transform transform = array[i];
-    //			if (transform.name == "pet point")
-    //			{
-    //				this.m_AmberPigController.m_Target = transform;
-    //				break;
-    //			}
-    //		}
-    //	}
+    public void SetAmberPigTargetPos()
+    {
+        //if (this.m_GameApp.m_GameObjSystem.PlayerObj == null)
+        //{
+        //    return;
+        //}
+        //if (this.AmberPigObj == null)
+        //{
+        //    return;
+        //}
+        //Transform[] componentsInChildren = this.m_GameApp.m_GameObjSystem.PlayerObj.transform.GetComponentsInChildren<Transform>();
+        //Transform[] array = componentsInChildren;
+        //for (int i = 0; i < array.Length; i++)
+        //{
+        //    Transform transform = array[i];
+        //    if (transform.name == "pet point")
+        //    {
+        //        this.m_AmberPigController.m_Target = transform;
+        //        break;
+        //    }
+        //}
+    }
 
     //	public void ChangeMainCamera(GameObject nextCamera)
     //	{
@@ -1407,36 +1410,36 @@ public class ExploreSystem
         }
     }
 
-    //	public void SetCameraDofEffectLookTarget(GameObject targetObj)
-    //	{
-    //		if (targetObj == null)
-    //		{
-    //			return;
-    //		}
-    //		GameObject gameObject = GameObject.Find("Main Camera");
-    //		if (gameObject == null)
-    //		{
-    //			gameObject = GameObject.FindWithTag("MainCamera");
-    //		}
-    //		if (gameObject)
-    //		{
-    //			DepthOfFieldScatter component = gameObject.GetComponent<DepthOfFieldScatter>();
-    //			if (component != null)
-    //			{
-    //				Transform[] componentsInChildren = targetObj.transform.GetComponentsInChildren<Transform>();
-    //				Transform[] array = componentsInChildren;
-    //				for (int i = 0; i < array.Length; i++)
-    //				{
-    //					Transform transform = array[i];
-    //					if (transform.name == "CamPos")
-    //					{
-    //						component.focalTransform = transform;
-    //						break;
-    //					}
-    //				}
-    //			}
-    //		}
-    //	}
+    public void SetCameraDofEffectLookTarget(GameObject targetObj)
+    {
+        if (targetObj == null)
+        {
+            return;
+        }
+        GameObject gameObject = GameObject.Find("Main Camera");
+        if (gameObject == null)
+        {
+            gameObject = GameObject.FindWithTag("MainCamera");
+        }
+        if (gameObject)
+        {
+            //DepthOfFieldScatter component = gameObject.GetComponent<DepthOfFieldScatter>();
+            //if (component != null)
+            //{
+            //    Transform[] componentsInChildren = targetObj.transform.GetComponentsInChildren<Transform>();
+            //    Transform[] array = componentsInChildren;
+            //    for (int i = 0; i < array.Length; i++)
+            //    {
+            //        Transform transform = array[i];
+            //        if (transform.name == "CamPos")
+            //        {
+            //            component.focalTransform = transform;
+            //            break;
+            //        }
+            //    }
+            //}
+        }
+    }
 
     //	public void SetCameraDOFEffect(bool enabled)
     //	{
