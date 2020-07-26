@@ -88,7 +88,8 @@ public class RendererTool
 				SkinnedMeshRenderer component = transform.GetComponent<SkinnedMeshRenderer>();
 				if (component != null)
 				{
-					component.material.SetFloat("_ExposureIBLX", data2.Settings[roleName].IBL);
+                    Debug.Log(component.name);
+                    component.material.SetFloat("_ExposureIBLX", data2.Settings[roleName].IBL);
 					component.material.SetFloat("_ExposureIBLY", Mathf.Max(1f, data2.Settings[roleName].IBL * 0.5f));
 					component.material.SetFloat("_IBLDiffSaturationValue", data2.Settings[roleName].Saturation);
 				}

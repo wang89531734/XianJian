@@ -185,48 +185,26 @@ public class M_GameRoleMotion : MonoBehaviour
 		}
 		S_AnimationData data = GameDataDB.AnimationDB.GetData(id);
 		if (data == null)
-		{
-			//if (Swd6Application.instance != null && Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
-			//{
-			//	string message = string.Concat(new object[]
-			//	{
-			//		"角色",
-			//		this.m_RoleId,
-			//		"_DBF沒有這個動作 : ",
-			//		id
-			//	});
-			//	Debug.LogWarning(message);
-			//}
+		{		
 			return;
 		}
 		this.m_Id = id;
 		this.m_PlayMotionName = data.ClipName;
-		//if (this.m_Animator != null)
-		//{
-		//	string name = "Base Layer." + data.ClipName;
-		//	int stateNameHash = Animator.StringToHash(name);
-		//	this.m_Animator.Play(stateNameHash, 0, 0f);
-		//}
-		//else if (this.m_Animation != null)
-		//{
-		//	//if (!AnimationControlSystem.GetClip(base.gameObject, data.ClipName))
-		//	//{
-		//	//	return;
-		//	//}
-		//	this.m_Animation.Play(this.m_PlayMotionName);
-		//}
-		//else if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
-		//{
-		//	string message2 = string.Concat(new object[]
-		//	{
-		//		"角色",
-		//		this.m_RoleId,
-		//		"_身上沒有這個動作_NULL_ : ",
-		//		data.ClipName
-		//	});
-		//	Debug.LogWarning(message2);
-		//}
-	}
+        if (this.m_Animator != null)
+        {
+            string name = "Base Layer." + data.ClipName;
+            int stateNameHash = Animator.StringToHash(name);
+            this.m_Animator.Play(stateNameHash, 0, 0f);
+        }
+        else if (this.m_Animation != null)
+        {
+            if (!AnimationControlSystem.GetClip(base.gameObject, data.ClipName))
+            {
+                return;
+            }
+            this.m_Animation.Play(this.m_PlayMotionName);
+        }
+    }
 
 	public void SetCrossMotion(int id)
 	{
@@ -440,11 +418,11 @@ public class M_GameRoleMotion : MonoBehaviour
 		{
 			return;
 		}
-		//if (!AnimationControlSystem.GetClip(base.gameObject, data.ClipName))
-		//{
-		//	return;
-		//}
-		AnimationState animationState = this.m_Animation[data.ClipName];
+        if (!AnimationControlSystem.GetClip(base.gameObject, data.ClipName))
+        {
+            return;
+        }
+        AnimationState animationState = this.m_Animation[data.ClipName];
 		if (animationState == null)
 		{
 			return;

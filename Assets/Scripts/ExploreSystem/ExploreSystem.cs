@@ -448,14 +448,14 @@ public class ExploreSystem
         //    this.PlayerChangePoint = string.Empty;
         //}
         this.PlayerObj = GameEntry.Instance.m_GameObjSystem.CreatePlayerGameObj(GameEntry.Instance.m_GameDataSystem.m_PlayerID, this.PlayerChangePos, this.PlayerChangeDir);
-        //this.m_PrePlayerPos = this.PlayerController.Pos;
-        //this.m_PrePosUpdateTime = 0f;
-        //this.m_PlayerUpdateTime = 1f;
-        //this.PlayerController.m_NoJump = false;
-        //this.m_PlyerController.m_Controller.enabled = false;
+        this.m_PrePlayerPos = this.PlayerController.Pos;
+        this.m_PrePosUpdateTime = 0f;
+        this.m_PlayerUpdateTime = 1f;
+        this.PlayerController.m_NoJump = false;
+        this.m_PlyerController.m_Controller.enabled = false;
         //this.AmberPigObj = GameEntry.Instance.m_GameObjSystem.CreateAmberPigGameObj();
-        //this.EnableMainCamera(true);
-        //this.SetCameraLookTarget(true);
+        this.EnableMainCamera(true);
+        this.SetCameraLookTarget(true);
         //this.SetAmberPigTargetPos();
         //this.m_GameApp.m_GameObjSystem.LoadMapObj(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
         //GameMapMobSystem.Instance.SetTarget(this.PlayerObj);
@@ -465,11 +465,11 @@ public class ExploreSystem
         //{
         //    this.PlayMusic();
         //}
-        //GameEntry.Input.Clear();
-        //this.m_HideMap = 0;
-        //this.m_RainEffect = null;
+        GameEntry.Input.Clear();
+        this.m_HideMap = 0;
+        this.m_RainEffect = null;
         //this.ClearNoFightData(true);
-        //this.m_GameApp.m_GameDataSystem.ReLoadObjData();
+        //GameEntry.Instance.m_GameDataSystem.ReLoadObjData();
         //if (this.m_GameApp.m_GameDataSystem.GetFlag(52))
         //{
         //    this.SetPlayerPointLight(true);
@@ -785,13 +785,13 @@ public class ExploreSystem
 
     public void Update()
     {
-        this.UpdaeInput();
-        this.UpdateLoadPlayer();
-        //this.UpdateCursor();
+        //this.UpdaeInput();
+        this.UpdateLoadPlayer();//让角色着地
+        ////this.UpdateCursor();
         //this.UpdaeReStartPos();
-        //this.UpdaePlayMusic();
-        //this.UpdaeNoFighCDTime();
-        //this.UpdaeNoFighTime();
+        ////this.UpdaePlayMusic();
+        ////this.UpdaeNoFighCDTime();
+        ////this.UpdaeNoFighTime();
         //this.UpdateUnloadResource();
         //this.UpdateHideUI();
         //if (this.m_OpenMenuTime > 0f)
@@ -840,19 +840,19 @@ public class ExploreSystem
     //		}
     //	}
 
-    //	private void UpdateUnloadResource()
-    //	{
-    //		if (this.m_ResourceUnLoadTime == 0f)
-    //		{
-    //			return;
-    //		}
-    //		this.m_ResourceUnLoadTime -= Time.deltaTime;
-    //		if (this.m_ResourceUnLoadTime <= 0f)
-    //		{
-    //			this.m_ResourceUnLoad = false;
-    //			this.m_ResourceUnLoadTime = 0f;
-    //		}
-    //	}
+    private void UpdateUnloadResource()
+    {
+        if (this.m_ResourceUnLoadTime == 0f)
+        {
+            return;
+        }
+        this.m_ResourceUnLoadTime -= Time.deltaTime;
+        if (this.m_ResourceUnLoadTime <= 0f)
+        {
+            this.m_ResourceUnLoad = false;
+            this.m_ResourceUnLoadTime = 0f;
+        }
+    }
 
     //	public void ClearNoFightData(bool clearAll)
     //	{
@@ -946,22 +946,22 @@ public class ExploreSystem
     //		this.m_AutoSave = false;
     //	}
 
-    //	private void UpdaeReStartPos()
-    //	{
-    //		if (!this.LockPlayer)
-    //		{
-    //			if (this.PlayerController == null)
-    //			{
-    //				return;
-    //			}
-    //			this.m_PrePosUpdateTime += Time.deltaTime;
-    //			if (this.m_PrePosUpdateTime >= 1f)
-    //			{
-    //				this.m_PrePosUpdateTime = 0f;
-    //				this.m_PrePlayerPos = this.PlayerController.Pos;
-    //			}
-    //		}
-    //	}
+    private void UpdaeReStartPos()
+    {
+        if (!this.LockPlayer)
+        {
+            if (this.PlayerController == null)
+            {
+                return;
+            }
+            this.m_PrePosUpdateTime += Time.deltaTime;
+            if (this.m_PrePosUpdateTime >= 1f)
+            {
+                this.m_PrePosUpdateTime = 0f;
+                this.m_PrePlayerPos = this.PlayerController.Pos;
+            }
+        }
+    }
 
     //	[DebuggerHidden]
     //	public IEnumerator QuickSave()
@@ -985,29 +985,29 @@ public class ExploreSystem
         {
             return;
         }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            GameObject gameObject = GameObject.Find("Main Camera");
-            if (gameObject == null)
-            {
-                gameObject = GameObject.FindWithTag("MainCamera");
-            }
-            M_PlayerMouseOrbit x = gameObject.GetComponent<M_PlayerMouseOrbit>();
-            if (x == null)
-            {
-                x = gameObject.AddComponent<M_PlayerMouseOrbit>();
-            }
-            //if (UI_Explore.Instance.IsVisible())
-            //{
-            //    UI_Explore.Instance.Hide();
-            //    UI_MiniMap.Instance.Hide();
-            //}
-            //else
-            //{
-            //    UI_Explore.Instance.Show();
-            //    UI_MiniMap.Instance.Show();
-            //}
-        }
+        //if (Input.GetKeyDown(KeyCode.H))
+        //{
+        //    GameObject gameObject = GameObject.Find("Main Camera");
+        //    if (gameObject == null)
+        //    {
+        //        gameObject = GameObject.FindWithTag("MainCamera");
+        //    }
+        //    M_PlayerMouseOrbit x = gameObject.GetComponent<M_PlayerMouseOrbit>();
+        //    if (x == null)
+        //    {
+        //        x = gameObject.AddComponent<M_PlayerMouseOrbit>();
+        //    }
+        //    //if (UI_Explore.Instance.IsVisible())
+        //    //{
+        //    //    UI_Explore.Instance.Hide();
+        //    //    UI_MiniMap.Instance.Hide();
+        //    //}
+        //    //else
+        //    //{
+        //    //    UI_Explore.Instance.Show();
+        //    //    UI_MiniMap.Instance.Show();
+        //    //}
+        //}
 
         //if (!this.LockPlayer)
         //{
@@ -1026,6 +1026,7 @@ public class ExploreSystem
         //        this.LockPlayer = true;
         //    }
         //}
+
         //if (!GameInput.GetKeyActionDown(KEY_ACTION.MENU))
         //{
         //    if (GameInput.GetKeyActionDown(KEY_ACTION.MAP))
@@ -1043,7 +1044,7 @@ public class ExploreSystem
         //    return;
         //}
         GameEntry.Input.KeyInput = true;
-        //this.OpenGameMainMenu();
+        this.OpenGameMainMenu();
     }
 
     //	private void GetAllItem()
@@ -1169,32 +1170,32 @@ public class ExploreSystem
     //	{
     //	}
 
-    //	public void OpenGameMainMenu()
-    //	{
-    //		if (this.LockPlayer)
-    //		{
-    //			return;
-    //		}
-    //		if (this.PlayerController.IsJump())
-    //		{
-    //			return;
-    //		}
-    //		if (this.m_OpenMainMenu)
-    //		{
-    //			return;
-    //		}
-    //		if (this.m_OpenMenuTime > 0f)
-    //		{
-    //			return;
-    //		}
-    //		if (this.m_GameApp.gameStateService.getCurrentState().name != "ExploreState")
-    //		{
-    //			return;
-    //		}
-    //		this.m_OpenMainMenu = true;
-    //		MusicSystem.Instance.PlayUISound(13, 1);
-    //		this.m_GameApp.StartCoroutine(this.m_GameApp.OpenGameMainMenu());
-    //	}
+    public void OpenGameMainMenu()
+    {
+        if (this.LockPlayer)
+        {
+            return;
+        }
+        if (this.PlayerController.IsJump())
+        {
+            return;
+        }
+        if (this.m_OpenMainMenu)
+        {
+            return;
+        }
+        if (this.m_OpenMenuTime > 0f)
+        {
+            return;
+        }
+        //if (this.m_GameApp.gameStateService.getCurrentState().name != "ExploreState")
+        //{
+        //    return;
+        //}
+        //this.m_OpenMainMenu = true;
+        //MusicSystem.Instance.PlayUISound(13, 1);
+        //this.m_GameApp.StartCoroutine(this.m_GameApp.OpenGameMainMenu());
+    }
 
     public void SetCameraLookTarget(bool bInit)
     {
@@ -1251,10 +1252,11 @@ public class ExploreSystem
                 break;
             }
         }
-        //gameObject.camera.orthographic = false;
+        Camera camera = gameObject.GetComponent<Camera>();
+        camera.orthographic = false;
         int num = 198656;
         num = ~num;
-        //gameObject.camera.cullingMask = num;
+        camera.cullingMask = num;
         this.SetCameraDofEffectLookTarget(GameEntry.Instance.m_GameObjSystem.PlayerObj);
     }
 

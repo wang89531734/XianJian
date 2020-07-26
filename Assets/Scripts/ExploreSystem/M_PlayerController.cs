@@ -64,6 +64,9 @@ public class M_PlayerController : M_GameRoleBase
 
 	public GameObject m_PickTarget;
 
+    /// <summary>
+    /// 跑步速度
+    /// </summary>
 	public float m_RunSpeed = 1f;
 
 	public float m_AtuoMoveSpeed;
@@ -505,9 +508,9 @@ public class M_PlayerController : M_GameRoleBase
 	{
         this.m_AstarAI = base.GetComponent<M_AStarAI>();
         this.m_Animator = (this.m_Anim = base.GetComponent<Animator>());
-        //Rigidbody[] componentsInChildren = base.gameObject.GetComponentsInChildren<Rigidbody>();
-        //this.cRigidbody = componentsInChildren[0];
-        //this.cRigidbody.isKinematic = false;
+        Rigidbody[] componentsInChildren = base.gameObject.GetComponentsInChildren<Rigidbody>();
+        this.cRigidbody = componentsInChildren[0];
+        this.cRigidbody.isKinematic = false;
         this.cacheDist = this.climbCheckDistance;
         this.rayHitComparer = new M_PlayerController.RayHitComparer();
         if (!base.gameObject.GetComponent<Rigidbody>())
@@ -516,21 +519,19 @@ public class M_PlayerController : M_GameRoleBase
             rigidbody.useGravity = false;
             rigidbody.isKinematic = true;
         }
-       
         base.RoleID = GameEntry.Instance.m_GameDataSystem.m_PlayerID;
-
         this.m_RoleMotion = base.gameObject.AddComponent<M_GameRoleMotion>();
         if (this.m_RoleMotion != null)
         {
             this.m_RoleMotion.Init(base.RoleID, 1);
         }
-        //布料
-        ////ShroudInstance[] componentsInChildren2 = base.GetComponentsInChildren<ShroudInstance>();
-        ////this.m_ShroudInstance = componentsInChildren2[0];
-        ////if (this.m_ShroudInstance != null)
-        ////{
-        ////	this.m_ShroudInstance.ReduceBlendWeight();
-        ////}
+        ////布料
+        //////ShroudInstance[] componentsInChildren2 = base.GetComponentsInChildren<ShroudInstance>();
+        //////this.m_ShroudInstance = componentsInChildren2[0];
+        //////if (this.m_ShroudInstance != null)
+        //////{
+        //////	this.m_ShroudInstance.ReduceBlendWeight();
+        //////}
         this.m_RunSpeed = 1f;
         S_StartRoleData data = GameDataDB.StartRoleDB.GetData(base.RoleID);
         if (data != null)
