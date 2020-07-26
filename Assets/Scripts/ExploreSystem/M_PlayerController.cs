@@ -9,10 +9,25 @@ public class M_PlayerController : M_GameRoleBase
 	public enum BaseState
 	{
 		Base,
+        /// <summary>
+        /// 爬
+        /// </summary>
 		Climb,
+        /// <summary>
+        /// 战斗
+        /// </summary>
 		Combat,
+        /// <summary>
+        /// 跳跃
+        /// </summary>
 		Jump,
+        /// <summary>
+        /// 落下
+        /// </summary>
 		Falling,
+        /// <summary>
+        /// 谈话转身
+        /// </summary>
 		TalkTurn
 	}
 
@@ -305,11 +320,11 @@ public class M_PlayerController : M_GameRoleBase
 
 	private Quaternion mRootMotionAngularVelocity = Quaternion.identity;
 
-	//public ControllerState m_State = default(ControllerState);
+    public ControllerState m_State = default(ControllerState);
 
-	//protected ControllerState m_PrevState = default(ControllerState);
+    protected ControllerState m_PrevState = default(ControllerState);
 
-	[HideInInspector]
+    [HideInInspector]
 	public float horizontal;
 
 	[HideInInspector]
@@ -645,35 +660,37 @@ public class M_PlayerController : M_GameRoleBase
         {
             return;
         }
+
         this.m_CurrentBaseState = this.m_Anim.GetCurrentAnimatorStateInfo(0);
+
         if (this.m_Controller != null)
         {
-            //this.m_Controller.velocity.y = 0f;
             this.grounded = Physics.Raycast(base.transform.position + base.transform.up * this.m_Controller.center.y, base.transform.up * -1f, out this.groundHit, this.groundedDistance, this.groundLayers);
         }
-        //this.m_Velocity = this.cRigidbody.velocity;
+
+        this.m_Velocity = this.cRigidbody.velocity;
+
         switch (this.m_BaseState)
         {
             case M_PlayerController.BaseState.Base:
-                this.UpdateSupportMove();
                 this.UpdateAutoMoveTime();
                 this.UpdateBaseInput();
-                this.UpdateIdleMotion();
-                this.UpdatePlayerTalk();
-                base.UpdateTurn();
-                this.UpdateSlopMovement(Time.deltaTime);
+                //this.UpdateIdleMotion();
+                //this.UpdatePlayerTalk();
+                //base.UpdateTurn();
+                //this.UpdateSlopMovement(Time.deltaTime);
                 break;
             case M_PlayerController.BaseState.Combat:
-                this.UpdateCombat();
+               // this.UpdateCombat();
                 break;
             case M_PlayerController.BaseState.Jump:
-                this.UpdateJump();
+              //  this.UpdateJump();
                 break;
             case M_PlayerController.BaseState.Falling:
-                this.UpdateFalling();
+               // this.UpdateFalling();
                 break;
             case M_PlayerController.BaseState.TalkTurn:
-                this.UpdateTalkTurn();
+              //  this.UpdateTalkTurn();
                 break;
         }
 
@@ -683,7 +700,7 @@ public class M_PlayerController : M_GameRoleBase
         //}
     }
 
-	private void HandleGroundedVelocities()
+    private void HandleGroundedVelocities()
 	{
 		this.m_Velocity.y = 0f;
 		if (this.m_MoveDirection.magnitude == 0f)
@@ -847,178 +864,178 @@ public class M_PlayerController : M_GameRoleBase
 		{
 			this.m_UpdateAutoMoveTime = 0f;
 			this.StopAutoMove();
-		}
-	}
+        }
+    }
 
 	private void UpdateBaseInput()
 	{
-		if (this.m_LockControl)
-		{
-			if (this.bTurnWalk)
-			{
-				this.m_Anim.SetFloat("Speed", 0.2f, 0.01f, Time.deltaTime);
-				this.UpdateFaceToTarget();
-			}
-			else if (!this.m_IsAutoMove)
-			{
-				this.m_Anim.SetFloat("Speed", 0f, 0.05f, Time.deltaTime);
-			}
-			return;
-		}
-		if (!this.m_Controller.enabled)
-		{
-			return;
-		}
-		bool flag = false;
-		this.m_DoJump = false;
-		if (!this.grounded)
-		{
-		}
+		//if (this.m_LockControl)
+		//{
+		//	if (this.bTurnWalk)
+		//	{
+		//		this.m_Anim.SetFloat("Speed", 0.2f, 0.01f, Time.deltaTime);
+		//		this.UpdateFaceToTarget();
+		//	}
+		//	else if (!this.m_IsAutoMove)
+		//	{
+		//		this.m_Anim.SetFloat("Speed", 0f, 0.05f, Time.deltaTime);
+		//	}
+		//	return;
+		//}
+		//if (!this.m_Controller.enabled)
+		//{
+		//	return;
+		//}
+		//bool flag = false;
+		//this.m_DoJump = false;
+		//if (!this.grounded)
+		//{
+		//}
 
-        //if (GameEntry.Input.GetKeyActionDown(KEY_ACTION.ACTION) || flag)
-        //{
-        //    bool flag2 = true;
-        //    if (GameEntry.Instance.m_GameDataSystem.GetFlag(41))
-        //    {
-        //        if (GameEntry.Instance.m_GameDataSystem.m_PlayerID == 3)
-        //        {
-        //            if (!GameEntry.Instance.m_ExploreSystem.IsAvoidMob())
-        //            {
-        //                if (!GameEntry.Instance.m_ExploreSystem.AvoidMob(10f, false))
-        //                {
-        //                    flag2 = false;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                flag2 = false;
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        flag2 = false;
-        //    }
-        //    if (flag2)
-        //    {
-        //        if (this.m_IdelState != ENUM_IDLESTATE.None)
-        //        {
-        //            this.PlayMotion(1, 0.01f);
-        //            this.m_UpdateIdleTime = 0f;
-        //            this.m_IdelState = ENUM_IDLESTATE.None;
-        //        }
-        //        if (Swd6Application.instance.m_GameDataSystem.m_PlayerID != 3)
-        //        {
-        //            this.m_ShowWeaponEffect = false;
-        //            if (!this.m_Anim.IsInTransition(0))
-        //            {
-        //                this.ShowWeaponEffect();
-        //            }
-        //            this.ShowWeapon(true);
-        //        }
-        //        this.m_BaseState = M_PlayerController.BaseState.Combat;
-        //        this.m_Anim.SetBool("Attack", true);
-        //        this.m_Anim.SetFloat("Speed", 0f);
-        //        this.m_Anim.speed = this.m_AnimSpeed;
-        //        this.m_Anim.applyRootMotion = false;
-        //        this.PlayAttackSound();
-        //        if (this.m_ShroudInstance != null)
-        //        {
-        //            this.m_ShroudInstance.ReduceBlendWeight();
-        //        }
-        //        Swd6Application.instance.m_UserBehavior.EventInfo.Counter(base.RoleID, CounterType.Genius);
-        //    }
-        //    return;
-        //}
+  //      //if (GameEntry.Input.GetKeyActionDown(KEY_ACTION.ACTION) || flag)
+  //      //{
+  //      //    bool flag2 = true;
+  //      //    if (GameEntry.Instance.m_GameDataSystem.GetFlag(41))
+  //      //    {
+  //      //        if (GameEntry.Instance.m_GameDataSystem.m_PlayerID == 3)
+  //      //        {
+  //      //            if (!GameEntry.Instance.m_ExploreSystem.IsAvoidMob())
+  //      //            {
+  //      //                if (!GameEntry.Instance.m_ExploreSystem.AvoidMob(10f, false))
+  //      //                {
+  //      //                    flag2 = false;
+  //      //                }
+  //      //            }
+  //      //            else
+  //      //            {
+  //      //                flag2 = false;
+  //      //            }
+  //      //        }
+  //      //    }
+  //      //    else
+  //      //    {
+  //      //        flag2 = false;
+  //      //    }
+  //      //    if (flag2)
+  //      //    {
+  //      //        if (this.m_IdelState != ENUM_IDLESTATE.None)
+  //      //        {
+  //      //            this.PlayMotion(1, 0.01f);
+  //      //            this.m_UpdateIdleTime = 0f;
+  //      //            this.m_IdelState = ENUM_IDLESTATE.None;
+  //      //        }
+  //      //        if (Swd6Application.instance.m_GameDataSystem.m_PlayerID != 3)
+  //      //        {
+  //      //            this.m_ShowWeaponEffect = false;
+  //      //            if (!this.m_Anim.IsInTransition(0))
+  //      //            {
+  //      //                this.ShowWeaponEffect();
+  //      //            }
+  //      //            this.ShowWeapon(true);
+  //      //        }
+  //      //        this.m_BaseState = M_PlayerController.BaseState.Combat;
+  //      //        this.m_Anim.SetBool("Attack", true);
+  //      //        this.m_Anim.SetFloat("Speed", 0f);
+  //      //        this.m_Anim.speed = this.m_AnimSpeed;
+  //      //        this.m_Anim.applyRootMotion = false;
+  //      //        this.PlayAttackSound();
+  //      //        if (this.m_ShroudInstance != null)
+  //      //        {
+  //      //            this.m_ShroudInstance.ReduceBlendWeight();
+  //      //        }
+  //      //        Swd6Application.instance.m_UserBehavior.EventInfo.Counter(base.RoleID, CounterType.Genius);
+  //      //    }
+  //      //    return;
+  //      //}
 
-        Vector3 dirKeyMoveVector = GameEntry.Input.GetDirKeyMoveVector();
-        this.horizontal = dirKeyMoveVector.x;
-        this.vertical = dirKeyMoveVector.y;
-        Vector3 joyLAxis = new Vector3(this.horizontal, 0f, this.vertical);
+  //      Vector3 dirKeyMoveVector = GameEntry.Input.GetDirKeyMoveVector();
+  //      this.horizontal = dirKeyMoveVector.x;
+  //      this.vertical = dirKeyMoveVector.y;
+  //      Vector3 joyLAxis = new Vector3(this.horizontal, 0f, this.vertical);
 
-        Vector3 normalized = Vector3.Scale(Camera.main.transform.forward, new Vector3(1f, 0f, 1f)).normalized;
-        Vector3 direction = this.vertical * normalized + this.horizontal * Camera.main.transform.right;
-        if (joyLAxis.magnitude > 1f)
-        {
-            joyLAxis.Normalize();
-        }
-        if (direction.magnitude > 1f)
-        {
-            direction.Normalize();
-        }
-        Vector3 vector = base.transform.InverseTransformDirection(direction);
-        float magnitude = joyLAxis.magnitude;
-        if (magnitude != 0f)
-        {
-            if (this.m_MoveTarget != null || this.m_IsAutoMove)
-            {
-                this.StopAutoMove();
-            }
-            this.m_MoveDirection = this.GetMoveDir(joyLAxis);
-            this.m_MoveDirection.y = 0f;
-            this.m_RotateDirection = (this.m_MoveDirection = this.m_MoveDirection.normalized);
-            //if (!this.bPressDirKey && this.m_ShroudInstance != null)
-            //{
-            //    this.m_ShroudInstance.ReduceBlendWeight();
-            //}
-            this.bPressDirKey = true;
-        }
-        else
-        {
-            this.bPressDirKey = false;
-        }
-        this.UpdateMousePickFloor();
-        if (this.m_IsAutoMove)
-        {
-            this.m_Controller.Move(new Vector3(0f, -this.m_DownGravity, 0f));
-            return;
-        }
-        this.UpdateRotate();
-        this.m_WalkSpeed = vector.z;
+  //      Vector3 normalized = Vector3.Scale(Camera.main.transform.forward, new Vector3(1f, 0f, 1f)).normalized;
+  //      Vector3 direction = this.vertical * normalized + this.horizontal * Camera.main.transform.right;
+  //      if (joyLAxis.magnitude > 1f)
+  //      {
+  //          joyLAxis.Normalize();
+  //      }
+  //      if (direction.magnitude > 1f)
+  //      {
+  //          direction.Normalize();
+  //      }
+  //      Vector3 vector = base.transform.InverseTransformDirection(direction);
+  //      float magnitude = joyLAxis.magnitude;
+  //      if (magnitude != 0f)
+  //      {
+  //          if (this.m_MoveTarget != null || this.m_IsAutoMove)
+  //          {
+  //              this.StopAutoMove();
+  //          }
+  //          this.m_MoveDirection = this.GetMoveDir(joyLAxis);
+  //          this.m_MoveDirection.y = 0f;
+  //          this.m_RotateDirection = (this.m_MoveDirection = this.m_MoveDirection.normalized);
+  //          //if (!this.bPressDirKey && this.m_ShroudInstance != null)
+  //          //{
+  //          //    this.m_ShroudInstance.ReduceBlendWeight();
+  //          //}
+  //          this.bPressDirKey = true;
+  //      }
+  //      else
+  //      {
+  //          this.bPressDirKey = false;
+  //      }
+  //      this.UpdateMousePickFloor();
+  //      if (this.m_IsAutoMove)
+  //      {
+  //          this.m_Controller.Move(new Vector3(0f, -this.m_DownGravity, 0f));
+  //          return;
+  //      }
+  //      this.UpdateRotate();
+  //      this.m_WalkSpeed = vector.z;
 
-        if (this.m_WalkSpeed > 0f)
-        {
-            if (this.m_IdelState == ENUM_IDLESTATE.WaitStart)
-            {
-                this.PlayMotion(1, 0.1f);
-                this.m_IdelState = ENUM_IDLESTATE.None;
-            }
-            //if (!this.bWalk && this.m_ShroudInstance != null)
-            //{
-            //    this.m_ShroudInstance.ReduceBlendWeight();
-            //}
-            this.bWalk = true;
-            this.m_UpdateIdleTime = 0f;
-            this.m_Anim.applyRootMotion = true;
-            this.m_Anim.speed = this.m_RunSpeed;
-            this.m_Anim.SetFloat("Speed", this.m_WalkSpeed, this.m_RuuBlendSpeed, Time.deltaTime);
-        }
-        else
-        {
-            if (this.bWalk)
-            {
-                //if (this.m_ShroudInstance != null)
-                //{
-                //    this.m_ShroudInstance.ReduceBlendWeight();
-                //}
-                this.m_Anim.applyRootMotion = false;
-            }
-            this.bWalk = false;
-            this.m_Anim.speed = this.m_AnimSpeed;
-            this.m_Anim.SetFloat("Speed", 0f, this.m_IdleBlendSpeed, Time.deltaTime);
-            if (this.m_IdelState == ENUM_IDLESTATE.None)
-            {
-                this.m_IdelState = ENUM_IDLESTATE.Start;
-            }
-        }
-        if (this.m_Controller != null && this.m_Controller.enabled)
-        {
-            this.m_Controller.Move(new Vector3(0f, -this.m_DownGravity, 0f));
-        }
-        if (this.m_CameraViewTarget != null)
-        {
-            this.m_CameraViewTarget.transform.position = base.transform.position + new Vector3(0f, 1.7f, 0f);
-        }
+  //      if (this.m_WalkSpeed > 0f)
+  //      {
+  //          if (this.m_IdelState == ENUM_IDLESTATE.WaitStart)
+  //          {
+  //              this.PlayMotion(1, 0.1f);
+  //              this.m_IdelState = ENUM_IDLESTATE.None;
+  //          }
+  //          //if (!this.bWalk && this.m_ShroudInstance != null)
+  //          //{
+  //          //    this.m_ShroudInstance.ReduceBlendWeight();
+  //          //}
+  //          this.bWalk = true;
+  //          this.m_UpdateIdleTime = 0f;
+  //          this.m_Anim.applyRootMotion = true;
+  //          this.m_Anim.speed = this.m_RunSpeed;
+  //          this.m_Anim.SetFloat("Speed", this.m_WalkSpeed, this.m_RuuBlendSpeed, Time.deltaTime);
+  //      }
+  //      else
+  //      {
+  //          if (this.bWalk)
+  //          {
+  //              //if (this.m_ShroudInstance != null)
+  //              //{
+  //              //    this.m_ShroudInstance.ReduceBlendWeight();
+  //              //}
+  //              this.m_Anim.applyRootMotion = false;
+  //          }
+  //          this.bWalk = false;
+  //          this.m_Anim.speed = this.m_AnimSpeed;
+  //          this.m_Anim.SetFloat("Speed", 0f, this.m_IdleBlendSpeed, Time.deltaTime);
+  //          if (this.m_IdelState == ENUM_IDLESTATE.None)
+  //          {
+  //              this.m_IdelState = ENUM_IDLESTATE.Start;
+  //          }
+  //      }
+  //      if (this.m_Controller != null && this.m_Controller.enabled)
+  //      {
+  //          this.m_Controller.Move(new Vector3(0f, -this.m_DownGravity, 0f));
+  //      }
+  //      if (this.m_CameraViewTarget != null)
+  //      {
+  //          this.m_CameraViewTarget.transform.position = base.transform.position + new Vector3(0f, 1.7f, 0f);
+  //      }
     }
 
 	private void GroundCheck()
@@ -1605,39 +1622,44 @@ public class M_PlayerController : M_GameRoleBase
 
 	public void UpdateSupportMove()
 	{
-		//if (this.m_State.Support != null && this.m_State.Support == this.m_PrevState.Support)
-		//{
-		//	this.m_State.SupportMove = Vector3.zero;
-		//	if (this.m_State.Support.rigidbody != null)
-		//	{
-		//		this.m_State.SupportPosition = this.m_State.Support.rigidbody.position;
-		//		this.m_State.SupportRotation = this.m_State.Support.rigidbody.rotation;
-		//	}
-		//	else
-		//	{
-		//		this.m_State.SupportPosition = this.m_State.Support.transform.position;
-		//		this.m_State.SupportRotation = this.m_State.Support.transform.rotation;
-		//	}
-		//	if (this.m_State.SupportPosition != this.m_PrevState.SupportPosition)
-		//	{
-		//		this.m_State.SupportMove = this.m_State.SupportPosition - this.m_PrevState.SupportPosition;
-		//	}
-		//	if (Quaternion.Angle(this.m_State.SupportRotation, this.m_PrevState.SupportRotation) != 0f)
-		//	{
-		//		Quaternion quaternion = this.m_PrevState.SupportRotation.RotationTo(this.m_State.SupportRotation);
-		//		base.transform.Rotate(quaternion.eulerAngles);
-		//		this.m_State.SupportMove = this.m_State.SupportMove + (this.m_State.SupportRotation * this.m_State.SupportContactPosition - this.m_PrevState.SupportRotation * this.m_State.SupportContactPosition);
-		//	}
-		//	if (this.m_State.SupportMove.sqrMagnitude != 0f && this.m_BaseState != M_PlayerController.BaseState.Jump)
-		//	{
-		//		this.m_Controller.Move(this.m_State.SupportMove);
-		//	}
-		//}
-		//if (this.m_State.Support != null && this.m_State.Velocity.HorizontalMagnitude() > 0f)
-		//{
-		//	this.m_State.SupportContactPosition = Vector3.zero;
-		//}
-	}
+        if (this.m_State.Support != null && this.m_State.Support == this.m_PrevState.Support)
+        {
+            Debug.Log("执行");
+            //this.m_State.SupportMove = Vector3.zero;
+            ////if (this.m_State.Support.rigidbody != null)
+            ////{
+            ////    this.m_State.SupportPosition = this.m_State.Support.rigidbody.position;
+            ////    this.m_State.SupportRotation = this.m_State.Support.rigidbody.rotation;
+            ////}
+            ////else
+            ////{
+            ////    this.m_State.SupportPosition = this.m_State.Support.transform.position;
+            ////    this.m_State.SupportRotation = this.m_State.Support.transform.rotation;
+            ////}
+
+            //if (this.m_State.SupportPosition != this.m_PrevState.SupportPosition)
+            //{
+            //    this.m_State.SupportMove = this.m_State.SupportPosition - this.m_PrevState.SupportPosition;
+            //}
+
+            ////if (Quaternion.Angle(this.m_State.SupportRotation, this.m_PrevState.SupportRotation) != 0f)
+            ////{
+            ////    Quaternion quaternion = this.m_PrevState.SupportRotation.RotationTo(this.m_State.SupportRotation);
+            ////    base.transform.Rotate(quaternion.eulerAngles);
+            ////    this.m_State.SupportMove = this.m_State.SupportMove + (this.m_State.SupportRotation * this.m_State.SupportContactPosition - this.m_PrevState.SupportRotation * this.m_State.SupportContactPosition);
+            ////}
+
+            //if (this.m_State.SupportMove.sqrMagnitude != 0f && this.m_BaseState != M_PlayerController.BaseState.Jump)
+            //{
+            //    this.m_Controller.Move(this.m_State.SupportMove);
+            //}
+        }
+
+        //if (this.m_State.Support != null && this.m_State.Velocity.HorizontalMagnitude() > 0f)
+        //{
+        //	this.m_State.SupportContactPosition = Vector3.zero;
+        //}
+    }
 
 	private void UpdateSlopMovement(float rDeltaTime)
 	{
