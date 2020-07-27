@@ -324,13 +324,19 @@ public class M_PlayerController : M_GameRoleBase
 
     protected ControllerState m_PrevState = default(ControllerState);
 
+    public Vector3 m_DirectionVector = Vector3.zero;
+
+    public M_PlayerMotor m_PlayerMotor { get; set; }
+
     [HideInInspector]
 	public float horizontal;
 
 	[HideInInspector]
 	public float vertical;
 
-	public bool Grounded
+    private float m_StopDistance = 0.2f;
+
+    public bool Grounded
 	{
 		get
 		{
@@ -521,6 +527,14 @@ public class M_PlayerController : M_GameRoleBase
 
 	private void Start()
 	{
+        this.m_PlayerMotor = (base.GetComponent(typeof(M_PlayerMotor)) as M_PlayerMotor);
+        if (this.m_PlayerMotor == null)
+        {
+            m_PlayerMotor=gameObject.AddComponent<M_PlayerMotor>();
+        }
+        this.m_PlayerMotor.maxForwardSpeed = this.m_RunSpeed;
+        this.m_JumpHeight = this.m_PlayerMotor.jumpHeight;
+
         this.m_AstarAI = base.GetComponent<M_AStarAI>();
         this.m_Animator = (this.m_Anim = base.GetComponent<Animator>());
         Rigidbody[] componentsInChildren = base.gameObject.GetComponentsInChildren<Rigidbody>();
@@ -673,8 +687,9 @@ public class M_PlayerController : M_GameRoleBase
         switch (this.m_BaseState)
         {
             case M_PlayerController.BaseState.Base:
-                this.UpdateAutoMoveTime();
+                //this.UpdateAutoMoveTime();
                 this.UpdateBaseInput();
+                this.UpdateMove();
                 //this.UpdateIdleMotion();
                 //this.UpdatePlayerTalk();
                 //base.UpdateTurn();
@@ -782,7 +797,47 @@ public class M_PlayerController : M_GameRoleBase
 		}
 	}
 
-	public void SetTalkTurn(GameObject target)
+    private void UpdateMove()
+    {
+        //if (this.m_NavMeshAgent != null && Swd6Application.instance.m_ExploreSystem.NavMesh && Swd6Application.instance.m_ExploreSystem.AutoPath && this.m_NavMeshAgent.enabled)
+        //{
+        //    return;
+        //}
+        if (this.m_DirectionVector == Vector3.zero)
+        {
+            return;
+        }
+        if (this.m_IsDash)
+        {
+            //this.PlayFaceMotion(0);
+        }
+        else
+        {
+            //this.PlayFaceMotion(1);
+        }
+        this.m_PlayerMotor.desiredMovementDirection = this.m_DirectionVector;
+        bool flag = false;
+        if (this.IsJump())
+        {
+            if (this.m_DirectionVector.magnitude - this.m_StopDistance <= 0f)
+            {
+                flag = true;
+            }
+        }
+        else if (this.m_DirectionVector.magnitude - this.m_StopDistance <= 0f)
+        {
+            flag = true;
+        }
+        //this.m_JumpMotor.IsMove = true;
+        //Swd6Application.instance.m_ExploreSystem.AddBattleStep();
+        if (flag)
+        {
+            this.StopMoveToTarget();
+        }
+    }
+
+
+    public void SetTalkTurn(GameObject target)
 	{
 		Vector3 lhs = target.transform.position - base.gameObject.transform.position;
 		lhs.Normalize();
@@ -951,20 +1006,18 @@ public class M_PlayerController : M_GameRoleBase
         //    return;
         //}
 
-        Vector3 dirKeyMoveVector = GameEntry.Input.GetDirKeyMoveVector();
-        this.horizontal = dirKeyMoveVector.x;
-        this.vertical = dirKeyMoveVector.y;
+        m_DirectionVector = GameEntry.Input.GetDirKeyMoveVector();
 
-        Vector3 normalized = Vector3.Scale(Camera.main.transform.forward, new Vector3(1f, 0f, 1f)).normalized;
-        Vector3 direction = this.vertical * normalized + this.horizontal * Camera.main.transform.right;
-
-        if (direction.magnitude > 1f)
+        if (this.m_DirectionVector.magnitude > 1f)
         {
-            direction.Normalize();
+            this.m_DirectionVector = this.m_DirectionVector.normalized;
         }
+        this.m_DirectionVector = this.m_DirectionVector.normalized * Mathf.Pow(this.m_DirectionVector.magnitude, 2f);
+        this.m_DirectionVector = Camera.main.transform.rotation * this.m_DirectionVector;
+        Quaternion rotation = Quaternion.FromToRotation(Camera.main.transform.forward * -1f, base.transform.up);
+        this.m_DirectionVector = rotation * this.m_DirectionVector;
+        this.m_DirectionVector = Quaternion.Inverse(base.transform.rotation) * this.m_DirectionVector;
 
-        Vector3 vector = base.transform.InverseTransformDirection(direction);
-        Debug.Log(vector+"执行");
         this.UpdateMousePickFloor();
 
         //if (this.m_IsAutoMove)
@@ -972,32 +1025,20 @@ public class M_PlayerController : M_GameRoleBase
         //    this.m_Controller.Move(new Vector3(0f, -this.m_DownGravity, 0f));
         //    return;
         //}
-        this.UpdateRotate();//转身
-        this.m_WalkSpeed = vector.z;
-        Debug.Log(m_WalkSpeed + "执行");
-        if (this.m_WalkSpeed > 0f)
-        {
-            if (this.m_IdelState == ENUM_IDLESTATE.WaitStart)
-            {
-                this.PlayMotion(1, 0.1f);
-                this.m_IdelState = ENUM_IDLESTATE.None;
-            }
 
-            this.bWalk = true;
-            this.m_UpdateIdleTime = 0f;
-            this.m_Anim.applyRootMotion = true;
-            this.m_Anim.speed = this.m_RunSpeed;
-            //this.m_Anim.SetFloat("Speed", this.m_WalkSpeed, this.m_RuuBlendSpeed, Time.deltaTime);
+        //this.UpdateRotate();//转身
+
+        if (this.m_DirectionVector != Vector3.zero)
+        {
+            //if (this.MoveTarget != null)
+            //{
+            //    this.StopMoveToTarget();
+            //    return;
+            //}
         }
         else
         {
-            this.bWalk = false;
-            this.m_Anim.speed = this.m_AnimSpeed;
-            //this.m_Anim.SetFloat("Speed", 0f, this.m_IdleBlendSpeed, Time.deltaTime);
-            if (this.m_IdelState == ENUM_IDLESTATE.None)
-            {
-                this.m_IdelState = ENUM_IDLESTATE.Start;
-            }
+            this.m_PlayerMotor.desiredMovementDirection = Vector3.zero;
         }
 
         if (this.m_Controller != null && this.m_Controller.enabled)
@@ -2036,13 +2077,29 @@ public class M_PlayerController : M_GameRoleBase
 		}
 	}
 
-	//public bool IsHeadCanLookAt()
-	//{
-	//	return !this.LockControl && this.m_IdelState != ENUM_IDLESTATE.WaitStart;
-	//}
+    //public bool IsHeadCanLookAt()
+    //{
+    //	return !this.LockControl && this.m_IdelState != ENUM_IDLESTATE.WaitStart;
+    //}
 
-	//public bool IsHideSkill()
-	//{
-	//	return Swd6Application.instance.m_GameDataSystem.m_PlayerID == 3 && Swd6Application.instance.m_ExploreSystem.IsAvoidMob() && !Swd6Application.instance.m_ExploreSystem.m_UseNoFightItem;
-	//}
+    //public bool IsHideSkill()
+    //{
+    //	return Swd6Application.instance.m_GameDataSystem.m_PlayerID == 3 && Swd6Application.instance.m_ExploreSystem.IsAvoidMob() && !Swd6Application.instance.m_ExploreSystem.m_UseNoFightItem;
+    //}
+
+    public void UpdateInputOnMovePlatform()
+    {
+        //LegAnimator component = base.gameObject.GetComponent<LegAnimator>();
+        //if (component)
+        //{
+        //this.m_DirectionVector = GameInput.GetDirKeyMoveVector();
+        //if (this.m_DirectionVector != Vector3.zero || this.MoveTarget != null)
+        //{
+        //    this.PlayIdleMotion();
+        //    return;
+        //}
+        //component.enabled = false;
+        //this.PlayMotion(601);
+        //}
+    }
 }
