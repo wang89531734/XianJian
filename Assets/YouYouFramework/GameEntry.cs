@@ -237,15 +237,6 @@ namespace YouYou
             get;
             private set;
         }
-
-        /// <summary>
-        /// 角色管理器
-        /// </summary>
-        public static GameInputManager Input
-        {
-            get;
-            private set;
-        }
         #endregion
 
         #region InitManagers 初始化管理器
@@ -267,7 +258,6 @@ namespace YouYou
             Resource = new AddressableManager();
             UI = new YouYouUIManager();
             Role = new RoleManager();
-            Input = new GameInputManager();
 
             Logger.Init();
             Event.Init();
@@ -282,10 +272,8 @@ namespace YouYou
             Resource.Init();
             UI.Init();
             Role.Init();
-            Input.Init();
             //进入第一个流程
 
-            new ResourcesManager();
             Procedure.ChangeState(ProcedureState.Preload);
         }
         #endregion
@@ -369,7 +357,7 @@ namespace YouYou
         {
             InitManagers();     
             
-            ReadGameDB();
+            ReadGameDB();//读取数据后期换
             //this.InitRequiredObject();
             InitGameSystem();
             this.m_InitializeOK = true;
@@ -464,10 +452,11 @@ namespace YouYou
             string mapBlockPath = Application.dataPath + "/../DBF/";
             string dbf_Path = Application.dataPath + "/../DBF/";
             string languagePath = Application.dataPath + "/../DBF/";
-            GameDataDB.SetConevrt(new SwdJsonCovertor());
-            GameDataDB.Initialize(mapBlockPath, dbf_Path, languagePath);
-            GameDataDB.LoadDBF();
-            GameDataDB.LoadLanguage();
+            //GameDataDB.SetConevrt(new SwdJsonCovertor());
+            //GameDataDB.Initialize(mapBlockPath, dbf_Path, languagePath);
+            //GameDataDB.LoadDBF();
+            //GameDataDB.LoadLanguage();
+            //GameDataDB.LoadDBFMapPath();
         }
 
         public GameObject m_ShroudMgr;
@@ -490,66 +479,66 @@ namespace YouYou
         //    }
         //}
 
-        public GameDataSystem m_GameDataSystem { get; private set; }
+        //public GameDataSystem m_GameDataSystem { get; private set; }
 
-        public ItemSystem m_ItemSystem { get; private set; }
+        //public ItemSystem m_ItemSystem { get; private set; }
 
-        /// <summary>
-        /// 任务系统
-        /// </summary>
-        public QuestSystem m_QuestSystem { get; private set; }
+        ///// <summary>
+        ///// 任务系统
+        ///// </summary>
+        //public QuestSystem m_QuestSystem { get; private set; }
 
-        public SkillSystem m_SkillSystem { get; private set; }
+        //public SkillSystem m_SkillSystem { get; private set; }
 
-        public IdentifySystem m_IdentifySystem { get; private set; }
+        //public IdentifySystem m_IdentifySystem { get; private set; }
 
-        public ExploreSystem m_ExploreSystem { get; private set; }
+        //public ExploreSystem m_ExploreSystem { get; private set; }
 
-        public GameObjSystem m_GameObjSystem { get; private set; }
+        //public GameObjSystem m_GameObjSystem { get; private set; }
 
-        public StorySystem m_StorySystem { get; private set; }
+        //public StorySystem m_StorySystem { get; private set; }
 
         private void InitGameSystem()
         {
-            this.m_GameObjSystem = new GameObjSystem();
-            this.m_GameObjSystem.Initialize();
-            this.m_GameDataSystem = new GameDataSystem();
-            this.m_GameDataSystem.Initialize();
-            this.m_ExploreSystem = new ExploreSystem();
-            this.m_ExploreSystem.Initialize();
-            //this.m_GameMenuSystem = new GameMenuSystem();
-            //this.m_GameMenuSystem.Initialize(this);
-            this.m_QuestSystem = new QuestSystem();
-            this.m_QuestSystem.Initialize();
-            this.m_IdentifySystem = new IdentifySystem();
-            this.m_IdentifySystem.Initialize();
-            this.m_ItemSystem = new ItemSystem();
-            this.m_ItemSystem.Initialize();
-            //this.m_SaveloadSystem = new SaveloadSystem();
-            //this.m_SaveloadSystem.Initialize();
-            this.m_SkillSystem = new SkillSystem();
-            this.m_SkillSystem.Initialize();
-            //this.m_MobGuardSystem = new MobGuardSystem();
-            //this.m_MobGuardSystem.Initialize();
-            //this.m_AchievementSystem = new AchievementSystem();
-            //this.m_AchievementSystem.Initialize();
-            //this.m_InheritSystem = new InheritSystem();
-            //this.m_InheritSystem.Initialize(this);
-            //this.m_MapPathSystem = new MapPathSystem();
-            //this.m_MapPathSystem.Initialize();
-            //this.m_FormationSystem = new FormationSystem();
-            //this.m_FormationSystem.Initialize();
-            //this.m_BigMapSystem = new BigMapSystem();
-            //this.m_BigMapSystem.Initialize();
-            //this.m_SmallTrapGameSystem = new SmallTrapGameSystem();
-            //this.m_WOPSystem = new WOPSystem();
-            //this.m_WOPSystem.Initialize();
-            //if (this.m_WOPSystem.IsDebug())
-            //{
-            //    this.m_WOPSystem.InitForNewGame();
-            //}
-            this.m_StorySystem = new StorySystem();
-            this.m_StorySystem.Initialize();
+            //this.m_GameObjSystem = new GameObjSystem();
+            //this.m_GameObjSystem.Initialize();
+            //this.m_GameDataSystem = new GameDataSystem();
+            //this.m_GameDataSystem.Initialize();
+            //this.m_ExploreSystem = new ExploreSystem();
+            //this.m_ExploreSystem.Initialize();
+            ////this.m_GameMenuSystem = new GameMenuSystem();
+            ////this.m_GameMenuSystem.Initialize(this);
+            //this.m_QuestSystem = new QuestSystem();
+            //this.m_QuestSystem.Initialize();
+            //this.m_IdentifySystem = new IdentifySystem();
+            //this.m_IdentifySystem.Initialize();
+            //this.m_ItemSystem = new ItemSystem();
+            //this.m_ItemSystem.Initialize();
+            ////this.m_SaveloadSystem = new SaveloadSystem();
+            ////this.m_SaveloadSystem.Initialize();
+            //this.m_SkillSystem = new SkillSystem();
+            //this.m_SkillSystem.Initialize();
+            ////this.m_MobGuardSystem = new MobGuardSystem();
+            ////this.m_MobGuardSystem.Initialize();
+            ////this.m_AchievementSystem = new AchievementSystem();
+            ////this.m_AchievementSystem.Initialize();
+            ////this.m_InheritSystem = new InheritSystem();
+            ////this.m_InheritSystem.Initialize(this);
+            ////this.m_MapPathSystem = new MapPathSystem();
+            ////this.m_MapPathSystem.Initialize();
+            ////this.m_FormationSystem = new FormationSystem();
+            ////this.m_FormationSystem.Initialize();
+            ////this.m_BigMapSystem = new BigMapSystem();
+            ////this.m_BigMapSystem.Initialize();
+            ////this.m_SmallTrapGameSystem = new SmallTrapGameSystem();
+            ////this.m_WOPSystem = new WOPSystem();
+            ////this.m_WOPSystem.Initialize();
+            ////if (this.m_WOPSystem.IsDebug())
+            ////{
+            ////    this.m_WOPSystem.InitForNewGame();
+            ////}
+            //this.m_StorySystem = new StorySystem();
+            //this.m_StorySystem.Initialize();
             //this.m_MusicControlSystem = new MusicSystem();
             //this.m_UserBehavior = new UserBehavior();
             //this.m_UserBehavior.DirectoryPath = Application.dataPath + "/../Launcher/UBData/";      
@@ -560,7 +549,7 @@ namespace YouYou
 
         public void StartNewGame()
         {
-            this.m_GameDataSystem.InitRoleData();
+            //this.m_GameDataSystem.InitRoleData();
             //base.StartCoroutine(DoTalk());
         }
 
@@ -585,8 +574,8 @@ namespace YouYou
             //    GameTalk.FlagON(1001);
             //}
             //GameTalk.StartTalk(false);
-            GameTalk.HideAllNpc(1);
-            GameTalk.PlayStory(100, "ME0000");
+            //GameTalk.HideAllNpc(1);
+            //GameTalk.PlayStory(100, "ME0000");
             //yield return base.StartCoroutine(GameTalk.IsPlayStoryEnd());
             yield return null;
             yield break;
@@ -594,10 +583,10 @@ namespace YouYou
 
         public void InitNewGame()
         {
-            this.m_GameObjSystem.Clear();
-            this.m_QuestSystem.Clear();
-            this.m_SkillSystem.Clear();
-            this.m_ItemSystem.Clear();
+            //this.m_GameObjSystem.Clear();
+            //this.m_QuestSystem.Clear();
+            //this.m_SkillSystem.Clear();
+            //this.m_ItemSystem.Clear();
             //this.m_MobGuardSystem.Clear();
             //this.m_AchievementSystem.InitForNewGame();
             //this.m_WOPSystem.InitForNewGame();
