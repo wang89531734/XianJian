@@ -355,10 +355,9 @@ namespace YouYou
 
         void Start()
         {
-            InitManagers();     
-            
-            ReadGameDB();//读取数据后期换
-            //this.InitRequiredObject();
+            InitManagers();
+
+            base.StartCoroutine(this.ReadGameDB());//读取数据后期换
             InitGameSystem();
             this.m_InitializeOK = true;
 
@@ -447,39 +446,19 @@ namespace YouYou
 #endif
         }
 
-        public void ReadGameDB()
+        private IEnumerator ReadGameDB()
         {
-            string mapBlockPath = Application.dataPath + "/../DBF/";
-            string dbf_Path = Application.dataPath + "/../DBF/";
-            string languagePath = Application.dataPath + "/../DBF/";
-            //GameDataDB.SetConevrt(new SwdJsonCovertor());
-            //GameDataDB.Initialize(mapBlockPath, dbf_Path, languagePath);
-            //GameDataDB.LoadDBF();
-            //GameDataDB.LoadLanguage();
-            //GameDataDB.LoadDBFMapPath();
+            string MapBlockPath = Application.dataPath + "/../DBF/";
+            string DBF_Path = Application.dataPath + "/../DBF/";
+            string LanguagePath = Application.dataPath + "/../DBF/";
+            GameDataDB.SetConevrt(new GameScriptPlugin.SwdJsonCovertor());
+            GameDataDB.Initialize(MapBlockPath, DBF_Path, LanguagePath);
+            yield return base.StartCoroutine(GameDataDB.LoadDBF());
+            yield return base.StartCoroutine(GameDataDB.LoadLanguage());
+            yield break;
         }
 
-        public GameObject m_ShroudMgr;
-
-        //protected virtual void InitRequiredObject()
-        //{
-        //    this.m_ShroudMgr = ResourcesManager.Instance.GetOther("ShroudMgr");
-        //    if (this.m_ShroudMgr != null)
-        //    {
-        //        UnityEngine.Object.DontDestroyOnLoad(this.m_ShroudMgr);
-        //    }
-        //    GameObject other = ResourcesManager.Instance.GetOther("MainMenuSky");
-        //    if (other != null)
-        //    {
-        //        //this.m_MainMenuSky = other.GetComponent<Sky>();
-        //        //if (this.m_MainMenuSky != null)
-        //        //{
-        //        //    UnityEngine.Object.DontDestroyOnLoad(other);
-        //        //}
-        //    }
-        //}
-
-        //public GameDataSystem m_GameDataSystem { get; private set; }
+        public GameDataSystem m_GameDataSystem { get; private set; }
 
         //public ItemSystem m_ItemSystem { get; private set; }
 
@@ -502,8 +481,8 @@ namespace YouYou
         {
             //this.m_GameObjSystem = new GameObjSystem();
             //this.m_GameObjSystem.Initialize();
-            //this.m_GameDataSystem = new GameDataSystem();
-            //this.m_GameDataSystem.Initialize();
+            this.m_GameDataSystem = new GameDataSystem();
+            this.m_GameDataSystem.Initialize();
             //this.m_ExploreSystem = new ExploreSystem();
             //this.m_ExploreSystem.Initialize();
             ////this.m_GameMenuSystem = new GameMenuSystem();
@@ -549,7 +528,7 @@ namespace YouYou
 
         public void StartNewGame()
         {
-            //this.m_GameDataSystem.InitRoleData();
+            this.m_GameDataSystem.InitRoleData();
             //base.StartCoroutine(DoTalk());
         }
 
@@ -590,7 +569,6 @@ namespace YouYou
             //this.m_MobGuardSystem.Clear();
             //this.m_AchievementSystem.InitForNewGame();
             //this.m_WOPSystem.InitForNewGame();
-            //this.m_FormationSystem.ClearFormation();
             //this.m_GameObjSystem.Initialize();
         }
 
