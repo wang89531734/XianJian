@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using YouYou;
 
 public class C_RoleDataEx : S_RoleData
 {
@@ -263,8 +264,8 @@ public class C_RoleDataEx : S_RoleData
 		this.CalRoleAttr();
 		if (showmsg)
 		{
-			UI_OkCancelBox.Instance.ClearSysMsg();
-			UI_OkCancelBox.Instance.AddSysMsg(msg, 3f);
+			//UI_OkCancelBox.Instance.ClearSysMsg();
+			//UI_OkCancelBox.Instance.AddSysMsg(msg, 3f);
 		}
 	}
 
@@ -420,11 +421,11 @@ public class C_RoleDataEx : S_RoleData
 
 	private void CalRoleAttrPlus_OnSevenRing(S_RoleAttr roleAttr)
 	{
-		if (Swd6Application.instance.m_ChapID == 101)
-		{
-			this.CalRoleAttrPlus_OnThousand(roleAttr);
-			return;
-		}
+		//if (Swd6Application.instance.m_ChapID == 101)
+		//{
+		//	this.CalRoleAttrPlus_OnThousand(roleAttr);
+		//	return;
+		//}
 		S_RoleAttr_Plus s_RoleAttr_Plus = new S_RoleAttr_Plus();
 		double num = Math.Round((double)(this.BaseRoleData.MaxHP * this.BaseRoleData.SevenRingGrid[0]) / 10.0, 0, MidpointRounding.AwayFromZero);
 		s_RoleAttr_Plus.AddMaxHP = (int)num;
@@ -488,121 +489,121 @@ public class C_RoleDataEx : S_RoleData
 	private void DoMitemAttrPlus(S_RoleAttr roleAttr, int AttrPlusID, ItemData itemData)
 	{
 		S_Item data = GameDataDB.ItemDB.GetData(itemData.ID);
-		IdentifyData data2 = Swd6Application.instance.m_IdentifySystem.GetData(itemData.ID);
-		if (data2 == null)
-		{
-			return;
-		}
-		int gUID = data.GUID;
-		switch (gUID)
-		{
-		case 701:
-			roleAttr.sAttrPlus.AddMaxHP += data.MItem.AttrEffect[data2.Level - 1];
-			return;
-		case 702:
-			roleAttr.sAttrPlus.AddMaxMP += data.MItem.AttrEffect[data2.Level - 1];
-			return;
-		case 703:
-			roleAttr.sAttrPlus.AddMaxAP += data.MItem.AttrEffect[data2.Level - 1];
-			return;
-		case 704:
-			roleAttr.sAttrPlus.AddAttack += data.MItem.AttrEffect[data2.Level - 1];
-			return;
-		case 705:
-			roleAttr.sAttrPlus.AddDef += data.MItem.AttrEffect[data2.Level - 1];
-			return;
-		case 706:
-			roleAttr.sAttrPlus.AddBlock += data.MItem.AttrEffect[data2.Level - 1];
-			return;
-		case 707:
-			roleAttr.sAttrPlus.AddAgi += data.MItem.AttrEffect[data2.Level - 1];
-			return;
-		case 708:
-			roleAttr.sAttrPlus.AddCritical += data.MItem.AttrEffect[data2.Level - 1];
-			return;
-		case 709:
-			roleAttr.sAttrPlus.AddLuck += data.MItem.AttrEffect[data2.Level - 1];
-			return;
-		case 710:
-		{
-			int currentMapOpenTreasuerCount = Swd6Application.instance.m_GameObjSystem.GetCurrentMapOpenTreasuerCount();
-			int currentMapTreasuerCount = Swd6Application.instance.m_GameObjSystem.GetCurrentMapTreasuerCount();
-			if (currentMapTreasuerCount > 0)
-			{
-				float num = (float)currentMapOpenTreasuerCount / (float)currentMapTreasuerCount;
-				num = (float)data.MItem.AttrEffect[data2.Level - 1] * num;
-				roleAttr.sAttrPlus.AddAttack += (int)num;
-				return;
-			}
-			break;
-		}
-		case 711:
-		{
-			int currentMapOpenTreasuerCount2 = Swd6Application.instance.m_GameObjSystem.GetCurrentMapOpenTreasuerCount();
-			int currentMapTreasuerCount2 = Swd6Application.instance.m_GameObjSystem.GetCurrentMapTreasuerCount();
-			if (currentMapTreasuerCount2 > 0)
-			{
-				float num2 = (float)currentMapOpenTreasuerCount2 / (float)currentMapTreasuerCount2;
-				num2 = (float)data.MItem.AttrEffect[data2.Level - 1] * num2;
-				roleAttr.sAttrPlus.AddDef += (int)num2;
-			}
-			break;
-		}
-		case 712:
-		case 713:
-		case 714:
-		case 715:
-		case 717:
-		case 718:
-		case 719:
-		case 721:
-		case 722:
-		case 723:
-		case 724:
-		case 725:
-		case 731:
-		case 732:
-		case 733:
-		case 734:
-		case 735:
-		case 736:
-			break;
-		case 716:
-			roleAttr.sAttrPlus.AddAgi += data.MItem.AttrEffect[data2.Level - 1];
-			return;
-		case 720:
-			roleAttr.sAttrPlus.AddMind += data.MItem.AttrEffect[data2.Level - 1];
-			return;
-		case 726:
-			roleAttr.sAttrPlus.AtkElement[1] += data.MItem.AttrEffect[data2.Level - 1];
-			return;
-		case 727:
-			roleAttr.sAttrPlus.AtkElement[2] += data.MItem.AttrEffect[data2.Level - 1];
-			return;
-		case 728:
-			roleAttr.sAttrPlus.AtkElement[0] += data.MItem.AttrEffect[data2.Level - 1];
-			return;
-		case 729:
-			roleAttr.sAttrPlus.AtkElement[3] += data.MItem.AttrEffect[data2.Level - 1];
-			return;
-		case 730:
-			roleAttr.sAttrPlus.AtkElement[4] += data.MItem.AttrEffect[data2.Level - 1];
-			return;
-		case 737:
-			for (int i = 0; i < 6; i++)
-			{
-				roleAttr.sAttrPlus.Element[i] += data.MItem.AttrEffect[data2.Level - 1];
-			}
-			return;
-		default:
-			if (gUID != 768)
-			{
-				return;
-			}
-			roleAttr.sAttrPlus.AddAttack += 999;
-			roleAttr.sAttrPlus.AddMaxHP += 3333;
-			return;
-		}
+		//IdentifyData data2 = Swd6Application.instance.m_IdentifySystem.GetData(itemData.ID);
+		//if (data2 == null)
+		//{
+		//	return;
+		//}
+		//int gUID = data.GUID;
+		//switch (gUID)
+		//{
+		//case 701:
+		//	roleAttr.sAttrPlus.AddMaxHP += data.MItem.AttrEffect[data2.Level - 1];
+		//	return;
+		//case 702:
+		//	roleAttr.sAttrPlus.AddMaxMP += data.MItem.AttrEffect[data2.Level - 1];
+		//	return;
+		//case 703:
+		//	roleAttr.sAttrPlus.AddMaxAP += data.MItem.AttrEffect[data2.Level - 1];
+		//	return;
+		//case 704:
+		//	roleAttr.sAttrPlus.AddAttack += data.MItem.AttrEffect[data2.Level - 1];
+		//	return;
+		//case 705:
+		//	roleAttr.sAttrPlus.AddDef += data.MItem.AttrEffect[data2.Level - 1];
+		//	return;
+		//case 706:
+		//	roleAttr.sAttrPlus.AddBlock += data.MItem.AttrEffect[data2.Level - 1];
+		//	return;
+		//case 707:
+		//	roleAttr.sAttrPlus.AddAgi += data.MItem.AttrEffect[data2.Level - 1];
+		//	return;
+		//case 708:
+		//	roleAttr.sAttrPlus.AddCritical += data.MItem.AttrEffect[data2.Level - 1];
+		//	return;
+		//case 709:
+		//	roleAttr.sAttrPlus.AddLuck += data.MItem.AttrEffect[data2.Level - 1];
+		//	return;
+		//case 710:
+		//{
+		//	//int currentMapOpenTreasuerCount = Swd6Application.instance.m_GameObjSystem.GetCurrentMapOpenTreasuerCount();
+		//	//int currentMapTreasuerCount = Swd6Application.instance.m_GameObjSystem.GetCurrentMapTreasuerCount();
+		//	if (currentMapTreasuerCount > 0)
+		//	{
+		//		float num = (float)currentMapOpenTreasuerCount / (float)currentMapTreasuerCount;
+		//		num = (float)data.MItem.AttrEffect[data2.Level - 1] * num;
+		//		roleAttr.sAttrPlus.AddAttack += (int)num;
+		//		return;
+		//	}
+		//	break;
+		//}
+		//case 711:
+		//{
+		//	//int currentMapOpenTreasuerCount2 = Swd6Application.instance.m_GameObjSystem.GetCurrentMapOpenTreasuerCount();
+		//	//int currentMapTreasuerCount2 = Swd6Application.instance.m_GameObjSystem.GetCurrentMapTreasuerCount();
+		//	if (currentMapTreasuerCount2 > 0)
+		//	{
+		//		float num2 = (float)currentMapOpenTreasuerCount2 / (float)currentMapTreasuerCount2;
+		//		num2 = (float)data.MItem.AttrEffect[data2.Level - 1] * num2;
+		//		roleAttr.sAttrPlus.AddDef += (int)num2;
+		//	}
+		//	break;
+		//}
+		//case 712:
+		//case 713:
+		//case 714:
+		//case 715:
+		//case 717:
+		//case 718:
+		//case 719:
+		//case 721:
+		//case 722:
+		//case 723:
+		//case 724:
+		//case 725:
+		//case 731:
+		//case 732:
+		//case 733:
+		//case 734:
+		//case 735:
+		//case 736:
+		//	break;
+		//case 716:
+		//	roleAttr.sAttrPlus.AddAgi += data.MItem.AttrEffect[data2.Level - 1];
+		//	return;
+		//case 720:
+		//	roleAttr.sAttrPlus.AddMind += data.MItem.AttrEffect[data2.Level - 1];
+		//	return;
+		//case 726:
+		//	roleAttr.sAttrPlus.AtkElement[1] += data.MItem.AttrEffect[data2.Level - 1];
+		//	return;
+		//case 727:
+		//	roleAttr.sAttrPlus.AtkElement[2] += data.MItem.AttrEffect[data2.Level - 1];
+		//	return;
+		//case 728:
+		//	roleAttr.sAttrPlus.AtkElement[0] += data.MItem.AttrEffect[data2.Level - 1];
+		//	return;
+		//case 729:
+		//	roleAttr.sAttrPlus.AtkElement[3] += data.MItem.AttrEffect[data2.Level - 1];
+		//	return;
+		//case 730:
+		//	roleAttr.sAttrPlus.AtkElement[4] += data.MItem.AttrEffect[data2.Level - 1];
+		//	return;
+		//case 737:
+		//	for (int i = 0; i < 6; i++)
+		//	{
+		//		roleAttr.sAttrPlus.Element[i] += data.MItem.AttrEffect[data2.Level - 1];
+		//	}
+		//	return;
+		//default:
+		//	if (gUID != 768)
+		//	{
+		//		return;
+		//	}
+		//	roleAttr.sAttrPlus.AddAttack += 999;
+		//	roleAttr.sAttrPlus.AddMaxHP += 3333;
+		//	return;
+		//}
 	}
 
 	private void CalRoleAttr_Finial(S_RoleAttr roleAttr)
@@ -771,7 +772,7 @@ public class C_RoleDataEx : S_RoleData
 	{
 		if (this.BaseRoleData.EquipID[(int)Pos] > 0)
 		{
-			return Swd6Application.instance.m_ItemSystem.GetDataBySerialID(this.BaseRoleData.EquipID[(int)Pos]);
+			return GameEntry.Instance.m_ItemSystem.GetDataBySerialID(this.BaseRoleData.EquipID[(int)Pos]);
 		}
 		return null;
 	}

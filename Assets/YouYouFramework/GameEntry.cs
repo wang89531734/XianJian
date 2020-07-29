@@ -460,18 +460,18 @@ namespace YouYou
 
         public GameDataSystem m_GameDataSystem { get; private set; }
 
-        //public ItemSystem m_ItemSystem { get; private set; }
+        public ItemSystem m_ItemSystem { get; private set; }
 
         ///// <summary>
         ///// 任务系统
         ///// </summary>
         //public QuestSystem m_QuestSystem { get; private set; }
 
-        //public SkillSystem m_SkillSystem { get; private set; }
+        public SkillSystem m_SkillSystem { get; private set; }
 
         //public IdentifySystem m_IdentifySystem { get; private set; }
 
-        //public ExploreSystem m_ExploreSystem { get; private set; }
+        public ExploreSystem m_ExploreSystem { get; private set; }
 
         //public GameObjSystem m_GameObjSystem { get; private set; }
 
@@ -483,20 +483,20 @@ namespace YouYou
             //this.m_GameObjSystem.Initialize();
             this.m_GameDataSystem = new GameDataSystem();
             this.m_GameDataSystem.Initialize();
-            //this.m_ExploreSystem = new ExploreSystem();
-            //this.m_ExploreSystem.Initialize();
+            this.m_ExploreSystem = new ExploreSystem();
+            this.m_ExploreSystem.Initialize();
             ////this.m_GameMenuSystem = new GameMenuSystem();
             ////this.m_GameMenuSystem.Initialize(this);
             //this.m_QuestSystem = new QuestSystem();
             //this.m_QuestSystem.Initialize();
             //this.m_IdentifySystem = new IdentifySystem();
             //this.m_IdentifySystem.Initialize();
-            //this.m_ItemSystem = new ItemSystem();
-            //this.m_ItemSystem.Initialize();
+            this.m_ItemSystem = new ItemSystem();
+            this.m_ItemSystem.Initialize();
             ////this.m_SaveloadSystem = new SaveloadSystem();
             ////this.m_SaveloadSystem.Initialize();
-            //this.m_SkillSystem = new SkillSystem();
-            //this.m_SkillSystem.Initialize();
+            this.m_SkillSystem = new SkillSystem();
+            this.m_SkillSystem.Initialize();
             ////this.m_MobGuardSystem = new MobGuardSystem();
             ////this.m_MobGuardSystem.Initialize();
             ////this.m_AchievementSystem = new AchievementSystem();

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using YouYou;
 
 [Serializable]
 public class S_BaseRoleData
@@ -115,7 +116,7 @@ public class S_BaseRoleData
 			this.EquipID[i] = startData.Equip[i];
 			if (this.EquipID[i] > 0)
 			{
-				ItemData itemData = Swd6Application.instance.m_ItemSystem.AddItem(this.EquipID[i], 1, ENUM_ItemState.Old, false);
+				ItemData itemData = GameEntry.Instance.m_ItemSystem.AddItem(this.EquipID[i], 1, ENUM_ItemState.Old, false);
 				itemData.Equip = true;
 				itemData.EquipCount++;
 				this.EquipID[i] = itemData.SerialID;
@@ -123,12 +124,12 @@ public class S_BaseRoleData
 		}
 		for (int j = 0; j < startData.Skill.Count; j++)
 		{
-			Swd6Application.instance.m_SkillSystem.LearnSkill(roldId, startData.Skill[j]);
+            GameEntry.Instance.m_SkillSystem.LearnSkill(roldId, startData.Skill[j]);
 		}
-		List<int> superSkillLearnList = Swd6Application.instance.m_SkillSystem.GetSuperSkillLearnList(roldId, this.Level);
+		List<int> superSkillLearnList = GameEntry.Instance.m_SkillSystem.GetSuperSkillLearnList(roldId, this.Level);
 		for (int k = 0; k < superSkillLearnList.Count; k++)
 		{
-			Swd6Application.instance.m_SkillSystem.LearnSuperSkillSlot(roldId, superSkillLearnList[k]);
+            GameEntry.Instance.m_SkillSystem.LearnSuperSkillSlot(roldId, superSkillLearnList[k]);
 		}
 		for (int l = 0; l < startData.Favorability.Count; l++)
 		{

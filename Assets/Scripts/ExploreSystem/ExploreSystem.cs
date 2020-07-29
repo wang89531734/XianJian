@@ -7,373 +7,370 @@ using UnityEngine;
 
 public class ExploreSystem
 {
-    //	private Swd6Application m_GameApp;
+    private float m_BattleStepCount;
 
-    //	private float m_BattleStepCount;
+    private int m_BattleID;
 
-    //	private int m_BattleID;
+    private bool m_bLockPlayer;
 
-    //	private bool m_bLockPlayer;
+    private bool m_bSetReStarPos;
 
-    //	private bool m_bSetReStarPos;
+    private bool m_bResumeMusic;
 
-    //	private bool m_bResumeMusic;
+    private bool m_bNavMesh;
 
-    //	private bool m_bNavMesh;
+    private bool m_bAutoPath;
 
-    //	private bool m_bAutoPath;
+    private bool m_OpenMainMenu;
 
-    //	private bool m_OpenMainMenu;
+    private bool m_IsRun = true;
 
-    //	private bool m_IsRun = true;
+    private float m_BattelTriggerTime;
 
-    //	private float m_BattelTriggerTime;
+    private float m_MaxBattleStep;
 
-    //	private float m_MaxBattleStep;
+    private string m_TriggerName;
 
-    //	private string m_TriggerName;
+    private int m_CostStamina = 25;
 
-    //	private int m_CostStamina = 25;
+    private int m_ShootFailTime;
 
-    //	private int m_ShootFailTime;
+    private float m_PlayerChangeDir;
 
-    //	private float m_PlayerChangeDir;
+    private float m_PlayMusicDelayTime;
 
-    //	private float m_PlayMusicDelayTime;
+    private float m_NoFightTime;
 
-    //	private float m_NoFightTime;
+    private float m_HitDamageDelayTime;
 
-    //	private float m_HitDamageDelayTime;
+    private float m_ActionSkillTime;
 
-    //	private float m_ActionSkillTime;
+    private int m_ActionSkillStep;
 
-    //	private int m_ActionSkillStep;
+    private bool m_bUseActionSkill;
 
-    //	private bool m_bUseActionSkill;
+    private bool m_bBeginShoot;
 
-    //	private bool m_bBeginShoot;
+    private bool m_BeginDispell;
 
-    //	private bool m_BeginDispell;
+    private bool m_BeginBreak;
 
-    //	private bool m_BeginBreak;
+    private bool m_BeginSuperJump;
 
-    //	private bool m_BeginSuperJump;
+    public bool m_SetCemeraInfo;
 
-    //	public bool m_SetCemeraInfo;
+    public float m_CameraXAngle;
 
-    //	public float m_CameraXAngle;
+    public float m_CameraYAngle;
 
-    //	public float m_CameraYAngle;
+    public float m_CameraDist;
 
-    //	public float m_CameraDist;
+    public float m_ResourceUnLoadTime;
 
-    //	public float m_ResourceUnLoadTime;
+    public bool m_ResourceUnLoad;
 
-    //	public bool m_ResourceUnLoad;
+    public bool m_UpdateCosCloth;
 
-    //	public bool m_UpdateCosCloth;
+    public bool m_PlayStory;
 
-    //	public bool m_PlayStory;
+    public float m_OpenMenuTime;
 
-    //	public float m_OpenMenuTime;
+    private GameObject m_TalkTarget;
 
-    //	private GameObject m_TalkTarget;
+    private GameObject m_ActionTarget;
 
-    //	private GameObject m_ActionTarget;
+    public GameObject m_GhostEffect;
 
-    //	public GameObject m_GhostEffect;
+    public GameObject m_ActionSTEffect;
 
-    //	public GameObject m_ActionSTEffect;
+    public GameObject m_ActionEffect;
 
-    //	public GameObject m_ActionEffect;
+    public GameObject m_ActionEDEffect;
 
-    //	public GameObject m_ActionEDEffect;
+    public GameObject m_ShootTarget;
 
-    //	public GameObject m_ShootTarget;
+    private Vector3 m_ShootOffset = Vector3.zero;
 
-    //	private Vector3 m_ShootOffset = Vector3.zero;
+    private Vector3 m_PrePlayerPos = Vector3.zero;
 
-    //	private Vector3 m_PrePlayerPos = Vector3.zero;
+    private Vector3 m_PlayerChangePos = Vector3.zero;
 
-    //	private Vector3 m_PlayerChangePos = Vector3.zero;
+    private Vector3 m_FloatingStartPos = Vector3.zero;
 
-    //	private Vector3 m_FloatingStartPos = Vector3.zero;
+    private Vector3 m_ReStartPos = Vector3.zero;
 
-    //	private Vector3 m_ReStartPos = Vector3.zero;
+    private GameObject m_PlayerGameObj;
 
-    //	private GameObject m_PlayerGameObj;
+    //private M_PlayerController m_PlyerController;
 
-    //	private M_PlayerController m_PlyerController;
+    private GameObject m_RidePetGameObj;
 
-    //	private GameObject m_RidePetGameObj;
+   // private M_RidePetController m_RidePetController;
 
-    //	private M_RidePetController m_RidePetController;
-
-    //	private GameObject m_AmberGameObj;
-
-    //	private M_AmberController m_AmberController;
-
-    //	public GameObject m_MoveTargetPoint;
-
-    //	private List<S_BattleArea> m_BattleArea;
-
-    //	private UI_GameFlagMenu m_UI_GameFlagMenu;
-
-    //	public List<S_GameObjData> m_GhostEyeObjList = new List<S_GameObjData>();
-
-    //	public GameObject m_MapSoundEvent;
-
-    //	public S_MapData m_MapData
-    //	{
-    //		get;
-    //		private set;
-    //	}
-
-    //	public GameObject PlayerObj
-    //	{
-    //		get
-    //		{
-    //			return this.m_PlayerGameObj;
-    //		}
-    //		set
-    //		{
-    //			this.m_PlayerGameObj = value;
-    //			this.m_PlayerGameObj.tag = "Player";
-    //			this.m_PlyerController = this.m_PlayerGameObj.GetComponent<M_PlayerController>();
-    //		}
-    //	}
-
-    //	public GameObject AmberObj
-    //	{
-    //		get
-    //		{
-    //			return this.m_AmberGameObj;
-    //		}
-    //		set
-    //		{
-    //			this.m_AmberGameObj = value;
-    //			if (this.m_AmberGameObj != null)
-    //			{
-    //				this.m_AmberController = this.m_AmberGameObj.GetComponent<M_AmberController>();
-    //			}
-    //		}
-    //	}
-
-    //	public GameObject RidePetObj
-    //	{
-    //		get
-    //		{
-    //			return this.m_RidePetGameObj;
-    //		}
-    //		set
-    //		{
-    //			this.m_RidePetGameObj = value;
-    //			this.m_RidePetGameObj.tag = "Player";
-    //		}
-    //	}
-
-    //	public M_RidePetController RidePetController
-    //	{
-    //		get
-    //		{
-    //			return this.m_RidePetController;
-    //		}
-    //	}
-
-    //	public bool IsUseActionSkill
-    //	{
-    //		get
-    //		{
-    //			return this.m_bUseActionSkill;
-    //		}
-    //	}
-
-    //	public M_PlayerController PlayerController
-    //	{
-    //		get
-    //		{
-    //			return this.m_PlyerController;
-    //		}
-    //	}
-
-    //	public float BattleStep
-    //	{
-    //		get
-    //		{
-    //			return this.m_BattleStepCount;
-    //		}
-    //		set
-    //		{
-    //			this.m_BattleStepCount = value;
-    //		}
-    //	}
-
-    //	public int BattleID
-    //	{
-    //		get
-    //		{
-    //			return this.m_BattleID;
-    //		}
-    //		set
-    //		{
-    //			this.m_BattleID = value;
-    //		}
-    //	}
-
-    //	public Vector3 PlayerChangePos
-    //	{
-    //		get
-    //		{
-    //			return this.m_PlayerChangePos;
-    //		}
-    //		set
-    //		{
-    //			this.m_PlayerChangePos = value;
-    //		}
-    //	}
-
-    //	public float PlayerChangeDir
-    //	{
-    //		get
-    //		{
-    //			return this.m_PlayerChangeDir;
-    //		}
-    //		set
-    //		{
-    //			this.m_PlayerChangeDir = value;
-    //		}
-    //	}
-
-    //	public bool LockPlayer
-    //	{
-    //		get
-    //		{
-    //			return this.m_bLockPlayer;
-    //		}
-    //		set
-    //		{
-    //			this.m_bLockPlayer = value;
-    //			if (this.m_PlyerController != null)
-    //			{
-    //				this.m_PlyerController.LockControl = this.m_bLockPlayer;
-    //			}
-    //			if (this.m_RidePetGameObj != null)
-    //			{
-    //				M_RidePetController component = this.m_RidePetGameObj.GetComponent<M_RidePetController>();
-    //				component.LockControl = this.m_bLockPlayer;
-    //			}
-    //			if (!this.m_bLockPlayer)
-    //			{
-    //				if (Swd6Application.instance.m_QuestSystem != null)
-    //				{
-    //					Swd6Application.instance.m_QuestSystem.Dirty();
-    //				}
-    //				this.TalkTarget = null;
-    //				UI_PartnerTalkDialog.Instance.Resume();
-    //				Swd6Application.instance.m_SkillSystem.CheckSkillLearnState(false);
-    //			}
-    //			else
-    //			{
-    //				UI_PartnerTalkDialog.Instance.Stop();
-    //				UI_ZoneMap.Instance.Hide();
-    //			}
-    //			GameInput.Clear();
-    //		}
-    //	}
-
-    //	public GameObject TalkTarget
-    //	{
-    //		get
-    //		{
-    //			return this.m_TalkTarget;
-    //		}
-    //		set
-    //		{
-    //			if (value == null && this.m_TalkTarget && this.m_TalkTarget.GetComponent<M_GameRoleBase>() != null)
-    //			{
-    //				this.m_TalkTarget.GetComponent<M_GameRoleBase>().Talk = false;
-    //			}
-    //			this.m_TalkTarget = value;
-    //		}
-    //	}
-
-    //	public GameObject ActionTarget
-    //	{
-    //		get
-    //		{
-    //			return this.m_ActionTarget;
-    //		}
-    //		set
-    //		{
-    //			this.m_ActionTarget = value;
-    //		}
-    //	}
-
-    //	public bool ResumeMusic
-    //	{
-    //		get
-    //		{
-    //			return this.m_bResumeMusic;
-    //		}
-    //		set
-    //		{
-    //			this.m_bResumeMusic = value;
-    //		}
-    //	}
-
-    //	public bool NavMesh
-    //	{
-    //		get
-    //		{
-    //			return this.m_bNavMesh;
-    //		}
-    //		set
-    //		{
-    //			this.m_bNavMesh = value;
-    //		}
-    //	}
-
-    //	public bool AutoPath
-    //	{
-    //		get
-    //		{
-    //			return this.m_bAutoPath;
-    //		}
-    //		set
-    //		{
-    //			this.m_bAutoPath = value;
-    //		}
-    //	}
-
-    //	public bool Run
-    //	{
-    //		get
-    //		{
-    //			return this.m_IsRun;
-    //		}
-    //		set
-    //		{
-    //			this.m_IsRun = value;
-    //		}
-    //	}
-
-    //	public bool OpenMainMenu
-    //	{
-    //		get
-    //		{
-    //			return this.m_OpenMainMenu;
-    //		}
-    //		set
-    //		{
-    //			this.m_OpenMainMenu = value;
-    //		}
-    //	}
-
-    //	public void Initialize(Swd6Application gameApp)
-    //	{
-    //		this.m_GameApp = gameApp;
-    //		this.m_BattleArea = new List<S_BattleArea>();
-    //	}
+    private GameObject m_AmberGameObj;
+
+   // private M_AmberController m_AmberController;
+
+    public GameObject m_MoveTargetPoint;
+
+    private List<S_BattleArea> m_BattleArea;
+
+    //private UI_GameFlagMenu m_UI_GameFlagMenu;
+
+    //public List<S_GameObjData> m_GhostEyeObjList = new List<S_GameObjData>();
+
+    public GameObject m_MapSoundEvent;
+
+    //public S_MapData m_MapData
+    //{
+    //    get;
+    //    private set;
+    //}
+
+    public GameObject PlayerObj
+    {
+        get
+        {
+            return this.m_PlayerGameObj;
+        }
+        set
+        {
+            this.m_PlayerGameObj = value;
+            this.m_PlayerGameObj.tag = "Player";
+            //this.m_PlyerController = this.m_PlayerGameObj.GetComponent<M_PlayerController>();
+        }
+    }
+
+    public GameObject AmberObj
+    {
+        get
+        {
+            return this.m_AmberGameObj;
+        }
+        set
+        {
+            this.m_AmberGameObj = value;
+            if (this.m_AmberGameObj != null)
+            {
+                //this.m_AmberController = this.m_AmberGameObj.GetComponent<M_AmberController>();
+            }
+        }
+    }
+
+    public GameObject RidePetObj
+    {
+        get
+        {
+            return this.m_RidePetGameObj;
+        }
+        set
+        {
+            this.m_RidePetGameObj = value;
+            this.m_RidePetGameObj.tag = "Player";
+        }
+    }
+
+    //public M_RidePetController RidePetController
+    //{
+    //    get
+    //    {
+    //        return this.m_RidePetController;
+    //    }
+    //}
+
+    public bool IsUseActionSkill
+    {
+        get
+        {
+            return this.m_bUseActionSkill;
+        }
+    }
+
+    //public M_PlayerController PlayerController
+    //{
+    //    get
+    //    {
+    //        return this.m_PlyerController;
+    //    }
+    //}
+
+    public float BattleStep
+    {
+        get
+        {
+            return this.m_BattleStepCount;
+        }
+        set
+        {
+            this.m_BattleStepCount = value;
+        }
+    }
+
+    public int BattleID
+    {
+        get
+        {
+            return this.m_BattleID;
+        }
+        set
+        {
+            this.m_BattleID = value;
+        }
+    }
+
+    public Vector3 PlayerChangePos
+    {
+        get
+        {
+            return this.m_PlayerChangePos;
+        }
+        set
+        {
+            this.m_PlayerChangePos = value;
+        }
+    }
+
+    public float PlayerChangeDir
+    {
+        get
+        {
+            return this.m_PlayerChangeDir;
+        }
+        set
+        {
+            this.m_PlayerChangeDir = value;
+        }
+    }
+
+    public bool LockPlayer
+    {
+        get
+        {
+            return this.m_bLockPlayer;
+        }
+        set
+        {
+            this.m_bLockPlayer = value;
+            //if (this.m_PlyerController != null)
+            //{
+            //    this.m_PlyerController.LockControl = this.m_bLockPlayer;
+            //}
+            //if (this.m_RidePetGameObj != null)
+            //{
+            //    M_RidePetController component = this.m_RidePetGameObj.GetComponent<M_RidePetController>();
+            //    component.LockControl = this.m_bLockPlayer;
+            //}
+            //if (!this.m_bLockPlayer)
+            //{
+            //    if (Swd6Application.instance.m_QuestSystem != null)
+            //    {
+            //        Swd6Application.instance.m_QuestSystem.Dirty();
+            //    }
+            //    this.TalkTarget = null;
+            //    UI_PartnerTalkDialog.Instance.Resume();
+            //    Swd6Application.instance.m_SkillSystem.CheckSkillLearnState(false);
+            //}
+            //else
+            //{
+            //    UI_PartnerTalkDialog.Instance.Stop();
+            //    UI_ZoneMap.Instance.Hide();
+            //}
+            //GameInput.Clear();
+        }
+    }
+
+    public GameObject TalkTarget
+    {
+        get
+        {
+            return this.m_TalkTarget;
+        }
+        set
+        {
+            //if (value == null && this.m_TalkTarget && this.m_TalkTarget.GetComponent<M_GameRoleBase>() != null)
+            //{
+            //    this.m_TalkTarget.GetComponent<M_GameRoleBase>().Talk = false;
+            //}
+            this.m_TalkTarget = value;
+        }
+    }
+
+    public GameObject ActionTarget
+    {
+        get
+        {
+            return this.m_ActionTarget;
+        }
+        set
+        {
+            this.m_ActionTarget = value;
+        }
+    }
+
+    public bool ResumeMusic
+    {
+        get
+        {
+            return this.m_bResumeMusic;
+        }
+        set
+        {
+            this.m_bResumeMusic = value;
+        }
+    }
+
+    public bool NavMesh
+    {
+        get
+        {
+            return this.m_bNavMesh;
+        }
+        set
+        {
+            this.m_bNavMesh = value;
+        }
+    }
+
+    public bool AutoPath
+    {
+        get
+        {
+            return this.m_bAutoPath;
+        }
+        set
+        {
+            this.m_bAutoPath = value;
+        }
+    }
+
+    public bool Run
+    {
+        get
+        {
+            return this.m_IsRun;
+        }
+        set
+        {
+            this.m_IsRun = value;
+        }
+    }
+
+    public bool OpenMainMenu
+    {
+        get
+        {
+            return this.m_OpenMainMenu;
+        }
+        set
+        {
+            this.m_OpenMainMenu = value;
+        }
+    }
+
+    public void Initialize()
+    {
+        this.m_BattleArea = new List<S_BattleArea>();
+    }
 
     //	public GameObject ShowMoveTarget(bool show, Vector3 targetPos)
     //	{

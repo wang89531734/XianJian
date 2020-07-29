@@ -228,11 +228,10 @@ public class GameDataSystem
             this.SetStartData(this.m_TeamRoleList[i], this.m_TeamRoleList[i], this.m_TeamRoleList[i]);
         }
 
-        //this.m_RoldData[0].BaseRoleData.IsJoin = true;
-       // this.m_DefaultPlayerID = 1;
-       //// this.AddRole(1, false);
-
-       // this.m_PlayerID = this.m_DefaultPlayerID;
+        this.m_RoldData[0].BaseRoleData.IsJoin = true;
+        this.m_DefaultPlayerID = 1;
+        this.AddRole(1, false);
+        this.m_PlayerID = this.m_DefaultPlayerID;
         //this.FlagON(24);
     }
 
@@ -669,23 +668,23 @@ public class GameDataSystem
     //		MusicControlSystem.Fade_PlayBackgroundMusicAB_BLoop(audioClip, audioClip2, 0.5f, 1f);
     //	}
 
-    //	public void AddRole(int roleId, bool showMsg)
-    //	{
-    //		if (roleId > 10)
-    //		{
-    //			Debug.LogError("id error!!");
-    //			return;
-    //		}
-    //		if (showMsg && roleId > 1)
-    //		{
-    //			string str = this.m_RoldData[roleId - 1].BaseRoleData.FamilyName + this.m_RoldData[roleId - 1].BaseRoleData.Name;
-    //			UI_OkCancelBox.Instance.AddSysMsg(str + GameDataDB.StrID(1060), 3f);
-    //		}
-    //		this.FlagON(roleId);
-    //		this.m_RoldData[roleId - 1].BaseRoleData.IsJoin = true;
-    //		this.m_RoldData[roleId - 1].BaseRoleData.IsFight = this.CheckCanFight();
-    //		this.UpdatePartyRole();
-    //	}
+    public void AddRole(int roleId, bool showMsg)
+    {
+        if (roleId > 10)
+        {
+            Debug.LogError("id error!!");
+            return;
+        }
+        if (showMsg && roleId > 1)
+        {
+            string str = this.m_RoldData[roleId - 1].BaseRoleData.FamilyName + this.m_RoldData[roleId - 1].BaseRoleData.Name;
+            //UI_OkCancelBox.Instance.AddSysMsg(str + GameDataDB.StrID(1060), 3f);
+        }
+        //this.FlagON(roleId);
+        this.m_RoldData[roleId - 1].BaseRoleData.IsJoin = true;
+        //this.m_RoldData[roleId - 1].BaseRoleData.IsFight = this.CheckCanFight();
+        //this.UpdatePartyRole();
+    }
 
     //	public void RemoveRole(int roleId, bool showMsg)
     //	{
@@ -785,18 +784,18 @@ public class GameDataSystem
     //		}
     //	}
 
-    //	public bool CheckCanFight()
-    //	{
-    //		int num = 0;
-    //		for (int i = 0; i < this.m_PartyRole.Count; i++)
-    //		{
-    //			if (this.m_PartyRole[i].m_IsFight)
-    //			{
-    //				num++;
-    //			}
-    //		}
-    //		return num < 3;
-    //	}
+    //public bool CheckCanFight()
+    //{
+    //    int num = 0;
+    //    for (int i = 0; i < this.m_PartyRole.Count; i++)
+    //    {
+    //        if (this.m_PartyRole[i].m_IsFight)
+    //        {
+    //            num++;
+    //        }
+    //    }
+    //    return num < 3;
+    //}
 
     //	public bool CheckMustFightRole(int id)
     //	{
