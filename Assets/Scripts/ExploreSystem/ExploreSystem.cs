@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using YouYou;
 
 public class ExploreSystem
 {
@@ -101,7 +102,7 @@ public class ExploreSystem
 
     private GameObject m_PlayerGameObj;
 
-    //private M_PlayerController m_PlyerController;
+    private M_PlayerController m_PlyerController;
 
     private GameObject m_RidePetGameObj;
 
@@ -121,11 +122,11 @@ public class ExploreSystem
 
     public GameObject m_MapSoundEvent;
 
-    //public S_MapData m_MapData
-    //{
-    //    get;
-    //    private set;
-    //}
+    public S_MapData m_MapData
+    {
+        get;
+        private set;
+    }
 
     public GameObject PlayerObj
     {
@@ -136,8 +137,8 @@ public class ExploreSystem
         set
         {
             this.m_PlayerGameObj = value;
-            this.m_PlayerGameObj.tag = "Player";
-            //this.m_PlyerController = this.m_PlayerGameObj.GetComponent<M_PlayerController>();
+            //this.m_PlayerGameObj.tag = "Player";
+            this.m_PlyerController = this.m_PlayerGameObj.GetComponent<M_PlayerController>();
         }
     }
 
@@ -186,13 +187,13 @@ public class ExploreSystem
         }
     }
 
-    //public M_PlayerController PlayerController
-    //{
-    //    get
-    //    {
-    //        return this.m_PlyerController;
-    //    }
-    //}
+    public M_PlayerController PlayerController
+    {
+        get
+        {
+            return this.m_PlyerController;
+        }
+    }
 
     public float BattleStep
     {
@@ -395,57 +396,44 @@ public class ExploreSystem
     //		return null;
     //	}
 
-    //	public void Begin()
-    //	{
-    //		this.LockPlayer = false;
-    //		GameObject gameObject = GameObject.FindWithTag("Player");
-    //		if (gameObject != null)
-    //		{
-    //			UnityEngine.Object.DestroyObject(gameObject);
-    //		}
-    //		else
-    //		{
-    //			gameObject = GameObject.Find("p03");
-    //			if (gameObject != null)
-    //			{
-    //				UnityEngine.Object.DestroyObject(gameObject);
-    //			}
-    //		}
-    //		this.EnableMainCamera(true);
-    //		this.LoadMapDate();
-    //		this.PlayerObj = this.m_GameApp.m_GameObjSystem.CreatePlayerGameObj(this.m_GameApp.m_GameDataSystem.m_PlayerID, this.PlayerChangePos, this.PlayerChangeDir);
-    //		TransformTool.SetLayerRecursively(this.PlayerObj.transform, 8);
-    //		this.AmberObj = this.m_GameApp.m_GameObjSystem.CreateAmberGameObj();
-    //		if (this.AmberObj != null)
-    //		{
-    //			TransformTool.SetLayerRecursively(this.AmberObj.transform, 8);
-    //		}
-    //		this.SetCharacterCollisionController();
-    //		this.SetCameraLookTarget();
-    //		this.SetAmberTargetPos();
-    //		this.LoadEventPrefab();
-    //		this.m_GameApp.m_GameObjSystem.LoadMapObj(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
-    //		this.SetBattleAreaData(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
-    //		UI_PartnerTalkDialog.Instance.BeginRandTalk(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
-    //		UI_ZoneMap.Instance.CreateMapData(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
-    //		UI_SmallMap.Instance.CreateMapData(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
-    //		if (!this.m_PlayStory)
-    //		{
-    //			Swd6Application.instance.StartCoroutine(this.m_GameApp.m_SaveloadSystem.AutoSave(ENUM_AUTOSAVETYPE.Map));
-    //		}
-    //		if (this.m_PlayMusicDelayTime <= 0f)
-    //		{
-    //			this.PlayMusic(1f);
-    //		}
-    //		GameInput.Clear();
-    //		this.ClearBattleInfo();
-    //		this.m_GameApp.m_GameDataSystem.ReLoadObjData();
-    //		if (this.m_GameApp.m_GameDataSystem.GetFlag(52))
-    //		{
-    //			this.SetPlayerPointLight(true);
-    //		}
-    //		Debug.Log("BeginExplore_" + this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
-    //	}
+    public void Begin()
+    {
+        this.LockPlayer = false;
+        this.EnableMainCamera(true);
+        //this.LoadMapDate();
+        this.PlayerObj = GameEntry.Instance.m_GameObjSystem.CreatePlayerGameObj(GameEntry.Instance.m_GameDataSystem.m_PlayerID, this.PlayerChangePos, this.PlayerChangeDir);
+        //TransformTool.SetLayerRecursively(this.PlayerObj.transform, 8);
+        //this.AmberObj = this.m_GameApp.m_GameObjSystem.CreateAmberGameObj();
+        //if (this.AmberObj != null)
+        //{
+        //    TransformTool.SetLayerRecursively(this.AmberObj.transform, 8);
+        //}
+        //this.SetCharacterCollisionController();
+        this.SetCameraLookTarget();
+        //this.SetAmberTargetPos();
+        //this.LoadEventPrefab();
+        //this.m_GameApp.m_GameObjSystem.LoadMapObj(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
+        //this.SetBattleAreaData(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
+        //UI_PartnerTalkDialog.Instance.BeginRandTalk(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
+        //UI_ZoneMap.Instance.CreateMapData(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
+        //UI_SmallMap.Instance.CreateMapData(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
+        //if (!this.m_PlayStory)
+        //{
+        //    Swd6Application.instance.StartCoroutine(this.m_GameApp.m_SaveloadSystem.AutoSave(ENUM_AUTOSAVETYPE.Map));
+        //}
+        //if (this.m_PlayMusicDelayTime <= 0f)
+        //{
+        //    this.PlayMusic(1f);
+        //}
+        GameInput.Clear();
+        //this.ClearBattleInfo();
+        //this.m_GameApp.m_GameDataSystem.ReLoadObjData();
+        //if (this.m_GameApp.m_GameDataSystem.GetFlag(52))
+        //{
+        //    this.SetPlayerPointLight(true);
+        //}
+        //Debug.Log("BeginExplore_" + this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
+    }
 
     //	public void End()
     //	{
@@ -517,30 +505,31 @@ public class ExploreSystem
     //		this.m_GameApp.m_GameDataSystem.FlagOFF(41);
     //	}
 
-    //	public void LoadMapDate()
-    //	{
-    //		this.m_MapData = GameDataDB.MapDB.GetData(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
-    //		if (this.m_MapData == null)
-    //		{
-    //			Debug.Log("載入地圖dbf錯誤_" + this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
-    //			return;
-    //		}
-    //		this.ResetData();
-    //		if (this.m_MapData.emType == ENUM_MapType.Maze)
-    //		{
-    //			this.m_GameApp.m_GameDataSystem.FlagON(41);
-    //		}
-    //		if (this.m_MapData.emType != ENUM_MapType.Maze)
-    //		{
-    //			this.m_GameApp.m_GameDataSystem.m_PlayerID = this.m_GameApp.m_GameDataSystem.m_DefaultPlayerID;
-    //			UI_Explore.Instance.SetActionSkill(this.m_GameApp.m_GameDataSystem.m_PlayerID);
-    //		}
-    //		else
-    //		{
-    //			UI_Explore.Instance.SetActionSkill(this.m_GameApp.m_GameDataSystem.m_PlayerID);
-    //		}
-    //		UI_Explore.Instance.SetActionSkillUIState();
-    //	}
+    public void LoadMapDate()
+    {
+        GameEntry.Instance.m_GameDataSystem.m_MapInfo.MapID = 3;
+        this.m_MapData = GameDataDB.MapDB.GetData(GameEntry.Instance.m_GameDataSystem.m_MapInfo.MapID);
+        if (this.m_MapData == null)
+        {
+            Debug.Log("載入地圖dbf錯誤_" + GameEntry.Instance.m_GameDataSystem.m_MapInfo.MapID);
+            return;
+        }
+        //this.ResetData();
+        //if (this.m_MapData.emType == ENUM_MapType.Maze)
+        //{
+        //    this.m_GameApp.m_GameDataSystem.FlagON(41);
+        //}
+        //if (this.m_MapData.emType != ENUM_MapType.Maze)
+        //{
+        //    this.m_GameApp.m_GameDataSystem.m_PlayerID = this.m_GameApp.m_GameDataSystem.m_DefaultPlayerID;
+        //   // UI_Explore.Instance.SetActionSkill(this.m_GameApp.m_GameDataSystem.m_PlayerID);
+        //}
+        //else
+        //{
+        //   // UI_Explore.Instance.SetActionSkill(this.m_GameApp.m_GameDataSystem.m_PlayerID);
+        //}
+       // UI_Explore.Instance.SetActionSkillUIState();
+    }
 
     //	public void LoadEventPrefab()
     //	{
@@ -1055,57 +1044,58 @@ public class ExploreSystem
     //		this.m_GameApp.StartCoroutine(this.m_GameApp.OpenGameMainMenu());
     //	}
 
-    //	public void SetCharacterCollisionController()
-    //	{
-    //		if ((this.m_MapData.emType == ENUM_MapType.Town || this.m_MapData.emType == ENUM_MapType.House) && (this.m_GameApp.m_GameDataSystem.m_PlayerID == 1 || this.m_GameApp.m_GameDataSystem.m_PlayerID == 6))
-    //		{
-    //			this.PlayerObj.AddComponent<M_CharacterCollisionController>();
-    //		}
-    //	}
+    public void SetCharacterCollisionController()
+    {
+        //if ((this.m_MapData.emType == ENUM_MapType.Town || this.m_MapData.emType == ENUM_MapType.House) && (this.m_GameApp.m_GameDataSystem.m_PlayerID == 1 || this.m_GameApp.m_GameDataSystem.m_PlayerID == 6))
+        //{
+        //    this.PlayerObj.AddComponent<M_CharacterCollisionController>();
+        //}
+    }
 
-    //	public void SetCameraLookTarget()
-    //	{
-    //		if (this.m_GameApp.m_GameObjSystem.PlayerObj == null)
-    //		{
-    //			return;
-    //		}
-    //		GameObject gameObject = GameObject.Find("Main Camera");
-    //		if (gameObject == null)
-    //		{
-    //			gameObject = GameObject.FindWithTag("MainCamera");
-    //		}
-    //		Component component = gameObject.GetComponent("M_MiniMapCamera");
-    //		if (component != null)
-    //		{
-    //			UnityEngine.Object.Destroy(component);
-    //		}
-    //		M_PlayerMouseOrbit m_PlayerMouseOrbit = gameObject.GetComponent<M_PlayerMouseOrbit>();
-    //		if (m_PlayerMouseOrbit == null)
-    //		{
-    //			m_PlayerMouseOrbit = gameObject.AddComponent<M_PlayerMouseOrbit>();
-    //		}
-    //		Transform[] componentsInChildren = this.m_GameApp.m_GameObjSystem.PlayerObj.transform.GetComponentsInChildren<Transform>();
-    //		Transform[] array = componentsInChildren;
-    //		for (int i = 0; i < array.Length; i++)
-    //		{
-    //			Transform transform = array[i];
-    //			if (transform.name == "camera view point")
-    //			{
-    //				m_PlayerMouseOrbit.m_Target = transform;
-    //				break;
-    //			}
-    //		}
-    //		gameObject.camera.orthographic = false;
-    //		int num = 8388608;
-    //		num = ~num;
-    //		gameObject.camera.cullingMask = num;
-    //		this.SetCameraDofEffectLookTarget(this.m_GameApp.m_GameObjSystem.PlayerObj);
-    //		m_PlayerMouseOrbit.SetNormalMode();
-    //		if (this.m_MapData.emType == ENUM_MapType.World)
-    //		{
-    //			m_PlayerMouseOrbit.SetBigMapMode();
-    //		}
-    //	}
+    public void SetCameraLookTarget()
+    {
+        if (GameEntry.Instance.m_GameObjSystem.PlayerObj == null)
+        {
+            return;
+        }
+        GameObject gameObject = GameObject.Find("Main Camera");
+        if (gameObject == null)
+        {
+            gameObject = GameObject.FindWithTag("MainCamera");
+        }
+        Component component = gameObject.GetComponent("M_MiniMapCamera");
+        if (component != null)
+        {
+            UnityEngine.Object.Destroy(component);
+        }
+        M_PlayerMouseOrbit m_PlayerMouseOrbit = gameObject.GetComponent<M_PlayerMouseOrbit>();
+        if (m_PlayerMouseOrbit == null)
+        {
+            m_PlayerMouseOrbit = gameObject.AddComponent<M_PlayerMouseOrbit>();
+        }
+        Transform[] componentsInChildren = GameEntry.Instance.m_GameObjSystem.PlayerObj.transform.GetComponentsInChildren<Transform>();
+        Transform[] array = componentsInChildren;
+        for (int i = 0; i < array.Length; i++)
+        {
+            Transform transform = array[i];
+            if (transform.name == "camera view point")
+            {
+                m_PlayerMouseOrbit.m_Target = transform;
+                break;
+            }
+        }
+        Camera camera= gameObject.GetComponent<Camera>();
+        camera.orthographic = false;
+        int num = 8388608;
+        num = ~num;
+        camera.cullingMask = num;
+        //this.SetCameraDofEffectLookTarget(this.m_GameApp.m_GameObjSystem.PlayerObj);
+        m_PlayerMouseOrbit.SetNormalMode();
+        //if (this.m_MapData.emType == ENUM_MapType.World)
+        //{
+        //    m_PlayerMouseOrbit.SetBigMapMode();
+        //}
+    }
 
     //	public void SetCameraLookShootTarget()
     //	{
@@ -1170,27 +1160,27 @@ public class ExploreSystem
     //		this.SetCameraDofEffectLookTarget(RidePetObj);
     //	}
 
-    //	public void EnableMainCamera(bool enable)
-    //	{
-    //		GameObject gameObject = GameObject.Find("Main Camera");
-    //		if (gameObject == null)
-    //		{
-    //			gameObject = GameObject.FindWithTag("MainCamera");
-    //		}
-    //		if (gameObject)
-    //		{
-    //			Camera component = gameObject.GetComponent<Camera>();
-    //			if (component)
-    //			{
-    //				component.enabled = enable;
-    //			}
-    //			AudioListener component2 = gameObject.GetComponent<AudioListener>();
-    //			if (component2)
-    //			{
-    //				UnityEngine.Object.Destroy(component2);
-    //			}
-    //		}
-    //	}
+    public void EnableMainCamera(bool enable)
+    {
+        GameObject gameObject = GameObject.Find("Main Camera");
+        if (gameObject == null)
+        {
+            gameObject = GameObject.FindWithTag("MainCamera");
+        }
+        if (gameObject)
+        {
+            Camera component = gameObject.GetComponent<Camera>();
+            if (component)
+            {
+                component.enabled = enable;
+            }
+            AudioListener component2 = gameObject.GetComponent<AudioListener>();
+            if (component2)
+            {
+                UnityEngine.Object.Destroy(component2);
+            }
+        }
+    }
 
     //	public void SetCameraDofEffectLookTarget(GameObject targetObj)
     //	{

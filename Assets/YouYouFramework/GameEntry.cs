@@ -473,14 +473,15 @@ namespace YouYou
 
         public ExploreSystem m_ExploreSystem { get; private set; }
 
-        //public GameObjSystem m_GameObjSystem { get; private set; }
+        public GameObjSystem m_GameObjSystem { get; private set; }
 
         //public StorySystem m_StorySystem { get; private set; }
 
         private void InitGameSystem()
         {
-            //this.m_GameObjSystem = new GameObjSystem();
-            //this.m_GameObjSystem.Initialize();
+            GameInput.Initialize();
+            this.m_GameObjSystem = new GameObjSystem();
+            this.m_GameObjSystem.Initialize();
             this.m_GameDataSystem = new GameDataSystem();
             this.m_GameDataSystem.Initialize();
             this.m_ExploreSystem = new ExploreSystem();
@@ -528,7 +529,7 @@ namespace YouYou
 
         public void StartNewGame()
         {
-            this.m_GameDataSystem.InitRoleData();
+            //this.m_GameDataSystem.InitRoleData();
             //base.StartCoroutine(DoTalk());
         }
 

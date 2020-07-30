@@ -280,7 +280,6 @@ MonoBehaviour:
     Group: {fileID: 1794511368}
   m_InitializeOK: 0
   timeScale: 0
-  m_ShroudMgr: {fileID: 0}
 --- !u!4 &1531371453
 Transform:
   m_ObjectHideFlags: 0

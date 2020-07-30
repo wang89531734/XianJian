@@ -15,7 +15,7 @@ public class GameDataDB
 
     private static string m_LanguagePath;
 
-    //	public static T_GameDB<S_MapData> MapDB = new T_GameDB<S_MapData>();
+    public static T_GameDB<S_MapData> MapDB = new T_GameDB<S_MapData>();
 
     //	public static T_GameDB<S_MapConnect> MapConnectDB = new T_GameDB<S_MapConnect>();
 
@@ -129,19 +129,11 @@ public class GameDataDB
     //		GameDataDB.LoadFromFile<S_AnimationData>(GameDataDB.AnimationDB, dataPath, false);
     //	}
 
-    //	public static void LoadDBFMapPath()
-    //	{
-    //		string dataPath = GameDataDB.m_DBF_Path + "MapData.dbf";
-    //		GameDataDB.LoadFromFile<S_MapData>(GameDataDB.MapDB, dataPath, true);
-    //		dataPath = GameDataDB.m_DBF_Path + "MapConnect.dbf";
-    //		GameDataDB.LoadFromFile<S_MapConnect>(GameDataDB.MapConnectDB, dataPath, true);
-    //	}
-
     public static IEnumerator LoadDBF()
     {
         Debug.Log("GameDB Load DBF Path:" + GameDataDB.m_DBF_Path);
         string dataPath = GameDataDB.m_DBF_Path + "MapData.dbf";
-        //GameDataDB.LoadFromFile<S_MapData>(GameDataDB.MapDB, dataPath, true);
+        GameDataDB.LoadFromFile<S_MapData>(GameDataDB.MapDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "MapConnect.dbf";
         //GameDataDB.LoadFromFile<S_MapConnect>(GameDataDB.MapConnectDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "NpcData.dbf";
@@ -178,10 +170,10 @@ public class GameDataDB
         GameDataDB.LoadFromFile<S_Level>(GameDataDB.LevelDB, dataPath, true);
         dataPath = GameDataDB.m_DBF_Path + "Item.dbf";
         GameDataDB.LoadFromFile<S_Item>(GameDataDB.ItemDB, dataPath, true);
-        dataPath = GameDataDB.m_DBF_Path + "Equip.dbf";
-        GameDataDB.LoadFromFile<S_Item>(GameDataDB.ItemDB, dataPath, false);
-        dataPath = GameDataDB.m_DBF_Path + "MagicItem.dbf";
-        GameDataDB.LoadFromFile<S_Item>(GameDataDB.ItemDB, dataPath, false);
+        //dataPath = GameDataDB.m_DBF_Path + "Equip.dbf";
+        //GameDataDB.LoadFromFile<S_Item>(GameDataDB.ItemDB, dataPath, false);
+        //dataPath = GameDataDB.m_DBF_Path + "MagicItem.dbf";
+        //GameDataDB.LoadFromFile<S_Item>(GameDataDB.ItemDB, dataPath, false);
         dataPath = GameDataDB.m_DBF_Path + "ItemMob.dbf";
         GameDataDB.LoadFromFile<S_Item>(GameDataDB.ItemDB, dataPath, false);
         dataPath = GameDataDB.m_DBF_Path + "RoleAttrPlus.dbf";
@@ -190,10 +182,10 @@ public class GameDataDB
         GameDataDB.LoadFromFile<S_SkillSlot>(GameDataDB.SkillPoolDB, dataPath, true);
         dataPath = GameDataDB.m_DBF_Path + "Buffer.dbf";
         GameDataDB.LoadFromFile<S_BufferData>(GameDataDB.BufferDB, dataPath, true);
-        dataPath = GameDataDB.m_DBF_Path + "Skill.dbf";
-        GameDataDB.LoadFromFile<S_Skill>(GameDataDB.SkillDB, dataPath, true);
-        dataPath = GameDataDB.m_DBF_Path + "SuperSkillPool.dbf";
-        GameDataDB.LoadFromFile<S_SuperSkillSlot>(GameDataDB.SuperSkillDB, dataPath, true);
+        //dataPath = GameDataDB.m_DBF_Path + "Skill.dbf";
+        //GameDataDB.LoadFromFile<S_Skill>(GameDataDB.SkillDB, dataPath, true);
+        //dataPath = GameDataDB.m_DBF_Path + "SuperSkillPool.dbf";
+        //GameDataDB.LoadFromFile<S_SuperSkillSlot>(GameDataDB.SuperSkillDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "BattleArea.dbf";
         //GameDataDB.LoadFromFile<S_BattleArea>(GameDataDB.BattleAreaDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "BattleGroup.dbf";

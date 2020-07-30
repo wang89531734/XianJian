@@ -43,9 +43,9 @@ public class GameDataSystem
 
     public float m_PlayTimes;
 
-    //public S_MapInfo m_MapInfo;
+    public S_MapInfo m_MapInfo;
 
-    //public S_GameFlag m_GameFlag;
+    public S_GameFlag m_GameFlag;
 
     private C_RoleDataEx[] m_RoldData;
 
@@ -232,7 +232,7 @@ public class GameDataSystem
         this.m_DefaultPlayerID = 1;
         this.AddRole(1, false);
         this.m_PlayerID = this.m_DefaultPlayerID;
-        //this.FlagON(24);
+        this.FlagON(24);
     }
 
     //	public void InitExRoleData(int chapId)
@@ -276,18 +276,10 @@ public class GameDataSystem
     //		}
     //	}
 
-    //	public int GetMaxID()
-    //	{
-    //		switch (this.m_ChapID)
-    //		{
-    //		case 100:
-    //			return 5;
-    //		case 101:
-    //			return 7;
-    //		default:
-    //			return 1;
-    //		}
-    //	}
+    public int GetMaxID()
+    {      
+                return 5;      
+    }
 
     //	public int GetMaxRoleCountByChapter(int chapId)
     //	{
@@ -302,15 +294,15 @@ public class GameDataSystem
     //		}
     //	}
 
-    //	public C_RoleDataEx GetRoleData(int id)
-    //	{
-    //		if (id > this.GetMaxID())
-    //		{
-    //			Debug.LogError("id error!!");
-    //			return null;
-    //		}
-    //		return this.m_RoldData[id - 1];
-    //	}
+    public C_RoleDataEx GetRoleData(int id)
+    {
+        if (id > this.GetMaxID())
+        {
+            Debug.LogError("id error!!");
+            return null;
+        }
+        return this.m_RoldData[id - 1];
+    }
 
     //	public void SetRoleData(int id, C_RoleDataEx roleData)
     //	{
@@ -442,27 +434,27 @@ public class GameDataSystem
     //		return this.m_GameFlag.Get(flag);
     //	}
 
-    //	public void FlagON(int flag)
-    //	{
-    //		this.m_GameFlag.ON(flag);
-    //		if (flag >= this.GetMinID() && flag <= this.GetMaxID())
-    //		{
-    //			if (!this.m_RoldData[flag - 1].BaseRoleData.IsJoin && flag != 7)
-    //			{
-    //				UI_OkCancelBox.Instance.AddSysMsg(GameDataDB.StrID(1040 + flag - 1), 3f);
-    //			}
-    //			if (!Swd6Application.instance.IsDLC())
-    //			{
-    //				this.FlagON(30 + flag);
-    //			}
-    //			this.m_RoldData[flag - 1].BaseRoleData.IsJoin = true;
-    //			this.UpdatePartyRole();
-    //		}
-    //		if (Swd6Application.instance.m_QuestSystem != null)
-    //		{
-    //			Swd6Application.instance.m_QuestSystem.Dirty();
-    //		}
-    //	}
+    public void FlagON(int flag)
+    {
+        this.m_GameFlag.ON(flag);
+        //if (flag >= this.GetMinID() && flag <= this.GetMaxID())
+        //{
+        //    if (!this.m_RoldData[flag - 1].BaseRoleData.IsJoin && flag != 7)
+        //    {
+        //        UI_OkCancelBox.Instance.AddSysMsg(GameDataDB.StrID(1040 + flag - 1), 3f);
+        //    }
+        //    if (!Swd6Application.instance.IsDLC())
+        //    {
+        //        this.FlagON(30 + flag);
+        //    }
+        //    this.m_RoldData[flag - 1].BaseRoleData.IsJoin = true;
+        //    this.UpdatePartyRole();
+        //}
+        //if (Swd6Application.instance.m_QuestSystem != null)
+        //{
+        //    Swd6Application.instance.m_QuestSystem.Dirty();
+        //}
+    }
 
     //	public void FlagOFF(int flag)
     //	{
