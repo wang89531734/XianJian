@@ -66,6 +66,9 @@ public class M_PlayerController : M_GameRoleBase
 
     //private GUIManager m_GuiManager;
 
+    /// <summary>
+    /// 方向
+    /// </summary>
     public Vector3 m_DirectionVector = Vector3.zero;
 
     private float oldMaxRotationSpeed;
@@ -402,50 +405,50 @@ public class M_PlayerController : M_GameRoleBase
     //		return this.m_GuiManager != null && (Input.GetMouseButtonUp(0) || Input.GetMouseButton(0) || Input.GetMouseButtonUp(1) || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) && this.m_GuiManager.DetecteMouseOnUI(true);
     //	}
 
-    //	private void UpdateRun()
-    //	{
-    //		if (this.m_WalkMultiplier != 1f)
-    //		{
-    //			if (!this.m_bAutoJump)
-    //			{
-    //				if (this.m_IsRun)
-    //				{
-    //					this.m_PlayerMotor.maxForwardSpeed = this.m_RunSpeed;
-    //				}
-    //				else
-    //				{
-    //					this.m_PlayerMotor.maxForwardSpeed = this.m_WalkSpeed;
-    //				}
-    //			}
-    //			if (!this.m_IsDash)
-    //			{
-    //				Swd6Application.instance.m_ExploreSystem.RestoreStaminaBar();
-    //			}
-    //			else if (this.m_IsDash)
-    //			{
-    //				if (Swd6Application.instance.m_ExploreSystem.ExpendStaminaBar(false))
-    //				{
-    //					if (!this.m_bAutoJump)
-    //					{
-    //						this.m_PlayerMotor.maxForwardSpeed = this.m_DashSpeed;
-    //					}
-    //				}
-    //				else
-    //				{
-    //					this.Dash();
-    //				}
-    //			}
-    //		}
-    //		if (this.m_SlowMove)
-    //		{
-    //			this.m_DirectionVector *= this.m_WalkMultiplier;
-    //		}
-    //		if (this.m_Reverse)
-    //		{
-    //			this.m_DirectionVector.x = -this.m_DirectionVector.x;
-    //			this.m_DirectionVector.z = -this.m_DirectionVector.z;
-    //		}
-    //	}
+    private void UpdateRun()
+    {
+        //if (this.m_WalkMultiplier != 1f)
+        //{
+        //    if (!this.m_bAutoJump)
+        //    {
+        //        if (this.m_IsRun)
+        //        {
+        //            this.m_PlayerMotor.maxForwardSpeed = this.m_RunSpeed;
+        //        }
+        //        else
+        //        {
+        //            this.m_PlayerMotor.maxForwardSpeed = this.m_WalkSpeed;
+        //        }
+        //    }
+        //    if (!this.m_IsDash)
+        //    {
+        //        Swd6Application.instance.m_ExploreSystem.RestoreStaminaBar();
+        //    }
+        //    else if (this.m_IsDash)
+        //    {
+        //        if (Swd6Application.instance.m_ExploreSystem.ExpendStaminaBar(false))
+        //        {
+        //            if (!this.m_bAutoJump)
+        //            {
+        //                this.m_PlayerMotor.maxForwardSpeed = this.m_DashSpeed;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            this.Dash();
+        //        }
+        //    }
+        //}
+        //if (this.m_SlowMove)
+        //{
+        //    this.m_DirectionVector *= this.m_WalkMultiplier;
+        //}
+        //if (this.m_Reverse)
+        //{
+        //    this.m_DirectionVector.x = -this.m_DirectionVector.x;
+        //    this.m_DirectionVector.z = -this.m_DirectionVector.z;
+        //}
+    }
 
     //	private void UpdateMotion()
     //	{
@@ -465,11 +468,7 @@ public class M_PlayerController : M_GameRoleBase
         //{
         //    return;
         //}
-        this.m_DirectionVector = GameInput.GetDirKeyMoveVector();
-        if (this.m_DirectionVector == Vector3.zero)
-        {
-        //    this.m_DirectionVector = GameInput.GetJoyLAxis();
-        }
+        this.m_DirectionVector = GameInput.GetDirKeyMoveVector();     
         if (this.m_DirectionVector.magnitude > 1f)
         {
             this.m_DirectionVector = this.m_DirectionVector.normalized;
@@ -479,31 +478,31 @@ public class M_PlayerController : M_GameRoleBase
         Quaternion rotation = Quaternion.FromToRotation(Camera.main.transform.forward * -1f, base.transform.up);
         this.m_DirectionVector = rotation * this.m_DirectionVector;
         this.m_DirectionVector = Quaternion.Inverse(base.transform.rotation) * this.m_DirectionVector;
-        if (GameInput.GetKeyActionDown(KEY_ACTION.DASH))
-        {
-            //this.Dash();
-            if (this.m_DashFOV && this.m_IsDash)
-            {
-                GameObject gameObject = GameObject.Find("Main Camera");
-                if (gameObject)
-                {
-                    //this.m_OldFOV = gameObject.camera.fieldOfView;
-                }
-            }
-        }
-        if (GameInput.GetKeyActionDown(KEY_ACTION.RUN))
-        {
-           // this.SetRun();
-        }
+        //if (GameInput.GetKeyActionDown(KEY_ACTION.DASH))
+        //{
+        //    //this.Dash();
+        //    if (this.m_DashFOV && this.m_IsDash)
+        //    {
+        //        GameObject gameObject = GameObject.Find("Main Camera");
+        //        if (gameObject)
+        //        {
+        //            //this.m_OldFOV = gameObject.camera.fieldOfView;
+        //        }
+        //    }
+        //}
+        //if (GameInput.GetKeyActionDown(KEY_ACTION.RUN))
+        //{
+        //    // this.SetRun();
+        //}
         //if (Swd6Application.instance.m_ExploreSystem.IsUseActionSkill)
         //{
         //    this.m_IsDash = false;
         //}
-        //this.UpdateRun();
-        if (GameInput.GetKeyActionDown(KEY_ACTION.JUMP))
-        {
-           // this.Jump(false);
-        }
+        this.UpdateRun();
+        //if (GameInput.GetKeyActionDown(KEY_ACTION.JUMP))
+        //{
+        //    this.Jump(false);
+        //}
         if (this.m_DirectionVector != Vector3.zero)
         {
             if (this.MoveTarget != null)
