@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(M_GameRoleMotion))]
 public abstract class M_GameRoleBase : MonoBehaviour
 {
+    public Animation m_Animation;
+
     public delegate void EventHandler(GameObject e);
 
     public delegate IEnumerator EventHandlerTalk();

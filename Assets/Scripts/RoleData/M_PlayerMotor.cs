@@ -103,8 +103,8 @@ public class M_PlayerMotor : CharacterMotorBase
 		this.activePlatform = null;
 		if (base.grounded)
 		{
-			//vector = Util.ProjectOntoPlane(vector, base.transform.up);
-		}
+            vector = Util.ProjectOntoPlane(vector, base.transform.up);
+        }
 		Vector3 a2 = vector;
 		base.jumping = false;
 		if (base.grounded)

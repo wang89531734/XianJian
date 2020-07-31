@@ -502,43 +502,43 @@ public class GameObjSystem
                 GameEntry.Pool.GameObjectSpawn(10001, (Transform trans2) =>
                 {
                     trans2.SetParent(gameObject.transform);
-                });
-                gameObject.transform.position = pos;
-                gameObject.transform.eulerAngles = new Vector3(0f, dir, 0f);
-                //gameObject.name = "Player";
-                //gameObject.layer = 2;
-                this.PlayerObj = gameObject;
-                GameObjState state = new GameObjState();
-                S_GameObjData objData = new S_GameObjData(id, 0, pos, dir, 1, state, this.PlayerObj);
-                this.AddGameObjData(objData);
-                if (!this.PlayerObj.GetComponent<M_PlayerController>())
-                {
-                    this.PlayerObj.AddComponent<M_PlayerController>();
-                }
-                if (!this.PlayerObj.GetComponent<M_PlayerMotor>())
-                {
-                    this.PlayerObj.AddComponent<M_PlayerMotor>();
-                }
-                //BendingSegment bendingSegment = new BendingSegment();
-                //bendingSegment.firstTransform = TransformTool.SearchHierarchyForBone(this.PlayerObj.transform, "Face-controller");
-                //bendingSegment.lastTransform = TransformTool.SearchHierarchyForBone(this.PlayerObj.transform, "Face-controller");
-                //if (bendingSegment.firstTransform != null)
-                //{
-                //    M_HeadLookController m_HeadLookController = this.PlayerObj.AddComponent<M_HeadLookController>();
-                //    m_HeadLookController.segments = new BendingSegment[1];
-                //    m_HeadLookController.segments[0] = bendingSegment;
-                //    m_HeadLookController.nonAffectedJoints = new NonAffectedJoints[0];
-                //}
-                //if (!this.PlayerObj.GetComponent<AudioListener>())
-                //{
-                //    this.PlayerObj.AddComponent<AudioListener>();
-                //}
-                //C_RoleDataEx roleData = GameEntry.Instance.m_GameDataSystem.GetRoleData(id);
-                //ItemData equipItemData = roleData.GetEquipItemData(ENUM_EquipPosition.CosCloth);
-                //if (equipItemData != null)
-                //{
-                //    this.SetPlayerCosCloth(equipItemData.ID, Enum_AvaterType.Map);
-                //}
+                    gameObject.transform.position = pos;
+                    gameObject.transform.eulerAngles = new Vector3(0f, dir, 0f);
+                    gameObject.name = "Player";
+                    //gameObject.layer = 2;
+                    this.PlayerObj = gameObject;
+                    GameObjState state = new GameObjState();
+                    S_GameObjData objData = new S_GameObjData(id, 0, pos, dir, 1, state, this.PlayerObj);
+                    this.AddGameObjData(objData);
+                    if (!this.PlayerObj.GetComponent<M_PlayerController>())
+                    {
+                        this.PlayerObj.AddComponent<M_PlayerController>();
+                    }
+                    if (!this.PlayerObj.GetComponent<M_PlayerMotor>())
+                    {
+                        this.PlayerObj.AddComponent<M_PlayerMotor>();
+                    }
+                    //BendingSegment bendingSegment = new BendingSegment();
+                    //bendingSegment.firstTransform = TransformTool.SearchHierarchyForBone(this.PlayerObj.transform, "Face-controller");
+                    //bendingSegment.lastTransform = TransformTool.SearchHierarchyForBone(this.PlayerObj.transform, "Face-controller");
+                    //if (bendingSegment.firstTransform != null)
+                    //{
+                    //    M_HeadLookController m_HeadLookController = this.PlayerObj.AddComponent<M_HeadLookController>();
+                    //    m_HeadLookController.segments = new BendingSegment[1];
+                    //    m_HeadLookController.segments[0] = bendingSegment;
+                    //    m_HeadLookController.nonAffectedJoints = new NonAffectedJoints[0];
+                    //}
+                    //if (!this.PlayerObj.GetComponent<AudioListener>())
+                    //{
+                    //    this.PlayerObj.AddComponent<AudioListener>();
+                    //}
+                    //C_RoleDataEx roleData = GameEntry.Instance.m_GameDataSystem.GetRoleData(id);
+                    //ItemData equipItemData = roleData.GetEquipItemData(ENUM_EquipPosition.CosCloth);
+                    //if (equipItemData != null)
+                    //{
+                    //    this.SetPlayerCosCloth(equipItemData.ID, Enum_AvaterType.Map);
+                    //}
+                });              
             }
         });
        

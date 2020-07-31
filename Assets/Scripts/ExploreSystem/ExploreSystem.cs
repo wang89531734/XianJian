@@ -137,7 +137,7 @@ public class ExploreSystem
         set
         {
             this.m_PlayerGameObj = value;
-            //this.m_PlayerGameObj.tag = "Player";
+            this.m_PlayerGameObj.tag = "Player";
             this.m_PlyerController = this.m_PlayerGameObj.GetComponent<M_PlayerController>();
         }
     }

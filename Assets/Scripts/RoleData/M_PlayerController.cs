@@ -217,6 +217,8 @@ public class M_PlayerController : M_GameRoleBase
     protected override void initialize()
     {
         this.m_PlayerMotor = (base.GetComponent(typeof(M_PlayerMotor)) as M_PlayerMotor);
+        m_Animation = base.GetComponentInChildren<Animation>();
+        //LegAnimator component = base.gameObject.GetComponent<LegAnimator>();
         //this.m_JumpMotor = (base.GetComponent(typeof(JumpAndIdle)) as JumpAndIdle);
         Vector3 position = base.transform.position;
         if (!base.GetComponent<NavMeshAgent>())
@@ -300,7 +302,7 @@ public class M_PlayerController : M_GameRoleBase
         if (base.MoveRole)
         {
             //this.UpdateMoveDest();
-            //this.UpdateMove();
+            this.UpdateMove();
             return;
         }
         this.UpdateFaceToTarget();
@@ -457,10 +459,10 @@ public class M_PlayerController : M_GameRoleBase
 
     private void UpdateMotion()
     {
-        //if (this.m_bPlayNormalMotion && !base.animation.IsPlaying(this.m_PlayMotionName))
-        //{
-        //    this.PlayIdleMotion();
-        //}
+        if (this.m_bPlayNormalMotion && !m_Animation.IsPlaying(this.m_PlayMotionName))
+        {
+            this.PlayIdleMotion();
+        }
     }
 
     private void UpdateInput()
@@ -532,18 +534,14 @@ public class M_PlayerController : M_GameRoleBase
 
     public void UpdateInputOnMovePlatform()
     {
-        //LegAnimator component = base.gameObject.GetComponent<LegAnimator>();
-        //if (component)
-        //{
-            this.m_DirectionVector = GameInput.GetDirKeyMoveVector();
-            if (this.m_DirectionVector != Vector3.zero || this.MoveTarget != null)
-            {
-                //this.PlayIdleMotion();
-                return;
-            }
-            //component.enabled = false;
-            this.PlayMotion(601);
-        //}
+        this.m_DirectionVector = GameInput.GetDirKeyMoveVector();
+        if (this.m_DirectionVector != Vector3.zero || this.MoveTarget != null)
+        {
+            //this.PlayIdleMotion();
+            return;
+        }
+        //this.PlayMotion(601);
+        //m_Animation.CrossFade("Run");
     }
 
     private void UpdateMoveTarget()
@@ -1127,12 +1125,7 @@ public class M_PlayerController : M_GameRoleBase
 
     public void PlayMotion(int id)
     {
-        //LegAnimator component = base.gameObject.GetComponent<LegAnimator>();
-        //if (component)
-        //{
-        //    component.enabled = false;
-        //}
-        //this.m_RoleMotion.SetCrossMotion(id);
+        this.m_RoleMotion.SetCrossMotion(id);
     }
 
     //	public void PlayMotionQueued(int id)
@@ -1145,17 +1138,12 @@ public class M_PlayerController : M_GameRoleBase
     //		this.m_RoleMotion.SetMotionQueued(id);
     //	}
 
-    //	public void PlayIdleMotion()
-    //	{
-    //		LegAnimator component = base.gameObject.GetComponent<LegAnimator>();
-    //		if (component)
-    //		{
-    //			component.enabled = true;
-    //		}
-    //		base.animation.CrossFade("locomotion");
-    //		this.m_bPlayNormalMotion = false;
-    //		this.m_RoleMotion.m_Id = 0;
-    //	}
+    public void PlayIdleMotion()
+    {
+        m_Animation.CrossFade("Stand");
+        this.m_bPlayNormalMotion = false;
+        this.m_RoleMotion.m_Id = 0;
+    }
 
     //	public void SetMotionSpeed(int id, float speed)
     //	{

@@ -186,55 +186,55 @@ public class M_GameRoleMotion : MonoBehaviour
     //		this.m_Animation.Play(this.m_PlayMotionName);
     //	}
 
-    //	public void SetCrossMotion(int id)
-    //	{
-    //		if (id == 0)
-    //		{
-    //			return;
-    //		}
-    //		S_AnimationData data = GameDataDB.AnimationDB.GetData(id);
-    //		if (data == null)
-    //		{
-    //			if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
-    //			{
-    //				string text = string.Concat(new object[]
-    //				{
-    //					"角色",
-    //					this.m_RoleId,
-    //					"_DBF沒有這個動作 : ",
-    //					id
-    //				});
-    //				Debug.LogWarning(text);
-    //				UI_OkCancelBox.Instance.ClearSysMsg();
-    //				UI_OkCancelBox.Instance.AddSysMsg(text, 10f);
-    //			}
-    //			return;
-    //		}
-    //		if (this.m_Animation == null)
-    //		{
-    //			if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
-    //			{
-    //				string text2 = string.Concat(new object[]
-    //				{
-    //					"角色",
-    //					this.m_RoleId,
-    //					"_身上沒有這個動作_NULL_ : ",
-    //					data.ClipName
-    //				});
-    //				Debug.LogWarning(text2);
-    //				UI_OkCancelBox.Instance.ClearSysMsg();
-    //				UI_OkCancelBox.Instance.AddSysMsg(text2, 10f);
-    //			}
-    //			return;
-    //		}
-    //		if (!AnimationControlSystem.GetClip(base.gameObject, data.ClipName))
-    //		{
-    //			return;
-    //		}
-    //		this.m_Id = id;
-    //		this.m_PlayMotionName = data.ClipName;
-    //		this.m_Animation.CrossFade(this.m_PlayMotionName);
-    //	}
+    public void SetCrossMotion(int id)
+    {
+        if (id == 0)
+        {
+            return;
+        }
+        //S_AnimationData data = GameDataDB.AnimationDB.GetData(id);
+        //if (data == null)
+        //{
+        //    if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
+        //    {
+        //        string text = string.Concat(new object[]
+        //        {
+        //                "角色",
+        //                this.m_RoleId,
+        //                "_DBF沒有這個動作 : ",
+        //                id
+        //        });
+        //        Debug.LogWarning(text);
+        //        UI_OkCancelBox.Instance.ClearSysMsg();
+        //        UI_OkCancelBox.Instance.AddSysMsg(text, 10f);
+        //    }
+        //    return;
+        //}
+        //if (this.m_Animation == null)
+        //{
+        //    if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
+        //    {
+        //        string text2 = string.Concat(new object[]
+        //        {
+        //                "角色",
+        //                this.m_RoleId,
+        //                "_身上沒有這個動作_NULL_ : ",
+        //                data.ClipName
+        //        });
+        //        Debug.LogWarning(text2);
+        //        UI_OkCancelBox.Instance.ClearSysMsg();
+        //        UI_OkCancelBox.Instance.AddSysMsg(text2, 10f);
+        //    }
+        //    return;
+        //}
+        //if (!AnimationControlSystem.GetClip(base.gameObject, data.ClipName))
+        //{
+        //    return;
+        //}
+        //this.m_Id = id;
+        ////this.m_PlayMotionName = data.ClipName;
+        //this.m_Animation.CrossFade(this.m_PlayMotionName);
+    }
 
     //	public void SetMotionQueued(int id)
     //	{
