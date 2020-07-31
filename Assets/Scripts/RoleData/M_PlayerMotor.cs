@@ -67,18 +67,18 @@ public class M_PlayerMotor : CharacterMotorBase
 	{
 		float magnitude = base.desiredFacingDirection.magnitude;
 		Vector3 vector = base.transform.rotation * base.desiredMovementDirection * (1f - magnitude) + base.desiredFacingDirection * magnitude;
-		//vector = Util.ProjectOntoPlane(vector, base.transform.up);
-		//vector = this.alignCorrection * vector;
-		//if (vector.sqrMagnitude > 0.01f)
-		//{
-		//	Vector3 vector2 = Util.ConstantSlerp(base.transform.forward, vector, this.maxRotationSpeed * Time.deltaTime);
-		//	vector2 = Util.ProjectOntoPlane(vector2, base.transform.up);
-		//	Quaternion rotation = default(Quaternion);
-		//	rotation.SetLookRotation(vector2, base.transform.up);
-		//	base.transform.rotation = rotation;
-		//	this.dirY = base.transform.eulerAngles.y;
-		//}
-	}
+        vector = Util.ProjectOntoPlane(vector, base.transform.up);
+        vector = this.alignCorrection * vector;
+        if (vector.sqrMagnitude > 0.01f)
+        {
+            Vector3 vector2 = Util.ConstantSlerp(base.transform.forward, vector, this.maxRotationSpeed * Time.deltaTime);
+            vector2 = Util.ProjectOntoPlane(vector2, base.transform.up);
+            Quaternion rotation = default(Quaternion);
+            rotation.SetLookRotation(vector2, base.transform.up);
+            base.transform.rotation = rotation;
+            this.dirY = base.transform.eulerAngles.y;
+        }
+    }
 
 	private void UpdateVelocity()
 	{

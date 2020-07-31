@@ -46,48 +46,48 @@ public class M_GameRoleMotion : MonoBehaviour
     //		this.m_Animation = anim;
     //	}
 
-    //	public void Init(int roleID, int id)
-    //	{
-    //		this.m_RoleId = roleID;
-    //		this.m_Animation = base.gameObject.GetComponent<Animation>();
-    //		if (this.m_Animation == null)
-    //		{
-    //			Transform[] componentsInChildren = base.gameObject.GetComponentsInChildren<Transform>();
-    //			if (componentsInChildren != null)
-    //			{
-    //				Transform[] array = componentsInChildren;
-    //				for (int i = 0; i < array.Length; i++)
-    //				{
-    //					Transform transform = array[i];
-    //					Animation[] componentsInChildren2 = transform.GetComponentsInChildren<Animation>();
-    //					if (componentsInChildren2 != null)
-    //					{
-    //						Animation[] array2 = componentsInChildren2;
-    //						for (int j = 0; j < array2.Length; j++)
-    //						{
-    //							Animation animation = array2[j];
-    //							if (animation.GetClipCount() != 0)
-    //							{
-    //								this.m_Animation = animation;
-    //								break;
-    //							}
-    //						}
-    //					}
-    //					if (this.m_Animation != null)
-    //					{
-    //						break;
-    //					}
-    //				}
-    //			}
-    //		}
-    //		if (this.m_Animation == null)
-    //		{
-    //			Debug.Log("RoleMotion No m_Animation_" + roleID);
-    //			return;
-    //		}
-    //		this.SetMotion(id);
-    //		this.ClampMotion(id);
-    //	}
+    public void Init(int roleID, int id)
+    {
+        this.m_RoleId = roleID;
+        //this.m_Animation = base.gameObject.GetComponent<Animation>();
+        //if (this.m_Animation == null)
+        //{
+        //    Transform[] componentsInChildren = base.gameObject.GetComponentsInChildren<Transform>();
+        //    if (componentsInChildren != null)
+        //    {
+        //        Transform[] array = componentsInChildren;
+        //        for (int i = 0; i < array.Length; i++)
+        //        {
+        //            Transform transform = array[i];
+        //            Animation[] componentsInChildren2 = transform.GetComponentsInChildren<Animation>();
+        //            if (componentsInChildren2 != null)
+        //            {
+        //                Animation[] array2 = componentsInChildren2;
+        //                for (int j = 0; j < array2.Length; j++)
+        //                {
+        //                    Animation animation = array2[j];
+        //                    if (animation.GetClipCount() != 0)
+        //                    {
+        //                        this.m_Animation = animation;
+        //                        break;
+        //                    }
+        //                }
+        //            }
+        //            if (this.m_Animation != null)
+        //            {
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
+        //if (this.m_Animation == null)
+        //{
+        //    Debug.Log("RoleMotion No m_Animation_" + roleID);
+        //    return;
+        //}
+        //this.SetMotion(id);
+        //this.ClampMotion(id);
+    }
 
     //	public void SetAlwaysAnimate(bool update)
     //	{

@@ -2,6 +2,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using YouYou;
 
 public class M_PlayerController : M_GameRoleBase
 {
@@ -228,11 +229,11 @@ public class M_PlayerController : M_GameRoleBase
             this.m_NavMeshAgent.enabled = false;
         }
         base.transform.position = position;
-        //this.m_RoleMotion = base.GetComponent<M_GameRoleMotion>();
-        //if (this.m_RoleMotion != null)
-        //{
-        //    this.m_RoleMotion.Init(base.RoleID, 601);
-        //}
+        this.m_RoleMotion = base.GetComponent<M_GameRoleMotion>();
+        if (this.m_RoleMotion != null)
+        {
+            this.m_RoleMotion.Init(base.RoleID, 601);
+        }
         //LegAnimator component = base.gameObject.GetComponent<LegAnimator>();
         //if (component)
         //{
@@ -266,11 +267,11 @@ public class M_PlayerController : M_GameRoleBase
         //{
         //    this.m_RunSpeed = 3.6f;
         //}
-        //this.targetPointObj = Swd6Application.instance.m_ExploreSystem.m_MoveTargetPoint;
+        this.targetPointObj = GameEntry.Instance.m_ExploreSystem.m_MoveTargetPoint;
         //this.m_GuiManager = Swd6Application.instance.guiManager;
         this.m_MoveTarget = null;
-        //this.m_IsRun = Swd6Application.instance.m_ExploreSystem.Run;
-        //this.m_PlayerMotor.maxForwardSpeed = this.m_RunSpeed;
+        this.m_IsRun = GameEntry.Instance.m_ExploreSystem.Run;
+        this.m_PlayerMotor.maxForwardSpeed = this.m_RunSpeed;
         //this.m_JumpHeight = this.m_PlayerMotor.jumpHeight;
         //this.m_JumpGravity = this.m_PlayerMotor.gravity;
         //if (Swd6Application.instance.m_ExploreSystem.m_MapData.emType == ENUM_MapType.Town)
@@ -279,10 +280,6 @@ public class M_PlayerController : M_GameRoleBase
         //}
         //this.PlayFaceMotion(2);
         //UI_Explore.Instance.SetDashState(false, this.m_IsRun);
-        //if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
-        //{
-        //    Debug.Log("Player Init OK!!");
-        //}
     }
 
     public override void Update()
@@ -290,7 +287,7 @@ public class M_PlayerController : M_GameRoleBase
         if (!this.LockControl)
         {
             this.UpdateInput();
-            //this.UpdateMotion();
+            this.UpdateMotion();
             //this.MousePickFloor();
             this.UpdateMoveTarget();
             this.UpdateMove();
@@ -458,13 +455,13 @@ public class M_PlayerController : M_GameRoleBase
         }
     }
 
-    //	private void UpdateMotion()
-    //	{
-    //		if (this.m_bPlayNormalMotion && !base.animation.IsPlaying(this.m_PlayMotionName))
-    //		{
-    //			this.PlayIdleMotion();
-    //		}
-    //	}
+    private void UpdateMotion()
+    {
+        //if (this.m_bPlayNormalMotion && !base.animation.IsPlaying(this.m_PlayMotionName))
+        //{
+        //    this.PlayIdleMotion();
+        //}
+    }
 
     private void UpdateInput()
     {
@@ -472,10 +469,12 @@ public class M_PlayerController : M_GameRoleBase
         {
             return;
         }
+
         //if (Swd6Application.instance.m_ExploreSystem.OpenMainMenu)
         //{
         //    return;
         //}
+
         this.m_DirectionVector = GameInput.GetDirKeyMoveVector();     
         if (this.m_DirectionVector.magnitude > 1f)
         {
@@ -486,6 +485,7 @@ public class M_PlayerController : M_GameRoleBase
         Quaternion rotation = Quaternion.FromToRotation(Camera.main.transform.forward * -1f, base.transform.up);
         this.m_DirectionVector = rotation * this.m_DirectionVector;
         this.m_DirectionVector = Quaternion.Inverse(base.transform.rotation) * this.m_DirectionVector;
+
         //if (GameInput.GetKeyActionDown(KEY_ACTION.DASH))
         //{
         //    //this.Dash();
@@ -498,19 +498,24 @@ public class M_PlayerController : M_GameRoleBase
         //        }
         //    }
         //}
+
         //if (GameInput.GetKeyActionDown(KEY_ACTION.RUN))
         //{
         //    // this.SetRun();
         //}
+
         //if (Swd6Application.instance.m_ExploreSystem.IsUseActionSkill)
         //{
         //    this.m_IsDash = false;
         //}
+
         this.UpdateRun();
+
         //if (GameInput.GetKeyActionDown(KEY_ACTION.JUMP))
         //{
         //    this.Jump(false);
         //}
+
         if (this.m_DirectionVector != Vector3.zero)
         {
             if (this.MoveTarget != null)
@@ -523,8 +528,6 @@ public class M_PlayerController : M_GameRoleBase
         {
             this.m_PlayerMotor.desiredMovementDirection = Vector3.zero;
         }
-        //Debug.Log(m_PlayerMotor.desiredMovementDirection);
-        Debug.Log(m_DirectionVector);
     }
 
     public void UpdateInputOnMovePlatform()

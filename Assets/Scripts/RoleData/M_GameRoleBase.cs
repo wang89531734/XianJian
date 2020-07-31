@@ -57,7 +57,7 @@ public abstract class M_GameRoleBase : MonoBehaviour
 
     //protected S_NpcData m_NpcData;
 
-    //public M_GameRoleMotion m_RoleMotion;
+    public M_GameRoleMotion m_RoleMotion;
 
     public M_GameRoleBase.EventHandler OnTalkDelegate;
 
