@@ -501,7 +501,7 @@ public class GameObjSystem
             {
                 GameEntry.Pool.GameObjectSpawn(10001, (Transform trans2) =>
                 {
-                    trans2.SetParent(trans2);
+                    trans2.SetParent(gameObject.transform);
                 });
                 gameObject.transform.position = pos;
                 gameObject.transform.eulerAngles = new Vector3(0f, dir, 0f);

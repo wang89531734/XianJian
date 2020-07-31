@@ -94,8 +94,8 @@ public class M_PlayerMotor : CharacterMotorBase
 			M_PlayerController component = base.gameObject.GetComponent<M_PlayerController>();
 			if (component)
 			{
-				//component.UpdateInputOnMovePlatform();
-			}
+                component.UpdateInputOnMovePlatform();
+            }
 			Vector3 a = this.activePlatform.TransformPoint(this.activeLocalPlatformPoint);
 			Vector3 b = a - this.activeGlobalPlatformPoint;
 			base.transform.position = base.transform.position + b;
