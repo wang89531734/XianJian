@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(M_GameRoleMotion))]
 public abstract class M_GameRoleBase : MonoBehaviour
 {
+    public Animation m_Animation;
+
     public delegate void EventHandler(GameObject e);
 
     public delegate IEnumerator EventHandlerTalk();
@@ -56,8 +57,6 @@ public abstract class M_GameRoleBase : MonoBehaviour
     protected Component m_QuestTalk;
 
     //protected S_NpcData m_NpcData;
-
-    public M_GameRoleMotion m_RoleMotion;
 
     public M_GameRoleBase.EventHandler OnTalkDelegate;
 
@@ -547,6 +546,7 @@ public abstract class M_GameRoleBase : MonoBehaviour
         //    }
         //}
         //ExploreMiniMapSystem.Instance.CreateNpcIcon(this.RoleID);
+        m_Animation=gameObject.GetComponentInChildren<Animation>();
         this.initialize();
     }
 

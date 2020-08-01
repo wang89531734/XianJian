@@ -230,11 +230,6 @@ public class M_PlayerController : M_GameRoleBase
             this.m_NavMeshAgent.enabled = false;
         }
         base.transform.position = position;
-        this.m_RoleMotion = base.GetComponent<M_GameRoleMotion>();
-        if (this.m_RoleMotion != null)
-        {
-            this.m_RoleMotion.Init(base.RoleID, 601);
-        }
     
         //base.gameObject.AddComponent<M_FootStep>();
         //if (Swd6Application.instance.m_ExploreSystem.m_MapData.emType == ENUM_MapType.World)
@@ -260,7 +255,6 @@ public class M_PlayerController : M_GameRoleBase
         if (!this.LockControl)
         {
             this.UpdateInput();
-            this.UpdateMotion();
             this.MousePickFloor();
             this.UpdateMoveTarget();
             this.UpdateMove();
@@ -426,15 +420,6 @@ public class M_PlayerController : M_GameRoleBase
         //}
     }
 
-    private void UpdateMotion()
-    {
-        if (this.m_bPlayNormalMotion)//&& !m_Animation.IsPlaying(this.m_PlayMotionName)
-        {
-            Debug.Log("PlayIdleMotion");
-            this.PlayIdleMotion();
-        }
-    }
-
     private void UpdateInput()
     {
         if (Camera.main == null)
@@ -498,9 +483,11 @@ public class M_PlayerController : M_GameRoleBase
                 this.StopMoveToTarget();
                 return;
             }
+            m_Animation.CrossFade("Run");
         }
         else
         {
+            m_Animation.CrossFade("Stand");
             this.m_PlayerMotor.desiredMovementDirection = Vector3.zero;
         }
     }
@@ -510,10 +497,10 @@ public class M_PlayerController : M_GameRoleBase
         this.m_DirectionVector = GameInput.GetDirKeyMoveVector();
         if (this.m_DirectionVector != Vector3.zero || this.MoveTarget != null)
         {
-            this.PlayIdleMotion();
+            m_Animation.CrossFade("Run");
             return;
         }
-        this.PlayMotion(601);
+        m_Animation.CrossFade("stand");
     }
 
     private void UpdateMoveTarget()
@@ -1091,11 +1078,6 @@ public class M_PlayerController : M_GameRoleBase
     //		}
     //	}
 
-    public void PlayMotion(int id)
-    {
-        this.m_RoleMotion.SetCrossMotion(id);
-    }
-
     //	public void PlayMotionQueued(int id)
     //	{
     //		LegAnimator component = base.gameObject.GetComponent<LegAnimator>();
@@ -1105,13 +1087,6 @@ public class M_PlayerController : M_GameRoleBase
     //		}
     //		this.m_RoleMotion.SetMotionQueued(id);
     //	}
-
-    public void PlayIdleMotion()
-    {
-        base.m_RoleMotion.m_Animation.CrossFade("Run");
-        this.m_bPlayNormalMotion = false;
-        this.m_RoleMotion.m_Id = 0;
-    }
 
     //	public void SetMotionSpeed(int id, float speed)
     //	{
