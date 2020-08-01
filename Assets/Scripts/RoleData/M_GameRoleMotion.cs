@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// 游戏角色动作
+/// </summary>
 public class M_GameRoleMotion : MonoBehaviour
 {
     private int m_RoleId;
@@ -21,7 +24,7 @@ public class M_GameRoleMotion : MonoBehaviour
 
     public string[] m_MotionName;
 
-    private Animation m_Animation;
+    public Animation m_Animation;
 
     public ENUM_Motion MotionState
     {
@@ -33,7 +36,7 @@ public class M_GameRoleMotion : MonoBehaviour
         {
             this.m_MotionState = value;
             int motionState = (int)this.m_MotionState;
-            //this.SetMotion(motionState);
+            this.SetMotion(motionState);
         }
     }
 
@@ -41,52 +44,12 @@ public class M_GameRoleMotion : MonoBehaviour
     {
     }
 
-    //	public M_GameRoleMotion(Animation anim)
-    //	{
-    //		this.m_Animation = anim;
-    //	}
-
     public void Init(int roleID, int id)
     {
         this.m_RoleId = roleID;
-        //this.m_Animation = base.gameObject.GetComponent<Animation>();
-        //if (this.m_Animation == null)
-        //{
-        //    Transform[] componentsInChildren = base.gameObject.GetComponentsInChildren<Transform>();
-        //    if (componentsInChildren != null)
-        //    {
-        //        Transform[] array = componentsInChildren;
-        //        for (int i = 0; i < array.Length; i++)
-        //        {
-        //            Transform transform = array[i];
-        //            Animation[] componentsInChildren2 = transform.GetComponentsInChildren<Animation>();
-        //            if (componentsInChildren2 != null)
-        //            {
-        //                Animation[] array2 = componentsInChildren2;
-        //                for (int j = 0; j < array2.Length; j++)
-        //                {
-        //                    Animation animation = array2[j];
-        //                    if (animation.GetClipCount() != 0)
-        //                    {
-        //                        this.m_Animation = animation;
-        //                        break;
-        //                    }
-        //                }
-        //            }
-        //            if (this.m_Animation != null)
-        //            {
-        //                break;
-        //            }
-        //        }
-        //    }
-        //}
-        //if (this.m_Animation == null)
-        //{
-        //    Debug.Log("RoleMotion No m_Animation_" + roleID);
-        //    return;
-        //}
-        //this.SetMotion(id);
-        //this.ClampMotion(id);
+        this.m_Animation = base.gameObject.GetComponentInChildren<Animation>();
+        this.SetMotion(id);
+        this.ClampMotion(id);
     }
 
     //	public void SetAlwaysAnimate(bool update)
@@ -103,17 +66,18 @@ public class M_GameRoleMotion : MonoBehaviour
     //		this.m_Animation.cullingType = AnimationCullingType.BasedOnRenderers;
     //	}
 
-    //	private void Update()
-    //	{
-    //		if (this.m_Destory && this.m_Animation)
-    //		{
-    //			this.m_DelayTime -= Time.deltaTime;
-    //			if (this.IsMotionFinished() || this.m_DelayTime <= 0f)
-    //			{
-    //				UnityEngine.Object.Destroy(base.gameObject);
-    //			}
-    //		}
-    //	}
+    private void Update()
+    {
+        if (this.m_Destory && this.m_Animation)
+        {
+            Debug.Log("执行");
+            //this.m_DelayTime -= Time.deltaTime;
+            //if (this.IsMotionFinished() || this.m_DelayTime <= 0f)
+            //{
+            //    UnityEngine.Object.Destroy(base.gameObject);
+            //}
+        }
+    }
 
     //	public void DestroyObj()
     //	{
@@ -121,70 +85,48 @@ public class M_GameRoleMotion : MonoBehaviour
     //		this.m_DelayTime = this.GetMotionTime(this.m_Id);
     //	}
 
-    //	public void SetMotionState(int state)
-    //	{
-    //		this.m_MotionState = (ENUM_Motion)state;
-    //		//if (!AnimationControlSystem.GetClip(base.gameObject, this.m_MotionName[state]))
-    //		//{
-    //		//	return;
-    //		//}
-    //		this.m_Animation.CrossFade(this.m_MotionName[state]);
-    //	}
+    public void SetMotionState(int state)
+    {
+        this.m_MotionState = (ENUM_Motion)state;
+        //if (!AnimationControlSystem.GetClip(base.gameObject, this.m_MotionName[state]))
+        //{
+        //	return;
+        //}
+        this.m_Animation.CrossFade(this.m_MotionName[state]);
+    }
 
     //	public int GetMotion()
     //	{
     //		return this.m_Id;
     //	}
 
-    //	public void SetMotion(int id)
-    //	{
-    //		if (id == 0)
-    //		{
-    //			return;
-    //		}
-    //		S_AnimationData data = GameDataDB.AnimationDB.GetData(id);
-    //		if (data == null)
-    //		{
-    //			if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
-    //			{
-    //				string text = string.Concat(new object[]
-    //				{
-    //					"角色",
-    //					this.m_RoleId,
-    //					"_DBF沒有這個動作 : ",
-    //					id
-    //				});
-    //				Debug.LogWarning(text);
-    //				UI_OkCancelBox.Instance.ClearSysMsg();
-    //				UI_OkCancelBox.Instance.AddSysMsg(text, 10f);
-    //			}
-    //			return;
-    //		}
-    //		if (this.m_Animation == null)
-    //		{
-    //			if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
-    //			{
-    //				string text2 = string.Concat(new object[]
-    //				{
-    //					"角色",
-    //					this.m_RoleId,
-    //					"_身上沒有這個動作_NULL_ : ",
-    //					data.ClipName
-    //				});
-    //				Debug.LogWarning(text2);
-    //				UI_OkCancelBox.Instance.ClearSysMsg();
-    //				UI_OkCancelBox.Instance.AddSysMsg(text2, 10f);
-    //			}
-    //			return;
-    //		}
-    //		if (!AnimationControlSystem.GetClip(base.gameObject, data.ClipName))
-    //		{
-    //			return;
-    //		}
-    //		this.m_Id = id;
-    //		this.m_PlayMotionName = data.ClipName;
-    //		this.m_Animation.Play(this.m_PlayMotionName);
-    //	}
+    public void SetMotion(int id)
+    {
+        if (id == 0)
+        {
+            return;
+        }
+        S_AnimationData data = GameDataDB.AnimationDB.GetData(id);
+        Debug.Log(data.ClipName);
+        S_AnimationData data1 = GameDataDB.AnimationDB.GetData(602);
+        Debug.Log(data1.ClipName);
+        S_AnimationData data2 = GameDataDB.AnimationDB.GetData(603);
+        Debug.Log(data2.ClipName);
+        S_AnimationData data3 = GameDataDB.AnimationDB.GetData(604);
+        Debug.Log(data3.ClipName);
+        S_AnimationData data4 = GameDataDB.AnimationDB.GetData(605);
+        Debug.Log(data4.ClipName);
+        S_AnimationData data5 = GameDataDB.AnimationDB.GetData(606);
+        Debug.Log(data5.ClipName);
+        string m_ClipName="";
+        if (id == 601)
+        {
+            m_ClipName = "Stand";
+        }
+        this.m_Id = id;    
+        this.m_PlayMotionName = m_ClipName;       
+        this.m_Animation.Play(this.m_PlayMotionName);
+    }
 
     public void SetCrossMotion(int id)
     {
@@ -343,36 +285,36 @@ public class M_GameRoleMotion : MonoBehaviour
     //		return animationState == null || animationState.time >= animationState.length || !this.m_Animation.IsPlaying(data.ClipName);
     //	}
 
-    //	public void ClampMotion(int id)
-    //	{
-    //		if (id == 0)
-    //		{
-    //			return;
-    //		}
-    //		S_AnimationData data = GameDataDB.AnimationDB.GetData(id);
-    //		if (data == null)
-    //		{
-    //			return;
-    //		}
-    //		if (this.m_Animation == null)
-    //		{
-    //			return;
-    //		}
-    //		if (!AnimationControlSystem.GetClip(base.gameObject, data.ClipName))
-    //		{
-    //			return;
-    //		}
-    //		AnimationState animationState = this.m_Animation[data.ClipName];
-    //		if (animationState == null)
-    //		{
-    //			return;
-    //		}
-    //		if (animationState.wrapMode != WrapMode.Loop)
-    //		{
-    //			animationState.time = animationState.length;
-    //			this.m_Animation.Play(data.ClipName);
-    //		}
-    //	}
+    public void ClampMotion(int id)
+    {
+        if (id == 0)
+        {
+            return;
+        }
+ 
+        if (this.m_Animation == null)
+        {
+            return;
+        }
+
+        string m_ClipName = "";
+        if (id == 601)
+        {
+            m_ClipName = "Stand";
+        }
+
+        AnimationState animationState = this.m_Animation[m_ClipName];
+        if (animationState == null)
+        {
+            return;
+        }
+
+        if (animationState.wrapMode != WrapMode.Loop)
+        {
+            animationState.time = animationState.length;
+            this.m_Animation.Play(m_ClipName);
+        }
+    }
 
     //	public float GetMotionTime(int id)
     //	{

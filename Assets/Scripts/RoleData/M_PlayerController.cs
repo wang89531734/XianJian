@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 using YouYou;
 
+/// <summary>
+/// 玩家控制器
+/// </summary>
 public class M_PlayerController : M_GameRoleBase
 {
     public GameObject targetPointObj;
@@ -66,10 +69,8 @@ public class M_PlayerController : M_GameRoleBase
 
     public float m_BreakSlowWaitTime = 2f;
 
-    //private GUIManager m_GuiManager;
-
     /// <summary>
-    /// 方向
+    /// 方向向量
     /// </summary>
     public Vector3 m_DirectionVector = Vector3.zero;
 
@@ -217,8 +218,6 @@ public class M_PlayerController : M_GameRoleBase
     protected override void initialize()
     {
         this.m_PlayerMotor = (base.GetComponent(typeof(M_PlayerMotor)) as M_PlayerMotor);
-        m_Animation = base.GetComponentInChildren<Animation>();
-        //LegAnimator component = base.gameObject.GetComponent<LegAnimator>();
         //this.m_JumpMotor = (base.GetComponent(typeof(JumpAndIdle)) as JumpAndIdle);
         Vector3 position = base.transform.position;
         if (!base.GetComponent<NavMeshAgent>())
@@ -236,41 +235,13 @@ public class M_PlayerController : M_GameRoleBase
         {
             this.m_RoleMotion.Init(base.RoleID, 601);
         }
-        //LegAnimator component = base.gameObject.GetComponent<LegAnimator>();
-        //if (component)
-        //{
-        //    int num = 1024;
-        //    num |= 4;
-        //    num |= 16;
-        //    num = ~num;
-        //    component.groundLayers = num;
-        //}
-        //LegController component2 = base.gameObject.GetComponent<LegController>();
-        //if (component2)
-        //{
-        //    for (int i = 0; i < component2.sourceAnimations.Length; i++)
-        //    {
-        //        if (component2.sourceAnimations[i].name == "walk")
-        //        {
-        //            this.m_WalkSpeed = component2.sourceAnimations[i].nativeSpeed;
-        //        }
-        //        if (component2.sourceAnimations[i].name == "run")
-        //        {
-        //            this.m_RunSpeed = component2.sourceAnimations[i].nativeSpeed;
-        //        }
-        //        if (component2.sourceAnimations[i].name == "sprint")
-        //        {
-        //            this.m_DashSpeed = component2.sourceAnimations[i].nativeSpeed;
-        //        }
-        //    }
-        //}
+    
         //base.gameObject.AddComponent<M_FootStep>();
         //if (Swd6Application.instance.m_ExploreSystem.m_MapData.emType == ENUM_MapType.World)
         //{
         //    this.m_RunSpeed = 3.6f;
         //}
         this.targetPointObj = GameEntry.Instance.m_ExploreSystem.m_MoveTargetPoint;
-        //this.m_GuiManager = Swd6Application.instance.guiManager;
         this.m_MoveTarget = null;
         this.m_IsRun = GameEntry.Instance.m_ExploreSystem.Run;
         this.m_PlayerMotor.maxForwardSpeed = this.m_RunSpeed;
@@ -290,7 +261,7 @@ public class M_PlayerController : M_GameRoleBase
         {
             this.UpdateInput();
             this.UpdateMotion();
-            //this.MousePickFloor();
+            this.MousePickFloor();
             this.UpdateMoveTarget();
             this.UpdateMove();
             this.UpdateFOV();
@@ -301,11 +272,13 @@ public class M_PlayerController : M_GameRoleBase
 
         if (base.MoveRole)
         {
-            //this.UpdateMoveDest();
+            Debug.Log("MoveRole");
+            this.UpdateMoveDest();
             this.UpdateMove();
             return;
         }
         this.UpdateFaceToTarget();
+        Debug.Log("UpdateFaceToTarget");
     }
 
     //	private void UpdateWaterWave()
@@ -371,44 +344,39 @@ public class M_PlayerController : M_GameRoleBase
 
     private void UpdateFOV()
     {
-        if (!this.m_DashFOV)
-        {
-            return;
-        }
-        GameObject gameObject;
-        if (!this.m_IsDash)
-        {
-            if (this.m_OldFOV > 0f)
-            {
-                gameObject = GameObject.Find("Main Camera");
-                //gameObject.camera.fieldOfView = Mathf.Lerp(gameObject.camera.fieldOfView, this.m_OldFOV, Time.deltaTime * 5f);
-                //if (Mathf.Abs(gameObject.camera.fieldOfView - this.m_OldFOV) < 0.1f)
-                //{
-                //    gameObject.camera.fieldOfView = this.m_OldFOV;
-                //    this.m_OldFOV = 0f;
-                //}
-            }
-            return;
-        }
-        gameObject = GameObject.Find("Main Camera");
-        if (this.m_DirectionVector == Vector3.zero)
-        {
-            if (this.m_OldFOV > 0f)
-            {
-                //gameObject.camera.fieldOfView = Mathf.Lerp(gameObject.camera.fieldOfView, this.m_OldFOV, Time.deltaTime * 5f);
-            }
-            return;
-        }
-        if (gameObject)
-        {
-            //gameObject.camera.fieldOfView = Mathf.Lerp(gameObject.camera.fieldOfView, 70f, Time.deltaTime * 5f);
-        }
+        //if (!this.m_DashFOV)
+        //{
+        //    return;
+        //}
+        //GameObject gameObject;
+        //if (!this.m_IsDash)
+        //{
+        //    if (this.m_OldFOV > 0f)
+        //    {
+        //        gameObject = GameObject.Find("Main Camera");
+        //        //gameObject.camera.fieldOfView = Mathf.Lerp(gameObject.camera.fieldOfView, this.m_OldFOV, Time.deltaTime * 5f);
+        //        //if (Mathf.Abs(gameObject.camera.fieldOfView - this.m_OldFOV) < 0.1f)
+        //        //{
+        //        //    gameObject.camera.fieldOfView = this.m_OldFOV;
+        //        //    this.m_OldFOV = 0f;
+        //        //}
+        //    }
+        //    return;
+        //}
+        //gameObject = GameObject.Find("Main Camera");
+        //if (this.m_DirectionVector == Vector3.zero)
+        //{
+        //    if (this.m_OldFOV > 0f)
+        //    {
+        //        //gameObject.camera.fieldOfView = Mathf.Lerp(gameObject.camera.fieldOfView, this.m_OldFOV, Time.deltaTime * 5f);
+        //    }
+        //    return;
+        //}
+        //if (gameObject)
+        //{
+        //    //gameObject.camera.fieldOfView = Mathf.Lerp(gameObject.camera.fieldOfView, 70f, Time.deltaTime * 5f);
+        //}
     }
-
-    //	private bool UpdateMouseUIEvent()
-    //	{
-    //		return this.m_GuiManager != null && (Input.GetMouseButtonUp(0) || Input.GetMouseButton(0) || Input.GetMouseButtonUp(1) || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) && this.m_GuiManager.DetecteMouseOnUI(true);
-    //	}
 
     private void UpdateRun()
     {
@@ -425,24 +393,25 @@ public class M_PlayerController : M_GameRoleBase
                     this.m_PlayerMotor.maxForwardSpeed = this.m_WalkSpeed;
                 }
             }
-            if (!this.m_IsDash)
-            {
-                //Swd6Application.instance.m_ExploreSystem.RestoreStaminaBar();
-            }
-            else if (this.m_IsDash)
-            {
-                //if (Swd6Application.instance.m_ExploreSystem.ExpendStaminaBar(false))
-                //{
-                //    if (!this.m_bAutoJump)
-                //    {
-                //        this.m_PlayerMotor.maxForwardSpeed = this.m_DashSpeed;
-                //    }
-                //}
-                //else
-                //{
-                //    this.Dash();
-                //}
-            }
+
+            //    if (!this.m_IsDash)
+            //    {
+            //        //Swd6Application.instance.m_ExploreSystem.RestoreStaminaBar();
+            //    }
+            //    else if (this.m_IsDash)
+            //    {
+            //        //if (Swd6Application.instance.m_ExploreSystem.ExpendStaminaBar(false))
+            //        //{
+            //        //    if (!this.m_bAutoJump)
+            //        //    {
+            //        //        this.m_PlayerMotor.maxForwardSpeed = this.m_DashSpeed;
+            //        //    }
+            //        //}
+            //        //else
+            //        //{
+            //        //    this.Dash();
+            //        //}
+            //    }
         }
 
         if (this.m_SlowMove)
@@ -450,17 +419,18 @@ public class M_PlayerController : M_GameRoleBase
             this.m_DirectionVector *= this.m_WalkMultiplier;
         }
 
-        if (this.m_Reverse)
-        {
-            this.m_DirectionVector.x = -this.m_DirectionVector.x;
-            this.m_DirectionVector.z = -this.m_DirectionVector.z;
-        }
+        //if (this.m_Reverse)
+        //{
+        //    this.m_DirectionVector.x = -this.m_DirectionVector.x;
+        //    this.m_DirectionVector.z = -this.m_DirectionVector.z;
+        //}
     }
 
     private void UpdateMotion()
     {
-        if (this.m_bPlayNormalMotion && !m_Animation.IsPlaying(this.m_PlayMotionName))
+        if (this.m_bPlayNormalMotion)//&& !m_Animation.IsPlaying(this.m_PlayMotionName)
         {
+            Debug.Log("PlayIdleMotion");
             this.PlayIdleMotion();
         }
     }
@@ -477,7 +447,7 @@ public class M_PlayerController : M_GameRoleBase
         //    return;
         //}
 
-        this.m_DirectionVector = GameInput.GetDirKeyMoveVector();     
+        this.m_DirectionVector = GameInput.GetDirKeyMoveVector();
         if (this.m_DirectionVector.magnitude > 1f)
         {
             this.m_DirectionVector = this.m_DirectionVector.normalized;
@@ -488,23 +458,24 @@ public class M_PlayerController : M_GameRoleBase
         this.m_DirectionVector = rotation * this.m_DirectionVector;
         this.m_DirectionVector = Quaternion.Inverse(base.transform.rotation) * this.m_DirectionVector;
 
-        //if (GameInput.GetKeyActionDown(KEY_ACTION.DASH))
-        //{
-        //    //this.Dash();
-        //    if (this.m_DashFOV && this.m_IsDash)
-        //    {
-        //        GameObject gameObject = GameObject.Find("Main Camera");
-        //        if (gameObject)
-        //        {
-        //            //this.m_OldFOV = gameObject.camera.fieldOfView;
-        //        }
-        //    }
-        //}
+        if (GameInput.GetKeyActionDown(KEY_ACTION.DASH))
+        {
+            Debug.Log("冲刺");
+            //this.Dash();
+            //if (this.m_DashFOV && this.m_IsDash)
+            //{
+            //    GameObject gameObject = GameObject.Find("Main Camera");
+            //    if (gameObject)
+            //    {
+            //        //this.m_OldFOV = gameObject.camera.fieldOfView;
+            //    }
+            //}
+        }
 
-        //if (GameInput.GetKeyActionDown(KEY_ACTION.RUN))
-        //{
-        //    // this.SetRun();
-        //}
+        if (GameInput.GetKeyActionDown(KEY_ACTION.RUN))
+        {
+            this.SetRun();
+        }
 
         //if (Swd6Application.instance.m_ExploreSystem.IsUseActionSkill)
         //{
@@ -513,15 +484,17 @@ public class M_PlayerController : M_GameRoleBase
 
         this.UpdateRun();
 
-        //if (GameInput.GetKeyActionDown(KEY_ACTION.JUMP))
-        //{
-        //    this.Jump(false);
-        //}
+        if (GameInput.GetKeyActionDown(KEY_ACTION.JUMP))
+        {
+            Debug.Log("跳跃");
+            //this.Jump(false);
+        }
 
         if (this.m_DirectionVector != Vector3.zero)
         {
             if (this.MoveTarget != null)
             {
+                Debug.Log("StopMoveToTarget");
                 this.StopMoveToTarget();
                 return;
             }
@@ -537,11 +510,10 @@ public class M_PlayerController : M_GameRoleBase
         this.m_DirectionVector = GameInput.GetDirKeyMoveVector();
         if (this.m_DirectionVector != Vector3.zero || this.MoveTarget != null)
         {
-            //this.PlayIdleMotion();
+            this.PlayIdleMotion();
             return;
         }
-        //this.PlayMotion(601);
-        //m_Animation.CrossFade("Run");
+        this.PlayMotion(601);
     }
 
     private void UpdateMoveTarget()
@@ -550,6 +522,7 @@ public class M_PlayerController : M_GameRoleBase
         {
             return;
         }
+        Debug.Log("UpdateMoveTarget");
         //if (!this.UpdateAutoPathMove())
         //{
         //    return;
@@ -563,14 +536,14 @@ public class M_PlayerController : M_GameRoleBase
         this.UpdateRun();
     }
 
-    //	private void UpdateMoveDest()
-    //	{
-    //		if (!base.MoveRole)
-    //		{
-    //			return;
-    //		}
-    //		this.MoveDirection = this.m_MoveDesPos;
-    //	}
+    private void UpdateMoveDest()
+    {
+        if (!base.MoveRole)
+        {
+            return;
+        }
+        this.MoveDirection = this.m_MoveDesPos;
+    }
 
     private void UpdateMove()
     {
@@ -594,7 +567,6 @@ public class M_PlayerController : M_GameRoleBase
 
         this.m_PlayerMotor.desiredMovementDirection = this.m_DirectionVector;
         bool flag = false;
-
         if (this.IsJump())
         {
             if (this.m_DirectionVector.magnitude - this.m_StopDistance <= 0f)
@@ -884,109 +856,105 @@ public class M_PlayerController : M_GameRoleBase
     //		}
     //	}
 
-    //	public void MousePickFloor()
-    //	{
-    //		if (Camera.main == null)
-    //		{
-    //			return;
-    //		}
-    //		if (Swd6Application.instance.gameStateService.getCurrentState() == null)
-    //		{
-    //			Debug.Log("StateNULL");
-    //			return;
-    //		}
-    //		if (Swd6Application.instance.gameStateService.getCurrentState().name != "ExploreState")
-    //		{
-    //			return;
-    //		}
-    //		if (this.UpdateMouseUIEvent())
-    //		{
-    //			return;
-    //		}
-    //		if (Input.GetMouseButtonUp(0))
-    //		{
-    //			if (this.m_LMouseDownTime >= 0.2f)
-    //			{
-    //				this.StopMoveToTarget();
-    //			}
-    //			this.m_LMouseDownPos = Vector3.zero;
-    //			this.m_LMouseDown = false;
-    //			this.m_WalkMask = false;
-    //			this.m_LMouseDownTime = 0f;
-    //			if (this.m_PickTarget)
-    //			{
-    //				return;
-    //			}
-    //		}
-    //		if (Input.GetMouseButtonDown(0))
-    //		{
-    //			if (this.m_PickTarget)
-    //			{
-    //				return;
-    //			}
-    //			this.m_LMouseDownTime = 0f;
-    //			this.m_LMouseDown = true;
-    //			this.m_WalkMask = false;
-    //			this.StopMoveToTarget();
-    //		}
-    //		if (Input.GetMouseButton(0) && !this.m_LMouseDown)
-    //		{
-    //			this.m_LMouseDownTime += Time.deltaTime;
-    //			this.m_LMouseDown = true;
-    //			this.m_WalkMask = false;
-    //		}
-    //		if (this.LockControl)
-    //		{
-    //			return;
-    //		}
-    //		if (this.m_PlayerMotor.gravity == 0f)
-    //		{
-    //			return;
-    //		}
-    //		if (this.m_LMouseDown)
-    //		{
-    //			RaycastHit raycastHit = default(RaycastHit);
-    //			int num = 1024;
-    //			num |= 4;
-    //			num = ~num;
-    //			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    //			Physics.Linecast(ray.origin, ray.origin + ray.direction * 1000f, out raycastHit, num);
-    //			if (null != raycastHit.transform)
-    //			{
-    //				if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
-    //				{
-    //					Debug.Log("Hit_" + raycastHit.collider.name);
-    //				}
-    //				if (this.m_LMouseDownTime == 0f)
-    //				{
-    //					if (raycastHit.collider.tag == "Player")
-    //					{
-    //						return;
-    //					}
-    //					if (raycastHit.collider.tag == "No Raycast")
-    //					{
-    //						return;
-    //					}
-    //				}
-    //				if (raycastHit.collider.tag == "Walkable")
-    //				{
-    //					this.m_WalkMask = true;
-    //				}
-    //				new Vector3(raycastHit.point.x, raycastHit.point.y, raycastHit.point.z);
-    //				this.m_LMouseDownPos = raycastHit.point;
-    //				if (this.m_LMouseDownTime >= 0.5f)
-    //				{
-    //					this.StopMoveToTarget();
-    //					this.MoveDirection = raycastHit.point;
-    //				}
-    //				else if (this.m_LMouseDownTime == 0f)
-    //				{
-    //					this.SetAutoMove(this.m_LMouseDownPos, false);
-    //				}
-    //			}
-    //		}
-    //		this.m_LMouseDown = false;
-    //	}
+    public void MousePickFloor()
+    {
+        if (Camera.main == null)
+        {
+            return;
+        }
+        //if (Swd6Application.instance.gameStateService.getCurrentState() == null)
+        //{
+        //    Debug.Log("StateNULL");
+        //    return;
+        //}
+        //if (Swd6Application.instance.gameStateService.getCurrentState().name != "ExploreState")
+        //{
+        //    return;
+        //}
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (this.m_LMouseDownTime >= 0.2f)
+            {
+                this.StopMoveToTarget();
+            }
+            this.m_LMouseDownPos = Vector3.zero;
+            this.m_LMouseDown = false;
+            this.m_WalkMask = false;
+            this.m_LMouseDownTime = 0f;
+            if (this.m_PickTarget)
+            {
+                return;
+            }
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (this.m_PickTarget)
+            {
+                return;
+            }
+            this.m_LMouseDownTime = 0f;
+            this.m_LMouseDown = true;
+            this.m_WalkMask = false;
+            this.StopMoveToTarget();
+        }
+        if (Input.GetMouseButton(0) && !this.m_LMouseDown)
+        {
+            this.m_LMouseDownTime += Time.deltaTime;
+            this.m_LMouseDown = true;
+            this.m_WalkMask = false;
+        }
+        if (this.LockControl)
+        {
+            return;
+        }
+        if (this.m_PlayerMotor.gravity == 0f)
+        {
+            return;
+        }
+        if (this.m_LMouseDown)
+        {
+            RaycastHit raycastHit = default(RaycastHit);
+            int num = 1024;
+            num |= 4;
+            num = ~num;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Physics.Linecast(ray.origin, ray.origin + ray.direction * 1000f, out raycastHit, num);
+            if (null != raycastHit.transform)
+            {
+                
+                Debug.Log("Hit_" + raycastHit.collider.name);
+               
+                if (this.m_LMouseDownTime == 0f)
+                {
+                    if (raycastHit.collider.tag == "Player")
+                    {
+                        return;
+                    }
+                    if (raycastHit.collider.tag == "No Raycast")
+                    {
+                        return;
+                    }
+                }
+                if (raycastHit.collider.tag == "Walkable")
+                {
+                    this.m_WalkMask = true;
+                }
+                new Vector3(raycastHit.point.x, raycastHit.point.y, raycastHit.point.z);
+                this.m_LMouseDownPos = raycastHit.point;
+                if (this.m_LMouseDownTime >= 0.5f)
+                {
+                    this.StopMoveToTarget();
+                    this.MoveDirection = raycastHit.point;
+                }
+                else if (this.m_LMouseDownTime == 0f)
+                {
+                    //this.SetAutoMove(this.m_LMouseDownPos, false);
+                }
+            }
+        }
+        this.m_LMouseDown = false;
+    }
 
     //	public bool SetMoveTarget(Ray ray, bool applyNow, bool autoMove)
     //	{
@@ -1140,7 +1108,7 @@ public class M_PlayerController : M_GameRoleBase
 
     public void PlayIdleMotion()
     {
-        m_Animation.CrossFade("Stand");
+        base.m_RoleMotion.m_Animation.CrossFade("Run");
         this.m_bPlayNormalMotion = false;
         this.m_RoleMotion.m_Id = 0;
     }
@@ -1210,14 +1178,14 @@ public class M_PlayerController : M_GameRoleBase
     //		}
     //	}
 
-    //	public void SetRun()
-    //	{
-    //		this.m_IsRun = !this.m_IsRun;
-    //		if (!this.m_IsDash)
-    //		{
-    //			UI_Explore.Instance.SetRunState(this.m_IsRun);
-    //		}
-    //	}
+    public void SetRun()
+    {
+        this.m_IsRun = !this.m_IsRun;
+        if (!this.m_IsDash)
+        {
+            //UI_Explore.Instance.SetRunState(this.m_IsRun);
+        }
+    }
 
     //	public void Dash()
     //	{

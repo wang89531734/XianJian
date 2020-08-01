@@ -492,7 +492,6 @@ public class GameObjSystem
             return this.PlayerObj;
         }
         string name = "Player" + id;
-
        
         GameEntry.Pool.GameObjectSpawn(1, (Transform trans) =>
         {

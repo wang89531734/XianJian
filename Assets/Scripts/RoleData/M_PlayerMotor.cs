@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// 玩家移动
+/// </summary>
 [RequireComponent(typeof(CharacterController))]
 public class M_PlayerMotor : CharacterMotorBase
 {
@@ -63,6 +66,9 @@ public class M_PlayerMotor : CharacterMotorBase
 		return this.m_IsJump;
 	}
 
+    /// <summary>
+    /// 脸的朝向
+    /// </summary>
 	private void UpdateFacingDirection()
 	{
 		float magnitude = base.desiredFacingDirection.magnitude;
@@ -159,11 +165,11 @@ public class M_PlayerMotor : CharacterMotorBase
 
 	private void Update()
 	{
-		if (!this.m_NavAgent)
-		{
-			this.UpdateFacingDirection();
-		}
-		this.UpdateVelocity();
+        if (!this.m_NavAgent)
+        {
+            this.UpdateFacingDirection();
+        }
+        this.UpdateVelocity();
 	}
 
 	private void OnControllerColliderHit(ControllerColliderHit hit)

@@ -59,7 +59,7 @@ public class GameDataDB
 
     //	public static T_GameDB<S_BattleGroup> BattleGroupDB = new T_GameDB<S_BattleGroup>();
 
-    //	public static T_GameDB<S_AnimationData> AnimationDB = new T_GameDB<S_AnimationData>();
+    public static T_GameDB<S_AnimationData> AnimationDB = new T_GameDB<S_AnimationData>();
 
     //	public static T_GameDB<S_EffectData> EffectDB = new T_GameDB<S_EffectData>();
 
@@ -112,22 +112,6 @@ public class GameDataDB
     //	public static T_GameDB<S_ReviewStory> ReviewStoryDB = new T_GameDB<S_ReviewStory>();
 
     public static Dictionary<int, string> LanguageDB = new Dictionary<int, string>();
-
-    //	public static void LoadDBFEditor()
-    //	{
-    //		string dataPath = GameDataDB.m_DBF_Path + "NpcData.dbf";
-    //		GameDataDB.LoadFromFile<S_NpcData>(GameDataDB.NpcDB, dataPath, true);
-    //		dataPath = GameDataDB.m_DBF_Path + "NpcData1.dbf";
-    //		GameDataDB.LoadFromFile<S_NpcData>(GameDataDB.NpcDB, dataPath, false);
-    //		dataPath = GameDataDB.m_DBF_Path + "NpcData2.dbf";
-    //		GameDataDB.LoadFromFile<S_NpcData>(GameDataDB.NpcDB, dataPath, false);
-    //		dataPath = GameDataDB.m_DBF_Path + "NpcData3.dbf";
-    //		GameDataDB.LoadFromFile<S_NpcData>(GameDataDB.NpcDB, dataPath, false);
-    //		dataPath = GameDataDB.m_DBF_Path + "AnimationData.dbf";
-    //		GameDataDB.LoadFromFile<S_AnimationData>(GameDataDB.AnimationDB, dataPath, true);
-    //		dataPath = GameDataDB.m_DBF_Path + "AnimationData2.dbf";
-    //		GameDataDB.LoadFromFile<S_AnimationData>(GameDataDB.AnimationDB, dataPath, false);
-    //	}
 
     public static IEnumerator LoadDBF()
     {
@@ -194,10 +178,10 @@ public class GameDataDB
         //GameDataDB.LoadFromFile<S_Quest>(GameDataDB.QuestDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "MainQuest.dbf";
         //GameDataDB.LoadFromFile<S_MainQuest>(GameDataDB.MainQuestDB, dataPath, true);
-        //dataPath = GameDataDB.m_DBF_Path + "AnimationData.dbf";
-        //GameDataDB.LoadFromFile<S_AnimationData>(GameDataDB.AnimationDB, dataPath, true);
-        //dataPath = GameDataDB.m_DBF_Path + "AnimationData2.dbf";
-        //GameDataDB.LoadFromFile<S_AnimationData>(GameDataDB.AnimationDB, dataPath, false);
+        dataPath = GameDataDB.m_DBF_Path + "AnimationData.dbf";
+        GameDataDB.LoadFromFile<S_AnimationData>(GameDataDB.AnimationDB, dataPath, true);
+        dataPath = GameDataDB.m_DBF_Path + "AnimationData2.dbf";
+        GameDataDB.LoadFromFile<S_AnimationData>(GameDataDB.AnimationDB, dataPath, false);
         //dataPath = GameDataDB.m_DBF_Path + "EffectData.dbf";
         //GameDataDB.LoadFromFile<S_EffectData>(GameDataDB.EffectDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "OSData.dbf";
