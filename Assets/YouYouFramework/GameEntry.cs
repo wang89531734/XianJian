@@ -228,15 +228,6 @@ namespace YouYou
             get;
             private set;
         }
-
-        /// <summary>
-        /// 角色管理器
-        /// </summary>
-        public static RoleManager Role
-        {
-            get;
-            private set;
-        }
         #endregion
 
         #region InitManagers 初始化管理器
@@ -257,7 +248,6 @@ namespace YouYou
             Scene = new YouYouSceneManager();
             Resource = new AddressableManager();
             UI = new YouYouUIManager();
-            Role = new RoleManager();
 
             Logger.Init();
             Event.Init();
@@ -271,7 +261,6 @@ namespace YouYou
             Scene.Init();
             Resource.Init();
             UI.Init();
-            Role.Init();
             //进入第一个流程
 
             Procedure.ChangeState(ProcedureState.Preload);
@@ -379,6 +368,39 @@ namespace YouYou
             Scene.OnUpdate();
             Resource.OnUpdate();
             UI.OnUpdate();
+
+            if (this.m_InitializeOK)
+            {
+                //if (this.m_GameDataSystem != null)
+                //{
+                //    this.m_GameDataSystem.Update();
+                //}
+                //if (this.m_QuestSystem != null)
+                //{
+                //    this.m_QuestSystem.Update();
+                //}
+                //if (this.m_AchievementSystem != null)
+                //{
+                //    this.m_AchievementSystem.Update();
+                //}
+                //if (this.m_GameMenuSystem != null)
+                //{
+                //    this.m_GameMenuSystem.Update();
+                //}
+                //if (this.m_QualitySettingSystem != null)
+                //{
+                //    this.m_QualitySettingSystem.Update();
+                //}
+                //if (this.m_UpdateResizeTime > 0f)
+                //{
+                //    this.m_UpdateResizeTime -= Time.deltaTime;
+                //    if (this.m_UpdateResizeTime <= 0f)
+                //    {
+                //        this.m_UpdateResizeTime = 0f;
+                //        ExploreMiniMapSystem.Instance.ReSize(this.m_GameDataSystem.m_MapInfo.MapID);
+                //    }
+                //}
+            }
         }
 
         /// <summary>
@@ -475,7 +497,7 @@ namespace YouYou
 
         public GameObjSystem m_GameObjSystem { get; private set; }
 
-        //public StorySystem m_StorySystem { get; private set; }
+        public StorySystem m_StorySystem { get; private set; }
 
         private void InitGameSystem()
         {
@@ -517,8 +539,8 @@ namespace YouYou
             ////{
             ////    this.m_WOPSystem.InitForNewGame();
             ////}
-            //this.m_StorySystem = new StorySystem();
-            //this.m_StorySystem.Initialize();
+            this.m_StorySystem = new StorySystem();
+            this.m_StorySystem.Initialize();
             //this.m_MusicControlSystem = new MusicSystem();
             //this.m_UserBehavior = new UserBehavior();
             //this.m_UserBehavior.DirectoryPath = Application.dataPath + "/../Launcher/UBData/";      
@@ -529,8 +551,8 @@ namespace YouYou
 
         public void StartNewGame()
         {
-            //this.m_GameDataSystem.InitRoleData();
-            //base.StartCoroutine(DoTalk());
+            this.m_GameDataSystem.InitRoleData();
+            base.StartCoroutine(DoTalk());
         }
 
         public IEnumerator DoTalk()
@@ -555,8 +577,8 @@ namespace YouYou
             //}
             //GameTalk.StartTalk(false);
             //GameTalk.HideAllNpc(1);
-            //GameTalk.PlayStory(100, "ME0000");
-            //yield return base.StartCoroutine(GameTalk.IsPlayStoryEnd());
+            GameTalk.PlayStory(100, "ME0000");
+            yield return base.StartCoroutine(GameTalk.IsPlayStoryEnd());
             yield return null;
             yield break;
         }
@@ -581,24 +603,63 @@ namespace YouYou
         public void ChangeToStoryState(int mapID, string storyName)
         {
             GameEntry.Procedure.SetData("m_StoryName", storyName);
-            if (GameEntry.Scene.m_CurrLoadSceneId != mapID && mapID!=100)
+
+            if (mapID == 100)//&& currentGameState is MenuState
             {
-                Debug.Log("切换状态");
-                //要加载场景
-                //this.ChangeMap(text, mapID, 0f, 0f, 0f, 0f);
+                //base.PushState(text);
+                //MenuState menuState = Swd6Application.instance.GetGameStateByName("MenuState") as MenuState;
+                //if (menuState != null)
+                //{
+                //    menuState.DestroyBackground();
+                //    return;
+                //}
             }
-            else if(GameEntry.Procedure.CurrProcedureState != ProcedureState.SelectRole)
+            else if (mapID == this.m_GameDataSystem.m_MapInfo.MapID)
             {
-                //切换状态
-                Debug.Log("切换状态");
-                GameEntry.Procedure.ChangeState(ProcedureState.SelectRole);
+                //if (currentGameState is StoryState)
+                //{
+                //    storyState.CreateNewStory();
+                //    return;
+                //}
+                //if (currentGameState is ExploreState)
+                //{
+                //    base.PushState(text);
+                //    return;
+                //}
+                //if (currentGameState is FightState)
+                //{
+                //    this.SwitchState(text);
+                //    return;
+                //}
+                //if (currentGameState is MenuState)
+                //{
+                //    base.PushState(text);
+                //    return;
+                //}
             }
             else
             {
-                Debug.Log("执行剧情");
-                //开始
-                //storyState.CreateNewStory();
+                //this.ChangeMap(text, mapID, 0f, 0f, 0f, 0f);
             }
+
+            //if (GameEntry.Scene.m_CurrLoadSceneId != mapID && mapID!=100)
+            //{
+            //    Debug.Log("切换状态");
+            //    //要加载场景
+            //    //this.ChangeMap(text, mapID, 0f, 0f, 0f, 0f);
+            //}
+            //else if(GameEntry.Procedure.CurrProcedureState != ProcedureState.SelectRole)
+            //{
+            //    //切换状态
+            //    Debug.Log("切换状态");
+            //    GameEntry.Procedure.ChangeState(ProcedureState.SelectRole);
+            //}
+            //else
+            //{
+            //    Debug.Log("执行剧情");
+            //    //开始
+            //    //storyState.CreateNewStory();
+            //}
         }
     }
 }

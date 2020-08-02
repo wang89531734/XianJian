@@ -49,7 +49,7 @@ public class GameDataSystem
 
     private C_RoleDataEx[] m_RoldData;
 
-    //private Dictionary<int, S_MapData> m_MapData;
+    private Dictionary<int, S_MapData> m_MapData;
 
     private int[] m_SevenRingNeedExp = new int[]
     {
@@ -147,17 +147,17 @@ public class GameDataSystem
         this.m_ReviewStory = new int[512];
         this.m_FightRole = new int[3];
         //this.m_MapInfo = default(S_MapInfo);
-        //this.m_GameFlag = new S_GameFlag();
-        //this.m_MapData = new Dictionary<int, S_MapData>();
+        this.m_GameFlag = new S_GameFlag();
+        this.m_MapData = new Dictionary<int, S_MapData>();
         //this.m_MapMusicData = new Dictionary<int, S_MapMusicData>();
         //this.m_PartyRole = new List<S_PartyData>();
         this.m_TeamRoleList = new List<int>();
         this.m_ActionSkillList = new List<int>();
-        //this.m_RoldData = new C_RoleDataEx[10];
-        //for (int i = 0; i < 10; i++)
-        //{
-        //    this.m_RoldData[i] = new C_RoleDataEx();
-        //}
+        this.m_RoldData = new C_RoleDataEx[10];
+        for (int i = 0; i < 10; i++)
+        {
+            this.m_RoldData[i] = new C_RoleDataEx();
+        }
     }
 
     public void Reset()
@@ -179,14 +179,17 @@ public class GameDataSystem
         {
             this.m_FightRole[i] = 0;
         }
-        //this.m_MapInfo.Clear();
-        //this.m_GameFlag.Clear();
+        this.m_MapInfo.Clear();
+        this.m_GameFlag.Clear();
         //this.m_PartyRole.Clear();
         this.m_TeamRoleList.Clear();
         this.m_ActionSkillList.Clear();
         //this.ClearMapData();
     }
 
+    /// <summary>
+    /// 初始队伍角色列表
+    /// </summary>
     public void InitTeamRoleList()
     {
         int[] sourceArray = new int[]
@@ -218,6 +221,9 @@ public class GameDataSystem
         Array.Copy(sourceArray, this.m_SevenRingNeedExp, this.m_SevenRingNeedExp.Length);
     }
 
+    /// <summary>
+    /// 初始化角色数据
+    /// </summary>
     public void InitRoleData()
     {
         this.Reset();
@@ -475,6 +481,13 @@ public class GameDataSystem
     //		this.m_GameFlag.Set(flag, val);
     //	}
 
+    /// <summary>
+    /// 设置开始数据
+    /// </summary>
+    /// <param name="roleId"></param>
+    /// <param name="dateId"></param>
+    /// <param name="levelId"></param>
+    /// <returns></returns>
     public bool SetStartData(int roleId, int dateId, int levelId)
     {
         int num = roleId - 1;
@@ -483,7 +496,6 @@ public class GameDataSystem
         {
             return false;
         }
-
         this.m_RoldData[num].BaseRoleData.ID = roleId;
         this.m_RoldData[num].BaseRoleData.FamilyName = GameDataDB.StrID(num * 10 + 51);
         this.m_RoldData[num].BaseRoleData.Name = GameDataDB.StrID(num * 10 + 52);
@@ -563,36 +575,36 @@ public class GameDataSystem
     //		});
     //	}
 
-    //	public S_MapData AddMapData(int mapid)
-    //	{
-    //		S_MapData s_MapData;
-    //		if (!this.m_MapData.ContainsKey(mapid))
-    //		{
-    //			s_MapData = GameDataDB.MapDB.GetData(mapid);
-    //			if (s_MapData != null)
-    //			{
-    //				this.m_MapData.Add(mapid, s_MapData);
-    //			}
-    //		}
-    //		else
-    //		{
-    //			s_MapData = this.m_MapData[mapid];
-    //		}
-    //		return s_MapData;
-    //	}
+    public S_MapData AddMapData(int mapid)
+    {
+        S_MapData s_MapData;
+        if (!this.m_MapData.ContainsKey(mapid))
+        {
+            s_MapData = GameDataDB.MapDB.GetData(mapid);
+            if (s_MapData != null)
+            {
+                this.m_MapData.Add(mapid, s_MapData);
+            }
+        }
+        else
+        {
+            s_MapData = this.m_MapData[mapid];
+        }
+        return s_MapData;
+    }
 
-    //	public S_MapData GetMapData(int mapid)
-    //	{
-    //		if (!this.m_MapData.ContainsKey(mapid))
-    //		{
-    //			this.AddMapData(mapid);
-    //		}
-    //		if (this.m_MapData.ContainsKey(mapid))
-    //		{
-    //			return this.m_MapData[mapid];
-    //		}
-    //		return null;
-    //	}
+    public S_MapData GetMapData(int mapid)
+    {
+        if (!this.m_MapData.ContainsKey(mapid))
+        {
+            this.AddMapData(mapid);
+        }
+        if (this.m_MapData.ContainsKey(mapid))
+        {
+            return this.m_MapData[mapid];
+        }
+        return null;
+    }
 
     //	public void ClearMapData()
     //	{
@@ -672,7 +684,7 @@ public class GameDataSystem
             string str = this.m_RoldData[roleId - 1].BaseRoleData.FamilyName + this.m_RoldData[roleId - 1].BaseRoleData.Name;
             //UI_OkCancelBox.Instance.AddSysMsg(str + GameDataDB.StrID(1060), 3f);
         }
-        //this.FlagON(roleId);
+        this.FlagON(roleId);
         this.m_RoldData[roleId - 1].BaseRoleData.IsJoin = true;
         //this.m_RoldData[roleId - 1].BaseRoleData.IsFight = this.CheckCanFight();
         //this.UpdatePartyRole();

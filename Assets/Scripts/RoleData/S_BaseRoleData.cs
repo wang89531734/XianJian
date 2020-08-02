@@ -7,8 +7,14 @@ public class S_BaseRoleData
 {
 	public int ID;
 
+    /// <summary>
+    /// 姓
+    /// </summary>
 	public string FamilyName;
 
+    /// <summary>
+    /// 名
+    /// </summary>
 	public string Name;
 
 	public int MaxHP;
@@ -86,6 +92,11 @@ public class S_BaseRoleData
 		}
 	}
 
+    /// <summary>
+    /// 设置开始数据
+    /// </summary>
+    /// <param name="startData"></param>
+    /// <param name="roldId"></param>
 	public void SetStartData(S_StartRoleData startData, int roldId)
 	{
 		int id = (roldId - 1) * 150 + startData.Level;
