@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - scene_stone
   - building
+  - Npc
   layers:
   - Default
   - TransparentFX

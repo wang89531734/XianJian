@@ -487,7 +487,7 @@ public class M_PlayerController : M_GameRoleBase
         }
         else
         {
-            m_Animation.CrossFade("Stand");
+            m_Animation.CrossFade("Stand",0.5f);
             this.m_PlayerMotor.desiredMovementDirection = Vector3.zero;
         }
     }
@@ -1243,133 +1243,134 @@ public class M_PlayerController : M_GameRoleBase
     //		return this.m_PlayerMotor == null || this.m_PlayerMotor.grounded;
     //	}
 
-    //	private void OnTriggerEnter(Collider other)
-    //	{
-    //		if (other.tag == "Npc")
-    //		{
-    //			this.m_EnterTalk = true;
-    //		}
-    //		if (other.tag == "MusicEvent")
-    //		{
-    //			other.gameObject.SendMessage("OnTalk", SendMessageOptions.DontRequireReceiver);
-    //			if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
-    //			{
-    //				Debug.Log("執行切換音樂事件_" + other.name);
-    //			}
-    //		}
-    //		if (other.tag == "Event")
-    //		{
-    //			this.m_EnterTalkEvent = true;
-    //			if (Swd6Application.instance.gameStateService.getCurrentState().name == "GameMenuState")
-    //			{
-    //				Swd6Application.instance.PopState();
-    //			}
-    //			if (base.MoveRole)
-    //			{
-    //				return;
-    //			}
-    //			other.gameObject.SendMessage("OnTalk", SendMessageOptions.DontRequireReceiver);
-    //			if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
-    //			{
-    //				Debug.Log("執行事件_" + other.name);
-    //			}
-    //		}
-    //		if (other.tag == "BattleEvent")
-    //		{
-    //			Swd6Application.instance.m_ExploreSystem.SetBattleAreaState(other.name);
-    //		}
-    //		if (other.tag == "WaterEvent" || other.tag == "WaterEvent2")
-    //		{
-    //			if (!this.m_WalkInWater)
-    //			{
-    //				string name;
-    //				if (other.tag == "WaterEvent")
-    //				{
-    //					name = "footstep_Water1";
-    //					this.m_FootStepWaterName = "footstep_Water2";
-    //				}
-    //				else
-    //				{
-    //					name = "footstep_Blood1";
-    //					this.m_FootStepWaterName = "footstep_Blood2";
-    //				}
-    //				if (this.IsJumpOver())
-    //				{
-    //					int num = 256;
-    //					num = ~num;
-    //					RaycastHit raycastHit = default(RaycastHit);
-    //					if (Physics.Raycast(new Ray
-    //					{
-    //						origin = base.gameObject.transform.position + new Vector3(0f, 1f, 0f),
-    //						direction = new Vector3(0f, -1f, 0f)
-    //					}, out raycastHit, 1000f, num))
-    //					{
-    //						GameObject gameObject = EffectGenerator.CreateEffectGameObject(name);
-    //						if (gameObject != null)
-    //						{
-    //							gameObject.transform.position = raycastHit.point;
-    //						}
-    //						gameObject = EffectGenerator.CreateEffectGameObject(this.m_FootStepWaterName);
-    //						if (gameObject != null)
-    //						{
-    //							gameObject.transform.position = raycastHit.point;
-    //						}
-    //					}
-    //					MusicControlSystem.PlaySound(3662, 1);
-    //				}
-    //			}
-    //			this.m_WalkInWater = true;
-    //		}
-    //	}
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.tag+"");
+        //if (other.tag == "Npc")
+        //{
+        //    this.m_EnterTalk = true;
+        //}
+        //if (other.tag == "MusicEvent")
+        //{
+        //    other.gameObject.SendMessage("OnTalk", SendMessageOptions.DontRequireReceiver);
+        //    if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
+        //    {
+        //        Debug.Log("執行切換音樂事件_" + other.name);
+        //    }
+        //}
+        //if (other.tag == "Event")
+        //{
+        //    this.m_EnterTalkEvent = true;
+        //    if (Swd6Application.instance.gameStateService.getCurrentState().name == "GameMenuState")
+        //    {
+        //        Swd6Application.instance.PopState();
+        //    }
+        //    if (base.MoveRole)
+        //    {
+        //        return;
+        //    }
+        //    other.gameObject.SendMessage("OnTalk", SendMessageOptions.DontRequireReceiver);
+        //    if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
+        //    {
+        //        Debug.Log("執行事件_" + other.name);
+        //    }
+        //}
+        //if (other.tag == "BattleEvent")
+        //{
+        //    Swd6Application.instance.m_ExploreSystem.SetBattleAreaState(other.name);
+        //}
+        //if (other.tag == "WaterEvent" || other.tag == "WaterEvent2")
+        //{
+        //    if (!this.m_WalkInWater)
+        //    {
+        //        string name;
+        //        if (other.tag == "WaterEvent")
+        //        {
+        //            name = "footstep_Water1";
+        //            this.m_FootStepWaterName = "footstep_Water2";
+        //        }
+        //        else
+        //        {
+        //            name = "footstep_Blood1";
+        //            this.m_FootStepWaterName = "footstep_Blood2";
+        //        }
+        //        if (this.IsJumpOver())
+        //        {
+        //            int num = 256;
+        //            num = ~num;
+        //            RaycastHit raycastHit = default(RaycastHit);
+        //            if (Physics.Raycast(new Ray
+        //            {
+        //                origin = base.gameObject.transform.position + new Vector3(0f, 1f, 0f),
+        //                direction = new Vector3(0f, -1f, 0f)
+        //            }, out raycastHit, 1000f, num))
+        //            {
+        //                GameObject gameObject = EffectGenerator.CreateEffectGameObject(name);
+        //                if (gameObject != null)
+        //                {
+        //                    gameObject.transform.position = raycastHit.point;
+        //                }
+        //                gameObject = EffectGenerator.CreateEffectGameObject(this.m_FootStepWaterName);
+        //                if (gameObject != null)
+        //                {
+        //                    gameObject.transform.position = raycastHit.point;
+        //                }
+        //            }
+        //            MusicControlSystem.PlaySound(3662, 1);
+        //        }
+        //    }
+        //    this.m_WalkInWater = true;
+        //}
+    }
 
-    //	private void OnTriggerStay(Collider other)
-    //	{
-    //		if (other.tag == "Npc")
-    //		{
-    //			this.m_EnterTalk = true;
-    //		}
-    //		M_GameTrap component = other.gameObject.GetComponent<M_GameTrap>();
-    //		if (component != null && component.GetTrapData() != null)
-    //		{
-    //			this.m_EnterTalk = false;
-    //		}
-    //		M_GameRoleBase component2 = other.gameObject.GetComponent<M_GameRoleBase>();
-    //		if (component2 && component2.Invalid)
-    //		{
-    //			this.m_EnterTalk = false;
-    //		}
-    //	}
+    private void OnTriggerStay(Collider other)
+    {
+        //if (other.tag == "Npc")
+        //{
+        //    this.m_EnterTalk = true;
+        //}
+        //M_GameTrap component = other.gameObject.GetComponent<M_GameTrap>();
+        //if (component != null && component.GetTrapData() != null)
+        //{
+        //    this.m_EnterTalk = false;
+        //}
+        //M_GameRoleBase component2 = other.gameObject.GetComponent<M_GameRoleBase>();
+        //if (component2 && component2.Invalid)
+        //{
+        //    this.m_EnterTalk = false;
+        //}
+    }
 
-    //	private void OnTriggerExit(Collider other)
-    //	{
-    //		this.m_EnterTalkEvent = false;
-    //		this.m_EnterTalk = false;
-    //		UI_PartnerTalkDialog.Instance.SetTalkEventObj(null);
-    //		if (other.tag == "MusicEvent")
-    //		{
-    //			if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
-    //			{
-    //				Debug.Log("切回原本地圖音樂!!");
-    //			}
-    //			Swd6Application.instance.m_ExploreSystem.PlayMusic(0.5f);
-    //		}
-    //		if (other.tag == "BattleEvent")
-    //		{
-    //			Swd6Application.instance.m_ExploreSystem.ExitBattleArea(other.name);
-    //		}
-    //		if (other.tag == "WaterEvent" || other.tag == "WaterEvent2")
-    //		{
-    //			if (this.m_WalkInWater && this.IsJump())
-    //			{
-    //				MusicControlSystem.PlaySound(3663, 1);
-    //			}
-    //			this.m_WalkInWater = false;
-    //		}
-    //	}
+    private void OnTriggerExit(Collider other)
+    {
+       // this.m_EnterTalkEvent = false;
+       // this.m_EnterTalk = false;
+       //// UI_PartnerTalkDialog.Instance.SetTalkEventObj(null);
+       // if (other.tag == "MusicEvent")
+       // {
+       //     //if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
+       //     //{
+       //     //    Debug.Log("切回原本地圖音樂!!");
+       //     //}
+       //     //Swd6Application.instance.m_ExploreSystem.PlayMusic(0.5f);
+       // }
+       // if (other.tag == "BattleEvent")
+       // {
+       //     //Swd6Application.instance.m_ExploreSystem.ExitBattleArea(other.name);
+       // }
+       // if (other.tag == "WaterEvent" || other.tag == "WaterEvent2")
+       // {
+       //     if (this.m_WalkInWater && this.IsJump())
+       //     {
+       //         //MusicControlSystem.PlaySound(3663, 1);
+       //     }
+       //     this.m_WalkInWater = false;
+       // }
+    }
 
-    //	private void OnControllerColliderHit(ControllerColliderHit hit)
-    //	{
-    //	}
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+    }
 
     //	private void OnFootStrike()
     //	{

@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 8686399080009569391}
   - component: {fileID: 2582338496861142882}
   - component: {fileID: -2268598688147293535}
+  - component: {fileID: 4753378192408582264}
   m_Layer: 8
   m_Name: RoleCtrl
   m_TagString: Player
@@ -99,6 +100,7 @@ MonoBehaviour:
   m_FaceDownId: 0
   m_MotionState: 0
   m_MotionName: []
+  m_Animation: {fileID: 0}
 --- !u!114 &-2268598688147293535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +121,6 @@ MonoBehaviour:
   m_WaitMotion: 0
   m_EnterTalk: 0
   m_DontRemoveScript: 0
-  m_RoleMotion: {fileID: 0}
   targetPointObj: {fileID: 0}
   m_NavMeshAgent: {fileID: 0}
   m_WalkSpeed: 1
@@ -154,3 +155,16 @@ MonoBehaviour:
   m_JumpHeight: 0
   m_JumpGravity: 0
   m_EnterTalkEvent: 0
+--- !u!65 &4753378192408582264
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6737525416784522626}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0}
