@@ -345,13 +345,10 @@ namespace YouYou
         void Start()
         {
             InitManagers();
-
-            base.StartCoroutine(this.ReadGameDB());//读取数据后期换
-            InitGameSystem();
-            this.m_InitializeOK = true;
-
             UnityEngine.Time.timeScale = timeScale = 1;
             Application.targetFrameRate = ParamsSettings.GetGradeParamData(ConstDefine.targetFrameRate, CurrDeviceGrade);
+
+            base.StartCoroutine(this.InitializeNormalGame());
         }
 
         void Update()
@@ -468,16 +465,69 @@ namespace YouYou
 #endif
         }
 
-        private IEnumerator ReadGameDB()
+
+        private IEnumerator InitializeNormalGame()
         {
-            string MapBlockPath = Application.dataPath + "/../DBF/";
-            string DBF_Path = Application.dataPath + "/../DBF/";
-            string LanguagePath = Application.dataPath + "/../DBF/";
-            GameDataDB.SetConevrt(new GameScriptPlugin.SwdJsonCovertor());
-            GameDataDB.Initialize(MapBlockPath, DBF_Path, LanguagePath);
-            yield return base.StartCoroutine(GameDataDB.LoadDBF());
-            yield return base.StartCoroutine(GameDataDB.LoadLanguage());
+            this.InitSystemSettings();
+            yield return null;
+            new ResourcesManager();
+            yield return null;
+            this.ReadGameDB();
+            //this.InitGUI();
+            //this.InitGameSystem();
+            //this.InitGameState();
+            //this.InitRequiredObject();
+            //this.m_InitializeOK = true;
+            //if (this.m_StartScene != string.Empty)
+            //{
+            //    AsyncOperation async = Application.LoadLevelAsync(this.m_StartScene);
+            //    while (!async.isDone)
+            //    {
+            //        yield return 1;
+            //    }
+            //    this.SwitchState("ExploreState");
+            //}
+            //else
+            //{
+            //    AsyncOperation async2 = Application.LoadLevelAsync("Logo");
+            //    while (!async2.isDone)
+            //    {
+            //        yield return 1;
+            //    }
+            //    this.SwitchState("LogoState");
+            //}
             yield break;
+        }
+
+        /// <summary>
+        /// 初始化系统设置
+        /// </summary>
+        protected void InitSystemSettings()
+        {
+            GameInput.Initialize();
+            //this.m_QualitySettingSystem = new QualitySettingSystem();
+            //this.m_QualitySettingSystem.Initialize();
+            //this.m_NormalSettingSystem = new NormalSettingSystem();
+            //this.m_NormalSettingSystem.Initialize();
+            //this.m_SoundSettingSystem = new SoundSettingSystem();
+            //this.m_SoundSettingSystem.Initialize();
+            //this.m_ControlSettingSystem = new ControlSettingSystem();
+            //this.m_ControlSettingSystem.Initialize();
+            //this.LoadSettings();
+            //this.m_QualitySettingSystem.SetFirstGameQuality();
+            //this.m_ControlSettingSystem.UpdateControlSetting();
+            //this.SaveSettings(false);
+        }
+
+        protected virtual void ReadGameDB()
+        {
+            string mapBlockPath = Application.dataPath + "/../DBF/";
+            string dbf_Path = Application.dataPath + "/../DBF/";
+            string languagePath = Application.dataPath + "/../DBF/";
+            GameDataDB.SetConevrt(new SwdJsonCovertor());
+            GameDataDB.Initialize(mapBlockPath, dbf_Path, languagePath);
+            GameDataDB.LoadDBF();
+            GameDataDB.LoadLanguage();
         }
 
         public GameDataSystem m_GameDataSystem { get; private set; }
@@ -501,7 +551,6 @@ namespace YouYou
 
         private void InitGameSystem()
         {
-            GameInput.Initialize();
             this.m_GameObjSystem = new GameObjSystem();
             this.m_GameObjSystem.Initialize();
             this.m_GameDataSystem = new GameDataSystem();
@@ -559,27 +608,33 @@ namespace YouYou
         {
             //GameTalk.StartTalk(true);
             //yield return base.StartCoroutine(GameTalk.WaitFadeTime(1f, 2f));
-            //GameTalk.AddItem(901, 3, false);
-            //GameTalk.AddItem(921, 3, false);
-            //GameTalk.AddMoney(200, false);
-            //GameTalk.FlagOFF(61);
-            //GameTalk.FlagOFF(62);
-            //GameTalk.FlagOFF(63);
-            //GameTalk.FlagOFF(64);
+            //GameTalk.AddItem(1301, 3, false);
+            //GameTalk.AddMoney(500, false);
+            //int a = GameTalk.GetPlayGameCount();
+            //if (a >= 2)
+            //{
+            //    GameTalk.AddItem(686, 1, false);
+            //    GameTalk.AddItem(687, 1, false);
+            //    GameTalk.AddItem(688, 1, false);
+            //    GameTalk.AddItem(689, 1, false);
+            //    GameTalk.AddItem(690, 1, false);
+            //}
+            //if (!GameTalk.GetFlag(1001) && !GameTalk.GetFlag(1002))
+            //{
+            //    GameTalk.FlagON(1001);
+            //}
+            //yield return base.StartCoroutine(GameTalk.OpenMakeName(1));
             //GameObject listener = GameObject.Find("Menu Listener");
             //if (listener != null && listener.GetComponent<AudioListener>() != null)
             //{
             //    listener.GetComponent<AudioListener>().enabled = false;
             //}
-            //if (!GameTalk.GetFlag(1001))
+            //GameObject cam = GameObject.Find("Camera");
+            //if (cam != null && cam.GetComponent<Camera>() != null)
             //{
-            //    GameTalk.FlagON(1001);
+            //    cam.GetComponent<Camera>().enabled = false;
             //}
-            //GameTalk.StartTalk(false);
-            //GameTalk.HideAllNpc(1);
-            GameTalk.PlayStory(100, "ME0000");
-            yield return base.StartCoroutine(GameTalk.IsPlayStoryEnd());
-            yield return null;
+            GameTalk.PlayStory(100, "ME11000");
             yield break;
         }
 
@@ -604,15 +659,9 @@ namespace YouYou
         {
             GameEntry.Procedure.SetData("m_StoryName", storyName);
 
-            if (mapID == 100)//&& currentGameState is MenuState
+            if (mapID == 100)
             {
-                //base.PushState(text);
-                //MenuState menuState = Swd6Application.instance.GetGameStateByName("MenuState") as MenuState;
-                //if (menuState != null)
-                //{
-                //    menuState.DestroyBackground();
-                //    return;
-                //}
+                GameEntry.Procedure.ChangeState(ProcedureState.SelectRole);
             }
             else if (mapID == this.m_GameDataSystem.m_MapInfo.MapID)
             {
@@ -641,25 +690,6 @@ namespace YouYou
             {
                 //this.ChangeMap(text, mapID, 0f, 0f, 0f, 0f);
             }
-
-            //if (GameEntry.Scene.m_CurrLoadSceneId != mapID && mapID!=100)
-            //{
-            //    Debug.Log("切换状态");
-            //    //要加载场景
-            //    //this.ChangeMap(text, mapID, 0f, 0f, 0f, 0f);
-            //}
-            //else if(GameEntry.Procedure.CurrProcedureState != ProcedureState.SelectRole)
-            //{
-            //    //切换状态
-            //    Debug.Log("切换状态");
-            //    GameEntry.Procedure.ChangeState(ProcedureState.SelectRole);
-            //}
-            //else
-            //{
-            //    Debug.Log("执行剧情");
-            //    //开始
-            //    //storyState.CreateNewStory();
-            //}
         }
     }
 }

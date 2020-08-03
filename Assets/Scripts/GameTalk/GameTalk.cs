@@ -133,7 +133,8 @@ public class GameTalk : MonoBehaviour
     public static void PlayStory(int mapid, string storyName)
     {
         S_MapData mapData = GameEntry.Instance.m_GameDataSystem.GetMapData(mapid);
-        UnityEngine.Debug.Log(mapData.Name);
+        S_MapData mapData2 = GameEntry.Instance.m_GameDataSystem.GetMapData(1003);
+        UnityEngine.Debug.Log(mapData2.Name);
         if (mapData != null)
         {
             GameEntry.Instance.m_ExploreSystem.BattleStep = 0f;

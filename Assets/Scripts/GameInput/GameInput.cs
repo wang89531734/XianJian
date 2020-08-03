@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class GameInput
 {
-	private static Dictionary<KEY_ACTION, KeyCode> GameKeyList = new Dictionary<KEY_ACTION, KeyCode>();
+    private static bool m_Initialize = false;
+
+    private static Dictionary<KEY_ACTION, KeyCode> GameKeyList = new Dictionary<KEY_ACTION, KeyCode>();
 
 	private static float m_DirKeySpeed = 6f;
 
@@ -77,7 +79,8 @@ public class GameInput
 	public static void Initialize()
 	{
 		GameInput.InitDefalutKeyMapping();
-	}
+        GameInput.m_Initialize = true;
+    }
 
 	public static void InitDefalutKeyMapping()
 	{
