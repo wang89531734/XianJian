@@ -420,16 +420,16 @@ public class SkillSystem
 
 	private void InitSuperSkillPoolData()
 	{
-		GameDataDB.SuperSkillDB.ResetByOrder();
-		int dataSize = GameDataDB.SuperSkillDB.GetDataSize();
-		for (int i = 0; i < dataSize; i++)
-		{
-			S_SuperSkillSlot dataByOrder = GameDataDB.SuperSkillDB.GetDataByOrder();
-			if (dataByOrder != null)
-			{
-				this.AddSuperSkillSlot(dataByOrder);
-			}
-		}
+		//GameDataDB.SuperSkillDB.ResetByOrder();
+		//int dataSize = GameDataDB.SuperSkillDB.GetDataSize();
+		//for (int i = 0; i < dataSize; i++)
+		//{
+		//	S_SuperSkillSlot dataByOrder = GameDataDB.SuperSkillDB.GetDataByOrder();
+		//	if (dataByOrder != null)
+		//	{
+		//		this.AddSuperSkillSlot(dataByOrder);
+		//	}
+		//}
 		for (int j = 0; j < 11; j++)
 		{
 			for (int k = 0; k < this.m_SuperSkillData[j].Count; k++)

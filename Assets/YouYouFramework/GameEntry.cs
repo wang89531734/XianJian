@@ -473,29 +473,9 @@ namespace YouYou
             new ResourcesManager();
             yield return null;
             this.ReadGameDB();
-            //this.InitGUI();
             //this.InitGameSystem();
-            //this.InitGameState();
             //this.InitRequiredObject();
-            //this.m_InitializeOK = true;
-            //if (this.m_StartScene != string.Empty)
-            //{
-            //    AsyncOperation async = Application.LoadLevelAsync(this.m_StartScene);
-            //    while (!async.isDone)
-            //    {
-            //        yield return 1;
-            //    }
-            //    this.SwitchState("ExploreState");
-            //}
-            //else
-            //{
-            //    AsyncOperation async2 = Application.LoadLevelAsync("Logo");
-            //    while (!async2.isDone)
-            //    {
-            //        yield return 1;
-            //    }
-            //    this.SwitchState("LogoState");
-            //}
+            this.m_InitializeOK = true;
             yield break;
         }
 
