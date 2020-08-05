@@ -11,66 +11,64 @@ public class C_FileCodec
 			int num = strPath.LastIndexOf("\\") + 1;
 			int length = strPath.Length;
 			string text = strPath.Substring(num, length - num);
-			int num2 = text.LastIndexOf(".");
-			int length2 = text.Length;
-			text.Substring(num2, length2 - num2);
-			string text2 = text.Substring(0, num2);
+			int length2 = text.LastIndexOf(".");
+			string text2 = text.Substring(0, length2);
 			text2 = strPath.Substring(0, strPath.LastIndexOf("\\") + 1) + text2 + ".dbfs";
 			FileStream fileStream = File.Open(strPath, FileMode.Open, FileAccess.Read);
 			FileStream fileStream2 = File.Open(text2, FileMode.Create, FileAccess.Write);
 			byte[] rgbKey = new byte[]
 			{
-				24,
-				55,
-				102,
-				24,
-				98,
+				39,
+				73,
+				99,
 				26,
-				67,
-				29,
 				84,
 				19,
-				37,
+				77,
+				65,
+				18,
+				96,
+				22,
 				118,
-				104,
-				85,
+				55,
+				51,
 				121,
 				27,
-				93,
+				151,
 				86,
 				24,
-				55,
-				102,
+				87,
+				212,
 				24,
-				98,
-				26,
-				67,
-				29,
-				9,
+				14,
+				6,
+				78,
+				103,
+				93,
 				2,
 				49,
 				69,
 				73,
-				92
+				135
 			};
 			byte[] rgbIV = new byte[]
 			{
-				22,
-				56,
-				82,
-				77,
-				84,
+				30,
+				255,
+				66,
+				5,
+				137,
 				31,
 				74,
 				24,
-				55,
-				102,
+				23,
+				96,
 				24,
 				98,
 				26,
 				67,
-				29,
-				99
+				59,
+				2
 			};
 			RijndaelManaged rijndaelManaged = new RijndaelManaged();
 			CryptoStream cryptoStream = new CryptoStream(fileStream2, rijndaelManaged.CreateEncryptor(rgbKey, rgbIV), CryptoStreamMode.Write);
@@ -95,64 +93,63 @@ public class C_FileCodec
 		int length = strPath.Length;
 		string text = strPath.Substring(num, length - num);
 		int length2 = text.LastIndexOf(".");
-		int arg_32_0 = text.Length;
 		text = text.Substring(0, length2);
 		text += "Org.dbf";
 		string path = strPath.Substring(0, strPath.LastIndexOf("\\") + 1) + text;
 		FileStream fileStream = File.Open(strPath, FileMode.Open, FileAccess.Read);
 		byte[] rgbKey = new byte[]
 		{
-			24,
-			55,
-			102,
-			24,
-			98,
+			39,
+			73,
+			99,
 			26,
-			67,
-			29,
 			84,
 			19,
-			37,
+			77,
+			65,
+			18,
+			96,
+			22,
 			118,
-			104,
-			85,
+			55,
+			51,
 			121,
 			27,
-			93,
+			151,
 			86,
 			24,
-			55,
-			102,
+			87,
+			212,
 			24,
-			98,
-			26,
-			67,
-			29,
-			9,
+			14,
+			6,
+			78,
+			103,
+			93,
 			2,
 			49,
 			69,
 			73,
-			92
+			135
 		};
 		byte[] rgbIV = new byte[]
 		{
-			22,
-			56,
-			82,
-			77,
-			84,
+			30,
+			255,
+			66,
+			5,
+			137,
 			31,
 			74,
 			24,
-			55,
-			102,
+			23,
+			96,
 			24,
 			98,
 			26,
 			67,
-			29,
-			99
+			59,
+			2
 		};
 		RijndaelManaged rijndaelManaged = new RijndaelManaged();
 		CryptoStream stream = new CryptoStream(fileStream, rijndaelManaged.CreateDecryptor(rgbKey, rgbIV), CryptoStreamMode.Read);
@@ -180,57 +177,57 @@ public class C_FileCodec
 		MemoryStream stream = new MemoryStream(bytes);
 		byte[] rgbKey = new byte[]
 		{
-			24,
-			55,
-			102,
-			24,
-			98,
+			39,
+			73,
+			99,
 			26,
-			67,
-			29,
 			84,
 			19,
-			37,
+			77,
+			65,
+			18,
+			96,
+			22,
 			118,
-			104,
-			85,
+			55,
+			51,
 			121,
 			27,
-			93,
+			151,
 			86,
 			24,
-			55,
-			102,
+			87,
+			212,
 			24,
-			98,
-			26,
-			67,
-			29,
-			9,
+			14,
+			6,
+			78,
+			103,
+			93,
 			2,
 			49,
 			69,
 			73,
-			92
+			135
 		};
 		byte[] rgbIV = new byte[]
 		{
-			22,
-			56,
-			82,
-			77,
-			84,
+			30,
+			255,
+			66,
+			5,
+			137,
 			31,
 			74,
 			24,
-			55,
-			102,
+			23,
+			96,
 			24,
 			98,
 			26,
 			67,
-			29,
-			99
+			59,
+			2
 		};
 		RijndaelManaged rijndaelManaged = new RijndaelManaged();
 		CryptoStream stream2 = new CryptoStream(stream, rijndaelManaged.CreateDecryptor(rgbKey, rgbIV), CryptoStreamMode.Read);

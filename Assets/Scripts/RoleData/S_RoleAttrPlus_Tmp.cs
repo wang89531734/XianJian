@@ -34,7 +34,7 @@ public class S_RoleAttrPlus_Tmp : I_BaseDBF
 
 	public void ParseData(Dictionary<string, string> values)
 	{
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			int num = 0;
 			string key = string.Format("Element_{0}", i);
@@ -45,38 +45,16 @@ public class S_RoleAttrPlus_Tmp : I_BaseDBF
 			}
 			this.RoleAttr_Plus.Element[i] = num;
 		}
-		for (int j = 0; j < 6; j++)
+		for (int j = 0; j < 4; j++)
 		{
 			int num2 = 0;
-			string key2 = string.Format("ElementRatio_{0}", j);
+			string key2 = string.Format("AtkElement_{0}", j);
 			if (values.ContainsKey(key2))
 			{
 				string s2 = values[key2];
 				int.TryParse(s2, out num2);
 			}
-			this.RoleAttr_Plus.ElementRatio[j] = num2;
-		}
-		for (int k = 0; k < 6; k++)
-		{
-			int num3 = 0;
-			string key3 = string.Format("AtkElement_{0}", k);
-			if (values.ContainsKey(key3))
-			{
-				string s3 = values[key3];
-				int.TryParse(s3, out num3);
-			}
-			this.RoleAttr_Plus.AtkElement[k] = num3;
-		}
-		for (int l = 0; l < 6; l++)
-		{
-			int num4 = 0;
-			string key4 = string.Format("AtkElementRatio_{0}", l);
-			if (values.ContainsKey(key4))
-			{
-				string s4 = values[key4];
-				int.TryParse(s4, out num4);
-			}
-			this.RoleAttr_Plus.AtkElementRatio[l] = num4;
+			this.RoleAttr_Plus.AtkElement[j] = num2;
 		}
 	}
 }

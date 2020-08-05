@@ -7,63 +7,51 @@ public class S_BaseRoleData
 {
 	public int ID;
 
-    /// <summary>
-    /// 姓
-    /// </summary>
 	public string FamilyName;
 
-    /// <summary>
-    /// 名
-    /// </summary>
 	public string Name;
 
 	public int MaxHP;
 
 	public int MaxMP;
 
-	public int MaxAP;
-
 	public int HP;
 
 	public int MP;
 
-	public int AP;
+	public int Atk;
 
-	public int Str;
+	public int MAtk;
 
-	public int Mag;
+	public int Def;
 
-	public int Sta;
-
-	public int Air;
+	public int MDef;
 
 	public int Agi;
 
 	public int Block;
 
-	public int Luck;
+	public int Dodge;
 
 	public int Critical;
 
-	public int Mind;
-
 	public ENUM_ElementType emElemntType;
+
+	public ENUM_ElementType emWeaponElemntType;
 
 	public int[] Element;
 
-	public int[] EquipID;
+	public int[] AtkElement;
 
-	public int CosClothID;
+	public int[] EquipID;
 
 	public int Level;
 
 	public int TotalExp;
 
-	public int[] SevenRingGrid;
+	public int TotalSkillPoint;
 
-	public int SevenRingExp;
-
-	public int SevenRingLevel;
+	public int CostSkillPoint;
 
 	public bool IsJoin;
 
@@ -71,106 +59,97 @@ public class S_BaseRoleData
 
 	public bool IsDeath;
 
-	public S_Favorability[] Favorability;
-
-	public S_AutoFightAI[] AutoFightAI;
-
 	public void init()
 	{
-		this.EquipID = new int[10];
-		this.Element = new int[6];
-		this.SevenRingGrid = new int[7];
-		this.Favorability = new S_Favorability[4];
-		for (int i = 0; i < 4; i++)
-		{
-			this.Favorability[i] = new S_Favorability();
-		}
-		this.AutoFightAI = new S_AutoFightAI[3];
-		for (int j = 0; j < 3; j++)
-		{
-			this.AutoFightAI[j] = new S_AutoFightAI();
-		}
+		this.EquipID = new int[8];
+		this.Element = new int[4];
+		this.AtkElement = new int[4];
 	}
 
     /// <summary>
     /// 设置开始数据
     /// </summary>
-    /// <param name="startData"></param>
-    /// <param name="roldId"></param>
-	public void SetStartData(S_StartRoleData startData, int roldId)
+    /// <param name="startData">开始数据</param>
+    /// <param name="roldId">角色ID</param>
+    /// <param name="setEquip">是否设置装备</param>
+	public void SetStartData(S_StartRoleData startData, int roldId, bool setEquip)
 	{
 		int id = (roldId - 1) * 150 + startData.Level;
 		S_Level data = GameDataDB.LevelDB.GetData(id);
 		this.HP = startData.HP;
 		this.MP = startData.MP;
-		this.AP = startData.AP;
 		this.MaxHP = data.MaxHP;
 		this.MaxMP = data.MaxMP;
-		this.MaxAP = data.MaxAP;
-		this.Str = data.Str;
-		this.Mag = data.Mag;
-		this.Sta = data.Sta;
-		this.Air = data.Air;
+		this.Atk = data.Atk;
+		this.MAtk = data.MAtk;
+		this.Def = data.Def;
+		this.MDef = data.MDef;
 		this.Agi = data.Agi;
 		this.Block = data.Block;
-		this.Luck = data.Luck;
+		this.Dodge = data.Dodage;
 		this.Critical = data.Critical;
-		this.Mind = data.Mind;
-		this.emElemntType = data.emElemntType;
-		this.Element = data.Element;
+		this.emElemntType = startData.emElemntType;
 		this.Level = startData.Level;
 		this.TotalExp = startData.StartExp;
+		this.TotalSkillPoint = data.SkillPoint;
+		this.CostSkillPoint = 0;
 		this.IsJoin = false;
 		this.IsFight = false;
-		for (int i = 0; i < 10; i++)
+		if (setEquip)
 		{
-			this.EquipID[i] = startData.Equip[i];
-			if (this.EquipID[i] > 0)
+			for (int i = 0; i < 8; i++)
 			{
-				ItemData itemData = GameEntry.Instance.m_ItemSystem.AddItem(this.EquipID[i], 1, ENUM_ItemState.Old, false);
-				itemData.Equip = true;
-				itemData.EquipCount++;
-				this.EquipID[i] = itemData.SerialID;
+				this.EquipID[i] = startData.Equip[i];
+				if (this.EquipID[i] > 0)
+				{
+                    ItemData itemData = GameEntry.Instance.m_ItemSystem.AddItem(this.EquipID[i], 1, ENUM_ItemState.Old, false);
+                    if (itemData != null)
+                    {
+                        itemData.Equip = true;
+                        itemData.EquipCount++;
+                        this.EquipID[i] = itemData.SerialID;
+                    }
+                }
 			}
 		}
-		for (int j = 0; j < startData.Skill.Count; j++)
-		{
-            GameEntry.Instance.m_SkillSystem.LearnSkill(roldId, startData.Skill[j]);
-		}
-		List<int> superSkillLearnList = GameEntry.Instance.m_SkillSystem.GetSuperSkillLearnList(roldId, this.Level);
-		for (int k = 0; k < superSkillLearnList.Count; k++)
-		{
-            GameEntry.Instance.m_SkillSystem.LearnSuperSkillSlot(roldId, superSkillLearnList[k]);
-		}
-		for (int l = 0; l < startData.Favorability.Count; l++)
-		{
-			this.Favorability[l].ID = startData.Favorability[l].ID;
-			this.Favorability[l].Value = startData.Favorability[l].Value;
-		}
+		//Swd6Application.instance.m_SkillSystem.ResetAllHotkey();
+		//for (int j = 0; j < startData.Skill.Count; j++)
+		//{
+		//	Swd6Application.instance.m_SkillSystem.LearnSkill(roldId, startData.Skill[j]);
+		//}
+		//this.CostSkillPoint = Swd6Application.instance.m_SkillSystem.LearnDefaultSphereSkill(roldId, (int)this.emElemntType);
 	}
 
-	public void SetLevelData(int levelUp, bool autoSetExp)
+	public void SetLevelUpData(int levelUp, bool autoSetExp, ref S_LevelUpInfo levelUpInfo)
 	{
 		S_Level data = GameDataDB.LevelDB.GetData((this.ID - 1) * 150 + this.Level);
 		S_Level data2 = GameDataDB.LevelDB.GetData((this.ID - 1) * 150 + levelUp);
 		if (data != null && data2 != null)
 		{
+			//List<int> skillLearnList = Swd6Application.instance.m_SkillSystem.GetSkillLearnList(this.ID, this.Level + 1, levelUp);
+			//if (skillLearnList.Count > 0)
+			//{
+			//	levelUpInfo.LearnSkillList.Clear();
+			//	for (int i = 0; i < skillLearnList.Count; i++)
+			//	{
+			//		levelUpInfo.LearnSkillList.Add(skillLearnList[i]);
+			//	}
+			//}
 			this.Level = levelUp;
 			this.HP = (this.MaxHP += data2.MaxHP - data.MaxHP);
 			this.MP = (this.MaxMP += data2.MaxMP - data.MaxMP);
-			this.AP = (this.MaxAP += data2.MaxAP - data.MaxAP);
-			this.Str += data2.Str - data.Str;
-			this.Mag += data2.Mag - data.Mag;
-			this.Sta += data2.Sta - data.Sta;
-			this.Air += data2.Air - data.Air;
+			this.Atk += data2.Atk - data.Atk;
+			this.MAtk += data2.MAtk - data.MAtk;
+			this.Def += data2.Def - data.Def;
+			this.MDef += data2.MDef - data.MDef;
 			this.Agi += data2.Agi - data.Agi;
 			this.Block += data2.Block - data.Block;
-			this.Luck += data2.Luck - data.Luck;
+			this.Dodge += data2.Dodage - data.Dodage;
 			this.Critical += data2.Critical - data.Critical;
-			this.Mind += data2.Mind - data.Mind;
-			for (int i = 0; i < 6; i++)
+			this.TotalSkillPoint += data2.SkillPoint;
+			if (data2.SkillPoint > 0)
 			{
-				this.Element[i] += data2.Element[i] - data.Element[i];
+				levelUpInfo.SkillPoint += data2.SkillPoint;
 			}
 			if (autoSetExp)
 			{
@@ -185,24 +164,21 @@ public class S_BaseRoleData
 		this.ID = data.ID;
 		this.HP = data.HP;
 		this.MP = data.MP;
-		this.AP = data.AP;
 		this.MaxHP = data.MaxHP;
 		this.MaxMP = data.MaxMP;
-		this.MaxAP = data.MaxAP;
-		this.Str = data.Str;
-		this.Mag = data.Mag;
-		this.Sta = data.Sta;
-		this.Air = data.Air;
+		this.Atk = data.Atk;
+		this.MAtk = data.MAtk;
+		this.Def = data.Def;
+		this.MDef = data.MDef;
 		this.Agi = data.Agi;
 		this.Block = data.Block;
-		this.Luck = data.Luck;
+		this.Dodge = data.Dodge;
 		this.Critical = data.Critical;
-		this.Mind = data.Mind;
 		this.emElemntType = data.emElemntType;
 		this.Level = data.Level;
 		this.TotalExp = data.TotalExp;
-		this.SevenRingExp = data.SevenRingExp;
-		this.SevenRingLevel = data.SevenRingLevel;
+		this.TotalSkillPoint = data.TotalSkillPoint;
+		this.CostSkillPoint = data.CostSkillPoint;
 		this.IsJoin = false;
 		this.IsFight = false;
 		this.IsDeath = false;
@@ -210,18 +186,13 @@ public class S_BaseRoleData
 		{
 			this.Element[i] = data.Element[i];
 		}
-		for (int j = 0; j < data.EquipID.Length; j++)
+		for (int j = 0; j < data.AtkElement.Length; j++)
 		{
-			this.EquipID[j] = data.EquipID[j];
+			this.AtkElement[j] = data.AtkElement[j];
 		}
-		for (int k = 0; k < data.Favorability.Length; k++)
+		for (int k = 0; k < data.EquipID.Length; k++)
 		{
-			this.Favorability[k].ID = data.Favorability[k].ID;
-			this.Favorability[k].Value = data.Favorability[k].Value;
-		}
-		for (int l = 0; l < data.AutoFightAI.Length; l++)
-		{
-			this.AutoFightAI[l] = data.AutoFightAI[l];
+			this.EquipID[k] = data.EquipID[k];
 		}
 	}
 }

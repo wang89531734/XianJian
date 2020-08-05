@@ -25,8 +25,26 @@ public class ItemSystem
     {
         this.m_ItemData = new Dictionary<int, ItemData>();
         this.m_ItemData.Clear();
+        //for (int i = 0; i < 5; i++)
+        //{
+        //    List<FightItemHotKeyInfo> list = new List<FightItemHotKeyInfo>();
+        //    for (int j = 0; j < 5; j++)
+        //    {
+        //        FightItemHotKeyInfo item = new FightItemHotKeyInfo();
+        //        list.Add(item);
+        //    }
+        //    this.m_FightItem.Add(i, list);
+        //}
     }
 
+    /// <summary>
+    /// 添加物品
+    /// </summary>
+    /// <param name="id">物品ID</param>
+    /// <param name="count">数量</param>
+    /// <param name="state">物品状态新旧</param>
+    /// <param name="showMsg">是否显示信息</param>
+    /// <returns></returns>
     public ItemData AddItem(int id, int count, ENUM_ItemState state, bool showMsg)
     {
         S_Item data = GameDataDB.ItemDB.GetData(id);
@@ -40,7 +58,7 @@ public class ItemSystem
         {
             itemData.New = false;
         }
-        //itemData = this.AddItemByItemID(itemData);
+        itemData = this.AddItemByItemID(itemData);
         if (showMsg && data != null)
         {
             string msg = string.Concat(new object[]
@@ -52,15 +70,17 @@ public class ItemSystem
             });
             //UI_Explore.Instance.AddPopMsg(msg, id);
         }
-        //if (data.emItemType == ENUM_ItemType.MagicItem)
-        //{
-        //    Swd6Application.instance.m_IdentifySystem.AddIdentify(id, ENUM_IdentifyType.Talisman, 0f, 0);
-        //}
-        //else if (data.emItemType == ENUM_ItemType.Normal)
-        //{
-        //    Swd6Application.instance.m_IdentifySystem.AddIdentify(id, ENUM_IdentifyType.Item, 100f, 0);
-        //}
-        //Swd6Application.instance.m_QuestSystem.Dirty();
+
+        if (data.emItemType == ENUM_ItemType.MagicItem)
+        {
+            GameEntry.Instance.m_IdentifySystem.AddIdentify(id, ENUM_IdentifyType.Talisman, 0f, 0);
+        }
+        else if (data.emItemType == ENUM_ItemType.Normal)
+        {
+            GameEntry.Instance.m_IdentifySystem.AddIdentify(id, ENUM_IdentifyType.Item, 100f, 0);
+        }
+
+        GameEntry.Instance.m_QuestSystem.Dirty();
         return itemData;
     }
 
@@ -188,44 +208,50 @@ public class ItemSystem
     //		return itemData;
     //	}
 
-    //	public ItemData AddItemByItemID(ItemData data)
-    //	{
-    //		S_Item data2 = GameDataDB.ItemDB.GetData(data.ID);
-    //		if (data2 == null)
-    //		{
-    //			return null;
-    //		}
-    //		ItemData itemData = this.GetDataByItemID(data.ID);
-    //		if (itemData == null)
-    //		{
-    //			do
-    //			{
-    //				data.SerialID = ++this.m_SerialID;
-    //			}
-    //			while (this.GetDataBySerialID(this.m_SerialID) != null);
-    //			if (data.Count > data2.MaxHeap)
-    //			{
-    //				data.Count = data2.MaxHeap;
-    //			}
-    //			this.m_ItemData.Add(data.SerialID, data);
-    //			itemData = this.m_ItemData[data.SerialID];
-    //		}
-    //		else
-    //		{
-    //			itemData.New = data.New;
-    //			itemData.GetTime = data.GetTime;
-    //			itemData.Count += data.Count;
-    //			if (itemData.Count > data2.MaxHeap)
-    //			{
-    //				itemData.Count = data2.MaxHeap;
-    //			}
-    //		}
-    //		if (data2.emItemType == ENUM_ItemType.Equip)
-    //		{
-    //			Swd6Application.instance.m_IdentifySystem.AddIdentify(data.ID, ENUM_IdentifyType.Equipment, 100f, 0);
-    //		}
-    //		return itemData;
-    //	}
+    /// <summary>
+    /// 根据物品ID添加物品
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
+    public ItemData AddItemByItemID(ItemData data)
+    {
+        S_Item data2 = GameDataDB.ItemDB.GetData(data.ID);
+        if (data2 == null)
+        {
+            return null;
+        }
+        ItemData itemData = this.GetDataByItemID(data.ID);
+        if (itemData == null)
+        {
+            do
+            {
+                data.SerialID = ++this.m_SerialID;
+            }
+            while (this.GetDataBySerialID(this.m_SerialID) != null);
+            if (data.Count > data2.MaxHeap)
+            {
+                data.Count = data2.MaxHeap;
+            }
+            this.m_ItemData.Add(data.SerialID, data);
+            itemData = this.m_ItemData[data.SerialID];
+        }
+        else
+        {
+            itemData.New = data.New;
+            itemData.GetTime = data.GetTime;
+            itemData.Count += data.Count;
+            if (itemData.Count > data2.MaxHeap)
+            {
+                itemData.Count = data2.MaxHeap;
+            }
+        }
+
+        if (data2.emItemType == ENUM_ItemType.Equip)
+        {
+            GameEntry.Instance.m_IdentifySystem.AddIdentify(data.ID, ENUM_IdentifyType.Equipment, 100f, 0);
+        }
+        return itemData;
+    }
 
     //	public void AddItem(int serialID, ItemData itemData)
     //	{
@@ -317,10 +343,10 @@ public class ItemSystem
     //		}
     //	}
 
-    //	public void Clear()
-    //	{
-    //		this.m_ItemData.Clear();
-    //	}
+    public void Clear()
+    {
+        this.m_ItemData.Clear();
+    }
 
     //	public bool CheckItem(int id, int count)
     //	{
@@ -374,20 +400,20 @@ public class ItemSystem
         return null;
     }
 
-    //	public ItemData GetDataByItemID(int id)
-    //	{
-    //		int itemTotalCount = this.GetItemTotalCount();
-    //		this.ResetByOrder();
-    //		for (int i = 0; i < itemTotalCount; i++)
-    //		{
-    //			ItemData dataByOrder = this.GetDataByOrder();
-    //			if (dataByOrder != null && dataByOrder.ID == id && dataByOrder.Grade == ENUM_GradeType.None && dataByOrder.MaxRefineSoul == 0)
-    //			{
-    //				return dataByOrder;
-    //			}
-    //		}
-    //		return null;
-    //	}
+    public ItemData GetDataByItemID(int id)
+    {
+        int itemTotalCount = this.GetItemTotalCount();
+        this.ResetByOrder();
+        for (int i = 0; i < itemTotalCount; i++)
+        {
+            ItemData dataByOrder = this.GetDataByOrder();
+            if (dataByOrder != null && dataByOrder.ID == id && dataByOrder.Grade == ENUM_GradeType.None && dataByOrder.MaxRefineSoul == 0)
+            {
+                return dataByOrder;
+            }
+        }
+        return null;
+    }
 
     //	public List<int> GetSmithItemListByItemID(int id)
     //	{
@@ -405,10 +431,10 @@ public class ItemSystem
     //		return list;
     //	}
 
-    //	public int GetItemTotalCount()
-    //	{
-    //		return this.m_ItemData.Count;
-    //	}
+    public int GetItemTotalCount()
+    {
+        return this.m_ItemData.Count;
+    }
 
     //	public int GetTreasureItemCount(ENUM_ActionHint emType, bool all)
     //	{
@@ -494,20 +520,20 @@ public class ItemSystem
     //		return num;
     //	}
 
-    //	public void ResetByOrder()
-    //	{
-    //		this.m_Iter = this.m_ItemData.GetEnumerator();
-    //	}
+    public void ResetByOrder()
+    {
+        this.m_Iter = this.m_ItemData.GetEnumerator();
+    }
 
-    //	public ItemData GetDataByOrder()
-    //	{
-    //		if (!this.m_Iter.MoveNext())
-    //		{
-    //			return null;
-    //		}
-    //		KeyValuePair<int, ItemData> current = this.m_Iter.Current;
-    //		return current.Value;
-    //	}
+    public ItemData GetDataByOrder()
+    {
+        if (!this.m_Iter.MoveNext())
+        {
+            return null;
+        }
+        KeyValuePair<int, ItemData> current = this.m_Iter.Current;
+        return current.Value;
+    }
 
     //	public ItemData GetDataByOrder(ENUM_ItemType type, ENUM_ItemSubType subType)
     //	{

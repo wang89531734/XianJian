@@ -33,6 +33,8 @@ public class GameDataSystem
 
     public int m_SelectPet;
 
+    public int m_FightPlayerID;
+
     public int m_DefaultPlayerID;
 
     public int[] m_StoreSpendMoney;
@@ -50,20 +52,6 @@ public class GameDataSystem
     private C_RoleDataEx[] m_RoldData;
 
     private Dictionary<int, S_MapData> m_MapData;
-
-    private int[] m_SevenRingNeedExp = new int[]
-    {
-            645,
-            1360,
-            2095,
-            2880,
-            4385,
-            5985,
-            7940,
-            11090,
-            14710,
-            14710
-    };
 
     //private List<S_PartyData> m_PartyRole;
 
@@ -192,19 +180,6 @@ public class GameDataSystem
     /// </summary>
     public void InitTeamRoleList()
     {
-        int[] sourceArray = new int[]
-        {
-                645,
-                1360,
-                2095,
-                2880,
-                4385,
-                5985,
-                7940,
-                11090,
-                14710,
-                14710
-        };
         this.m_TeamRoleList.Clear();
         this.m_ActionSkillList.Clear();
 
@@ -212,13 +187,10 @@ public class GameDataSystem
         this.m_TeamRoleList.Add(2);
         this.m_TeamRoleList.Add(3);
         this.m_TeamRoleList.Add(4);
-        this.m_TeamRoleList.Add(5);
         this.m_ActionSkillList.Add(1);
         this.m_ActionSkillList.Add(2);
         this.m_ActionSkillList.Add(3);
         this.m_ActionSkillList.Add(4);
-        this.m_ActionSkillList.Add(5);
-        Array.Copy(sourceArray, this.m_SevenRingNeedExp, this.m_SevenRingNeedExp.Length);
     }
 
     /// <summary>
@@ -231,14 +203,17 @@ public class GameDataSystem
         this.InitTeamRoleList();
         for (int i = 0; i < this.m_TeamRoleList.Count; i++)
         {
-            this.SetStartData(this.m_TeamRoleList[i], this.m_TeamRoleList[i], this.m_TeamRoleList[i]);
+            int dateId = this.m_TeamRoleList[i];
+            int levelId = this.m_TeamRoleList[i];
+            this.SetStartData(this.m_TeamRoleList[i], dateId, levelId);
         }
+        //this.m_RoldData[this.m_TeamRoleList[0] - 1].BaseRoleData.IsJoin = true;
+        //this.m_DefaultPlayerID = this.m_TeamRoleList[0];
+        //this.AddRole(this.m_TeamRoleList[0], false);
 
-        this.m_RoldData[0].BaseRoleData.IsJoin = true;
-        this.m_DefaultPlayerID = 1;
-        this.AddRole(1, false);
-        this.m_PlayerID = this.m_DefaultPlayerID;
-        this.FlagON(24);
+        //this.m_PlayerID = this.m_DefaultPlayerID;
+        //this.m_FightPlayerID = this.m_DefaultPlayerID;
+        //this.FlagON(24);
     }
 
     //	public void InitExRoleData(int chapId)
@@ -499,17 +474,10 @@ public class GameDataSystem
         this.m_RoldData[num].BaseRoleData.ID = roleId;
         this.m_RoldData[num].BaseRoleData.FamilyName = GameDataDB.StrID(num * 10 + 51);
         this.m_RoldData[num].BaseRoleData.Name = GameDataDB.StrID(num * 10 + 52);
-        this.m_RoldData[num].BaseRoleData.SevenRingLevel = 1;
-        this.m_RoldData[num].BaseRoleData.SevenRingExp = 0;
-        for (int i = 0; i < this.m_RoldData[num].BaseRoleData.SevenRingGrid.Length; i++)
-        {
-            this.m_RoldData[num].BaseRoleData.SevenRingGrid[i] = 0;
-        }
-        this.m_RoldData[num].BaseRoleData.SetStartData(data, levelId);
-        this.m_RoldData[num].CalRoleAttr();
-        this.m_RoldData[num].SetFullHP();
-        this.m_RoldData[num].SetFullMP();
-        this.m_RoldData[num].SetFullAP();
+        this.m_RoldData[num].BaseRoleData.SetStartData(data, levelId, true);
+        //this.m_RoldData[num].CalRoleAttr();
+        //this.m_RoldData[num].SetFullHP();
+        //this.m_RoldData[num].SetFullMP();
         return true;
     }
 

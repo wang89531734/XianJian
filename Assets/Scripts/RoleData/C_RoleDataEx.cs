@@ -1,19 +1,16 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using YouYou;
 
 public class C_RoleDataEx : S_RoleData
 {
-	protected int StaPlus;
-
-	protected int MagPlus;
-
-	protected int AirPlus;
-
 	private Dictionary<int, Buff_Base> m_Buffs;
 
 	private List<Buff_Base> m_NoRemoveBuffs;
+
+	private FormationData m_FormationData;
+
+	private int m_FormationUnitIdx;
 
 	public void SetLevel(int Value)
 	{
@@ -121,54 +118,6 @@ public class C_RoleDataEx : S_RoleData
 		return this.BaseRoleData.MP;
 	}
 
-	public void SetAP(int Value)
-	{
-		int maxAP = this.RoleAttr.sFinial.MaxAP;
-		if (Value > maxAP)
-		{
-			Value = maxAP;
-		}
-		if (Value < 0)
-		{
-			Value = 0;
-		}
-		this.BaseRoleData.AP = Value;
-	}
-
-	public void AddAP(int Value)
-	{
-		this.BaseRoleData.AP += Value;
-		int maxAP = this.RoleAttr.sFinial.MaxAP;
-		if (this.BaseRoleData.AP > maxAP)
-		{
-			this.BaseRoleData.AP = maxAP;
-		}
-		if (this.BaseRoleData.AP < 0)
-		{
-			this.BaseRoleData.AP = 0;
-		}
-	}
-
-	public void AddAP(float Percent)
-	{
-		int num = (int)((float)this.RoleAttr.sFinial.MaxAP * Percent) / 100;
-		this.BaseRoleData.AP += num;
-		int maxAP = this.RoleAttr.sFinial.MaxAP;
-		if (this.BaseRoleData.AP > maxAP)
-		{
-			this.BaseRoleData.AP = maxAP;
-		}
-		if (this.BaseRoleData.AP < 0)
-		{
-			this.BaseRoleData.AP = 0;
-		}
-	}
-
-	public int GetAP()
-	{
-		return this.BaseRoleData.AP;
-	}
-
 	public void SetFullHP()
 	{
 		this.BaseRoleData.HP = this.RoleAttr.sFinial.MaxHP;
@@ -179,11 +128,6 @@ public class C_RoleDataEx : S_RoleData
 		this.BaseRoleData.MP = this.RoleAttr.sFinial.MaxMP;
 	}
 
-	public void SetFullAP()
-	{
-		this.BaseRoleData.AP = this.RoleAttr.sFinial.MaxAP;
-	}
-
 	public void AddUpBaseRoleAttr(int id, bool showmsg)
 	{
 		S_RoleAttrPlus_Tmp data = GameDataDB.RoleAttrPlusDB.GetData(id);
@@ -192,7 +136,7 @@ public class C_RoleDataEx : S_RoleData
 			Debug.LogWarning("能力加成表讀取失敗_" + id);
 			return;
 		}
-		string msg = "";
+		string msg = string.Empty;
 		if (data.RoleAttr_Plus.AddMaxHP > 0)
 		{
 			this.BaseRoleData.MaxHP += data.RoleAttr_Plus.AddMaxHP;
@@ -203,89 +147,110 @@ public class C_RoleDataEx : S_RoleData
 			this.BaseRoleData.MaxMP += data.RoleAttr_Plus.AddMaxMP;
 			msg = string.Format(GameDataDB.StrID(7451), data.RoleAttr_Plus.AddMaxMP);
 		}
-		if (data.RoleAttr_Plus.AddMaxAP > 0)
+		if (data.RoleAttr_Plus.AddAttack > 0)
 		{
-			this.BaseRoleData.MaxAP += data.RoleAttr_Plus.AddMaxAP;
-			msg = string.Format(GameDataDB.StrID(7452), data.RoleAttr_Plus.AddMaxAP);
+			this.BaseRoleData.Atk += data.RoleAttr_Plus.AddAttack;
+			msg = string.Format(GameDataDB.StrID(7452), data.RoleAttr_Plus.AddAttack);
 		}
-		if (data.RoleAttr_Plus.AddStr > 0)
+		if (data.RoleAttr_Plus.AddMAtk > 0)
 		{
-			this.BaseRoleData.Str += data.RoleAttr_Plus.AddStr;
-			msg = string.Format(GameDataDB.StrID(7455), data.RoleAttr_Plus.AddStr);
+			this.BaseRoleData.MAtk += data.RoleAttr_Plus.AddMAtk;
+			msg = string.Format(GameDataDB.StrID(7463), data.RoleAttr_Plus.AddMAtk);
 		}
-		if (data.RoleAttr_Plus.AddMag > 0)
+		if (data.RoleAttr_Plus.AddDef > 0)
 		{
-			this.BaseRoleData.Mag += data.RoleAttr_Plus.AddMag;
-			msg = string.Format(GameDataDB.StrID(7456), data.RoleAttr_Plus.AddMag);
+			this.BaseRoleData.Def += data.RoleAttr_Plus.AddDef;
+			msg = string.Format(GameDataDB.StrID(7453), data.RoleAttr_Plus.AddDef);
 		}
-		if (data.RoleAttr_Plus.AddSta > 0)
+		if (data.RoleAttr_Plus.AddMDef > 0)
 		{
-			this.BaseRoleData.Sta += data.RoleAttr_Plus.AddSta;
-			msg = string.Format(GameDataDB.StrID(7457), data.RoleAttr_Plus.AddSta);
-		}
-		if (data.RoleAttr_Plus.AddAir > 0)
-		{
-			this.BaseRoleData.Air += data.RoleAttr_Plus.AddAir;
-			msg = string.Format(GameDataDB.StrID(7458), data.RoleAttr_Plus.AddAir);
-		}
-		if (data.RoleAttr_Plus.AddMind > 0)
-		{
-			this.BaseRoleData.Mind += data.RoleAttr_Plus.AddMind;
-			msg = string.Format(GameDataDB.StrID(7459), data.RoleAttr_Plus.AddMind);
+			this.BaseRoleData.MDef += data.RoleAttr_Plus.AddMDef;
+			msg = string.Format(GameDataDB.StrID(7464), data.RoleAttr_Plus.AddMDef);
 		}
 		if (data.RoleAttr_Plus.AddAgi > 0)
 		{
 			this.BaseRoleData.Agi += data.RoleAttr_Plus.AddAgi;
-			msg = string.Format(GameDataDB.StrID(7460), data.RoleAttr_Plus.AddAgi);
+			msg = string.Format(GameDataDB.StrID(7454), data.RoleAttr_Plus.AddAgi);
 		}
 		if (data.RoleAttr_Plus.AddBlock > 0)
 		{
 			this.BaseRoleData.Block += data.RoleAttr_Plus.AddBlock;
-			msg = string.Format(GameDataDB.StrID(7461), data.RoleAttr_Plus.AddBlock);
+			msg = string.Format(GameDataDB.StrID(7455), data.RoleAttr_Plus.AddBlock);
 		}
-		if (data.RoleAttr_Plus.AddLuck > 0)
+		if (data.RoleAttr_Plus.AddDodge > 0)
 		{
-			this.BaseRoleData.Luck += data.RoleAttr_Plus.AddLuck;
-			msg = string.Format(GameDataDB.StrID(7462), data.RoleAttr_Plus.AddLuck);
+			this.BaseRoleData.Dodge += data.RoleAttr_Plus.AddDodge;
+			msg = string.Format(GameDataDB.StrID(7465), data.RoleAttr_Plus.AddDodge);
 		}
 		if (data.RoleAttr_Plus.AddCritical > 0)
 		{
 			this.BaseRoleData.Critical += data.RoleAttr_Plus.AddCritical;
-			msg = string.Format(GameDataDB.StrID(7463), data.RoleAttr_Plus.AddCritical);
+			msg = string.Format(GameDataDB.StrID(7456), data.RoleAttr_Plus.AddCritical);
 		}
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			if (data.RoleAttr_Plus.Element[i] > 0)
 			{
 				this.BaseRoleData.Element[i] += data.RoleAttr_Plus.Element[i];
-				msg = string.Format(GameDataDB.StrID(7464 + i) + GameDataDB.StrID(7470) + "+{0}", data.RoleAttr_Plus.Element[i]);
+				msg = string.Format(GameDataDB.StrID(7610 + i) + GameDataDB.StrID(7470) + "+{0}", data.RoleAttr_Plus.Element[i]);
+			}
+		}
+		for (int j = 0; j < 4; j++)
+		{
+			if (data.RoleAttr_Plus.AtkElement[j] > 0)
+			{
+				this.BaseRoleData.AtkElement[j] += data.RoleAttr_Plus.AtkElement[j];
+				msg = string.Format(GameDataDB.StrID(7614 + j) + GameDataDB.StrID(7471) + "+{0}", data.RoleAttr_Plus.AtkElement[j]);
 			}
 		}
 		this.CalRoleAttr();
 		if (showmsg)
 		{
-			//UI_OkCancelBox.Instance.ClearSysMsg();
-			//UI_OkCancelBox.Instance.AddSysMsg(msg, 3f);
+			//UI_Message.Instance.ClearSysMsg();
+			//UI_Message.Instance.AddSysMsg(msg, 3f);
 		}
 	}
 
 	public void CalRoleAttr()
 	{
 		S_RoleAttr s_RoleAttr = new S_RoleAttr();
-		this.StaPlus = 0;
-		this.MagPlus = 0;
-		this.AirPlus = 0;
+		S_RoleAttr s_RoleAttr2 = new S_RoleAttr();
+		S_RoleAttr s_RoleAttr3 = new S_RoleAttr();
 		this.CalRoleAttrPlus_OnEquip(s_RoleAttr);
-		this.CalRoleAttrPlus_OnBuff(s_RoleAttr);
-		this.CalRoleAttrPlus_OnSevenRing(s_RoleAttr);
 		this.CalRoleAttr_Finial(s_RoleAttr);
+		this.CalRoleAttrPlus_OnPassiveSkill(s_RoleAttr2);
+		this.CalRoleAttr_Finial2(s_RoleAttr, s_RoleAttr2);
+		this.CalRoleAttrPlus_OnMItem(s_RoleAttr3);
+		this.CalRoleAttr_Finial2(s_RoleAttr, s_RoleAttr3);
+		s_RoleAttr.sAttrPlus += s_RoleAttr2.sAttrPlus;
+		s_RoleAttr.sAttrPlus += s_RoleAttr3.sAttrPlus;
+		this.RoleAttr.sAttrPlus = s_RoleAttr.sAttrPlus;
+		this.RoleAttr.sFinial = s_RoleAttr.sFinial;
+	}
+
+	public void CalRoleAttr_Fight()
+	{
+		S_RoleAttr s_RoleAttr = new S_RoleAttr();
+		S_RoleAttr s_RoleAttr2 = new S_RoleAttr();
+		S_RoleAttr s_RoleAttr3 = new S_RoleAttr();
+		this.CalRoleAttrPlus_OnEquip(s_RoleAttr);
+		this.CalRoleAttrPlus_OnFormation(s_RoleAttr);
+		this.CalRoleAttrPlus_OnBuff(s_RoleAttr);
+		this.CalRoleAttr_Finial(s_RoleAttr);
+		this.CalRoleAttrPlus_OnPassiveSkill(s_RoleAttr2);
+		this.CalRoleAttr_Finial2(s_RoleAttr, s_RoleAttr2);
+		this.CalRoleAttrPlus_OnMItem(s_RoleAttr3);
+		this.CalRoleAttr_Finial2(s_RoleAttr, s_RoleAttr3);
+		s_RoleAttr.sAttrPlus += s_RoleAttr2.sAttrPlus;
+		s_RoleAttr.sAttrPlus += s_RoleAttr3.sAttrPlus;
 		this.RoleAttr.sAttrPlus = s_RoleAttr.sAttrPlus;
 		this.RoleAttr.sFinial = s_RoleAttr.sFinial;
 	}
 
 	private void CalRoleAttrPlus_OnEquip(S_RoleAttr roleAttr)
 	{
-		int num = 9;
+		this.BaseRoleData.emWeaponElemntType = ENUM_ElementType.Physical;
+		int num = 7;
 		for (int i = 0; i < num; i++)
 		{
 			ItemData equipItemData = this.GetEquipItemData((ENUM_EquipPosition)i);
@@ -294,22 +259,24 @@ public class C_RoleDataEx : S_RoleData
 				S_Item data = GameDataDB.ItemDB.GetData(equipItemData.ID);
 				if (data != null)
 				{
-					if (data.emItemType == ENUM_ItemType.MagicItem)
+					if (data.emItemType != ENUM_ItemType.MagicItem)
 					{
-						this.DoMitemAttrPlus(roleAttr, data.RoleAttrPlusID, equipItemData);
-					}
-					else if (data.emItemType == ENUM_ItemType.Equip)
-					{
-						this.DoRoleAttrPlus(roleAttr, data.RoleAttrPlusID);
-						this.DoSmithItemAttrPlus(roleAttr, equipItemData);
-						for (int j = 0; j < equipItemData.MaxRefineSoul; j++)
+						if (data.emItemType == ENUM_ItemType.Equip)
 						{
-							if (equipItemData.RefineSoul[j] != 0)
+							this.DoRoleAttrPlus(roleAttr, data.RoleAttrPlusID);
+							for (int j = 0; j < 3; j++)
 							{
-								S_Item data2 = GameDataDB.ItemDB.GetData(equipItemData.RefineSoul[j]);
-								if (data2 != null)
+								if (equipItemData.RefineSoul[j] != 0)
 								{
-									this.DoRoleAttrPlus(roleAttr, data2.MobData.AttrPlugID);
+									S_Item data2 = GameDataDB.ItemDB.GetData(equipItemData.RefineSoul[j]);
+									if (data2 != null)
+									{
+										this.DoRoleAttrPlus(roleAttr, data2.MobData.AttrPlugID);
+										if (data.emSubItemType == ENUM_ItemSubType.Weapon)
+										{
+											this.DoWeaponElement(roleAttr, data2.MobData.AttrPlugID);
+										}
+									}
 								}
 							}
 						}
@@ -319,9 +286,27 @@ public class C_RoleDataEx : S_RoleData
 		}
 	}
 
+	private void CalRoleAttrPlus_OnMItem(S_RoleAttr roleAttr)
+	{
+		ItemData equipItemData = this.GetEquipItemData(ENUM_EquipPosition.Talisman);
+		if (equipItemData == null)
+		{
+			return;
+		}
+		S_Item data = GameDataDB.ItemDB.GetData(equipItemData.ID);
+		if (data == null)
+		{
+			return;
+		}
+		if (data.emItemType == ENUM_ItemType.MagicItem)
+		{
+			this.DoMitemAttrPlus(roleAttr, data.RoleAttrPlusID, equipItemData);
+		}
+	}
+
 	private void CalRoleAttrPlus_OnEquipByDBF(S_RoleAttr roleAttr, ENUM_EquipPosition position)
 	{
-		int num = 9;
+		int num = 7;
 		int i = 0;
 		while (i < num)
 		{
@@ -335,7 +320,7 @@ public class C_RoleDataEx : S_RoleData
 					s_Item = GameDataDB.ItemDB.GetData(itemData.ID);
 					if (s_Item != null)
 					{
-						goto IL_49;
+						goto IL_5D;
 					}
 				}
 			}
@@ -344,27 +329,25 @@ public class C_RoleDataEx : S_RoleData
 				s_Item = this.GetItemEquip((ENUM_EquipPosition)i);
 				if (s_Item != null)
 				{
-					goto IL_49;
+					goto IL_5D;
 				}
 			}
-			IL_CF:
+			IL_EF:
 			i++;
 			continue;
-			IL_49:
+			IL_5D:
 			if (s_Item.emItemType == ENUM_ItemType.MagicItem)
 			{
-				this.DoMitemAttrPlus(roleAttr, s_Item.RoleAttrPlusID, itemData);
-				goto IL_CF;
+				goto IL_EF;
 			}
 			if (s_Item.emItemType != ENUM_ItemType.Equip)
 			{
-				goto IL_CF;
+				goto IL_EF;
 			}
 			this.DoRoleAttrPlus(roleAttr, s_Item.RoleAttrPlusID);
 			if (itemData != null)
 			{
-				this.DoSmithItemAttrPlus(roleAttr, itemData);
-				for (int j = 0; j < itemData.MaxRefineSoul; j++)
+				for (int j = 0; j < 3; j++)
 				{
 					if (itemData.RefineSoul[j] != 0)
 					{
@@ -375,10 +358,27 @@ public class C_RoleDataEx : S_RoleData
 						}
 					}
 				}
-				goto IL_CF;
+				goto IL_EF;
 			}
-			goto IL_CF;
+			goto IL_EF;
 		}
+	}
+
+	private void CalRoleAttrPlus_OnPassiveSkill(S_RoleAttr roleAttr)
+	{
+		//List<int> passiveSkillList = Swd6Application.instance.m_SkillSystem.GetPassiveSkillList(this.BaseRoleData.ID);
+		//for (int i = 0; i < passiveSkillList.Count; i++)
+		//{
+		//	S_Skill data = GameDataDB.SkillDB.GetData(passiveSkillList[i]);
+		//	if (data != null && data.emItemType == ENUM_ItemSubType.Passive)
+		//	{
+		//		S_UseEffect data2 = GameDataDB.UseEffectDB.GetData(data.UseEffectID);
+		//		if (data2 != null && data2.SpecialID > 0)
+		//		{
+		//			this.DoRoleAttrPlus(roleAttr, data2.SpecialID);
+		//		}
+		//	}
+		//}
 	}
 
 	public void SetBuffs(Dictionary<int, Buff_Base> buffs, List<Buff_Base> noRemoveBuffs)
@@ -389,9 +389,15 @@ public class C_RoleDataEx : S_RoleData
 
 	public void CleanBuffs()
 	{
-		this.m_Buffs.Clear();
+		if (this.m_Buffs != null)
+		{
+			this.m_Buffs.Clear();
+		}
 		this.m_Buffs = null;
-		this.m_NoRemoveBuffs.Clear();
+		if (this.m_NoRemoveBuffs != null)
+		{
+			this.m_NoRemoveBuffs.Clear();
+		}
 		this.m_NoRemoveBuffs = null;
 	}
 
@@ -419,49 +425,35 @@ public class C_RoleDataEx : S_RoleData
 		}
 	}
 
-	private void CalRoleAttrPlus_OnSevenRing(S_RoleAttr roleAttr)
+	public void SetFormationInfo(FormationData data, int unitIdx)
 	{
-		//if (Swd6Application.instance.m_ChapID == 101)
-		//{
-		//	this.CalRoleAttrPlus_OnThousand(roleAttr);
-		//	return;
-		//}
-		S_RoleAttr_Plus s_RoleAttr_Plus = new S_RoleAttr_Plus();
-		double num = Math.Round((double)(this.BaseRoleData.MaxHP * this.BaseRoleData.SevenRingGrid[0]) / 10.0, 0, MidpointRounding.AwayFromZero);
-		s_RoleAttr_Plus.AddMaxHP = (int)num;
-		num = Math.Round((double)(this.BaseRoleData.Mag * this.BaseRoleData.SevenRingGrid[1]) / 10.0, 0, MidpointRounding.AwayFromZero);
-		s_RoleAttr_Plus.AddMag = (int)num;
-		num = Math.Round((double)(this.BaseRoleData.MaxAP * this.BaseRoleData.SevenRingGrid[2]) / 10.0, 0, MidpointRounding.AwayFromZero);
-		s_RoleAttr_Plus.AddMaxAP = (int)num;
-		num = Math.Round((double)(this.BaseRoleData.Air * this.BaseRoleData.SevenRingGrid[3]) / 10.0, 0, MidpointRounding.AwayFromZero);
-		s_RoleAttr_Plus.AddAir = (int)num;
-		num = Math.Round((double)(this.BaseRoleData.Str * this.BaseRoleData.SevenRingGrid[4]) / 10.0, 0, MidpointRounding.AwayFromZero);
-		s_RoleAttr_Plus.AddStr = (int)num;
-		num = Math.Round((double)(this.BaseRoleData.Sta * this.BaseRoleData.SevenRingGrid[5]) / 10.0, 0, MidpointRounding.AwayFromZero);
-		s_RoleAttr_Plus.AddSta = (int)num;
-		num = Math.Round((double)(this.BaseRoleData.MaxMP * this.BaseRoleData.SevenRingGrid[6]) / 10.0, 0, MidpointRounding.AwayFromZero);
-		s_RoleAttr_Plus.AddMaxMP = (int)num;
-		roleAttr.sAttrPlus += s_RoleAttr_Plus;
+		this.m_FormationData = data;
+		this.m_FormationUnitIdx = unitIdx;
 	}
 
-	private void CalRoleAttrPlus_OnThousand(S_RoleAttr roleAttr)
+	//public void ResetFormationData()
+	//{
+	//	this.m_FormationData = Swd6Application.instance.m_FormationSystem.GetDefaultFormationData();
+	//	this.m_FormationUnitIdx = -1;
+	//}
+
+	private void CalRoleAttrPlus_OnFormation(S_RoleAttr roleAttr)
 	{
-		S_RoleAttr_Plus s_RoleAttr_Plus = new S_RoleAttr_Plus();
-		double num = Math.Round((double)(this.BaseRoleData.Str * this.BaseRoleData.SevenRingGrid[0]) / 10.0, 0, MidpointRounding.AwayFromZero);
-		s_RoleAttr_Plus.AddStr = (int)num;
-		num = Math.Round((double)(this.BaseRoleData.Sta * this.BaseRoleData.SevenRingGrid[1]) / 10.0, 0, MidpointRounding.AwayFromZero);
-		s_RoleAttr_Plus.AddSta = (int)num;
-		num = Math.Round((double)(this.BaseRoleData.Mag * this.BaseRoleData.SevenRingGrid[2]) / 10.0, 0, MidpointRounding.AwayFromZero);
-		s_RoleAttr_Plus.AddMag = (int)num;
-		num = Math.Round((double)(this.BaseRoleData.Block * this.BaseRoleData.SevenRingGrid[3]) / 20.0, 0, MidpointRounding.AwayFromZero);
-		s_RoleAttr_Plus.AddBlock = (int)num;
-		num = Math.Round((double)(this.BaseRoleData.Luck * this.BaseRoleData.SevenRingGrid[4]) / 20.0, 0, MidpointRounding.AwayFromZero);
-		s_RoleAttr_Plus.AddLuck = (int)num;
-		num = Math.Round((double)(this.BaseRoleData.Critical * this.BaseRoleData.SevenRingGrid[5]) / 20.0, 0, MidpointRounding.AwayFromZero);
-		s_RoleAttr_Plus.AddCritical = (int)num;
-		num = Math.Round((double)(this.BaseRoleData.Mind * this.BaseRoleData.SevenRingGrid[6]) / 20.0, 0, MidpointRounding.AwayFromZero);
-		s_RoleAttr_Plus.AddMind = (int)num;
-		roleAttr.sAttrPlus += s_RoleAttr_Plus;
+		if (this.m_FormationData == null)
+		{
+			return;
+		}
+		//S_FormationData data = GameDataDB.FormationDB.GetData((int)this.m_FormationData.emElement);
+		//if (data == null)
+		//{
+		//	return;
+		//}
+		//this.DoRoleAttrPlus(roleAttr, data.BaseAttr);
+		//if (this.m_FormationUnitIdx < 0 || this.m_FormationUnitIdx >= data.RoleAttr.Count)
+		//{
+		//	return;
+		//}
+		//this.DoRoleAttrPlus(roleAttr, data.RoleAttr[this.m_FormationUnitIdx]);
 	}
 
 	private void DoRoleAttrPlus(S_RoleAttr roleAttr, int RoleAttrPlusID)
@@ -475,135 +467,127 @@ public class C_RoleDataEx : S_RoleData
 		roleAttr.sAttrPlus += data.RoleAttr_Plus;
 	}
 
-	private void DoSmithItemAttrPlus(S_RoleAttr roleAttr, ItemData itemData)
+	private void DoWeaponElement(S_RoleAttr roleAttr, int RoleAttrPlusID)
 	{
-		S_Item data = GameDataDB.ItemDB.GetData(itemData.ID);
-		if (data.emSubItemType == ENUM_ItemSubType.Weapon)
+		S_RoleAttrPlus_Tmp data = GameDataDB.RoleAttrPlusDB.GetData(RoleAttrPlusID);
+		if (data == null)
 		{
-			roleAttr.sAttrPlus.AddAttack += itemData.GradeNumber;
+			Debug.LogWarning("能力加成表讀取失敗_" + RoleAttrPlusID);
 			return;
 		}
-		roleAttr.sAttrPlus.AddDef += itemData.GradeNumber;
+		if (data.RoleAttr_Plus.AtkElement[0] > 0)
+		{
+			//this.BaseRoleData.emWeaponElemntType = ENUM_ElementType.Wind;
+		}
+		if (data.RoleAttr_Plus.AtkElement[1] > 0)
+		{
+			this.BaseRoleData.emWeaponElemntType = ENUM_ElementType.Earth;
+		}
+		if (data.RoleAttr_Plus.AtkElement[2] > 0)
+		{
+			this.BaseRoleData.emWeaponElemntType = ENUM_ElementType.Water;
+		}
+		if (data.RoleAttr_Plus.AtkElement[3] > 0)
+		{
+			this.BaseRoleData.emWeaponElemntType = ENUM_ElementType.Fire;
+		}
 	}
 
 	private void DoMitemAttrPlus(S_RoleAttr roleAttr, int AttrPlusID, ItemData itemData)
 	{
-		S_Item data = GameDataDB.ItemDB.GetData(itemData.ID);
+		//S_Item data = GameDataDB.ItemDB.GetData(itemData.ID);
 		//IdentifyData data2 = Swd6Application.instance.m_IdentifySystem.GetData(itemData.ID);
 		//if (data2 == null)
 		//{
 		//	return;
 		//}
+		//roleAttr.sAttrPlus.AddMaxRatioHP = 0;
+		//roleAttr.sAttrPlus.AddMaxRatioMP = 0;
+		//roleAttr.sAttrPlus.AddRatioAttack = 0;
+		//roleAttr.sAttrPlus.AddRatioDef = 0;
+		//roleAttr.sAttrPlus.AddRatioMAtk = 0;
+		//roleAttr.sAttrPlus.AddRatioMDef = 0;
+		//roleAttr.sAttrPlus.AddAgi = 0;
+		//roleAttr.sAttrPlus.AddBlock = 0;
+		//roleAttr.sAttrPlus.AddCritical = 0;
+		//for (int i = 0; i < 4; i++)
+		//{
+		//	roleAttr.sAttrPlus.Element[i] = 0;
+		//}
 		//int gUID = data.GUID;
 		//switch (gUID)
 		//{
 		//case 701:
-		//	roleAttr.sAttrPlus.AddMaxHP += data.MItem.AttrEffect[data2.Level - 1];
+		//	roleAttr.sAttrPlus.AddMaxRatioHP += (int)data.MItem.AttrEffect[data2.Level - 1];
 		//	return;
 		//case 702:
-		//	roleAttr.sAttrPlus.AddMaxMP += data.MItem.AttrEffect[data2.Level - 1];
+		//	roleAttr.sAttrPlus.AddMaxRatioMP += (int)data.MItem.AttrEffect[data2.Level - 1];
 		//	return;
 		//case 703:
-		//	roleAttr.sAttrPlus.AddMaxAP += data.MItem.AttrEffect[data2.Level - 1];
+		//	roleAttr.sAttrPlus.AddRatioAttack += (int)data.MItem.AttrEffect[data2.Level - 1];
 		//	return;
 		//case 704:
-		//	roleAttr.sAttrPlus.AddAttack += data.MItem.AttrEffect[data2.Level - 1];
+		//	roleAttr.sAttrPlus.AddRatioDef += (int)data.MItem.AttrEffect[data2.Level - 1];
 		//	return;
 		//case 705:
-		//	roleAttr.sAttrPlus.AddDef += data.MItem.AttrEffect[data2.Level - 1];
+		//	roleAttr.sAttrPlus.AddRatioMAtk += (int)data.MItem.AttrEffect[data2.Level - 1];
 		//	return;
 		//case 706:
-		//	roleAttr.sAttrPlus.AddBlock += data.MItem.AttrEffect[data2.Level - 1];
+		//	roleAttr.sAttrPlus.AddRatioMDef += (int)data.MItem.AttrEffect[data2.Level - 1];
 		//	return;
 		//case 707:
-		//	roleAttr.sAttrPlus.AddAgi += data.MItem.AttrEffect[data2.Level - 1];
+		//	roleAttr.sAttrPlus.AddAgi += (int)data.MItem.AttrEffect[data2.Level - 1];
 		//	return;
 		//case 708:
-		//	roleAttr.sAttrPlus.AddCritical += data.MItem.AttrEffect[data2.Level - 1];
+		//	roleAttr.sAttrPlus.AddBlock += (int)data.MItem.AttrEffect[data2.Level - 1];
 		//	return;
 		//case 709:
-		//	roleAttr.sAttrPlus.AddLuck += data.MItem.AttrEffect[data2.Level - 1];
+		//	roleAttr.sAttrPlus.AddCritical += (int)data.MItem.AttrEffect[data2.Level - 1];
 		//	return;
 		//case 710:
-		//{
-		//	//int currentMapOpenTreasuerCount = Swd6Application.instance.m_GameObjSystem.GetCurrentMapOpenTreasuerCount();
-		//	//int currentMapTreasuerCount = Swd6Application.instance.m_GameObjSystem.GetCurrentMapTreasuerCount();
-		//	if (currentMapTreasuerCount > 0)
-		//	{
-		//		float num = (float)currentMapOpenTreasuerCount / (float)currentMapTreasuerCount;
-		//		num = (float)data.MItem.AttrEffect[data2.Level - 1] * num;
-		//		roleAttr.sAttrPlus.AddAttack += (int)num;
-		//		return;
-		//	}
-		//	break;
-		//}
 		//case 711:
-		//{
-		//	//int currentMapOpenTreasuerCount2 = Swd6Application.instance.m_GameObjSystem.GetCurrentMapOpenTreasuerCount();
-		//	//int currentMapTreasuerCount2 = Swd6Application.instance.m_GameObjSystem.GetCurrentMapTreasuerCount();
-		//	if (currentMapTreasuerCount2 > 0)
-		//	{
-		//		float num2 = (float)currentMapOpenTreasuerCount2 / (float)currentMapTreasuerCount2;
-		//		num2 = (float)data.MItem.AttrEffect[data2.Level - 1] * num2;
-		//		roleAttr.sAttrPlus.AddDef += (int)num2;
-		//	}
-		//	break;
-		//}
 		//case 712:
 		//case 713:
 		//case 714:
 		//case 715:
-		//case 717:
-		//case 718:
-		//case 719:
-		//case 721:
-		//case 722:
-		//case 723:
-		//case 724:
-		//case 725:
-		//case 731:
-		//case 732:
-		//case 733:
-		//case 734:
-		//case 735:
-		//case 736:
-		//	break;
-		//case 716:
-		//	roleAttr.sAttrPlus.AddAgi += data.MItem.AttrEffect[data2.Level - 1];
-		//	return;
-		//case 720:
-		//	roleAttr.sAttrPlus.AddMind += data.MItem.AttrEffect[data2.Level - 1];
-		//	return;
-		//case 726:
-		//	roleAttr.sAttrPlus.AtkElement[1] += data.MItem.AttrEffect[data2.Level - 1];
-		//	return;
-		//case 727:
-		//	roleAttr.sAttrPlus.AtkElement[2] += data.MItem.AttrEffect[data2.Level - 1];
-		//	return;
-		//case 728:
-		//	roleAttr.sAttrPlus.AtkElement[0] += data.MItem.AttrEffect[data2.Level - 1];
-		//	return;
-		//case 729:
-		//	roleAttr.sAttrPlus.AtkElement[3] += data.MItem.AttrEffect[data2.Level - 1];
-		//	return;
-		//case 730:
-		//	roleAttr.sAttrPlus.AtkElement[4] += data.MItem.AttrEffect[data2.Level - 1];
-		//	return;
-		//case 737:
-		//	for (int i = 0; i < 6; i++)
-		//	{
-		//		roleAttr.sAttrPlus.Element[i] += data.MItem.AttrEffect[data2.Level - 1];
-		//	}
-		//	return;
-		//default:
-		//	if (gUID != 768)
+		//	IL_113:
+		//	if (gUID != 726)
 		//	{
 		//		return;
 		//	}
-		//	roleAttr.sAttrPlus.AddAttack += 999;
-		//	roleAttr.sAttrPlus.AddMaxHP += 3333;
+		//	for (int j = 0; j < 4; j++)
+		//	{
+		//		roleAttr.sAttrPlus.Element[j] += (int)data.MItem.AttrEffect[data2.Level - 1];
+		//	}
+		//	return;
+		//case 716:
+		//{
+		//	int currentMapOpenTreasuerCount = Swd6Application.instance.m_GameObjSystem.GetCurrentMapOpenTreasuerCount();
+		//	int currentMapTreasuerCount = Swd6Application.instance.m_GameObjSystem.GetCurrentMapTreasuerCount();
+		//	if (currentMapTreasuerCount > 0)
+		//	{
+		//		float num = (float)currentMapOpenTreasuerCount / (float)currentMapTreasuerCount;
+		//		num = data.MItem.AttrEffect[data2.Level - 1] * num;
+		//		roleAttr.sAttrPlus.AddRatioAttack += (int)num;
+		//		roleAttr.sAttrPlus.AddRatioMAtk += (int)num;
+		//	}
 		//	return;
 		//}
+		//case 717:
+		//{
+		//	int currentMapOpenTreasuerCount2 = Swd6Application.instance.m_GameObjSystem.GetCurrentMapOpenTreasuerCount();
+		//	int currentMapTreasuerCount2 = Swd6Application.instance.m_GameObjSystem.GetCurrentMapTreasuerCount();
+		//	if (currentMapTreasuerCount2 > 0)
+		//	{
+		//		float num2 = (float)currentMapOpenTreasuerCount2 / (float)currentMapTreasuerCount2;
+		//		num2 = data.MItem.AttrEffect[data2.Level - 1] * num2;
+		//		roleAttr.sAttrPlus.AddRatioDef += (int)num2;
+		//		roleAttr.sAttrPlus.AddRatioMDef += (int)num2;
+		//	}
+		//	return;
+		//}
+		//}
+		//goto IL_113;
 	}
 
 	private void CalRoleAttr_Finial(S_RoleAttr roleAttr)
@@ -611,74 +595,39 @@ public class C_RoleDataEx : S_RoleData
 		float num = 1f + (float)this.BaseRoleData.Level / 100f;
 		roleAttr.sFinial.MaxHP = this.BaseRoleData.MaxHP + this.BaseRoleData.MaxHP * roleAttr.sAttrPlus.AddMaxRatioHP / 100 + roleAttr.sAttrPlus.AddMaxHP;
 		roleAttr.sFinial.MaxMP = this.BaseRoleData.MaxMP + this.BaseRoleData.MaxMP * roleAttr.sAttrPlus.AddMaxRatioMP / 100 + roleAttr.sAttrPlus.AddMaxMP;
-		roleAttr.sFinial.MaxAP = this.BaseRoleData.MaxAP + this.BaseRoleData.MaxAP * roleAttr.sAttrPlus.AddMaxRatioAP / 100 + roleAttr.sAttrPlus.AddMaxAP;
-		roleAttr.sFinial.Str = this.BaseRoleData.Str + this.BaseRoleData.Str * roleAttr.sAttrPlus.AddRatioStr / 100 + roleAttr.sAttrPlus.AddStr;
-		if (roleAttr.sFinial.Str < 0)
-		{
-			roleAttr.sFinial.Str = 0;
-		}
-		roleAttr.sFinial.Sta = this.BaseRoleData.Sta + this.BaseRoleData.Sta * roleAttr.sAttrPlus.AddRatioSta / 100 + roleAttr.sAttrPlus.AddSta;
-		if (roleAttr.sFinial.Sta < 0)
-		{
-			roleAttr.sFinial.Sta = 0;
-		}
-		roleAttr.sFinial.Air = this.BaseRoleData.Air + this.BaseRoleData.Air * roleAttr.sAttrPlus.AddRatioAir / 100 + roleAttr.sAttrPlus.AddAir;
-		if (roleAttr.sFinial.Air < 0)
-		{
-			roleAttr.sFinial.Air = 0;
-		}
-		roleAttr.sFinial.Mag = this.BaseRoleData.Mag + this.BaseRoleData.Mag * roleAttr.sAttrPlus.AddRatioMag / 100 + roleAttr.sAttrPlus.AddMag;
-		if (roleAttr.sFinial.Mag < 0)
-		{
-			roleAttr.sFinial.Mag = 0;
-		}
-		roleAttr.sFinial.Agi = this.BaseRoleData.Agi + this.BaseRoleData.Agi * roleAttr.sAttrPlus.AddRatioAgi / 100 + roleAttr.sAttrPlus.AddAgi;
-		roleAttr.sFinial.Block = this.BaseRoleData.Block + roleAttr.sAttrPlus.AddBlock;
-		roleAttr.sFinial.Luck = this.BaseRoleData.Luck + roleAttr.sAttrPlus.AddLuck;
-		roleAttr.sFinial.Critical = this.BaseRoleData.Critical + roleAttr.sAttrPlus.AddCritical;
-		roleAttr.sFinial.Mind = this.BaseRoleData.Mind + this.BaseRoleData.Mind * roleAttr.sAttrPlus.AddRatioMind / 100 + roleAttr.sAttrPlus.AddMind;
-		int num2 = (int)Math.Round((double)((float)roleAttr.sFinial.Str * num), 0, MidpointRounding.AwayFromZero);
-		roleAttr.sFinial.Attack = num2 + roleAttr.sAttrPlus.AddAttack;
-		roleAttr.sFinial.Attack += roleAttr.sFinial.Attack * roleAttr.sAttrPlus.AddRatioAttack / 100;
+		roleAttr.sFinial.Attack = this.BaseRoleData.Atk + this.BaseRoleData.Atk * roleAttr.sAttrPlus.AddRatioAttack / 100 + roleAttr.sAttrPlus.AddAttack;
 		if (roleAttr.sFinial.Attack < 0)
 		{
 			roleAttr.sFinial.Attack = 0;
 		}
-		int num3 = (int)Math.Round((double)((float)roleAttr.sFinial.Sta * num), 0, MidpointRounding.AwayFromZero);
-		roleAttr.sFinial.Def = num3 + roleAttr.sAttrPlus.AddDef;
-		roleAttr.sFinial.Def += roleAttr.sFinial.Def * roleAttr.sAttrPlus.AddRatioDef / 100;
+		roleAttr.sFinial.Def = this.BaseRoleData.Def + this.BaseRoleData.Def * roleAttr.sAttrPlus.AddRatioDef / 100 + roleAttr.sAttrPlus.AddDef;
 		if (roleAttr.sFinial.Def < 0)
 		{
 			roleAttr.sFinial.Def = 0;
 		}
-		for (int i = 0; i < 6; i++)
+		//roleAttr.sFinial.MAttack = this.BaseRoleData.MAtk + this.BaseRoleData.MAtk * roleAttr.sAttrPlus.AddRatioMAtk / 100 + roleAttr.sAttrPlus.AddMAtk;
+		//if (roleAttr.sFinial.MAttack < 0)
+		//{
+		//	roleAttr.sFinial.MAttack = 0;
+		//}
+		//roleAttr.sFinial.MDef = this.BaseRoleData.MDef + this.BaseRoleData.MDef * roleAttr.sAttrPlus.AddRatioMDef / 100 + roleAttr.sAttrPlus.AddMDef;
+		//if (roleAttr.sFinial.MDef < 0)
+		//{
+		//	roleAttr.sFinial.MDef = 0;
+		//}
+		//roleAttr.sFinial.Agi = this.BaseRoleData.Agi + roleAttr.sAttrPlus.AddAgi;
+		//roleAttr.sFinial.Block = this.BaseRoleData.Block + roleAttr.sAttrPlus.AddBlock;
+		//roleAttr.sFinial.Dodge = this.BaseRoleData.Dodge + roleAttr.sAttrPlus.AddDodge;
+		roleAttr.sFinial.Critical = this.BaseRoleData.Critical + roleAttr.sAttrPlus.AddCritical;
+		for (int i = 0; i < 4; i++)
 		{
-			if (this.BaseRoleData.Element[i] == 0 && roleAttr.sAttrPlus.ElementRatio[i] < 0)
-			{
-				roleAttr.sFinial.Element[i] = 300 * roleAttr.sAttrPlus.ElementRatio[i] / 100 + roleAttr.sAttrPlus.Element[i];
-			}
-			else
-			{
-				roleAttr.sFinial.Element[i] = this.BaseRoleData.Element[i] + this.BaseRoleData.Element[i] * roleAttr.sAttrPlus.ElementRatio[i] / 100 + roleAttr.sAttrPlus.Element[i];
-			}
-			roleAttr.sFinial.AtkElement[i] = roleAttr.sAttrPlus.AtkElement[i];
+			roleAttr.sFinial.Element[i] += roleAttr.sAttrPlus.Element[i];
+			roleAttr.sFinial.AtkElement[i] += roleAttr.sAttrPlus.AtkElement[i];
 		}
-		num = 4f * ((float)this.BaseRoleData.Level / 99f);
-		this.StaPlus = (int)Math.Round((double)((float)roleAttr.sFinial.Sta * num), 0, MidpointRounding.AwayFromZero);
-		this.MagPlus = (int)Math.Round((double)((float)roleAttr.sFinial.Mag * num), 0, MidpointRounding.AwayFromZero);
-		this.AirPlus = (int)Math.Round((double)((float)roleAttr.sFinial.Air * num), 0, MidpointRounding.AwayFromZero);
-		roleAttr.sFinial.MaxHP += this.StaPlus;
-		roleAttr.sFinial.MaxMP += this.MagPlus;
-		roleAttr.sFinial.MaxAP += this.AirPlus;
 		if (roleAttr.sFinial.MaxMP < 1)
 		{
 			roleAttr.sFinial.MaxMP = 1;
 			this.BaseRoleData.MP = 1;
-		}
-		if (roleAttr.sFinial.MaxAP < 1)
-		{
-			roleAttr.sFinial.MaxAP = 1;
-			this.BaseRoleData.AP = 1;
 		}
 		if (this.BaseRoleData.HP > roleAttr.sFinial.MaxHP)
 		{
@@ -688,9 +637,54 @@ public class C_RoleDataEx : S_RoleData
 		{
 			this.BaseRoleData.MP = roleAttr.sFinial.MaxMP;
 		}
-		if (this.BaseRoleData.AP > roleAttr.sFinial.MaxAP)
+	}
+
+	private void CalRoleAttr_Finial2(S_RoleAttr roleAttr, S_RoleAttr mItemAttr)
+	{
+		float num = 1f + (float)this.BaseRoleData.Level / 100f;
+		roleAttr.sFinial.MaxHP = roleAttr.sFinial.MaxHP + roleAttr.sFinial.MaxHP * mItemAttr.sAttrPlus.AddMaxRatioHP / 100 + mItemAttr.sAttrPlus.AddMaxHP;
+		roleAttr.sFinial.MaxMP = roleAttr.sFinial.MaxMP + roleAttr.sFinial.MaxMP * mItemAttr.sAttrPlus.AddMaxRatioMP / 100 + mItemAttr.sAttrPlus.AddMaxMP;
+		roleAttr.sFinial.Attack = roleAttr.sFinial.Attack + roleAttr.sFinial.Attack * mItemAttr.sAttrPlus.AddRatioAttack / 100 + mItemAttr.sAttrPlus.AddAttack;
+		if (roleAttr.sFinial.Attack < 0)
 		{
-			this.BaseRoleData.AP = roleAttr.sFinial.MaxAP;
+			roleAttr.sFinial.Attack = 0;
+		}
+		roleAttr.sFinial.Def = roleAttr.sFinial.Def + roleAttr.sFinial.Def * mItemAttr.sAttrPlus.AddRatioDef / 100 + mItemAttr.sAttrPlus.AddDef;
+		if (roleAttr.sFinial.Def < 0)
+		{
+			roleAttr.sFinial.Def = 0;
+		}
+		//roleAttr.sFinial.MAttack = roleAttr.sFinial.MAttack + roleAttr.sFinial.MAttack * mItemAttr.sAttrPlus.AddRatioMAtk / 100 + mItemAttr.sAttrPlus.AddMAtk;
+		//if (roleAttr.sFinial.MAttack < 0)
+		//{
+		//	roleAttr.sFinial.MAttack = 0;
+		//}
+		//roleAttr.sFinial.MDef = roleAttr.sFinial.MDef + roleAttr.sFinial.MDef * mItemAttr.sAttrPlus.AddRatioMDef / 100 + mItemAttr.sAttrPlus.AddMDef;
+		//if (roleAttr.sFinial.MDef < 0)
+		//{
+		//	roleAttr.sFinial.MDef = 0;
+		//}
+		roleAttr.sFinial.Agi = roleAttr.sFinial.Agi + mItemAttr.sAttrPlus.AddAgi;
+		roleAttr.sFinial.Block = roleAttr.sFinial.Block + mItemAttr.sAttrPlus.AddBlock;
+		//roleAttr.sFinial.Dodge = roleAttr.sFinial.Dodge + mItemAttr.sAttrPlus.AddDodge;
+		roleAttr.sFinial.Critical = roleAttr.sFinial.Critical + mItemAttr.sAttrPlus.AddCritical;
+		for (int i = 0; i < 4; i++)
+		{
+			roleAttr.sFinial.Element[i] += mItemAttr.sAttrPlus.Element[i];
+			roleAttr.sFinial.AtkElement[i] += mItemAttr.sAttrPlus.AtkElement[i];
+		}
+		if (roleAttr.sFinial.MaxMP < 1)
+		{
+			roleAttr.sFinial.MaxMP = 1;
+			this.BaseRoleData.MP = 1;
+		}
+		if (this.BaseRoleData.HP > roleAttr.sFinial.MaxHP)
+		{
+			this.BaseRoleData.HP = roleAttr.sFinial.MaxHP;
+		}
+		if (this.BaseRoleData.MP > roleAttr.sFinial.MaxMP)
+		{
+			this.BaseRoleData.MP = roleAttr.sFinial.MaxMP;
 		}
 	}
 
@@ -702,16 +696,14 @@ public class C_RoleDataEx : S_RoleData
 			return this.RoleAttr.sFinial.MaxHP;
 		case ENUM_RoleAttr.MaxMP:
 			return this.RoleAttr.sFinial.MaxMP;
-		case ENUM_RoleAttr.MaxAP:
-			return this.RoleAttr.sFinial.MaxAP;
 		case ENUM_RoleAttr.Str:
-			return this.RoleAttr.sFinial.Str;
+			return this.RoleAttr.sFinial.Attack;
 		case ENUM_RoleAttr.Mag:
-			return this.RoleAttr.sFinial.Mag;
+			//return this.RoleAttr.sFinial.MAttack;
 		case ENUM_RoleAttr.Sta:
-			return this.RoleAttr.sFinial.Sta;
+			//return this.RoleAttr.sFinial.Def;
 		case ENUM_RoleAttr.Air:
-			return this.RoleAttr.sFinial.Air;
+			//return this.RoleAttr.sFinial.MDef;
 		default:
 			return 0;
 		}
@@ -720,6 +712,8 @@ public class C_RoleDataEx : S_RoleData
 	public S_RoleAttr CompareEquipData(ENUM_EquipPosition pos, int id)
 	{
 		S_RoleAttr s_RoleAttr = new S_RoleAttr();
+		S_RoleAttr s_RoleAttr2 = new S_RoleAttr();
+		S_RoleAttr s_RoleAttr3 = new S_RoleAttr();
 		if (pos == ENUM_EquipPosition.Null)
 		{
 			return null;
@@ -727,8 +721,13 @@ public class C_RoleDataEx : S_RoleData
 		int num = this.BaseRoleData.EquipID[(int)pos];
 		this.BaseRoleData.EquipID[(int)pos] = id;
 		this.CalRoleAttrPlus_OnEquip(s_RoleAttr);
-		this.CalRoleAttrPlus_OnSevenRing(s_RoleAttr);
 		this.CalRoleAttr_Finial(s_RoleAttr);
+		this.CalRoleAttrPlus_OnPassiveSkill(s_RoleAttr2);
+		this.CalRoleAttr_Finial2(s_RoleAttr, s_RoleAttr2);
+		this.CalRoleAttrPlus_OnMItem(s_RoleAttr3);
+		this.CalRoleAttr_Finial2(s_RoleAttr, s_RoleAttr3);
+		s_RoleAttr.sAttrPlus += s_RoleAttr2.sAttrPlus;
+		s_RoleAttr.sAttrPlus += s_RoleAttr3.sAttrPlus;
 		s_RoleAttr.sFinial -= this.RoleAttr.sFinial;
 		this.BaseRoleData.EquipID[(int)pos] = num;
 		return s_RoleAttr;
@@ -737,7 +736,8 @@ public class C_RoleDataEx : S_RoleData
 	public S_RoleAttr CompareEquipDataByItemID(ENUM_EquipPosition pos, int itemId)
 	{
 		S_RoleAttr s_RoleAttr = new S_RoleAttr();
-		new S_RoleAttr();
+		S_RoleAttr s_RoleAttr2 = new S_RoleAttr();
+		S_RoleAttr s_RoleAttr3 = new S_RoleAttr();
 		if (pos == ENUM_EquipPosition.Null)
 		{
 			return null;
@@ -745,8 +745,13 @@ public class C_RoleDataEx : S_RoleData
 		int num = this.BaseRoleData.EquipID[(int)pos];
 		this.BaseRoleData.EquipID[(int)pos] = itemId;
 		this.CalRoleAttrPlus_OnEquipByDBF(s_RoleAttr, pos);
-		this.CalRoleAttrPlus_OnSevenRing(s_RoleAttr);
 		this.CalRoleAttr_Finial(s_RoleAttr);
+		this.CalRoleAttrPlus_OnPassiveSkill(s_RoleAttr2);
+		this.CalRoleAttr_Finial2(s_RoleAttr, s_RoleAttr2);
+		this.CalRoleAttrPlus_OnMItem(s_RoleAttr3);
+		this.CalRoleAttr_Finial2(s_RoleAttr, s_RoleAttr3);
+		s_RoleAttr.sAttrPlus += s_RoleAttr2.sAttrPlus;
+		s_RoleAttr.sAttrPlus += s_RoleAttr3.sAttrPlus;
 		s_RoleAttr.sFinial -= this.RoleAttr.sFinial;
 		this.BaseRoleData.EquipID[(int)pos] = num;
 		return s_RoleAttr;
@@ -757,12 +762,8 @@ public class C_RoleDataEx : S_RoleData
 		S_Item data = GameDataDB.ItemDB.GetData(id);
 		if (data == null)
 		{
-			Debug.Log("CanEquip Read Item error!!");
+			Debug.Log("CanEquip Read Item error!!_" + id);
 			return false;
-		}
-		if (data.emSubItemType == ENUM_ItemSubType.Story)
-		{
-			return data.UseEffect.emTarget != ENUM_UseTarget.NoTarget;
 		}
 		ENUM_EquipChar equipChar = (ENUM_EquipChar)data.Equip.EquipChar;
 		return ((equipChar & ENUM_EquipChar.Player1) == ENUM_EquipChar.Player1 && this.BaseRoleData.ID == 1) || ((equipChar & ENUM_EquipChar.Player2) == ENUM_EquipChar.Player2 && this.BaseRoleData.ID == 2) || ((equipChar & ENUM_EquipChar.Player3) == ENUM_EquipChar.Player3 && this.BaseRoleData.ID == 3) || ((equipChar & ENUM_EquipChar.Player4) == ENUM_EquipChar.Player4 && this.BaseRoleData.ID == 4) || ((equipChar & ENUM_EquipChar.Player5) == ENUM_EquipChar.Player5 && this.BaseRoleData.ID == 5) || ((equipChar & ENUM_EquipChar.Player6) == ENUM_EquipChar.Player6 && this.BaseRoleData.ID == 6) || ((equipChar & ENUM_EquipChar.Player7) == ENUM_EquipChar.Player7 && this.BaseRoleData.ID == 7);
@@ -770,10 +771,10 @@ public class C_RoleDataEx : S_RoleData
 
 	public ItemData GetEquipItemData(ENUM_EquipPosition Pos)
 	{
-		if (this.BaseRoleData.EquipID[(int)Pos] > 0)
-		{
-			return GameEntry.Instance.m_ItemSystem.GetDataBySerialID(this.BaseRoleData.EquipID[(int)Pos]);
-		}
+		//if (this.BaseRoleData.EquipID[(int)Pos] > 0)
+		//{
+		//	return Swd6Application.instance.m_ItemSystem.GetDataBySerialID(this.BaseRoleData.EquipID[(int)Pos]);
+		//}
 		return null;
 	}
 
@@ -813,17 +814,9 @@ public class C_RoleDataEx : S_RoleData
 		{
 			result = ENUM_EquipPosition.Accessories;
 		}
-		if (type == ENUM_ItemSubType.MagicArms)
-		{
-			result = ENUM_EquipPosition.MagicArms;
-		}
-		if (type == ENUM_ItemSubType.Talisman)
+		if (type == ENUM_ItemSubType.Talisman || type == ENUM_ItemSubType.MagicArms)
 		{
 			result = ENUM_EquipPosition.Talisman;
-		}
-		if (type == ENUM_ItemSubType.Story)
-		{
-			result = ENUM_EquipPosition.Story;
 		}
 		if (type == ENUM_ItemSubType.CosCloth)
 		{
@@ -834,13 +827,16 @@ public class C_RoleDataEx : S_RoleData
 
 	public bool CheckEquipItem(int itemId)
 	{
-		int num = 10;
+		int num = 8;
 		for (int i = 0; i < num; i++)
 		{
 			ItemData equipItemData = this.GetEquipItemData((ENUM_EquipPosition)i);
-			if (equipItemData != null && equipItemData.ID == itemId)
+			if (equipItemData != null)
 			{
-				return true;
+				if (equipItemData.ID == itemId)
+				{
+					return true;
+				}
 			}
 		}
 		return false;

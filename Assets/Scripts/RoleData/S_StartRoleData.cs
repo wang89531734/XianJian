@@ -13,8 +13,6 @@ public class S_StartRoleData : I_BaseDBF
 
 	public int MP;
 
-	public int AP;
-
 	public float AttackRang;
 
 	public float MoveSpeed;
@@ -25,17 +23,16 @@ public class S_StartRoleData : I_BaseDBF
 
 	public int StartExp;
 
+	public ENUM_ElementType emElemntType;
+
 	public List<int> Skill;
 
 	public int[] Equip;
 
-	public List<S_Favorability> Favorability;
-
 	public S_StartRoleData()
 	{
 		this.Skill = new List<int>();
-		this.Equip = new int[10];
-		this.Favorability = new List<S_Favorability>();
+		this.Equip = new int[8];
 	}
 
 	public int GetGUID()
@@ -65,7 +62,7 @@ public class S_StartRoleData : I_BaseDBF
 				this.Skill.Add(num);
 			}
 		}
-		for (int j = 0; j < 9; j++)
+		for (int j = 0; j < 8; j++)
 		{
 			int num2 = 0;
 			string key2 = string.Format("Equip_{0}", j);
@@ -75,23 +72,6 @@ public class S_StartRoleData : I_BaseDBF
 				int.TryParse(s2, out num2);
 			}
 			this.Equip[j] = num2;
-		}
-		for (int k = 0; k < 7; k++)
-		{
-			int num3 = 0;
-			string key3 = string.Format("Favorability_{0}", k);
-			if (dictionary.ContainsKey(key3))
-			{
-				string s3 = dictionary[key3];
-				int.TryParse(s3, out num3);
-			}
-			if (num3 > 0)
-			{
-				S_Favorability s_Favorability = new S_Favorability();
-				s_Favorability.ID = k + 1;
-				s_Favorability.Value = num3;
-				this.Favorability.Add(s_Favorability);
-			}
 		}
 	}
 }

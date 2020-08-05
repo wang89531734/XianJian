@@ -13,34 +13,25 @@ public class S_Level : I_BaseDBF
 
 	public int MaxMP;
 
-	public int MaxAP;
+	public int Atk;
 
-	public int Str;
+	public int Def;
 
-	public int Mag;
+	public int MAtk;
 
-	public int Sta;
-
-	public int Air;
+	public int MDef;
 
 	public int Agi;
 
 	public int Block;
 
-	public int Luck;
+	public int Dodage;
 
 	public int Critical;
 
-	public int Mind;
+	public int LearnSkillID;
 
-	public ENUM_ElementType emElemntType;
-
-	public int[] Element;
-
-	public S_Level()
-	{
-		this.Element = new int[6];
-	}
+	public int SkillPoint;
 
 	public int GetGUID()
 	{
@@ -54,16 +45,5 @@ public class S_Level : I_BaseDBF
 			return;
 		}
 		Dictionary<string, string> dictionary = Converter.deserializeObject<Dictionary<string, string>>(JsonString);
-		for (int i = 0; i < 6; i++)
-		{
-			int num = 0;
-			string key = string.Format("Element_{0}", i);
-			if (dictionary.ContainsKey(key))
-			{
-				string s = dictionary[key];
-				int.TryParse(s, out num);
-			}
-			this.Element[i] = num;
-		}
 	}
 }

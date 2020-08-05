@@ -473,8 +473,7 @@ namespace YouYou
             new ResourcesManager();
             yield return null;
             this.ReadGameDB();
-            //this.InitGameSystem();
-            //this.InitRequiredObject();
+            this.InitGameSystem();
             this.m_InitializeOK = true;
             yield break;
         }
@@ -514,14 +513,17 @@ namespace YouYou
 
         public ItemSystem m_ItemSystem { get; private set; }
 
-        ///// <summary>
-        ///// 任务系统
-        ///// </summary>
-        //public QuestSystem m_QuestSystem { get; private set; }
+        /// <summary>
+        /// 任务系统
+        /// </summary>
+        public QuestSystem m_QuestSystem { get; private set; }
 
         public SkillSystem m_SkillSystem { get; private set; }
 
-        //public IdentifySystem m_IdentifySystem { get; private set; }
+        /// <summary>
+        /// 鉴定系统
+        /// </summary>
+        public IdentifySystem m_IdentifySystem { get; private set; }
 
         public ExploreSystem m_ExploreSystem { get; private set; }
 
@@ -541,8 +543,8 @@ namespace YouYou
             ////this.m_GameMenuSystem.Initialize(this);
             //this.m_QuestSystem = new QuestSystem();
             //this.m_QuestSystem.Initialize();
-            //this.m_IdentifySystem = new IdentifySystem();
-            //this.m_IdentifySystem.Initialize();
+            this.m_IdentifySystem = new IdentifySystem();
+            this.m_IdentifySystem.Initialize();
             this.m_ItemSystem = new ItemSystem();
             this.m_ItemSystem.Initialize();
             ////this.m_SaveloadSystem = new SaveloadSystem();
@@ -614,7 +616,7 @@ namespace YouYou
             //{
             //    cam.GetComponent<Camera>().enabled = false;
             //}
-            GameTalk.PlayStory(100, "ME11000");
+            //GameTalk.PlayStory(100, "ME11000");
             yield break;
         }
 
@@ -623,7 +625,7 @@ namespace YouYou
             //this.m_GameObjSystem.Clear();
             //this.m_QuestSystem.Clear();
             //this.m_SkillSystem.Clear();
-            //this.m_ItemSystem.Clear();
+            this.m_ItemSystem.Clear();
             //this.m_MobGuardSystem.Clear();
             //this.m_AchievementSystem.InitForNewGame();
             //this.m_WOPSystem.InitForNewGame();
