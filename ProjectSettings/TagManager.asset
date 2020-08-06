@@ -10,6 +10,7 @@ TagManager:
   - scene_stone
   - building
   - Npc
+  - BattleEvent
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - 
   - 
   - Player
-  - 
+  - Ground
   - 
   - 
   - 

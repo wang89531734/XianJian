@@ -135,7 +135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100060, guid: 74c8949d3ddc9164188026db805f0047, type: 3}
       propertyPath: m_TagString
-      value: Npc
+      value: BattleEvent
       objectReference: {fileID: 0}
     - target: {fileID: 400060, guid: 74c8949d3ddc9164188026db805f0047, type: 3}
       propertyPath: m_LocalPosition.x
@@ -326,9 +326,9 @@ GameObject:
   - component: {fileID: 1515672300}
   - component: {fileID: 1515672299}
   - component: {fileID: 1515672298}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

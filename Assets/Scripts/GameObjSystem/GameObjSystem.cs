@@ -552,24 +552,7 @@ public class GameObjSystem
                 });
             }
         });
-
-        //GameObject characterRoot = ResourcesManager.Instance.GetCharacterRoot(name);
-        //if (characterRoot == null)
-        //{
-        //    Debug.Log("CreatePlayerGameObj::無法建立Root物件_" + id);
-        //    return null;
-        //}
-        //GameObject gameObject = this.GetPlayerCosCloth(id);
-        //if (gameObject == null)
-        //{
-        //    gameObject = ResourcesManager.Instance.GetCharacterModel(text);
-        //    if (gameObject == null)
-        //    {
-        //        Debug.Log("CreatePlayerGameObj::無法建立Model物件_" + id);
-        //        return null;
-        //    }
-        //}
-
+      
         //RendererTool.ChangeSenceMaterialSetting(text, gameObject);
         //gameObject.transform.parent = characterRoot.transform;
         //Animator component = gameObject.GetComponent<Animator>();

@@ -1326,28 +1326,28 @@ public class ExploreSystem
     //		}
     //	}
 
-    //	private void SetBattleAreaData(int mapID)
-    //	{
-    //		this.BattleStep = 0f;
-    //		this.m_MaxBattleStep = 0f;
-    //		this.m_BattelTriggerTime = 0f;
-    //		this.m_TriggerName = null;
-    //		this.m_BattleArea.Clear();
-    //		GameDataDB.BattleAreaDB.ResetByOrder();
-    //		int dataSize = GameDataDB.BattleAreaDB.GetDataSize();
-    //		for (int i = 0; i < dataSize; i++)
-    //		{
-    //			S_BattleArea dataByOrder = GameDataDB.BattleAreaDB.GetDataByOrder();
-    //			if (dataByOrder != null && dataByOrder.MapID == mapID)
-    //			{
-    //				this.m_BattleArea.Add(dataByOrder);
-    //			}
-    //		}
-    //		if (this.m_AmberController != null)
-    //		{
-    //			this.m_AmberController.SetFightWarring(false);
-    //		}
-    //	}
+    //private void m_BattleArea(int mapID)
+    //{
+    //    this.BattleStep = 0f;
+    //    this.m_MaxBattleStep = 0f;
+    //    this.m_BattelTriggerTime = 0f;
+    //    this.m_TriggerName = null;
+    //    //this.m_BattleArea.Clear();
+    //    //GameDataDB.BattleAreaDB.ResetByOrder();
+    //    //int dataSize = GameDataDB.BattleAreaDB.GetDataSize();
+    //    //for (int i = 0; i < dataSize; i++)
+    //    //{
+    //    //    S_BattleArea dataByOrder = GameDataDB.BattleAreaDB.GetDataByOrder();
+    //    //    if (dataByOrder != null && dataByOrder.MapID == mapID)
+    //    //    {
+    //    //        this.m_BattleArea.Add(dataByOrder);
+    //    //    }
+    //    //}
+    //    //if (this.m_AmberController != null)
+    //    //{
+    //    //    this.m_AmberController.SetFightWarring(false);
+    //    //}
+    //}
 
     //	public void AddBattleStep()
     //	{
@@ -1424,50 +1424,47 @@ public class ExploreSystem
     //		this.m_BattleID = 0;
     //	}
 
-    //	public void SetBattleAreaState(string triggerName)
-    //	{
-    //		if (Swd6Application.instance.m_GameDataSystem.GetFlag(21))
-    //		{
-    //			return;
-    //		}
-    //		this.m_MaxBattleStep = 0f;
-    //		if (triggerName == null)
-    //		{
-    //			return;
-    //		}
-    //		this.m_TriggerName = triggerName;
-    //		foreach (S_BattleArea current in this.m_BattleArea)
-    //		{
-    //			if (current.TriggerName == triggerName)
-    //			{
-    //				for (int i = 0; i < 4; i++)
-    //				{
-    //					S_BattleEncounter s_BattleEncounter = current.Encounter[i];
-    //					if (s_BattleEncounter.Step > 100)
-    //					{
-    //						this.m_MaxBattleStep += 100f;
-    //					}
-    //					else
-    //					{
-    //						this.m_MaxBattleStep += (float)s_BattleEncounter.Step;
-    //					}
-    //				}
-    //				if (!Swd6Application.instance.m_GameDataSystem.GetFlag(23) && this.m_AmberController != null)
-    //				{
-    //					this.m_AmberController.SetFightWarring(true);
-    //				}
-    //				if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
-    //				{
-    //					Debug.Log("進入戰鬥區域_" + triggerName);
-    //				}
-    //				return;
-    //			}
-    //		}
-    //		if (this.m_AmberController != null)
-    //		{
-    //			this.m_AmberController.SetFightWarring(false);
-    //		}
-    //	}
+    public void SetBattleAreaState(string triggerName)
+    {
+        Debug.Log("进入战斗");
+        //if (GameEntry.Instance.m_GameDataSystem.GetFlag(21))
+        //{
+        //    return;
+        //}
+        //this.m_MaxBattleStep = 0f;
+        //if (triggerName == null)
+        //{
+        //    return;
+        //}
+        //this.m_TriggerName = triggerName;
+        foreach (S_BattleArea current in this.m_BattleArea)
+        {
+            if (current.TriggerName == triggerName)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    S_BattleEncounter s_BattleEncounter = current.Encounter[i];
+                    if (s_BattleEncounter.Step > 100)
+                    {
+                        this.m_MaxBattleStep += 100f;
+                    }
+                    else
+                    {
+                        this.m_MaxBattleStep += (float)s_BattleEncounter.Step;
+                    }
+                }
+                //if (!GameEntry.Instance.m_GameDataSystem.GetFlag(23) && this.m_AmberController != null)
+                //{
+                //    this.m_AmberController.SetFightWarring(true);
+                //}
+                return;
+            }
+        }
+        //if (this.m_AmberController != null)
+        //{
+        //    this.m_AmberController.SetFightWarring(false);
+        //}
+    }
 
     //	public void ExitBattleArea(string triggerName)
     //	{

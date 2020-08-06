@@ -94,6 +94,18 @@ public class M_PlayerController : M_GameRoleBase
 
     public CharacterController m_Controller;
 
+    private RaycastHit groundHit;
+
+    public float groundedDistance = 3f;
+
+    public LayerMask groundLayers = -1;
+
+    private bool grounded;
+
+    public Vector3 m_Velocity = default(Vector3);
+
+    private Rigidbody cRigidbody;
+
     public GameObject m_PickTarget
     {
         get;
@@ -217,34 +229,67 @@ public class M_PlayerController : M_GameRoleBase
         }
     }
 
+    protected override void initialize()
+    {
+      
+    }
+
     private void Awake()
     {
         this.m_Controller = base.GetComponent<CharacterController>();
     }
 
-    protected override void initialize()
+    private void Start()
     {
-        //this.m_PlayerMotor = (base.GetComponent(typeof(M_PlayerMotor)) as M_PlayerMotor);
+        //this.m_AstarAI = base.GetComponent<M_AStarAI>();
+
+        //this.cacheDist = this.climbCheckDistance;
+        //this.rayHitComparer = new M_PlayerController.RayHitComparer();
+
+        //if (Swd6Application.instance != null)
+        //{
+        //    base.RoleID = Swd6Application.instance.m_GameDataSystem.m_PlayerID;
+        //}
+        //this.m_RoleMotion = base.gameObject.AddComponent<M_GameRoleMotion>();
+        //if (this.m_RoleMotion != null)
+        //{
+        //    this.m_RoleMotion.Init(base.RoleID, 1);
+        //}
+        //ShroudInstance[] componentsInChildren2 = base.GetComponentsInChildren<ShroudInstance>();
+        //this.m_ShroudInstance = componentsInChildren2[0];
+        //if (this.m_ShroudInstance != null)
+        //{
+        //    this.m_ShroudInstance.ReduceBlendWeight();
+        //}
+        //this.m_RunSpeed = 1f;
+        //S_StartRoleData data = GameDataDB.StartRoleDB.GetData(base.RoleID);
+        //if (data != null)
+        //{
+        //    this.m_RunSpeed = data.MoveSpeed;
+        //}
+
+        m_Animation = gameObject.GetComponentInChildren<Animation>();
+        this.m_PlayerMotor = (base.GetComponent(typeof(M_PlayerMotor)) as M_PlayerMotor);
         ////this.m_JumpMotor = (base.GetComponent(typeof(JumpAndIdle)) as JumpAndIdle);
         Vector3 position = base.transform.position;
-        //if (!base.GetComponent<NavMeshAgent>())
-        //{
-        //    this.m_NavMeshAgent = base.gameObject.AddComponent<NavMeshAgent>();
-        //    this.m_NavMeshAgent.acceleration = 200f;
-        //    this.m_NavMeshAgent.angularSpeed = 500f;
-        //    this.m_NavMeshAgent.baseOffset = -0.01f;
-        //    this.m_NavMeshAgent.walkableMask = 1;
-        //    this.m_NavMeshAgent.enabled = false;
-        //}
-        base.transform.position = position;
-        ////base.gameObject.AddComponent<M_FootStep>();
-        ////if (Swd6Application.instance.m_ExploreSystem.m_MapData.emType == ENUM_MapType.World)
+        ////if (!base.GetComponent<NavMeshAgent>())
         ////{
-        ////    this.m_RunSpeed = 3.6f;
+        ////    this.m_NavMeshAgent = base.gameObject.AddComponent<NavMeshAgent>();
+        ////    this.m_NavMeshAgent.acceleration = 200f;
+        ////    this.m_NavMeshAgent.angularSpeed = 500f;
+        ////    this.m_NavMeshAgent.baseOffset = -0.01f;
+        ////    this.m_NavMeshAgent.walkableMask = 1;
+        ////    this.m_NavMeshAgent.enabled = false;
         ////}
-        this.targetPointObj = GameEntry.Instance.m_ExploreSystem.m_MoveTargetPoint;
+        base.transform.position = position;
+        //////base.gameObject.AddComponent<M_FootStep>();
+        //////if (Swd6Application.instance.m_ExploreSystem.m_MapData.emType == ENUM_MapType.World)
+        //////{
+        //////    this.m_RunSpeed = 3.6f;
+        //////}
+        //this.targetPointObj = GameEntry.Instance.m_ExploreSystem.m_MoveTargetPoint;
         this.m_MoveTarget = null;
-        this.m_IsRun = GameEntry.Instance.m_ExploreSystem.Run;
+        //this.m_IsRun = GameEntry.Instance.m_ExploreSystem.Run;
         //this.m_PlayerMotor.maxForwardSpeed = this.m_RunSpeed;
         //this.m_JumpHeight = this.m_PlayerMotor.jumpHeight;
         //this.m_JumpGravity = this.m_PlayerMotor.gravity;
@@ -258,17 +303,23 @@ public class M_PlayerController : M_GameRoleBase
 
     public override void Update()
     {
-        //if (!this.LockControl)
-        //{
-        //    this.UpdateInput();
-        //    this.MousePickFloor();
-        //    this.UpdateMoveTarget();
-        //    this.UpdateMove();
-        //    this.UpdateFOV();
-        //    //this.UpdatePlayerTalk();
-        //    //this.UpdateWaterWave();
-        //    return;
-        //}
+        if (this.m_Controller != null)
+        {
+            //判断是否着地
+            this.grounded = Physics.Raycast(base.transform.position + base.transform.up * this.m_Controller.center.y, base.transform.up * -1f, out this.groundHit, this.groundedDistance, this.groundLayers);
+        }
+        //this.m_Velocity = this.cRigidbody.velocity;
+        if (!this.LockControl)
+        {
+            this.UpdateInput();
+            this.MousePickFloor();
+            this.UpdateMoveTarget();
+            this.UpdateMove();
+            this.UpdateFOV();
+            //this.UpdatePlayerTalk();
+            //this.UpdateWaterWave();
+            return;
+        }
 
         if (base.MoveRole)
         {
@@ -278,7 +329,6 @@ public class M_PlayerController : M_GameRoleBase
             return;
         }
         this.UpdateFaceToTarget();
-        Debug.Log("UpdateFaceToTarget");
     }
 
     //	private void UpdateWaterWave()
@@ -493,7 +543,7 @@ public class M_PlayerController : M_GameRoleBase
         }
         else
         {
-            m_Animation.CrossFade("Stand",0.5f);
+            m_Animation.CrossFade("Stand",0.2f);
             this.m_PlayerMotor.desiredMovementDirection = Vector3.zero;
         }
     }
@@ -1281,10 +1331,10 @@ public class M_PlayerController : M_GameRoleBase
         //        Debug.Log("執行事件_" + other.name);
         //    }
         //}
-        //if (other.tag == "BattleEvent")
-        //{
-        //    Swd6Application.instance.m_ExploreSystem.SetBattleAreaState(other.name);
-        //}
+        if (other.tag == "BattleEvent")
+        {
+            GameEntry.Instance.m_ExploreSystem.SetBattleAreaState(other.name);
+        }
         //if (other.tag == "WaterEvent" || other.tag == "WaterEvent2")
         //{
         //    if (!this.m_WalkInWater)
