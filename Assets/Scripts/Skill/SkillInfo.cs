@@ -1,24 +1,23 @@
 using System;
 
+[Serializable]
 public class SkillInfo : IComparable<SkillInfo>
 {
-	public int GUID
-	{
-		get;
-		set;
-	}
+	public int ID;
 
-	public int ID
-	{
-		get;
-		set;
-	}
+	public int PreID;
 
-	public int Level
-	{
-		get;
-		set;
-	}
+	public int LearnTime;
+
+	public int MaxLearnTime;
+
+	public int LearnPoint;
+
+	public int ActivePoint;
+
+	public int Group;
+
+	public SphereType Type;
 
 	public int CompareTo(SkillInfo obj)
 	{
@@ -27,14 +26,10 @@ public class SkillInfo : IComparable<SkillInfo>
 
 	public int CompareTo(SkillInfo p, SkillSortFields field)
 	{
-		switch (field)
+		if (field != SkillSortFields.ID)
 		{
-		case SkillSortFields.ID:
-			return this.ID.CompareTo(p.ID);
-		case SkillSortFields.LEVEL:
-			return this.Level.CompareTo(p.Level);
-		default:
 			return this.ID.CompareTo(p.ID);
 		}
+		return this.ID.CompareTo(p.ID);
 	}
 }

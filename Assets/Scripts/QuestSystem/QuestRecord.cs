@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// ÈÎÎñ¼ÇÂ¼
+/// </summary>
 public class QuestRecord
 {
 	public int ID;

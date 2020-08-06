@@ -359,6 +359,18 @@ namespace YouYou
                 curr.Value.OnUpdate();
             }
 
+            if (m_Async != null)
+            {
+                Debug.Log(m_Async.progress);
+
+                if (m_Async.progress == 1)
+                {
+                    UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("MAP01", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+                }
+            }
+
+          
+
             Time.OnUpdate();
             Procedure.OnUpdate();
             Pool.OnUpdate();
@@ -509,8 +521,14 @@ namespace YouYou
             GameDataDB.LoadLanguage();
         }
 
+        /// <summary>
+        /// 游戏数据系统
+        /// </summary>
         public GameDataSystem m_GameDataSystem { get; private set; }
 
+        /// <summary>
+        /// 物品系统
+        /// </summary>
         public ItemSystem m_ItemSystem { get; private set; }
 
         /// <summary>
@@ -518,6 +536,9 @@ namespace YouYou
         /// </summary>
         public QuestSystem m_QuestSystem { get; private set; }
 
+        /// <summary>
+        /// 技能系统
+        /// </summary>
         public SkillSystem m_SkillSystem { get; private set; }
 
         /// <summary>
@@ -529,8 +550,6 @@ namespace YouYou
 
         public GameObjSystem m_GameObjSystem { get; private set; }
 
-        public StorySystem m_StorySystem { get; private set; }
-
         private void InitGameSystem()
         {
             this.m_GameObjSystem = new GameObjSystem();
@@ -541,8 +560,8 @@ namespace YouYou
             this.m_ExploreSystem.Initialize();
             ////this.m_GameMenuSystem = new GameMenuSystem();
             ////this.m_GameMenuSystem.Initialize(this);
-            //this.m_QuestSystem = new QuestSystem();
-            //this.m_QuestSystem.Initialize();
+            this.m_QuestSystem = new QuestSystem();
+            this.m_QuestSystem.Initialize();
             this.m_IdentifySystem = new IdentifySystem();
             this.m_IdentifySystem.Initialize();
             this.m_ItemSystem = new ItemSystem();
@@ -570,8 +589,6 @@ namespace YouYou
             ////{
             ////    this.m_WOPSystem.InitForNewGame();
             ////}
-            this.m_StorySystem = new StorySystem();
-            this.m_StorySystem.Initialize();
             //this.m_MusicControlSystem = new MusicSystem();
             //this.m_UserBehavior = new UserBehavior();
             //this.m_UserBehavior.DirectoryPath = Application.dataPath + "/../Launcher/UBData/";      
@@ -583,47 +600,12 @@ namespace YouYou
         public void StartNewGame()
         {
             this.m_GameDataSystem.InitRoleData();
-            base.StartCoroutine(DoTalk());
         }
-
-        public IEnumerator DoTalk()
-        {
-            //GameTalk.StartTalk(true);
-            //yield return base.StartCoroutine(GameTalk.WaitFadeTime(1f, 2f));
-            //GameTalk.AddItem(1301, 3, false);
-            //GameTalk.AddMoney(500, false);
-            //int a = GameTalk.GetPlayGameCount();
-            //if (a >= 2)
-            //{
-            //    GameTalk.AddItem(686, 1, false);
-            //    GameTalk.AddItem(687, 1, false);
-            //    GameTalk.AddItem(688, 1, false);
-            //    GameTalk.AddItem(689, 1, false);
-            //    GameTalk.AddItem(690, 1, false);
-            //}
-            //if (!GameTalk.GetFlag(1001) && !GameTalk.GetFlag(1002))
-            //{
-            //    GameTalk.FlagON(1001);
-            //}
-            //yield return base.StartCoroutine(GameTalk.OpenMakeName(1));
-            //GameObject listener = GameObject.Find("Menu Listener");
-            //if (listener != null && listener.GetComponent<AudioListener>() != null)
-            //{
-            //    listener.GetComponent<AudioListener>().enabled = false;
-            //}
-            //GameObject cam = GameObject.Find("Camera");
-            //if (cam != null && cam.GetComponent<Camera>() != null)
-            //{
-            //    cam.GetComponent<Camera>().enabled = false;
-            //}
-            //GameTalk.PlayStory(100, "ME11000");
-            yield break;
-        }
-
+      
         public void InitNewGame()
         {
             //this.m_GameObjSystem.Clear();
-            //this.m_QuestSystem.Clear();
+            this.m_QuestSystem.Clear();
             //this.m_SkillSystem.Clear();
             this.m_ItemSystem.Clear();
             //this.m_MobGuardSystem.Clear();
@@ -640,13 +622,13 @@ namespace YouYou
         public void ChangeToStoryState(int mapID, string storyName)
         {
             GameEntry.Procedure.SetData("m_StoryName", storyName);
-
-            if (mapID == 100)
+            if (mapID == 100 && GameEntry.Procedure.CurrProcedureState==ProcedureState.EnterGame)
             {
                 GameEntry.Procedure.ChangeState(ProcedureState.SelectRole);
             }
             else if (mapID == this.m_GameDataSystem.m_MapInfo.MapID)
             {
+                Debug.Log("执行");
                 //if (currentGameState is StoryState)
                 //{
                 //    storyState.CreateNewStory();
@@ -670,8 +652,71 @@ namespace YouYou
             }
             else
             {
-                //this.ChangeMap(text, mapID, 0f, 0f, 0f, 0f);
+                this.ChangeMap(ProcedureState.SelectRole, mapID, 0f, 0f, 0f, 0f);
             }
+        }
+
+        public void ChangeMap(ProcedureState stateName, int mapid, float x, float y, float z, float dir)
+        {
+            //this.m_ExploreSystem.AutoSave();
+            //if (this.m_ExploreSystem.m_TalkEventObj != null)
+            //{
+            //    this.m_ExploreSystem.m_DontRemoveObj = this.m_ExploreSystem.m_TalkEventObj;
+            //    if (this.m_ExploreSystem.m_DontRemoveObj != null)
+            //    {
+            //        UnityEngine.Object.DontDestroyOnLoad(this.m_ExploreSystem.m_DontRemoveObj);
+            //    }
+            //    this.m_ExploreSystem.m_DontRemoveObj.transform.parent = base.gameObject.transform;
+            //}
+            S_MapData mapData = this.m_GameDataSystem.GetMapData(mapid);
+            if (mapData != null)
+            {
+                this.m_GameDataSystem.m_MapInfo.MapID = mapid;
+                this.m_ExploreSystem.PlayerChangePos = new Vector3(x, y, z);
+                this.m_ExploreSystem.PlayerChangeDir = dir;
+                this.m_ExploreSystem.PlayerController = null;
+                this.ChangeStateByLoading(stateName, mapData.Name);
+            }
+            else
+            {
+                UnityEngine.Debug.LogWarning("Map_" + mapid + " Load Error!!");
+            }
+        }
+
+        public void ChangeMap(string stateName, int mapid, string pointName)
+        {
+            //this.m_ExploreSystem.AutoSave();
+            //if (this.m_ExploreSystem.m_TalkEventObj != null)
+            //{
+            //    this.m_ExploreSystem.m_DontRemoveObj = this.m_ExploreSystem.m_TalkEventObj;
+            //    if (this.m_ExploreSystem.m_DontRemoveObj != null)
+            //    {
+            //        UnityEngine.Object.DontDestroyOnLoad(this.m_ExploreSystem.m_DontRemoveObj);
+            //    }
+            //    this.m_ExploreSystem.m_DontRemoveObj.transform.parent = base.gameObject.transform;
+            //}
+            //S_MapData mapData = this.m_GameDataSystem.GetMapData(mapid);
+            //if (mapData != null)
+            //{
+            //    this.m_GameDataSystem.m_MapInfo.MapID = mapid;
+            //    this.m_ExploreSystem.PlayerChangePoint = pointName;
+            //    this.m_ExploreSystem.PlayerController = null;
+            //    this.ChangeStateByLoading(stateName, mapData.Name);
+            //}
+            //else
+            //{
+            //    UnityEngine.Debug.LogWarning("Map_" + mapid + " Load Error!!");
+            //}
+        }
+
+        private AsyncOperation m_Async;
+
+        public void ChangeStateByLoading(ProcedureState stateName, string nextSceneName)
+        {
+            GameEntry.Scene.LoadScene(2, false, () =>
+            {
+                GameEntry.Procedure.ChangeState(stateName);
+            });
         }
     }
 }

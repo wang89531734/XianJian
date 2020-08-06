@@ -43,105 +43,95 @@ public class GameDataDB
 
 	public static T_GameDB<S_SkillSlot> SkillPoolDB = new T_GameDB<S_SkillSlot>();
 
-	//public static T_GameDB<S_SkillPlate> SkillPlateDB = new T_GameDB<S_SkillPlate>();
+    public static T_GameDB<S_SkillPlate> SkillPlateDB = new T_GameDB<S_SkillPlate>();
 
-	public static T_GameDB<S_Skill> SkillDB = new T_GameDB<S_Skill>();
+    public static T_GameDB<S_Skill> SkillDB = new T_GameDB<S_Skill>();
 
 	public static T_GameDB<S_BufferData> BufferDB = new T_GameDB<S_BufferData>();
 
 	public static T_GameDB<S_UseEffect> UseEffectDB = new T_GameDB<S_UseEffect>();
 
-	//public static T_GameDB<S_Quest> QuestDB = new T_GameDB<S_Quest>();
+    public static T_GameDB<S_Quest> QuestDB = new T_GameDB<S_Quest>();
 
-	//public static T_GameDB<S_MainQuest> MainQuestDB = new T_GameDB<S_MainQuest>();
+    public static T_GameDB<S_MainQuest> MainQuestDB = new T_GameDB<S_MainQuest>();
 
-	//public static T_GameDB<S_TalkString> TalkStringDB = new T_GameDB<S_TalkString>();
+    //public static T_GameDB<S_TalkString> TalkStringDB = new T_GameDB<S_TalkString>();
 
-	//public static T_GameDB<S_PartnerTalk> PartnerTalkDB = new T_GameDB<S_PartnerTalk>();
+    //public static T_GameDB<S_PartnerTalk> PartnerTalkDB = new T_GameDB<S_PartnerTalk>();
 
-	//public static T_GameDB<S_Achievement> AchievementDB = new T_GameDB<S_Achievement>();
+    //public static T_GameDB<S_Achievement> AchievementDB = new T_GameDB<S_Achievement>();
 
-	//public static T_GameDB<S_NpcShop> NpcShopDB = new T_GameDB<S_NpcShop>();
+    //public static T_GameDB<S_NpcShop> NpcShopDB = new T_GameDB<S_NpcShop>();
 
-	//public static T_GameDB<S_BattleRate> BattleRateDB = new T_GameDB<S_BattleRate>();
+    //public static T_GameDB<S_BattleRate> BattleRateDB = new T_GameDB<S_BattleRate>();
 
-	//public static T_GameDB<S_BattleGroup> BattleGroupDB = new T_GameDB<S_BattleGroup>();
+    //public static T_GameDB<S_BattleGroup> BattleGroupDB = new T_GameDB<S_BattleGroup>();
 
-	public static T_GameDB<S_AnimationData> AnimationDB = new T_GameDB<S_AnimationData>();
+    public static T_GameDB<S_AnimationData> AnimationDB = new T_GameDB<S_AnimationData>();
 
-	//public static T_GameDB<S_ActData> ActDataDB = new T_GameDB<S_ActData>();
+    //public static T_GameDB<S_ActData> ActDataDB = new T_GameDB<S_ActData>();
 
-	//public static T_GameDB<S_EffectData> EffectDB = new T_GameDB<S_EffectData>();
+    //public static T_GameDB<S_EffectData> EffectDB = new T_GameDB<S_EffectData>();
 
-	//public static T_GameDB<S_OSData> OSDB = new T_GameDB<S_OSData>();
+    //public static T_GameDB<S_OSData> OSDB = new T_GameDB<S_OSData>();
 
-	//public static T_GameDB<S_MovieData> MovieDB = new T_GameDB<S_MovieData>();
+    //public static T_GameDB<S_MovieSubtitleData> MovieSubDB = new T_GameDB<S_MovieSubtitleData>();
 
-	//public static T_GameDB<S_MovieSubtitleData> MovieSubDB = new T_GameDB<S_MovieSubtitleData>();
+    //public static T_GameDB<S_MaterialEffectData> MaterialEffectDB = new T_GameDB<S_MaterialEffectData>();
 
-	//public static T_GameDB<S_MaterialEffectData> MaterialEffectDB = new T_GameDB<S_MaterialEffectData>();
+    //public static T_GameDB<S_SenceMaterialSetting> SenceMaterialSettingDB = new T_GameDB<S_SenceMaterialSetting>();
 
-	//public static T_GameDB<S_SenceMaterialSetting> SenceMaterialSettingDB = new T_GameDB<S_SenceMaterialSetting>();
+    //public static T_GameDB<S_MusicData> MusicDB = new T_GameDB<S_MusicData>();
 
-	//public static T_GameDB<S_MusicData> MusicDB = new T_GameDB<S_MusicData>();
+    //public static T_GameDB<S_MusicEffectData> MusicEffectDB = new T_GameDB<S_MusicEffectData>();
 
-	//public static T_GameDB<S_MusicEffectData> MusicEffectDB = new T_GameDB<S_MusicEffectData>();
+    //public static T_GameDB<S_MobMoneyExp> MobMoneyExpDB = new T_GameDB<S_MobMoneyExp>();
 
-	//public static T_GameDB<S_MobMoneyExp> MobMoneyExpDB = new T_GameDB<S_MobMoneyExp>();
+    //public static T_GameDB<S_MobAI> MobAIDB = new T_GameDB<S_MobAI>();
 
-	//public static T_GameDB<S_MobAI> MobAIDB = new T_GameDB<S_MobAI>();
+    //public static T_GameDB<S_CombineSkillEffect> CombineSkillEffectDB = new T_GameDB<S_CombineSkillEffect>();
 
-	//public static T_GameDB<S_CombineSkillEffect> CombineSkillEffectDB = new T_GameDB<S_CombineSkillEffect>();
+    //public static T_GameDB<S_SuperSkillEffect> SuperSkillEffectDB = new T_GameDB<S_SuperSkillEffect>();
 
-	//public static T_GameDB<S_SuperSkillEffect> SuperSkillEffectDB = new T_GameDB<S_SuperSkillEffect>();
+    //public static T_GameDB<S_SkillEffect> SkillEffectDB = new T_GameDB<S_SkillEffect>();
 
-	//public static T_GameDB<S_SkillEffect> SkillEffectDB = new T_GameDB<S_SkillEffect>();
+    //public static T_GameDB<S_AttackEffect> AttackEffectDB = new T_GameDB<S_AttackEffect>();
 
-	//public static T_GameDB<S_AttackEffect> AttackEffectDB = new T_GameDB<S_AttackEffect>();
+    //public static T_GameDB<S_SkillCameraPath> SkillCameraPathDB = new T_GameDB<S_SkillCameraPath>();
 
-	//public static T_GameDB<S_SkillCameraPath> SkillCameraPathDB = new T_GameDB<S_SkillCameraPath>();
+    //public static T_GameDB<S_MonsterCompositeData> MonsterCompositeDB = new T_GameDB<S_MonsterCompositeData>();
 
-	//public static T_GameDB<S_MonsterCompositeData> MonsterCompositeDB = new T_GameDB<S_MonsterCompositeData>();
+    //public static T_GameDB<S_ManufactureFormulaData> ManufactureFormulaDB = new T_GameDB<S_ManufactureFormulaData>();
 
-	//public static T_GameDB<S_ManufactureFormulaData> ManufactureFormulaDB = new T_GameDB<S_ManufactureFormulaData>();
+    //public static T_GameDB<S_RefineGradeData> RefineGradeDB = new T_GameDB<S_RefineGradeData>();
 
-	//public static T_GameDB<S_RefineGradeData> RefineGradeDB = new T_GameDB<S_RefineGradeData>();
+    //public static T_GameDB<S_MonsterRefineFactorData> MonsterRefineFactorDB = new T_GameDB<S_MonsterRefineFactorData>();
 
-	//public static T_GameDB<S_MonsterRefineFactorData> MonsterRefineFactorDB = new T_GameDB<S_MonsterRefineFactorData>();
+    //public static T_GameDB<S_BuffStatusRelationship> BuffStatusDB = new T_GameDB<S_BuffStatusRelationship>();
 
-	//public static T_GameDB<S_BuffStatusRelationship> BuffStatusDB = new T_GameDB<S_BuffStatusRelationship>();
+    //public static T_GameDB<S_UnlockCode> UnlockCodeDB = new T_GameDB<S_UnlockCode>();
 
-	//public static T_GameDB<S_UnlockCode> UnlockCodeDB = new T_GameDB<S_UnlockCode>();
+    //public static T_GameDB<S_UnlockData> UnlockDataDB = new T_GameDB<S_UnlockData>();
 
-	//public static T_GameDB<S_UnlockData> UnlockDataDB = new T_GameDB<S_UnlockData>();
+    //public static T_GameDB<S_MemoryPuzzle> MemoryPuzzleDB = new T_GameDB<S_MemoryPuzzle>();
 
-	//public static T_GameDB<S_MemoryPuzzle> MemoryPuzzleDB = new T_GameDB<S_MemoryPuzzle>();
+    //public static T_GameDB<S_UserGuide_Tmp> UserGuideDB = new T_GameDB<S_UserGuide_Tmp>();
 
-	//public static T_GameDB<S_UserGuide_Tmp> UserGuideDB = new T_GameDB<S_UserGuide_Tmp>();
+    //public static T_GameDB<S_Help_Tmp> HelpDB = new T_GameDB<S_Help_Tmp>();
 
-	//public static T_GameDB<S_Help_Tmp> HelpDB = new T_GameDB<S_Help_Tmp>();
+    //public static T_GameDB<S_FilterString> FilterDB = new T_GameDB<S_FilterString>();
 
-	//public static T_GameDB<S_FilterString> FilterDB = new T_GameDB<S_FilterString>();
+    //public static T_GameDB<S_Atlas> AtlasDB = new T_GameDB<S_Atlas>();
 
-	//public static T_GameDB<S_Atlas> AtlasDB = new T_GameDB<S_Atlas>();
+    //public static T_GameDB<S_ReviewStory> ReviewStoryDB = new T_GameDB<S_ReviewStory>();
 
-	//public static T_GameDB<S_ReviewStory> ReviewStoryDB = new T_GameDB<S_ReviewStory>();
-
-	public static Dictionary<int, string> LanguageDB = new Dictionary<int, string>();
-
-	public static void LoadDBFMapPath()
-	{
-		string dataPath = GameDataDB.m_DBF_Path + "MapData.dbf";
-		GameDataDB.LoadFromFile<S_MapData>(GameDataDB.MapDB, dataPath, true);
-		dataPath = GameDataDB.m_DBF_Path + "MapConnect.dbf";
-		//GameDataDB.LoadFromFile<S_MapConnect>(GameDataDB.MapConnectDB, dataPath, true);
-	}
+    public static Dictionary<int, string> LanguageDB = new Dictionary<int, string>();
 
 	public static void LoadDBF()
 	{
         UnityEngine.Debug.Log("GameDB Load DBF Path:" + GameDataDB.m_DBF_Path);
         string dataPath = GameDataDB.m_DBF_Path + "MapData.dbf";
-        //GameDataDB.LoadFromFile<S_MapData>(GameDataDB.MapDB, dataPath, true);
+        GameDataDB.LoadFromFile<S_MapData>(GameDataDB.MapDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "NpcData.dbf";
         //GameDataDB.LoadFromFile<S_NpcData>(GameDataDB.NpcDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "NpcData1.dbf";
@@ -154,8 +144,8 @@ public class GameDataDB
         //GameDataDB.LoadFromFile<S_NpcAI>(GameDataDB.NpcAIDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "NpcAI2.dbf";
         //GameDataDB.LoadFromFile<S_NpcAI>(GameDataDB.NpcAIDB, dataPath, false);
-        //dataPath = GameDataDB.m_DBF_Path + "Quest.dbf";
-        //GameDataDB.LoadFromFile<S_Quest>(GameDataDB.QuestDB, dataPath, true);
+        dataPath = GameDataDB.m_DBF_Path + "Quest.dbf";
+        GameDataDB.LoadFromFile<S_Quest>(GameDataDB.QuestDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "AnimationData.dbf";
         //GameDataDB.LoadFromFile<S_AnimationData>(GameDataDB.AnimationDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "FormationData.dbf";
@@ -178,12 +168,12 @@ public class GameDataDB
         //GameDataDB.LoadFromFile<S_BattleRate>(GameDataDB.BattleRateDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "BattleGroup.dbf";
         //GameDataDB.LoadFromFile<S_BattleGroup>(GameDataDB.BattleGroupDB, dataPath, true);
-        //dataPath = GameDataDB.m_DBF_Path + "Skill.dbf";
-        //GameDataDB.LoadFromFile<S_Skill>(GameDataDB.SkillDB, dataPath, true);
-        //dataPath = GameDataDB.m_DBF_Path + "Skill2.dbf";
-        //GameDataDB.LoadFromFile<S_Skill>(GameDataDB.SkillDB, dataPath, false);
-        //dataPath = GameDataDB.m_DBF_Path + "SkillPlate.dbf";
-        //GameDataDB.LoadFromFile<S_SkillPlate>(GameDataDB.SkillPlateDB, dataPath, true);
+        dataPath = GameDataDB.m_DBF_Path + "Skill.dbf";
+        GameDataDB.LoadFromFile<S_Skill>(GameDataDB.SkillDB, dataPath, true);
+        dataPath = GameDataDB.m_DBF_Path + "Skill2.dbf";
+        GameDataDB.LoadFromFile<S_Skill>(GameDataDB.SkillDB, dataPath, false);
+        dataPath = GameDataDB.m_DBF_Path + "SkillPlate.dbf";
+        GameDataDB.LoadFromFile<S_SkillPlate>(GameDataDB.SkillPlateDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "ActData.dbf";
         //GameDataDB.LoadFromFile<S_ActData>(GameDataDB.ActDataDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "TalkString.dbf";
@@ -200,8 +190,8 @@ public class GameDataDB
         //GameDataDB.LoadFromFile<S_UseEffect>(GameDataDB.UseEffectDB, dataPath, false);
         //dataPath = GameDataDB.m_DBF_Path + "UseEffect3.dbf";
         //GameDataDB.LoadFromFile<S_UseEffect>(GameDataDB.UseEffectDB, dataPath, false);
-        //dataPath = GameDataDB.m_DBF_Path + "MainQuest.dbf";
-        //GameDataDB.LoadFromFile<S_MainQuest>(GameDataDB.MainQuestDB, dataPath, true);
+        dataPath = GameDataDB.m_DBF_Path + "MainQuest.dbf";
+        GameDataDB.LoadFromFile<S_MainQuest>(GameDataDB.MainQuestDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "OSData.dbf";
         //GameDataDB.LoadFromFile<S_OSData>(GameDataDB.OSDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "OSData2.dbf";
@@ -212,8 +202,6 @@ public class GameDataDB
         //GameDataDB.LoadFromFile<S_BuffStatusRelationship>(GameDataDB.BuffStatusDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "EffectData.dbf";
         //GameDataDB.LoadFromFile<S_EffectData>(GameDataDB.EffectDB, dataPath, true);
-        //dataPath = GameDataDB.m_DBF_Path + "MovieData.dbf";
-        //GameDataDB.LoadFromFile<S_MovieData>(GameDataDB.MovieDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "MusicData.dbf";
         //GameDataDB.LoadFromFile<S_MusicData>(GameDataDB.MusicDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "MusicEffectData.dbf";

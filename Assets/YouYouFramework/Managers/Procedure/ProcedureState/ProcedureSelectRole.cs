@@ -9,40 +9,28 @@ namespace YouYou
     /// </summary>
     public class ProcedureSelectRole : ProcedureBase
     {
-        //private UI_Subtitle m_UI_Subtitle;
-
-        //private UI_Subtitle_FullScreen m_UI_Subtitle_FullScreen;
-
         private string m_StoryName;
 
         private GameObject m_CurrentStroyObject;
 
-        private M_StoryBase m_StoryBase;
-
-        private float m_ShadowDistance;
-
-        private bool m_bEnableTextFrameInStory;
+        private GameObject m_MapEvent;
 
         public override void OnEnter()
         {
             base.OnEnter();
             GameEntry.Log(LogCategory.Procedure, "OnEnter SelectRole");
-            string a=GameEntry.Procedure.GetData<string>("m_StoryName");
-            Debug.Log(a);
-            AssetBundle.LoadFromFile(Application.dataPath + "/../assetbundles/Story/" + a + ".unity3d");
-            //this.m_bEnableTextFrameInStory = false;//Swd6Application.instance.m_NormalSettingSystem.GetNormalSetting().m_bEnableTextFrameInStory;
-            //this.LoadEventPrefab();
-            //this.GetGUI();
-            this.CreateNewStory();
-            //this.SetMainCameraEnable(false);
-            GameEntry.Instance.m_StorySystem.StoryBegin();
-            //this.m_ShadowDistance = QualitySettings.shadowDistance;
-            //QualitySettings.shadowDistance = 50f;
+            m_StoryName = GameEntry.Procedure.GetData<string>("m_StoryName");
+            this.LoadEventPrefab();
+            this.CreateNewStory();           
         }
 
         public override void OnUpdate()
         {
-            base.OnUpdate();
+            base.OnUpdate();//剧情回顾的时候有用
+            //if (Swd6Application.instance.m_StorySystem.IsReviewStory() && GameInput.IsPressKeyboardCancelKey() && this.m_StoryBase != null && !this.m_StoryBase.isFinish)
+            //{
+            //    this.m_StoryBase.ProcessFinishEvent();
+            //}
         }
 
         public override void OnLeave()
@@ -67,32 +55,63 @@ namespace YouYou
                 return;
             }
             string name = mapData.Name + "_Event_3";
-            //MapEventGenerator.GetMapEvent(name);
+            this.m_MapEvent = ResourcesManager.Instance.GetMapEvent(name);
         }
 
         public void CreateNewStory()
         {
+            this.SetMainCameraEnable(false);
             //this.HideGUI();
-            this.DestroyCurrentStory();
-            //this.m_CurrentStroyObject = StoryGenerator.CreateOtherGameObject(this.m_StoryName);
-            //if (this.m_CurrentStroyObject == null)
-            //{
-            //    Debug.LogWarning("m_CurrentStroyObject is null ");
-            //    return;
-            //}
-            //this.m_StoryBase = this.m_CurrentStroyObject.GetComponent<M_StoryBase>();
-            //this.m_StoryBase.Initial();
+            //this.DestroyCurrentStory();
+            //ResourcesManager.Instance.Clear_Story();
+            //ResourcesManager.Instance.Clear_Fight();
+            //Resources.UnloadUnusedAssets();
+            this.m_CurrentStroyObject = ResourcesManager.Instance.GetStory(this.m_StoryName);
+            if (this.m_CurrentStroyObject == null)
+            {
+                Debug.LogWarning("m_CurrentStroyObject is null ");
+                return;
+            }
         }
 
         private void DestroyCurrentStory()
         {
-            this.m_StoryBase = null;
             UnityEngine.Object.DestroyImmediate(this.m_CurrentStroyObject);
-            //RenderSettings.ambientLight = GameDefine.AMBIENTLIGHT;
             //MovieSystem.Instance.StopMovie();
-            //MusicControlSystem.StopSpeech();
-            //MusicControlSystem.FadeStopEnvironmentMusic();
-            //MusicControlSystem.StopAllLoopSound();
+            //MusicSystem.Instance.StopVoice();
+            //MusicSystem.Instance.FadeStopEnvironmentMusic();
+            //MusicSystem.Instance.StopAllLoopSound();
+        }
+
+        private void SetMainCameraEnable(bool isEnable)
+        {
+            GameObject gameObject = GameObject.Find("Main Camera");
+            if (gameObject == null)
+            {
+                gameObject = GameObject.FindWithTag("MainCamera");
+            }
+            if (gameObject)
+            {
+                Camera component = gameObject.GetComponent<Camera>();
+                if (component)
+                {
+                    component.enabled = isEnable;
+                }
+                AudioListener component2 = gameObject.GetComponent<AudioListener>();
+                if (component2)
+                {
+                    UnityEngine.Object.Destroy(component2);
+                }
+            }
+            GameObject playerObj = GameEntry.Instance.m_GameObjSystem.PlayerObj;
+            if (playerObj)
+            {
+                AudioListener component3 = playerObj.GetComponent<AudioListener>();
+                if (component3)
+                {
+                    component3.enabled = isEnable;
+                }
+            }
         }
     }
 }

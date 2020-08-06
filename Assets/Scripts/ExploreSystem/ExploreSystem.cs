@@ -193,6 +193,10 @@ public class ExploreSystem
         {
             return this.m_PlyerController;
         }
+        set
+        {
+            this.m_PlyerController = value;
+        }
     }
 
     public float BattleStep

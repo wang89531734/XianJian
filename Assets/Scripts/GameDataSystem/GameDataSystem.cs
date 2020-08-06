@@ -53,7 +53,7 @@ public class GameDataSystem
 
     private Dictionary<int, S_MapData> m_MapData;
 
-    //private List<S_PartyData> m_PartyRole;
+    private List<S_PartyData> m_PartyRole;
 
     private List<int> m_TeamRoleList;
 
@@ -117,28 +117,23 @@ public class GameDataSystem
 
     public void Initialize()
     {
-        this.m_GameVersion = "2.01";
+        this.m_GameVersion = "1.04";
         this.m_Money = 0;
         this.m_Stamina = 600;
-        this.m_Sense = 0;
-        this.m_FightScore = 0;
-        this.m_LegendPoint = 0;
         this.m_PlayerID = 1;
         this.m_PlayTimes = 0f;
         this.m_BreakBoxTimes = 0;
         this.m_CompleteGame = 0;
         this.m_MaxCompleteGame = 0;
         this.m_PlayGameCount = 1;
-        this.m_SoulPoint = 0;
-        this.m_SoulStone = 0;
         this.m_StoreSpendMoney = new int[256];
         this.m_ReviewStory = new int[512];
-        this.m_FightRole = new int[3];
-        //this.m_MapInfo = default(S_MapInfo);
+        this.m_FightRole = new int[4];
+        this.m_MapInfo = default(S_MapInfo);
         this.m_GameFlag = new S_GameFlag();
         this.m_MapData = new Dictionary<int, S_MapData>();
         //this.m_MapMusicData = new Dictionary<int, S_MapMusicData>();
-        //this.m_PartyRole = new List<S_PartyData>();
+        this.m_PartyRole = new List<S_PartyData>();
         this.m_TeamRoleList = new List<int>();
         this.m_ActionSkillList = new List<int>();
         this.m_RoldData = new C_RoleDataEx[10];
@@ -152,24 +147,19 @@ public class GameDataSystem
     {
         this.m_Money = 0;
         this.m_Stamina = 600;
-        this.m_Sense = 0;
-        this.m_FightScore = 0;
-        this.m_LegendPoint = 0;
         this.m_PlayerID = 1;
         this.m_PlayTimes = 0f;
         this.m_BreakBoxTimes = 0;
         this.m_CompleteGame = 0;
         this.m_PlayGameCount = 1;
-        this.m_SoulPoint = 0;
-        this.m_SoulStone = 0;
         this.m_SelectPet = 0;
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             this.m_FightRole[i] = 0;
         }
         this.m_MapInfo.Clear();
         this.m_GameFlag.Clear();
-        //this.m_PartyRole.Clear();
+        this.m_PartyRole.Clear();
         this.m_TeamRoleList.Clear();
         this.m_ActionSkillList.Clear();
         //this.ClearMapData();
@@ -201,19 +191,27 @@ public class GameDataSystem
         this.Reset();
         GameEntry.Instance.InitNewGame();
         this.InitTeamRoleList();
-        for (int i = 0; i < this.m_TeamRoleList.Count; i++)
-        {
-            int dateId = this.m_TeamRoleList[i];
-            int levelId = this.m_TeamRoleList[i];
-            this.SetStartData(this.m_TeamRoleList[i], dateId, levelId);
-        }
-        //this.m_RoldData[this.m_TeamRoleList[0] - 1].BaseRoleData.IsJoin = true;
-        //this.m_DefaultPlayerID = this.m_TeamRoleList[0];
-        //this.AddRole(this.m_TeamRoleList[0], false);
 
-        //this.m_PlayerID = this.m_DefaultPlayerID;
-        //this.m_FightPlayerID = this.m_DefaultPlayerID;
-        //this.FlagON(24);
+        for (int j = 0; j < this.m_TeamRoleList.Count; j++)
+        {
+            this.SetStartData(this.m_TeamRoleList[j], this.m_TeamRoleList[j], this.m_TeamRoleList[j]);
+        }
+        GameEntry.Instance.m_SkillSystem.InitDefaultHotKeySkill();
+        this.m_RoldData[0].BaseRoleData.IsJoin = true;
+        this.m_DefaultPlayerID = 1;
+        this.AddRole(1, false);
+        //NormalSetting normalSetting = Swd6Application.instance.m_NormalSettingSystem.GetNormalSetting();
+        //if (normalSetting.m_bEnableTeach)//应该是教程
+        //{
+        //    this.FlagON(75);
+        //    this.FlagON(76);
+        //    this.FlagON(77);
+        //}
+        this.AddDLCItem();
+
+        this.m_PlayerID = this.m_DefaultPlayerID;
+        this.m_FightPlayerID = this.m_DefaultPlayerID;
+        this.FlagON(24);
     }
 
     //	public void InitExRoleData(int chapId)
@@ -405,15 +403,15 @@ public class GameDataSystem
     //		}
     //	}
 
-    //	public void Update()
-    //	{
-    //		this.m_PlayTimes += Time.deltaTime;
-    //	}
+    public void Update()
+    {
+        this.m_PlayTimes += Time.deltaTime;
+    }
 
-    //	public bool GetFlag(int flag)
-    //	{
-    //		return this.m_GameFlag.Get(flag);
-    //	}
+    public bool GetFlag(int flag)
+    {
+        return this.m_GameFlag.Get(flag);
+    }
 
     public void FlagON(int flag)
     {
@@ -475,9 +473,9 @@ public class GameDataSystem
         this.m_RoldData[num].BaseRoleData.FamilyName = GameDataDB.StrID(num * 10 + 51);
         this.m_RoldData[num].BaseRoleData.Name = GameDataDB.StrID(num * 10 + 52);
         this.m_RoldData[num].BaseRoleData.SetStartData(data, levelId, true);
-        //this.m_RoldData[num].CalRoleAttr();
-        //this.m_RoldData[num].SetFullHP();
-        //this.m_RoldData[num].SetFullMP();
+        this.m_RoldData[num].CalRoleAttr();
+        this.m_RoldData[num].SetFullHP();
+        this.m_RoldData[num].SetFullMP();
         return true;
     }
 
@@ -655,7 +653,7 @@ public class GameDataSystem
         this.FlagON(roleId);
         this.m_RoldData[roleId - 1].BaseRoleData.IsJoin = true;
         //this.m_RoldData[roleId - 1].BaseRoleData.IsFight = this.CheckCanFight();
-        //this.UpdatePartyRole();
+        this.UpdatePartyRole();
     }
 
     //	public void RemoveRole(int roleId, bool showMsg)
@@ -702,21 +700,21 @@ public class GameDataSystem
     //		}
     //	}
 
-    //	public void UpdatePartyRole()
-    //	{
-    //		this.m_PartyRole.Clear();
-    //		for (int i = 0; i < this.GetMaxTeamRoleCount(); i++)
-    //		{
-    //			int num = this.m_TeamRoleList[i];
-    //			if (Swd6Application.instance.m_GameDataSystem.GetFlag(num))
-    //			{
-    //				S_PartyData s_PartyData = new S_PartyData();
-    //				s_PartyData.m_ID = num;
-    //				s_PartyData.m_IsFight = this.GetRoleData(num).BaseRoleData.IsFight;
-    //				this.m_PartyRole.Add(s_PartyData);
-    //			}
-    //		}
-    //	}
+    public void UpdatePartyRole()
+    {
+        //this.m_PartyRole.Clear();
+        //for (int i = 0; i < this.GetMaxTeamRoleCount(); i++)
+        //{
+        //    int num = this.m_TeamRoleList[i];
+        //    if (GameEntry.Instance.m_GameDataSystem.GetFlag(num))
+        //    {
+        //        S_PartyData s_PartyData = new S_PartyData();
+        //        s_PartyData.m_ID = num;
+        //        s_PartyData.m_IsFight = this.GetRoleData(num).BaseRoleData.IsFight;
+        //        this.m_PartyRole.Add(s_PartyData);
+        //    }
+        //}
+    }
 
     //	public void UpdateMustFightList(List<int> fightList)
     //	{
@@ -756,18 +754,18 @@ public class GameDataSystem
     //		}
     //	}
 
-    //public bool CheckCanFight()
-    //{
-    //    int num = 0;
-    //    for (int i = 0; i < this.m_PartyRole.Count; i++)
-    //    {
-    //        if (this.m_PartyRole[i].m_IsFight)
-    //        {
-    //            num++;
-    //        }
-    //    }
-    //    return num < 3;
-    //}
+    public bool CheckCanFight()
+    {
+        int num = 0;
+        for (int i = 0; i < this.m_PartyRole.Count; i++)
+        {
+            if (this.m_PartyRole[i].m_IsFight)
+            {
+                num++;
+            }
+        }
+        return num < 3;
+    }
 
     //	public bool CheckMustFightRole(int id)
     //	{
@@ -823,10 +821,10 @@ public class GameDataSystem
     //		return this.m_TeamRoleList;
     //	}
 
-    //	public int GetMaxTeamRoleCount()
-    //	{
-    //		return this.m_TeamRoleList.Count;
-    //	}
+    public int GetMaxTeamRoleCount()
+    {
+        return this.m_TeamRoleList.Count;
+    }
 
     //	public int GetPartyRoleID(int index)
     //	{
@@ -1459,4 +1457,40 @@ public class GameDataSystem
     //		}
     //		this.UpdatePartyRole();
     //	}
+
+    public void AddDLCItem()
+    {
+        if (GameEntry.Instance.m_ItemSystem.GetDataByItemID(12) == null)
+        {
+            GameEntry.Instance.m_ItemSystem.AddItem(12, 1, ENUM_ItemState.New, false);
+        }
+        if (GameEntry.Instance.m_ItemSystem.GetDataByItemID(32) == null)
+        {
+            GameEntry.Instance.m_ItemSystem.AddItem(32, 1, ENUM_ItemState.New, false);
+        }
+        if (GameEntry.Instance.m_ItemSystem.GetDataByItemID(52) == null)
+        {
+            GameEntry.Instance.m_ItemSystem.AddItem(52, 1, ENUM_ItemState.New, false);
+        }
+        if (GameEntry.Instance.m_ItemSystem.GetDataByItemID(72) == null)
+        {
+            GameEntry.Instance.m_ItemSystem.AddItem(72, 1, ENUM_ItemState.New, false);
+        }
+        if (GameEntry.Instance.m_ItemSystem.GetDataByItemID(301) == null)
+        {
+            GameEntry.Instance.m_ItemSystem.AddItem(301, 1, ENUM_ItemState.New, false);
+        }
+        if (GameEntry.Instance.m_ItemSystem.GetDataByItemID(302) == null)
+        {
+            GameEntry.Instance.m_ItemSystem.AddItem(302, 1, ENUM_ItemState.New, false);
+        }
+        if (GameEntry.Instance.m_ItemSystem.GetDataByItemID(303) == null)
+        {
+            GameEntry.Instance.m_ItemSystem.AddItem(303, 1, ENUM_ItemState.New, false);
+        }
+        if (GameEntry.Instance.m_ItemSystem.GetDataByItemID(304) == null)
+        {
+            GameEntry.Instance.m_ItemSystem.AddItem(304, 1, ENUM_ItemState.New, false);
+        }
+    }
 }

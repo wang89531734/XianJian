@@ -93,7 +93,6 @@ public class ResourcesManager
 		this.m_VoiceLoader = new ResourceLoader("/../Assetbundles/Voice/", "Assets/Assetbundles/Music/Voice/", ".ogg");
 		this.m_SoundLoader = new ResourceLoader("/../Assetbundles/Sound/", "Assets/Assetbundles/Music/Sound/", ".ogg");
 		this.GetShaderList();
-		this.GetFont();
 	}
 
 	public void Clear()
@@ -157,27 +156,7 @@ public class ResourcesManager
 	private void GetShaderList()
 	{
 		AssetBundle assetBundle = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/Shader/ShaderList.unity3d");
-	}
-
-	private void GetFont()
-	{
-		AssetBundle assetBundle = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/GUI/Font.unity3d");
-		AssetBundle assetBundle2 = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/GUI/SciFiAtlas.unity3d");
-		AssetBundle assetBundle3 = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/GUI/WoodenAtlas.unity3d");
-		AssetBundle assetBundle4 = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/GUI/MiniMapRenderTex.unity3d");
-		AssetBundle assetBundle5 = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/GUI/window_setting_layer.unity3d");
-		AssetBundle assetBundle6 = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/GUI/mainmenu_icon.unity3d");
-		AssetBundle assetBundle7 = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/GUI/other_fight_layer.unity3d");
-		AssetBundle assetBundle8 = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/GUI/window_layer01.unity3d");
-		AssetBundle assetBundle9 = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/GUI/window_layer02.unity3d");
-		AssetBundle assetBundle10 = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/GUI/rolelayerAtlas.unity3d");
-		AssetBundle assetBundle11 = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/GUI/listatlas2.unity3d");
-		AssetBundle assetBundle12 = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/GUI/scollbar.unity3d");
-		AssetBundle assetBundle13 = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/GUI/other_hpmpexp.unity3d");
-		AssetBundle assetBundle14 = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/GUI/other_message_01.unity3d");
-		AssetBundle assetBundle15 = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/GUI/other_message_02.unity3d");
-		AssetBundle assetBundle16 = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/GUI/other_formationlayer_bu.unity3d");
-		AssetBundle assetBundle17 = AssetBundle.LoadFromFile(Application.dataPath + "/../Assetbundles/GUI/button_01.unity3d");
+        assetBundle.LoadAllAssets<GameObject>();
 	}
 
 	public GameObject GetFightObject(string name)

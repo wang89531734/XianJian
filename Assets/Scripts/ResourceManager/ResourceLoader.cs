@@ -165,11 +165,11 @@ public class ResourceLoader
 			return null;
 		}
 		AssetBundle assetBundle = AssetBundle.LoadFromFile(Application.dataPath + this.m_AssetBundlePath + name + ".unity3d");
-		if (assetBundle == null)
+        if (assetBundle == null)
 		{
-			return null;
+            return null;
 		}
-		UnityEngine.Object mainAsset = assetBundle.LoadAsset(this.m_AssetBundlePath + name + ".unity3d");
+        GameObject mainAsset = assetBundle.LoadAsset<GameObject>(name);
 		if (mainAsset == null)
 		{
 			assetBundle.Unload(false);

@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using YouYou;
 
 public class QuestSystem
 {
-    private static QuestSystem _instance;
-
     private bool m_Dirty;
 
     private Dictionary<int, QuestRecord> m_QuestRecord = new Dictionary<int, QuestRecord>();
@@ -20,14 +19,6 @@ public class QuestSystem
 
     private Dictionary<int, S_FinishMob> m_WantMob = new Dictionary<int, S_FinishMob>();
 
-    public static QuestSystem Instance
-    {
-        get
-        {
-            return QuestSystem._instance;
-        }
-    }
-
     public void Initialize()
     {
         this.m_QuestGroupList = new Dictionary<int, List<int>>[32];
@@ -35,67 +26,67 @@ public class QuestSystem
         {
             this.m_QuestGroupList[i] = new Dictionary<int, List<int>>();
         }
-        //this.InitQuestData();
+        this.InitQuestData();
     }
 
-    //	private void InitQuestData()
-    //	{
-    //		GameDataDB.QuestDB.ResetByOrder();
-    //		int dataSize = GameDataDB.QuestDB.GetDataSize();
-    //		for (int i = 0; i < dataSize; i++)
-    //		{
-    //			S_Quest dataByOrder = GameDataDB.QuestDB.GetDataByOrder();
-    //			if (dataByOrder != null)
-    //			{
-    //				this.AddQuestData(this.m_GiveQuestList, dataByOrder.GiveNpc, dataByOrder.GUID);
-    //				this.AddQuestData(this.m_RunQuestList, dataByOrder.RunNpc, dataByOrder.GUID);
-    //				this.AddQuestData(this.m_ReportQuestList, dataByOrder.ReportNpc, dataByOrder.GUID);
-    //				this.AddQuestGroupData(dataByOrder);
-    //			}
-    //		}
-    //	}
+    private void InitQuestData()
+    {
+        GameDataDB.QuestDB.ResetByOrder();
+        int dataSize = GameDataDB.QuestDB.GetDataSize();
+        for (int i = 0; i < dataSize; i++)
+        {
+            S_Quest dataByOrder = GameDataDB.QuestDB.GetDataByOrder();
+            if (dataByOrder != null)
+            {
+                this.AddQuestData(this.m_GiveQuestList, dataByOrder.GiveNpc, dataByOrder.GUID);
+                this.AddQuestData(this.m_RunQuestList, dataByOrder.RunNpc, dataByOrder.GUID);
+                this.AddQuestData(this.m_ReportQuestList, dataByOrder.ReportNpc, dataByOrder.GUID);
+                this.AddQuestGroupData(dataByOrder);
+            }
+        }
+    }
 
-    //	private void AddQuestGroupData(S_Quest quest)
-    //	{
-    //		if (this.m_QuestGroupList[quest.Chapter].ContainsKey(quest.Group))
-    //		{
-    //			List<int> list = this.m_QuestGroupList[quest.Chapter][quest.Group];
-    //			list.Add(quest.GUID);
-    //		}
-    //		else
-    //		{
-    //			List<int> list2 = new List<int>();
-    //			list2.Add(quest.GUID);
-    //			this.m_QuestGroupList[quest.Chapter].Add(quest.Group, list2);
-    //		}
-    //	}
+    private void AddQuestGroupData(S_Quest quest)
+    {
+        if (this.m_QuestGroupList[quest.Chapter].ContainsKey(quest.Group))
+        {
+            List<int> list = this.m_QuestGroupList[quest.Chapter][quest.Group];
+            list.Add(quest.GUID);
+        }
+        else
+        {
+            List<int> list2 = new List<int>();
+            list2.Add(quest.GUID);
+            this.m_QuestGroupList[quest.Chapter].Add(quest.Group, list2);
+        }
+    }
 
-    //	public Dictionary<int, List<int>> GetQuestGroupData(int chapter)
-    //	{
-    //		return this.m_QuestGroupList[chapter];
-    //	}
+    public Dictionary<int, List<int>> GetQuestGroupData(int chapter)
+    {
+        return this.m_QuestGroupList[chapter];
+    }
 
-    //	public void Clear()
-    //	{
-    //		this.m_QuestRecord.Clear();
-    //	}
+    public void Clear()
+    {
+        this.m_QuestRecord.Clear();
+    }
 
-    //	public QuestRecord GetQuestRecord(int id)
-    //	{
-    //		if (this.m_QuestRecord.ContainsKey(id))
-    //		{
-    //			return this.m_QuestRecord[id];
-    //		}
-    //		return null;
-    //	}
+    public QuestRecord GetQuestRecord(int id)
+    {
+        if (this.m_QuestRecord.ContainsKey(id))
+        {
+            return this.m_QuestRecord[id];
+        }
+        return null;
+    }
 
-    //	public void ClearQuestRecord(int id)
-    //	{
-    //		if (this.m_QuestRecord.ContainsKey(id))
-    //		{
-    //			this.m_QuestRecord.Remove(id);
-    //		}
-    //	}
+    public void ClearQuestRecord(int id)
+    {
+        if (this.m_QuestRecord.ContainsKey(id))
+        {
+            this.m_QuestRecord.Remove(id);
+        }
+    }
 
     //	public void AddQuestRecord(QuestRecord questData)
     //	{
@@ -109,20 +100,20 @@ public class QuestSystem
     //		}
     //	}
 
-    //	private void AddQuestData(Dictionary<int, List<int>> QuestList, int id, int questId)
-    //	{
-    //		if (QuestList.ContainsKey(id))
-    //		{
-    //			QuestList[id].Add(questId);
-    //		}
-    //		else
-    //		{
-    //			QuestList.Add(id, new List<int>
-    //			{
-    //				questId
-    //			});
-    //		}
-    //	}
+    private void AddQuestData(Dictionary<int, List<int>> QuestList, int id, int questId)
+    {
+        if (QuestList.ContainsKey(id))
+        {
+            QuestList[id].Add(questId);
+        }
+        else
+        {
+            QuestList.Add(id, new List<int>
+                {
+                    questId
+                });
+        }
+    }
 
     //	public List<int> GetGiveQuestData(int NpcID)
     //	{
@@ -151,22 +142,25 @@ public class QuestSystem
     //		return null;
     //	}
 
-    //	public void Dirty()
-    //	{
-    //		if (this.gameApplication.m_ExploreSystem.PlayerObj == null)
-    //		{
-    //			return;
-    //		}
-    //		this.m_Dirty = true;
-    //	}
+    /// <summary>
+    /// 已更新
+    /// </summary>
+    public void Dirty()
+    {
+        if (GameEntry.Instance.m_ExploreSystem.PlayerObj == null)
+        {
+            return;
+        }
+        this.m_Dirty = true;
+    }
 
-    //	public void Update()
-    //	{
-    //		if (this.m_Dirty)
-    //		{
-    //			this.RefreshQuestHint();
-    //		}
-    //	}
+    public void Update()
+    {
+        if (this.m_Dirty)
+        {
+            //this.RefreshQuestHint();
+        }
+    }
 
     //	public void RefreshQuestHint()
     //	{
