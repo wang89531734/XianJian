@@ -110,7 +110,27 @@ public class M_PlayerMouseOrbit : MonoBehaviour
 		}
 	}
 
-	private void UpdateFreeControl()
+    public void Init()
+    {
+        Vector3 eulerAngles = base.transform.eulerAngles;
+        this.m_XAngle = eulerAngles.y;
+        this.m_YAngle = eulerAngles.x;
+        if (GameEntry.Instance.m_ExploreSystem.PlayerController)
+        {
+            this.m_XAngle = GameEntry.Instance.m_ExploreSystem.PlayerController.Dir;
+            this.m_YAngle = 10f;
+        }
+        this.m_DistanceByPhysics = this.m_Distance;
+        if (this.m_Target != null)
+        {
+            Quaternion rotation = Quaternion.Euler(this.m_YAngle, this.m_XAngle, 0f);
+            Vector3 point = new Vector3(0f, 0f, -this.m_Distance);
+            Vector3 position = rotation * point + this.m_Target.position;
+            this.m_Transform.position = position;
+        }
+    }
+
+    private void UpdateFreeControl()
 	{
 		Vector3 vector = new Vector3(0f, 0f, 0f);
 		if (Input.GetMouseButton(1))

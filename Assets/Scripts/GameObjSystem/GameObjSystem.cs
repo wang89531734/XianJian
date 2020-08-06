@@ -21,6 +21,10 @@ public class GameObjSystem
 
     private List<CombineInstance> m_CombineInstances = new List<CombineInstance>();
 
+    private List<GameObject> m_PhysicClothList = new List<GameObject>();
+
+    private List<GameObject> m_PlayerObjList = new List<GameObject>();
+
     private string[] PlayerShowName = new string[]
     {
         "p01-show",
@@ -485,14 +489,22 @@ public class GameObjSystem
     //		return num;
     //	}
 
+    /// <summary>
+    /// 创建玩家物体
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="pos"></param>
+    /// <param name="dir"></param>
+    /// <returns></returns>
     public GameObject CreatePlayerGameObj(int id, Vector3 pos, float dir)
     {
         if (this.PlayerObj != null)
         {
             return this.PlayerObj;
         }
-        string name = "Player" + id;
-       
+        string text = "Player" + id;
+        string name = "Player" + id + "_Map";
+
         GameEntry.Pool.GameObjectSpawn(1, (Transform trans) =>
         {
             GameObject gameObject = trans.gameObject;
@@ -537,16 +549,126 @@ public class GameObjSystem
                     //{
                     //    this.SetPlayerCosCloth(equipItemData.ID, Enum_AvaterType.Map);
                     //}
-                });              
+                });
             }
         });
-       
-        //if (id == 4)
+
+        //GameObject characterRoot = ResourcesManager.Instance.GetCharacterRoot(name);
+        //if (characterRoot == null)
         //{
-        //    this.HideBreakWeapon();
+        //    Debug.Log("CreatePlayerGameObj::無法建立Root物件_" + id);
+        //    return null;
         //}
+        //GameObject gameObject = this.GetPlayerCosCloth(id);
+        //if (gameObject == null)
+        //{
+        //    gameObject = ResourcesManager.Instance.GetCharacterModel(text);
+        //    if (gameObject == null)
+        //    {
+        //        Debug.Log("CreatePlayerGameObj::無法建立Model物件_" + id);
+        //        return null;
+        //    }
+        //}
+
+        //RendererTool.ChangeSenceMaterialSetting(text, gameObject);
+        //gameObject.transform.parent = characterRoot.transform;
+        //Animator component = gameObject.GetComponent<Animator>();
+        //if (component == null)
+        //{
+        //    Debug.Log("CreatePlayerGameObj::找不到Animator_" + id);
+        //    return null;
+        //}
+        //component.enabled = false;
+        //Avatar avatar = component.avatar;
+        //UnityEngine.Object.Destroy(component);
+        ////string name2 = "Player" + id + "_Map";
+        ////component = characterRoot.GetComponent<Animator>();
+        ////component.runtimeAnimatorController = ResourceManager.Instance.GetAnimatorController(name2);
+        ////component.avatar = avatar;
+        ////component.applyRootMotion = false;
+        //SphereCollider component2 = gameObject.GetComponent<SphereCollider>();
+        //if (component2 != null)
+        //{
+        //    UnityEngine.Object.Destroy(component2);
+        //}
+        //CapsuleCollider component3 = gameObject.GetComponent<CapsuleCollider>();
+        //if (component3 != null)
+        //{
+        //    component3.enabled = true;
+        //    component3.isTrigger = true;
+        //}
+        ////FaceFXControllerScript component4 = gameObject.GetComponent<FaceFXControllerScript>();
+        ////if (component4 != null)
+        ////{
+        ////    UnityEngine.Object.Destroy(component4);
+        ////}
+        //Animation component5 = gameObject.GetComponent<Animation>();
+        //if (component5 != null)
+        //{
+        //    UnityEngine.Object.Destroy(component5);
+        //}
+        ////this.m_ShroudInstance = gameObject.GetComponent<ShroudInstance>();
+        ////if (this.m_ShroudInstance != null)
+        ////{
+        ////    this.m_ShroudInstance.ReduceBlendWeight_StoryEnable();
+        ////}
+        //CharacterController component6 = gameObject.GetComponent<CharacterController>();
+        //UnityEngine.Object.Destroy(component6);
+        //characterRoot.transform.position = pos;
+        //characterRoot.transform.eulerAngles = new Vector3(0f, dir, 0f);
+        //characterRoot.name = "Player";
+        //component.applyRootMotion = true;
+        ////TransformTool.SetLayerRecursively(characterRoot.transform, 2);
+        //gameObject.tag = "Player";
+        //this.PlayerObj = characterRoot;
+        //GameObjState state = new GameObjState();
+        //S_GameObjData objData = new S_GameObjData(id, 0, pos, dir, 1, state, this.PlayerObj);
+        //this.AddGameObjData(objData);
+        ////if (!this.PlayerObj.GetComponent<AudioListener>())
+        ////{
+        ////    this.PlayerObj.AddComponent<AudioListener>();
+        ////}
+        //this.m_PhysicClothList.Clear();
+        //this.m_PlayerObjList.Clear();
+
         this.m_IsHide = false;
         return this.PlayerObj;
+    }
+
+    public GameObject GetPlayerCosCloth(int roleId)
+    {
+        if (roleId == 0)
+        {
+            return null;
+        }
+        C_RoleDataEx roleData = GameEntry.Instance.m_GameDataSystem.GetRoleData(roleId);
+        if (roleData == null)
+        {
+            return null;
+        }
+        ItemData equipItemData = roleData.GetEquipItemData(ENUM_EquipPosition.CosCloth);
+        if (equipItemData == null)
+        {
+            Debug.Log("执行");
+            return null;
+        }
+        if (equipItemData.ID == 0)
+        {
+            Debug.Log("执行");
+            return null;
+        }
+        S_Item data = GameDataDB.ItemDB.GetData(equipItemData.ID);
+        if (data == null)
+        {
+            Debug.Log(data.Equip.Materail[0].MeshName);
+            return null;
+        }
+        if (data.Equip.Materail.Count == 0)
+        {
+            Debug.Log(data.Equip.Materail[0].MeshName);
+            return null;
+        }
+        return ResourcesManager.Instance.GetCharacterModel(data.Equip.Materail[0].MeshName);
     }
 
     //	public GameObject CreatePlayerShowObj(int id, int itemId)

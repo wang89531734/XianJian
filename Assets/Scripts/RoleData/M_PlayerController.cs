@@ -92,6 +92,8 @@ public class M_PlayerController : M_GameRoleBase
 
     //public OffMeshLinkData m_LinkData;
 
+    public CharacterController m_Controller;
+
     public GameObject m_PickTarget
     {
         get;
@@ -215,31 +217,35 @@ public class M_PlayerController : M_GameRoleBase
         }
     }
 
+    private void Awake()
+    {
+        this.m_Controller = base.GetComponent<CharacterController>();
+    }
+
     protected override void initialize()
     {
-        this.m_PlayerMotor = (base.GetComponent(typeof(M_PlayerMotor)) as M_PlayerMotor);
-        //this.m_JumpMotor = (base.GetComponent(typeof(JumpAndIdle)) as JumpAndIdle);
+        //this.m_PlayerMotor = (base.GetComponent(typeof(M_PlayerMotor)) as M_PlayerMotor);
+        ////this.m_JumpMotor = (base.GetComponent(typeof(JumpAndIdle)) as JumpAndIdle);
         Vector3 position = base.transform.position;
-        if (!base.GetComponent<NavMeshAgent>())
-        {
-            this.m_NavMeshAgent = base.gameObject.AddComponent<NavMeshAgent>();
-            this.m_NavMeshAgent.acceleration = 200f;
-            this.m_NavMeshAgent.angularSpeed = 500f;
-            this.m_NavMeshAgent.baseOffset = -0.01f;
-            this.m_NavMeshAgent.walkableMask = 1;
-            this.m_NavMeshAgent.enabled = false;
-        }
-        base.transform.position = position;
-    
-        //base.gameObject.AddComponent<M_FootStep>();
-        //if (Swd6Application.instance.m_ExploreSystem.m_MapData.emType == ENUM_MapType.World)
+        //if (!base.GetComponent<NavMeshAgent>())
         //{
-        //    this.m_RunSpeed = 3.6f;
+        //    this.m_NavMeshAgent = base.gameObject.AddComponent<NavMeshAgent>();
+        //    this.m_NavMeshAgent.acceleration = 200f;
+        //    this.m_NavMeshAgent.angularSpeed = 500f;
+        //    this.m_NavMeshAgent.baseOffset = -0.01f;
+        //    this.m_NavMeshAgent.walkableMask = 1;
+        //    this.m_NavMeshAgent.enabled = false;
         //}
+        base.transform.position = position;
+        ////base.gameObject.AddComponent<M_FootStep>();
+        ////if (Swd6Application.instance.m_ExploreSystem.m_MapData.emType == ENUM_MapType.World)
+        ////{
+        ////    this.m_RunSpeed = 3.6f;
+        ////}
         this.targetPointObj = GameEntry.Instance.m_ExploreSystem.m_MoveTargetPoint;
         this.m_MoveTarget = null;
         this.m_IsRun = GameEntry.Instance.m_ExploreSystem.Run;
-        this.m_PlayerMotor.maxForwardSpeed = this.m_RunSpeed;
+        //this.m_PlayerMotor.maxForwardSpeed = this.m_RunSpeed;
         //this.m_JumpHeight = this.m_PlayerMotor.jumpHeight;
         //this.m_JumpGravity = this.m_PlayerMotor.gravity;
         //if (Swd6Application.instance.m_ExploreSystem.m_MapData.emType == ENUM_MapType.Town)
@@ -252,17 +258,17 @@ public class M_PlayerController : M_GameRoleBase
 
     public override void Update()
     {
-        if (!this.LockControl)
-        {
-            this.UpdateInput();
-            this.MousePickFloor();
-            this.UpdateMoveTarget();
-            this.UpdateMove();
-            this.UpdateFOV();
-            //this.UpdatePlayerTalk();
-            //this.UpdateWaterWave();
-            return;
-        }
+        //if (!this.LockControl)
+        //{
+        //    this.UpdateInput();
+        //    this.MousePickFloor();
+        //    this.UpdateMoveTarget();
+        //    this.UpdateMove();
+        //    this.UpdateFOV();
+        //    //this.UpdatePlayerTalk();
+        //    //this.UpdateWaterWave();
+        //    return;
+        //}
 
         if (base.MoveRole)
         {
@@ -374,44 +380,44 @@ public class M_PlayerController : M_GameRoleBase
 
     private void UpdateRun()
     {
-        if (this.m_WalkMultiplier != 1f)
-        {
-            if (!this.m_bAutoJump)
-            {
-                if (this.m_IsRun)
-                {
-                    this.m_PlayerMotor.maxForwardSpeed = this.m_RunSpeed;
-                }
-                else
-                {
-                    this.m_PlayerMotor.maxForwardSpeed = this.m_WalkSpeed;
-                }
-            }
+        //if (this.m_WalkMultiplier != 1f)
+        //{
+        //    if (!this.m_bAutoJump)
+        //    {
+        //        if (this.m_IsRun)
+        //        {
+        //            this.m_PlayerMotor.maxForwardSpeed = this.m_RunSpeed;
+        //        }
+        //        else
+        //        {
+        //            this.m_PlayerMotor.maxForwardSpeed = this.m_WalkSpeed;
+        //        }
+        //    }
 
-            //    if (!this.m_IsDash)
-            //    {
-            //        //Swd6Application.instance.m_ExploreSystem.RestoreStaminaBar();
-            //    }
-            //    else if (this.m_IsDash)
-            //    {
-            //        //if (Swd6Application.instance.m_ExploreSystem.ExpendStaminaBar(false))
-            //        //{
-            //        //    if (!this.m_bAutoJump)
-            //        //    {
-            //        //        this.m_PlayerMotor.maxForwardSpeed = this.m_DashSpeed;
-            //        //    }
-            //        //}
-            //        //else
-            //        //{
-            //        //    this.Dash();
-            //        //}
-            //    }
-        }
+        //    //    if (!this.m_IsDash)
+        //    //    {
+        //    //        //Swd6Application.instance.m_ExploreSystem.RestoreStaminaBar();
+        //    //    }
+        //    //    else if (this.m_IsDash)
+        //    //    {
+        //    //        //if (Swd6Application.instance.m_ExploreSystem.ExpendStaminaBar(false))
+        //    //        //{
+        //    //        //    if (!this.m_bAutoJump)
+        //    //        //    {
+        //    //        //        this.m_PlayerMotor.maxForwardSpeed = this.m_DashSpeed;
+        //    //        //    }
+        //    //        //}
+        //    //        //else
+        //    //        //{
+        //    //        //    this.Dash();
+        //    //        //}
+        //    //    }
+        //}
 
-        if (this.m_SlowMove)
-        {
-            this.m_DirectionVector *= this.m_WalkMultiplier;
-        }
+        //if (this.m_SlowMove)
+        //{
+        //    this.m_DirectionVector *= this.m_WalkMultiplier;
+        //}
 
         //if (this.m_Reverse)
         //{

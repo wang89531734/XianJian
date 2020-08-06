@@ -359,18 +359,6 @@ namespace YouYou
                 curr.Value.OnUpdate();
             }
 
-            if (m_Async != null)
-            {
-                Debug.Log(m_Async.progress);
-
-                if (m_Async.progress == 1)
-                {
-                    UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("MAP01", UnityEngine.SceneManagement.LoadSceneMode.Additive);
-                }
-            }
-
-          
-
             Time.OnUpdate();
             Procedure.OnUpdate();
             Pool.OnUpdate();
@@ -380,33 +368,25 @@ namespace YouYou
 
             if (this.m_InitializeOK)
             {
-                //if (this.m_GameDataSystem != null)
-                //{
-                //    this.m_GameDataSystem.Update();
-                //}
-                //if (this.m_QuestSystem != null)
-                //{
-                //    this.m_QuestSystem.Update();
-                //}
+                if (this.m_GameDataSystem != null)
+                {
+                    this.m_GameDataSystem.Update();
+                }
+                if (this.m_QuestSystem != null)
+                {
+                    this.m_QuestSystem.Update();
+                }
                 //if (this.m_AchievementSystem != null)
                 //{
                 //    this.m_AchievementSystem.Update();
                 //}
-                //if (this.m_GameMenuSystem != null)
-                //{
-                //    this.m_GameMenuSystem.Update();
-                //}
-                //if (this.m_QualitySettingSystem != null)
-                //{
-                //    this.m_QualitySettingSystem.Update();
-                //}
+                GameInput.Update();
                 //if (this.m_UpdateResizeTime > 0f)
                 //{
                 //    this.m_UpdateResizeTime -= Time.deltaTime;
                 //    if (this.m_UpdateResizeTime <= 0f)
                 //    {
                 //        this.m_UpdateResizeTime = 0f;
-                //        ExploreMiniMapSystem.Instance.ReSize(this.m_GameDataSystem.m_MapInfo.MapID);
                 //    }
                 //}
             }
@@ -606,7 +586,7 @@ namespace YouYou
         {
             //this.m_GameObjSystem.Clear();
             this.m_QuestSystem.Clear();
-            //this.m_SkillSystem.Clear();
+            this.m_SkillSystem.Clear();
             this.m_ItemSystem.Clear();
             //this.m_MobGuardSystem.Clear();
             //this.m_AchievementSystem.InitForNewGame();
@@ -708,8 +688,6 @@ namespace YouYou
             //    UnityEngine.Debug.LogWarning("Map_" + mapid + " Load Error!!");
             //}
         }
-
-        private AsyncOperation m_Async;
 
         public void ChangeStateByLoading(ProcedureState stateName, string nextSceneName)
         {

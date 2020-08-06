@@ -112,13 +112,13 @@ public class S_BaseRoleData
                 }
 			}
 		}
-		//Swd6Application.instance.m_SkillSystem.ResetAllHotkey();
-		//for (int j = 0; j < startData.Skill.Count; j++)
-		//{
-		//	Swd6Application.instance.m_SkillSystem.LearnSkill(roldId, startData.Skill[j]);
-		//}
-		//this.CostSkillPoint = Swd6Application.instance.m_SkillSystem.LearnDefaultSphereSkill(roldId, (int)this.emElemntType);
-	}
+        GameEntry.Instance.m_SkillSystem.ResetAllHotkey();
+        for (int j = 0; j < startData.Skill.Count; j++)
+        {
+            GameEntry.Instance.m_SkillSystem.LearnSkill(roldId, startData.Skill[j]);
+        }
+        this.CostSkillPoint = GameEntry.Instance.m_SkillSystem.LearnDefaultSphereSkill(roldId, (int)this.emElemntType);
+    }
 
 	public void SetLevelUpData(int levelUp, bool autoSetExp, ref S_LevelUpInfo levelUpInfo)
 	{
@@ -126,17 +126,17 @@ public class S_BaseRoleData
 		S_Level data2 = GameDataDB.LevelDB.GetData((this.ID - 1) * 150 + levelUp);
 		if (data != null && data2 != null)
 		{
-			//List<int> skillLearnList = Swd6Application.instance.m_SkillSystem.GetSkillLearnList(this.ID, this.Level + 1, levelUp);
-			//if (skillLearnList.Count > 0)
-			//{
-			//	levelUpInfo.LearnSkillList.Clear();
-			//	for (int i = 0; i < skillLearnList.Count; i++)
-			//	{
-			//		levelUpInfo.LearnSkillList.Add(skillLearnList[i]);
-			//	}
-			//}
-			this.Level = levelUp;
-			this.HP = (this.MaxHP += data2.MaxHP - data.MaxHP);
+            List<int> skillLearnList = GameEntry.Instance.m_SkillSystem.GetSkillLearnList(this.ID, this.Level + 1, levelUp);
+            if (skillLearnList.Count > 0)
+            {
+                levelUpInfo.LearnSkillList.Clear();
+                for (int i = 0; i < skillLearnList.Count; i++)
+                {
+                    levelUpInfo.LearnSkillList.Add(skillLearnList[i]);
+                }
+            }
+            this.Level = levelUp;
+            this.HP = (this.MaxHP += data2.MaxHP - data.MaxHP);
 			this.MP = (this.MaxMP += data2.MaxMP - data.MaxMP);
 			this.Atk += data2.Atk - data.Atk;
 			this.MAtk += data2.MAtk - data.MAtk;

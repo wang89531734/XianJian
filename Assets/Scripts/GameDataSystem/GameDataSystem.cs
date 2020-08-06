@@ -162,7 +162,7 @@ public class GameDataSystem
         this.m_PartyRole.Clear();
         this.m_TeamRoleList.Clear();
         this.m_ActionSkillList.Clear();
-        //this.ClearMapData();
+        this.ClearMapData();
     }
 
     /// <summary>
@@ -242,18 +242,10 @@ public class GameDataSystem
     //		this.FlagON(24);
     //	}
 
-    //	public int GetMinID()
-    //	{
-    //		switch (this.m_ChapID)
-    //		{
-    //		case 100:
-    //			return 1;
-    //		case 101:
-    //			return 2;
-    //		default:
-    //			return 1;
-    //		}
-    //	}
+    public int GetMinID()
+    {      
+        return 1;      
+    }
 
     public int GetMaxID()
     {      
@@ -283,16 +275,16 @@ public class GameDataSystem
         return this.m_RoldData[id - 1];
     }
 
-    //	public void SetRoleData(int id, C_RoleDataEx roleData)
-    //	{
-    //		if (id > this.GetMaxID())
-    //		{
-    //			Debug.LogError("id error!!");
-    //			return;
-    //		}
-    //		this.m_RoldData[id - 1] = roleData;
-    //		this.m_RoldData[id - 1].CalRoleAttr();
-    //	}
+    public void SetRoleData(int id, C_RoleDataEx roleData)
+    {
+        if (id > this.GetMaxID())
+        {
+            Debug.LogError("id error!!");
+            return;
+        }
+        this.m_RoldData[id - 1] = roleData;
+        this.m_RoldData[id - 1].CalRoleAttr();
+    }
 
     //	public void SetBaseRoleData(int id, S_BaseRoleData roleData)
     //	{
@@ -435,19 +427,19 @@ public class GameDataSystem
         //}
     }
 
-    //	public void FlagOFF(int flag)
-    //	{
-    //		this.m_GameFlag.OFF(flag);
-    //		if (flag >= this.GetMinID() && flag <= this.GetMaxID())
-    //		{
-    //			this.m_RoldData[flag - 1].BaseRoleData.IsFight = false;
-    //			this.UpdatePartyRole();
-    //		}
-    //		if (Swd6Application.instance.m_QuestSystem != null)
-    //		{
-    //			Swd6Application.instance.m_QuestSystem.Dirty();
-    //		}
-    //	}
+    public void FlagOFF(int flag)
+    {
+        this.m_GameFlag.OFF(flag);
+        if (flag >= this.GetMinID() && flag <= this.GetMaxID())
+        {
+            this.m_RoldData[flag - 1].BaseRoleData.IsFight = false;
+            this.UpdatePartyRole();
+        }
+        if (GameEntry.Instance.m_QuestSystem != null)
+        {
+            GameEntry.Instance.m_QuestSystem.Dirty();
+        }
+    }
 
     //	public void FlagSet(int flag, bool val)
     //	{
@@ -479,16 +471,16 @@ public class GameDataSystem
         return true;
     }
 
-    //	public S_Level GetLevelData(int roleId, int level)
-    //	{
-    //		int num = (roleId - 1) * 150 + level;
-    //		S_Level data = GameDataDB.LevelDB.GetData(num);
-    //		if (data == null)
-    //		{
-    //			Debug.Log("讀取升級表錯誤_" + num);
-    //		}
-    //		return data;
-    //	}
+    public S_Level GetLevelData(int roleId, int level)
+    {
+        int num = (roleId - 1) * 150 + level;
+        S_Level data = GameDataDB.LevelDB.GetData(num);
+        if (data == null)
+        {
+            Debug.Log("讀取升級表錯誤_" + num);
+        }
+        return data;
+    }
 
     //	public void LevelUp(int roleId, int level, bool autoSetExp)
     //	{
@@ -572,21 +564,21 @@ public class GameDataSystem
         return null;
     }
 
-    //	public void ClearMapData()
-    //	{
-    //		foreach (S_MapData current in this.m_MapData.Values)
-    //		{
-    //			if (this.m_MapMusicData.ContainsKey(current.GUID))
-    //			{
-    //				S_MapMusicData s_MapMusicData = this.m_MapMusicData[current.GUID];
-    //				current.MusicID1 = s_MapMusicData.MusicID1;
-    //				current.MusicID2 = s_MapMusicData.MusicID2;
-    //				current.emMusicMode = s_MapMusicData.emMusicMode;
-    //			}
-    //		}
-    //		this.m_MapData.Clear();
-    //		this.m_MapMusicData.Clear();
-    //	}
+    public void ClearMapData()
+    {
+        foreach (S_MapData current in this.m_MapData.Values)
+        {
+            //if (this.m_MapMusicData.ContainsKey(current.GUID))
+            //{
+            //    S_MapMusicData s_MapMusicData = this.m_MapMusicData[current.GUID];
+            //    current.MusicID1 = s_MapMusicData.MusicID1;
+            //    current.MusicID2 = s_MapMusicData.MusicID2;
+            //    current.emMusicMode = s_MapMusicData.emMusicMode;
+            //}
+        }
+        this.m_MapData.Clear();
+        //this.m_MapMusicData.Clear();
+    }
 
     //	public void ChangeMapMusic(int mapid, int music1, int music2, ENUM_MusicMode mode, ENUM_MusicChangeMode changeMode)
     //	{

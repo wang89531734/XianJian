@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using YouYou;
 
 public class C_RoleDataEx : S_RoleData
 {
@@ -771,12 +772,12 @@ public class C_RoleDataEx : S_RoleData
 
 	public ItemData GetEquipItemData(ENUM_EquipPosition Pos)
 	{
-		//if (this.BaseRoleData.EquipID[(int)Pos] > 0)
-		//{
-		//	return Swd6Application.instance.m_ItemSystem.GetDataBySerialID(this.BaseRoleData.EquipID[(int)Pos]);
-		//}
-		return null;
-	}
+        if (this.BaseRoleData.EquipID[(int)Pos] > 0)
+        {
+            return GameEntry.Instance.m_ItemSystem.GetDataBySerialID(this.BaseRoleData.EquipID[(int)Pos]);
+        }
+        return null;
+    }
 
 	public S_Item GetItemEquip(ENUM_EquipPosition Pos)
 	{

@@ -8,7 +8,7 @@ public class S_Skill : I_BaseDBF
 
 	public string Name;
 
-	public string IconNo;
+	public int IconNo;
 
 	public string Desc;
 
@@ -18,15 +18,13 @@ public class S_Skill : I_BaseDBF
 
 	public ENUM_SkillEffectType emSkillEffectType;
 
-	public int SpellTransferSwitch;
+	public ENUM_SkillTriggerType emTriggerType;
+
+	public int Group;
 
 	public int LearnRole;
 
-	public int UseComboCode;
-
 	public int UseLevel;
-
-	public int UsePoint;
 
 	public int UsePartner;
 
@@ -34,7 +32,7 @@ public class S_Skill : I_BaseDBF
 
 	public int CastMP;
 
-	public int CastAP;
+	public float CastCD;
 
 	public List<int> CastBuffer;
 
@@ -42,12 +40,14 @@ public class S_Skill : I_BaseDBF
 
 	public int CastCallRate;
 
-	public S_UseEffect UseEffect;
+	public List<S_SkillCastCall> CastCallList;
+
+	public int UseEffectID;
 
 	public S_Skill()
 	{
 		this.CastBuffer = new List<int>();
-		this.UseEffect = new S_UseEffect();
+		this.CastCallList = new List<S_SkillCastCall>();
 	}
 
 	public int GetGUID()
@@ -65,9 +65,7 @@ public class S_Skill : I_BaseDBF
 		this.Desc = GameDataDB.TransStringByLanguageType(this.Desc);
 		this.Help = GameDataDB.TransStringByLanguageType(this.Help);
 		Dictionary<string, string> dictionary = Converter.deserializeObject<Dictionary<string, string>>(JsonString);
-		this.UseEffect = Converter.deserializeObject<S_UseEffect>(JsonString);
-		this.UseEffect.ParseData(dictionary);
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			int num = 0;
 			string key = string.Format("CastBuffer_{0}", i);
@@ -79,6 +77,26 @@ public class S_Skill : I_BaseDBF
 				{
 					this.CastBuffer.Add(num);
 				}
+			}
+		}
+		for (int j = 0; j < 5; j++)
+		{
+			S_SkillCastCall s_SkillCastCall = new S_SkillCastCall();
+			string key2 = string.Format("CastCallID_{0}", j);
+			if (dictionary.ContainsKey(key2))
+			{
+				string s2 = dictionary[key2];
+				int.TryParse(s2, out s_SkillCastCall.CastCallID);
+			}
+			key2 = string.Format("CastCallRate_{0}", j);
+			if (dictionary.ContainsKey(key2))
+			{
+				string s2 = dictionary[key2];
+				int.TryParse(s2, out s_SkillCastCall.CastCallRate);
+			}
+			if (s_SkillCastCall.CastCallID > 0)
+			{
+				this.CastCallList.Add(s_SkillCastCall);
 			}
 		}
 	}

@@ -79,7 +79,7 @@ public class GameDataDB
 
     //public static T_GameDB<S_MaterialEffectData> MaterialEffectDB = new T_GameDB<S_MaterialEffectData>();
 
-    //public static T_GameDB<S_SenceMaterialSetting> SenceMaterialSettingDB = new T_GameDB<S_SenceMaterialSetting>();
+    public static T_GameDB<S_SenceMaterialSetting> SenceMaterialSettingDB = new T_GameDB<S_SenceMaterialSetting>();
 
     //public static T_GameDB<S_MusicData> MusicDB = new T_GameDB<S_MusicData>();
 
@@ -220,8 +220,8 @@ public class GameDataDB
         //GameDataDB.LoadFromFile<S_ManufactureFormulaData>(GameDataDB.ManufactureFormulaDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "MaterialEffectData.dbf";
         //GameDataDB.LoadFromFile<S_MaterialEffectData>(GameDataDB.MaterialEffectDB, dataPath, true);
-        //dataPath = GameDataDB.m_DBF_Path + "SceneMaterialSetting.dbf";
-        //GameDataDB.LoadFromFile<S_SenceMaterialSetting>(GameDataDB.SenceMaterialSettingDB, dataPath, true);
+        dataPath = GameDataDB.m_DBF_Path + "SceneMaterialSetting.dbf";
+        GameDataDB.LoadFromFile<S_SenceMaterialSetting>(GameDataDB.SenceMaterialSettingDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "UnlockCode.dbf";
         //GameDataDB.LoadFromFile<S_UnlockCode>(GameDataDB.UnlockCodeDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "UnlockData.dbf";

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using YouYou;
 
 public class SkillSystem
 {
@@ -52,28 +53,28 @@ public class SkillSystem
         }
     }
 
-    //	public void ResetAllHotkey()
-    //	{
-    //		for (int i = 0; i < 10; i++)
-    //		{
-    //			if (i > 0)
-    //			{
-    //				this.ResetSkillHotkey(i, ResetSkillType.ALL);
-    //			}
-    //		}
-    //	}
+    public void ResetAllHotkey()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            if (i > 0)
+            {
+                this.ResetSkillHotkey(i, ResetSkillType.ALL);
+            }
+        }
+    }
 
-    //	public void Clear()
-    //	{
-    //		for (int i = 0; i < 10; i++)
-    //		{
-    //			this.m_RoleSkill[i].Clear();
-    //			if (i > 0)
-    //			{
-    //				this.ResetAllSpherSkill(i);
-    //			}
-    //		}
-    //	}
+    public void Clear()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            this.m_RoleSkill[i].Clear();
+            if (i > 0)
+            {
+                this.ResetAllSpherSkill(i);
+            }
+        }
+    }
 
     public void ResetSkillHotkey(int roleId, ResetSkillType type)
     {
@@ -214,28 +215,28 @@ public class SkillSystem
         return null;
     }
 
-    //	public List<int> GetSkillLearnList(int roleId, int currentLevel, int newlevel)
-    //	{
-    //		List<int> list = new List<int>();
-    //		int num = 0;
-    //		for (int i = currentLevel; i <= newlevel; i++)
-    //		{
-    //			S_Level levelData = Swd6Application.instance.m_GameDataSystem.GetLevelData(roleId, i);
-    //			if (levelData.LearnSkillID != 0)
-    //			{
-    //				if (!this.CheckSkill(roleId, levelData.LearnSkillID))
-    //				{
-    //					this.LearnSkill(roleId, levelData.LearnSkillID);
-    //					num = levelData.LearnSkillID;
-    //				}
-    //			}
-    //		}
-    //		if (num > 0)
-    //		{
-    //			list.Add(num);
-    //		}
-    //		return list;
-    //	}
+    public List<int> GetSkillLearnList(int roleId, int currentLevel, int newlevel)
+    {
+        List<int> list = new List<int>();
+        int num = 0;
+        for (int i = currentLevel; i <= newlevel; i++)
+        {
+            S_Level levelData = GameEntry.Instance.m_GameDataSystem.GetLevelData(roleId, i);
+            if (levelData.LearnSkillID != 0)
+            {
+                if (!this.CheckSkill(roleId, levelData.LearnSkillID))
+                {
+                    this.LearnSkill(roleId, levelData.LearnSkillID);
+                    num = levelData.LearnSkillID;
+                }
+            }
+        }
+        if (num > 0)
+        {
+            list.Add(num);
+        }
+        return list;
+    }
 
     public void SetDefaultHotKeySkill(int roleId, bool all)
     {
@@ -270,22 +271,22 @@ public class SkillSystem
         }
     }
 
-    //	public int LearnSkill(int roleId, int skillId)
-    //	{
-    //		if (roleId > 10)
-    //		{
-    //			Debug.LogError("LearnSkill Id error!!");
-    //			return 0;
-    //		}
-    //		if (this.CheckSkill(roleId, skillId))
-    //		{
-    //			return 0;
-    //		}
-    //		this.ReplaceGroupSkill(roleId, skillId);
-    //		this.m_RoleSkill[roleId - 1].Add(skillId);
-    //		this.AutoSetFightSkillHotkeyID(roleId, skillId);
-    //		return skillId;
-    //	}
+    public int LearnSkill(int roleId, int skillId)
+    {
+        if (roleId > 10)
+        {
+            Debug.LogError("LearnSkill Id error!!");
+            return 0;
+        }
+        if (this.CheckSkill(roleId, skillId))
+        {
+            return 0;
+        }
+        this.ReplaceGroupSkill(roleId, skillId);
+        this.m_RoleSkill[roleId - 1].Add(skillId);
+        this.AutoSetFightSkillHotkeyID(roleId, skillId);
+        return skillId;
+    }
 
     //	public void LearnAllSphereSkill(int roleId)
     //	{
@@ -306,65 +307,65 @@ public class SkillSystem
     //		}
     //	}
 
-    //	public bool CheckSkill(int roleId, int skillId)
-    //	{
-    //		if (roleId > 10)
-    //		{
-    //			Debug.LogError("CheckSkill Id error!!");
-    //			return false;
-    //		}
-    //		List<int> skillList = this.GetSkillList(roleId);
-    //		return skillList.Contains(skillId);
-    //	}
+    public bool CheckSkill(int roleId, int skillId)
+    {
+        if (roleId > 10)
+        {
+            Debug.LogError("CheckSkill Id error!!");
+            return false;
+        }
+        List<int> skillList = this.GetSkillList(roleId);
+        return skillList.Contains(skillId);
+    }
 
-    //	public void ReplaceGroupSkill(int roleId, int skillId)
-    //	{
-    //		if (roleId > 10)
-    //		{
-    //			Debug.LogError("RemoveGroupSkill Id error!!");
-    //			return;
-    //		}
-    //		S_Skill data = GameDataDB.SkillDB.GetData(skillId);
-    //		List<int> list = new List<int>();
-    //		if (data == null)
-    //		{
-    //			Debug.LogError("讀取技能表錯誤::" + skillId);
-    //			return;
-    //		}
-    //		List<int> skillList = this.GetSkillList(roleId);
-    //		for (int i = 0; i < skillList.Count; i++)
-    //		{
-    //			S_Skill data2 = GameDataDB.SkillDB.GetData(skillList[i]);
-    //			if (data2 == null)
-    //			{
-    //				Debug.LogError("讀取技能表錯誤::" + skillList[i]);
-    //			}
-    //			else if (data.Group == data2.Group)
-    //			{
-    //				list.Add(data2.GUID);
-    //			}
-    //		}
-    //		for (int j = 0; j < list.Count; j++)
-    //		{
-    //			this.RemoveSkill(roleId, list[j]);
-    //		}
-    //	}
+    public void ReplaceGroupSkill(int roleId, int skillId)
+    {
+        if (roleId > 10)
+        {
+            Debug.LogError("RemoveGroupSkill Id error!!");
+            return;
+        }
+        S_Skill data = GameDataDB.SkillDB.GetData(skillId);
+        List<int> list = new List<int>();
+        if (data == null)
+        {
+            Debug.LogError("讀取技能表錯誤::" + skillId);
+            return;
+        }
+        List<int> skillList = this.GetSkillList(roleId);
+        for (int i = 0; i < skillList.Count; i++)
+        {
+            S_Skill data2 = GameDataDB.SkillDB.GetData(skillList[i]);
+            if (data2 == null)
+            {
+                Debug.LogError("讀取技能表錯誤::" + skillList[i]);
+            }
+            else if (data.Group == data2.Group)
+            {
+                list.Add(data2.GUID);
+            }
+        }
+        for (int j = 0; j < list.Count; j++)
+        {
+            this.RemoveSkill(roleId, list[j]);
+        }
+    }
 
-    //	public bool RemoveSkill(int roleId, int skillId)
-    //	{
-    //		if (roleId > 10)
-    //		{
-    //			Debug.LogError("CheckSkill Id error!!");
-    //			return false;
-    //		}
-    //		if (this.m_RoleSkill[roleId - 1].Contains(skillId))
-    //		{
-    //			this.RemoveFightSkillHotkeyID(roleId, skillId);
-    //			this.m_RoleSkill[roleId - 1].Remove(skillId);
-    //			return true;
-    //		}
-    //		return false;
-    //	}
+    public bool RemoveSkill(int roleId, int skillId)
+    {
+        if (roleId > 10)
+        {
+            Debug.LogError("CheckSkill Id error!!");
+            return false;
+        }
+        if (this.m_RoleSkill[roleId - 1].Contains(skillId))
+        {
+            this.RemoveFightSkillHotkeyID(roleId, skillId);
+            this.m_RoleSkill[roleId - 1].Remove(skillId);
+            return true;
+        }
+        return false;
+    }
 
     public List<int> GetSkillList(int roleId)
     {
@@ -528,27 +529,27 @@ public class SkillSystem
     //		}
     //	}
 
-    //	public int LearnDefaultSphereSkill(int roleId, int type)
-    //	{
-    //		if (roleId > 10)
-    //		{
-    //			Debug.LogError("LearnDefaultSphereSkill Id error!!");
-    //			return 0;
-    //		}
-    //		if (!this.m_SkillPlateData[roleId].ContainsKey(type))
-    //		{
-    //			return 0;
-    //		}
-    //		List<SkillInfo> list = this.m_SkillPlateData[roleId][type];
-    //		if (list == null)
-    //		{
-    //			return 0;
-    //		}
-    //		list[0].LearnTime = 1;
-    //		list[0].LearnPoint = 1;
-    //		this.AutoSetFightSphereSkillHotkeyID(roleId, list[0]);
-    //		return list[0].LearnPoint;
-    //	}
+    public int LearnDefaultSphereSkill(int roleId, int type)
+    {
+        if (roleId > 10)
+        {
+            Debug.LogError("LearnDefaultSphereSkill Id error!!");
+            return 0;
+        }
+        if (!this.m_SkillPlateData[roleId].ContainsKey(type))
+        {
+            return 0;
+        }
+        List<SkillInfo> list = this.m_SkillPlateData[roleId][type];
+        if (list == null)
+        {
+            return 0;
+        }
+        list[0].LearnTime = 1;
+        list[0].LearnPoint = 1;
+        this.AutoSetFightSphereSkillHotkeyID(roleId, list[0]);
+        return list[0].LearnPoint;
+    }
 
     //	public bool CheckPreSkill(int roleId, int skillId)
     //	{
@@ -611,41 +612,41 @@ public class SkillSystem
     //		return learnTime >= skillInfo.ActivePoint;
     //	}
 
-    //	public void ResetSpherSkill(int roleId, int type)
-    //	{
-    //		if (roleId > 10)
-    //		{
-    //			Debug.LogError("ResetSpherSkill Id error!!");
-    //			return;
-    //		}
-    //		if (!this.m_SkillPlateData[roleId].ContainsKey(type))
-    //		{
-    //			return;
-    //		}
-    //		List<SkillInfo> list = this.m_SkillPlateData[roleId][type];
-    //		if (list == null)
-    //		{
-    //			return;
-    //		}
-    //		for (int i = 0; i < list.Count; i++)
-    //		{
-    //			list[i].LearnTime = 0;
-    //		}
-    //	}
+    public void ResetSpherSkill(int roleId, int type)
+    {
+        if (roleId > 10)
+        {
+            Debug.LogError("ResetSpherSkill Id error!!");
+            return;
+        }
+        if (!this.m_SkillPlateData[roleId].ContainsKey(type))
+        {
+            return;
+        }
+        List<SkillInfo> list = this.m_SkillPlateData[roleId][type];
+        if (list == null)
+        {
+            return;
+        }
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i].LearnTime = 0;
+        }
+    }
 
-    //	public void ResetAllSpherSkill(int roleId)
-    //	{
-    //		if (roleId > 10)
-    //		{
-    //			Debug.LogError("ResetAllSpherSkill Id error!!");
-    //			return;
-    //		}
-    //		for (int i = 1; i <= 4; i++)
-    //		{
-    //			this.ResetSpherSkill(roleId, i);
-    //		}
-    //		this.ResetSkillHotkey(roleId, ResetSkillType.SPHERESKILL);
-    //	}
+    public void ResetAllSpherSkill(int roleId)
+    {
+        if (roleId > 10)
+        {
+            Debug.LogError("ResetAllSpherSkill Id error!!");
+            return;
+        }
+        for (int i = 1; i <= 4; i++)
+        {
+            this.ResetSpherSkill(roleId, i);
+        }
+        this.ResetSkillHotkey(roleId, ResetSkillType.SPHERESKILL);
+    }
 
     //	public int CheckSpherSkillCostPoint(int roleId)
     //	{
@@ -763,36 +764,36 @@ public class SkillSystem
         return false;
     }
 
-    //	public void RemoveFightSkillHotkeyID(int roleId, int skillId)
-    //	{
-    //		if (roleId > 10)
-    //		{
-    //			Debug.LogError("AutoSetFightSkillHotkeyID roldId error!!");
-    //			return;
-    //		}
-    //		S_Skill data = GameDataDB.SkillDB.GetData(skillId);
-    //		if (data == null)
-    //		{
-    //			return;
-    //		}
-    //		if (data.emItemType == ENUM_ItemSubType.Passive)
-    //		{
-    //			return;
-    //		}
-    //		for (int i = 0; i < 5; i++)
-    //		{
-    //			List<FightSkillHotKeyInfo> list = this.m_FightSkill[roleId][i];
-    //			for (int j = 0; j < list.Count; j++)
-    //			{
-    //				if (list[j].ID == skillId)
-    //				{
-    //					list[j].ID = 0;
-    //					list[j].AI = false;
-    //					return;
-    //				}
-    //			}
-    //		}
-    //	}
+    public void RemoveFightSkillHotkeyID(int roleId, int skillId)
+    {
+        if (roleId > 10)
+        {
+            Debug.LogError("AutoSetFightSkillHotkeyID roldId error!!");
+            return;
+        }
+        S_Skill data = GameDataDB.SkillDB.GetData(skillId);
+        if (data == null)
+        {
+            return;
+        }
+        if (data.emItemType == ENUM_ItemSubType.Passive)
+        {
+            return;
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            List<FightSkillHotKeyInfo> list = this.m_FightSkill[roleId][i];
+            for (int j = 0; j < list.Count; j++)
+            {
+                if (list[j].ID == skillId)
+                {
+                    list[j].ID = 0;
+                    list[j].AI = false;
+                    return;
+                }
+            }
+        }
+    }
 
     public void AutoSetFightSkillHotkeyID(int roleId, int skillId)
     {

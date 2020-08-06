@@ -421,17 +421,17 @@ public abstract class M_GameRoleBase : MonoBehaviour
         }
     }
 
-    //public Vector3 Pos
-    //{
-    //    get
-    //    {
-    //        return this.GetPos();
-    //    }
-    //    set
-    //    {
-    //        this.SetPos(value);
-    //    }
-    //}
+    public Vector3 Pos
+    {
+        get
+        {
+            return this.GetPos();
+        }
+        set
+        {
+            this.SetPos(value);
+        }
+    }
 
     public float MoveSpeed
     {
@@ -597,20 +597,20 @@ public abstract class M_GameRoleBase : MonoBehaviour
     //		return this.m_RoleMotion.IsMotionFinished(id);
     //	}
 
-    //	public void SetPos(Vector3 pos)
-    //	{
-    //		base.transform.position = pos;
-    //	}
+    public void SetPos(Vector3 pos)
+    {
+        base.transform.position = pos;
+    }
 
-    //	public void SetPos(float x, float y, float z)
-    //	{
-    //		this.SetPos(new Vector3(x, y, z));
-    //	}
+    public void SetPos(float x, float y, float z)
+    {
+        this.SetPos(new Vector3(x, y, z));
+    }
 
-    //	public Vector3 GetPos()
-    //	{
-    //		return base.transform.position;
-    //	}
+    public Vector3 GetPos()
+    {
+        return base.transform.position;
+    }
 
     //	public void Translate(float x, float y, float z)
     //	{
