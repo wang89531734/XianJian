@@ -10,7 +10,7 @@ TagManager:
   - scene_stone
   - building
   - Npc
-  - BattleEvent
+  - Mob
   layers:
   - Default
   - TransparentFX

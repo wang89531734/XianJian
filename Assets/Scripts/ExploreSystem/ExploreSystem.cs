@@ -1406,23 +1406,54 @@ public class ExploreSystem
     //		}
     //	}
 
-    //	public void EnterFight()
-    //	{
-    //		if (this.m_BeginBreak || this.m_BeginDispell || this.m_bBeginShoot)
-    //		{
-    //			return;
-    //		}
-    //		this.LockPlayer = true;
-    //		Swd6Application.instance.StartCoroutine(this.m_GameApp.m_SaveloadSystem.AutoSave(ENUM_AUTOSAVETYPE.Fight));
-    //		this.BattleStep = 0f;
-    //		Swd6Application.instance.m_FightSystem.Fight(this.m_BattleID);
-    //		if (this.m_AmberController != null)
-    //		{
-    //			this.m_AmberController.SetFightWarring(false);
-    //		}
-    //		UI_ZoneMap.Instance.Hide();
-    //		this.m_BattleID = 0;
-    //	}
+    public void EnterFight(int battleId, bool bHit)
+    {
+        if (this.m_BattleID > 0)
+        {
+            return;
+        }
+        Debug.LogWarning("EnterFight_" + battleId);
+        //this.m_GameApp.m_SaveloadSystem.AutoSave1(ENUM_AUTOSAVETYPE.Fight);
+        //S_BattleRate data = GameDataDB.BattleRateDB.GetData(battleId);
+        //if (data == null)
+        //{
+        //    Debug.LogWarning("EnterFight::讀取BattleRateDB表錯誤_" + battleId);
+        //    return;
+        //}
+        //int fightPlayerID = 0;
+        //int num = 0;
+        //int num2 = 0;
+        //int num3 = 4;
+        //int num4 = UnityEngine.Random.Range(0, 100);
+        //if (data.Flag.Count > 0 && this.m_GameApp.m_GameDataSystem.GetFlag(data.Flag[0]))
+        //{
+        //    num2 = 5;
+        //    num3 = data.Group.Count;      
+        //}
+        //if (num3 > data.Group.Count)
+        //{
+        //    num3 = data.Group.Count;
+        //}
+        //for (int i = num2; i < num3; i++)
+        //{
+        //    if (data.Group[i].GroupID != 0)
+        //    {
+        //        num += data.Group[i].GroupRate;
+        //        if (num4 <= num)
+        //        {
+        //            this.m_BattleID = data.Group[i].GroupID;
+        //            //if (bHit)
+        //            //{
+        //            //    fightPlayerID = Swd6Application.instance.m_GameDataSystem.m_PlayerID;
+        //            //}
+        //            //FightSystem.Instance.Fight(this.m_BattleID, fightPlayerID);
+        //            break;
+        //        }
+        //    }
+        //}
+        this.LockPlayer = true;
+        //UI_ZoneMap.Instance.Hide();
+    }
 
     public void SetBattleAreaState(string triggerName)
     {
