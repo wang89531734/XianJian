@@ -1412,19 +1412,20 @@ public class ExploreSystem
         {
             return;
         }
-        Debug.LogWarning("EnterFight_" + battleId);
+
         //this.m_GameApp.m_SaveloadSystem.AutoSave1(ENUM_AUTOSAVETYPE.Fight);
-        //S_BattleRate data = GameDataDB.BattleRateDB.GetData(battleId);
-        //if (data == null)
-        //{
-        //    Debug.LogWarning("EnterFight::讀取BattleRateDB表錯誤_" + battleId);
-        //    return;
-        //}
-        //int fightPlayerID = 0;
-        //int num = 0;
-        //int num2 = 0;
-        //int num3 = 4;
-        //int num4 = UnityEngine.Random.Range(0, 100);
+        S_BattleRate data = GameDataDB.BattleRateDB.GetData(7004);  
+        if (data == null)
+        {
+            Debug.LogWarning("EnterFight::讀取BattleRateDB表錯誤_" + battleId);
+            return;
+        }
+        Debug.Log(data.TriggerName);
+        int fightPlayerID = 0;
+        int num = 0;
+        int num2 = 0;
+        int num3 = 4;
+        int num4 = UnityEngine.Random.Range(0, 100);
         //if (data.Flag.Count > 0 && this.m_GameApp.m_GameDataSystem.GetFlag(data.Flag[0]))
         //{
         //    num2 = 5;

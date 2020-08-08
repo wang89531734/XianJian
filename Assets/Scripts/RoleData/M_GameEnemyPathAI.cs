@@ -30,7 +30,7 @@ public class M_GameEnemyPathAI : AIPath
 
     public bool m_Enable = true;
 
-    //public ENUM_EnemyPathAIState aiState = ENUM_EnemyPathAIState.Search;
+    public ENUM_EnemyPathAIState aiState = ENUM_EnemyPathAIState.Search;
 
     public float m_AlertAngle = 180f;
 

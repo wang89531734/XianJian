@@ -63,9 +63,9 @@ public class GameDataDB
 
     //public static T_GameDB<S_NpcShop> NpcShopDB = new T_GameDB<S_NpcShop>();
 
-    //public static T_GameDB<S_BattleRate> BattleRateDB = new T_GameDB<S_BattleRate>();
+    public static T_GameDB<S_BattleRate> BattleRateDB = new T_GameDB<S_BattleRate>();
 
-    //public static T_GameDB<S_BattleGroup> BattleGroupDB = new T_GameDB<S_BattleGroup>();
+    public static T_GameDB<S_BattleGroup> BattleGroupDB = new T_GameDB<S_BattleGroup>();
 
     public static T_GameDB<S_AnimationData> AnimationDB = new T_GameDB<S_AnimationData>();
 
@@ -164,10 +164,10 @@ public class GameDataDB
         GameDataDB.LoadFromFile<S_Item>(GameDataDB.ItemDB, dataPath, false);
         dataPath = GameDataDB.m_DBF_Path + "ItemMob.dbf";
         GameDataDB.LoadFromFile<S_Item>(GameDataDB.ItemDB, dataPath, false);
-        //dataPath = GameDataDB.m_DBF_Path + "BattleRate.dbf";
-        //GameDataDB.LoadFromFile<S_BattleRate>(GameDataDB.BattleRateDB, dataPath, true);
-        //dataPath = GameDataDB.m_DBF_Path + "BattleGroup.dbf";
-        //GameDataDB.LoadFromFile<S_BattleGroup>(GameDataDB.BattleGroupDB, dataPath, true);
+        dataPath = GameDataDB.m_DBF_Path + "BattleRate.dbf";
+        GameDataDB.LoadFromFile<S_BattleRate>(GameDataDB.BattleRateDB, dataPath, true);
+        dataPath = GameDataDB.m_DBF_Path + "BattleGroup.dbf";
+        GameDataDB.LoadFromFile<S_BattleGroup>(GameDataDB.BattleGroupDB, dataPath, true);
         dataPath = GameDataDB.m_DBF_Path + "Skill.dbf";
         GameDataDB.LoadFromFile<S_Skill>(GameDataDB.SkillDB, dataPath, true);
         dataPath = GameDataDB.m_DBF_Path + "Skill2.dbf";
@@ -369,7 +369,8 @@ public class GameDataDB
 		{
 			string txt = C_FileCodec.DecodeFile2(DataPath + "s");
 			List<T> datas = GameDataDB.CovertData<T>(txt);
-			GameDB.AddDataFromList(datas);
+            UnityEngine.Debug.Log(txt + "");
+            GameDB.AddDataFromList(datas);
 			UnityEngine.Debug.Log(str + "OK");
 			return true;
 		}
