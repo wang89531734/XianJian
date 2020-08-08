@@ -9,59 +9,42 @@ namespace YouYou
     /// </summary>
     public class ProcedureGameLevel : ProcedureBase
     {
+        //public FightSceneManager m_FightSceneMgr;
+
+        //public BuffSystem m_BuffSystem;
+
         public override void OnEnter()
         {
             base.OnEnter();
             GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureWorldMap");
-            Debug.Log("加载角色");
-            Debug.Log("显示主UI");
-            //this.m_FightSceneManager = new FightSceneManager(this);
-            //this.m_FightCommandManager = new FightCommandManager(this);
-            //this.m_FightCommandFactory = new FightCommandFactory();
-            //this.m_FightScoreManager = new FightScoreManager();
-            //this.m_FightCommandTemp = new FightCommandTemp();
-            //this.m_AISystem = new AISystem(this);
-            //this.m_BuffSystem = new BuffSystem(this);
-            //UI_Fight.Instance.m_FightState = this;
-            //UI_Fight.Instance.m_FightSceneManager = this.m_FightSceneManager;
-            //UI_Fight.Instance.m_FightCommandFactory = this.m_FightCommandFactory;
-            //UI_Fight.Instance.m_FightCommandTemp = this.m_FightCommandTemp;
-            //UI_FinishFight.Instance.m_FightSceneManager = this.m_FightSceneManager;
-            //UI_FinishFight.Instance.LoadGUI();
-            //UI_Fight.Instance.LoadGUI();
-            //this.InitFightSubStates();
-            //this.SetMainCameraEnable(false);
-            //this.ChangeSubState(FightState.SubState.Appearence);
-            //this.ChangeAmbientLight();
-            //CameraControlSystem.FadeTo(0f, 1f);
+            //this.m_BuffSystem = FightSystem.Instance.m_BuffSystem;
+            //this.m_FightSceneMgr = new FightSceneManager();
+            //this.m_FightSceneMgr.m_FihgtState = this;
+            //this.m_FightSceneMgr.m_BuffSystem = this.m_BuffSystem;
+            //UI_Fade.Instance.FadeTo(0f, 1f);
+            //this.gameApplication.m_UserBehavior.EventInfo.TimeStart(FightSystem.Instance.m_BattleGroupID, TimerType.Battle);
         }
 
         public override void OnUpdate()
         {
             base.OnUpdate();
-            //if (this.m_CurrentFightSubState == null)
-            //{
-            //    return;
-            //}
-            //this.m_CurrentFightSubState.Update();
-            //if (this.m_FightSceneManager.IsFightFinish() && this.m_CurrentFightSubState.m_SubState == FightState.SubState.Normal)
-            //{
-            //    if (this.m_FightSceneManager.fightStoryMode == Enum_FightStoryMode.None)
-            //    {
-            //        this.ChangeSubState(FightState.SubState.Finish);
-            //        return;
-            //    }
-            //    if (this.m_FightSceneManager.fightStoryMode == Enum_FightStoryMode.ProcessWin && this.m_FightSceneManager.IsAllPlayerDead())
-            //    {
-            //        this.ChangeSubState(FightState.SubState.Finish);
-            //    }
-            //}
+            //this.m_FightSceneMgr.Update();
         }
 
         public override void OnLeave()
         {
             base.OnLeave();
             GameEntry.Log(LogCategory.Procedure, "OnLeave ProcedureWorldMap");
+            //this.m_FightSceneMgr.ClearFightObjs();
+            //UI_Fight.Instance.Hide();
+            //UI_FinishFight.Instance.Hide();
+            //UI_TalkDialog.Instance.Close();
+            //UI_GameGMFightStatistics.Instance.Hide();
+            //if (UI_FinishFight.Instance.m_bWin && Swd6Application.instance != null && Swd6Application.instance.m_ExploreSystem.PlayerController != null)
+            //{
+            //    Swd6Application.instance.m_ExploreSystem.PlayerController.PlayMotion(1, 0f);
+            //}
+            //this.gameApplication.m_UserBehavior.EventInfo.TimeEnd(FightSystem.Instance.m_BattleGroupID, TimerType.Battle);
         }
     }
 }

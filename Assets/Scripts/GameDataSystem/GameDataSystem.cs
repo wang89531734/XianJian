@@ -7,12 +7,18 @@ public class GameDataSystem
 {
     public string m_GameVersion;
 
+    /// <summary>
+    /// 金钱
+    /// </summary>
     private int m_Money;
 
     private int m_SoulPoint;
 
     private int m_SoulStone;
 
+    /// <summary>
+    /// 耐力
+    /// </summary>
     public int m_Stamina;
 
     public int m_Sense;
@@ -27,6 +33,9 @@ public class GameDataSystem
 
     public int m_PlayGameCount;
 
+    /// <summary>
+    /// 玩家ID
+    /// </summary>
     public int m_PlayerID;
 
     public int m_BreakBoxTimes;
@@ -191,27 +200,26 @@ public class GameDataSystem
         this.Reset();
         GameEntry.Instance.InitNewGame();
         this.InitTeamRoleList();
-
         for (int j = 0; j < this.m_TeamRoleList.Count; j++)
         {
             this.SetStartData(this.m_TeamRoleList[j], this.m_TeamRoleList[j], this.m_TeamRoleList[j]);
         }
-        GameEntry.Instance.m_SkillSystem.InitDefaultHotKeySkill();
-        this.m_RoldData[0].BaseRoleData.IsJoin = true;
-        this.m_DefaultPlayerID = 1;
-        this.AddRole(1, false);
-        //NormalSetting normalSetting = Swd6Application.instance.m_NormalSettingSystem.GetNormalSetting();
+        //GameEntry.Instance.m_SkillSystem.InitDefaultHotKeySkill();
+        //this.m_RoldData[0].BaseRoleData.IsJoin = true;
+        //this.m_DefaultPlayerID = 1;
+        //this.AddRole(1, false);
+        ////NormalSetting normalSetting = Swd6Application.instance.m_NormalSettingSystem.GetNormalSetting();
         //if (normalSetting.m_bEnableTeach)//应该是教程
         //{
         //    this.FlagON(75);
         //    this.FlagON(76);
         //    this.FlagON(77);
         //}
-        this.AddDLCItem();
+        //this.AddDLCItem();
 
-        this.m_PlayerID = this.m_DefaultPlayerID;
-        this.m_FightPlayerID = this.m_DefaultPlayerID;
-        this.FlagON(24);
+        //this.m_PlayerID = this.m_DefaultPlayerID;
+        //this.m_FightPlayerID = this.m_DefaultPlayerID;
+        //this.FlagON(24);
     }
 
     //	public void InitExRoleData(int chapId)
@@ -449,9 +457,9 @@ public class GameDataSystem
     /// <summary>
     /// 设置开始数据
     /// </summary>
-    /// <param name="roleId"></param>
-    /// <param name="dateId"></param>
-    /// <param name="levelId"></param>
+    /// <param name="roleId">角色ID</param>
+    /// <param name="dateId">数据ID</param>
+    /// <param name="levelId">等级ID</param>
     /// <returns></returns>
     public bool SetStartData(int roleId, int dateId, int levelId)
     {
@@ -461,13 +469,13 @@ public class GameDataSystem
         {
             return false;
         }
-        this.m_RoldData[num].BaseRoleData.ID = roleId;
-        this.m_RoldData[num].BaseRoleData.FamilyName = GameDataDB.StrID(num * 10 + 51);
-        this.m_RoldData[num].BaseRoleData.Name = GameDataDB.StrID(num * 10 + 52);
-        this.m_RoldData[num].BaseRoleData.SetStartData(data, levelId, true);
-        this.m_RoldData[num].CalRoleAttr();
-        this.m_RoldData[num].SetFullHP();
-        this.m_RoldData[num].SetFullMP();
+        //this.m_RoldData[num].BaseRoleData.ID = roleId;
+        //this.m_RoldData[num].BaseRoleData.FamilyName = GameDataDB.StrID(num * 10 + 51);
+        //this.m_RoldData[num].BaseRoleData.Name = GameDataDB.StrID(num * 10 + 52);
+        //this.m_RoldData[num].BaseRoleData.SetStartData(data, levelId, true);
+        //this.m_RoldData[num].CalRoleAttr();
+        //this.m_RoldData[num].SetFullHP();
+        //this.m_RoldData[num].SetFullMP();
         return true;
     }
 

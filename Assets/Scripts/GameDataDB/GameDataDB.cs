@@ -369,7 +369,6 @@ public class GameDataDB
 		{
 			string txt = C_FileCodec.DecodeFile2(DataPath + "s");
 			List<T> datas = GameDataDB.CovertData<T>(txt);
-            UnityEngine.Debug.Log(txt + "");
             GameDB.AddDataFromList(datas);
 			UnityEngine.Debug.Log(str + "OK");
 			return true;
@@ -401,7 +400,7 @@ public class GameDataDB
 		for (int i = 0; i < array2.Length; i++)
 		{
 			string text2 = array2[i];
-			if (!(text2 == string.Empty))
+            if (!(text2 == string.Empty))
 			{
 				T t = GameDataDB.m_Conevrt.deserializeObject<T>(text2);
 				if (t is I_BaseDBF)

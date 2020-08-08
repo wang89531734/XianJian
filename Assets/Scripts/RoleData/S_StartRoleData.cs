@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 
+
 public class S_StartRoleData : I_BaseDBF
 {
 	public int GUID;
@@ -47,7 +48,7 @@ public class S_StartRoleData : I_BaseDBF
 			return;
 		}
 		this.Desc = GameDataDB.TransStringByLanguageType(this.Desc);
-		Dictionary<string, string> dictionary = Converter.deserializeObject<Dictionary<string, string>>(JsonString);
+        Dictionary<string, string> dictionary = Converter.deserializeObject<Dictionary<string, string>>(JsonString);
 		for (int i = 0; i < 10; i++)
 		{
 			int num = 0;

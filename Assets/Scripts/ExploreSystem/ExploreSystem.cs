@@ -1414,22 +1414,22 @@ public class ExploreSystem
         }
 
         //this.m_GameApp.m_SaveloadSystem.AutoSave1(ENUM_AUTOSAVETYPE.Fight);
-        S_BattleRate data = GameDataDB.BattleRateDB.GetData(7004);  
-        if (data == null)
-        {
-            Debug.LogWarning("EnterFight::讀取BattleRateDB表錯誤_" + battleId);
-            return;
-        }
-        Debug.Log(data.TriggerName);
-        int fightPlayerID = 0;
-        int num = 0;
-        int num2 = 0;
-        int num3 = 4;
-        int num4 = UnityEngine.Random.Range(0, 100);
-        //if (data.Flag.Count > 0 && this.m_GameApp.m_GameDataSystem.GetFlag(data.Flag[0]))
+        //S_BattleRate data = GameDataDB.BattleRateDB.GetData(7004);  
+        //if (data == null)
+        //{
+        //    Debug.LogWarning("EnterFight::讀取BattleRateDB表錯誤_" + battleId);
+        //    return;
+        //}
+        //int fightPlayerID = 0;
+        //int num = 0;
+        //int num2 = 0;
+        //int num3 = 4;
+        //int num4 = UnityEngine.Random.Range(0, 100);
+        //Debug.Log(data.Flag.Count);
+        //if (data.Flag.Count > 0 && GameEntry.Instance.m_GameDataSystem.GetFlag(data.Flag[0]))
         //{
         //    num2 = 5;
-        //    num3 = data.Group.Count;      
+        //    num3 = data.Group.Count;
         //}
         //if (num3 > data.Group.Count)
         //{
@@ -1447,7 +1447,8 @@ public class ExploreSystem
         //            //{
         //            //    fightPlayerID = Swd6Application.instance.m_GameDataSystem.m_PlayerID;
         //            //}
-        //            //FightSystem.Instance.Fight(this.m_BattleID, fightPlayerID);
+        FightSystem.Instance.Fight(1, 1);
+        //FightSystem.Instance.Fight(this.m_BattleID, fightPlayerID);
         //            break;
         //        }
         //    }

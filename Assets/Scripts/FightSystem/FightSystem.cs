@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
+using YouYou;
 
 public class FightSystem
 {
@@ -23,40 +24,45 @@ public class FightSystem
 
     private GameObject FightEffect;
 
-    //	public static FightSystem Instance
-    //	{
-    //		get
-    //		{
-    //			if (FightSystem.instance == null)
-    //			{
-    //				FightSystem.instance = new FightSystem();
-    //			}
-    //			return FightSystem.instance;
-    //		}
-    //	}
+    public static FightSystem Instance
+    {
+        get
+        {
+            if (FightSystem.instance == null)
+            {
+                FightSystem.instance = new FightSystem();
+            }
+            return FightSystem.instance;
+        }
+    }
 
-    //	public void Fight(int battleGroupID, int fightPlayerID)
-    //	{
-    //		MusicSystem.Instance.Fade_StopBackgroundMusic(2f);
-    //		MusicSystem.Instance.PlaySound(1, 1);
-    //		if (battleGroupID == 7108 && GameTalk.CheckItem(305, 1))
-    //		{
-    //			battleGroupID = 7109;
-    //		}
-    //		this.m_BattleGroupID = battleGroupID;
-    //		this.m_FightPlayerID = fightPlayerID;
-    //		this.m_LoseAndContinue = false;
-    //		this.m_bPracticeFight = false;
-    //		Swd6Application.instance.StartCoroutine(this.FightCoroutine());
-    //	}
+    public void Fight(int battleGroupID, int fightPlayerID)
+    {
+        //MusicSystem.Instance.Fade_StopBackgroundMusic(2f);
+        //MusicSystem.Instance.PlaySound(1, 1);
+        //if (battleGroupID == 7108 && GameTalk.CheckItem(305, 1))
+        //{
+        //    battleGroupID = 7109;
+        //}
+        this.m_BattleGroupID = battleGroupID;
+        this.m_FightPlayerID = fightPlayerID;
+        this.m_LoseAndContinue = false;
+        this.m_bPracticeFight = false;
+        GameEntry.Instance.StartCoroutine(this.FightCoroutine());
+    }
 
-    //	[DebuggerHidden]
-    //	private IEnumerator FightCoroutine()
-    //	{
-    //		FightSystem.<FightCoroutine>c__Iterator88D <FightCoroutine>c__Iterator88D = new FightSystem.<FightCoroutine>c__Iterator88D();
-    //		<FightCoroutine>c__Iterator88D.<>f__this = this;
-    //		return <FightCoroutine>c__Iterator88D;
-    //	}
+    private IEnumerator FightCoroutine()
+    {
+        //this.FightEffectIn(true);
+        yield return null;
+        //while (!this.IsFightEffectInFinish())
+        //{
+        //    yield return null;
+        //}
+        UnityEngine.Debug.Log("ÇÐ»»Õ½¶·×´Ì¬");
+        GameEntry.Procedure.ChangeState(ProcedureState.GameLevel);
+        yield break;
+    }
 
     //	public void FightUnitTest(int battleGroupID)
     //	{
