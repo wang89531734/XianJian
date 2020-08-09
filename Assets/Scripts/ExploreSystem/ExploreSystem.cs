@@ -1,4 +1,3 @@
-//using GameFramework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -141,6 +140,9 @@ public class ExploreSystem
         private set;
     }
 
+    /// <summary>
+    /// 玩家物体
+    /// </summary>
     public GameObject PlayerObj
     {
         get
@@ -293,7 +295,7 @@ public class ExploreSystem
             //    UI_PartnerTalkDialog.Instance.Stop();
             //    UI_ZoneMap.Instance.Hide();
             //}
-            //GameInput.Clear();
+            GameInput.Clear();
         }
     }
 
@@ -427,8 +429,8 @@ public class ExploreSystem
 
     public void Begin()
     {
-        bool lockPlayer = this.LockPlayer;
-        this.LoadMapDate();
+        //bool lockPlayer = this.LockPlayer;
+        //this.LoadMapDate();
         if (this.PlayerChangePoint != string.Empty)
         {
             GameObject gameObject2 = GameObject.Find(this.PlayerChangePoint);
@@ -440,14 +442,14 @@ public class ExploreSystem
             this.PlayerChangePoint = string.Empty;
         }
         this.PlayerObj = GameEntry.Instance.m_GameObjSystem.CreatePlayerGameObj(GameEntry.Instance.m_GameDataSystem.m_PlayerID, this.PlayerChangePos, this.PlayerChangeDir);
-        this.m_PrePlayerPos = this.PlayerController.Pos;
-        this.m_PrePosUpdateTime = 0f;
-        this.m_PlayerUpdateTime = 1f;
-        this.PlayerController.m_NoJump = false;
-        //this.AmberPigObj = this.m_GameApp.m_GameObjSystem.CreateAmberPigGameObj();
-        this.EnableMainCamera(true);
-        this.SetCameraLookTarget(true);
-        //this.SetAmberPigTargetPos();
+        //this.m_PrePlayerPos = this.PlayerController.Pos;
+        //this.m_PrePosUpdateTime = 0f;
+        //this.m_PlayerUpdateTime = 1f;
+        //this.PlayerController.m_NoJump = false;
+        ////this.AmberPigObj = this.m_GameApp.m_GameObjSystem.CreateAmberPigGameObj();
+        //this.EnableMainCamera(true);
+        //this.SetCameraLookTarget(true);
+        ////this.SetAmberPigTargetPos();
         //this.m_GameApp.m_GameObjSystem.LoadMapObj(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
         //GameMapMobSystem.Instance.SetTarget(this.PlayerObj);
         //ExploreMiniMapSystem.Instance.CreateMapData(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
@@ -456,7 +458,7 @@ public class ExploreSystem
         //{
         //    this.PlayMusic();
         //}
-        GameInput.Clear();
+        //GameInput.Clear();
         //this.m_HideMap = 0;
         //this.m_RainEffect = null;
         //this.ClearNoFightData(true);
@@ -469,7 +471,7 @@ public class ExploreSystem
         //{
         //    this.SetMapRainEffect();
         //}
-        this.LockPlayer = lockPlayer;
+        //this.LockPlayer = lockPlayer;
         //this.ClearBattleInfo();
         //this.SpecialSetting();
         //this.ChangeSky();
@@ -733,7 +735,7 @@ public class ExploreSystem
 
     public void Update()
     {
-        //this.UpdaeInput();
+        this.UpdaeInput();
         //this.UpdateCursor();
         //this.UpdateFollowPet();
         //this.UpdaeReStartPos();
@@ -840,155 +842,155 @@ public class ExploreSystem
     //		yield break;
     //	}
 
-    //	private void UpdaeInput()
-    //	{
-    //		if (this.m_GameApp.gameStateService.getCurrentState().name != "ExploreState")
-    //		{
-    //			return;
-    //		}
-    //		if (this.LockPlayer)
-    //		{
-    //			if (Input.GetKeyDown(KeyCode.H))
-    //			{
-    //				bool flag = this.PlayerController.HideRole;
-    //				if (this.m_RidePetController != null)
-    //				{
-    //					flag = this.m_RidePetController.Hide;
-    //					if (this.m_RidePetController.m_BeginDown || this.m_RidePetController.m_BeginRise)
-    //					{
-    //						return;
-    //					}
-    //				}
-    //				if (!UI_Explore.Instance.IsVisible() && flag)
-    //				{
-    //					this.SetCameraDOFEffect(true);
-    //					GameInput.m_IsDelayPress = true;
-    //					UI_SmallMap.Instance.Show();
-    //					UI_Explore.Instance.Show();
-    //					this.LockPlayer = false;
-    //					if (this.m_RidePetController != null)
-    //					{
-    //						this.m_RidePetController.Hide = false;
-    //						return;
-    //					}
-    //					this.PlayerController.HideRole = false;
-    //					if (this.AmberObj)
-    //					{
-    //						this.AmberObj.GetComponent<M_AmberController>().SetRender(true);
-    //					}
-    //				}
-    //			}
-    //			return;
-    //		}
-    //		if (this.PlayerController.IsJump())
-    //		{
-    //			return;
-    //		}
-    //		if (Input.GetKeyDown(KeyCode.H))
-    //		{
-    //			GameObject gameObject = GameObject.Find("Main Camera");
-    //			if (gameObject == null)
-    //			{
-    //				gameObject = GameObject.FindWithTag("MainCamera");
-    //			}
-    //			M_PlayerMouseOrbit x = gameObject.GetComponent<M_PlayerMouseOrbit>();
-    //			if (x == null)
-    //			{
-    //				x = gameObject.AddComponent<M_PlayerMouseOrbit>();
-    //			}
-    //			bool flag2 = this.PlayerController.HideRole;
-    //			if (this.m_RidePetController != null)
-    //			{
-    //				flag2 = this.m_RidePetController.Hide;
-    //				if (this.m_RidePetController.m_BeginDown || this.m_RidePetController.m_BeginRise)
-    //				{
-    //					return;
-    //				}
-    //			}
-    //			if (UI_Explore.Instance.IsVisible())
-    //			{
-    //				this.SetCameraDOFEffect(false);
-    //				GameInput.m_IsDelayPress = false;
-    //				UI_SmallMap.Instance.Hide();
-    //				UI_Explore.Instance.Hide();
-    //				UI_ZoneMap.Instance.Hide();
-    //			}
-    //			else if (!flag2)
-    //			{
-    //				this.PlayerController.HideRole = true;
-    //				if (this.m_RidePetController != null)
-    //				{
-    //					this.m_RidePetController.Hide = true;
-    //				}
-    //				this.SetCameraDOFEffect(true);
-    //				GameInput.m_IsDelayPress = true;
-    //				this.LockPlayer = true;
-    //				if (this.AmberObj)
-    //				{
-    //					this.AmberObj.GetComponent<M_AmberController>().SetRender(false);
-    //				}
-    //			}
-    //			else
-    //			{
-    //				this.SetCameraDOFEffect(true);
-    //				GameInput.m_IsDelayPress = true;
-    //				UI_SmallMap.Instance.Show();
-    //				UI_Explore.Instance.Show();
-    //				if (this.m_RidePetController != null)
-    //				{
-    //					this.m_RidePetController.Hide = false;
-    //				}
-    //				else
-    //				{
-    //					this.PlayerController.HideRole = false;
-    //				}
-    //				if (this.AmberObj)
-    //				{
-    //					this.AmberObj.GetComponent<M_AmberController>().SetRender(true);
-    //				}
-    //				this.LockPlayer = false;
-    //			}
-    //		}
-    //		if (Input.GetKeyDown(KeyCode.F9) || GameInput.GetJoyKeyDown(JOYSTICK_KEY.R3))
-    //		{
-    //			this.m_GameApp.StartCoroutine(this.QuickSave());
-    //		}
-    //		if (Input.GetKeyDown(KeyCode.F10) | GameInput.GetJoyKeyDown(JOYSTICK_KEY.L3))
-    //		{
-    //			this.LockPlayer = true;
-    //			UI_GameSaveLoadMenu.Instance.OpenLoad();
-    //		}
-    //		if (!GameInput.GetKeyActionDown(KEY_ACTION.MENU))
-    //		{
-    //			if (GameInput.GetKeyActionDown(KEY_ACTION.MAP))
-    //			{
-    //				if (this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID == 1000)
-    //				{
-    //					UI_BigMap.Instance.Open();
-    //				}
-    //				else
-    //				{
-    //					UI_ZoneMap.Instance.Open();
-    //				}
-    //				MusicControlSystem.PlayUISound(4017, 1);
-    //			}
-    //			return;
-    //		}
-    //		if (UI_ZoneMap.Instance.IsVisible())
-    //		{
-    //			return;
-    //		}
-    //		if (UI_BigMap.Instance.IsVisible())
-    //		{
-    //			return;
-    //		}
-    //		if (UI_GameSaveLoadMenu.Instance.IsVisible())
-    //		{
-    //			return;
-    //		}
-    //		GameInput.KeyInput = true;
-    //		this.OpenGameMainMenu();
-    //	}
+    private void UpdaeInput()
+    {
+        //if (this.m_GameApp.gameStateService.getCurrentState().name != "ExploreState")
+        //{
+        //    return;
+        //}
+        //if (this.LockPlayer)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.H))
+        //    {
+        //        bool flag = this.PlayerController.HideRole;
+        //        if (this.m_RidePetController != null)
+        //        {
+        //            flag = this.m_RidePetController.Hide;
+        //            if (this.m_RidePetController.m_BeginDown || this.m_RidePetController.m_BeginRise)
+        //            {
+        //                return;
+        //            }
+        //        }
+        //        if (!UI_Explore.Instance.IsVisible() && flag)
+        //        {
+        //            this.SetCameraDOFEffect(true);
+        //            GameInput.m_IsDelayPress = true;
+        //            UI_SmallMap.Instance.Show();
+        //            UI_Explore.Instance.Show();
+        //            this.LockPlayer = false;
+        //            if (this.m_RidePetController != null)
+        //            {
+        //                this.m_RidePetController.Hide = false;
+        //                return;
+        //            }
+        //            this.PlayerController.HideRole = false;
+        //            if (this.AmberObj)
+        //            {
+        //                this.AmberObj.GetComponent<M_AmberController>().SetRender(true);
+        //            }
+        //        }
+        //    }
+        //    return;
+        //}
+        //if (this.PlayerController.IsJump())
+        //{
+        //    return;
+        //}
+        //if (Input.GetKeyDown(KeyCode.H))
+        //{
+        //    GameObject gameObject = GameObject.Find("Main Camera");
+        //    if (gameObject == null)
+        //    {
+        //        gameObject = GameObject.FindWithTag("MainCamera");
+        //    }
+        //    M_PlayerMouseOrbit x = gameObject.GetComponent<M_PlayerMouseOrbit>();
+        //    if (x == null)
+        //    {
+        //        x = gameObject.AddComponent<M_PlayerMouseOrbit>();
+        //    }
+        //    bool flag2 = this.PlayerController.HideRole;
+        //    if (this.m_RidePetController != null)
+        //    {
+        //        flag2 = this.m_RidePetController.Hide;
+        //        if (this.m_RidePetController.m_BeginDown || this.m_RidePetController.m_BeginRise)
+        //        {
+        //            return;
+        //        }
+        //    }
+        //    if (UI_Explore.Instance.IsVisible())
+        //    {
+        //        this.SetCameraDOFEffect(false);
+        //        GameInput.m_IsDelayPress = false;
+        //        UI_SmallMap.Instance.Hide();
+        //        UI_Explore.Instance.Hide();
+        //        UI_ZoneMap.Instance.Hide();
+        //    }
+        //    else if (!flag2)
+        //    {
+        //        this.PlayerController.HideRole = true;
+        //        if (this.m_RidePetController != null)
+        //        {
+        //            this.m_RidePetController.Hide = true;
+        //        }
+        //        this.SetCameraDOFEffect(true);
+        //        GameInput.m_IsDelayPress = true;
+        //        this.LockPlayer = true;
+        //        if (this.AmberObj)
+        //        {
+        //            this.AmberObj.GetComponent<M_AmberController>().SetRender(false);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        this.SetCameraDOFEffect(true);
+        //        GameInput.m_IsDelayPress = true;
+        //        UI_SmallMap.Instance.Show();
+        //        UI_Explore.Instance.Show();
+        //        if (this.m_RidePetController != null)
+        //        {
+        //            this.m_RidePetController.Hide = false;
+        //        }
+        //        else
+        //        {
+        //            this.PlayerController.HideRole = false;
+        //        }
+        //        if (this.AmberObj)
+        //        {
+        //            this.AmberObj.GetComponent<M_AmberController>().SetRender(true);
+        //        }
+        //        this.LockPlayer = false;
+        //    }
+        //}
+        //if (Input.GetKeyDown(KeyCode.F9) || GameInput.GetJoyKeyDown(JOYSTICK_KEY.R3))
+        //{
+        //    this.m_GameApp.StartCoroutine(this.QuickSave());
+        //}
+        //if (Input.GetKeyDown(KeyCode.F10) | GameInput.GetJoyKeyDown(JOYSTICK_KEY.L3))
+        //{
+        //    this.LockPlayer = true;
+        //    UI_GameSaveLoadMenu.Instance.OpenLoad();
+        //}
+        //if (!GameInput.GetKeyActionDown(KEY_ACTION.MENU))
+        //{
+        //    if (GameInput.GetKeyActionDown(KEY_ACTION.MAP))
+        //    {
+        //        if (this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID == 1000)
+        //        {
+        //            UI_BigMap.Instance.Open();
+        //        }
+        //        else
+        //        {
+        //            UI_ZoneMap.Instance.Open();
+        //        }
+        //        MusicControlSystem.PlayUISound(4017, 1);
+        //    }
+        //    return;
+        //}
+        //if (UI_ZoneMap.Instance.IsVisible())
+        //{
+        //    return;
+        //}
+        //if (UI_BigMap.Instance.IsVisible())
+        //{
+        //    return;
+        //}
+        //if (UI_GameSaveLoadMenu.Instance.IsVisible())
+        //{
+        //    return;
+        //}
+        //GameInput.KeyInput = true;
+        //this.OpenGameMainMenu();
+    }
 
     //	private void UpdaeDebugInput()
     //	{

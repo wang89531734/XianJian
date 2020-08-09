@@ -7,8 +7,14 @@ public class S_BaseRoleData
 {
 	public int ID;
 
+    /// <summary>
+    /// ае
+    /// </summary>
 	public string FamilyName;
 
+    /// <summary>
+    /// Ућ
+    /// </summary>
 	public string Name;
 
 	public int MaxHP;
@@ -75,7 +81,7 @@ public class S_BaseRoleData
 	public void SetStartData(S_StartRoleData startData, int roldId, bool setEquip)
 	{
 		int id = (roldId - 1) * 150 + startData.Level;
-		S_Level data = GameDataDB.LevelDB.GetData(id);
+        S_Level data = GameDataDB.LevelDB.GetData(id);
 		this.HP = startData.HP;
 		this.MP = startData.MP;
 		this.MaxHP = data.MaxHP;

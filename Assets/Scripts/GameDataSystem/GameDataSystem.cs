@@ -204,10 +204,10 @@ public class GameDataSystem
         {
             this.SetStartData(this.m_TeamRoleList[j], this.m_TeamRoleList[j], this.m_TeamRoleList[j]);
         }
-        //GameEntry.Instance.m_SkillSystem.InitDefaultHotKeySkill();
-        //this.m_RoldData[0].BaseRoleData.IsJoin = true;
-        //this.m_DefaultPlayerID = 1;
-        //this.AddRole(1, false);
+        GameEntry.Instance.m_SkillSystem.InitDefaultHotKeySkill();
+        this.m_RoldData[0].BaseRoleData.IsJoin = true;
+        this.m_DefaultPlayerID = 1;
+        this.AddRole(1, false);
         ////NormalSetting normalSetting = Swd6Application.instance.m_NormalSettingSystem.GetNormalSetting();
         //if (normalSetting.m_bEnableTeach)//应该是教程
         //{
@@ -217,8 +217,8 @@ public class GameDataSystem
         //}
         //this.AddDLCItem();
 
-        //this.m_PlayerID = this.m_DefaultPlayerID;
-        //this.m_FightPlayerID = this.m_DefaultPlayerID;
+        this.m_PlayerID = this.m_DefaultPlayerID;
+        this.m_FightPlayerID = this.m_DefaultPlayerID;
         //this.FlagON(24);
     }
 
@@ -469,13 +469,13 @@ public class GameDataSystem
         {
             return false;
         }
-        //this.m_RoldData[num].BaseRoleData.ID = roleId;
-        //this.m_RoldData[num].BaseRoleData.FamilyName = GameDataDB.StrID(num * 10 + 51);
-        //this.m_RoldData[num].BaseRoleData.Name = GameDataDB.StrID(num * 10 + 52);
-        //this.m_RoldData[num].BaseRoleData.SetStartData(data, levelId, true);
-        //this.m_RoldData[num].CalRoleAttr();
-        //this.m_RoldData[num].SetFullHP();
-        //this.m_RoldData[num].SetFullMP();
+        this.m_RoldData[num].BaseRoleData.ID = roleId;
+        this.m_RoldData[num].BaseRoleData.FamilyName = GameDataDB.StrID(num * 10 + 51);
+        this.m_RoldData[num].BaseRoleData.Name = GameDataDB.StrID(num * 10 + 52);
+        this.m_RoldData[num].BaseRoleData.SetStartData(data, levelId, true);
+        this.m_RoldData[num].CalRoleAttr();
+        this.m_RoldData[num].SetFullHP();
+        this.m_RoldData[num].SetFullMP();
         return true;
     }
 
@@ -638,6 +638,11 @@ public class GameDataSystem
     //		MusicControlSystem.Fade_PlayBackgroundMusicAB_BLoop(audioClip, audioClip2, 0.5f, 1f);
     //	}
 
+    /// <summary>
+    /// 加人角色
+    /// </summary>
+    /// <param name="roleId"></param>
+    /// <param name="showMsg"></param>
     public void AddRole(int roleId, bool showMsg)
     {
         if (roleId > 10)
@@ -700,20 +705,23 @@ public class GameDataSystem
     //		}
     //	}
 
+    /// <summary>
+    /// 更新伙伴
+    /// </summary>
     public void UpdatePartyRole()
     {
-        //this.m_PartyRole.Clear();
-        //for (int i = 0; i < this.GetMaxTeamRoleCount(); i++)
-        //{
-        //    int num = this.m_TeamRoleList[i];
-        //    if (GameEntry.Instance.m_GameDataSystem.GetFlag(num))
-        //    {
-        //        S_PartyData s_PartyData = new S_PartyData();
-        //        s_PartyData.m_ID = num;
-        //        s_PartyData.m_IsFight = this.GetRoleData(num).BaseRoleData.IsFight;
-        //        this.m_PartyRole.Add(s_PartyData);
-        //    }
-        //}
+        this.m_PartyRole.Clear();
+        for (int i = 0; i < this.GetMaxTeamRoleCount(); i++)
+        {
+            int num = this.m_TeamRoleList[i];
+            //if (GameEntry.Instance.m_GameDataSystem.GetFlag(num))
+            //{
+            //    S_PartyData s_PartyData = new S_PartyData();
+            //    s_PartyData.m_ID = num;
+            //    s_PartyData.m_IsFight = this.GetRoleData(num).BaseRoleData.IsFight;
+            //    this.m_PartyRole.Add(s_PartyData);
+            //}
+        }
     }
 
     //	public void UpdateMustFightList(List<int> fightList)

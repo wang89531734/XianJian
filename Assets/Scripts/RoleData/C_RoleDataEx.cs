@@ -212,6 +212,9 @@ public class C_RoleDataEx : S_RoleData
 		}
 	}
 
+    /// <summary>
+    /// 计算角色属性
+    /// </summary>
 	public void CalRoleAttr()
 	{
 		S_RoleAttr s_RoleAttr = new S_RoleAttr();
