@@ -39,7 +39,7 @@ public class S_BattleGroup : I_BaseDBF
 			{
 				string text = dictionary[key];
 				int.TryParse(text, out s_BattleMobData.GUID);
-			}
+            }
 			key = string.Format("MobTargetPos_{0}", i);
 			if (dictionary.ContainsKey(key))
 			{

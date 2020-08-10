@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 2582338496861142882}
   - component: {fileID: -2268598688147293535}
   - component: {fileID: -7167081506600236869}
+  - component: {fileID: 5054723876561636917}
   m_Layer: 8
   m_Name: RoleCtrl
   m_TagString: Player
@@ -161,6 +162,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   m_Velocity: {x: 0, y: 0, z: 0}
+  m_BaseState: 0
 --- !u!136 &-7167081506600236869
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -175,3 +177,30 @@ CapsuleCollider:
   m_Height: 1.9
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &5054723876561636917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6737525416784522626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c47c85707f1334f91cd10e30c4270b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxForwardSpeed: 1.5
+  maxBackwardsSpeed: 1.5
+  maxSidewaysSpeed: 1.5
+  maxVelocityChange: 8
+  gravity: 25
+  canJump: 1
+  jumpHeight: 1.7
+  forwardVector: {x: 0, y: 0, z: 1}
+  maxRotationSpeed: 270
+  dirY: -1
+  m_DoJump: 0
+  m_IsJump: 0
+  m_CanJump: 1
+  m_NavAgent: 0
+  jumpAddVelocity: {x: 0, y: 0, z: 0}

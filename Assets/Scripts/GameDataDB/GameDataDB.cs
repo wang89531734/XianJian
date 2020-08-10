@@ -21,17 +21,17 @@ public class GameDataDB
 
 	public static T_GameDB<S_MapData> MapDB = new T_GameDB<S_MapData>();
 
-	//public static T_GameDB<S_MapConnect> MapConnectDB = new T_GameDB<S_MapConnect>();
+    //public static T_GameDB<S_MapConnect> MapConnectDB = new T_GameDB<S_MapConnect>();
 
-	//public static T_GameDB<S_NpcData> NpcDB = new T_GameDB<S_NpcData>();
+    public static T_GameDB<S_NpcData> NpcDB = new T_GameDB<S_NpcData>();
 
-	//public static T_GameDB<S_NpcAI> NpcAIDB = new T_GameDB<S_NpcAI>();
+    public static T_GameDB<S_NpcAI> NpcAIDB = new T_GameDB<S_NpcAI>();
 
-	//public static T_GameDB<S_Treasure> TreasureDB = new T_GameDB<S_Treasure>();
+    //public static T_GameDB<S_Treasure> TreasureDB = new T_GameDB<S_Treasure>();
 
-	//public static T_GameDB<S_Trap> TrapDB = new T_GameDB<S_Trap>();
+    //public static T_GameDB<S_Trap> TrapDB = new T_GameDB<S_Trap>();
 
-	public static T_GameDB<S_StartRoleData> StartRoleDB = new T_GameDB<S_StartRoleData>();
+    public static T_GameDB<S_StartRoleData> StartRoleDB = new T_GameDB<S_StartRoleData>();
 
 	public static T_GameDB<S_Level> LevelDB = new T_GameDB<S_Level>();
 
@@ -132,18 +132,18 @@ public class GameDataDB
         UnityEngine.Debug.Log("GameDB Load DBF Path:" + GameDataDB.m_DBF_Path);
         string dataPath = GameDataDB.m_DBF_Path + "MapData.dbf";
         GameDataDB.LoadFromFile<S_MapData>(GameDataDB.MapDB, dataPath, true);
-        //dataPath = GameDataDB.m_DBF_Path + "NpcData.dbf";
-        //GameDataDB.LoadFromFile<S_NpcData>(GameDataDB.NpcDB, dataPath, true);
-        //dataPath = GameDataDB.m_DBF_Path + "NpcData1.dbf";
-        //GameDataDB.LoadFromFile<S_NpcData>(GameDataDB.NpcDB, dataPath, false);
-        //dataPath = GameDataDB.m_DBF_Path + "NpcData2.dbf";
-        //GameDataDB.LoadFromFile<S_NpcData>(GameDataDB.NpcDB, dataPath, false);
-        //dataPath = GameDataDB.m_DBF_Path + "NpcData3.dbf";
-        //GameDataDB.LoadFromFile<S_NpcData>(GameDataDB.NpcDB, dataPath, false);
-        //dataPath = GameDataDB.m_DBF_Path + "NpcAI.dbf";
-        //GameDataDB.LoadFromFile<S_NpcAI>(GameDataDB.NpcAIDB, dataPath, true);
-        //dataPath = GameDataDB.m_DBF_Path + "NpcAI2.dbf";
-        //GameDataDB.LoadFromFile<S_NpcAI>(GameDataDB.NpcAIDB, dataPath, false);
+        dataPath = GameDataDB.m_DBF_Path + "NpcData.dbf";
+        GameDataDB.LoadFromFile<S_NpcData>(GameDataDB.NpcDB, dataPath, true);
+        dataPath = GameDataDB.m_DBF_Path + "NpcData1.dbf";
+        GameDataDB.LoadFromFile<S_NpcData>(GameDataDB.NpcDB, dataPath, false);
+        dataPath = GameDataDB.m_DBF_Path + "NpcData2.dbf";
+        GameDataDB.LoadFromFile<S_NpcData>(GameDataDB.NpcDB, dataPath, false);
+        dataPath = GameDataDB.m_DBF_Path + "NpcData3.dbf";
+        GameDataDB.LoadFromFile<S_NpcData>(GameDataDB.NpcDB, dataPath, false);
+        dataPath = GameDataDB.m_DBF_Path + "NpcAI.dbf";
+        GameDataDB.LoadFromFile<S_NpcAI>(GameDataDB.NpcAIDB, dataPath, true);
+        dataPath = GameDataDB.m_DBF_Path + "NpcAI2.dbf";
+        GameDataDB.LoadFromFile<S_NpcAI>(GameDataDB.NpcAIDB, dataPath, false);
         dataPath = GameDataDB.m_DBF_Path + "Quest.dbf";
         GameDataDB.LoadFromFile<S_Quest>(GameDataDB.QuestDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "AnimationData.dbf";

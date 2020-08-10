@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using YouYou;
 
 public abstract class M_GameRoleBase : MonoBehaviour
 {
@@ -56,7 +57,7 @@ public abstract class M_GameRoleBase : MonoBehaviour
 
     protected Component m_QuestTalk;
 
-    //protected S_NpcData m_NpcData;
+    protected S_NpcData m_NpcData;
 
     public M_GameRoleBase.EventHandler OnTalkDelegate;
 
@@ -122,60 +123,60 @@ public abstract class M_GameRoleBase : MonoBehaviour
         }
     }
 
-    //public bool DisableRole
-    //{
-    //    get
-    //    {
-    //        return this.m_RoleState.Test(ENUM_GameObjFlag.Disable);
-    //    }
-    //    set
-    //    {
-    //        if (value)
-    //        {
-    //            this.OnExitFocus();
-    //            this.CheckQuestState();
-    //            ExploreMiniMapSystem.Instance.UpdateQuestIcon(this.RoleID);
-    //            this.m_RoleState.Set(ENUM_GameObjFlag.Disable);
-    //            UnityEngine.Object.DestroyObject(base.gameObject);
-    //            this.m_GameObjData.GameObj = null;
-    //            return;
-    //        }
-    //        this.m_RoleState.Reset(ENUM_GameObjFlag.Disable);
-    //        if (this.m_GameObjData.GameObj == null)
-    //        {
-    //            Swd6Application.instance.m_GameObjSystem.LoadObj(this.m_GameObjData);
-    //        }
-    //    }
-    //}
+    public bool DisableRole
+    {
+        get
+        {
+            return this.m_RoleState.Test(ENUM_GameObjFlag.Disable);
+        }
+        set
+        {
+            if (value)
+            {
+                //this.OnExitFocus();
+                //this.CheckQuestState();
+               // ExploreMiniMapSystem.Instance.UpdateQuestIcon(this.RoleID);
+                this.m_RoleState.Set(ENUM_GameObjFlag.Disable);
+               // UnityEngine.Object.DestroyObject(base.gameObject);
+                this.m_GameObjData.GameObj = null;
+                return;
+            }
+            this.m_RoleState.Reset(ENUM_GameObjFlag.Disable);
+            if (this.m_GameObjData.GameObj == null)
+            {
+               // Swd6Application.instance.m_GameObjSystem.LoadObj(this.m_GameObjData);
+            }
+        }
+    }
 
-    //public virtual bool HideRole
-    //{
-    //    get
-    //    {
-    //        return this.m_RoleState.Test(ENUM_GameObjFlag.Hide);
-    //    }
-    //    set
-    //    {
-    //        if (value)
-    //        {
-    //            this.m_RoleState.Set(ENUM_GameObjFlag.Hide);
-    //        }
-    //        else
-    //        {
-    //            this.m_RoleState.Reset(ENUM_GameObjFlag.Hide);
-    //            if (this.m_NpcData != null && this.m_NpcData.emType == ENUM_NpcType.Treasure)
-    //            {
-    //                ExploreMiniMapSystem.Instance.UpdateQuestIcon(this.RoleID);
-    //            }
-    //        }
-    //        this.HideGameObj(value);
-    //        if (this.m_GameObjData == null)
-    //        {
-    //            return;
-    //        }
-    //        this.CheckQuestState();
-    //    }
-    //}
+    public virtual bool HideRole
+    {
+        get
+        {
+            return this.m_RoleState.Test(ENUM_GameObjFlag.Hide);
+        }
+        set
+        {
+            if (value)
+            {
+                this.m_RoleState.Set(ENUM_GameObjFlag.Hide);
+            }
+            else
+            {
+                this.m_RoleState.Reset(ENUM_GameObjFlag.Hide);
+                if (this.m_NpcData != null && this.m_NpcData.emType == ENUM_NpcType.Treasure)
+                {
+                    //ExploreMiniMapSystem.Instance.UpdateQuestIcon(this.RoleID);
+                }
+            }
+            this.HideGameObj(value);
+            if (this.m_GameObjData == null)
+            {
+                return;
+            }
+            //this.CheckQuestState();
+        }
+    }
 
     public bool NoCollider
     {
@@ -447,106 +448,103 @@ public abstract class M_GameRoleBase : MonoBehaviour
 
     private void Start()
     {
-        //if (Swd6Application.instance)
+        int mapID = GameEntry.Instance.m_GameDataSystem.m_MapInfo.MapID;
+        string text = base.gameObject.name;
+        //if (base.gameObject.transform.parent != null)
         //{
-        //    Swd6Application instance = Swd6Application.instance;
-        //    int mapID = instance.m_GameDataSystem.m_MapInfo.MapID;
-        //    string text = base.gameObject.name;
-        //    if (base.gameObject.transform.parent != null)
-        //    {
-        //        text = base.gameObject.transform.parent.name;
-        //    }
-        //    if (text.Contains("NPC_"))
-        //    {
-        //        text = text.Replace("NPC_", "");
-        //        this.RoleID = int.Parse(text);
-        //        this.m_NpcData = GameDataDB.NpcDB.GetData(this.RoleID);
-        //        if (this.m_NpcData == null)
-        //        {
-        //            Debug.Log("找不到NPC資料_" + this.RoleID);
-        //        }
-        //        if (!instance.m_GameObjSystem.CheckGameObjData(this.RoleID))
-        //        {
-        //            int num = (int)this.m_RoleState.Get();
-        //            string.Format(string.Concat(new object[]
-        //            {
-        //                    base.gameObject.name,
-        //                    "+",
-        //                    this.RoleID,
-        //                    "+",
-        //                    mapID,
-        //                    "+",
-        //                    num.ToString("X")
-        //            }), new object[0]);
-        //            this.LoadPrefabModel();
-        //            this.m_GameObjData = new S_GameObjData(this.RoleID, mapID, this.GetPos(), this.GetDir(), this.m_NpcData.Motion, this.m_RoleState, base.gameObject);
-        //            instance.m_GameObjSystem.AddGameObjData(this.m_GameObjData);
-        //        }
-        //        else
-        //        {
-        //            this.m_GameObjData = instance.m_GameObjSystem.GetObjData(this.RoleID);
-        //            if (this.m_GameObjData != null)
-        //            {
-        //                this.LoadPrefabModel();
-        //                this.m_GameObjData.GameObj = base.gameObject;
-        //                int num2 = (int)this.m_GameObjData.State.Get();
-        //                string.Format(string.Concat(new object[]
-        //                {
-        //                        base.gameObject.name,
-        //                        "+",
-        //                        this.m_GameObjData.MapId,
-        //                        "+",
-        //                        num2.ToString("X")
-        //                }), new object[0]);
-        //                this.m_RoleState = this.m_GameObjData.State;
-        //                if (mapID != this.m_GameObjData.MapId)
-        //                {
-        //                    UnityEngine.Object.Destroy(base.gameObject);
-        //                    return;
-        //                }
-        //                if (this.m_GameObjData.Pos == Vector3.zero)
-        //                {
-        //                    this.m_GameObjData.Pos = this.GetPos();
-        //                }
-        //                this.SetPos(this.m_GameObjData.Pos);
-        //                if (this.m_GameObjData.Dir != 1000f)
-        //                {
-        //                    this.Dir = this.m_GameObjData.Dir;
-        //                }
-        //                if (this.HideRole)
-        //                {
-        //                    this.HideRole = true;
-        //                }
-        //                if (this.NoCollider)
-        //                {
-        //                    this.NoCollider = true;
-        //                }
-        //                if (this.DisableRole && this.m_NpcData.emType != ENUM_NpcType.Egg)
-        //                {
-        //                    if (this.Open)
-        //                    {
-        //                        ExploreMiniMapSystem.Instance.ChangeToOpenIcon(this.RoleID);
-        //                    }
-        //                    UnityEngine.Object.Destroy(base.gameObject);
-        //                }
-        //            }
-        //        }
-        //    }
+        //    text = base.gameObject.transform.parent.name;
         //}
-        //if (this.m_NpcData != null)
-        //{
-        //    this.m_RoleMotion = base.GetComponent<M_GameRoleMotion>();
-        //    if (this.m_RoleMotion != null)
-        //    {
-        //        this.m_RoleMotion.Init(this.RoleID, this.m_GameObjData.Motion);
-        //    }
-        //    if (this.m_NpcData.Talk != null)
-        //    {
-        //        base.gameObject.AddComponent(this.m_NpcData.Talk);
-        //    }
-        //}
+        if (text.Contains("NPC_"))
+        {
+            text = text.Replace("NPC_", "");
+            this.RoleID = int.Parse(text);
+            this.m_NpcData = GameDataDB.NpcDB.GetData(this.RoleID);
+            if (this.m_NpcData == null)
+            {
+                Debug.Log("找不到NPC資料_" + this.RoleID);
+            }
+
+            if (!GameEntry.Instance.m_GameObjSystem.CheckGameObjData(this.RoleID))
+            {
+                Debug.Log("找不到NPC資料_" + this.RoleID);
+                int num = (int)this.m_RoleState.Get();
+                string.Format(string.Concat(new object[]
+                {
+                            base.gameObject.name,
+                            "+",
+                            this.RoleID,
+                            "+",
+                            mapID,
+                            "+",
+                            num.ToString("X")
+                }), new object[0]);
+                //this.m_GameObjData = new S_GameObjData(this.RoleID, mapID, this.GetPos(), this.GetDir(), this.m_NpcData.Motion, this.m_RoleState, base.gameObject);
+                //instance.m_GameObjSystem.AddGameObjData(this.m_GameObjData);
+            }
+            else
+            {
+                this.m_GameObjData = GameEntry.Instance.m_GameObjSystem.GetObjData(this.RoleID);
+                if (this.m_GameObjData != null)
+                {
+                    this.m_GameObjData.GameObj = base.gameObject;
+                    int num2 = (int)this.m_GameObjData.State.Get();
+                    string.Format(string.Concat(new object[]
+                    {
+                                base.gameObject.name,
+                                "+",
+                                this.m_GameObjData.MapId,
+                                "+",
+                                num2.ToString("X")
+                    }), new object[0]);
+                    this.m_RoleState = this.m_GameObjData.State;
+                    //if (mapID != this.m_GameObjData.MapId)
+                    //{
+                    //    UnityEngine.Object.Destroy(base.gameObject);
+                    //    return;
+                    //}
+                    if (this.m_GameObjData.Pos == Vector3.zero)
+                    {
+                        this.m_GameObjData.Pos = this.GetPos();
+                    }
+                    this.SetPos(this.m_GameObjData.Pos);
+                    if (this.m_GameObjData.Dir != 1000f)
+                    {
+                        this.Dir = this.m_GameObjData.Dir;
+                    }
+                    if (this.HideRole)
+                    {
+                        this.HideRole = true;
+                    }
+                    if (this.NoCollider)
+                    {
+                        this.NoCollider = true;
+                    }
+                    //if (this.DisableRole)
+                    //{
+                    //    if (this.Open)
+                    //    {
+                    //        //ExploreMiniMapSystem.Instance.ChangeToOpenIcon(this.RoleID);
+                    //    }
+                    //    UnityEngine.Object.Destroy(base.gameObject);
+                    //}
+                }
+            }
+        }
+
+        if (this.m_NpcData != null)
+        {
+            //this.m_RoleMotion = base.GetComponent<M_GameRoleMotion>();
+            //if (this.m_RoleMotion != null)
+            //{
+            //    this.m_RoleMotion.Init(this.RoleID, this.m_GameObjData.Motion);
+            //}
+            //if (this.m_NpcData.Talk != null)
+            //{
+            //    base.gameObject.AddComponent(this.m_NpcData.Talk);
+            //}
+        }
         //ExploreMiniMapSystem.Instance.CreateNpcIcon(this.RoleID);
-        m_Animation=gameObject.GetComponentInChildren<Animation>();
+        m_Animation =gameObject.GetComponentInChildren<Animation>();
         this.initialize();
     }
 
@@ -790,10 +788,6 @@ public abstract class M_GameRoleBase : MonoBehaviour
     //		return false;
     //	}
 
-    //	public void LoadPrefabModel()
-    //	{
-    //	}
-
     //	public void AttachDefaultComponent()
     //	{
     //		if (!base.gameObject.GetComponent<CapsuleCollider>())
@@ -832,10 +826,10 @@ public abstract class M_GameRoleBase : MonoBehaviour
     //		this.Pick = false;
     //	}
 
-    //	public S_NpcData GetNpcData()
-    //	{
-    //		return this.m_NpcData;
-    //	}
+    public S_NpcData GetNpcData()
+    {
+        return this.m_NpcData;
+    }
 
     //	public virtual void SetMove(Vector3 moveDest)
     //	{
@@ -867,72 +861,72 @@ public abstract class M_GameRoleBase : MonoBehaviour
     //		return !this.MoveRole;
     //	}
 
-    //	public void HideGameObj(bool bHide)
-    //	{
-    //		SkinnedMeshRenderer[] componentsInChildren = base.gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
-    //		if (componentsInChildren != null)
-    //		{
-    //			SkinnedMeshRenderer[] array = componentsInChildren;
-    //			for (int i = 0; i < array.Length; i++)
-    //			{
-    //				SkinnedMeshRenderer skinnedMeshRenderer = array[i];
-    //				if (skinnedMeshRenderer)
-    //				{
-    //					skinnedMeshRenderer.enabled = !bHide;
-    //				}
-    //			}
-    //		}
-    //		MeshRenderer[] componentsInChildren2 = base.gameObject.GetComponentsInChildren<MeshRenderer>();
-    //		if (componentsInChildren2 != null)
-    //		{
-    //			MeshRenderer[] array2 = componentsInChildren2;
-    //			for (int j = 0; j < array2.Length; j++)
-    //			{
-    //				MeshRenderer meshRenderer = array2[j];
-    //				if (meshRenderer)
-    //				{
-    //					meshRenderer.enabled = !bHide;
-    //				}
-    //			}
-    //		}
-    //		Light[] componentsInChildren3 = base.gameObject.GetComponentsInChildren<Light>();
-    //		if (componentsInChildren != null)
-    //		{
-    //			Light[] array3 = componentsInChildren3;
-    //			for (int k = 0; k < array3.Length; k++)
-    //			{
-    //				Light light = array3[k];
-    //				if (light)
-    //				{
-    //					light.enabled = !bHide;
-    //				}
-    //			}
-    //		}
-    //		ParticleSystem[] componentsInChildren4 = base.gameObject.GetComponentsInChildren<ParticleSystem>();
-    //		if (componentsInChildren4 != null)
-    //		{
-    //			ParticleSystem[] array4 = componentsInChildren4;
-    //			for (int l = 0; l < array4.Length; l++)
-    //			{
-    //				ParticleSystem particleSystem = array4[l];
-    //				if (particleSystem)
-    //				{
-    //					if (bHide)
-    //					{
-    //						particleSystem.Stop();
-    //					}
-    //					else
-    //					{
-    //						particleSystem.Play();
-    //					}
-    //				}
-    //			}
-    //		}
-    //		if (base.gameObject.renderer != null)
-    //		{
-    //			base.gameObject.renderer.enabled = !bHide;
-    //		}
-    //	}
+    public void HideGameObj(bool bHide)
+    {
+        SkinnedMeshRenderer[] componentsInChildren = base.gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+        if (componentsInChildren != null)
+        {
+            SkinnedMeshRenderer[] array = componentsInChildren;
+            for (int i = 0; i < array.Length; i++)
+            {
+                SkinnedMeshRenderer skinnedMeshRenderer = array[i];
+                if (skinnedMeshRenderer)
+                {
+                    skinnedMeshRenderer.enabled = !bHide;
+                }
+            }
+        }
+        MeshRenderer[] componentsInChildren2 = base.gameObject.GetComponentsInChildren<MeshRenderer>();
+        if (componentsInChildren2 != null)
+        {
+            MeshRenderer[] array2 = componentsInChildren2;
+            for (int j = 0; j < array2.Length; j++)
+            {
+                MeshRenderer meshRenderer = array2[j];
+                if (meshRenderer)
+                {
+                    meshRenderer.enabled = !bHide;
+                }
+            }
+        }
+        Light[] componentsInChildren3 = base.gameObject.GetComponentsInChildren<Light>();
+        if (componentsInChildren != null)
+        {
+            Light[] array3 = componentsInChildren3;
+            for (int k = 0; k < array3.Length; k++)
+            {
+                Light light = array3[k];
+                if (light)
+                {
+                    light.enabled = !bHide;
+                }
+            }
+        }
+        ParticleSystem[] componentsInChildren4 = base.gameObject.GetComponentsInChildren<ParticleSystem>();
+        if (componentsInChildren4 != null)
+        {
+            ParticleSystem[] array4 = componentsInChildren4;
+            for (int l = 0; l < array4.Length; l++)
+            {
+                ParticleSystem particleSystem = array4[l];
+                if (particleSystem)
+                {
+                    if (bHide)
+                    {
+                        particleSystem.Stop();
+                    }
+                    else
+                    {
+                        particleSystem.Play();
+                    }
+                }
+            }
+        }
+        //if (base.gameObject.renderer != null)
+        //{
+        //    base.gameObject.renderer.enabled = !bHide;
+        //}
+    }
 
     //	public void AlphaObj(float alpha)
     //	{

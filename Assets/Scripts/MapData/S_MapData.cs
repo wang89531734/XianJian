@@ -82,7 +82,8 @@ public class S_MapData : I_BaseDBF
 		this.Name = GameDataDB.TransStringByLanguageType(this.Name);
 		this.Desc = GameDataDB.TransStringByLanguageType(this.Desc);
 		this.LoadInfo = GameDataDB.TransStringByLanguageType(this.LoadInfo);
-		Dictionary<string, string> dictionary = Converter.deserializeObject<Dictionary<string, string>>(JsonString);
+        Debug.Log(GUID + " " + Name+" " + Desc + " " + LoadInfo);
+        Dictionary<string, string> dictionary = Converter.deserializeObject<Dictionary<string, string>>(JsonString);
 		for (int i = 0; i < 10; i++)
 		{
 			string text = string.Empty;

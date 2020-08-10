@@ -51,37 +51,37 @@ public class GameObjSystem
     public void Initialize()
     {
         this.m_AllGameObjData.Clear();
-        //GameDataDB.NpcDB.ResetByOrder();
-        //int dataSize = GameDataDB.NpcDB.GetDataSize();
-        //for (int i = 0; i < dataSize; i++)
-        //{
-        //    S_NpcData dataByOrder = GameDataDB.NpcDB.GetDataByOrder();
-        //    if (dataByOrder != null)
-        //    {
-        //        GameObjState gameObjState = new GameObjState();
-        //        if (dataByOrder.Pick == 1)
-        //        {
-        //            gameObjState.Set(ENUM_GameObjFlag.Pick);
-        //        }
-        //        if (dataByOrder.Show == 0)
-        //        {
-        //            gameObjState.Set(ENUM_GameObjFlag.Hide);
-        //        }
-        //        if (dataByOrder.Disable == 1)
-        //        {
-        //            gameObjState.Set(ENUM_GameObjFlag.Disable);
-        //        }
-        //        if (dataByOrder.NoCollider == 1)
-        //        {
-        //            gameObjState.Set(ENUM_GameObjFlag.NoCollider);
-        //        }
-        //        if (dataByOrder.Ground == 1)
-        //        {
-        //            gameObjState.Set(ENUM_GameObjFlag.Ground);
-        //        }
-        //        this.AddGameObjData(dataByOrder.GetGUID(), new Vector3(0f, 0f, 0f), 1000f, gameObjState.Get(), null);
-        ////    }
-        //}
+        GameDataDB.NpcDB.ResetByOrder();
+        int dataSize = GameDataDB.NpcDB.GetDataSize();
+        for (int i = 0; i < dataSize; i++)
+        {
+            S_NpcData dataByOrder = GameDataDB.NpcDB.GetDataByOrder();
+            if (dataByOrder != null)
+            {
+                GameObjState gameObjState = new GameObjState();
+                if (dataByOrder.Pick == 1)
+                {
+                    gameObjState.Set(ENUM_GameObjFlag.Pick);
+                }
+                if (dataByOrder.Show == 0)
+                {
+                    gameObjState.Set(ENUM_GameObjFlag.Hide);
+                }
+                if (dataByOrder.Disable == 1)
+                {
+                    gameObjState.Set(ENUM_GameObjFlag.Disable);
+                }
+                if (dataByOrder.NoCollider == 1)
+                {
+                    gameObjState.Set(ENUM_GameObjFlag.NoCollider);
+                }
+                if (dataByOrder.Ground == 1)
+                {
+                    gameObjState.Set(ENUM_GameObjFlag.Ground);
+                }
+                this.AddGameObjData(dataByOrder.GetGUID(), new Vector3(0f, 0f, 0f), 1000f, gameObjState.Get(), null);
+            }
+        }
     }
 
     //	public void Clear()
@@ -105,33 +105,33 @@ public class GameObjSystem
         this.m_AllGameObjData.Add(objData.Id, objData);
     }
 
-    //	public void AddGameObjData(int id, Vector3 pos, float dir, ENUM_GameObjFlag flag, GameObject gameObj)
-    //	{
-    //		S_NpcData data = GameDataDB.NpcDB.GetData(id);
-    //		if (data == null)
-    //		{
-    //			Debug.LogError("AddGameObjData Error!! Can't Find Id_" + id);
-    //			return;
-    //		}
-    //		GameObjState gameObjState = new GameObjState();
-    //		gameObjState.Set(data.emState | flag);
-    //		S_GameObjData objData = new S_GameObjData(id, data.MapID, pos, dir, data.Motion, gameObjState, gameObj);
-    //		this.AddGameObjData(objData);
-    //	}
+    public void AddGameObjData(int id, Vector3 pos, float dir, ENUM_GameObjFlag flag, GameObject gameObj)
+    {
+        S_NpcData data = GameDataDB.NpcDB.GetData(id);
+        if (data == null)
+        {
+            Debug.LogError("AddGameObjData Error!! Can't Find Id_" + id);
+            return;
+        }
+        GameObjState gameObjState = new GameObjState();
+        gameObjState.Set(data.emState | flag);
+        S_GameObjData objData = new S_GameObjData(id, data.MapID, pos, dir, data.Motion, gameObjState, gameObj);
+        this.AddGameObjData(objData);
+    }
 
     public bool CheckGameObjData(int id)
     {
         return this.m_AllGameObjData.ContainsKey(id);
     }
 
-    //	public S_GameObjData GetObjData(int id)
-    //	{
-    //		if (this.CheckGameObjData(id))
-    //		{
-    //			return this.m_AllGameObjData[id];
-    //		}
-    //		return null;
-    //	}
+    public S_GameObjData GetObjData(int id)
+    {
+        if (this.CheckGameObjData(id))
+        {
+            return this.m_AllGameObjData[id];
+        }
+        return null;
+    }
 
     //	public Dictionary<int, S_GameObjData> GetGameObjData()
     //	{
@@ -160,41 +160,41 @@ public class GameObjSystem
     //		}
     //	}
 
-    //	public void SetMapObjData(int mapid)
-    //	{
-    //		if (mapid == 0)
-    //		{
-    //			Debug.LogError("Map == 0!!");
-    //			return;
-    //		}
-    //		this.ClearMapObjData();
-    //		foreach (S_GameObjData current in this.m_AllGameObjData.Values)
-    //		{
-    //			if (current.MapId == mapid || current.OrgMapId == mapid)
-    //			{
-    //				this.m_CurrentGameObjList.Add(current);
-    //			}
-    //		}
-    //	}
+    public void SetMapObjData(int mapid)
+    {
+        if (mapid == 0)
+        {
+            Debug.LogError("Map == 0!!");
+            return;
+        }
+        this.ClearMapObjData();
+        foreach (S_GameObjData current in this.m_AllGameObjData.Values)
+        {
+            if (current.MapId == mapid || current.OrgMapId == mapid)
+            {
+                this.m_CurrentGameObjList.Add(current);
+            }
+        }
+    }
 
     //	public List<S_GameObjData> GetMapObjData()
     //	{
     //		return this.m_CurrentGameObjList;
     //	}
 
-    //	public void ClearMapObjData()
-    //	{
-    //		this.m_CurrentGameObjList.Clear();
-    //	}
+    public void ClearMapObjData()
+    {
+        this.m_CurrentGameObjList.Clear();
+    }
 
-    //	public void LoadMapObj(int mapid)
-    //	{
-    //		this.SetMapObjData(mapid);
-    //		foreach (S_GameObjData current in this.m_CurrentGameObjList)
-    //		{
-    //			this.LoadObj(current);
-    //		}
-    //	}
+    public void LoadMapObj(int mapid)
+    {
+        this.SetMapObjData(mapid);
+        foreach (S_GameObjData current in this.m_CurrentGameObjList)
+        {
+            this.LoadObj(current);
+        }
+    }
 
     //	public void ResetMineObjData(int mapid)
     //	{
@@ -267,132 +267,178 @@ public class GameObjSystem
     //		}
     //	}
 
-    //	public void LoadObj(S_GameObjData ObjData)
-    //	{
-    //		if (ObjData == null)
-    //		{
-    //			return;
-    //		}
-    //		string name = "NPC_" + ObjData.Id;
-    //		GameObject gameObject = GameObject.Find(name);
-    //		if (gameObject == null)
-    //		{
-    //			gameObject = GameNpcGenerator.GetGameNpc(name);
-    //			if (gameObject)
-    //			{
-    //				gameObject.transform.position = ObjData.Pos;
-    //				gameObject.name = name;
-    //			}
-    //		}
-    //		if (gameObject != null)
-    //		{
-    //			S_NpcData data = GameDataDB.NpcDB.GetData(ObjData.Id);
-    //			if (data != null)
-    //			{
-    //				GameObject gameObject2;
-    //				if (ObjData.Id >= 101 && ObjData.Id <= 104)
-    //				{
-    //					gameObject2 = PlayerGenerator.CreatePlayerGameObject(data.PrefName);
-    //					C_RoleDataEx roleData = Swd6Application.instance.m_GameDataSystem.GetRoleData(ObjData.Id + 1 - 100);
-    //					if (roleData != null)
-    //					{
-    //						ItemData equipItemData = roleData.GetEquipItemData(ENUM_EquipPosition.CosCloth);
-    //						if (equipItemData != null)
-    //						{
-    //							this.SetMaterail(equipItemData.ID, Enum_AvaterType.Map, gameObject2);
-    //						}
-    //					}
-    //				}
-    //				else
-    //				{
-    //					gameObject2 = NpcGenerator.CreateNpcGameObject(ObjData.Id);
-    //				}
-    //				if (gameObject2 == null)
-    //				{
-    //					Debug.Log("Can't Load Npc PrefData_" + data.PrefName);
-    //					return;
-    //				}
-    //				gameObject2.tag = "Npc";
-    //				Transform transform = gameObject.transform.Find(data.PrefName);
-    //				if (transform != null)
-    //				{
-    //					UnityEngine.Object.DestroyObject(transform.gameObject);
-    //				}
-    //				Vector3 position = gameObject.transform.position;
-    //				Vector3 eulerAngles = gameObject.transform.eulerAngles;
-    //				Vector3 localScale = gameObject.transform.localScale;
-    //				gameObject.transform.position = new Vector3(0f, 0f, 0f);
-    //				gameObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
-    //				gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
-    //				gameObject2.transform.parent = gameObject.transform;
-    //				if (data.emType == ENUM_NpcType.Role || data.emType == ENUM_NpcType.Quest || data.emType == ENUM_NpcType.Service)
-    //				{
-    //					if (!gameObject2.GetComponent<M_GameNpc>())
-    //					{
-    //						gameObject2.AddComponent<M_GameNpc>();
-    //					}
-    //					ObjData.RoleBase = gameObject2.GetComponent<M_GameNpc>();
-    //					if (data.LookAtRange > 0f)
-    //					{
-    //						BendingSegment bendingSegment = new BendingSegment();
-    //						bendingSegment.firstTransform = TransformTool.SearchHierarchyForBone(gameObject2.transform, "Bip001 Head");
-    //						bendingSegment.lastTransform = TransformTool.SearchHierarchyForBone(gameObject2.transform, "Bip001 Head");
-    //						if (bendingSegment.firstTransform != null)
-    //						{
-    //							M_HeadLookController m_HeadLookController = gameObject2.AddComponent<M_HeadLookController>();
-    //							m_HeadLookController.segments = new BendingSegment[1];
-    //							m_HeadLookController.segments[0] = bendingSegment;
-    //							m_HeadLookController.nonAffectedJoints = new NonAffectedJoints[0];
-    //						}
-    //					}
-    //				}
-    //				if (data.emType == ENUM_NpcType.Treasure)
-    //				{
-    //					if (!gameObject2.GetComponent<M_GameTreasure>())
-    //					{
-    //						gameObject2.AddComponent<M_GameTreasure>();
-    //					}
-    //					ObjData.RoleBase = gameObject2.GetComponent<M_GameTreasure>();
-    //				}
-    //				if (data.emType == ENUM_NpcType.Mine)
-    //				{
-    //					if (!gameObject2.GetComponent<M_GameMine>())
-    //					{
-    //						gameObject2.AddComponent<M_GameMine>();
-    //					}
-    //					ObjData.RoleBase = gameObject2.GetComponent<M_GameMine>();
-    //				}
-    //				if (data.emType == ENUM_NpcType.Trap)
-    //				{
-    //					if (!gameObject2.GetComponent<M_GameTrap>())
-    //					{
-    //						gameObject2.AddComponent<M_GameTrap>();
-    //					}
-    //					ObjData.RoleBase = gameObject2.GetComponent<M_GameTrap>();
-    //				}
-    //				if (data.emType == ENUM_NpcType.Egg)
-    //				{
-    //					if (!gameObject2.GetComponent<M_GameEgg>())
-    //					{
-    //						gameObject2.AddComponent<M_GameEgg>();
-    //					}
-    //					ObjData.RoleBase = gameObject2.GetComponent<M_GameEgg>();
-    //					if (Swd6Application.instance.m_SaveloadSystem.m_Loading)
-    //					{
-    //						M_GameEgg m_GameEgg = ObjData.RoleBase as M_GameEgg;
-    //						m_GameEgg.m_NoReBirth = true;
-    //					}
-    //				}
-    //				if (data.emType == ENUM_NpcType.NoEffect)
-    //				{
-    //					gameObject2.AddComponent<M_GameNoEffectNpc>();
-    //				}
-    //				gameObject.transform.position = position;
-    //				gameObject.transform.eulerAngles = eulerAngles;
-    //				gameObject.transform.localScale = localScale;
-    //			}
-    //		}
-    //	}
+    public void LoadObj(S_GameObjData ObjData)
+    {
+        if (ObjData == null)
+        {
+            return;
+        }
+        if (ObjData.GameObj || ObjData.RoleBase)
+        {
+            return;
+        }
+        string name = "NPC_" + ObjData.Id;
+        GameObject gameObject = GameObject.Find(name);
+        if (gameObject == null)
+        {
+            gameObject = ResourcesManager.Instance.GetGameNpc(name);
+            if (gameObject != null)
+            {
+                gameObject.name = name;
+            }
+            else
+            {
+                gameObject = new GameObject(name);
+                if (gameObject != null)
+                {
+                    gameObject.transform.position = ObjData.Pos;
+                    gameObject.name = name;
+                }
+            }
+        }
+        if (gameObject != null)
+        {
+            S_NpcData data = GameDataDB.NpcDB.GetData(ObjData.Id);
+            if (data != null)
+            {
+                GameObject gameObject2 = null;
+                if (data.PrefName != null)
+                {
+                    if (ObjData.Id >= 151 && ObjData.Id <= 153)
+                    {
+                        gameObject2 = this.GetPlayerCosCloth(ObjData.Id + 1 - 150);
+                        if (gameObject2 == null)
+                        {
+                            gameObject2 = ResourcesManager.Instance.GetCharacterModel(data.PrefName);
+                        }
+                    }
+                    else
+                    {
+                        gameObject2 = ResourcesManager.Instance.GetCharacterModel(data.PrefName);
+                    }
+                    if (gameObject2 != null)
+                    {
+                        for (int i = 0; i < data.DisableRenderer.Count; i++)
+                        {
+                            //RendererTool.EnableRenderer(gameObject2, data.DisableRenderer[i], false);
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning(data.GUID + "_Npc PrefName是空的!!");
+                }
+                if (gameObject2 == null)
+                {
+                    Debug.LogWarning("Can't Load Npc PrefData_" + data.PrefName);
+                    return;
+                }
+                gameObject2.tag = "Npc";
+                Transform transform = gameObject.transform.Find(data.PrefName);
+                if (transform != null)
+                {
+                    //UnityEngine.Object.DestroyObject(transform.gameObject);
+                }
+                Vector3 position = gameObject.transform.position;
+                Vector3 eulerAngles = gameObject.transform.eulerAngles;
+                Vector3 localScale = gameObject.transform.localScale;
+                gameObject.transform.position = new Vector3(0f, 0f, 0f);
+                gameObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+                gameObject2.transform.parent = gameObject.transform;
+                if (data.emType == ENUM_NpcType.Role || data.emType == ENUM_NpcType.Quest || data.emType == ENUM_NpcType.Service)
+                {
+                    //if (!gameObject2.GetComponent<M_GameNpc>())
+                    //{
+                    //    gameObject2.AddComponent<M_GameNpc>();
+                    //}
+                    //ObjData.RoleBase = gameObject2.GetComponent<M_GameNpc>();
+                    //if (data.LookAtRange > 0f)
+                    //{
+                    //    gameObject2.AddComponent<M_HeadLookController>();
+                    //}
+                    //gameObject2.AddComponent<Seeker>();
+                    //gameObject2.AddComponent<FunnelModifier>();
+                    //gameObject2.AddComponent<M_AStarAI>();
+                }
+                if (data.emType == ENUM_NpcType.Treasure)
+                {
+                    //if (!gameObject2.GetComponent<M_GameTreasure>())
+                    //{
+                    //    gameObject2.AddComponent<M_GameTreasure>();
+                    //}
+                    //ObjData.RoleBase = gameObject2.GetComponent<M_GameTreasure>();
+                }
+                if (data.emType == ENUM_NpcType.Mine)
+                {
+                    //if (!gameObject2.GetComponent<M_GameMine>())
+                    //{
+                    //    gameObject2.AddComponent<M_GameMine>();
+                    //}
+                    //ObjData.RoleBase = gameObject2.GetComponent<M_GameMine>();
+                }
+                if (data.emType == ENUM_NpcType.Trap)
+                {
+                    //if (!gameObject2.GetComponent<M_GameTrap>())
+                    //{
+                    //    gameObject2.AddComponent<M_GameTrap>();
+                    //}
+                    //ObjData.RoleBase = gameObject2.GetComponent<M_GameTrap>();
+                }
+                if (data.emType == ENUM_NpcType.Arrow)
+                {
+                    //gameObject2.AddComponent<M_GameNoEffectNpc>();
+                    //ObjData.RoleBase = gameObject2.GetComponent<M_GameNoEffectNpc>();
+                }
+                if (data.emType == ENUM_NpcType.Map)
+                {
+                    //gameObject2.AddComponent<M_GameNoEffectNpc>();
+                    //ObjData.RoleBase = gameObject2.GetComponent<M_GameNoEffectNpc>();
+                }
+                if (data.emType == ENUM_NpcType.NoEffect)
+                {
+                    //gameObject2.AddComponent<M_GameNoEffectNpc>();
+                    //ObjData.RoleBase = gameObject2.GetComponent<M_GameNoEffectNpc>();
+                }
+                if (data.emType == ENUM_NpcType.Mob)
+                {
+                    gameObject2.AddComponent<M_GameMapMob>();
+                    ObjData.RoleBase = gameObject2.GetComponent<M_GameMapMob>();
+                    gameObject2.tag = "Mob";
+                }
+                if (data.AnimatorController != null)
+                {
+                    Animator component = gameObject2.GetComponent<Animator>();
+                    if (component != null)
+                    {
+                        //component.runtimeAnimatorController = ResourceManager.Instance.GetAnimatorController(data.AnimatorController);
+                    }
+                }
+                //FaceFXControllerScript component2 = gameObject2.GetComponent<FaceFXControllerScript>();
+                //if (component2 != null)
+                //{
+                //    UnityEngine.Object.Destroy(component2);
+                //}
+                Animation component3 = gameObject2.GetComponent<Animation>();
+                if (component3 != null)
+                {
+                    UnityEngine.Object.Destroy(component3);
+                }
+                //RendererTool.SetNPCMaterail(ObjData.Id, gameObject2);
+                RendererTool.ChangeSenceMaterialSetting(data.PrefName, gameObject2);
+                gameObject.transform.position = position;
+                gameObject.transform.eulerAngles = eulerAngles;
+                gameObject.transform.localScale = localScale;
+                if (data.Ground == 1)
+                {
+                    int layer = gameObject2.transform.gameObject.layer;
+                    TransformTool.SetLayerRecursively(gameObject2.transform, 2);
+                    GameMath.CastObjectOnTerrain(gameObject2, 0.5f);
+                    TransformTool.SetLayerRecursively(gameObject2.transform, layer);
+                }
+            }
+        }
+    }
 
     //	public void HideObjByType(int mapid, ENUM_NpcType type, bool hide)
     //	{
@@ -516,6 +562,7 @@ public class GameObjSystem
                     gameObject.transform.position = pos;
                     gameObject.transform.eulerAngles = new Vector3(0f, dir, 0f);
                     gameObject.name = "Player";
+                    gameObject.tag = "Player";
                     //gameObject.layer = 2;
                     this.PlayerObj = gameObject;
                     GameObjState state = new GameObjState();
@@ -552,67 +599,29 @@ public class GameObjSystem
                 });
             }
         });
-      
+
         //RendererTool.ChangeSenceMaterialSetting(text, gameObject);
-        //gameObject.transform.parent = characterRoot.transform;
-        //Animator component = gameObject.GetComponent<Animator>();
-        //if (component == null)
-        //{
-        //    Debug.Log("CreatePlayerGameObj::找不到Animator_" + id);
-        //    return null;
-        //}
-        //component.enabled = false;
-        //Avatar avatar = component.avatar;
-        //UnityEngine.Object.Destroy(component);
-        ////string name2 = "Player" + id + "_Map";
-        ////component = characterRoot.GetComponent<Animator>();
-        ////component.runtimeAnimatorController = ResourceManager.Instance.GetAnimatorController(name2);
-        ////component.avatar = avatar;
-        ////component.applyRootMotion = false;
-        //SphereCollider component2 = gameObject.GetComponent<SphereCollider>();
-        //if (component2 != null)
-        //{
-        //    UnityEngine.Object.Destroy(component2);
-        //}
+
         //CapsuleCollider component3 = gameObject.GetComponent<CapsuleCollider>();
         //if (component3 != null)
         //{
         //    component3.enabled = true;
         //    component3.isTrigger = true;
         //}
-        ////FaceFXControllerScript component4 = gameObject.GetComponent<FaceFXControllerScript>();
-        ////if (component4 != null)
-        ////{
-        ////    UnityEngine.Object.Destroy(component4);
-        ////}
-        //Animation component5 = gameObject.GetComponent<Animation>();
-        //if (component5 != null)
-        //{
-        //    UnityEngine.Object.Destroy(component5);
-        //}
+
         ////this.m_ShroudInstance = gameObject.GetComponent<ShroudInstance>();
         ////if (this.m_ShroudInstance != null)
         ////{
         ////    this.m_ShroudInstance.ReduceBlendWeight_StoryEnable();
         ////}
-        //CharacterController component6 = gameObject.GetComponent<CharacterController>();
-        //UnityEngine.Object.Destroy(component6);
-        //characterRoot.transform.position = pos;
-        //characterRoot.transform.eulerAngles = new Vector3(0f, dir, 0f);
-        //characterRoot.name = "Player";
-        //component.applyRootMotion = true;
+
         ////TransformTool.SetLayerRecursively(characterRoot.transform, 2);
-        //gameObject.tag = "Player";
-        //this.PlayerObj = characterRoot;
-        //GameObjState state = new GameObjState();
-        //S_GameObjData objData = new S_GameObjData(id, 0, pos, dir, 1, state, this.PlayerObj);
-        //this.AddGameObjData(objData);
         ////if (!this.PlayerObj.GetComponent<AudioListener>())
         ////{
         ////    this.PlayerObj.AddComponent<AudioListener>();
         ////}
-        //this.m_PhysicClothList.Clear();
-        //this.m_PlayerObjList.Clear();
+        this.m_PhysicClothList.Clear();
+        this.m_PlayerObjList.Clear();
 
         this.m_IsHide = false;
         return this.PlayerObj;

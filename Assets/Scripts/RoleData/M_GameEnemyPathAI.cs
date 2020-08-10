@@ -98,7 +98,7 @@ public class M_GameEnemyPathAI : AIPath
 
     private M_GameRoleMotion m_Motion;
 
-    //private S_NpcAI m_NpcAI;
+    private S_NpcAI m_NpcAI;
 
     public GameObject endOfPathEffect;
 
@@ -106,38 +106,38 @@ public class M_GameEnemyPathAI : AIPath
 
     public new void Start()
     {
-        //if (!this.m_Init)
-        //{
-        //    this.initialize();
-        //}
+        if (!this.m_Init)
+        {
+            this.initialize();
+        }
         base.Start();
     }
 
-    //	public void initialize()
-    //	{
-    //		this.InitAI();
-    //		this.endReachedDistance = 0.3f;
-    //		this.closestOnPathCheck = false;
-    //		this.startPosition = this.tr.position;
-    //		this.aiState = ENUM_EnemyPathAIState.Search;
-    //		if (this.m_RandWalk > 0)
-    //		{
-    //			this.aiState = ENUM_EnemyPathAIState.RandWalk;
-    //		}
-    //		this.m_Anim = base.GetComponent<Animator>();
-    //		this.m_Motion = base.GetComponent<M_GameRoleMotion>();
-    //		if (this.m_NpcAI != null)
-    //		{
-    //			this.SetMotion(this.m_NpcAI.WaitMotion[0]);
-    //		}
-    //		this.InitPatrolNode();
-    //		if (this.target == null)
-    //		{
-    //			this.target = Swd6Application.instance.m_ExploreSystem.PlayerObj.transform;
-    //		}
-    //		GameMapMobSystem.Instance.AddObj(base.gameObject.GetInstanceID(), base.gameObject);
-    //		this.m_Init = true;
-    //	}
+    public void initialize()
+    {
+        this.InitAI();
+        //this.endReachedDistance = 0.3f;
+        //this.closestOnPathCheck = false;
+        //this.startPosition = this.tr.position;
+        //this.aiState = ENUM_EnemyPathAIState.Search;
+        //if (this.m_RandWalk > 0)
+        //{
+        //    this.aiState = ENUM_EnemyPathAIState.RandWalk;
+        //}
+        //this.m_Anim = base.GetComponent<Animator>();
+        //this.m_Motion = base.GetComponent<M_GameRoleMotion>();
+        //if (this.m_NpcAI != null)
+        //{
+        //    this.SetMotion(this.m_NpcAI.WaitMotion[0]);
+        //}
+        //this.InitPatrolNode();
+        //if (this.target == null)
+        //{
+        //    this.target = Swd6Application.instance.m_ExploreSystem.PlayerObj.transform;
+        //}
+        //GameMapMobSystem.Instance.AddObj(base.gameObject.GetInstanceID(), base.gameObject);
+        this.m_Init = true;
+    }
 
     //	public override void OnTargetReached()
     //	{
@@ -153,43 +153,43 @@ public class M_GameEnemyPathAI : AIPath
     //		return this.tr.position;
     //	}
 
-    //	public void InitAI()
-    //	{
-    //		M_GameRoleBase component = base.GetComponent<M_GameRoleBase>();
-    //		if (component == null)
-    //		{
-    //			return;
-    //		}
-    //		this.m_NpcAI = GameDataDB.NpcAIDB.GetData(component.GetNpcData().AIMode);
-    //		if (this.m_NpcAI == null)
-    //		{
-    //			if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
-    //			{
-    //				Debug.Log(component.RoleID + "_InitAI::讀取NpcAI資造錯誤_" + component.GetNpcData().AIMode);
-    //			}
-    //			return;
-    //		}
-    //		this.m_MoveMotion = this.m_NpcAI.MoveMotion;
-    //		this.m_RandWalk = this.m_NpcAI.RandWalk;
-    //		this.m_RandWalkRange = this.m_NpcAI.RandWalkRange;
-    //		this.m_RandWalkTime = this.m_NpcAI.RandWalkTime;
-    //		this.m_AlertAngle = this.m_NpcAI.AlertAngle;
-    //		this.m_AlertMinRange = this.m_NpcAI.AlertMinRange;
-    //		this.m_AlertMaxRange = this.m_NpcAI.AlertMaxRange;
-    //		this.m_FollowMinTime = this.m_NpcAI.FollowMinTime;
-    //		this.m_FollowMaxTime = this.m_NpcAI.FollowMaxTime;
-    //		this.m_FollowMotion = this.m_NpcAI.FollowMotion;
-    //		this.m_Follow = this.m_NpcAI.Follow;
-    //		this.m_FollowSpeed = this.m_NpcAI.FollowSpeed;
-    //		if (this.m_FollowSpeed == 0f)
-    //		{
-    //			this.m_FollowSpeed = 1f;
-    //		}
-    //		this.m_RebornMaxTime = this.m_NpcAI.RebornMaxTime;
-    //		this.m_BattleID = this.m_NpcAI.BattleID;
-    //		this.m_PatroleMaxWaitTime = (float)this.m_NpcAI.WaitMoveTime;
-    //		this.m_PatrolRootNode = GameObject.Find(this.m_NpcAI.MovePrefab);
-    //	}
+    public void InitAI()
+    {
+        M_GameRoleBase component = base.GetComponent<M_GameRoleBase>();
+        if (component == null)
+        {
+            return;
+        }
+        this.m_NpcAI = GameDataDB.NpcAIDB.GetData(8001);
+        if (this.m_NpcAI == null)
+        {
+            //if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
+            //{
+            //    Debug.Log(component.RoleID + "_InitAI::讀取NpcAI資造錯誤_" + component.GetNpcData().AIMode);
+            //}
+            return;
+        }
+        this.m_MoveMotion = this.m_NpcAI.MoveMotion;
+        this.m_RandWalk = this.m_NpcAI.RandWalk;
+        this.m_RandWalkRange = this.m_NpcAI.RandWalkRange;
+        this.m_RandWalkTime = this.m_NpcAI.RandWalkTime;
+        this.m_AlertAngle = this.m_NpcAI.AlertAngle;
+        this.m_AlertMinRange = this.m_NpcAI.AlertMinRange;
+        this.m_AlertMaxRange = this.m_NpcAI.AlertMaxRange;
+        this.m_FollowMinTime = this.m_NpcAI.FollowMinTime;
+        this.m_FollowMaxTime = this.m_NpcAI.FollowMaxTime;
+        this.m_FollowMotion = this.m_NpcAI.FollowMotion;
+        this.m_Follow = this.m_NpcAI.Follow;
+        this.m_FollowSpeed = this.m_NpcAI.FollowSpeed;
+        if (this.m_FollowSpeed == 0f)
+        {
+            this.m_FollowSpeed = 1f;
+        }
+        this.m_RebornMaxTime = this.m_NpcAI.RebornMaxTime;
+        this.m_BattleID = this.m_NpcAI.BattleID;
+        this.m_PatroleMaxWaitTime = (float)this.m_NpcAI.WaitMoveTime;
+        this.m_PatrolRootNode = GameObject.Find(this.m_NpcAI.MovePrefab);
+    }
 
     //	public void InitPatrolNode()
     //	{

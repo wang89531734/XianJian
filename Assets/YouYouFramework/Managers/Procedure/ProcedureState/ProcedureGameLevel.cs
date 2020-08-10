@@ -9,7 +9,7 @@ namespace YouYou
     /// </summary>
     public class ProcedureGameLevel : ProcedureBase
     {
-        //public FightSceneManager m_FightSceneMgr;
+        public FightSceneManager m_FightSceneMgr;
 
         //public BuffSystem m_BuffSystem;
 
@@ -18,17 +18,16 @@ namespace YouYou
             base.OnEnter();
             GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureWorldMap");
             //this.m_BuffSystem = FightSystem.Instance.m_BuffSystem;
-            //this.m_FightSceneMgr = new FightSceneManager();
-            //this.m_FightSceneMgr.m_FihgtState = this;
+            this.m_FightSceneMgr = new FightSceneManager();
+            this.m_FightSceneMgr.m_FihgtState = this;
             //this.m_FightSceneMgr.m_BuffSystem = this.m_BuffSystem;
             //UI_Fade.Instance.FadeTo(0f, 1f);
-            //this.gameApplication.m_UserBehavior.EventInfo.TimeStart(FightSystem.Instance.m_BattleGroupID, TimerType.Battle);
         }
 
         public override void OnUpdate()
         {
             base.OnUpdate();
-            //this.m_FightSceneMgr.Update();
+            this.m_FightSceneMgr.Update();
         }
 
         public override void OnLeave()
