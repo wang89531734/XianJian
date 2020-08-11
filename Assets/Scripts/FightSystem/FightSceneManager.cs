@@ -15,7 +15,7 @@ public class FightSceneManager
 
     //public M_CatchMob m_CatchMobPet;
 
-    //public Dictionary<int, M_Player> m_PlayerList = new Dictionary<int, M_Player>();
+    public Dictionary<int, M_Player> m_PlayerList = new Dictionary<int, M_Player>();
 
     //public Dictionary<int, M_Guard> m_GuardList = new Dictionary<int, M_Guard>();
 
@@ -183,10 +183,10 @@ public class FightSceneManager
         this.InitFightPosition();
         this.InitFightCamera();
         this.CreateCharacters();
-        //this.InitFightSetting();
+        this.InitFightSetting();
         //UI_GameGMFightStatistics.Instance.InitRole(this.m_PlayerList);
         //this.PlayAppearCameraPath();
-        //this.InitFightTalk();
+        this.InitFightTalk();
     }
 
     private void InitBattleGroup()
@@ -302,16 +302,16 @@ public class FightSceneManager
         this.m_MainPlayer = null;
         string text = string.Empty;
         FormationData defaultFormationData = GameEntry.Instance.m_FormationSystem.GetDefaultFormationData();
-        //List<int> list = new List<int>();
-        //for (int i = 0; i < defaultFormationData.Unit.Count; i++)
-        //{
-        //    if (defaultFormationData.Unit[i].RoleID > 0)
-        //    {
-        //        list.Add(defaultFormationData.Unit[i].RoleID);
-        //    }
-        //}
-        //list.Sort();
-        //this.m_PlayerList.Clear();
+        List<int> list = new List<int>();
+        for (int i = 0; i < defaultFormationData.Unit.Count; i++)
+        {
+            if (defaultFormationData.Unit[i].RoleID > 0)
+            {
+                list.Add(defaultFormationData.Unit[i].RoleID);
+            }
+        }
+        list.Sort();
+        this.m_PlayerList.Clear();
         //GameObject gameObject;
         //RuntimeAnimatorController animatorController_Fight;
         //for (int j = 0; j < list.Count; j++)
@@ -678,56 +678,56 @@ public class FightSceneManager
     //		return m_Mob;
     //	}
 
-    //	private void InitFightSetting()
-    //	{
-    //		FormationData defaultFormationData = Swd6Application.instance.m_FormationSystem.GetDefaultFormationData();
-    //		if (defaultFormationData != null)
-    //		{
-    //			this.ChangeFormation(Swd6Application.instance.m_FormationSystem.DefaultFormation);
-    //			int fightPlayerID = Swd6Application.instance.m_GameDataSystem.m_FightPlayerID;
-    //			if (this.GetRole(fightPlayerID) != null)
-    //			{
-    //				this.ChangeControlCharacter(Swd6Application.instance.m_GameDataSystem.m_FightPlayerID, false);
-    //			}
-    //			else
-    //			{
-    //				this.ChangeControlCharacter(1, false);
-    //			}
-    //			int flag = 60 + this.m_ControlledRoleID;
-    //			M_Player role = this.GetRole(this.m_ControlledRoleID);
-    //			if (role != null)
-    //			{
-    //				role.SetUseAI(Swd6Application.instance.m_GameDataSystem.GetFlag(flag));
-    //				UI_Fight.Instance.UpdateRoleAICheckBox(this.m_ControlledRoleID);
-    //			}
-    //		}
-    //		else
-    //		{
-    //			UnityEngine.Debug.LogWarning("==== 無預設陣型資料 ====");
-    //		}
-    //		this.InitFightTarget();
-    //		this.InitPlayerGuardPos(defaultFormationData);
-    //		for (int i = 0; i < 5; i++)
-    //		{
-    //			List<FightItemHotKeyInfo> fightItemHotkeyList = Swd6Application.instance.m_ItemSystem.GetFightItemHotkeyList(i);
-    //			for (int j = 0; j < fightItemHotkeyList.Count; j++)
-    //			{
-    //				if (fightItemHotkeyList[j].AI)
-    //				{
-    //					this.SetAIFightItems(fightItemHotkeyList[j].ID);
-    //				}
-    //			}
-    //		}
-    //		this.m_AIReviveItems.Sort();
-    //		this.m_AIHealItems_Single.Sort();
-    //		this.m_AIHealItems_Single.Reverse();
-    //		this.m_AIHealItems_All.Sort();
-    //		this.m_AIHealItems_All.Reverse();
-    //		this.m_AIRestoreMPItems_Single.Sort();
-    //		this.m_AIRestoreMPItems_Single.Reverse();
-    //		this.m_AIRestoreMPItems_All.Sort();
-    //		this.m_AIRestoreMPItems_All.Reverse();
-    //	}
+    private void InitFightSetting()
+    {
+        //FormationData defaultFormationData = Swd6Application.instance.m_FormationSystem.GetDefaultFormationData();
+        //if (defaultFormationData != null)
+        //{
+        //    this.ChangeFormation(Swd6Application.instance.m_FormationSystem.DefaultFormation);
+        //    int fightPlayerID = Swd6Application.instance.m_GameDataSystem.m_FightPlayerID;
+        //    if (this.GetRole(fightPlayerID) != null)
+        //    {
+        //        this.ChangeControlCharacter(Swd6Application.instance.m_GameDataSystem.m_FightPlayerID, false);
+        //    }
+        //    else
+        //    {
+        //        this.ChangeControlCharacter(1, false);
+        //    }
+        //    int flag = 60 + this.m_ControlledRoleID;
+        //    M_Player role = this.GetRole(this.m_ControlledRoleID);
+        //    if (role != null)
+        //    {
+        //        role.SetUseAI(Swd6Application.instance.m_GameDataSystem.GetFlag(flag));
+        //        UI_Fight.Instance.UpdateRoleAICheckBox(this.m_ControlledRoleID);
+        //    }
+        //}
+        //else
+        //{
+        //    UnityEngine.Debug.LogWarning("==== 無預設陣型資料 ====");
+        //}
+        //this.InitFightTarget();
+        //this.InitPlayerGuardPos(defaultFormationData);
+        //for (int i = 0; i < 5; i++)
+        //{
+        //    List<FightItemHotKeyInfo> fightItemHotkeyList = Swd6Application.instance.m_ItemSystem.GetFightItemHotkeyList(i);
+        //    for (int j = 0; j < fightItemHotkeyList.Count; j++)
+        //    {
+        //        if (fightItemHotkeyList[j].AI)
+        //        {
+        //            this.SetAIFightItems(fightItemHotkeyList[j].ID);
+        //        }
+        //    }
+        //}
+        //this.m_AIReviveItems.Sort();
+        //this.m_AIHealItems_Single.Sort();
+        //this.m_AIHealItems_Single.Reverse();
+        //this.m_AIHealItems_All.Sort();
+        //this.m_AIHealItems_All.Reverse();
+        //this.m_AIRestoreMPItems_Single.Sort();
+        //this.m_AIRestoreMPItems_Single.Reverse();
+        //this.m_AIRestoreMPItems_All.Sort();
+        //this.m_AIRestoreMPItems_All.Reverse();
+    }
 
     //	private void SetAIFightItems(int itemID)
     //	{
@@ -2923,29 +2923,29 @@ public class FightSceneManager
     //		this.m_FightCameraController.ChangeFormation();
     //	}
 
-    //	private void InitFightTalk()
-    //	{
-    //		if (this.m_BattleGroup == null)
-    //		{
-    //			UnityEngine.Debug.LogWarning("m_BattleGroup = Null");
-    //			return;
-    //		}
-    //		if (this.m_BattleGroup.FightTalk != null)
-    //		{
-    //			GameObject gameObject = new GameObject("FightTalkMgrObj");
-    //			this.m_FightTalk = (gameObject.AddComponent(this.m_BattleGroup.FightTalk) as M_FightTalk);
-    //			if (this.m_FightTalk != null)
-    //			{
-    //				this.m_FightTalk.m_FightSceneManager = this;
-    //				this.m_FightTalk.Play();
-    //			}
-    //			else
-    //			{
-    //				UnityEngine.Debug.Log("找不到戰鬥劇情Script : " + this.m_BattleGroup.FightTalk);
-    //				UnityEngine.Object.Destroy(gameObject);
-    //			}
-    //		}
-    //	}
+    private void InitFightTalk()
+    {
+        if (this.m_BattleGroup == null)
+        {
+            UnityEngine.Debug.LogWarning("m_BattleGroup = Null");
+            return;
+        }
+        if (this.m_BattleGroup.FightTalk != null)
+        {
+            //GameObject gameObject = new GameObject("FightTalkMgrObj");
+            //this.m_FightTalk = (gameObject.AddComponent(this.m_BattleGroup.FightTalk) as M_FightTalk);
+            //if (this.m_FightTalk != null)
+            //{
+            //    this.m_FightTalk.m_FightSceneManager = this;
+            //    this.m_FightTalk.Play();
+            //}
+            //else
+            //{
+            //    UnityEngine.Debug.Log("找不到戰鬥劇情Script : " + this.m_BattleGroup.FightTalk);
+            //    UnityEngine.Object.Destroy(gameObject);
+            //}
+        }
+    }
 
     //	public void SetFightTalkMoney(int money)
     //	{
