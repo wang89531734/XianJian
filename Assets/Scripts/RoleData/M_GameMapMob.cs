@@ -16,7 +16,7 @@ public class M_GameMapMob : M_GameRoleBase
         //	ExploreMiniMapSystem.Instance.RemoveQuestIcon(base.RoleID);
         //	return;
         //}
-        //base.gameObject.AddComponent<Seeker>();
+        base.gameObject.AddComponent<Seeker>();
         //FunnelModifier funnelModifier = base.gameObject.AddComponent<FunnelModifier>();
         //funnelModifier.priority = 1;
         this.m_PathAI = base.gameObject.AddComponent<M_GameEnemyPathAI>();
@@ -42,21 +42,21 @@ public class M_GameMapMob : M_GameRoleBase
         //{
         //	component.enabled = false;
         //}
-        //CapsuleCollider component2 = base.gameObject.GetComponent<CapsuleCollider>();
-        //if (component2 != null)
-        //{
-        //	component2.enabled = true;
-        //	component2.isTrigger = true;
-        //}
-        //else
-        //{
-        //	BoxCollider component3 = base.gameObject.GetComponent<BoxCollider>();
-        //	if (component3 != null)
-        //	{
-        //		component3.enabled = true;
-        //		component3.isTrigger = true;
-        //	}
-        //}
+        CapsuleCollider component2 = base.gameObject.GetComponent<CapsuleCollider>();
+        if (component2 != null)
+        {
+            component2.enabled = true;
+            component2.isTrigger = true;
+        }
+        else
+        {
+            BoxCollider component3 = base.gameObject.GetComponent<BoxCollider>();
+            if (component3 != null)
+            {
+                component3.enabled = true;
+                component3.isTrigger = true;
+            }
+        }
         //if (this.m_RoleMotion)
         //{
         //	this.m_RoleMotion.SetAlwaysAnimate(false);

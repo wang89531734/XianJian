@@ -511,14 +511,14 @@ public abstract class M_GameRoleBase : MonoBehaviour
                     {
                         this.Dir = this.m_GameObjData.Dir;
                     }
-                    if (this.HideRole)
-                    {
-                        this.HideRole = true;
-                    }
-                    if (this.NoCollider)
-                    {
-                        this.NoCollider = true;
-                    }
+                    //if (this.HideRole)
+                    //{
+                    //    this.HideRole = true;
+                    //}
+                    //if (this.NoCollider)
+                    //{
+                    //    this.NoCollider = true;
+                    //}
                     //if (this.DisableRole)
                     //{
                     //    if (this.Open)

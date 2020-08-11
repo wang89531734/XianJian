@@ -1467,13 +1467,10 @@ public class ExploreSystem
         {
             num3 = data.Group.Count;
         }
-        Debug.Log(data.Group.Count);
         for (int i = num2; i < num3; i++)
         {
-            Debug.Log(i);
             if (data.Group[i].GroupID != 0)
             {
-                Debug.Log(data.Group[i].GroupID);
                 num += data.Group[i].GroupRate;
                 if (num4 <= num)
                 {

@@ -51,7 +51,7 @@ public class FightSceneManager
 
     private int m_GuardIdx;
 
-    //private M_Player m_MainPlayer;
+    private M_Player m_MainPlayer;
 
     //private M_Mob m_MainTarget;
 
@@ -128,7 +128,7 @@ public class FightSceneManager
         this.m_GuardIdx = 0;
         this.m_MobSerialID = 0;
         this.m_ControlledRoleID = -1;
-        //this.m_MainPlayer = null;
+        this.m_MainPlayer = null;
         this.m_IsFightFinish = false;
         this.m_bWin = false;
         //this.SetPauseMode(NormalSettingSystem.Instance.GetNormalSetting().m_bEnableFightStop);
@@ -235,29 +235,32 @@ public class FightSceneManager
     //		}
     //	}
 
+    /// <summary>
+    /// 初始化战斗位置
+    /// </summary>
     private void InitFightPosition()
     {
-        //this.m_FightPosition = ResourceManager.Instance.GetFightObject("FightPosition");
-        //GameObject gameObject = GameObject.Find(this.m_BattleGroup.BattleCenterPoint);
-        //if (gameObject != null)
-        //{
-        //    this.m_FightPosition.transform.position = gameObject.transform.position + new Vector3(0f, 0.05f, 0f);
-        //    this.m_FightPosition.transform.rotation = gameObject.transform.rotation;
-        //    this.m_BattlePoint = gameObject.transform;
-        //}
-        //else
-        //{
-        //    UnityEngine.Debug.Log("抓不到戰場中心點 m_BattleGroup.BattleCenterPoint:" + this.m_BattleGroup.BattleCenterPoint);
-        //}
-        //for (int i = 1; i <= 8; i++)
-        //{
-        //    string name = "T" + i;
-        //    Transform transform = TransformTool.FindChild(this.m_FightPosition.transform, name);
-        //    if (transform != null)
-        //    {
-        //        this.m_MobIdlePoint.Add(transform);
-        //    }
-        //}
+        this.m_FightPosition = ResourcesManager.Instance.GetFightObject("FightPosition");
+        GameObject gameObject = GameObject.Find(this.m_BattleGroup.BattleCenterPoint);
+        if (gameObject != null)
+        {
+            this.m_FightPosition.transform.position = gameObject.transform.position + new Vector3(0f, 0.05f, 0f);
+            this.m_FightPosition.transform.rotation = gameObject.transform.rotation;
+            this.m_BattlePoint = gameObject.transform;
+        }
+        else
+        {
+            UnityEngine.Debug.Log("抓不到戰場中心點 m_BattleGroup.BattleCenterPoint:" + this.m_BattleGroup.BattleCenterPoint);
+        }
+        for (int i = 1; i <= 8; i++)
+        {
+            string name = "T" + i;
+            Transform transform = TransformTool.FindChild(this.m_FightPosition.transform, name);
+            if (transform != null)
+            {
+                this.m_MobIdlePoint.Add(transform);
+            }
+        }
     }
 
     private void InitFightCamera()
@@ -272,9 +275,9 @@ public class FightSceneManager
             UnityEngine.Debug.LogWarning("m_BattleGroup.FightCamera is null, ID:" + this.m_BattleGroup.GetGUID());
             text = "FightCamera";
         }
-        //this.m_FightCamera = ResourceManager.Instance.GetFightObject(text);
-        //this.m_FightCamera.name = "FightCamera";
-        //this.m_FightCamera.camera.hdr = true;
+        this.m_FightCamera = ResourcesManager.Instance.GetFightObject(text);
+        this.m_FightCamera.name = "FightCamera";
+        m_FightCamera.GetComponent<Camera>().allowHDR = true;
         //GameObject mainCamera = SkySystem.Instance.GetMainCamera();
         //if (mainCamera == null)
         //{
@@ -288,111 +291,111 @@ public class FightSceneManager
 
     public void CreateCharacters()
     {
-        //this.CreatePlayer();
+        this.CreatePlayer();
         //this.CreateGuards();
         //this.CreateMobs();
     }
 
-    //	private void CreatePlayer()
-    //	{
-    //		this.m_ControlledRoleID = -1;
-    //		this.m_MainPlayer = null;
-    //		string text = string.Empty;
-    //		FormationData defaultFormationData = Swd6Application.instance.m_FormationSystem.GetDefaultFormationData();
-    //		List<int> list = new List<int>();
-    //		for (int i = 0; i < defaultFormationData.Unit.Count; i++)
-    //		{
-    //			if (defaultFormationData.Unit[i].RoleID > 0)
-    //			{
-    //				list.Add(defaultFormationData.Unit[i].RoleID);
-    //			}
-    //		}
-    //		list.Sort();
-    //		this.m_PlayerList.Clear();
-    //		GameObject gameObject;
-    //		RuntimeAnimatorController animatorController_Fight;
-    //		for (int j = 0; j < list.Count; j++)
-    //		{
-    //			int num = list[j];
-    //			if (num > 0)
-    //			{
-    //				if (!this.m_PlayerList.ContainsKey(num))
-    //				{
-    //					if (Swd6Application.instance.m_GameDataSystem.GetFlag(num))
-    //					{
-    //						text = "Player" + num.ToString();
-    //						gameObject = Swd6Application.instance.m_GameObjSystem.GetPlayerCosCloth(num);
-    //						if (gameObject == null)
-    //						{
-    //							gameObject = ResourceManager.Instance.GetCharacterModel_Fight(text);
-    //							if (gameObject == null)
-    //							{
-    //								UnityEngine.Debug.Log("CreatePlayer::無法建立Model物件_" + num);
-    //								goto IL_2A3;
-    //							}
-    //						}
-    //						RendererTool.ChangeSenceMaterialSetting(text, gameObject);
-    //						M_Player m_Player = gameObject.AddComponent<M_Player>();
-    //						m_Player.m_ModelName = text;
-    //						this.m_PlayerList.Add(num, m_Player);
-    //						animatorController_Fight = ResourceManager.Instance.GetAnimatorController_Fight(text + "_Fight");
-    //						if (animatorController_Fight != null)
-    //						{
-    //							Animator component = gameObject.GetComponent<Animator>();
-    //							if (component != null)
-    //							{
-    //								component.runtimeAnimatorController = animatorController_Fight;
-    //							}
-    //						}
-    //						if (m_Player == null)
-    //						{
-    //							UnityEngine.Debug.LogWarning("M_Player == null");
-    //						}
-    //						m_Player.m_FightPosition = this.m_FightPosition;
-    //						m_Player.m_FightSceneMgr = this;
-    //						m_Player.InitRole(num);
-    //						ItemData equipItemData = m_Player.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Weapon);
-    //						if (equipItemData != null)
-    //						{
-    //							S_Item data = GameDataDB.ItemDB.GetData(equipItemData.ID);
-    //							if (data != null)
-    //							{
-    //								int num2 = (int)m_Player.m_RoleDataEx.BaseRoleData.emWeaponElemntType;
-    //								num2 = ((num2 > 0) ? num2 : 0);
-    //								GameObject weapon = AvatarTool.GetWeapon(gameObject, data.Equip.WeaponModelName, data.Equip.WeaponModelPoint, data.Equip.WeaponTrail[num2]);
-    //								M_WeaponTrail[] componentsInChildren = weapon.GetComponentsInChildren<M_WeaponTrail>();
-    //								if (componentsInChildren != null)
-    //								{
-    //									for (int k = 0; k < componentsInChildren.Length; k++)
-    //									{
-    //										componentsInChildren[k].Emit = false;
-    //									}
-    //								}
-    //							}
-    //						}
-    //						TransformTool.SetLayerRecursively(m_Player.m_ModelTransform, 18);
-    //					}
-    //				}
-    //			}
-    //			IL_2A3:;
-    //		}
-    //		text = "Player5";
-    //		gameObject = ResourceManager.Instance.GetCharacterModel_Fight(text);
-    //		animatorController_Fight = ResourceManager.Instance.GetAnimatorController_Fight(text + "_Fight");
-    //		if (animatorController_Fight != null)
-    //		{
-    //			Animator component2 = gameObject.GetComponent<Animator>();
-    //			if (component2 != null)
-    //			{
-    //				component2.runtimeAnimatorController = animatorController_Fight;
-    //			}
-    //		}
-    //		this.m_CatchMobPet = gameObject.AddComponent<M_CatchMob>();
-    //		this.m_CatchMobPet.m_FightSceneMgr = this;
-    //		this.m_CatchMobPet.Initialize();
-    //		TransformTool.SetLayerRecursively(this.m_CatchMobPet.m_ModelTransform, 18);
-    //		this.m_CatchMobPet.m_RoleModel.SetActive(false);
-    //	}
+    private void CreatePlayer()
+    {
+        this.m_ControlledRoleID = -1;
+        this.m_MainPlayer = null;
+        string text = string.Empty;
+        FormationData defaultFormationData = GameEntry.Instance.m_FormationSystem.GetDefaultFormationData();
+        //List<int> list = new List<int>();
+        //for (int i = 0; i < defaultFormationData.Unit.Count; i++)
+        //{
+        //    if (defaultFormationData.Unit[i].RoleID > 0)
+        //    {
+        //        list.Add(defaultFormationData.Unit[i].RoleID);
+        //    }
+        //}
+        //list.Sort();
+        //this.m_PlayerList.Clear();
+        //GameObject gameObject;
+        //RuntimeAnimatorController animatorController_Fight;
+        //for (int j = 0; j < list.Count; j++)
+        //{
+        //    int num = list[j];
+        //    if (num > 0)
+        //    {
+        //        if (!this.m_PlayerList.ContainsKey(num))
+        //        {
+        //            if (Swd6Application.instance.m_GameDataSystem.GetFlag(num))
+        //            {
+        //                text = "Player" + num.ToString();
+        //                gameObject = Swd6Application.instance.m_GameObjSystem.GetPlayerCosCloth(num);
+        //                if (gameObject == null)
+        //                {
+        //                    gameObject = ResourceManager.Instance.GetCharacterModel_Fight(text);
+        //                    if (gameObject == null)
+        //                    {
+        //                        UnityEngine.Debug.Log("CreatePlayer::無法建立Model物件_" + num);
+        //                        goto IL_2A3;
+        //                    }
+        //                }
+        //                RendererTool.ChangeSenceMaterialSetting(text, gameObject);
+        //                M_Player m_Player = gameObject.AddComponent<M_Player>();
+        //                m_Player.m_ModelName = text;
+        //                this.m_PlayerList.Add(num, m_Player);
+        //                animatorController_Fight = ResourceManager.Instance.GetAnimatorController_Fight(text + "_Fight");
+        //                if (animatorController_Fight != null)
+        //                {
+        //                    Animator component = gameObject.GetComponent<Animator>();
+        //                    if (component != null)
+        //                    {
+        //                        component.runtimeAnimatorController = animatorController_Fight;
+        //                    }
+        //                }
+        //                if (m_Player == null)
+        //                {
+        //                    UnityEngine.Debug.LogWarning("M_Player == null");
+        //                }
+        //                m_Player.m_FightPosition = this.m_FightPosition;
+        //                m_Player.m_FightSceneMgr = this;
+        //                m_Player.InitRole(num);
+        //                ItemData equipItemData = m_Player.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Weapon);
+        //                if (equipItemData != null)
+        //                {
+        //                    S_Item data = GameDataDB.ItemDB.GetData(equipItemData.ID);
+        //                    if (data != null)
+        //                    {
+        //                        int num2 = (int)m_Player.m_RoleDataEx.BaseRoleData.emWeaponElemntType;
+        //                        num2 = ((num2 > 0) ? num2 : 0);
+        //                        GameObject weapon = AvatarTool.GetWeapon(gameObject, data.Equip.WeaponModelName, data.Equip.WeaponModelPoint, data.Equip.WeaponTrail[num2]);
+        //                        M_WeaponTrail[] componentsInChildren = weapon.GetComponentsInChildren<M_WeaponTrail>();
+        //                        if (componentsInChildren != null)
+        //                        {
+        //                            for (int k = 0; k < componentsInChildren.Length; k++)
+        //                            {
+        //                                componentsInChildren[k].Emit = false;
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //                TransformTool.SetLayerRecursively(m_Player.m_ModelTransform, 18);
+        //            }
+        //        }
+        //    }
+        //    IL_2A3:;
+        //}
+        //text = "Player5";
+        //gameObject = ResourceManager.Instance.GetCharacterModel_Fight(text);
+        //animatorController_Fight = ResourceManager.Instance.GetAnimatorController_Fight(text + "_Fight");
+        //if (animatorController_Fight != null)
+        //{
+        //    Animator component2 = gameObject.GetComponent<Animator>();
+        //    if (component2 != null)
+        //    {
+        //        component2.runtimeAnimatorController = animatorController_Fight;
+        //    }
+        //}
+        //this.m_CatchMobPet = gameObject.AddComponent<M_CatchMob>();
+        //this.m_CatchMobPet.m_FightSceneMgr = this;
+        //this.m_CatchMobPet.Initialize();
+        //TransformTool.SetLayerRecursively(this.m_CatchMobPet.m_ModelTransform, 18);
+        //this.m_CatchMobPet.m_RoleModel.SetActive(false);
+    }
 
     //	private void CreateGuards()
     //	{

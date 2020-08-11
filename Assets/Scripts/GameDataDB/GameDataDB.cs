@@ -39,9 +39,9 @@ public class GameDataDB
 
 	public static T_GameDB<S_RoleAttrPlus_Tmp> RoleAttrPlusDB = new T_GameDB<S_RoleAttrPlus_Tmp>();
 
-	//public static T_GameDB<S_FormationData> FormationDB = new T_GameDB<S_FormationData>();
+    public static T_GameDB<S_FormationData> FormationDB = new T_GameDB<S_FormationData>();
 
-	public static T_GameDB<S_SkillSlot> SkillPoolDB = new T_GameDB<S_SkillSlot>();
+    public static T_GameDB<S_SkillSlot> SkillPoolDB = new T_GameDB<S_SkillSlot>();
 
     public static T_GameDB<S_SkillPlate> SkillPlateDB = new T_GameDB<S_SkillPlate>();
 
@@ -148,8 +148,8 @@ public class GameDataDB
         GameDataDB.LoadFromFile<S_Quest>(GameDataDB.QuestDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "AnimationData.dbf";
         //GameDataDB.LoadFromFile<S_AnimationData>(GameDataDB.AnimationDB, dataPath, true);
-        //dataPath = GameDataDB.m_DBF_Path + "FormationData.dbf";
-        //GameDataDB.LoadFromFile<S_FormationData>(GameDataDB.FormationDB, dataPath, true);
+        dataPath = GameDataDB.m_DBF_Path + "FormationData.dbf";
+        GameDataDB.LoadFromFile<S_FormationData>(GameDataDB.FormationDB, dataPath, true);
         //dataPath = GameDataDB.m_DBF_Path + "RoleAttrPlus.dbf";
         //GameDataDB.LoadFromFile<S_RoleAttrPlus_Tmp>(GameDataDB.RoleAttrPlusDB, dataPath, true);
         dataPath = GameDataDB.m_DBF_Path + "StartRoleData.dbf";

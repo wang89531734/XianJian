@@ -530,6 +530,8 @@ namespace YouYou
 
         public GameObjSystem m_GameObjSystem { get; private set; }
 
+        public FormationSystem m_FormationSystem { get; private set; }
+
         private void InitGameSystem()
         {
             this.m_GameObjSystem = new GameObjSystem();
