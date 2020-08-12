@@ -172,7 +172,6 @@ public class FormationSystem
 		{
 			if (this.m_FormationDataList[i].Enable)
 			{
-                Debug.Log("执行"+ i);
                 for (int j = 0; j < GameEntry.Instance.m_GameDataSystem.GetNumberRoleFromParty(); j++)
                 {
                     int partyRoleID = GameEntry.Instance.m_GameDataSystem.GetPartyRoleID(j);

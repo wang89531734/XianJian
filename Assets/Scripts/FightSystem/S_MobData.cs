@@ -7,6 +7,8 @@ public class S_MobData
 
 	public string ShowName;
 
+	public string ScriptName;
+
 	public int Level;
 
 	public ENUM_MobRace emRace;
@@ -25,11 +27,11 @@ public class S_MobData
 
 	public int ShowFlag;
 
-	public int CostSoulPoint;
-
 	public ENUM_ElementType emElemnt;
 
 	public int DieAway;
+
+	public float MoveTime;
 
 	public int AttackRang;
 
@@ -41,25 +43,25 @@ public class S_MobData
 
 	public int Def;
 
-	public int Agi;
+	public int MAtk;
+
+	public int MDef;
 
 	public int Block;
 
-	public int Stable;
+	public int Dodge;
 
 	public int Critical;
 
-	public int Weak;
-
-	public int Luck;
-
-	public int Mind;
+	public int Agi;
 
 	public ENUM_ElementType emAtkElemnt;
 
 	public int AI;
 
 	public int AttrPlugID;
+
+	public int FormationAttrPlugID;
 
 	public int Figure;
 
@@ -69,13 +71,23 @@ public class S_MobData
 
 	public int CriticalEffect;
 
-	public List<int> Skill;
+	public List<int> NormalSkillID;
 
-	public List<int> SkillRate;
+	public List<int> NormalSkillRate;
 
-	public List<int> SkillLastHP;
+	public List<int> StartSkillID;
 
-	public List<int> SkillCount;
+	public List<int> HpSkillID;
+
+	public List<int> HpSkillHP;
+
+	public int DeadSkillID;
+
+	public int HitSkillID;
+
+	public int HitSkillRate;
+
+	public int HitSkillCount;
 
 	public List<S_DropItem> DropItem;
 
@@ -85,12 +97,13 @@ public class S_MobData
 
 	public S_MobData()
 	{
-		this.DefElement = new int[6];
+		this.DefElement = new int[4];
 		this.AttackEffect = new List<int>();
-		this.Skill = new List<int>();
-		this.SkillRate = new List<int>();
-		this.SkillLastHP = new List<int>();
-		this.SkillCount = new List<int>();
 		this.DropItem = new List<S_DropItem>();
+		this.NormalSkillID = new List<int>();
+		this.NormalSkillRate = new List<int>();
+		this.StartSkillID = new List<int>();
+		this.HpSkillID = new List<int>();
+		this.HpSkillHP = new List<int>();
 	}
 }

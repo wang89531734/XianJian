@@ -131,81 +131,81 @@ public class M_Character : MonoBehaviour
 
     private void Awake()
     {
-        //this.Initialize();
+        this.Initialize();
     }
 
-    //	public virtual void Initialize()
-    //	{
-    //		this.m_RoleModel = base.gameObject;
-    //		this.m_ModelTransform = base.transform;
-    //		this.m_HitTransform = TransformTool.FindChild(this.m_ModelTransform, this.m_HitPointName);
-    //		if (this.m_HitTransform == null)
-    //		{
-    //			UnityEngine.Debug.LogWarning("Character Initialize, Cant Get HitPoint Reference.");
-    //			this.m_HitTransform = this.m_ModelTransform;
-    //		}
-    //		this.m_Animator = base.GetComponent<Animator>();
-    //		this.ClearCommand();
-    //		this.m_CharacterController = base.GetComponent<CharacterController>();
-    //		if (this.m_CharacterController != null)
-    //		{
-    //			this.m_RoleRadius = this.m_CharacterController.radius * 1.5f;
-    //			this.m_RoleHeight = this.m_CharacterController.height;
-    //			this.m_CharacterController.enabled = false;
-    //			if (this is M_Player)
-    //			{
-    //				this.m_RoleRadius = 1f;
-    //			}
-    //			this.m_CharacterController.slopeLimit = 5f;
-    //			this.m_CharacterController.stepOffset = 0.05f;
-    //			if (this.m_CharacterController.height < 10f)
-    //			{
-    //				this.m_CharacterController.height = 10f;
-    //				this.m_CharacterController.center = new Vector3(this.m_CharacterController.center.x, 5.08f, this.m_CharacterController.center.z);
-    //			}
-    //		}
-    //		else
-    //		{
-    //			UnityEngine.Debug.LogError("m_CharacterController is NULL!!");
-    //		}
-    //		CapsuleCollider component = base.GetComponent<CapsuleCollider>();
-    //		if (component != null)
-    //		{
-    //			BoxCollider component2 = base.GetComponent<BoxCollider>();
-    //			if (component2 != null)
-    //			{
-    //				component2.isTrigger = true;
-    //				UnityEngine.Object.Destroy(component);
-    //			}
-    //			else
-    //			{
-    //				component.isTrigger = true;
-    //				component.enabled = true;
-    //			}
-    //		}
-    //		SphereCollider component3 = base.GetComponent<SphereCollider>();
-    //		if (component3 != null)
-    //		{
-    //			this.m_DoAttackRange = component3.radius;
-    //			UnityEngine.Object.Destroy(component3);
-    //		}
-    //		else
-    //		{
-    //			UnityEngine.Debug.Log("sphereCol == null, can't set m_DoAttackRange.");
-    //		}
-    //		this.m_ShroudInstance = base.GetComponent<ShroudInstance>();
-    //		FaceFXControllerScript component4 = base.GetComponent<FaceFXControllerScript>();
-    //		if (component4 != null)
-    //		{
-    //			UnityEngine.Object.Destroy(component4);
-    //		}
-    //		Animation component5 = base.GetComponent<Animation>();
-    //		if (component5 != null)
-    //		{
-    //			UnityEngine.Object.Destroy(component5);
-    //		}
-    //		this.m_emLastActionType = ENUM_FightActionType.Null;
-    //	}
+    public virtual void Initialize()
+    {
+        this.m_RoleModel = base.gameObject;
+        this.m_ModelTransform = base.transform;
+        //this.m_HitTransform = TransformTool.FindChild(this.m_ModelTransform, this.m_HitPointName);
+        //if (this.m_HitTransform == null)
+        //{
+        //    UnityEngine.Debug.LogWarning("Character Initialize, Cant Get HitPoint Reference.");
+        //    this.m_HitTransform = this.m_ModelTransform;
+        //}
+        //this.m_Animator = base.GetComponent<Animator>();
+        //this.ClearCommand();
+        //this.m_CharacterController = base.GetComponent<CharacterController>();
+        //if (this.m_CharacterController != null)
+        //{
+        //    this.m_RoleRadius = this.m_CharacterController.radius * 1.5f;
+        //    this.m_RoleHeight = this.m_CharacterController.height;
+        //    this.m_CharacterController.enabled = false;
+        //    if (this is M_Player)
+        //    {
+        //        this.m_RoleRadius = 1f;
+        //    }
+        //    this.m_CharacterController.slopeLimit = 5f;
+        //    this.m_CharacterController.stepOffset = 0.05f;
+        //    if (this.m_CharacterController.height < 10f)
+        //    {
+        //        this.m_CharacterController.height = 10f;
+        //        this.m_CharacterController.center = new Vector3(this.m_CharacterController.center.x, 5.08f, this.m_CharacterController.center.z);
+        //    }
+        //}
+        //else
+        //{
+        //    UnityEngine.Debug.LogError("m_CharacterController is NULL!!");
+        //}
+        //CapsuleCollider component = base.GetComponent<CapsuleCollider>();
+        //if (component != null)
+        //{
+        //    BoxCollider component2 = base.GetComponent<BoxCollider>();
+        //    if (component2 != null)
+        //    {
+        //        component2.isTrigger = true;
+        //        UnityEngine.Object.Destroy(component);
+        //    }
+        //    else
+        //    {
+        //        component.isTrigger = true;
+        //        component.enabled = true;
+        //    }
+        //}
+        //SphereCollider component3 = base.GetComponent<SphereCollider>();
+        //if (component3 != null)
+        //{
+        //    this.m_DoAttackRange = component3.radius;
+        //    UnityEngine.Object.Destroy(component3);
+        //}
+        //else
+        //{
+        //    UnityEngine.Debug.Log("sphereCol == null, can't set m_DoAttackRange.");
+        //}
+        //this.m_ShroudInstance = base.GetComponent<ShroudInstance>();
+        //FaceFXControllerScript component4 = base.GetComponent<FaceFXControllerScript>();
+        //if (component4 != null)
+        //{
+        //    UnityEngine.Object.Destroy(component4);
+        //}
+        //Animation component5 = base.GetComponent<Animation>();
+        //if (component5 != null)
+        //{
+        //    UnityEngine.Object.Destroy(component5);
+        //}
+        //this.m_emLastActionType = ENUM_FightActionType.Null;
+    }
 
     //	public void ModelDropCheck()
     //	{
@@ -997,9 +997,9 @@ public class M_Character : MonoBehaviour
     //		return result;
     //	}
 
-    //	public virtual void InitFightRoleData()
-    //	{
-    //	}
+    public virtual void InitFightRoleData()
+    {
+    }
 
     //	public bool IsDead()
     //	{

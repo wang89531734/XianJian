@@ -122,85 +122,85 @@ public class M_Player : M_Character
     {
     }
 
-    //	public void InitRole(int roleID)
-    //	{
-    //		this.m_emFight = M_Character.Enum_FightStatus.Idle;
-    //		this.m_CharacterController.enabled = true;
-    //		this.m_EnableCharacterContoller = true;
-    //		this.m_RoleID = roleID;
-    //		this.m_SkillCDList.Clear();
-    //		for (int i = 0; i < 5; i++)
-    //		{
-    //			List<FightSkillHotKeyInfo> fightSkillHotkeyList = Swd6Application.instance.m_SkillSystem.GetFightSkillHotkeyList(this.m_RoleID, i);
-    //			for (int j = 0; j < fightSkillHotkeyList.Count; j++)
-    //			{
-    //				S_Skill data = GameDataDB.SkillDB.GetData(fightSkillHotkeyList[j].ID);
-    //				if (data != null)
-    //				{
-    //					if (this.m_SkillCDList.ContainsKey(fightSkillHotkeyList[j].ID))
-    //					{
-    //						this.m_SkillCDList[fightSkillHotkeyList[j].ID] = data.CastCD;
-    //					}
-    //					else
-    //					{
-    //						this.m_SkillCDList.Add(fightSkillHotkeyList[j].ID, data.CastCD);
-    //					}
-    //					if (fightSkillHotkeyList[j].AI)
-    //					{
-    //						this.SetAISkills(fightSkillHotkeyList[j].ID);
-    //					}
-    //				}
-    //			}
-    //		}
-    //		this.m_AIReviveSkills_Single.Sort();
-    //		this.m_AIReviveSkills_Single.Reverse();
-    //		this.m_AIReviveSkills_All.Sort();
-    //		this.m_AIReviveSkills_All.Reverse();
-    //		this.m_AIHealSkills_Single.Sort();
-    //		this.m_AIHealSkills_Single.Reverse();
-    //		this.m_AIHealSkills_All.Sort();
-    //		this.m_AIHealSkills_All.Reverse();
-    //		this.m_AIHealBuffSkills_Single.Sort();
-    //		this.m_AIHealBuffSkills_Single.Reverse();
-    //		this.m_AIHealBuffSkills_All.Sort();
-    //		this.m_AIHealBuffSkills_All.Reverse();
-    //		this.m_AIRestoreMPSkills_Single.Sort();
-    //		this.m_AIRestoreMPSkills_Single.Reverse();
-    //		this.m_AIRestoreMPSkills_All.Sort();
-    //		this.m_AIRestoreMPSkills_All.Reverse();
-    //		this.m_AIDebuffSkills_1.Sort();
-    //		this.m_AIDebuffSkills_1.Reverse();
-    //		this.m_AIDebuffSkills_2.Sort();
-    //		this.m_AIDebuffSkills_2.Reverse();
-    //		this.m_RoleDataEx = Swd6Application.instance.m_GameDataSystem.GetRoleData(this.m_RoleID);
-    //		if (this.m_RoleDataEx == null)
-    //		{
-    //			Debug.LogWarning("m_RoleDataEx is Null m_RoleID = " + this.m_RoleID);
-    //			return;
-    //		}
-    //		ItemData equipItemData = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Weapon);
-    //		this.m_emWeaponElemntType = this.m_RoleDataEx.BaseRoleData.emWeaponElemntType;
-    //		this.m_MagicItem = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Talisman);
-    //		if (this.m_MagicItem != null)
-    //		{
-    //			S_Item data2 = GameDataDB.ItemDB.GetData(this.m_MagicItem.ID);
-    //			if (data2 != null && data2.emSubItemType == ENUM_ItemSubType.Talisman)
-    //			{
-    //				this.m_MagicItem_Passive = new MagicItem_Passive(this, this.m_MagicItem);
-    //			}
-    //			if (data2 != null && data2.emSubItemType == ENUM_ItemSubType.MagicArms)
-    //			{
-    //				this.m_MagicItem_Active = new MagicItem_Active(this, this.m_MagicItem);
-    //			}
-    //		}
-    //		this.m_CharacterName = this.m_RoleDataEx.BaseRoleData.FamilyName + this.m_RoleDataEx.BaseRoleData.Name;
-    //		this.m_BeforeLevelUpInfo = new FightLevelUpInfo(this.m_RoleDataEx);
-    //		this.InitFightRoleData();
-    //		this.SetPassiveSkill(roleID);
-    //		this.m_ActionCD = (float)(500 - this.m_FightRoleData.Agi) / 100f;
-    //		this.UpdateBuffIconCallback = new M_Character.UpdateBuffIcon(this.UpdateUIBuffIcon);
-    //		this.SetStartUpdate(false);
-    //	}
+    public void InitRole(int roleID)
+    {
+        //this.m_emFight = M_Character.Enum_FightStatus.Idle;
+        //this.m_CharacterController.enabled = true;
+        //this.m_EnableCharacterContoller = true;
+        this.m_RoleID = roleID;
+        //this.m_SkillCDList.Clear();
+        for (int i = 0; i < 5; i++)
+        {
+            //List<FightSkillHotKeyInfo> fightSkillHotkeyList = Swd6Application.instance.m_SkillSystem.GetFightSkillHotkeyList(this.m_RoleID, i);
+            //for (int j = 0; j < fightSkillHotkeyList.Count; j++)
+            //{
+            //    S_Skill data = GameDataDB.SkillDB.GetData(fightSkillHotkeyList[j].ID);
+            //    if (data != null)
+            //    {
+            //        if (this.m_SkillCDList.ContainsKey(fightSkillHotkeyList[j].ID))
+            //        {
+            //            this.m_SkillCDList[fightSkillHotkeyList[j].ID] = data.CastCD;
+            //        }
+            //        else
+            //        {
+            //            this.m_SkillCDList.Add(fightSkillHotkeyList[j].ID, data.CastCD);
+            //        }
+            //        if (fightSkillHotkeyList[j].AI)
+            //        {
+            //            this.SetAISkills(fightSkillHotkeyList[j].ID);
+            //        }
+            //    }
+            //}
+        }
+        //this.m_AIReviveSkills_Single.Sort();
+        //this.m_AIReviveSkills_Single.Reverse();
+        //this.m_AIReviveSkills_All.Sort();
+        //this.m_AIReviveSkills_All.Reverse();
+        //this.m_AIHealSkills_Single.Sort();
+        //this.m_AIHealSkills_Single.Reverse();
+        //this.m_AIHealSkills_All.Sort();
+        //this.m_AIHealSkills_All.Reverse();
+        //this.m_AIHealBuffSkills_Single.Sort();
+        //this.m_AIHealBuffSkills_Single.Reverse();
+        //this.m_AIHealBuffSkills_All.Sort();
+        //this.m_AIHealBuffSkills_All.Reverse();
+        //this.m_AIRestoreMPSkills_Single.Sort();
+        //this.m_AIRestoreMPSkills_Single.Reverse();
+        //this.m_AIRestoreMPSkills_All.Sort();
+        //this.m_AIRestoreMPSkills_All.Reverse();
+        //this.m_AIDebuffSkills_1.Sort();
+        //this.m_AIDebuffSkills_1.Reverse();
+        //this.m_AIDebuffSkills_2.Sort();
+        //this.m_AIDebuffSkills_2.Reverse();
+        //this.m_RoleDataEx = Swd6Application.instance.m_GameDataSystem.GetRoleData(this.m_RoleID);
+        //if (this.m_RoleDataEx == null)
+        //{
+        //    Debug.LogWarning("m_RoleDataEx is Null m_RoleID = " + this.m_RoleID);
+        //    return;
+        //}
+        //ItemData equipItemData = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Weapon);
+        //this.m_emWeaponElemntType = this.m_RoleDataEx.BaseRoleData.emWeaponElemntType;
+        //this.m_MagicItem = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Talisman);
+        //if (this.m_MagicItem != null)
+        //{
+        //    S_Item data2 = GameDataDB.ItemDB.GetData(this.m_MagicItem.ID);
+        //    if (data2 != null && data2.emSubItemType == ENUM_ItemSubType.Talisman)
+        //    {
+        //        this.m_MagicItem_Passive = new MagicItem_Passive(this, this.m_MagicItem);
+        //    }
+        //    if (data2 != null && data2.emSubItemType == ENUM_ItemSubType.MagicArms)
+        //    {
+        //        this.m_MagicItem_Active = new MagicItem_Active(this, this.m_MagicItem);
+        //    }
+        //}
+        //this.m_CharacterName = this.m_RoleDataEx.BaseRoleData.FamilyName + this.m_RoleDataEx.BaseRoleData.Name;
+        //this.m_BeforeLevelUpInfo = new FightLevelUpInfo(this.m_RoleDataEx);
+        this.InitFightRoleData();
+        //this.SetPassiveSkill(roleID);
+        //this.m_ActionCD = (float)(500 - this.m_FightRoleData.Agi) / 100f;
+        //this.UpdateBuffIconCallback = new M_Character.UpdateBuffIcon(this.UpdateUIBuffIcon);
+        //this.SetStartUpdate(false);
+    }
 
     //	public ItemData GetEquipMagicItemData()
     //	{
@@ -1622,48 +1622,48 @@ public class M_Player : M_Character
     //		this.m_emAIType = fData.Unit[unitIdx].emAI;
     //	}
 
-    //	public override void InitFightRoleData()
-    //	{
-    //		this.m_FightRoleData.Level = this.m_RoleDataEx.GetLevel();
-    //		this.m_FightRoleData.MaxHP = this.m_RoleDataEx.RoleAttr.sFinial.MaxHP;
-    //		this.m_FightRoleData.HP = this.m_RoleDataEx.GetHP();
-    //		this.m_OriginalHP = this.m_RoleDataEx.GetHP();
-    //		this.m_FightRoleData.MaxMP = this.m_RoleDataEx.RoleAttr.sFinial.MaxMP;
-    //		this.m_FightRoleData.MP = this.m_RoleDataEx.GetMP();
-    //		this.m_FightRoleData.Atk = this.m_RoleDataEx.RoleAttr.sFinial.Attack;
-    //		this.m_FightRoleData.Def = this.m_RoleDataEx.RoleAttr.sFinial.Def;
-    //		this.m_FightRoleData.MagicAtk = this.m_RoleDataEx.RoleAttr.sFinial.MAttack;
-    //		this.m_FightRoleData.MagicDef = this.m_RoleDataEx.RoleAttr.sFinial.MDef;
-    //		this.m_FightRoleData.Agi = this.m_RoleDataEx.RoleAttr.sFinial.Agi;
-    //		this.m_FightRoleData.Dodge = this.m_RoleDataEx.RoleAttr.sFinial.Dodge;
-    //		this.m_FightRoleData.Block = this.m_RoleDataEx.RoleAttr.sFinial.Block;
-    //		this.m_FightRoleData.Critical = this.m_RoleDataEx.RoleAttr.sFinial.Critical;
-    //		int[] array = new int[4];
-    //		for (int i = 0; i < array.Length; i++)
-    //		{
-    //			if (i < this.m_RoleDataEx.RoleAttr.sFinial.AtkElement.Length)
-    //			{
-    //				array[i] = this.m_RoleDataEx.RoleAttr.sFinial.AtkElement[i];
-    //			}
-    //			else
-    //			{
-    //				array[i] = 0;
-    //			}
-    //		}
-    //		int[] array2 = new int[4];
-    //		for (int j = 0; j < array2.Length; j++)
-    //		{
-    //			if (j < this.m_RoleDataEx.RoleAttr.sFinial.Element.Length)
-    //			{
-    //				array2[j] = this.m_RoleDataEx.RoleAttr.sFinial.Element[j];
-    //			}
-    //			else
-    //			{
-    //				array2[j] = 0;
-    //			}
-    //		}
-    //		this.m_FightRoleData.DefElement = array2;
-    //	}
+    public override void InitFightRoleData()
+    {
+        //this.m_FightRoleData.Level = this.m_RoleDataEx.GetLevel();
+        //this.m_FightRoleData.MaxHP = this.m_RoleDataEx.RoleAttr.sFinial.MaxHP;
+        //this.m_FightRoleData.HP = this.m_RoleDataEx.GetHP();
+        //this.m_OriginalHP = this.m_RoleDataEx.GetHP();
+        //this.m_FightRoleData.MaxMP = this.m_RoleDataEx.RoleAttr.sFinial.MaxMP;
+        //this.m_FightRoleData.MP = this.m_RoleDataEx.GetMP();
+        //this.m_FightRoleData.Atk = this.m_RoleDataEx.RoleAttr.sFinial.Attack;
+        //this.m_FightRoleData.Def = this.m_RoleDataEx.RoleAttr.sFinial.Def;
+        //this.m_FightRoleData.MagicAtk = this.m_RoleDataEx.RoleAttr.sFinial.MAttack;
+        //this.m_FightRoleData.MagicDef = this.m_RoleDataEx.RoleAttr.sFinial.MDef;
+        //this.m_FightRoleData.Agi = this.m_RoleDataEx.RoleAttr.sFinial.Agi;
+        //this.m_FightRoleData.Dodge = this.m_RoleDataEx.RoleAttr.sFinial.Dodge;
+        //this.m_FightRoleData.Block = this.m_RoleDataEx.RoleAttr.sFinial.Block;
+        //this.m_FightRoleData.Critical = this.m_RoleDataEx.RoleAttr.sFinial.Critical;
+        //int[] array = new int[4];
+        //for (int i = 0; i < array.Length; i++)
+        //{
+        //    if (i < this.m_RoleDataEx.RoleAttr.sFinial.AtkElement.Length)
+        //    {
+        //        array[i] = this.m_RoleDataEx.RoleAttr.sFinial.AtkElement[i];
+        //    }
+        //    else
+        //    {
+        //        array[i] = 0;
+        //    }
+        //}
+        //int[] array2 = new int[4];
+        //for (int j = 0; j < array2.Length; j++)
+        //{
+        //    if (j < this.m_RoleDataEx.RoleAttr.sFinial.Element.Length)
+        //    {
+        //        array2[j] = this.m_RoleDataEx.RoleAttr.sFinial.Element[j];
+        //    }
+        //    else
+        //    {
+        //        array2[j] = 0;
+        //    }
+        //}
+        //this.m_FightRoleData.DefElement = array2;
+    }
 
     //	public void ResetHP_Refight()
     //	{

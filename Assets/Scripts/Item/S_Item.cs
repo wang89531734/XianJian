@@ -10,19 +10,21 @@ public class S_Item : I_BaseDBF
 
 	public ENUM_ItemSubType emSubItemType;
 
+	public ENUM_MaterialType emMaterialTyep;
+
 	public string Name;
 
-	public string IconNo;
+	public int IconNo;
 
 	public string StoryPrefabName;
+
+	public string ShowPrefabName;
 
 	public string Desc;
 
 	public string Help;
 
 	public int ItemLevel;
-
-	public int ItemRank;
 
 	public int UseLevel;
 
@@ -42,7 +44,7 @@ public class S_Item : I_BaseDBF
 
 	public int CanRefine;
 
-	public int CanThrowing;
+	public int EquipShowVer;
 
 	public int RoleAttrPlusID;
 
@@ -54,7 +56,7 @@ public class S_Item : I_BaseDBF
 
 	public S_MobData MobData;
 
-	public S_UseEffect UseEffect;
+	public int UseEffectID;
 
 	public S_Item()
 	{
@@ -62,7 +64,6 @@ public class S_Item : I_BaseDBF
 		this.Equip = new S_ItemEquip();
 		this.MItem = new S_ItemMagic();
 		this.MobData = new S_MobData();
-		this.UseEffect = new S_UseEffect();
 	}
 
 	public int GetGUID()
@@ -79,38 +80,40 @@ public class S_Item : I_BaseDBF
 		this.Name = GameDataDB.TransStringByLanguageType(this.Name);
 		this.Desc = GameDataDB.TransStringByLanguageType(this.Desc);
 		this.Help = GameDataDB.TransStringByLanguageType(this.Help);
+		if (this.Help != null)
+		{
+			this.Help = this.Help.Replace("\\n", "\n");
+		}
+		if (this.Desc != null)
+		{
+			this.Desc = this.Desc.Replace("\\n", "\n");
+		}
 		Dictionary<string, string> values = Converter.deserializeObject<Dictionary<string, string>>(JsonString);
 		switch (this.emItemType)
 		{
 		case ENUM_ItemType.Normal:
 			this.Normal = Converter.deserializeObject<S_ItemNormal>(JsonString);
-			this.UseEffect = Converter.deserializeObject<S_UseEffect>(JsonString);
-			this.UseEffect.ParseData(values);
-			return;
+			break;
 		case ENUM_ItemType.Equip:
 			this.Equip = Converter.deserializeObject<S_ItemEquip>(JsonString);
 			this.Equip.ParseData(values);
-			this.UseEffect = Converter.deserializeObject<S_UseEffect>(JsonString);
-			this.UseEffect.ParseData(values);
-			return;
+			break;
 		case ENUM_ItemType.MagicItem:
 			this.Equip = Converter.deserializeObject<S_ItemEquip>(JsonString);
 			this.Equip.ParseData(values);
 			this.MItem = Converter.deserializeObject<S_ItemMagic>(JsonString);
 			this.MItem.ParseData(values);
-			return;
+			break;
 		case ENUM_ItemType.Mob:
 			this.MobData = Converter.deserializeObject<S_MobData>(JsonString);
 			this.ParseMobData(values);
-			return;
-		default:
-			return;
+			break;
 		}
 	}
 
 	public void ParseMobData(Dictionary<string, string> values)
 	{
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			int num = 0;
 			string key = string.Format("DefElement_{0}", i);
@@ -139,10 +142,10 @@ public class S_Item : I_BaseDBF
 				this.MobData.AttackEffect.Add(num2);
 			}
 		}
-		for (int k = 0; k < 10; k++)
+		for (int k = 0; k < 4; k++)
 		{
 			int num3 = 0;
-			string key3 = string.Format("Skill_{0}", k);
+			string key3 = string.Format("NormalSkillID_{0}", k);
 			if (values.ContainsKey(key3))
 			{
 				string s3 = values[key3];
@@ -150,65 +153,85 @@ public class S_Item : I_BaseDBF
 			}
 			if (num3 > 0)
 			{
-				this.MobData.Skill.Add(num3);
+				this.MobData.NormalSkillID.Add(num3);
 			}
 		}
-		for (int l = 0; l < 10; l++)
+		for (int l = 0; l < 4; l++)
 		{
 			int num4 = 0;
-			string key4 = string.Format("SkillRate_{0}", l);
+			string key4 = string.Format("NormalSkillRate_{0}", l);
 			if (values.ContainsKey(key4))
 			{
 				string s4 = values[key4];
 				int.TryParse(s4, out num4);
 			}
-			if (num4 > 0)
+			if (num4 >= 0)
 			{
-				this.MobData.SkillRate.Add(num4);
+				this.MobData.NormalSkillRate.Add(num4);
 			}
 		}
-		for (int m = 0; m < 10; m++)
+		for (int m = 0; m < 2; m++)
 		{
-			int item = 0;
-			string key5 = string.Format("SkillLastHP_{0}", m);
+			int num5 = 0;
+			string key5 = string.Format("StartSkillID_{0}", m);
 			if (values.ContainsKey(key5))
 			{
 				string s5 = values[key5];
-				int.TryParse(s5, out item);
+				int.TryParse(s5, out num5);
 			}
-			this.MobData.SkillLastHP.Add(item);
+			if (num5 > 0)
+			{
+				this.MobData.StartSkillID.Add(num5);
+			}
 		}
-		for (int n = 0; n < 10; n++)
+		for (int n = 0; n < 4; n++)
 		{
-			int item2 = 0;
-			string key6 = string.Format("SkillCount_{0}", n);
+			int num6 = 0;
+			string key6 = string.Format("HpSkillID_{0}", n);
 			if (values.ContainsKey(key6))
 			{
 				string s6 = values[key6];
-				int.TryParse(s6, out item2);
+				int.TryParse(s6, out num6);
 			}
-			this.MobData.SkillCount.Add(item2);
+			if (num6 > 0)
+			{
+				this.MobData.HpSkillID.Add(num6);
+			}
 		}
-		for (int num5 = 0; num5 < 5; num5++)
+		for (int num7 = 0; num7 < 4; num7++)
+		{
+			int num8 = 0;
+			string key7 = string.Format("HpSkillHP_{0}", num7);
+			if (values.ContainsKey(key7))
+			{
+				string s7 = values[key7];
+				int.TryParse(s7, out num8);
+			}
+			if (num8 > 0)
+			{
+				this.MobData.HpSkillHP.Add(num8);
+			}
+		}
+		for (int num9 = 0; num9 < 5; num9++)
 		{
 			S_DropItem s_DropItem = new S_DropItem();
-			string key7 = string.Format("DropItemID_{0}", num5);
-			if (values.ContainsKey(key7))
+			string key8 = string.Format("DropItemID_{0}", num9);
+			if (values.ContainsKey(key8))
 			{
-				string s7 = values[key7];
-				int.TryParse(s7, out s_DropItem.ID);
+				string s8 = values[key8];
+				int.TryParse(s8, out s_DropItem.ID);
 			}
-			key7 = string.Format("DropCount_{0}", num5);
-			if (values.ContainsKey(key7))
+			key8 = string.Format("DropCount_{0}", num9);
+			if (values.ContainsKey(key8))
 			{
-				string s7 = values[key7];
-				int.TryParse(s7, out s_DropItem.Count);
+				string s8 = values[key8];
+				int.TryParse(s8, out s_DropItem.Count);
 			}
-			key7 = string.Format("DropRate_{0}", num5);
-			if (values.ContainsKey(key7))
+			key8 = string.Format("DropRate_{0}", num9);
+			if (values.ContainsKey(key8))
 			{
-				string s7 = values[key7];
-				int.TryParse(s7, out s_DropItem.Rate);
+				string s8 = values[key8];
+				int.TryParse(s8, out s_DropItem.Rate);
 			}
 			if (s_DropItem.ID > 0)
 			{
