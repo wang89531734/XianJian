@@ -560,8 +560,8 @@ namespace YouYou
             ////this.m_InheritSystem.Initialize(this);
             ////this.m_MapPathSystem = new MapPathSystem();
             ////this.m_MapPathSystem.Initialize();
-            ////this.m_FormationSystem = new FormationSystem();
-            ////this.m_FormationSystem.Initialize();
+            this.m_FormationSystem = new FormationSystem();
+            this.m_FormationSystem.Initialize();
             ////this.m_BigMapSystem = new BigMapSystem();
             ////this.m_BigMapSystem.Initialize();
             ////this.m_SmallTrapGameSystem = new SmallTrapGameSystem();
@@ -593,6 +593,7 @@ namespace YouYou
             //this.m_MobGuardSystem.Clear();
             //this.m_AchievementSystem.InitForNewGame();
             //this.m_WOPSystem.InitForNewGame();
+            this.m_FormationSystem.ClearFormation();
             //this.m_GameObjSystem.Initialize();
         }
 
