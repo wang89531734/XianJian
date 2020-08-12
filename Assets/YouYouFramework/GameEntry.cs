@@ -542,6 +542,8 @@ namespace YouYou
             this.m_ExploreSystem.Initialize();
             ////this.m_GameMenuSystem = new GameMenuSystem();
             ////this.m_GameMenuSystem.Initialize(this);
+            ///.
+            ///.
             this.m_QuestSystem = new QuestSystem();
             this.m_QuestSystem.Initialize();
             this.m_IdentifySystem = new IdentifySystem();

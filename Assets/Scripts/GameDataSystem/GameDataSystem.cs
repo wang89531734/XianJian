@@ -219,7 +219,7 @@ public class GameDataSystem
 
         this.m_PlayerID = this.m_DefaultPlayerID;
         this.m_FightPlayerID = this.m_DefaultPlayerID;
-        //this.FlagON(24);
+        this.FlagON(24);
     }
 
     //	public void InitExRoleData(int chapId)
@@ -416,19 +416,20 @@ public class GameDataSystem
     public void FlagON(int flag)
     {
         this.m_GameFlag.ON(flag);
-        //if (flag >= this.GetMinID() && flag <= this.GetMaxID())
-        //{
-        //    if (!this.m_RoldData[flag - 1].BaseRoleData.IsJoin && flag != 7)
-        //    {
-        //        UI_OkCancelBox.Instance.AddSysMsg(GameDataDB.StrID(1040 + flag - 1), 3f);
-        //    }
-        //    if (!Swd6Application.instance.IsDLC())
-        //    {
-        //        this.FlagON(30 + flag);
-        //    }
-        //    this.m_RoldData[flag - 1].BaseRoleData.IsJoin = true;
-        //    this.UpdatePartyRole();
-        //}
+        if (flag >= this.GetMinID() && flag <= this.GetMaxID())
+        {
+            if (!this.m_RoldData[flag - 1].BaseRoleData.IsJoin && flag != 7)
+            {
+                //UI_OkCancelBox.Instance.AddSysMsg(GameDataDB.StrID(1040 + flag - 1), 3f);
+            }
+            
+            this.FlagON(30 + flag);            
+            this.m_RoldData[flag - 1].BaseRoleData.IsJoin = true;
+            this.UpdatePartyRole();
+            Debug.Log("开启阵型");
+            GameEntry.Instance.m_FormationSystem.UnlockFormation(flag);
+            GameEntry.Instance.m_FormationSystem.AutoSetUnitData();
+        }
         //if (Swd6Application.instance.m_QuestSystem != null)
         //{
         //    Swd6Application.instance.m_QuestSystem.Dirty();
@@ -714,13 +715,13 @@ public class GameDataSystem
         for (int i = 0; i < this.GetMaxTeamRoleCount(); i++)
         {
             int num = this.m_TeamRoleList[i];
-            //if (GameEntry.Instance.m_GameDataSystem.GetFlag(num))
-            //{
-            //    S_PartyData s_PartyData = new S_PartyData();
-            //    s_PartyData.m_ID = num;
-            //    s_PartyData.m_IsFight = this.GetRoleData(num).BaseRoleData.IsFight;
-            //    this.m_PartyRole.Add(s_PartyData);
-            //}
+            if (GameEntry.Instance.m_GameDataSystem.GetFlag(num))
+            {
+                S_PartyData s_PartyData = new S_PartyData();
+                s_PartyData.m_ID = num;
+                s_PartyData.m_IsFight = this.GetRoleData(num).BaseRoleData.IsFight;
+                this.m_PartyRole.Add(s_PartyData);
+            }
         }
     }
 
@@ -814,10 +815,10 @@ public class GameDataSystem
     //		return true;
     //	}
 
-    //	public int GetNumberRoleFromParty()
-    //	{
-    //		return this.m_PartyRole.Count;
-    //	}
+    public int GetNumberRoleFromParty()
+    {
+        return this.m_PartyRole.Count;
+    }
 
     //	public List<S_PartyData> GetPartyRoleList()
     //	{
@@ -834,14 +835,14 @@ public class GameDataSystem
         return this.m_TeamRoleList.Count;
     }
 
-    //	public int GetPartyRoleID(int index)
-    //	{
-    //		if (index >= this.m_PartyRole.Count)
-    //		{
-    //			return 0;
-    //		}
-    //		return this.m_PartyRole[index].m_ID;
-    //	}
+    public int GetPartyRoleID(int index)
+    {
+        if (index >= this.m_PartyRole.Count)
+        {
+            return 0;
+        }
+        return this.m_PartyRole[index].m_ID;
+    }
 
     //	public List<int> GetActionSkillList()
     //	{
