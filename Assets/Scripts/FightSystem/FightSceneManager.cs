@@ -292,7 +292,7 @@ public class FightSceneManager
     public void CreateCharacters()
     {
         this.CreatePlayer();
-        //this.CreateGuards();
+        this.CreateGuards();
         this.CreateMobs();
     }
 
@@ -303,6 +303,7 @@ public class FightSceneManager
         string text = string.Empty;
         FormationData defaultFormationData = GameEntry.Instance.m_FormationSystem.GetDefaultFormationData();
         List<int> list = new List<int>();
+        UnityEngine.Debug.Log("defaultFormationData.LeaderID=" + defaultFormationData.LeaderID);
         for (int i = 0; i < defaultFormationData.Unit.Count; i++)
         {
             if (defaultFormationData.Unit[i].RoleID > 0)
@@ -397,40 +398,40 @@ public class FightSceneManager
         //this.m_CatchMobPet.m_RoleModel.SetActive(false);
     }
 
-    //	private void CreateGuards()
-    //	{
-    //		List<S_MobGuard> mobGuardData = Swd6Application.instance.m_MobGuardSystem.GetMobGuardData();
-    //		int num = 1;
-    //		if (this.m_BattleGroupGUID == 7005)
-    //		{
-    //			M_Guard x = this.CreateGuard(3116, num);
-    //			if (x == null)
-    //			{
-    //				UnityEngine.Debug.Log("Create guard == null, ID:3116");
-    //			}
-    //			num++;
-    //		}
-    //		for (int i = 0; i < mobGuardData.Count; i++)
-    //		{
-    //			if (num == 3)
-    //			{
-    //				break;
-    //			}
-    //			if (mobGuardData[i].ID > 0)
-    //			{
-    //				M_Guard x2 = this.CreateGuard(mobGuardData[i].ID, num);
-    //				if (x2 == null)
-    //				{
-    //					UnityEngine.Debug.Log("Create guard == null, ID:" + mobGuardData[i].ID);
-    //				}
-    //				else
-    //				{
-    //					num++;
-    //					this.m_GuardIdx = i;
-    //				}
-    //			}
-    //		}
-    //	}
+    private void CreateGuards()
+    {
+        //List<S_MobGuard> mobGuardData = Swd6Application.instance.m_MobGuardSystem.GetMobGuardData();
+        //int num = 1;
+        //if (this.m_BattleGroupGUID == 7005)
+        //{
+        //    M_Guard x = this.CreateGuard(3116, num);
+        //    if (x == null)
+        //    {
+        //        UnityEngine.Debug.Log("Create guard == null, ID:3116");
+        //    }
+        //    num++;
+        //}
+        //for (int i = 0; i < mobGuardData.Count; i++)
+        //{
+        //    if (num == 3)
+        //    {
+        //        break;
+        //    }
+        //    if (mobGuardData[i].ID > 0)
+        //    {
+        //        M_Guard x2 = this.CreateGuard(mobGuardData[i].ID, num);
+        //        if (x2 == null)
+        //        {
+        //            UnityEngine.Debug.Log("Create guard == null, ID:" + mobGuardData[i].ID);
+        //        }
+        //        else
+        //        {
+        //            num++;
+        //            this.m_GuardIdx = i;
+        //        }
+        //    }
+        //}
+    }
 
     //	public M_Guard CreateGuard(int mobGUID, int posID)
     //	{
@@ -683,33 +684,33 @@ public class FightSceneManager
 
     private void InitFightSetting()
     {
-        //FormationData defaultFormationData = Swd6Application.instance.m_FormationSystem.GetDefaultFormationData();
-        //if (defaultFormationData != null)
-        //{
-        //    this.ChangeFormation(Swd6Application.instance.m_FormationSystem.DefaultFormation);
-        //    int fightPlayerID = Swd6Application.instance.m_GameDataSystem.m_FightPlayerID;
-        //    if (this.GetRole(fightPlayerID) != null)
-        //    {
-        //        this.ChangeControlCharacter(Swd6Application.instance.m_GameDataSystem.m_FightPlayerID, false);
-        //    }
-        //    else
-        //    {
-        //        this.ChangeControlCharacter(1, false);
-        //    }
-        //    int flag = 60 + this.m_ControlledRoleID;
-        //    M_Player role = this.GetRole(this.m_ControlledRoleID);
-        //    if (role != null)
-        //    {
-        //        role.SetUseAI(Swd6Application.instance.m_GameDataSystem.GetFlag(flag));
-        //        UI_Fight.Instance.UpdateRoleAICheckBox(this.m_ControlledRoleID);
-        //    }
-        //}
-        //else
-        //{
-        //    UnityEngine.Debug.LogWarning("==== 無預設陣型資料 ====");
-        //}
+        FormationData defaultFormationData = GameEntry.Instance.m_FormationSystem.GetDefaultFormationData();
+        if (defaultFormationData != null)
+        {
+            this.ChangeFormation(GameEntry.Instance.m_FormationSystem.DefaultFormation);
+            int fightPlayerID = GameEntry.Instance.m_GameDataSystem.m_FightPlayerID;
+            if (this.GetRole(fightPlayerID) != null)
+            {
+                this.ChangeControlCharacter(GameEntry.Instance.m_GameDataSystem.m_FightPlayerID, false);
+            }
+            else
+            {
+                this.ChangeControlCharacter(1, false);
+            }
+            int flag = 60 + this.m_ControlledRoleID;
+            M_Player role = this.GetRole(this.m_ControlledRoleID);
+            if (role != null)
+            {
+                //role.SetUseAI(Swd6Application.instance.m_GameDataSystem.GetFlag(flag));
+                //UI_Fight.Instance.UpdateRoleAICheckBox(this.m_ControlledRoleID);
+            }
+        }
+        else
+        {
+            UnityEngine.Debug.LogWarning("==== 無預設陣型資料 ====");
+        }
         //this.InitFightTarget();
-        //this.InitPlayerGuardPos(defaultFormationData);
+        this.InitPlayerGuardPos(defaultFormationData);
         //for (int i = 0; i < 5; i++)
         //{
         //    List<FightItemHotKeyInfo> fightItemHotkeyList = Swd6Application.instance.m_ItemSystem.GetFightItemHotkeyList(i);
@@ -760,54 +761,54 @@ public class FightSceneManager
     //		}
     //	}
 
-    //	private void InitPlayerGuardPos(FormationData fData)
-    //	{
-    //		if (fData == null)
-    //		{
-    //			return;
-    //		}
-    //		if (fData.emElement == ENUM_ElementType.Null || fData.emElement == ENUM_ElementType.Physical)
-    //		{
-    //			UnityEngine.Debug.LogWarning("陣型資料有誤 陣型屬性:" + fData.emElement);
-    //			return;
-    //		}
-    //		string text = "PlayerGroup" + (int)fData.emElement;
-    //		Transform current = TransformTool.FindChild(this.m_FightPosition.transform, "Player");
-    //		current = TransformTool.FindChild(current, text);
-    //		for (int i = 0; i < fData.Unit.Count; i++)
-    //		{
-    //			FormationUnit formationUnit = fData.Unit[i];
-    //			int num = i + 1;
-    //			if (this.m_PlayerList.ContainsKey(formationUnit.RoleID))
-    //			{
-    //				text = "Player" + (int)fData.emElement + num.ToString();
-    //				Transform transform = TransformTool.FindChild(current, text);
-    //				if (transform != null)
-    //				{
-    //					this.m_PlayerList[formationUnit.RoleID].m_ModelTransform.position = transform.position;
-    //					this.m_PlayerList[formationUnit.RoleID].m_ModelTransform.rotation = transform.rotation;
-    //					this.m_PlayerList[formationUnit.RoleID].SetInitPos(transform.position);
-    //				}
-    //				else
-    //				{
-    //					UnityEngine.Debug.LogWarning("Cant fing pos:" + text);
-    //				}
-    //			}
-    //		}
-    //		foreach (M_Guard current2 in this.m_GuardList.Values)
-    //		{
-    //			string text2 = "Guard" + (int)fData.emElement + current2.m_DebutPosID.ToString();
-    //			Transform transform2 = TransformTool.FindChild(current, text2);
-    //			if (transform2 == null)
-    //			{
-    //				UnityEngine.Debug.Log("cant find fihgtPosition, posName:" + text2);
-    //			}
-    //			else
-    //			{
-    //				current2.m_DebutTargetTransform = transform2;
-    //			}
-    //		}
-    //	}
+    private void InitPlayerGuardPos(FormationData fData)
+    {
+        if (fData == null)
+        {
+            return;
+        }
+        if (fData.emElement == ENUM_ElementType.Null || fData.emElement == ENUM_ElementType.Physical)
+        {
+            UnityEngine.Debug.LogWarning("陣型資料有誤 陣型屬性:" + fData.emElement);
+            return;
+        }
+        string text = "PlayerGroup" + (int)fData.emElement;
+        Transform current = TransformTool.FindChild(this.m_FightPosition.transform, "Player");
+        current = TransformTool.FindChild(current, text);
+        for (int i = 0; i < fData.Unit.Count; i++)
+        {
+            FormationUnit formationUnit = fData.Unit[i];
+            int num = i + 1;
+            if (this.m_PlayerList.ContainsKey(formationUnit.RoleID))
+            {
+                text = "Player" + (int)fData.emElement + num.ToString();
+                Transform transform = TransformTool.FindChild(current, text);
+                if (transform != null)
+                {
+                    this.m_PlayerList[formationUnit.RoleID].m_ModelTransform.position = transform.position;
+                    this.m_PlayerList[formationUnit.RoleID].m_ModelTransform.rotation = transform.rotation;
+                    this.m_PlayerList[formationUnit.RoleID].SetInitPos(transform.position);
+                }
+                else
+                {
+                    UnityEngine.Debug.LogWarning("Cant fing pos:" + text);
+                }
+            }
+        }
+        //foreach (M_Guard current2 in this.m_GuardList.Values)
+        //{
+        //    string text2 = "Guard" + (int)fData.emElement + current2.m_DebutPosID.ToString();
+        //    Transform transform2 = TransformTool.FindChild(current, text2);
+        //    if (transform2 == null)
+        //    {
+        //        UnityEngine.Debug.Log("cant find fihgtPosition, posName:" + text2);
+        //    }
+        //    else
+        //    {
+        //        current2.m_DebutTargetTransform = transform2;
+        //    }
+        //}
+    }
 
     //	private void FightRoleBuffSetting()
     //	{
@@ -1490,14 +1491,14 @@ public class FightSceneManager
     //		return this.m_PlayerList;
     //	}
 
-    //	public M_Player GetRole(int roleID)
-    //	{
-    //		if (this.m_PlayerList.ContainsKey(roleID))
-    //		{
-    //			return this.m_PlayerList[roleID];
-    //		}
-    //		return null;
-    //	}
+    public M_Player GetRole(int roleID)
+    {
+        if (this.m_PlayerList.ContainsKey(roleID))
+        {
+            return this.m_PlayerList[roleID];
+        }
+        return null;
+    }
 
     //	public List<int> GetAliveRoleIDList()
     //	{
@@ -1568,72 +1569,72 @@ public class FightSceneManager
     //		return this.m_GuardList;
     //	}
 
-    //	public void ChangeControlCharacter(int key, bool bDead)
-    //	{
-    //		M_Player role = this.GetRole(key);
-    //		if (role == null || role.IsDead())
-    //		{
-    //			return;
-    //		}
-    //		foreach (KeyValuePair<int, M_Player> current in this.m_PlayerList)
-    //		{
-    //			if (current.Key == key)
-    //			{
-    //				current.Value.SetIsControlCharacter(true);
-    //			}
-    //			else
-    //			{
-    //				current.Value.SetIsControlCharacter(false);
-    //			}
-    //		}
-    //		this.m_NowControlledEffect.transform.position = this.m_PlayerList[key].GetModelPosition();
-    //		this.m_NowControlledEffect.transform.rotation = this.m_PlayerList[key].m_ModelTransform.rotation;
-    //		this.m_NowControlledEffect.transform.parent = this.m_PlayerList[key].m_ModelTransform;
-    //		if (this.m_FightCamera != null)
-    //		{
-    //			M_MouseOrbit component = this.m_FightCamera.GetComponent<M_MouseOrbit>();
-    //			Transform transform = TransformTool.FindChild(this.m_PlayerList[key].m_ModelTransform, "P1001");
-    //			if (transform != null)
-    //			{
-    //				component.target = transform;
-    //				component.distance = 5f;
-    //				component.x = this.m_PlayerList[key].m_ModelTransform.eulerAngles.y;
-    //				component.y = 20f;
-    //			}
-    //		}
-    //		if (this.m_ControlledRoleID == key)
-    //		{
-    //			return;
-    //		}
-    //		bool useAI = false;
-    //		if (bDead)
-    //		{
-    //			useAI = this.GetControlledPlayer().m_bUseAI;
-    //		}
-    //		this.m_ControlledRoleID = key;
-    //		if (this.m_PlayerList.ContainsKey(key))
-    //		{
-    //			this.m_MainPlayer = this.m_PlayerList[key];
-    //		}
-    //		else
-    //		{
-    //			this.m_MainPlayer = null;
-    //		}
-    //		this.SetFightCameraController();
-    //		UI_Fight.Instance.UpdateSelectRole();
-    //		foreach (KeyValuePair<int, M_Player> current2 in this.m_PlayerList)
-    //		{
-    //			if (current2.Key == key)
-    //			{
-    //				current2.Value.SetUseAI(useAI);
-    //			}
-    //			else
-    //			{
-    //				current2.Value.SetUseAI(true);
-    //			}
-    //			UI_Fight.Instance.UpdateRoleAICheckBox(current2.Key);
-    //		}
-    //	}
+    public void ChangeControlCharacter(int key, bool bDead)
+    {
+        M_Player role = this.GetRole(key);
+        //if (role == null || role.IsDead())
+        //{
+        //    return;
+        //}
+        //foreach (KeyValuePair<int, M_Player> current in this.m_PlayerList)
+        //{
+        //    if (current.Key == key)
+        //    {
+        //        current.Value.SetIsControlCharacter(true);
+        //    }
+        //    else
+        //    {
+        //        current.Value.SetIsControlCharacter(false);
+        //    }
+        //}
+        //this.m_NowControlledEffect.transform.position = this.m_PlayerList[key].GetModelPosition();
+        //this.m_NowControlledEffect.transform.rotation = this.m_PlayerList[key].m_ModelTransform.rotation;
+        //this.m_NowControlledEffect.transform.parent = this.m_PlayerList[key].m_ModelTransform;
+        //if (this.m_FightCamera != null)
+        //{
+        //    M_MouseOrbit component = this.m_FightCamera.GetComponent<M_MouseOrbit>();
+        //    Transform transform = TransformTool.FindChild(this.m_PlayerList[key].m_ModelTransform, "P1001");
+        //    if (transform != null)
+        //    {
+        //        component.target = transform;
+        //        component.distance = 5f;
+        //        component.x = this.m_PlayerList[key].m_ModelTransform.eulerAngles.y;
+        //        component.y = 20f;
+        //    }
+        //}
+        //if (this.m_ControlledRoleID == key)
+        //{
+        //    return;
+        //}
+        //bool useAI = false;
+        //if (bDead)
+        //{
+        //    useAI = this.GetControlledPlayer().m_bUseAI;
+        //}
+        //this.m_ControlledRoleID = key;
+        //if (this.m_PlayerList.ContainsKey(key))
+        //{
+        //    this.m_MainPlayer = this.m_PlayerList[key];
+        //}
+        //else
+        //{
+        //    this.m_MainPlayer = null;
+        //}
+        //this.SetFightCameraController();
+        //UI_Fight.Instance.UpdateSelectRole();
+        //foreach (KeyValuePair<int, M_Player> current2 in this.m_PlayerList)
+        //{
+        //    if (current2.Key == key)
+        //    {
+        //        current2.Value.SetUseAI(useAI);
+        //    }
+        //    else
+        //    {
+        //        current2.Value.SetUseAI(true);
+        //    }
+        //    UI_Fight.Instance.UpdateRoleAICheckBox(current2.Key);
+        //}
+    }
 
     //	public bool ChangeTargetMob(int key)
     //	{
@@ -1663,45 +1664,45 @@ public class FightSceneManager
     //		return this.m_NowFormation;
     //	}
 
-    //	public void ChangeFormation(int idx)
-    //	{
-    //		if (this.m_ChangeFormationCDTimer > 0f)
-    //		{
-    //			return;
-    //		}
-    //		FormationData formationData = Swd6Application.instance.m_FormationSystem.GetFormationData(idx);
-    //		if (formationData == null)
-    //		{
-    //			UnityEngine.Debug.LogWarning("FormationData == null");
-    //			return;
-    //		}
-    //		this.m_NowFormationIdx = idx;
-    //		this.m_NowFormation = formationData;
-    //		for (int i = 0; i < formationData.Unit.Count; i++)
-    //		{
-    //			FormationUnit formationUnit = formationData.Unit[i];
-    //			if (formationUnit != null)
-    //			{
-    //				if (this.m_PlayerList.ContainsKey(formationUnit.RoleID))
-    //				{
-    //					if (Swd6Application.instance.m_GameDataSystem.GetFlag(formationUnit.RoleID))
-    //					{
-    //						this.m_PlayerList[formationUnit.RoleID].SetFormationData(formationData, i);
-    //					}
-    //				}
-    //			}
-    //		}
-    //		foreach (M_Player current in this.m_PlayerList.Values)
-    //		{
-    //			current.UpdateFightRoleData();
-    //		}
-    //		this.ChangeInitPos(formationData);
-    //		this.CreateChangeFormationEffect(idx + ENUM_ElementType.Wind);
-    //		this.m_ChangeFormationCDTimer = 10f;
-    //		Swd6Application.instance.m_FormationSystem.DefaultFormation = idx;
-    //		this.ChangeFormationCameraPath();
-    //		UI_Fight.Instance.UpdateNowFormation();
-    //	}
+    public void ChangeFormation(int idx)
+    {
+        if (this.m_ChangeFormationCDTimer > 0f)
+        {
+            return;
+        }
+        FormationData formationData = GameEntry.Instance.m_FormationSystem.GetFormationData(idx);
+        if (formationData == null)
+        {
+            UnityEngine.Debug.LogWarning("FormationData == null");
+            return;
+        }
+        this.m_NowFormationIdx = idx;
+        this.m_NowFormation = formationData;
+        for (int i = 0; i < formationData.Unit.Count; i++)
+        {
+            FormationUnit formationUnit = formationData.Unit[i];
+            if (formationUnit != null)
+            {
+                if (this.m_PlayerList.ContainsKey(formationUnit.RoleID))
+                {
+                    if (GameEntry.Instance.m_GameDataSystem.GetFlag(formationUnit.RoleID))
+                    {
+                        //this.m_PlayerList[formationUnit.RoleID].SetFormationData(formationData, i);
+                    }
+                }
+            }
+        }
+        foreach (M_Player current in this.m_PlayerList.Values)
+        {
+            //current.UpdateFightRoleData();
+        }
+        this.ChangeInitPos(formationData);
+        //this.CreateChangeFormationEffect(idx + ENUM_ElementType.Wind);
+        this.m_ChangeFormationCDTimer = 10f;
+        GameEntry.Instance.m_FormationSystem.DefaultFormation = idx;
+        this.ChangeFormationCameraPath();
+        //UI_Fight.Instance.UpdateNowFormation();
+    }
 
     //	private void CreateChangeFormationEffect(ENUM_ElementType emType)
     //	{
@@ -1735,52 +1736,52 @@ public class FightSceneManager
     //		}
     //	}
 
-    //	private void ChangeInitPos(FormationData fData)
-    //	{
-    //		if (fData == null)
-    //		{
-    //			return;
-    //		}
-    //		if (fData.emElement == ENUM_ElementType.Null || fData.emElement == ENUM_ElementType.Physical)
-    //		{
-    //			UnityEngine.Debug.LogWarning("陣型資料有誤 陣型屬性:" + fData.emElement);
-    //			return;
-    //		}
-    //		string text = "PlayerGroup" + (int)fData.emElement;
-    //		Transform current = TransformTool.FindChild(this.m_FightPosition.transform, "Player");
-    //		current = TransformTool.FindChild(current, text);
-    //		for (int i = 0; i < fData.Unit.Count; i++)
-    //		{
-    //			FormationUnit formationUnit = fData.Unit[i];
-    //			int num = i + 1;
-    //			if (this.m_PlayerList.ContainsKey(formationUnit.RoleID))
-    //			{
-    //				text = "Player" + (int)fData.emElement + num.ToString();
-    //				Transform transform = TransformTool.FindChild(current, text);
-    //				if (transform != null)
-    //				{
-    //					this.m_PlayerList[formationUnit.RoleID].SetInitPos(transform.position);
-    //				}
-    //				else
-    //				{
-    //					UnityEngine.Debug.LogWarning("Cant find pos:" + text);
-    //				}
-    //			}
-    //		}
-    //		foreach (M_Guard current2 in this.m_GuardList.Values)
-    //		{
-    //			string text2 = "Guard" + (int)fData.emElement + current2.m_DebutPosID.ToString();
-    //			Transform transform2 = TransformTool.FindChild(current, text2);
-    //			if (transform2 == null)
-    //			{
-    //				UnityEngine.Debug.Log("cant find fihgtPosition, posName:" + text2);
-    //			}
-    //			else
-    //			{
-    //				current2.m_DebutTargetTransform = transform2;
-    //			}
-    //		}
-    //	}
+    private void ChangeInitPos(FormationData fData)
+    {
+        if (fData == null)
+        {
+            return;
+        }
+        if (fData.emElement == ENUM_ElementType.Null || fData.emElement == ENUM_ElementType.Physical)
+        {
+            UnityEngine.Debug.LogWarning("陣型資料有誤 陣型屬性:" + fData.emElement);
+            return;
+        }
+        string text = "PlayerGroup" + (int)fData.emElement;
+        Transform current = TransformTool.FindChild(this.m_FightPosition.transform, "Player");
+        current = TransformTool.FindChild(current, text);
+        for (int i = 0; i < fData.Unit.Count; i++)
+        {
+            FormationUnit formationUnit = fData.Unit[i];
+            int num = i + 1;
+            if (this.m_PlayerList.ContainsKey(formationUnit.RoleID))
+            {
+                text = "Player" + (int)fData.emElement + num.ToString();
+                Transform transform = TransformTool.FindChild(current, text);
+                if (transform != null)
+                {
+                    this.m_PlayerList[formationUnit.RoleID].SetInitPos(transform.position);
+                }
+                else
+                {
+                    UnityEngine.Debug.LogWarning("Cant find pos:" + text);
+                }
+            }
+        }
+        //foreach (M_Guard current2 in this.m_GuardList.Values)
+        //{
+        //    string text2 = "Guard" + (int)fData.emElement + current2.m_DebutPosID.ToString();
+        //    Transform transform2 = TransformTool.FindChild(current, text2);
+        //    if (transform2 == null)
+        //    {
+        //        UnityEngine.Debug.Log("cant find fihgtPosition, posName:" + text2);
+        //    }
+        //    else
+        //    {
+        //        current2.m_DebutTargetTransform = transform2;
+        //    }
+        //}
+    }
 
     //	public M_Mob GetMainTarget()
     //	{
@@ -2917,14 +2918,14 @@ public class FightSceneManager
     //		this.m_FightCameraController.CatchSuccessShotCharacter(character);
     //	}
 
-    //	public void ChangeFormationCameraPath()
-    //	{
-    //		if (this.m_FightCameraController == null)
-    //		{
-    //			return;
-    //		}
-    //		this.m_FightCameraController.ChangeFormation();
-    //	}
+    public void ChangeFormationCameraPath()
+    {
+        //if (this.m_FightCameraController == null)
+        //{
+        //    return;
+        //}
+        //this.m_FightCameraController.ChangeFormation();
+    }
 
     private void InitFightTalk()
     {

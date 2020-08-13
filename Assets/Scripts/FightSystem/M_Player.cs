@@ -363,10 +363,10 @@ public class M_Player : M_Character
     //		}
     //	}
 
-    //	public void SetInitPos(Vector3 pos)
-    //	{
-    //		this.m_InitPos = pos;
-    //	}
+    public void SetInitPos(Vector3 pos)
+    {
+        this.m_InitPos = pos;
+    }
 
     //	public override bool IsStandby()
     //	{

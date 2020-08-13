@@ -4,10 +4,8 @@ public enum ENUM_ElementType
 {
 	Null = -1,
 	Physical,
-	Thunder,
+	Wind,
 	Earth,
 	Water,
-	Fire,
-	Plague,
-	Evil
+	Fire
 }
