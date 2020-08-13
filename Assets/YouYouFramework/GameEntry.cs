@@ -522,15 +522,29 @@ namespace YouYou
         public SkillSystem m_SkillSystem { get; private set; }
 
         /// <summary>
-        /// 鉴定系统
+        /// 图鉴系统
         /// </summary>
         public IdentifySystem m_IdentifySystem { get; private set; }
 
+        /// <summary>
+        /// 探索系统
+        /// </summary>
         public ExploreSystem m_ExploreSystem { get; private set; }
 
+        /// <summary>
+        /// 游戏物体系统
+        /// </summary>
         public GameObjSystem m_GameObjSystem { get; private set; }
 
+        /// <summary>
+        /// 阵型系统
+        /// </summary>
         public FormationSystem m_FormationSystem { get; private set; }
+
+        /// <summary>
+        /// 守卫系统
+        /// </summary>
+        public MobGuardSystem m_MobGuardSystem { get; private set; }
 
         private void InitGameSystem()
         {
@@ -554,8 +568,8 @@ namespace YouYou
             ////this.m_SaveloadSystem.Initialize();
             this.m_SkillSystem = new SkillSystem();
             this.m_SkillSystem.Initialize();
-            ////this.m_MobGuardSystem = new MobGuardSystem();
-            ////this.m_MobGuardSystem.Initialize();
+            this.m_MobGuardSystem = new MobGuardSystem();
+            this.m_MobGuardSystem.Initialize();
             ////this.m_AchievementSystem = new AchievementSystem();
             ////this.m_AchievementSystem.Initialize();
             ////this.m_InheritSystem = new InheritSystem();
@@ -581,22 +595,29 @@ namespace YouYou
             //this.SetGameEnviromentInfo();
         }
 
+        /// <summary>
+        /// 开始新游戏
+        /// </summary>
         public void StartNewGame()
         {
             this.m_GameDataSystem.InitRoleData();
+            GameEntry.Scene.LoadScene(2, false, () =>
+            {
+                GameEntry.Procedure.ChangeState(ProcedureState.WorldMap);
+            });
         }
       
         public void InitNewGame()
         {
-            //this.m_GameObjSystem.Clear();
+            this.m_GameObjSystem.Clear();
             this.m_QuestSystem.Clear();
             this.m_SkillSystem.Clear();
             this.m_ItemSystem.Clear();
-            //this.m_MobGuardSystem.Clear();
-            //this.m_AchievementSystem.InitForNewGame();
-            //this.m_WOPSystem.InitForNewGame();
+            this.m_MobGuardSystem.Clear();
+            //this.m_AchievementSystem.InitForNewGame();//成就系统
+            //this.m_WOPSystem.InitForNewGame();//制造系统
             this.m_FormationSystem.ClearFormation();
-            //this.m_GameObjSystem.Initialize();
+            this.m_GameObjSystem.Initialize();
         }
 
         /// <summary>

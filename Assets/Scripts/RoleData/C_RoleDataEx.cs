@@ -220,17 +220,17 @@ public class C_RoleDataEx : S_RoleData
 		S_RoleAttr s_RoleAttr = new S_RoleAttr();
 		S_RoleAttr s_RoleAttr2 = new S_RoleAttr();
 		S_RoleAttr s_RoleAttr3 = new S_RoleAttr();
-		this.CalRoleAttrPlus_OnEquip(s_RoleAttr);
-		this.CalRoleAttr_Finial(s_RoleAttr);
-		this.CalRoleAttrPlus_OnPassiveSkill(s_RoleAttr2);
-		this.CalRoleAttr_Finial2(s_RoleAttr, s_RoleAttr2);
-		this.CalRoleAttrPlus_OnMItem(s_RoleAttr3);
-		this.CalRoleAttr_Finial2(s_RoleAttr, s_RoleAttr3);
-		s_RoleAttr.sAttrPlus += s_RoleAttr2.sAttrPlus;
-		s_RoleAttr.sAttrPlus += s_RoleAttr3.sAttrPlus;
-		this.RoleAttr.sAttrPlus = s_RoleAttr.sAttrPlus;
-		this.RoleAttr.sFinial = s_RoleAttr.sFinial;
-	}
+        this.CalRoleAttrPlus_OnEquip(s_RoleAttr);
+        this.CalRoleAttr_Finial(s_RoleAttr);
+        //this.CalRoleAttrPlus_OnPassiveSkill(s_RoleAttr2);//被动技能
+        //this.CalRoleAttr_Finial2(s_RoleAttr, s_RoleAttr2);
+        //this.CalRoleAttrPlus_OnMItem(s_RoleAttr3);//物品
+        //this.CalRoleAttr_Finial2(s_RoleAttr, s_RoleAttr3);
+        s_RoleAttr.sAttrPlus += s_RoleAttr2.sAttrPlus;
+        s_RoleAttr.sAttrPlus += s_RoleAttr3.sAttrPlus;
+        this.RoleAttr.sAttrPlus = s_RoleAttr.sAttrPlus;
+        this.RoleAttr.sFinial = s_RoleAttr.sFinial;
+    }
 
 	public void CalRoleAttr_Fight()
 	{
@@ -370,20 +370,20 @@ public class C_RoleDataEx : S_RoleData
 
 	private void CalRoleAttrPlus_OnPassiveSkill(S_RoleAttr roleAttr)
 	{
-		//List<int> passiveSkillList = Swd6Application.instance.m_SkillSystem.GetPassiveSkillList(this.BaseRoleData.ID);
-		//for (int i = 0; i < passiveSkillList.Count; i++)
-		//{
-		//	S_Skill data = GameDataDB.SkillDB.GetData(passiveSkillList[i]);
-		//	if (data != null && data.emItemType == ENUM_ItemSubType.Passive)
-		//	{
-		//		S_UseEffect data2 = GameDataDB.UseEffectDB.GetData(data.UseEffectID);
-		//		if (data2 != null && data2.SpecialID > 0)
-		//		{
-		//			this.DoRoleAttrPlus(roleAttr, data2.SpecialID);
-		//		}
-		//	}
-		//}
-	}
+        //List<int> passiveSkillList = GameEntry.Instance.m_SkillSystem.GetPassiveSkillList(this.BaseRoleData.ID);
+        //for (int i = 0; i < passiveSkillList.Count; i++)
+        //{
+        //    S_Skill data = GameDataDB.SkillDB.GetData(passiveSkillList[i]);
+        //    if (data != null && data.emItemType == ENUM_ItemSubType.Passive)
+        //    {
+        //        S_UseEffect data2 = GameDataDB.UseEffectDB.GetData(data.UseEffectID);
+        //        if (data2 != null && data2.SpecialID > 0)
+        //        {
+        //            this.DoRoleAttrPlus(roleAttr, data2.SpecialID);
+        //        }
+        //    }
+        //}
+    }
 
 	public void SetBuffs(Dictionary<int, Buff_Base> buffs, List<Buff_Base> noRemoveBuffs)
 	{
@@ -609,20 +609,20 @@ public class C_RoleDataEx : S_RoleData
 		{
 			roleAttr.sFinial.Def = 0;
 		}
-		//roleAttr.sFinial.MAttack = this.BaseRoleData.MAtk + this.BaseRoleData.MAtk * roleAttr.sAttrPlus.AddRatioMAtk / 100 + roleAttr.sAttrPlus.AddMAtk;
-		//if (roleAttr.sFinial.MAttack < 0)
-		//{
-		//	roleAttr.sFinial.MAttack = 0;
-		//}
-		//roleAttr.sFinial.MDef = this.BaseRoleData.MDef + this.BaseRoleData.MDef * roleAttr.sAttrPlus.AddRatioMDef / 100 + roleAttr.sAttrPlus.AddMDef;
-		//if (roleAttr.sFinial.MDef < 0)
-		//{
-		//	roleAttr.sFinial.MDef = 0;
-		//}
-		//roleAttr.sFinial.Agi = this.BaseRoleData.Agi + roleAttr.sAttrPlus.AddAgi;
-		//roleAttr.sFinial.Block = this.BaseRoleData.Block + roleAttr.sAttrPlus.AddBlock;
-		//roleAttr.sFinial.Dodge = this.BaseRoleData.Dodge + roleAttr.sAttrPlus.AddDodge;
-		roleAttr.sFinial.Critical = this.BaseRoleData.Critical + roleAttr.sAttrPlus.AddCritical;
+        roleAttr.sFinial.MAttack = this.BaseRoleData.MAtk + this.BaseRoleData.MAtk * roleAttr.sAttrPlus.AddRatioMAtk / 100 + roleAttr.sAttrPlus.AddMAtk;
+        if (roleAttr.sFinial.MAttack < 0)
+        {
+            roleAttr.sFinial.MAttack = 0;
+        }
+        roleAttr.sFinial.MDef = this.BaseRoleData.MDef + this.BaseRoleData.MDef * roleAttr.sAttrPlus.AddRatioMDef / 100 + roleAttr.sAttrPlus.AddMDef;
+        if (roleAttr.sFinial.MDef < 0)
+        {
+            roleAttr.sFinial.MDef = 0;
+        }
+        roleAttr.sFinial.Agi = this.BaseRoleData.Agi + roleAttr.sAttrPlus.AddAgi;
+        roleAttr.sFinial.Block = this.BaseRoleData.Block + roleAttr.sAttrPlus.AddBlock;
+        roleAttr.sFinial.Dodge = this.BaseRoleData.Dodge + roleAttr.sAttrPlus.AddDodge;
+        roleAttr.sFinial.Critical = this.BaseRoleData.Critical + roleAttr.sAttrPlus.AddCritical;
 		for (int i = 0; i < 4; i++)
 		{
 			roleAttr.sFinial.Element[i] += roleAttr.sAttrPlus.Element[i];

@@ -150,8 +150,8 @@ public class GameDataDB
         //GameDataDB.LoadFromFile<S_AnimationData>(GameDataDB.AnimationDB, dataPath, true);
         dataPath = GameDataDB.m_DBF_Path + "FormationData.dbf";
         GameDataDB.LoadFromFile<S_FormationData>(GameDataDB.FormationDB, dataPath, true);
-        //dataPath = GameDataDB.m_DBF_Path + "RoleAttrPlus.dbf";
-        //GameDataDB.LoadFromFile<S_RoleAttrPlus_Tmp>(GameDataDB.RoleAttrPlusDB, dataPath, true);
+        dataPath = GameDataDB.m_DBF_Path + "RoleAttrPlus.dbf";
+        GameDataDB.LoadFromFile<S_RoleAttrPlus_Tmp>(GameDataDB.RoleAttrPlusDB, dataPath, true);
         dataPath = GameDataDB.m_DBF_Path + "StartRoleData.dbf";
         GameDataDB.LoadFromFile<S_StartRoleData>(GameDataDB.StartRoleDB, dataPath, true);
         dataPath = GameDataDB.m_DBF_Path + "Level.dbf";

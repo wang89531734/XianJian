@@ -50,26 +50,42 @@ public class GameDataSystem
 
     public int[] m_ReviewStory;
 
+    /// <summary>
+    /// 战斗角色
+    /// </summary>
     public int[] m_FightRole;
 
     public float m_PlayTimes;
 
+    /// <summary>
+    /// 地图信息
+    /// </summary>
     public S_MapInfo m_MapInfo;
 
+    /// <summary>
+    /// 游戏标记
+    /// </summary>
     public S_GameFlag m_GameFlag;
 
     private C_RoleDataEx[] m_RoldData;
 
+    /// <summary>
+    /// 地图数据
+    /// </summary>
     private Dictionary<int, S_MapData> m_MapData;
 
+    /// <summary>
+    /// 伙伴角色
+    /// </summary>
     private List<S_PartyData> m_PartyRole;
 
     private List<int> m_TeamRoleList;
 
     private List<int> m_ActionSkillList;
 
-    //private Dictionary<int, S_MapMusicData> m_MapMusicData;
-
+    /// <summary>
+    /// 金钱
+    /// </summary>
     public int Money
     {
         get
@@ -83,8 +99,8 @@ public class GameDataSystem
             {
                 this.m_Money = 0;
             }
-            //Swd6Application.instance.m_AchievementSystem.AddAchievementByType(Enum_AchievementType.GetMoney, 0, 0, 0, this.m_Money);
-            //Swd6Application.instance.m_QuestSystem.Dirty();
+            //GameEntry.Instance.m_AchievementSystem.AddAchievementByType(Enum_AchievementType.GetMoney, 0, 0, 0, this.m_Money);
+            GameEntry.Instance.m_QuestSystem.Dirty();
         }
     }
 
@@ -141,7 +157,6 @@ public class GameDataSystem
         this.m_MapInfo = default(S_MapInfo);
         this.m_GameFlag = new S_GameFlag();
         this.m_MapData = new Dictionary<int, S_MapData>();
-        //this.m_MapMusicData = new Dictionary<int, S_MapMusicData>();
         this.m_PartyRole = new List<S_PartyData>();
         this.m_TeamRoleList = new List<int>();
         this.m_ActionSkillList = new List<int>();
@@ -430,10 +445,10 @@ public class GameDataSystem
             GameEntry.Instance.m_FormationSystem.UnlockFormation(flag);
             GameEntry.Instance.m_FormationSystem.AutoSetUnitData();
         }
-        //if (Swd6Application.instance.m_QuestSystem != null)
-        //{
-        //    Swd6Application.instance.m_QuestSystem.Dirty();
-        //}
+        if (GameEntry.Instance.m_QuestSystem != null)
+        {
+            GameEntry.Instance.m_QuestSystem.Dirty();
+        }
     }
 
     public void FlagOFF(int flag)
@@ -573,20 +588,12 @@ public class GameDataSystem
         return null;
     }
 
+    /// <summary>
+    /// 清除地图数据
+    /// </summary>
     public void ClearMapData()
     {
-        foreach (S_MapData current in this.m_MapData.Values)
-        {
-            //if (this.m_MapMusicData.ContainsKey(current.GUID))
-            //{
-            //    S_MapMusicData s_MapMusicData = this.m_MapMusicData[current.GUID];
-            //    current.MusicID1 = s_MapMusicData.MusicID1;
-            //    current.MusicID2 = s_MapMusicData.MusicID2;
-            //    current.emMusicMode = s_MapMusicData.emMusicMode;
-            //}
-        }
         this.m_MapData.Clear();
-        //this.m_MapMusicData.Clear();
     }
 
     //	public void ChangeMapMusic(int mapid, int music1, int music2, ENUM_MusicMode mode, ENUM_MusicChangeMode changeMode)
@@ -658,7 +665,7 @@ public class GameDataSystem
         }
         this.FlagON(roleId);
         this.m_RoldData[roleId - 1].BaseRoleData.IsJoin = true;
-        //this.m_RoldData[roleId - 1].BaseRoleData.IsFight = this.CheckCanFight();
+        this.m_RoldData[roleId - 1].BaseRoleData.IsFight = this.CheckCanFight();
         this.UpdatePartyRole();
     }
 

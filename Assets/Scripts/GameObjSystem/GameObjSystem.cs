@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using YouYou;
 
+/// <summary>
+/// 游戏物体系统
+/// </summary>
 public class GameObjSystem
 {
     private const string m_PlayerPrefPath = "Player";
@@ -84,11 +87,11 @@ public class GameObjSystem
         }
     }
 
-    //	public void Clear()
-    //	{
-    //		this.ClearMapObjData();
-    //		this.m_AllGameObjData.Clear();
-    //	}
+    public void Clear()
+    {
+        this.ClearMapObjData();
+        this.m_AllGameObjData.Clear();
+    }
 
     public void AddGameObjData(S_GameObjData objData)
     {

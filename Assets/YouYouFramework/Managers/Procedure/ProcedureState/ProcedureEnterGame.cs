@@ -17,7 +17,7 @@ namespace YouYou
         public override void OnEnter()
         {
             base.OnEnter();
-            Debug.Log("OnEnter ProcedureEnterGame");
+            Debug.Log("OnEnter Procedure进入游戏流程");
             GameEntry.UI.OpenUIForm(101);
         }
 
