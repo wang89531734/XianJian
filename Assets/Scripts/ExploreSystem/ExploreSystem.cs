@@ -271,30 +271,22 @@ public class ExploreSystem
         set
         {
             this.m_bLockPlayer = value;
-            //if (this.m_PlyerController != null)
-            //{
-            //    this.m_PlyerController.LockControl = this.m_bLockPlayer;
-            //}
-            //if (this.m_RidePetGameObj != null)
-            //{
-            //    M_RidePetController component = this.m_RidePetGameObj.GetComponent<M_RidePetController>();
-            //    component.LockControl = this.m_bLockPlayer;
-            //}
-            //if (!this.m_bLockPlayer)
-            //{
-            //    if (Swd6Application.instance.m_QuestSystem != null)
-            //    {
-            //        Swd6Application.instance.m_QuestSystem.Dirty();
-            //    }
-            //    this.TalkTarget = null;
-            //    UI_PartnerTalkDialog.Instance.Resume();
-            //    Swd6Application.instance.m_SkillSystem.CheckSkillLearnState(false);
-            //}
-            //else
-            //{
-            //    UI_PartnerTalkDialog.Instance.Stop();
-            //    UI_ZoneMap.Instance.Hide();
-            //}
+            if (this.m_PlyerController != null)
+            {
+                this.m_PlyerController.LockControl = this.m_bLockPlayer;
+            }
+            if (!this.m_bLockPlayer)
+            {
+                if (GameEntry.Instance.m_QuestSystem != null)
+                {
+                    GameEntry.Instance.m_QuestSystem.Dirty();
+                }
+                this.TalkTarget = null;
+            }
+            else
+            {
+                //UI_ZoneMap.Instance.Hide();
+            }
             GameInput.Clear();
         }
     }
@@ -431,8 +423,8 @@ public class ExploreSystem
     {
         bool lockPlayer = this.LockPlayer;
         this.LoadMapDate();
-        //this.LoadEventPrefab();
-        if (this.PlayerChangePoint != string.Empty)
+        //this.LoadEventPrefab();//后期需要修改
+        if (this.PlayerChangePoint != string.Empty)//获取出生点
         {
             GameObject gameObject2 = GameObject.Find(this.PlayerChangePoint);
             if (gameObject2 != null)
@@ -574,8 +566,8 @@ public class ExploreSystem
 
     public void ResetData()
     {
-        GameEntry.Instance.m_GameDataSystem.FlagOFF(40);
-        GameEntry.Instance.m_GameDataSystem.FlagOFF(41);
+        GameEntry.Instance.m_GameDataSystem.FlagOFF(40);//40应该是城镇
+        GameEntry.Instance.m_GameDataSystem.FlagOFF(41);//41应该是迷宫
     }
 
     public void LoadMapDate()
@@ -602,7 +594,6 @@ public class ExploreSystem
         {
             // UI_Explore.Instance.SetActionSkill(this.m_GameApp.m_GameDataSystem.m_PlayerID);
         }
-        //UI_Explore.Instance.SetActionSkillUIState();
     }
 
     //	public void ResetMapSoundVolume()
