@@ -401,7 +401,7 @@ public class ExploreSystem
 
     public void Initialize()
     {
-        this.m_BattleArea = new List<S_BattleArea>();
+        
     }
 
     //	public GameObject ShowMoveTarget(bool show, Vector3 targetPos)
@@ -429,7 +429,7 @@ public class ExploreSystem
 
     public void Begin()
     {
-        //bool lockPlayer = this.LockPlayer;
+        bool lockPlayer = this.LockPlayer;
         this.LoadMapDate();
         //this.LoadEventPrefab();
         if (this.PlayerChangePoint != string.Empty)
