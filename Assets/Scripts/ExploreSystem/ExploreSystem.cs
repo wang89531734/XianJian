@@ -1102,16 +1102,11 @@ public class ExploreSystem
             return;
         }
         this.m_MainCameraGameObj = gameObject;
-        //Component component = gameObject.GetComponent("M_MiniMapCamera");
-        //if (component != null)
-        //{
-        //    UnityEngine.Object.Destroy(component);
-        //}
-        //M_MouseOrbit component2 = gameObject.GetComponent<M_MouseOrbit>();
-        //if (component2 != null)
-        //{
-        //    component2.enabled = false;
-        //}
+        M_MouseOrbit component2 = gameObject.GetComponent<M_MouseOrbit>();
+        if (component2 != null)
+        {
+            component2.enabled = false;
+        }
         this.m_PlayerMouseOrbit = gameObject.GetComponent<M_PlayerMouseOrbit>();
         if (this.m_PlayerMouseOrbit == null)
         {

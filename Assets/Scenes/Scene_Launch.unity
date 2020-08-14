@@ -279,6 +279,7 @@ MonoBehaviour:
     BaseOrder: 6000
     Group: {fileID: 1794511368}
   m_InitializeOK: 0
+  m_MainCamera: {fileID: 1893041469}
   timeScale: 0
 --- !u!4 &1531371453
 Transform:
@@ -684,6 +685,7 @@ GameObject:
   - component: {fileID: 1893041470}
   - component: {fileID: 1893041469}
   - component: {fileID: 1893041468}
+  - component: {fileID: 1893041471}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -780,3 +782,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1893041471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893041467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ded0b4ef77f65ed42b0e96e351029f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  distance: 8
+  xSpeed: 50
+  ySpeed: 50
+  yMinLimit: -20
+  yMaxLimit: 80
+  distanceMin: 0.5
+  distanceMax: 25
+  x: 0
+  y: 0

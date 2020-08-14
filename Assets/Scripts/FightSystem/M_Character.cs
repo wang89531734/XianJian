@@ -33,7 +33,7 @@ public class M_Character : MonoBehaviour
 
     public string m_FBXName;
 
-    //public string m_HitPointName = RefPointType.point04.ToString();
+    public string m_HitPointName = RefPointType.point04.ToString();
 
     public GameObject m_FightPosition;
 
@@ -77,7 +77,7 @@ public class M_Character : MonoBehaviour
 
     public static int State_Giddy_Cycle = Animator.StringToHash("Base Layer.giddy_B");
 
-    //public FightRoleData m_FightRoleData = new FightRoleData();
+    public FightRoleData m_FightRoleData = new FightRoleData();
 
     public GameObject m_ActionTargetModel;
 
@@ -136,9 +136,10 @@ public class M_Character : MonoBehaviour
 
     public virtual void Initialize()
     {
+        UnityEngine.Debug.Log("执行这一步");
         this.m_RoleModel = base.gameObject;
         this.m_ModelTransform = base.transform;
-        //this.m_HitTransform = TransformTool.FindChild(this.m_ModelTransform, this.m_HitPointName);
+        this.m_HitTransform = TransformTool.FindChild(this.m_ModelTransform, this.m_HitPointName);
         //if (this.m_HitTransform == null)
         //{
         //    UnityEngine.Debug.LogWarning("Character Initialize, Cant Get HitPoint Reference.");
@@ -1001,10 +1002,10 @@ public class M_Character : MonoBehaviour
     {
     }
 
-    //	public bool IsDead()
-    //	{
-    //		return this.m_FightRoleData == null || this.m_FightRoleData.HP <= 0;
-    //	}
+    public bool IsDead()
+    {
+        return this.m_FightRoleData == null || this.m_FightRoleData.HP <= 0;
+    }
 
     //	public virtual bool IsStandby()
     //	{

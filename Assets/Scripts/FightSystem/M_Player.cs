@@ -124,6 +124,7 @@ public class M_Player : M_Character
 
     public void InitRole(int roleID)
     {
+        Debug.Log("应该执行这一步");
         //this.m_emFight = M_Character.Enum_FightStatus.Idle;
         //this.m_CharacterController.enabled = true;
         //this.m_EnableCharacterContoller = true;
@@ -1609,10 +1610,10 @@ public class M_Player : M_Character
     //		return array;
     //	}
 
-    //	public void SetIsControlCharacter(bool bIsControlCharacter)
-    //	{
-    //		this.m_bIsControlCharacter = bIsControlCharacter;
-    //	}
+    public void SetIsControlCharacter(bool bIsControlCharacter)
+    {
+        this.m_bIsControlCharacter = bIsControlCharacter;
+    }
 
     //	public void SetFormationData(FormationData fData, int unitIdx)
     //	{

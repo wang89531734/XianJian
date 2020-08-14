@@ -33,8 +33,8 @@ public class M_FightCameraController : MonoBehaviour
 	{
 		this.m_GameObject = base.gameObject;
 		this.m_Transform = base.transform;
-		//this.m_Camera = base.camera;
-	}
+        this.m_Camera = gameObject.GetComponent<Camera>();
+    }
 
 	public virtual void SetStoryMode(bool isStory)
 	{

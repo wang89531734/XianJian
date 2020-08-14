@@ -55,6 +55,7 @@ public class M_Mob : M_Character
         float num = UnityEngine.Random.Range(-1f, 1f);
         //this.m_ActionCDTimer = base.GetActionCD() + num;
         this.m_HurtAudioSource = base.gameObject.AddComponent<AudioSource>();
+        UnityEngine.Debug.Log("执行这一步");
     }
 
     //	public virtual void InitMob(int MobGUID)

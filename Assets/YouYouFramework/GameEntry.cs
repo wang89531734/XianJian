@@ -71,6 +71,9 @@ namespace YouYou
         [HideInInspector]
         public bool m_InitializeOK;
 
+        [Header("主摄像机")]
+        public Camera m_MainCamera;
+
         #region 时间缩放
         [CustomValueDrawer("SetTimeScale")]
         public float timeScale;
