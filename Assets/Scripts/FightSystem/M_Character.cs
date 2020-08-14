@@ -85,7 +85,7 @@ public class M_Character : MonoBehaviour
 
     public float m_ActionCDTimer;
 
-    //public List<FightCommand> m_CommandQueue = new List<FightCommand>();
+    public List<FightCommand> m_CommandQueue = new List<FightCommand>();
 
     public Dictionary<int, Buff_Base> m_BuffList = new Dictionary<int, Buff_Base>();
 
@@ -99,7 +99,7 @@ public class M_Character : MonoBehaviour
 
     public float m_RunToTargetTimer;
 
-    //public ENUM_FightActionType m_emLastActionType;
+    public ENUM_FightActionType m_emLastActionType;
 
     public bool m_bNoMoveAttack = true;
 
@@ -136,17 +136,16 @@ public class M_Character : MonoBehaviour
 
     public virtual void Initialize()
     {
-        UnityEngine.Debug.Log("执行这一步");
         this.m_RoleModel = base.gameObject;
         this.m_ModelTransform = base.transform;
         this.m_HitTransform = TransformTool.FindChild(this.m_ModelTransform, this.m_HitPointName);
-        //if (this.m_HitTransform == null)
-        //{
-        //    UnityEngine.Debug.LogWarning("Character Initialize, Cant Get HitPoint Reference.");
-        //    this.m_HitTransform = this.m_ModelTransform;
-        //}
+        if (this.m_HitTransform == null)
+        {
+            UnityEngine.Debug.LogWarning("Character Initialize, Cant Get HitPoint Reference.");
+            this.m_HitTransform = this.m_ModelTransform;
+        }
         //this.m_Animator = base.GetComponent<Animator>();
-        //this.ClearCommand();
+        this.ClearCommand();
         //this.m_CharacterController = base.GetComponent<CharacterController>();
         //if (this.m_CharacterController != null)
         //{
@@ -205,7 +204,7 @@ public class M_Character : MonoBehaviour
         //{
         //    UnityEngine.Object.Destroy(component5);
         //}
-        //this.m_emLastActionType = ENUM_FightActionType.Null;
+        this.m_emLastActionType = ENUM_FightActionType.Null;
     }
 
     //	public void ModelDropCheck()
@@ -440,14 +439,14 @@ public class M_Character : MonoBehaviour
     //		this.CrossFadeAnimation(this.State_Standby, 0.1f);
     //	}
 
-    //	public virtual void ClearCommand()
-    //	{
-    //		for (int i = 0; i < this.m_CommandQueue.Count; i++)
-    //		{
-    //			this.m_CommandQueue[i].Clear();
-    //		}
-    //		this.m_CommandQueue.Clear();
-    //	}
+    public virtual void ClearCommand()
+    {
+        for (int i = 0; i < this.m_CommandQueue.Count; i++)
+        {
+            this.m_CommandQueue[i].Clear();
+        }
+        this.m_CommandQueue.Clear();
+    }
 
     //	public virtual Vector3 GetModelPosition()
     //	{
