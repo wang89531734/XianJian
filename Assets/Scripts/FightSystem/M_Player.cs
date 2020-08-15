@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using YouYou;
 
 public class M_Player : M_Character
 {
@@ -124,8 +125,7 @@ public class M_Player : M_Character
 
     public void InitRole(int roleID)
     {
-        Debug.Log("应该执行这一步");
-        //this.m_emFight = M_Character.Enum_FightStatus.Idle;
+        this.m_emFight = M_Character.Enum_FightStatus.Idle;
         //this.m_CharacterController.enabled = true;
         //this.m_EnableCharacterContoller = true;
         this.m_RoleID = roleID;
@@ -173,12 +173,12 @@ public class M_Player : M_Character
         //this.m_AIDebuffSkills_1.Reverse();
         //this.m_AIDebuffSkills_2.Sort();
         //this.m_AIDebuffSkills_2.Reverse();
-        //this.m_RoleDataEx = Swd6Application.instance.m_GameDataSystem.GetRoleData(this.m_RoleID);
-        //if (this.m_RoleDataEx == null)
-        //{
-        //    Debug.LogWarning("m_RoleDataEx is Null m_RoleID = " + this.m_RoleID);
-        //    return;
-        //}
+        this.m_RoleDataEx = GameEntry.Instance.m_GameDataSystem.GetRoleData(this.m_RoleID);
+        if (this.m_RoleDataEx == null)
+        {
+            Debug.LogWarning("m_RoleDataEx is Null m_RoleID = " + this.m_RoleID);
+            return;
+        }
         //ItemData equipItemData = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Weapon);
         //this.m_emWeaponElemntType = this.m_RoleDataEx.BaseRoleData.emWeaponElemntType;
         //this.m_MagicItem = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Talisman);
@@ -194,7 +194,7 @@ public class M_Player : M_Character
         //        this.m_MagicItem_Active = new MagicItem_Active(this, this.m_MagicItem);
         //    }
         //}
-        //this.m_CharacterName = this.m_RoleDataEx.BaseRoleData.FamilyName + this.m_RoleDataEx.BaseRoleData.Name;
+        this.m_CharacterName = this.m_RoleDataEx.BaseRoleData.FamilyName + this.m_RoleDataEx.BaseRoleData.Name;
         //this.m_BeforeLevelUpInfo = new FightLevelUpInfo(this.m_RoleDataEx);
         this.InitFightRoleData();
         //this.SetPassiveSkill(roleID);

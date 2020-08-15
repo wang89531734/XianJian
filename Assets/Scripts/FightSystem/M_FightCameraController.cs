@@ -31,6 +31,7 @@ public class M_FightCameraController : MonoBehaviour
 
 	protected virtual void Start()
 	{
+        Debug.Log("Ö´ÐÐ");
 		this.m_GameObject = base.gameObject;
 		this.m_Transform = base.transform;
         this.m_Camera = gameObject.GetComponent<Camera>();

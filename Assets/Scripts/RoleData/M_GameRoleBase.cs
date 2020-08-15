@@ -502,15 +502,15 @@ public abstract class M_GameRoleBase : MonoBehaviour
                     //    UnityEngine.Object.Destroy(base.gameObject);
                     //    return;
                     //}
-                    if (this.m_GameObjData.Pos == Vector3.zero)
-                    {
-                        this.m_GameObjData.Pos = this.GetPos();
-                    }
-                    this.SetPos(this.m_GameObjData.Pos);
-                    if (this.m_GameObjData.Dir != 1000f)
-                    {
-                        this.Dir = this.m_GameObjData.Dir;
-                    }
+                    //if (this.m_GameObjData.Pos == Vector3.zero)
+                    //{
+                    //    this.m_GameObjData.Pos = this.GetPos();
+                    //}
+                    //this.SetPos(this.m_GameObjData.Pos);
+                    //if (this.m_GameObjData.Dir != 1000f)
+                    //{
+                    //    this.Dir = this.m_GameObjData.Dir;
+                    //}
                     //if (this.HideRole)
                     //{
                     //    this.HideRole = true;
