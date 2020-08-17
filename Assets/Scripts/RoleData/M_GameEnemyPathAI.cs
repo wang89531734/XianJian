@@ -94,8 +94,6 @@ public class M_GameEnemyPathAI : AIPath
 
     private Animator m_Anim;
 
-    private AnimatorStateInfo m_CurrentBaseState;
-
     private M_GameRoleMotion m_Motion;
 
     private S_NpcAI m_NpcAI;

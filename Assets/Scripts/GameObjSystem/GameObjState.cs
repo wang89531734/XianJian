@@ -1,5 +1,8 @@
 using System;
 
+/// <summary>
+/// ÓÎÏ·ÎïÌå×´Ì¬
+/// </summary>
 public class GameObjState
 {
 	private ENUM_GameObjFlag m_ObjFlag;

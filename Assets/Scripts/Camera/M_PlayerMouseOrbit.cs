@@ -6,25 +6,19 @@ public class M_PlayerMouseOrbit : MonoBehaviour
 {
 	public Transform m_Target;
 
-	private float m_TargetHeight;
-
-	private bool m_IsLerp;
-
-	public float m_YPositionLimit = 0.02f;
-
 	public float m_Distance = 5.5f;
 
 	public float m_XSpeed = 120f;
 
 	public float m_YSpeed = 120f;
 
-	public float m_YMinLimit = -20f;
+	public float m_YMinLimit = -15f;
 
-	public float m_YMaxLimit = 80f;
+	public float m_YMaxLimit = 50f;
 
-	public float m_DistanceMin = 1f;
+	public float m_DistanceMin = 1.5f;
 
-	public float m_DistanceMax = 5.5f;
+	public float m_DistanceMax = 7f;
 
 	public float m_XAngle;
 
@@ -32,13 +26,13 @@ public class M_PlayerMouseOrbit : MonoBehaviour
 
 	public float m_SnapAngle;
 
-	public float m_TurnSpeed = 0.05f;
+	public float m_TurnSpeed = 0.03f;
 
 	public float m_FreeMoveSpeed = 10f;
 
-	public bool m_LockMode;
+	public Vector3 m_LookOffset = Vector3.zero;
 
-	public bool m_BigMapMode;
+	public bool m_LockMode;
 
 	public bool m_NoControl;
 
@@ -52,23 +46,31 @@ public class M_PlayerMouseOrbit : MonoBehaviour
 
 	private Transform m_Transform;
 
-	private float m_DistanceByPhysics;
+	public float m_DistanceByPhysics;
 
 	private float m_yVelocity;
 
+	public float m_RMosuePressTime;
+
+	public float m_LMosuePressTime;
+
 	public float m_Damping = 10f;
 
-	public float m_ZoomDamping = 0.3f;
+	public float m_ZoomDamping = 0.05f;
 
 	public bool m_Isphysics = true;
 
-	public bool m_ShootMode
-	{
-		get;
-		set;
-	}
+	public float m_BeforeHitOffset = 2f;
+
+	public float m_AfterHitOffset = 0.5f;
 
 	private void Start()
+	{
+		this.m_Transform = base.transform;
+		this.SetSaveCameraData(true);
+	}
+
+	public void Init()
 	{
 		Vector3 eulerAngles = base.transform.eulerAngles;
 		this.m_XAngle = eulerAngles.y;
@@ -78,27 +80,6 @@ public class M_PlayerMouseOrbit : MonoBehaviour
 			this.m_XAngle = GameEntry.Instance.m_ExploreSystem.PlayerController.Dir;
 			this.m_YAngle = 10f;
 		}
-		if (GameEntry.Instance.m_ExploreSystem.m_SetCemeraInfo)
-		{
-            GameEntry.Instance.m_ExploreSystem.m_SetCemeraInfo = false;
-			this.m_XAngle = GameEntry.Instance.m_ExploreSystem.m_CameraXAngle;
-			this.m_YAngle = GameEntry.Instance.m_ExploreSystem.m_CameraYAngle;
-			if (GameEntry.Instance.m_ExploreSystem.m_CameraDist > 0f)
-			{
-				this.m_Distance = GameEntry.Instance.m_ExploreSystem.m_CameraDist;
-			}
-		}
-		if (this.m_BigMapMode)
-		{
-			this.m_Distance = 8f;
-			this.m_DistanceMax = 8f;
-			this.m_YAngle = 30.5f;
-		}
-		//if (base.rigidbody)
-		//{
-		//	base.rigidbody.freezeRotation = true;
-		//}
-		this.m_Transform = base.transform;
 		this.m_DistanceByPhysics = this.m_Distance;
 		if (this.m_Target != null)
 		{
@@ -106,31 +87,69 @@ public class M_PlayerMouseOrbit : MonoBehaviour
 			Vector3 point = new Vector3(0f, 0f, -this.m_Distance);
 			Vector3 position = rotation * point + this.m_Target.position;
 			this.m_Transform.position = position;
-			this.m_TargetHeight = this.m_Target.position.y;
 		}
 	}
 
-    public void Init()
-    {
-        Vector3 eulerAngles = base.transform.eulerAngles;
-        this.m_XAngle = eulerAngles.y;
-        this.m_YAngle = eulerAngles.x;
-        if (GameEntry.Instance.m_ExploreSystem.PlayerController)
-        {
-            this.m_XAngle = GameEntry.Instance.m_ExploreSystem.PlayerController.Dir;
-            this.m_YAngle = 10f;
-        }
-        this.m_DistanceByPhysics = this.m_Distance;
-        if (this.m_Target != null)
-        {
-            Quaternion rotation = Quaternion.Euler(this.m_YAngle, this.m_XAngle, 0f);
-            Vector3 point = new Vector3(0f, 0f, -this.m_Distance);
-            Vector3 position = rotation * point + this.m_Target.position;
-            this.m_Transform.position = position;
-        }
-    }
+	public void SetSaveCameraData(bool clear)
+	{
+		if (GameEntry.Instance == null)
+		{
+			return;
+		}
+		if (GameEntry.Instance.m_ExploreSystem.m_SetCemeraInfo)
+		{
+			if (clear)
+			{
+                GameEntry.Instance.m_ExploreSystem.m_SetCemeraInfo = false;
+			}
+			this.m_XAngle = GameEntry.Instance.m_ExploreSystem.m_CameraXAngle;
+			this.m_YAngle = GameEntry.Instance.m_ExploreSystem.m_CameraYAngle;
+			if (GameEntry.Instance.m_ExploreSystem.m_CameraDist > 0f)
+			{
+				this.m_Distance = GameEntry.Instance.m_ExploreSystem.m_CameraDist;
+			}
+			if (GameEntry.Instance.m_ExploreSystem.m_CameraMinDist > 0f)
+			{
+				this.m_DistanceMin = GameEntry.Instance.m_ExploreSystem.m_CameraMinDist;
+			}
+			if (GameEntry.Instance.m_ExploreSystem.m_CameraMaxDist > 0f)
+			{
+				this.m_DistanceMax = GameEntry.Instance.m_ExploreSystem.m_CameraMaxDist;
+			}
+			if (GameEntry.Instance.m_ExploreSystem.m_CameraYMinLimit != 0f)
+			{
+				this.m_YMinLimit = GameEntry.Instance.m_ExploreSystem.m_CameraYMinLimit;
+			}
+			if (GameEntry.Instance.m_ExploreSystem.m_CameraYMaxLimit != 0f)
+			{
+				this.m_YMaxLimit = GameEntry.Instance.m_ExploreSystem.m_CameraYMaxLimit;
+			}
+			if (GameEntry.Instance.m_ExploreSystem.m_CameraIsphysics != 0)
+			{
+				if (GameEntry.Instance.m_ExploreSystem.m_CameraIsphysics == 1)
+				{
+					this.m_Isphysics = true;
+				}
+				else
+				{
+					this.m_Isphysics = false;
+				}
+			}
+			if (GameEntry.Instance.m_ExploreSystem.m_CameraLock != 0)
+			{
+				if (GameEntry.Instance.m_ExploreSystem.m_CameraLock == 1)
+				{
+					this.m_LockMode = true;
+				}
+				else
+				{
+					this.m_LockMode = false;
+				}
+			}
+		}
+	}
 
-    private void UpdateFreeControl()
+	private void UpdateFreeControl()
 	{
 		Vector3 vector = new Vector3(0f, 0f, 0f);
 		if (Input.GetMouseButton(1))
@@ -195,7 +214,6 @@ public class M_PlayerMouseOrbit : MonoBehaviour
 		{
 			return;
 		}
-		bool lockPlayer = GameEntry.Instance.m_ExploreSystem.LockPlayer;
 		Camera component = base.GetComponent<Camera>();
 		if (component && !component.enabled)
 		{
@@ -210,134 +228,89 @@ public class M_PlayerMouseOrbit : MonoBehaviour
 		{
 			return;
 		}
-		bool flag = false;
-		bool flag2 = false;
 		if (Input.GetMouseButton(1))
 		{
+			this.m_RMosuePressTime += Time.deltaTime;
+		}
+		if (Input.GetMouseButtonUp(1))
+		{
+			this.m_RMosuePressTime = 0f;
+		}
+		if (this.m_RMosuePressTime >= 0.05f)
+		{
 			this.m_Snapping = false;
-			flag = true;
-			if (!lockPlayer || !this.m_ShootMode)
+			if (!this.m_LockMode)
 			{
 				this.m_XAngle += Input.GetAxis("Mouse X") * this.m_XSpeed * this.m_TurnSpeed;
-				if (!this.m_LockMode)
-				{
-					this.m_YAngle -= Input.GetAxis("Mouse Y") * this.m_YSpeed * this.m_TurnSpeed;
-				}
+				this.m_YAngle -= Input.GetAxis("Mouse Y") * this.m_YSpeed * this.m_TurnSpeed;
 			}
 		}
-
-		if (!lockPlayer || !this.m_ShootMode)
+		if (!this.m_LockMode)
 		{
 			if (GameInput.GetKeyActionPress(KEY_ACTION.CAMERA_LEFT))
 			{
-				flag2 = true;
 				this.m_XAngle -= this.m_XSpeed * Time.deltaTime;
 			}
 			if (GameInput.GetKeyActionPress(KEY_ACTION.CAMERA_RIGHT))
 			{
-				flag2 = true;
 				this.m_XAngle += this.m_XSpeed * Time.deltaTime;
 			}
-			if (!this.m_LockMode)
+			if (GameInput.GetKeyActionPress(KEY_ACTION.CAMERA_UP))
 			{
-				if (GameInput.GetKeyActionPress(KEY_ACTION.CAMERA_UP))
-				{
-					flag2 = true;
-					this.m_YAngle += this.m_YSpeed * 0.01f;
-				}
-				if (GameInput.GetKeyActionPress(KEY_ACTION.CAMERA_DOWN))
-				{
-					flag2 = true;
-					this.m_YAngle -= this.m_YSpeed * 0.01f;
-				}
+				this.m_YAngle += this.m_YSpeed * 0.01f;
+			}
+			if (GameInput.GetKeyActionPress(KEY_ACTION.CAMERA_DOWN))
+			{
+				this.m_YAngle -= this.m_YSpeed * 0.01f;
 			}
 		}
 		this.m_YAngle = M_PlayerMouseOrbit.ClampAngle(this.m_YAngle, this.m_YMinLimit, this.m_YMaxLimit);
 		this.m_XAngle = M_PlayerMouseOrbit.ClampAngle360(this.m_XAngle);
 		Quaternion rotation = Quaternion.Euler(this.m_YAngle, this.m_XAngle, 0f);
-		if (!lockPlayer && !this.m_LockMode)
+		if (!this.m_LockMode)
 		{
 			this.m_Distance = Mathf.Clamp(this.m_Distance - Input.GetAxis("Mouse ScrollWheel") * 5f, this.m_DistanceMin, this.m_DistanceMax);
-			if (GameInput.GetKeyActionPress(KEY_ACTION.CAMERA_IN))
+			if (!GameEntry.Instance.m_ExploreSystem.LockPlayer)
 			{
-				this.m_Distance = Mathf.Clamp(this.m_Distance - 0.1f, this.m_DistanceMin, this.m_DistanceMax);
-			}
-			if (GameInput.GetKeyActionPress(KEY_ACTION.CAMERA_OUT))
-			{
-				this.m_Distance = Mathf.Clamp(this.m_Distance - -0.1f, this.m_DistanceMin, this.m_DistanceMax);
+				if (GameInput.GetKeyActionPress(KEY_ACTION.CAMERA_IN))
+				{
+					this.m_Distance = Mathf.Clamp(this.m_Distance - 0.1f, this.m_DistanceMin, this.m_DistanceMax);
+				}
+				if (GameInput.GetKeyActionPress(KEY_ACTION.CAMERA_OUT))
+				{
+					this.m_Distance = Mathf.Clamp(this.m_Distance - -0.1f, this.m_DistanceMin, this.m_DistanceMax);
+				}
 			}
 		}
 		if (this.m_AtuoFollow)
 		{
-			if (GameInput.GetKeyActionDown(KEY_ACTION.SNAP) && !this.m_Snapping)
-			{
-				this.m_SnapAngle = GameEntry.Instance.m_ExploreSystem.PlayerController.Dir;
-				this.velocity = Vector3.zero;
-				this.m_Snapping = true;
-			}
-			if (!flag && !flag2)
-			{
-				this.m_YAngle = Mathf.Lerp(this.m_YAngle, 10f, Time.deltaTime * 0.5f);
-				rotation = this.SetUpRotation(this.m_Target.position);
-				this.m_Transform.rotation = rotation;
-			}
 		}
-		Vector3 point = new Vector3(0f, 0f, -this.m_Distance);
-		Vector3 vector = rotation * point + this.m_Target.position;
-		bool flag3 = false;
-		int num = 1024;
+		Vector3 point = new Vector3(0f, -0.5f, -(this.m_Distance + this.m_BeforeHitOffset));
+		Vector3 vector = this.m_Target.position + this.m_LookOffset;
+		Vector3 vector2 = rotation * point + vector;
+		int num = 32768;
 		num |= 4;
-		num |= 512;
 		num = ~num;
 		this.m_Transform.rotation = rotation;
 		if (this.m_Isphysics)
 		{
 			RaycastHit raycastHit;
-			if (Physics.Linecast(this.m_Target.position, vector, out raycastHit, num))
+			if (Physics.Linecast(vector, vector2, out raycastHit, num))
 			{
-				flag3 = true;
-				if (raycastHit.collider.tag == "Player")
+				if (raycastHit.collider.tag != "Npc")
 				{
-					flag3 = false;
+					float num2 = (vector - raycastHit.point).magnitude;
+					num2 = Mathf.Clamp(num2 - this.m_AfterHitOffset, this.m_DistanceMin, this.m_DistanceMax);
+					this.m_DistanceByPhysics = Mathf.SmoothDamp(this.m_DistanceByPhysics, num2, ref this.m_yVelocity, this.m_ZoomDamping);
 				}
-				if (raycastHit.collider.tag == "Npc")
-				{
-					flag3 = false;
-				}
-				if (raycastHit.collider.tag == "Event")
-				{
-					flag3 = false;
-				}
-			}
-			if (flag3)
-			{
-				float num2 = (this.m_Target.position - raycastHit.point).magnitude;
-				num2 = Mathf.Clamp(num2 - 1f, this.m_DistanceMin, this.m_DistanceMax);
-				this.m_DistanceByPhysics = Mathf.SmoothDamp(this.m_DistanceByPhysics, num2, ref this.m_yVelocity, this.m_ZoomDamping);
 			}
 			else if (this.m_DistanceByPhysics != this.m_Distance)
 			{
 				this.m_DistanceByPhysics = Mathf.SmoothDamp(this.m_DistanceByPhysics, this.m_Distance, ref this.m_yVelocity, this.m_ZoomDamping);
 			}
-			vector = rotation * new Vector3(0f, 0f, -this.m_DistanceByPhysics) + this.m_Target.position;
+			vector2 = rotation * new Vector3(0f, 0f, -this.m_DistanceByPhysics) + vector;
 		}
-		if (Mathf.Abs(this.m_Target.position.y - this.m_TargetHeight) > this.m_YPositionLimit)
-		{
-			this.m_IsLerp = true;
-		}
-		if (this.m_IsLerp)
-		{
-			this.m_Transform.position = new Vector3(vector.x, Mathf.Lerp(this.m_Transform.position.y, vector.y, Time.deltaTime * this.m_Damping), vector.z);
-			if (Mathf.Abs(this.m_Transform.position.y - vector.y) < 0.01f)
-			{
-				this.m_IsLerp = false;
-			}
-		}
-		else
-		{
-			this.m_Transform.position = vector;
-		}
-		this.m_TargetHeight = this.m_Target.position.y;
+		this.m_Transform.position = vector2;
 	}
 
 	public Quaternion SetUpRotation(Vector3 centerPos)
@@ -412,36 +385,25 @@ public class M_PlayerMouseOrbit : MonoBehaviour
 		return Mathf.Abs(b - a);
 	}
 
-	public void SetFlyMode()
-	{
-		this.m_LockMode = true;
-		this.m_Distance = 8f;
-		this.m_DistanceMax = 8f;
-		this.m_YAngle = 31.5f;
-	}
-
-	public void SetBigMapMode()
-	{
-		this.m_LockMode = true;
-		this.m_BigMapMode = true;
-		this.m_Distance = 8f;
-		this.m_DistanceMax = 8f;
-		this.m_YAngle = 30.5f;
-	}
-
 	public void SetNormalMode()
 	{
 		this.m_LockMode = false;
-		this.m_BigMapMode = false;
 		this.m_NoControl = false;
-		this.m_DistanceMax = 5.5f;
+		this.m_Isphysics = true;
+		this.m_DistanceMin = 1.5f;
+		this.m_DistanceMax = 7f;
+		this.m_YMinLimit = -15f;
+		this.m_YMaxLimit = 50f;
+		this.m_TurnSpeed = 0.03f;
+		this.m_LookOffset = Vector3.zero;
 		if (this.m_Distance > this.m_DistanceMax)
 		{
 			this.m_Distance = this.m_DistanceMax;
 		}
+		this.SetSaveCameraData(false);
 	}
 
-	public void SetLookTargetMode(string target1, string target2)
+	public void SetLookTargetMode(string target1, string target2, float dir)
 	{
 		this.m_NoControl = true;
 		GameObject gameObject = GameObject.Find(target1);
@@ -458,6 +420,12 @@ public class M_PlayerMouseOrbit : MonoBehaviour
 		}
 		this.m_Transform.position = gameObject.transform.position;
 		this.m_Transform.LookAt(gameObject2.transform);
+		if (dir != 0f)
+		{
+			Vector3 eulerAngles = this.m_Transform.eulerAngles;
+			eulerAngles.y = dir;
+			this.m_Transform.eulerAngles = eulerAngles;
+		}
 	}
 
 	public void TurnLeft()

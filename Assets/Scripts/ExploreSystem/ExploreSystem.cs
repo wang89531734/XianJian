@@ -65,6 +65,18 @@ public class ExploreSystem
 
     public float m_CameraDist;
 
+    public float m_CameraMinDist;
+
+    public float m_CameraMaxDist;
+
+    public float m_CameraYMinLimit;
+
+    public float m_CameraYMaxLimit;
+
+    public int m_CameraIsphysics;
+
+    public int m_CameraLock;
+
     public float m_ResourceUnLoadTime;
 
     public bool m_ResourceUnLoad;
@@ -121,8 +133,6 @@ public class ExploreSystem
     //private UI_GameFlagMenu m_UI_GameFlagMenu;
 
     //public List<S_GameObjData> m_GhostEyeObjList = new List<S_GameObjData>();
-
-    public GameObject m_MapSoundEvent;
 
     private string m_PlayerChangePoint = string.Empty;
 
@@ -423,7 +433,7 @@ public class ExploreSystem
     {
         bool lockPlayer = this.LockPlayer;
         this.LoadMapDate();
-        //this.LoadEventPrefab();//后期需要修改
+        //this.LoadEventPrefab();//后期需要修改 加载位置坐标和遮挡控制器
         if (this.PlayerChangePoint != string.Empty)//获取出生点
         {
             GameObject gameObject2 = GameObject.Find(this.PlayerChangePoint);
@@ -439,13 +449,14 @@ public class ExploreSystem
         this.m_PrePosUpdateTime = 0f;
         this.m_PlayerUpdateTime = 1f;
         this.PlayerController.m_NoJump = false;
-        ////this.AmberPigObj = this.m_GameApp.m_GameObjSystem.CreateAmberPigGameObj();
-        //this.EnableMainCamera(true);
+        //this.m_PlyerController.m_Controller.enabled = false;
+        //this.AmberPigObj = this.m_GameApp.m_GameObjSystem.CreateAmberPigGameObj();//加载宠物
+        this.EnableMainCamera(true);
         this.SetCameraLookTarget(true);
-        ////this.SetAmberPigTargetPos();
-        ///GameEntry.Instance.m_GameObjSystem.LoadMapObj(GameEntry.Instance.m_GameDataSystem.m_MapInfo.MapID);
-        //GameMapMobSystem.Instance.SetTarget(this.PlayerObj);
-        //ExploreMiniMapSystem.Instance.CreateMapData(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
+        //this.SetAmberPigTargetPos();//宠物跟随
+        //GameEntry.Instance.m_GameObjSystem.LoadMapObj(GameEntry.Instance.m_GameDataSystem.m_MapInfo.MapID);//加载游戏物体
+        //GameMapMobSystem.Instance.SetTarget(this.PlayerObj);//给怪物设置敌人
+        //ExploreMiniMapSystem.Instance.CreateMapData(this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);//创建小地图
         //this.m_GameApp.m_SaveloadSystem.m_Loading = false;
         //if (this.m_PlayMusicDelayTime <= 0f)
         //{
@@ -454,20 +465,20 @@ public class ExploreSystem
         GameInput.Clear();
         //this.m_HideMap = 0;
         //this.m_RainEffect = null;
-        //this.ClearNoFightData(true);
+        //this.ClearNoFightData(true);//清理战斗数据
         //this.m_GameApp.m_GameDataSystem.ReLoadObjData();
         //if (this.m_GameApp.m_GameDataSystem.GetFlag(52))
         //{
-        //    this.SetPlayerPointLight(true);
+        //    this.SetPlayerPointLight(true);//设置点光源
         //}
         //if (this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID == 64 && !this.m_GameApp.m_GameDataSystem.GetFlag(56))
         //{
-        //    this.SetMapRainEffect();
+        //    this.SetMapRainEffect();//设置下雨
         //}
-        //this.LockPlayer = lockPlayer;
-        //this.ClearBattleInfo();
+        this.LockPlayer = lockPlayer;
+        //this.ClearBattleInfo();//清理战斗数据
         //this.SpecialSetting();//特别设置
-        //this.ChangeSky();
+        //this.ChangeSky();//更改天空
     }
 
     public void LoadEventPrefab()
@@ -475,29 +486,13 @@ public class ExploreSystem
         if (this.m_MapData == null)
         {
             return;
-        }
-        //string[] ignoreName = new string[]
-        //{
-        //    "Extra_Mask_MAP78",
-        //    "Extra_Mask_MAP66_01",
-        //    "Extra_Mask_MAP59_01"
-        //};
+        }     
         string name;
         for (int i = 1; i <= 5; i++)
         {
             name = this.m_MapData.Name + "_Event_" + i.ToString();
-            GameObject mapEvent = ResourcesManager.Instance.GetMapEvent(name);
-            //if (mapEvent != null)
-            //{
-            //    TransformTool.SetLayerRecursively(mapEvent.transform, 2, ignoreName);
-            //}
+            GameObject mapEvent = ResourcesManager.Instance.GetMapEvent(name);         
         }
-        //name = this.m_MapData.Name + "_SoundEvent";
-        //if (this.m_MapSoundEvent != null)
-        //{
-        //    UnityEngine.Object.Destroy(this.m_MapSoundEvent);
-        //}
-        //this.m_MapSoundEvent = ResourcesManager.Instance.GetMapSoundEvent(name);
     }
 
     //	public void End()
@@ -1091,52 +1086,32 @@ public class ExploreSystem
         {
             return;
         }
-        GameObject gameObject = GameObject.Find("Main Camera");
-        if (gameObject == null)
-        {
-            gameObject = GameObject.FindWithTag("MainCamera");
-        }
-        if (gameObject == null)
-        {
-            Debug.LogError("找不到Main Camera");
-            return;
-        }
-        this.m_MainCameraGameObj = gameObject;
-        M_MouseOrbit component2 = gameObject.GetComponent<M_MouseOrbit>();
+        this.m_MainCameraGameObj = GameEntry.Instance.m_MainCamera.gameObject;
+        M_MouseOrbit component2 = GameEntry.Instance.m_MainCamera.gameObject.GetComponent<M_MouseOrbit>();
         if (component2 != null)
         {
             component2.enabled = false;
         }
-        this.m_PlayerMouseOrbit = gameObject.GetComponent<M_PlayerMouseOrbit>();
+        this.m_PlayerMouseOrbit = GameEntry.Instance.m_MainCamera.gameObject.GetComponent<M_PlayerMouseOrbit>();
         if (this.m_PlayerMouseOrbit == null)
         {
-            this.m_PlayerMouseOrbit = gameObject.AddComponent<M_PlayerMouseOrbit>();
+            this.m_PlayerMouseOrbit = GameEntry.Instance.m_MainCamera.gameObject.AddComponent<M_PlayerMouseOrbit>();
         }
+
         if (bInit)
         {
             this.m_PlayerMouseOrbit.Init();
             this.m_PlayerMouseOrbit.SetNormalMode();
         }
-        //DepthOfFieldScatter component3 = gameObject.GetComponent<DepthOfFieldScatter>();
         Transform[] componentsInChildren = GameEntry.Instance.m_GameObjSystem.PlayerObj.transform.GetComponentsInChildren<Transform>();
         foreach (Transform transform in componentsInChildren)
         {
             if (transform.name == "CamPos")
             {
-                //if (component3 != null)
-                //{
-                //    component3.focalTransform = transform;
-                //}
                 this.m_PlayerMouseOrbit.m_Target = transform;
                 break;
             }
         }
-        Camera m_Camera=gameObject.GetComponent<Camera>();
-        m_Camera.orthographic = false;
-        int num = 198656;
-        num = ~num;
-        m_Camera.cullingMask = num;
-        //this.SetCameraDofEffectLookTarget(this.m_GameApp.m_GameObjSystem.PlayerObj);
     }
 
     //	public void SetCameraLookShootTarget()
@@ -1208,23 +1183,15 @@ public class ExploreSystem
     /// <param name="enable"></param>
     public void EnableMainCamera(bool enable)
     {
-        GameObject gameObject = GameObject.Find("Main Camera");
-        if (gameObject == null)
+        GameEntry.Instance.m_MainCamera.enabled = enable;
+        GameObject playerObj = GameEntry.Instance.m_GameObjSystem.PlayerObj;
+        if (playerObj)
         {
-            gameObject = GameObject.FindWithTag("MainCamera");
-        }
-        if (gameObject)
-        {
-            Camera component = gameObject.GetComponent<Camera>();
-            if (component)
+            AudioListener component4 = playerObj.GetComponent<AudioListener>();
+            if (component4)
             {
-                component.enabled = enable;
+                component4.enabled = enable;
             }
-            //AudioListener component2 = gameObject.GetComponent<AudioListener>();
-            //if (component2)
-            //{
-            //    UnityEngine.Object.Destroy(component2);
-            //}
         }
     }
 

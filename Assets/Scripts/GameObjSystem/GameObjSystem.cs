@@ -93,6 +93,10 @@ public class GameObjSystem
         this.m_AllGameObjData.Clear();
     }
 
+    /// <summary>
+    /// 添加游戏物体数据
+    /// </summary>
+    /// <param name="objData"></param>
     public void AddGameObjData(S_GameObjData objData)
     {
         if (objData.Id == 0)
@@ -553,79 +557,37 @@ public class GameObjSystem
         }
         string text = "Player" + id;
         string name = "Player" + id + "_Map";
-
         GameEntry.Pool.GameObjectSpawn(1, (Transform trans) =>
         {
-            GameObject gameObject = trans.gameObject;
-            if (gameObject != null)
+            GameObject characterRoot = trans.gameObject;
+            if (characterRoot != null)
             {
+                characterRoot.transform.position = pos;
+                characterRoot.transform.eulerAngles = new Vector3(0f, dir, 0f);
+                //characterRoot.layer = 2;
+                characterRoot.tag = "Player";
+                this.PlayerObj = characterRoot;
                 GameEntry.Pool.GameObjectSpawn(10001, (Transform trans2) =>
                 {
-                    trans2.SetParent(gameObject.transform);
-                    gameObject.transform.position = pos;
-                    gameObject.transform.eulerAngles = new Vector3(0f, dir, 0f);
-                    gameObject.name = "Player";
-                    gameObject.tag = "Player";
-                    //gameObject.layer = 2;
-                    this.PlayerObj = gameObject;
-                    GameObjState state = new GameObjState();
-                    S_GameObjData objData = new S_GameObjData(id, 0, pos, dir, 1, state, this.PlayerObj);
-                    this.AddGameObjData(objData);
-                    if (!this.PlayerObj.GetComponent<M_PlayerController>())
+                    trans2.SetParent(characterRoot.transform);
+                    CapsuleCollider component3 = trans2.GetComponent<CapsuleCollider>();
+                    if (component3 != null)
                     {
-                        this.PlayerObj.AddComponent<M_PlayerController>();
+                        component3.enabled = true;
+                        component3.isTrigger = true;
                     }
-                    if (!this.PlayerObj.GetComponent<M_PlayerMotor>())
-                    {
-                        this.PlayerObj.AddComponent<M_PlayerMotor>();
-                    }
-                    //BendingSegment bendingSegment = new BendingSegment();
-                    //bendingSegment.firstTransform = TransformTool.SearchHierarchyForBone(this.PlayerObj.transform, "Face-controller");
-                    //bendingSegment.lastTransform = TransformTool.SearchHierarchyForBone(this.PlayerObj.transform, "Face-controller");
-                    //if (bendingSegment.firstTransform != null)
-                    //{
-                    //    M_HeadLookController m_HeadLookController = this.PlayerObj.AddComponent<M_HeadLookController>();
-                    //    m_HeadLookController.segments = new BendingSegment[1];
-                    //    m_HeadLookController.segments[0] = bendingSegment;
-                    //    m_HeadLookController.nonAffectedJoints = new NonAffectedJoints[0];
-                    //}
-                    //if (!this.PlayerObj.GetComponent<AudioListener>())
-                    //{
-                    //    this.PlayerObj.AddComponent<AudioListener>();
-                    //}
-                    //C_RoleDataEx roleData = GameEntry.Instance.m_GameDataSystem.GetRoleData(id);
-                    //ItemData equipItemData = roleData.GetEquipItemData(ENUM_EquipPosition.CosCloth);
-                    //if (equipItemData != null)
-                    //{
-                    //    this.SetPlayerCosCloth(equipItemData.ID, Enum_AvaterType.Map);
-                    //}
                 });
             }
         });
-
-        //RendererTool.ChangeSenceMaterialSetting(text, gameObject);
-
-        //CapsuleCollider component3 = gameObject.GetComponent<CapsuleCollider>();
-        //if (component3 != null)
-        //{
-        //    component3.enabled = true;
-        //    component3.isTrigger = true;
-        //}
-
-        ////this.m_ShroudInstance = gameObject.GetComponent<ShroudInstance>();
-        ////if (this.m_ShroudInstance != null)
-        ////{
-        ////    this.m_ShroudInstance.ReduceBlendWeight_StoryEnable();
-        ////}
-
-        ////TransformTool.SetLayerRecursively(characterRoot.transform, 2);
-        ////if (!this.PlayerObj.GetComponent<AudioListener>())
-        ////{
-        ////    this.PlayerObj.AddComponent<AudioListener>();
-        ////}
+        GameObjState state = new GameObjState();
+        S_GameObjData objData = new S_GameObjData(id, 0, pos, dir, 1, state, this.PlayerObj);
+        this.AddGameObjData(objData);
+        if (!this.PlayerObj.GetComponent<AudioListener>())
+        {
+            this.PlayerObj.AddComponent<AudioListener>();
+        }
         this.m_PhysicClothList.Clear();
         this.m_PlayerObjList.Clear();
-
         this.m_IsHide = false;
         return this.PlayerObj;
     }

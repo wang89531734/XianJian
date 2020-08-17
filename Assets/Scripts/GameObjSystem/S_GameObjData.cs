@@ -33,6 +33,16 @@ public class S_GameObjData
 	{
 	}
 
+    /// <summary>
+    /// 游戏物体数据
+    /// </summary>
+    /// <param name="roleid">角色ID</param>
+    /// <param name="mapid">地图ID</param>
+    /// <param name="pos">位置</param>
+    /// <param name="angle">朝向</param>
+    /// <param name="motion">动作</param>
+    /// <param name="state">状态</param>
+    /// <param name="gameObj">物体</param>
 	public S_GameObjData(int roleid, int mapid, Vector3 pos, float angle, int motion, GameObjState state, GameObject gameObj)
 	{
 		this.Id = roleid;
