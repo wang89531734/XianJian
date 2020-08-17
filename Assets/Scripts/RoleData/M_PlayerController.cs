@@ -305,6 +305,7 @@ public class M_PlayerController : M_GameRoleBase
     private void Awake()
     {
         this.m_Controller = base.GetComponent<CharacterController>();
+        this.m_PlayerMotor = base.GetComponent<M_PlayerMotor>();
     }
 
     private void Start()
@@ -336,6 +337,9 @@ public class M_PlayerController : M_GameRoleBase
         {
             this.m_RunSpeed = data.MoveSpeed;
         }
+        this.m_PlayerMotor.maxForwardSpeed = this.m_RunSpeed;
+        this.m_JumpHeight = this.m_PlayerMotor.jumpHeight;
+        this.m_JumpGravity = this.m_PlayerMotor.gravity;
     }
 
     public override void Update()
@@ -522,24 +526,40 @@ public class M_PlayerController : M_GameRoleBase
         Vector3 dirKeyMoveVector = GameInput.GetDirKeyMoveVector();
         this.horizontal = dirKeyMoveVector.x;
         this.vertical = dirKeyMoveVector.y;
-
+        Vector3 joyLAxis = new Vector3(this.horizontal, 0f, this.vertical);
         Vector3 normalized = Vector3.Scale(Camera.main.transform.forward, new Vector3(1f, 0f, 1f)).normalized;
         Vector3 direction = this.vertical * normalized + this.horizontal * Camera.main.transform.right;
-
+        if (joyLAxis.magnitude > 1f)
+        {
+            joyLAxis.Normalize();
+        }
         if (direction.magnitude > 1f)
         {
             direction.Normalize();
         }
         Vector3 vector = base.transform.InverseTransformDirection(direction);
+        float magnitude = joyLAxis.magnitude;
+        if (magnitude != 0f)
+        {
+            //if (this.m_MoveTarget != null || this.m_IsAutoMove)
+            //{
+            //    this.StopAutoMove();
+            //}
+            this.m_MoveDirection = this.GetMoveDir(joyLAxis);
+            this.m_MoveDirection.y = 0f;
+            this.m_RotateDirection = (this.m_MoveDirection = this.m_MoveDirection.normalized);
+        }
 
-        
-        //if (this.m_MoveTarget != null || this.m_IsAutoMove)
-        //{
-        //    this.StopAutoMove();
-        //}
-        //this.m_MoveDirection.y = 0f;
-        //this.m_RotateDirection = (this.m_MoveDirection = this.m_MoveDirection.normalized);
-
+        this.m_DirectionVector = dirKeyMoveVector;
+        if (this.m_DirectionVector.magnitude > 1f)
+        {
+            this.m_DirectionVector = this.m_DirectionVector.normalized;
+        }
+        this.m_DirectionVector = this.m_DirectionVector.normalized * Mathf.Pow(this.m_DirectionVector.magnitude, 2f);
+        this.m_DirectionVector = Camera.main.transform.rotation * this.m_DirectionVector;
+        Quaternion rotation = Quaternion.FromToRotation(Camera.main.transform.forward * -1f, base.transform.up);
+        this.m_DirectionVector = rotation * this.m_DirectionVector;
+        this.m_DirectionVector = Quaternion.Inverse(base.transform.rotation) * this.m_DirectionVector;
         //this.UpdateMousePickFloor();
         //if (this.m_IsAutoMove)
         //{
@@ -555,31 +575,18 @@ public class M_PlayerController : M_GameRoleBase
             //{
             //    this.PlayMotion(1, 0.1f);
             //    this.m_IdelState = ENUM_IDLESTATE.None;
-            //}
-            //if (!this.bWalk && this.m_ShroudInstance != null)
-            //{
-            //    this.m_ShroudInstance.ReduceBlendWeight();
-            //}
+            //}  
             this.bWalk = true;
             //this.m_UpdateIdleTime = 0f;
-            //this.m_Anim.applyRootMotion = true;
-            //this.m_Anim.speed = this.m_RunSpeed;
-            //this.m_Anim.SetFloat("Speed", this.m_WalkSpeed, this.m_RuuBlendSpeed, Time.deltaTime);
+            //    m_Animation.CrossFade("Run");
+            this.m_PlayerMotor.desiredMovementDirection = m_DirectionVector;
         }
         else
         {
             Debug.Log("不移动");
-            //if (this.bWalk)
-            //{
-            //    if (this.m_ShroudInstance != null)
-            //    {
-            //        this.m_ShroudInstance.ReduceBlendWeight();
-            //    }
-            //    this.m_Anim.applyRootMotion = false;
-            //}
             this.bWalk = false;
-            //this.m_Anim.speed = this.m_AnimSpeed;
-            //this.m_Anim.SetFloat("Speed", 0f, this.m_IdleBlendSpeed, Time.deltaTime);
+            //m_Animation.CrossFade("Stand", 0.2f);
+            this.m_PlayerMotor.desiredMovementDirection = Vector3.zero;
             //if (this.m_IdelState == ENUM_IDLESTATE.None)
             //{
             //    this.m_IdelState = ENUM_IDLESTATE.Start;
@@ -594,6 +601,13 @@ public class M_PlayerController : M_GameRoleBase
         //{
         //    this.m_CameraViewTarget.transform.position = base.transform.position + new Vector3(0f, 1.7f, 0f);
         //}
+    }
+
+    private Vector3 GetMoveDir(Vector3 horizontal)
+    {
+        Vector3 point = horizontal;
+        point = point.normalized * Mathf.Pow(point.magnitude, 2f);
+        return Camera.main.transform.rotation * point;
     }
 
     private void UpdateRotate()

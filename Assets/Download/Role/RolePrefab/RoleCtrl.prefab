@@ -40,7 +40,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4828424870629250840}
   - component: {fileID: 8686399080009569391}
-  - component: {fileID: 2582338496861142882}
   - component: {fileID: -2268598688147293535}
   - component: {fileID: -7167081506600236869}
   - component: {fileID: 5054723876561636917}
@@ -84,24 +83,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &2582338496861142882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6737525416784522626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c542df18c1512b749bcf3b03c22c98f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Id: 0
-  m_FaceUpId: 0
-  m_FaceDownId: 0
-  m_MotionState: 0
-  m_MotionName: []
-  m_Animation: {fileID: 0}
 --- !u!114 &-2268598688147293535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +144,19 @@ MonoBehaviour:
     m_Bits: 512
   m_Velocity: {x: 0, y: 0, z: 0}
   m_BaseState: 0
+  climbSpeed: 0.7
+  climbCheckRadius: 0.4
+  climbCheckDistance: 3
+  climbOffsetToWall: 0.2
+  heightOffsetToEdge: 1
+  smoothDistanceSpeed: 2
+  cornerSideOffset: 0.4
+  setFloatDampTime: 0.15
+  m_RotateSpeed: 15
+  bWalk: 0
+  horizontal: 0
+  vertical: 0
+  m_DoJump: 0
 --- !u!136 &-7167081506600236869
 CapsuleCollider:
   m_ObjectHideFlags: 0
