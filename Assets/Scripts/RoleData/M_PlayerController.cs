@@ -141,12 +141,6 @@ public class M_PlayerController : M_GameRoleBase
 
     private IComparer rayHitComparer;
 
-    [HideInInspector]
-    public float horizontal;
-
-    [HideInInspector]
-    public float vertical;
-
     public enum BaseState
     {
         Base,
@@ -305,7 +299,7 @@ public class M_PlayerController : M_GameRoleBase
     private void Awake()
     {
         this.m_Controller = base.GetComponent<CharacterController>();
-        this.m_PlayerMotor = base.GetComponent<M_PlayerMotor>();
+        this.m_PlayerMotor = base.GetComponent<M_PlayerMotor>();     
     }
 
     private void Start()
@@ -340,6 +334,7 @@ public class M_PlayerController : M_GameRoleBase
         this.m_PlayerMotor.maxForwardSpeed = this.m_RunSpeed;
         this.m_JumpHeight = this.m_PlayerMotor.jumpHeight;
         this.m_JumpGravity = this.m_PlayerMotor.gravity;
+        this.m_Animation = base.GetComponentInChildren<Animation>();
     }
 
     public override void Update()
@@ -523,34 +518,8 @@ public class M_PlayerController : M_GameRoleBase
             //}
             return;
         }
-        Vector3 dirKeyMoveVector = GameInput.GetDirKeyMoveVector();
-        this.horizontal = dirKeyMoveVector.x;
-        this.vertical = dirKeyMoveVector.y;
-        Vector3 joyLAxis = new Vector3(this.horizontal, 0f, this.vertical);
-        Vector3 normalized = Vector3.Scale(Camera.main.transform.forward, new Vector3(1f, 0f, 1f)).normalized;
-        Vector3 direction = this.vertical * normalized + this.horizontal * Camera.main.transform.right;
-        if (joyLAxis.magnitude > 1f)
-        {
-            joyLAxis.Normalize();
-        }
-        if (direction.magnitude > 1f)
-        {
-            direction.Normalize();
-        }
-        Vector3 vector = base.transform.InverseTransformDirection(direction);
-        float magnitude = joyLAxis.magnitude;
-        if (magnitude != 0f)
-        {
-            //if (this.m_MoveTarget != null || this.m_IsAutoMove)
-            //{
-            //    this.StopAutoMove();
-            //}
-            this.m_MoveDirection = this.GetMoveDir(joyLAxis);
-            this.m_MoveDirection.y = 0f;
-            this.m_RotateDirection = (this.m_MoveDirection = this.m_MoveDirection.normalized);
-        }
 
-        this.m_DirectionVector = dirKeyMoveVector;
+        this.m_DirectionVector = GameInput.GetDirKeyMoveVector();
         if (this.m_DirectionVector.magnitude > 1f)
         {
             this.m_DirectionVector = this.m_DirectionVector.normalized;
@@ -566,11 +535,14 @@ public class M_PlayerController : M_GameRoleBase
         //    this.m_Controller.Move(new Vector3(0f, -this.m_DownGravity, 0f));
         //    return;
         //}
-        this.UpdateRotate();
-        this.m_WalkSpeed = vector.z;
-        if (this.m_WalkSpeed > 0f)
+
+        if (this.m_DirectionVector != Vector3.zero)
         {
-            Debug.Log("执行");
+            //if (this.MoveTarget != null)
+            //    {
+            //        this.StopMoveToTarget();
+            //        return;
+            //    }
             //if (this.m_IdelState == ENUM_IDLESTATE.WaitStart)
             //{
             //    this.PlayMotion(1, 0.1f);
@@ -578,18 +550,17 @@ public class M_PlayerController : M_GameRoleBase
             //}  
             this.bWalk = true;
             //this.m_UpdateIdleTime = 0f;
-            //    m_Animation.CrossFade("Run");
+            m_Animation.CrossFade("Run", 0.1f);
             this.m_PlayerMotor.desiredMovementDirection = m_DirectionVector;
         }
         else
         {
-            Debug.Log("不移动");
             this.bWalk = false;
-            //m_Animation.CrossFade("Stand", 0.2f);
+            m_Animation.CrossFade("Stand", 0.1f);
             this.m_PlayerMotor.desiredMovementDirection = Vector3.zero;
             //if (this.m_IdelState == ENUM_IDLESTATE.None)
             //{
-            //    this.m_IdelState = ENUM_IDLESTATE.Start;
+            //    this.m_IdelState = ENUM_IDLESTATE.Start;0
             //}
         }
 
@@ -601,32 +572,6 @@ public class M_PlayerController : M_GameRoleBase
         //{
         //    this.m_CameraViewTarget.transform.position = base.transform.position + new Vector3(0f, 1.7f, 0f);
         //}
-    }
-
-    private Vector3 GetMoveDir(Vector3 horizontal)
-    {
-        Vector3 point = horizontal;
-        point = point.normalized * Mathf.Pow(point.magnitude, 2f);
-        return Camera.main.transform.rotation * point;
-    }
-
-    private void UpdateRotate()
-    {
-        if (this.m_RotateDirection != Vector3.zero)
-        {
-            this.RotateTowards(this.m_RotateDirection);
-        }
-    }
-
-    protected void RotateTowards(Vector3 dir)
-    {
-        Quaternion quaternion = base.transform.rotation;
-        Quaternion to = Quaternion.LookRotation(dir);
-        Vector3 eulerAngles = Quaternion.Slerp(quaternion, to, this.m_RotateSpeed * Time.deltaTime).eulerAngles;
-        eulerAngles.z = 0f;
-        eulerAngles.x = 0f;
-        quaternion = Quaternion.Euler(eulerAngles);
-        base.transform.rotation = quaternion;
     }
 
     //	private void UpdateWaterWave()
@@ -884,48 +829,6 @@ public class M_PlayerController : M_GameRoleBase
             return;
         }
         this.MoveDirection = this.m_MoveDesPos;
-    }
-
-    private void UpdateMove()
-    {
-        //if (this.m_NavMeshAgent != null && Swd6Application.instance.m_ExploreSystem.NavMesh && Swd6Application.instance.m_ExploreSystem.AutoPath && this.m_NavMeshAgent.enabled)
-        //{
-        //    return;
-        //}
-        if (this.m_DirectionVector == Vector3.zero)
-        {
-            return;
-        }
-
-        //if (this.m_IsDash)
-        //{
-        //    this.PlayFaceMotion(0);
-        //}
-        //else
-        //{
-        //    this.PlayFaceMotion(1);
-        //}
-
-        this.m_PlayerMotor.desiredMovementDirection = this.m_DirectionVector;
-        bool flag = false;
-        if (this.IsJump())
-        {
-            if (this.m_DirectionVector.magnitude - this.m_StopDistance <= 0f)
-            {
-                flag = true;
-            }
-        }
-        else if (this.m_DirectionVector.magnitude - this.m_StopDistance <= 0f)
-        {
-            flag = true;
-        }
-
-        //this.m_JumpMotor.IsMove = true;
-        //Swd6Application.instance.m_ExploreSystem.AddBattleStep();
-        if (flag)
-        {
-            this.StopMoveToTarget();
-        }
     }
 
     //	private bool UpdateAutoPathMove()

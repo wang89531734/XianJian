@@ -23,10 +23,6 @@ public abstract class M_GameRoleBase : MonoBehaviour
 
     protected Vector3 m_HidePos = Vector3.zero;
 
-    protected Vector3 m_MoveDirection = Vector3.zero;
-
-    protected Vector3 m_RotateDirection = Vector3.zero;
-
     protected Vector3 m_MoveDesPos = Vector3.zero;
 
     protected float m_DesiredDistance = 0.1f;
