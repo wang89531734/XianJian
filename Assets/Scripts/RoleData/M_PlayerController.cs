@@ -851,10 +851,10 @@ public class M_PlayerController : M_GameRoleBase
         this.m_DirectionVector = GameInput.GetDirKeyMoveVector();
         if (this.m_DirectionVector != Vector3.zero || this.MoveTarget != null)
         {
-            m_Animation.CrossFade("Run");
+            //m_Animation.CrossFade("Run");
             return;
         }
-        m_Animation.CrossFade("stand");
+        //m_Animation.CrossFade("stand");
     }
 
     private void UpdateMoveTarget()
