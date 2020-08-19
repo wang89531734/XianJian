@@ -13,35 +13,37 @@ public class M_GameMapMob : M_GameRoleBase
 	{
         //if (base.DisableRole)
         //{
-        //	ExploreMiniMapSystem.Instance.RemoveQuestIcon(base.RoleID);
-        //	return;
+        //    ExploreMiniMapSystem.Instance.RemoveQuestIcon(base.RoleID);
+        //    return;
         //}
-        base.gameObject.AddComponent<Seeker>();
+        //base.gameObject.AddComponent<Seeker>();
         //FunnelModifier funnelModifier = base.gameObject.AddComponent<FunnelModifier>();
         //funnelModifier.priority = 1;
-        this.m_PathAI = base.gameObject.AddComponent<M_GameEnemyPathAI>();
-        if (this.m_PathAI != null)
-        {
-            this.m_PathAI.initialize();
-        }
+        //this.m_PathAI = base.gameObject.AddComponent<M_GameEnemyPathAI>();
+        //if (this.m_PathAI != null)
+        //{
+        //    this.m_PathAI.initialize();
+        //}
+
         //if (this.HideRole)
         //{
-        //	this.m_PathAI.Disable();
+        //    this.m_PathAI.Disable();
         //}
+
         //if (this.m_NpcData.Ground == 1)
         //{
-        //	int layer = base.gameObject.layer;
-        //	TransformTool.SetLayerRecursively(base.transform, 2);
-        //	GameMath.CastObjectOnTerrain(base.gameObject, 0.5f);
-        //	this.m_GameObjData.Pos = base.gameObject.transform.position + new Vector3(0f, 0.05f, 0f);
-        //	base.SetPos(this.m_GameObjData.Pos);
-        //	TransformTool.SetLayerRecursively(base.gameObject.transform, layer);
+        //    int layer = base.gameObject.layer;
+        //    TransformTool.SetLayerRecursively(base.transform, 2);
+        //    GameMath.CastObjectOnTerrain(base.gameObject, 0.5f);
+        //    this.m_GameObjData.Pos = base.gameObject.transform.position + new Vector3(0f, 0.05f, 0f);
+        //    base.SetPos(this.m_GameObjData.Pos);
+        //    TransformTool.SetLayerRecursively(base.gameObject.transform, layer);
         //}
-        //SphereCollider component = base.gameObject.GetComponent<SphereCollider>();
-        //if (component != null)
-        //{
-        //	component.enabled = false;
-        //}
+        SphereCollider component = base.gameObject.GetComponent<SphereCollider>();
+        if (component != null)
+        {
+            component.enabled = false;
+        }
         CapsuleCollider component2 = base.gameObject.GetComponent<CapsuleCollider>();
         if (component2 != null)
         {
@@ -57,15 +59,13 @@ public class M_GameMapMob : M_GameRoleBase
                 component3.isTrigger = true;
             }
         }
-        //if (this.m_RoleMotion)
-        //{
-        //	this.m_RoleMotion.SetAlwaysAnimate(false);
-        //}
+
         //TransformTool.SetLayerRecursively(base.gameObject.transform, 9);
         //base.gameObject.layer = 15;
     }
 
-	public override void Update()
+
+    public override void Update()
 	{
 	}
 

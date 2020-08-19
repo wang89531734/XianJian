@@ -13,7 +13,9 @@ public class S_GameObjData
 
 	public float Dir;
 
-	public int Motion;
+    public float Dir2;
+
+    public int Motion;
 
 	public GameObjState State;
 
@@ -53,7 +55,8 @@ public class S_GameObjData
 		this.State = state;
 		this.GameObj = gameObj;
 		this.OrgMapId = mapid;
-	}
+        this.Dir2 = 1000f;
+    }
 
 	//public S_GameObjData(GameObjCreateParam CreateParam, GameObject gameObj)
 	//{

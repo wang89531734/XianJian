@@ -154,8 +154,6 @@ MonoBehaviour:
   setFloatDampTime: 0.15
   m_RotateSpeed: 15
   bWalk: 0
-  horizontal: 0
-  vertical: 0
   m_DoJump: 0
 --- !u!136 &-7167081506600236869
 CapsuleCollider:
@@ -183,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c47c85707f1334f91cd10e30c4270b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxForwardSpeed: 1.5
+  maxForwardSpeed: 3
   maxBackwardsSpeed: 1.5
   maxSidewaysSpeed: 1.5
   maxVelocityChange: 8

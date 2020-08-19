@@ -604,6 +604,7 @@ namespace YouYou
         public void StartNewGame()
         {
             this.m_GameDataSystem.InitRoleData();
+            GameEntry.Instance.m_GameDataSystem.m_MapInfo.MapID = 51;
             GameEntry.Scene.LoadScene(2, false, () =>
             {
                 GameEntry.Procedure.ChangeState(ProcedureState.WorldMap);

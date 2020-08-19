@@ -567,7 +567,6 @@ public class ExploreSystem
 
     public void LoadMapDate()
     {
-        GameEntry.Instance.m_GameDataSystem.m_MapInfo.MapID = 51;
         this.m_MapData = GameDataDB.MapDB.GetData(GameEntry.Instance.m_GameDataSystem.m_MapInfo.MapID);
         if (this.m_MapData == null)
         {

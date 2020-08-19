@@ -19,5 +19,6 @@ public enum ENUM_GameObjFlag
 	Open = 16777216,
 	Pick = 33554432,
 	Invalid = 134217728,
-	View = 1048576
+	View = 1048576,
+	Hide2 = 2097152
 }
