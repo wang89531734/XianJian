@@ -125,78 +125,79 @@ public class M_Player : M_Character
 
     public void InitRole(int roleID)
     {
-        this.m_emFight = M_Character.Enum_FightStatus.Idle;
-        //this.m_CharacterController.enabled = true;
-        //this.m_EnableCharacterContoller = true;
-        this.m_RoleID = roleID;
-        //this.m_SkillCDList.Clear();
-        for (int i = 0; i < 5; i++)
-        {
-            //List<FightSkillHotKeyInfo> fightSkillHotkeyList = Swd6Application.instance.m_SkillSystem.GetFightSkillHotkeyList(this.m_RoleID, i);
-            //for (int j = 0; j < fightSkillHotkeyList.Count; j++)
-            //{
-            //    S_Skill data = GameDataDB.SkillDB.GetData(fightSkillHotkeyList[j].ID);
-            //    if (data != null)
-            //    {
-            //        if (this.m_SkillCDList.ContainsKey(fightSkillHotkeyList[j].ID))
-            //        {
-            //            this.m_SkillCDList[fightSkillHotkeyList[j].ID] = data.CastCD;
-            //        }
-            //        else
-            //        {
-            //            this.m_SkillCDList.Add(fightSkillHotkeyList[j].ID, data.CastCD);
-            //        }
-            //        if (fightSkillHotkeyList[j].AI)
-            //        {
-            //            this.SetAISkills(fightSkillHotkeyList[j].ID);
-            //        }
-            //    }
-            //}
-        }
-        //this.m_AIReviveSkills_Single.Sort();
-        //this.m_AIReviveSkills_Single.Reverse();
-        //this.m_AIReviveSkills_All.Sort();
-        //this.m_AIReviveSkills_All.Reverse();
-        //this.m_AIHealSkills_Single.Sort();
-        //this.m_AIHealSkills_Single.Reverse();
-        //this.m_AIHealSkills_All.Sort();
-        //this.m_AIHealSkills_All.Reverse();
-        //this.m_AIHealBuffSkills_Single.Sort();
-        //this.m_AIHealBuffSkills_Single.Reverse();
-        //this.m_AIHealBuffSkills_All.Sort();
-        //this.m_AIHealBuffSkills_All.Reverse();
-        //this.m_AIRestoreMPSkills_Single.Sort();
-        //this.m_AIRestoreMPSkills_Single.Reverse();
-        //this.m_AIRestoreMPSkills_All.Sort();
-        //this.m_AIRestoreMPSkills_All.Reverse();
-        //this.m_AIDebuffSkills_1.Sort();
-        //this.m_AIDebuffSkills_1.Reverse();
-        //this.m_AIDebuffSkills_2.Sort();
-        //this.m_AIDebuffSkills_2.Reverse();
-        this.m_RoleDataEx = GameEntry.Instance.m_GameDataSystem.GetRoleData(this.m_RoleID);
-        if (this.m_RoleDataEx == null)
-        {
-            Debug.LogWarning("m_RoleDataEx is Null m_RoleID = " + this.m_RoleID);
-            return;
-        }
-        //ItemData equipItemData = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Weapon);
-        //this.m_emWeaponElemntType = this.m_RoleDataEx.BaseRoleData.emWeaponElemntType;
-        //this.m_MagicItem = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Talisman);
-        //if (this.m_MagicItem != null)
+        UnityEngine.Debug.Log("执行");
+        //this.m_emFight = M_Character.Enum_FightStatus.Idle;
+        ////this.m_CharacterController.enabled = true;
+        ////this.m_EnableCharacterContoller = true;
+        //this.m_RoleID = roleID;
+        ////this.m_SkillCDList.Clear();
+        //for (int i = 0; i < 5; i++)
         //{
-        //    S_Item data2 = GameDataDB.ItemDB.GetData(this.m_MagicItem.ID);
-        //    if (data2 != null && data2.emSubItemType == ENUM_ItemSubType.Talisman)
-        //    {
-        //        this.m_MagicItem_Passive = new MagicItem_Passive(this, this.m_MagicItem);
-        //    }
-        //    if (data2 != null && data2.emSubItemType == ENUM_ItemSubType.MagicArms)
-        //    {
-        //        this.m_MagicItem_Active = new MagicItem_Active(this, this.m_MagicItem);
-        //    }
+        //    //List<FightSkillHotKeyInfo> fightSkillHotkeyList = Swd6Application.instance.m_SkillSystem.GetFightSkillHotkeyList(this.m_RoleID, i);
+        //    //for (int j = 0; j < fightSkillHotkeyList.Count; j++)
+        //    //{
+        //    //    S_Skill data = GameDataDB.SkillDB.GetData(fightSkillHotkeyList[j].ID);
+        //    //    if (data != null)
+        //    //    {
+        //    //        if (this.m_SkillCDList.ContainsKey(fightSkillHotkeyList[j].ID))
+        //    //        {
+        //    //            this.m_SkillCDList[fightSkillHotkeyList[j].ID] = data.CastCD;
+        //    //        }
+        //    //        else
+        //    //        {
+        //    //            this.m_SkillCDList.Add(fightSkillHotkeyList[j].ID, data.CastCD);
+        //    //        }
+        //    //        if (fightSkillHotkeyList[j].AI)
+        //    //        {
+        //    //            this.SetAISkills(fightSkillHotkeyList[j].ID);
+        //    //        }
+        //    //    }
+        //    //}
         //}
-        this.m_CharacterName = this.m_RoleDataEx.BaseRoleData.FamilyName + this.m_RoleDataEx.BaseRoleData.Name;
-        //this.m_BeforeLevelUpInfo = new FightLevelUpInfo(this.m_RoleDataEx);
-        this.InitFightRoleData();
+        ////this.m_AIReviveSkills_Single.Sort();
+        ////this.m_AIReviveSkills_Single.Reverse();
+        ////this.m_AIReviveSkills_All.Sort();
+        ////this.m_AIReviveSkills_All.Reverse();
+        ////this.m_AIHealSkills_Single.Sort();
+        ////this.m_AIHealSkills_Single.Reverse();
+        ////this.m_AIHealSkills_All.Sort();
+        ////this.m_AIHealSkills_All.Reverse();
+        ////this.m_AIHealBuffSkills_Single.Sort();
+        ////this.m_AIHealBuffSkills_Single.Reverse();
+        ////this.m_AIHealBuffSkills_All.Sort();
+        ////this.m_AIHealBuffSkills_All.Reverse();
+        ////this.m_AIRestoreMPSkills_Single.Sort();
+        ////this.m_AIRestoreMPSkills_Single.Reverse();
+        ////this.m_AIRestoreMPSkills_All.Sort();
+        ////this.m_AIRestoreMPSkills_All.Reverse();
+        ////this.m_AIDebuffSkills_1.Sort();
+        ////this.m_AIDebuffSkills_1.Reverse();
+        ////this.m_AIDebuffSkills_2.Sort();
+        ////this.m_AIDebuffSkills_2.Reverse();
+        //this.m_RoleDataEx = GameEntry.Instance.m_GameDataSystem.GetRoleData(this.m_RoleID);
+        //if (this.m_RoleDataEx == null)
+        //{
+        //    Debug.LogWarning("m_RoleDataEx is Null m_RoleID = " + this.m_RoleID);
+        //    return;
+        //}
+        ////ItemData equipItemData = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Weapon);
+        ////this.m_emWeaponElemntType = this.m_RoleDataEx.BaseRoleData.emWeaponElemntType;
+        ////this.m_MagicItem = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Talisman);
+        ////if (this.m_MagicItem != null)
+        ////{
+        ////    S_Item data2 = GameDataDB.ItemDB.GetData(this.m_MagicItem.ID);
+        ////    if (data2 != null && data2.emSubItemType == ENUM_ItemSubType.Talisman)
+        ////    {
+        ////        this.m_MagicItem_Passive = new MagicItem_Passive(this, this.m_MagicItem);
+        ////    }
+        ////    if (data2 != null && data2.emSubItemType == ENUM_ItemSubType.MagicArms)
+        ////    {
+        ////        this.m_MagicItem_Active = new MagicItem_Active(this, this.m_MagicItem);
+        ////    }
+        ////}
+        //this.m_CharacterName = this.m_RoleDataEx.BaseRoleData.FamilyName + this.m_RoleDataEx.BaseRoleData.Name;
+        ////this.m_BeforeLevelUpInfo = new FightLevelUpInfo(this.m_RoleDataEx);
+        //this.InitFightRoleData();
         //this.SetPassiveSkill(roleID);
         //this.m_ActionCD = (float)(500 - this.m_FightRoleData.Agi) / 100f;
         //this.UpdateBuffIconCallback = new M_Character.UpdateBuffIcon(this.UpdateUIBuffIcon);

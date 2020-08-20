@@ -188,7 +188,7 @@ public class FightSceneManager
         //this.InitFightEffect();
         this.InitFightPosition();
         this.InitFightCamera();
-        //this.CreateCharacters();
+        this.CreateCharacters();
         //this.InitFightSetting();
         ////UI_GameGMFightStatistics.Instance.InitRole(this.m_PlayerList);
         //this.PlayAppearCameraPath();
@@ -282,7 +282,7 @@ public class FightSceneManager
         M_PlayerMouseOrbit PlayerMouseOrbit = GameEntry.Instance.m_MainCamera.GetComponent<M_PlayerMouseOrbit>();
         if (PlayerMouseOrbit != null)
         {
-            PlayerMouseOrbit.enabled = false;
+            GameObject.Destroy(PlayerMouseOrbit);
         }
 
         M_FightCameraController_Black FightCameraController_BlackrMouseOrbit = GameEntry.Instance.m_MainCamera.GetComponent<M_FightCameraController_Black>();
@@ -294,6 +294,9 @@ public class FightSceneManager
         this.m_FightCamera = GameEntry.Instance.m_MainCamera.gameObject;
     }
 
+    /// <summary>
+    /// 创建角色
+    /// </summary>
     public void CreateCharacters()
     {
         this.CreatePlayer();
@@ -330,7 +333,7 @@ public class FightSceneManager
                 if (!this.m_PlayerList.ContainsKey(num))
                 {
                     if (GameEntry.Instance.m_GameDataSystem.GetFlag(num))
-                    {            
+                    {
                         text = "Player" + num.ToString();
                         gameObject = GameEntry.Instance.m_GameObjSystem.GetPlayerCosCloth(num);
                         if (gameObject == null)
@@ -344,7 +347,6 @@ public class FightSceneManager
                         // RendererTool.ChangeSenceMaterialSetting(text, gameObject);
                         M_Player m_Player = gameObject.AddComponent<M_Player>();
                         m_Player.m_ModelName = text;
-                        UnityEngine.Debug.Log("CreatePlayer::無法建立Model物件_" + num);
                         this.m_PlayerList.Add(num, m_Player);
                         // animatorController_Fight = ResourcesManager.Instance.GetAnimatorController_Fight(text + "_Fight");
                         // if (animatorController_Fight != null)
@@ -526,48 +528,48 @@ public class FightSceneManager
             if (s_BattleMobData != null)
             {        
                 M_Mob m_Mob = this.CreateMob(s_BattleMobData);
-                if (m_Mob == null)
-                {
-                    UnityEngine.Debug.Log("Create mob == null, ID:" + this.m_BattleGroup.BattleMob[i].GUID);
-                }
-                else
-                {
-                    this.m_MobRewardList.Add(m_Mob);
-                    if (num <= 0)
-                    {
-                        num = m_Mob.m_MobSerialID;
-                    }
-                    for (int j = 0; j < m_Mob.m_MobData.DropItem.Count; j++)
-                    {
-                        S_DropItem s_DropItem = m_Mob.m_MobData.DropItem[j];
-                        if (s_DropItem == null)
-                        {
-                            UnityEngine.Debug.Log("無掉落品資訊");
-                        }
-                        else if ((this.m_BattleGroupGUID < 7001 || this.m_BattleGroupGUID > 7200) && FightSystem.Instance.m_FightPlayerID == 2 && s_DropItem.Rate == 0)
-                        {
-                            if (this.m_BonusDropItemList.ContainsKey(s_DropItem.ID))
-                            {
-                                Dictionary<int, int> bonusDropItemList;
-                                Dictionary<int, int> expr_124 = bonusDropItemList = this.m_BonusDropItemList;
-                                int num2;
-                                int expr_12E = num2 = s_DropItem.ID;
-                                num2 = bonusDropItemList[num2];
-                                expr_124[expr_12E] = num2 + s_DropItem.Count;
-                            }
-                            else
-                            {
-                                this.m_BonusDropItemList.Add(s_DropItem.ID, s_DropItem.Count);
-                            }
-                        }
-                    }
-                }
+                //if (m_Mob == null)
+                //{
+                //    UnityEngine.Debug.Log("Create mob == null, ID:" + this.m_BattleGroup.BattleMob[i].GUID);
+                //}
+                //else
+                //{
+                //    this.m_MobRewardList.Add(m_Mob);
+                //    if (num <= 0)
+                //    {
+                //        num = m_Mob.m_MobSerialID;
+                //    }
+                //    for (int j = 0; j < m_Mob.m_MobData.DropItem.Count; j++)
+                //    {
+                //        S_DropItem s_DropItem = m_Mob.m_MobData.DropItem[j];
+                //        if (s_DropItem == null)
+                //        {
+                //            UnityEngine.Debug.Log("無掉落品資訊");
+                //        }
+                //        else if ((this.m_BattleGroupGUID < 7001 || this.m_BattleGroupGUID > 7200) && FightSystem.Instance.m_FightPlayerID == 2 && s_DropItem.Rate == 0)
+                //        {
+                //            if (this.m_BonusDropItemList.ContainsKey(s_DropItem.ID))
+                //            {
+                //                Dictionary<int, int> bonusDropItemList;
+                //                Dictionary<int, int> expr_124 = bonusDropItemList = this.m_BonusDropItemList;
+                //                int num2;
+                //                int expr_12E = num2 = s_DropItem.ID;
+                //                num2 = bonusDropItemList[num2];
+                //                expr_124[expr_12E] = num2 + s_DropItem.Count;
+                //            }
+                //            else
+                //            {
+                //                this.m_BonusDropItemList.Add(s_DropItem.ID, s_DropItem.Count);
+                //            }
+                //        }
+                //    }
+                //}
             }
         }
-        if (num > 0)
-        {
-            this.ChangeTargetMob(num);
-        }
+        //if (num > 0)
+        //{
+        //    this.ChangeTargetMob(num);
+        //}
     }
 
     //	public void SummonMob(int iMobGUID, string strStartPos, string strTargetPos)
@@ -1650,6 +1652,7 @@ public class FightSceneManager
 
     public bool ChangeTargetMob(int key)
     {
+        UnityEngine.Debug.Log("TODO");
         //if (!this.m_MobList.ContainsKey(key))
         //{
         //    return false;
