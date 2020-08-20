@@ -188,13 +188,16 @@ public class FightSceneManager
         //this.InitFightEffect();
         this.InitFightPosition();
         this.InitFightCamera();
-        this.CreateCharacters();
-        this.InitFightSetting();
+        //this.CreateCharacters();
+        //this.InitFightSetting();
         ////UI_GameGMFightStatistics.Instance.InitRole(this.m_PlayerList);
         //this.PlayAppearCameraPath();
         //this.InitFightTalk();
     }
 
+    /// <summary>
+    /// 初始化战斗组
+    /// </summary>
     private void InitBattleGroup()
     {
         this.m_BattleGroupGUID = FightSystem.Instance.m_BattleGroupID;

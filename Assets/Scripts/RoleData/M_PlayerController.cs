@@ -1600,44 +1600,46 @@ public class M_PlayerController : M_GameRoleBase
         {
             return;
         }
-        //M_GameEnemyPathAI component = other.gameObject.GetComponent<M_GameEnemyPathAI>();
-        //if (component == null)
-        //{
-        //    return;
-        //}
+        M_GameEnemyPathAI component = other.gameObject.GetComponent<M_GameEnemyPathAI>();
+        if (component == null)
+        {
+            return;
+        }
+
         //if (Swd6Application.instance.m_GameDataSystem.GetFlag(21))
         //{
         //    return;
         //}
-        //if (this.m_BaseState == M_PlayerController.BaseState.Combat && weapon)
-        //{
-        //    //if (Swd6Application.instance.m_GameDataSystem.m_PlayerID == 3)
-        //    //{
-        //    //    return;
-        //    //}
-        //    //this.LockControl = true;
-        //    //if (!component.OnHurt())
-        //    //{
-        //    //    this.LockControl = false;
-        //    //}
-        //    //else
-        //    //{
-        //    //    //this.m_Anim.SetBool("Attack", false);
-        //    //    //this.m_Anim.SetFloat("Speed", 0f);
-        //    //    //this.m_MouseAttackTime = 0f;
-        //    //    //this.m_BaseState = M_PlayerController.BaseState.Base;
-        //    //    //this.PlayMotion(2, 1.1f);
-        //    //    //this.PlayMapSkillSound();
-        //    //}
-        //}
-        //else if (component.OnEncounter())
-        //{
-        //    this.LockControl = true;
-        //    base.transform.rotation = GameMath.RotateToTarget(base.transform, component.transform);
-        //    component.transform.rotation = GameMath.RotateToTarget(component.transform, base.transform);
-        //    //this.ShowWeapon(true);
-        //    //this.PlayMotion(2, 0.2f);
-        //}
+
+        if (this.m_BaseState == M_PlayerController.BaseState.Combat && weapon)
+        {
+            //if (Swd6Application.instance.m_GameDataSystem.m_PlayerID == 3)
+            //{
+            //    return;
+            //}
+            //this.LockControl = true;
+            //if (!component.OnHurt())
+            //{
+            //    this.LockControl = false;
+            //}
+            //else
+            //{
+            //    //this.m_Anim.SetBool("Attack", false);
+            //    //this.m_Anim.SetFloat("Speed", 0f);
+            //    //this.m_MouseAttackTime = 0f;
+            //    //this.m_BaseState = M_PlayerController.BaseState.Base;
+            //    //this.PlayMotion(2, 1.1f);
+            //    //this.PlayMapSkillSound();
+            //}
+        }
+        else if (component.OnEncounter())
+        {
+            this.LockControl = true;
+            base.transform.rotation = GameMath.RotateToTarget(base.transform, component.transform);
+            component.transform.rotation = GameMath.RotateToTarget(component.transform, base.transform);
+            //this.ShowWeapon(true);
+            //this.PlayMotion(2, 0.2f);
+        }
     }
 
     private class RayHitComparer : IComparer

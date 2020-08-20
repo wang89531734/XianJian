@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using YouYou;
 
-public class M_GameEnemyPathAI : AIPath
+public class M_GameEnemyPathAI : MonoBehaviour //: AIPath
 {
     public float sleepVelocity = 1f;
 
@@ -108,7 +108,7 @@ public class M_GameEnemyPathAI : AIPath
         {
             this.initialize();
         }
-        base.Start();
+        //base.Start();
     }
 
     public void initialize()
@@ -153,40 +153,40 @@ public class M_GameEnemyPathAI : AIPath
 
     public void InitAI()
     {
-        M_GameRoleBase component = base.GetComponent<M_GameRoleBase>();
+        M_GameRoleBase component = gameObject.GetComponent<M_GameRoleBase>();
         if (component == null)
         {
             return;
         }
         this.m_NpcAI = GameDataDB.NpcAIDB.GetData(8001);
-        if (this.m_NpcAI == null)
-        {
-            //if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
-            //{
-            //    Debug.Log(component.RoleID + "_InitAI::讀取NpcAI資造錯誤_" + component.GetNpcData().AIMode);
-            //}
-            return;
-        }
-        this.m_MoveMotion = this.m_NpcAI.MoveMotion;
-        this.m_RandWalk = this.m_NpcAI.RandWalk;
-        this.m_RandWalkRange = this.m_NpcAI.RandWalkRange;
-        this.m_RandWalkTime = this.m_NpcAI.RandWalkTime;
-        this.m_AlertAngle = this.m_NpcAI.AlertAngle;
-        this.m_AlertMinRange = this.m_NpcAI.AlertMinRange;
-        this.m_AlertMaxRange = this.m_NpcAI.AlertMaxRange;
-        this.m_FollowMinTime = this.m_NpcAI.FollowMinTime;
-        this.m_FollowMaxTime = this.m_NpcAI.FollowMaxTime;
-        this.m_FollowMotion = this.m_NpcAI.FollowMotion;
-        this.m_Follow = this.m_NpcAI.Follow;
-        this.m_FollowSpeed = this.m_NpcAI.FollowSpeed;
-        if (this.m_FollowSpeed == 0f)
-        {
-            this.m_FollowSpeed = 1f;
-        }
-        this.m_RebornMaxTime = this.m_NpcAI.RebornMaxTime;
+        //if (this.m_NpcAI == null)
+        //{
+        //    //if (Swd6Application.instance.m_ResourceType == ENUM_ResourceType.Develop)
+        //    //{
+        //    //    Debug.Log(component.RoleID + "_InitAI::讀取NpcAI資造錯誤_" + component.GetNpcData().AIMode);
+        //    //}
+        //    return;
+        //}
+        //this.m_MoveMotion = this.m_NpcAI.MoveMotion;
+        //this.m_RandWalk = this.m_NpcAI.RandWalk;
+        //this.m_RandWalkRange = this.m_NpcAI.RandWalkRange;
+        //this.m_RandWalkTime = this.m_NpcAI.RandWalkTime;
+        //this.m_AlertAngle = this.m_NpcAI.AlertAngle;
+        //this.m_AlertMinRange = this.m_NpcAI.AlertMinRange;
+        //this.m_AlertMaxRange = this.m_NpcAI.AlertMaxRange;
+        //this.m_FollowMinTime = this.m_NpcAI.FollowMinTime;
+        //this.m_FollowMaxTime = this.m_NpcAI.FollowMaxTime;
+        //this.m_FollowMotion = this.m_NpcAI.FollowMotion;
+        //this.m_Follow = this.m_NpcAI.Follow;
+        //this.m_FollowSpeed = this.m_NpcAI.FollowSpeed;
+        //if (this.m_FollowSpeed == 0f)
+        //{
+        //    this.m_FollowSpeed = 1f;
+        //}
+        //this.m_RebornMaxTime = this.m_NpcAI.RebornMaxTime;
         this.m_BattleID = this.m_NpcAI.BattleID;
-        this.m_PatroleMaxWaitTime = (float)this.m_NpcAI.WaitMoveTime;
-        this.m_PatrolRootNode = GameObject.Find(this.m_NpcAI.MovePrefab);
+        //this.m_PatroleMaxWaitTime = (float)this.m_NpcAI.WaitMoveTime;
+        //this.m_PatrolRootNode = GameObject.Find(this.m_NpcAI.MovePrefab);
     }
 
     //	public void InitPatrolNode()
@@ -670,6 +670,10 @@ public class M_GameEnemyPathAI : AIPath
     //		}
     //	}
 
+    /// <summary>
+    /// 进入战斗
+    /// </summary>
+    /// <param name="bHit"></param>
     public void EnterFight(bool bHit)
     {
         GameEntry.Instance.m_ExploreSystem.EnterFight(this.m_BattleID, bHit);
@@ -922,6 +926,10 @@ public class M_GameEnemyPathAI : AIPath
     //		return true;
     //	}
 
+    /// <summary>
+    /// 遭遇
+    /// </summary>
+    /// <returns></returns>
     public bool OnEncounter()
     {
         //if (this.aiState == ENUM_EnemyPathAIState.Return)
@@ -945,7 +953,7 @@ public class M_GameEnemyPathAI : AIPath
         //this.canMove = false;
         this.m_WaitFightTime = 0f;
         //GameMapMobSystem.Instance.Pause();
-        this.Enable();
+        //this.Enable();
         return true;
     }
 

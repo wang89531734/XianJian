@@ -16,12 +16,12 @@ namespace YouYou
         public override void OnEnter()
         {
             base.OnEnter();
-            GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureWorldMap");
+            GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureGameLevel");
             //this.m_BuffSystem = FightSystem.Instance.m_BuffSystem;
             this.m_FightSceneMgr = new FightSceneManager();
             this.m_FightSceneMgr.m_FihgtState = this;
             //this.m_FightSceneMgr.m_BuffSystem = this.m_BuffSystem;
-            GameEntry.UI.OpenUIForm(106);
+            //GameEntry.UI.OpenUIForm(106);
             //UI_Fade.Instance.FadeTo(0f, 1f);
         }
 
@@ -34,7 +34,7 @@ namespace YouYou
         public override void OnLeave()
         {
             base.OnLeave();
-            GameEntry.Log(LogCategory.Procedure, "OnLeave ProcedureWorldMap");
+            GameEntry.Log(LogCategory.Procedure, "OnLeave ProcedureGameLevel");
             //this.m_FightSceneMgr.ClearFightObjs();
             //UI_Fight.Instance.Hide();
             //UI_FinishFight.Instance.Hide();

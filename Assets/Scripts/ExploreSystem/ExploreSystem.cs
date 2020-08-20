@@ -1391,6 +1391,11 @@ public class ExploreSystem
     //		}
     //	}
 
+    /// <summary>
+    /// 进入战斗
+    /// </summary>
+    /// <param name="battleId">战斗编号</param>
+    /// <param name="bHit">是否受伤</param>
     public void EnterFight(int battleId, bool bHit)
     {
         if (this.m_BattleID > 0)
@@ -1419,6 +1424,7 @@ public class ExploreSystem
         {
             num3 = data.Group.Count;
         }
+
         for (int i = num2; i < num3; i++)
         {
             if (data.Group[i].GroupID != 0)

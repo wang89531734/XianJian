@@ -19,11 +19,11 @@ public class M_GameMapMob : M_GameRoleBase
         //base.gameObject.AddComponent<Seeker>();
         //FunnelModifier funnelModifier = base.gameObject.AddComponent<FunnelModifier>();
         //funnelModifier.priority = 1;
-        //this.m_PathAI = base.gameObject.AddComponent<M_GameEnemyPathAI>();
-        //if (this.m_PathAI != null)
-        //{
-        //    this.m_PathAI.initialize();
-        //}
+        this.m_PathAI = base.gameObject.AddComponent<M_GameEnemyPathAI>();
+        if (this.m_PathAI != null)
+        {
+            this.m_PathAI.initialize();
+        }
 
         //if (this.HideRole)
         //{

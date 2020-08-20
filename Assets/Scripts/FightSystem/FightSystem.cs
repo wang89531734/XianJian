@@ -36,6 +36,11 @@ public class FightSystem
         }
     }
 
+    /// <summary>
+    /// Õ½¶·
+    /// </summary>
+    /// <param name="battleGroupID"></param>
+    /// <param name="fightPlayerID"></param>
     public void Fight(int battleGroupID, int fightPlayerID)
     {
         //MusicSystem.Instance.Fade_StopBackgroundMusic(2f);
