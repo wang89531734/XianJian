@@ -59,6 +59,7 @@ public class M_Mob : M_Character
 
     public virtual void InitMob(int MobGUID)
     {
+        UnityEngine.Debug.Log("执行:" + MobGUID);
         this.m_emFight = M_Character.Enum_FightStatus.Idle;
         //if (this.m_CharacterController != null)
         //{
@@ -77,20 +78,20 @@ public class M_Mob : M_Character
         //{
         //    UnityEngine.Debug.LogError("m_CharacterController == null");
         //}
-        S_Item data = GameDataDB.ItemDB.GetData(MobGUID);
-        if (data == null || data.emItemType != ENUM_ItemType.Mob)
-        {
-            UnityEngine.Debug.LogWarning("無法取得怪物資料 MobGUID:" + MobGUID);
-            return;
-        }
-        this.m_MobGUID = MobGUID;
-        this.m_IconNo = data.IconNo;
-        this.m_MobData = data.MobData;
-        //this.ResetSkill();
-        this.InitFightRoleData();
-        //this.m_ActionCD = (float)(1000 - this.m_FightRoleData.Agi) / 100f;
-        //this.SkillSetting(data.MobData);
-        this.m_CharacterName = data.Name;
+        //S_Item data = GameDataDB.ItemDB.GetData(MobGUID);
+        //if (data == null || data.emItemType != ENUM_ItemType.Mob)
+        //{
+        //    UnityEngine.Debug.LogWarning("無法取得怪物資料 MobGUID:" + MobGUID);
+        //    return;
+        //}
+        //this.m_MobGUID = MobGUID;
+        //this.m_IconNo = data.IconNo;
+        //this.m_MobData = data.MobData;
+        ////this.ResetSkill();
+        //this.InitFightRoleData();
+        ////this.m_ActionCD = (float)(1000 - this.m_FightRoleData.Agi) / 100f;
+        ////this.SkillSetting(data.MobData);
+        //this.m_CharacterName = data.Name;
         //this.UpdateBuffIconCallback = new M_Character.UpdateBuffIcon(this.UpdateUIBuffIcon);
         //this.SetStartUpdate(false);
     }

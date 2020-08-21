@@ -13,5 +13,8 @@ public class FormationData
 
 	public ENUM_ElementType emElement;
 
+    /// <summary>
+    /// ’Û–Õµ•Œª
+    /// </summary>
 	public List<FormationUnit> Unit = new List<FormationUnit>();
 }

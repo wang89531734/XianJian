@@ -189,7 +189,7 @@ public class FightSceneManager
         this.InitFightPosition();
         this.InitFightCamera();
         this.CreateCharacters();
-        //this.InitFightSetting();
+        this.InitFightSetting();
         ////UI_GameGMFightStatistics.Instance.InitRole(this.m_PlayerList);
         //this.PlayAppearCameraPath();
         //this.InitFightTalk();
@@ -647,18 +647,13 @@ public class FightSceneManager
             UnityEngine.Debug.LogWarning("cat load model:" + prefName);
             return null;
         }
-        //RendererTool.ChangeSenceMaterialSetting(prefName, characterModel_Fight);
-        M_Mob m_Mob;
+        ////RendererTool.ChangeSenceMaterialSetting(prefName, characterModel_Fight);
+        M_Mob m_Mob=null;
         if (data.MobData.ScriptName == null || data.MobData.ScriptName.Length == 0)
         {
             m_Mob = characterModel_Fight.AddComponent<M_Mob>();
         }
-        else
-        {
-            UnityEngine.Debug.Log(data.MobData.ScriptName);
-            //m_Mob = (characterModel_Fight.AddComponent<M_Mob>(data.MobData.ScriptName);
-            m_Mob =null;
-        }
+
         string text = prefName;
         if (data.MobData.emType != ENUM_MobType.Boss)
         {
@@ -668,19 +663,19 @@ public class FightSceneManager
             });
             text = array[0];
         }
-        //RuntimeAnimatorController animatorController_Fight = ResourcesManager.Instance.GetAnimatorController_Fight(text);
-        //if (animatorController_Fight != null)
-        //{
-        //    Animator component = characterModel_Fight.GetComponent<Animator>();
-        //    if (component != null)
-        //    {
-        //        component.runtimeAnimatorController = animatorController_Fight;
-        //    }
-        //}
-        //else
-        //{
-        //    UnityEngine.Debug.LogError("找不到contoller:" + data.Name + ", contollerName:" + text);
-        //}
+        ////RuntimeAnimatorController animatorController_Fight = ResourcesManager.Instance.GetAnimatorController_Fight(text);
+        ////if (animatorController_Fight != null)
+        ////{
+        ////    Animator component = characterModel_Fight.GetComponent<Animator>();
+        ////    if (component != null)
+        ////    {
+        ////        component.runtimeAnimatorController = animatorController_Fight;
+        ////    }
+        ////}
+        ////else
+        ////{
+        ////    UnityEngine.Debug.LogError("找不到contoller:" + data.Name + ", contollerName:" + text);
+        ////}
         characterModel_Fight.transform.position = pos;
         characterModel_Fight.transform.rotation = rotation;
         this.m_MobSerialID++;
@@ -710,20 +705,20 @@ public class FightSceneManager
             {
                 this.ChangeControlCharacter(1, false);
             }
-            int flag = 60 + this.m_ControlledRoleID;
-            M_Player role = this.GetRole(this.m_ControlledRoleID);
-            if (role != null)
-            {
-                //role.SetUseAI(Swd6Application.instance.m_GameDataSystem.GetFlag(flag));
-                //UI_Fight.Instance.UpdateRoleAICheckBox(this.m_ControlledRoleID);
-            }
+            //int flag = 60 + this.m_ControlledRoleID;
+            //M_Player role = this.GetRole(this.m_ControlledRoleID);
+            //if (role != null)
+            //{
+            //    //role.SetUseAI(Swd6Application.instance.m_GameDataSystem.GetFlag(flag));
+            //    //UI_Fight.Instance.UpdateRoleAICheckBox(this.m_ControlledRoleID);
+            //}
         }
         else
         {
             UnityEngine.Debug.LogWarning("==== 無預設陣型資料 ====");
         }
-        this.InitFightTarget();
-        this.InitPlayerGuardPos(defaultFormationData);
+        //this.InitFightTarget();
+        //this.InitPlayerGuardPos(defaultFormationData);
         //for (int i = 0; i < 5; i++)
         //{
         //    List<FightItemHotKeyInfo> fightItemHotkeyList = Swd6Application.instance.m_ItemSystem.GetFightItemHotkeyList(i);
@@ -1584,13 +1579,12 @@ public class FightSceneManager
 
     public void ChangeControlCharacter(int key, bool bDead)
     {
-        UnityEngine.Debug.Log("执行"+ key);
         M_Player role = this.GetRole(key);
         //if (role == null || role.IsDead())
         //{
-        //    UnityEngine.Debug.Log("执行");
         //    return;
         //}
+
         foreach (KeyValuePair<int, M_Player> current in this.m_PlayerList)
         {
             if (current.Key == key)
@@ -1605,29 +1599,16 @@ public class FightSceneManager
         //this.m_NowControlledEffect.transform.position = this.m_PlayerList[key].GetModelPosition();
         //this.m_NowControlledEffect.transform.rotation = this.m_PlayerList[key].m_ModelTransform.rotation;
         //this.m_NowControlledEffect.transform.parent = this.m_PlayerList[key].m_ModelTransform;
-        if (this.m_FightCamera != null)
-        {
-            M_MouseOrbit component = this.m_FightCamera.GetComponent<M_MouseOrbit>();
-            Transform transform = TransformTool.FindChild(this.m_PlayerList[key].m_ModelTransform, "P1001");
-            if (transform != null)
-            {
-                UnityEngine.Debug.Log("执行");
-                component.target = transform;
-                component.distance = 5f;
-                component.x = this.m_PlayerList[key].m_ModelTransform.eulerAngles.y;
-                component.y = 20f;
-            }
-        }
 
         if (this.m_ControlledRoleID == key)
         {
             return;
         }
-        bool useAI = false;
-        //if (bDead)
-        //{
-        //    //useAI = this.GetControlledPlayer().m_bUseAI;
-        //}
+        //bool useAI = false;
+        ////if (bDead)
+        ////{
+        ////    //useAI = this.GetControlledPlayer().m_bUseAI;
+        ////}
         this.m_ControlledRoleID = key;
         if (this.m_PlayerList.ContainsKey(key))
         {
@@ -1677,11 +1658,15 @@ public class FightSceneManager
         return true;
     }
 
-    //	public FormationData GetNowFormation()
-    //	{
-    //		return this.m_NowFormation;
-    //	}
+    public FormationData GetNowFormation()
+    {
+        return this.m_NowFormation;
+    }
 
+    /// <summary>
+    /// 改变阵型
+    /// </summary>
+    /// <param name="idx"></param>
     public void ChangeFormation(int idx)
     {
         if (this.m_ChangeFormationCDTimer > 0f)
@@ -1705,14 +1690,15 @@ public class FightSceneManager
                 {
                     if (GameEntry.Instance.m_GameDataSystem.GetFlag(formationUnit.RoleID))
                     {
-                        //this.m_PlayerList[formationUnit.RoleID].SetFormationData(formationData, i);
+                        this.m_PlayerList[formationUnit.RoleID].SetFormationData(formationData, i);
                     }
                 }
             }
         }
+
         foreach (M_Player current in this.m_PlayerList.Values)
         {
-            //current.UpdateFightRoleData();
+            current.UpdateFightRoleData();
         }
         this.ChangeInitPos(formationData);
         //this.CreateChangeFormationEffect(idx + ENUM_ElementType.Wind);
@@ -1786,6 +1772,7 @@ public class FightSceneManager
                 }
             }
         }
+
         //foreach (M_Guard current2 in this.m_GuardList.Values)
         //{
         //    string text2 = "Guard" + (int)fData.emElement + current2.m_DebutPosID.ToString();
@@ -2834,12 +2821,10 @@ public class FightSceneManager
         this.m_FightCameraController = this.m_FightCamera.GetComponent<M_FightCameraController>();
         if (this.m_FightCameraController == null)
         {
-            UnityEngine.Debug.Log("执行");
             this.m_FightCameraController = this.m_FightCamera.AddComponent<M_FightCameraController>();
         }
         if (this.m_PlayerList.ContainsKey(this.m_ControlledRoleID))
         {
-            UnityEngine.Debug.Log("执行"+ m_ControlledRoleID);
             this.m_FightCameraController.SetFollower(this.m_PlayerList[this.m_ControlledRoleID]);
         }
     }
@@ -2940,11 +2925,11 @@ public class FightSceneManager
 
     public void ChangeFormationCameraPath()
     {
-        //if (this.m_FightCameraController == null)
-        //{
-        //    return;
-        //}
-        //this.m_FightCameraController.ChangeFormation();
+        if (this.m_FightCameraController == null)
+        {
+            return;
+        }
+        this.m_FightCameraController.ChangeFormation();
     }
 
     private void InitFightTalk()
