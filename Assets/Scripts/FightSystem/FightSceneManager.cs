@@ -513,6 +513,9 @@ public class FightSceneManager
     //		return m_Guard;
     //	}
 
+    /// <summary>
+    /// 创建怪物
+    /// </summary>
     private void CreateMobs()
     {
         if (this.m_BattleGroup == null)
