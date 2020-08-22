@@ -41,10 +41,6 @@ public class M_Character : MonoBehaviour
 
     public CharacterController m_CharacterController;
 
-    public GameObject m_RoleModel;
-
-    public Transform m_ModelTransform;
-
     public Transform m_HitTransform;
 
     public float m_RoleHeight;
@@ -136,13 +132,11 @@ public class M_Character : MonoBehaviour
 
     public virtual void Initialize()
     {
-        this.m_RoleModel = base.gameObject;
-        this.m_ModelTransform = base.transform;
-        this.m_HitTransform = TransformTool.FindChild(this.m_ModelTransform, this.m_HitPointName);
+        this.m_HitTransform = TransformTool.FindChild(base.transform, this.m_HitPointName);
         if (this.m_HitTransform == null)
         {
             UnityEngine.Debug.LogWarning("Character Initialize, Cant Get HitPoint Reference.");
-            this.m_HitTransform = this.m_ModelTransform;
+            this.m_HitTransform = base.transform;
         }
         //this.m_Animator = base.GetComponent<Animator>();
         this.ClearCommand();

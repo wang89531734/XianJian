@@ -718,7 +718,7 @@ public class FightSceneManager
             UnityEngine.Debug.LogWarning("==== 無預設陣型資料 ====");
         }
         //this.InitFightTarget();
-        //this.InitPlayerGuardPos(defaultFormationData);
+        this.InitPlayerGuardPos(defaultFormationData);
         //for (int i = 0; i < 5; i++)
         //{
         //    List<FightItemHotKeyInfo> fightItemHotkeyList = Swd6Application.instance.m_ItemSystem.GetFightItemHotkeyList(i);
@@ -793,8 +793,8 @@ public class FightSceneManager
                 Transform transform = TransformTool.FindChild(current, text);
                 if (transform != null)
                 {
-                    this.m_PlayerList[formationUnit.RoleID].m_ModelTransform.position = transform.position;
-                    this.m_PlayerList[formationUnit.RoleID].m_ModelTransform.rotation = transform.rotation;
+                    this.m_PlayerList[formationUnit.RoleID].transform.position = transform.position;
+                    this.m_PlayerList[formationUnit.RoleID].transform.rotation = transform.rotation;
                     this.m_PlayerList[formationUnit.RoleID].SetInitPos(transform.position);
                 }
                 else

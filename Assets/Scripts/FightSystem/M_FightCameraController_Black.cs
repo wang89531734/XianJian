@@ -85,10 +85,10 @@ public class M_FightCameraController_Black : M_FightCameraController
     private IEnumerator ChangeFormationCoroutine()
     {
         this.m_CurrentState = M_FightCameraController.Enum_CameraState.ChangeFormation;
-        this.m_Transform.position = this.m_Follower.m_ModelTransform.TransformPoint(this.m_ChangeFormationPos);
-        Vector3 targetPos = this.m_Follower.m_ModelTransform.TransformPoint(0f, this.m_Follower.m_RoleHeight * 0.5f, 0f);
-        Quaternion rotation = Quaternion.LookRotation(targetPos - this.m_Transform.position, Vector3.up);
-        this.m_Transform.rotation = rotation;
+        this.transform.position = this.m_Follower.transform.TransformPoint(this.m_ChangeFormationPos);
+        Vector3 targetPos = this.m_Follower.transform.TransformPoint(0f, this.m_Follower.m_RoleHeight * 0.5f, 0f);
+        Quaternion rotation = Quaternion.LookRotation(targetPos - this.transform.position, Vector3.up);
+        this.transform.rotation = rotation;
         yield return new WaitForSeconds(this.m_ChangeFormationStayTime);
         this.m_CurrentState = M_FightCameraController.Enum_CameraState.Normal;
         yield break;
@@ -98,10 +98,10 @@ public class M_FightCameraController_Black : M_FightCameraController
 	{
 		base.StopAllCoroutines();
 		this.m_CurrentState = M_FightCameraController.Enum_CameraState.Story;
-		this.m_Transform.parent = character.m_ModelTransform;
-		this.m_Transform.localPosition = pos;
-		this.m_Transform.localRotation = Quaternion.Euler(rot);
-		this.m_Transform.parent = null;
+		this.transform.parent = character.transform;
+		this.transform.localPosition = pos;
+		this.transform.localRotation = Quaternion.Euler(rot);
+		this.transform.parent = null;
 	}
 
 	//public override void SkillShotCharacter(M_Character character, S_SkillCameraData skillCameraData, bool bCritical)
@@ -205,47 +205,39 @@ public class M_FightCameraController_Black : M_FightCameraController
 
 	private void UpdatePosition()
 	{
-		//this.m_CurrentFOV = this.m_Camera.fieldOfView;
-		//Vector3 joyRAxis = GameInput.GetJoyRAxis();
-		//if (joyRAxis != Vector3.zero)
-		//{
-		//	this.m_MouseX += joyRAxis.x * this.m_JoySpeedX * Time.deltaTime;
-		//	this.m_MouseX = Mathf.Clamp(this.m_MouseX, this.m_MouseRangeMin, this.m_MouseRangeMax);
-		//	this.m_CurrentFOV = Mathf.Clamp(this.m_CurrentFOV + joyRAxis.y * this.m_JoySpeedY * Time.deltaTime, this.m_MinFOV, this.m_MaxFOV);
-		//	this.m_Camera.fieldOfView = this.m_CurrentFOV;
-		//}
-		//else
-		//{
-		//	if (Input.GetMouseButton(1))
-		//	{
-		//		this.m_MouseX += Input.GetAxis("Mouse X") * this.m_MouseSpeedX;
-		//		this.m_MouseX = Mathf.Clamp(this.m_MouseX, this.m_MouseRangeMin, this.m_MouseRangeMax);
-		//	}
-		//	this.m_CurrentFOV = Mathf.Clamp(this.m_CurrentFOV - Input.GetAxis("Mouse ScrollWheel") * this.m_ScrollSpeed, this.m_MinFOV, this.m_MaxFOV);
-		//	this.m_Camera.fieldOfView = this.m_CurrentFOV;
-		//}
-		//Vector3 to = this.m_Follower.m_ModelTransform.TransformPoint(this.m_FollowPos + new Vector3(this.m_MouseX, 0f, 0f));
-		//this.m_Transform.position = Vector3.Lerp(this.m_Transform.position, to, Time.deltaTime * this.m_FollowSpeed);
-	}
+        this.m_CurrentFOV = gameObject.GetComponent<Camera>().fieldOfView;
+
+        if (Input.GetMouseButton(1))
+        {
+            UnityEngine.Debug.Log("执行");
+            this.m_MouseX += Input.GetAxis("Mouse X") * this.m_MouseSpeedX;
+            this.m_MouseX = Mathf.Clamp(this.m_MouseX, this.m_MouseRangeMin, this.m_MouseRangeMax);
+        }
+        this.m_CurrentFOV = Mathf.Clamp(this.m_CurrentFOV - Input.GetAxis("Mouse ScrollWheel") * this.m_ScrollSpeed, this.m_MinFOV, this.m_MaxFOV);
+        gameObject.GetComponent<Camera>().fieldOfView = this.m_CurrentFOV;
+
+        Vector3 to = this.m_Follower.transform.TransformPoint(this.m_FollowPos + new Vector3(this.m_MouseX, 0f, 0f));
+        this.transform.position = Vector3.Lerp(this.transform.position, to, Time.deltaTime * this.m_FollowSpeed);
+    }
 
 	private void UpdateRotation()
 	{
-		//if (this.m_GameObject == null)
-		//{
-		//	return;
-		//}
-		//if (this.m_FightSceneManager == null)
-		//{
-		//	return;
-		//}
-		//if (this.m_Follower.m_FaceToTarget is M_Mob || this.m_Follower.IsLoseHeart())
-		//{
-		//	this.m_CurrentFaceTarget = this.m_Follower.m_FaceToTarget;
-		//}
-		//Vector3 a = this.m_CurrentFaceTarget.GetModelPosition() + new Vector3(0f, this.m_CurrentFaceTarget.m_RoleHeight * this.m_TargetHeightRatio, 0f);
-		//Quaternion to = Quaternion.Euler(Quaternion.LookRotation(a - this.m_Transform.position, Vector3.up).eulerAngles);
-		//this.m_Transform.rotation = Quaternion.Slerp(this.m_Transform.rotation, to, Time.deltaTime * this.m_RotateSpeed);
-	}
+        //if (this.m_GameObject == null)
+        //{
+        //	return;
+        //}
+        //if (this.m_FightSceneManager == null)
+        //{
+        //	return;
+        //}
+        //if (this.m_Follower.m_FaceToTarget is M_Mob || this.m_Follower.IsLoseHeart())
+        //{
+        //	this.m_CurrentFaceTarget = this.m_Follower.m_FaceToTarget;
+        //}
+        //Vector3 a = this.m_CurrentFaceTarget.GetModelPosition() + new Vector3(0f, this.m_CurrentFaceTarget.m_RoleHeight * this.m_TargetHeightRatio, 0f);
+        //Quaternion to = Quaternion.Euler(Quaternion.LookRotation(a - this.m_Transform.position, Vector3.up).eulerAngles);
+        //this.m_Transform.rotation = Quaternion.Slerp(this.m_Transform.rotation, to, Time.deltaTime * this.m_RotateSpeed);
+    }
 
 	private void ChangePosition()
 	{
@@ -260,15 +252,14 @@ public class M_FightCameraController_Black : M_FightCameraController
         //if (this.m_Follower.m_FaceToTarget is M_Mob || this.m_Follower.IsLoseHeart())
         //{
         //    this.m_CurrentFaceTarget = this.m_Follower.m_FaceToTarget;
-        //}
+        //}   
 
-        //Vector3 position = this.m_Follower.m_ModelTransform.TransformPoint(this.m_FollowPos + new Vector3(this.m_MouseX, 0f, 0f));
-        //Vector3 position = this.m_Follower.transform.TransformPoint(this.m_FollowPos + new Vector3(this.m_MouseX, 0f, 0f));
-        //this.m_Transform.position = position;
-        //this.m_Transform.rotation = this.m_Follower.m_ModelTransform.rotation;
+        Vector3 position = this.m_Follower.transform.TransformPoint(this.m_FollowPos + new Vector3(this.m_MouseX, 0f, 0f));
+        this.transform.position = position;
+        this.transform.rotation = this.m_Follower.transform.rotation;
     }
 
-	public override void SetStoryMode(bool isStory)
+    public override void SetStoryMode(bool isStory)
 	{
 		if (isStory)
 		{
