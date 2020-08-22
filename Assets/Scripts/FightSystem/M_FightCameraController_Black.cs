@@ -213,20 +213,18 @@ public class M_FightCameraController_Black : M_FightCameraController
 
 	private void UpdatePosition()
 	{
-        UnityEngine.Debug.Log("执行UpdatePosition");
-        //this.m_CurrentFOV = gameObject.GetComponent<Camera>().fieldOfView;
+        this.m_CurrentFOV = this.m_Camera.fieldOfView;
 
-        //if (Input.GetMouseButton(1))
-        //{
-        //    UnityEngine.Debug.Log("执行");
-        //    this.m_MouseX += Input.GetAxis("Mouse X") * this.m_MouseSpeedX;
-        //    this.m_MouseX = Mathf.Clamp(this.m_MouseX, this.m_MouseRangeMin, this.m_MouseRangeMax);
-        //}
-        //this.m_CurrentFOV = Mathf.Clamp(this.m_CurrentFOV - Input.GetAxis("Mouse ScrollWheel") * this.m_ScrollSpeed, this.m_MinFOV, this.m_MaxFOV);
-        //gameObject.GetComponent<Camera>().fieldOfView = this.m_CurrentFOV;
+        if (Input.GetMouseButton(1))
+        {
+            this.m_MouseX += Input.GetAxis("Mouse X") * this.m_MouseSpeedX;
+            this.m_MouseX = Mathf.Clamp(this.m_MouseX, this.m_MouseRangeMin, this.m_MouseRangeMax);
+        }
+        this.m_CurrentFOV = Mathf.Clamp(this.m_CurrentFOV - Input.GetAxis("Mouse ScrollWheel") * this.m_ScrollSpeed, this.m_MinFOV, this.m_MaxFOV);
+        this.m_Camera.fieldOfView = this.m_CurrentFOV;
 
-        //Vector3 to = this.m_Follower.transform.TransformPoint(this.m_FollowPos + new Vector3(this.m_MouseX, 0f, 0f));
-        //this.transform.position = Vector3.Lerp(this.transform.position, to, Time.deltaTime * this.m_FollowSpeed);
+        Vector3 to = this.m_Follower.m_ModelTransform.TransformPoint(this.m_FollowPos + new Vector3(this.m_MouseX, 0f, 0f));
+        this.m_Transform.position = Vector3.Lerp(this.m_Transform.position, to, Time.deltaTime * this.m_FollowSpeed);
     }
 
 	private void UpdateRotation()
@@ -253,27 +251,19 @@ public class M_FightCameraController_Black : M_FightCameraController
 	{
         //if (this.m_GameObject == null)
         //{
-        //	return;
+        //    return;
         //}
         //if (this.m_FightSceneManager == null)
         //{
-        //	return;
+        //    return;
         //}
         //if (this.m_Follower.m_FaceToTarget is M_Mob || this.m_Follower.IsLoseHeart())
         //{
         //    this.m_CurrentFaceTarget = this.m_Follower.m_FaceToTarget;
-        //}   
-
-        Vector3 position = this.m_Follower.transform.TransformPoint(this.m_FollowPos + new Vector3(this.m_MouseX, 0f, 0f));
-        this.transform.position = position;
-        this.transform.rotation = this.m_Follower.transform.rotation;
-
-        //	this.m_CurrentFaceTarget = this.m_Follower.m_FaceToTarget;
         //}
-        //Vector3 position = this.m_Follower.m_ModelTransform.TransformPoint(this.m_FollowPos + new Vector3(this.m_MouseX, 0f, 0f));
-        //      this.m_Transform.position = position;
-        //      this.m_Transform.rotation = this.m_Follower.m_ModelTransform.rotation;
-        this.transform.position = m_Follower.transform.position;
+        Vector3 position = this.m_Follower.m_ModelTransform.TransformPoint(this.m_FollowPos + new Vector3(this.m_MouseX, 0f, 0f));
+        this.m_Transform.position = position;
+        this.m_Transform.rotation = this.m_Follower.m_ModelTransform.rotation;
     }
 
     public override void SetStoryMode(bool isStory)

@@ -288,7 +288,9 @@ public class FightSceneManager
         M_FightCameraController_Black FightCameraController_BlackrMouseOrbit = GameEntry.Instance.m_MainCamera.GetComponent<M_FightCameraController_Black>();
         if (FightCameraController_BlackrMouseOrbit == null)
         {
-            GameEntry.Instance.m_MainCamera.gameObject.AddComponent<M_FightCameraController_Black>();
+            FightCameraController_BlackrMouseOrbit=GameEntry.Instance.m_MainCamera.gameObject.AddComponent<M_FightCameraController_Black>();
+            FightCameraController_BlackrMouseOrbit.m_FollowSpeed = 5f;
+            FightCameraController_BlackrMouseOrbit.m_FollowPos = new Vector3(1.5f,2.5f,-6f);
         }
 
         this.m_FightCamera = GameEntry.Instance.m_MainCamera.gameObject;

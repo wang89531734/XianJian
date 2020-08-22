@@ -117,6 +117,10 @@ public class M_Character : MonoBehaviour
 
     public int m_TotalBeHealed;
 
+    public GameObject m_RoleModel;
+
+    public Transform m_ModelTransform;
+
     private void Start()
     {
     }
@@ -133,6 +137,8 @@ public class M_Character : MonoBehaviour
     public virtual void Initialize()
     {
         UnityEngine.Debug.Log("Ö´ÐÐM_Character Initialize");
+        this.m_RoleModel = base.gameObject;
+        this.m_ModelTransform = base.transform;
         //this.m_HitTransform = TransformTool.FindChild(base.transform, this.m_HitPointName);
         //if (this.m_HitTransform == null)
         //{
