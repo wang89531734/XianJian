@@ -125,11 +125,11 @@ public class M_Player : M_Character
 
     public void InitRole(int roleID)
     {
-        UnityEngine.Debug.Log("执行"+ roleID);
-        this.m_emFight = M_Character.Enum_FightStatus.Idle;
-        //this.m_CharacterController.enabled = true;
-        //this.m_EnableCharacterContoller = true;
-        this.m_RoleID = roleID;
+        UnityEngine.Debug.Log("执行");
+        //this.m_emFight = M_Character.Enum_FightStatus.Idle;
+        ////this.m_CharacterController.enabled = true;
+        ////this.m_EnableCharacterContoller = true;
+        //this.m_RoleID = roleID;
         ////this.m_SkillCDList.Clear();
         //for (int i = 0; i < 5; i++)
         //{
@@ -174,12 +174,12 @@ public class M_Player : M_Character
         ////this.m_AIDebuffSkills_1.Reverse();
         ////this.m_AIDebuffSkills_2.Sort();
         ////this.m_AIDebuffSkills_2.Reverse();
-        this.m_RoleDataEx = GameEntry.Instance.m_GameDataSystem.GetRoleData(this.m_RoleID);
-        if (this.m_RoleDataEx == null)
-        {
-            Debug.LogWarning("m_RoleDataEx is Null m_RoleID = " + this.m_RoleID);
-            return;
-        }
+        //this.m_RoleDataEx = GameEntry.Instance.m_GameDataSystem.GetRoleData(this.m_RoleID);
+        //if (this.m_RoleDataEx == null)
+        //{
+        //    Debug.LogWarning("m_RoleDataEx is Null m_RoleID = " + this.m_RoleID);
+        //    return;
+        //}
         ////ItemData equipItemData = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Weapon);
         ////this.m_emWeaponElemntType = this.m_RoleDataEx.BaseRoleData.emWeaponElemntType;
         ////this.m_MagicItem = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Talisman);
@@ -1616,18 +1616,13 @@ public class M_Player : M_Character
         this.m_bIsControlCharacter = bIsControlCharacter;
     }
 
-    /// <summary>
-    /// 设置阵型数据
-    /// </summary>
-    /// <param name="fData"></param>
-    /// <param name="unitIdx"></param>
-    public void SetFormationData(FormationData fData, int unitIdx)
-    {
-        this.m_FormationData = fData;
-        this.m_FormationUnitIdx = unitIdx;
-        this.m_emFormationActionType = fData.Unit[unitIdx].emActionType;
-        this.m_emAIType = fData.Unit[unitIdx].emAI;
-    }
+    //	public void SetFormationData(FormationData fData, int unitIdx)
+    //	{
+    //		this.m_FormationData = fData;
+    //		this.m_FormationUnitIdx = unitIdx;
+    //		this.m_emFormationActionType = fData.Unit[unitIdx].emActionType;
+    //		this.m_emAIType = fData.Unit[unitIdx].emAI;
+    //	}
 
     public override void InitFightRoleData()
     {
@@ -1677,73 +1672,70 @@ public class M_Player : M_Character
     //		this.m_RoleDataEx.SetHP(this.m_OriginalHP);
     //	}
 
-    /// <summary>
-    /// 更新战斗角色数据
-    /// </summary>
-    public override void UpdateFightRoleData()
-    {
-        //if (base.IsDead())
-        //{
-        //    this.m_RoleDataEx.SetBuffs(this.m_BuffList, null);
-        //}
-        //else
-        //{
-        //    this.m_RoleDataEx.SetBuffs(this.m_BuffList, this.m_NoRemoveBuffList);
-        //}
-        this.m_RoleDataEx.SetFormationInfo(this.m_FormationData, this.m_FormationUnitIdx);
-        if (this.m_emFight == M_Character.Enum_FightStatus.Finish)
-        {
-            this.m_RoleDataEx.CalRoleAttr();
-        }
-        else
-        {
-            this.m_RoleDataEx.CalRoleAttr_Fight();
-        }
-        this.m_FightRoleData.Level = this.m_RoleDataEx.GetLevel();
-        this.m_FightRoleData.MaxHP = this.m_RoleDataEx.RoleAttr.sFinial.MaxHP;
-        this.m_FightRoleData.MaxMP = this.m_RoleDataEx.RoleAttr.sFinial.MaxMP;
-        this.m_FightRoleData.Atk = this.m_RoleDataEx.RoleAttr.sFinial.Attack;
-        this.m_FightRoleData.Def = this.m_RoleDataEx.RoleAttr.sFinial.Def;
-        this.m_FightRoleData.MagicAtk = this.m_RoleDataEx.RoleAttr.sFinial.MAttack;
-        this.m_FightRoleData.MagicDef = this.m_RoleDataEx.RoleAttr.sFinial.MDef;
-        this.m_FightRoleData.Agi = this.m_RoleDataEx.RoleAttr.sFinial.Agi;
-        this.m_FightRoleData.Dodge = this.m_RoleDataEx.RoleAttr.sFinial.Dodge;
-        this.m_FightRoleData.Block = this.m_RoleDataEx.RoleAttr.sFinial.Block;
-        this.m_FightRoleData.Critical = this.m_RoleDataEx.RoleAttr.sFinial.Critical;
-        int[] array = new int[4];
-        for (int i = 0; i < array.Length; i++)
-        {
-            if (i < this.m_RoleDataEx.RoleAttr.sFinial.AtkElement.Length)
-            {
-                array[i] = this.m_RoleDataEx.RoleAttr.sFinial.AtkElement[i];
-            }
-            else
-            {
-                array[i] = 0;
-            }
-        }
-        this.m_FightRoleData.AtkElement = array;
-        int[] array2 = new int[4];
-        for (int j = 0; j < array2.Length; j++)
-        {
-            if (j < this.m_RoleDataEx.RoleAttr.sFinial.Element.Length)
-            {
-                array2[j] = this.m_RoleDataEx.RoleAttr.sFinial.Element[j];
-            }
-            else
-            {
-                array2[j] = 0;
-            }
-        }
-        this.m_FightRoleData.DefElement = array2;
-        //base.CheckTransElementTypeBuff();
-        //if (this.m_BuffList.ContainsKey(78))
-        //{
-        //    float num = (float)this.m_FightRoleData.Agi * 0.5f;
-        //    this.m_FightRoleData.Agi = Mathf.RoundToInt(num + 0.1f);
-        //}
-        this.m_ActionCD = (float)(500 - this.m_FightRoleData.Agi) / 100f;
-    }
+    //	public override void UpdateFightRoleData()
+    //	{
+    //		if (base.IsDead())
+    //		{
+    //			this.m_RoleDataEx.SetBuffs(this.m_BuffList, null);
+    //		}
+    //		else
+    //		{
+    //			this.m_RoleDataEx.SetBuffs(this.m_BuffList, this.m_NoRemoveBuffList);
+    //		}
+    //		this.m_RoleDataEx.SetFormationInfo(this.m_FormationData, this.m_FormationUnitIdx);
+    //		if (this.m_emFight == M_Character.Enum_FightStatus.Finish)
+    //		{
+    //			this.m_RoleDataEx.CalRoleAttr();
+    //		}
+    //		else
+    //		{
+    //			this.m_RoleDataEx.CalRoleAttr_Fight();
+    //		}
+    //		this.m_FightRoleData.Level = this.m_RoleDataEx.GetLevel();
+    //		this.m_FightRoleData.MaxHP = this.m_RoleDataEx.RoleAttr.sFinial.MaxHP;
+    //		this.m_FightRoleData.MaxMP = this.m_RoleDataEx.RoleAttr.sFinial.MaxMP;
+    //		this.m_FightRoleData.Atk = this.m_RoleDataEx.RoleAttr.sFinial.Attack;
+    //		this.m_FightRoleData.Def = this.m_RoleDataEx.RoleAttr.sFinial.Def;
+    //		this.m_FightRoleData.MagicAtk = this.m_RoleDataEx.RoleAttr.sFinial.MAttack;
+    //		this.m_FightRoleData.MagicDef = this.m_RoleDataEx.RoleAttr.sFinial.MDef;
+    //		this.m_FightRoleData.Agi = this.m_RoleDataEx.RoleAttr.sFinial.Agi;
+    //		this.m_FightRoleData.Dodge = this.m_RoleDataEx.RoleAttr.sFinial.Dodge;
+    //		this.m_FightRoleData.Block = this.m_RoleDataEx.RoleAttr.sFinial.Block;
+    //		this.m_FightRoleData.Critical = this.m_RoleDataEx.RoleAttr.sFinial.Critical;
+    //		int[] array = new int[4];
+    //		for (int i = 0; i < array.Length; i++)
+    //		{
+    //			if (i < this.m_RoleDataEx.RoleAttr.sFinial.AtkElement.Length)
+    //			{
+    //				array[i] = this.m_RoleDataEx.RoleAttr.sFinial.AtkElement[i];
+    //			}
+    //			else
+    //			{
+    //				array[i] = 0;
+    //			}
+    //		}
+    //		this.m_FightRoleData.AtkElement = array;
+    //		int[] array2 = new int[4];
+    //		for (int j = 0; j < array2.Length; j++)
+    //		{
+    //			if (j < this.m_RoleDataEx.RoleAttr.sFinial.Element.Length)
+    //			{
+    //				array2[j] = this.m_RoleDataEx.RoleAttr.sFinial.Element[j];
+    //			}
+    //			else
+    //			{
+    //				array2[j] = 0;
+    //			}
+    //		}
+    //		this.m_FightRoleData.DefElement = array2;
+    //		base.CheckTransElementTypeBuff();
+    //		if (this.m_BuffList.ContainsKey(78))
+    //		{
+    //			float num = (float)this.m_FightRoleData.Agi * 0.5f;
+    //			this.m_FightRoleData.Agi = Mathf.RoundToInt(num + 0.1f);
+    //		}
+    //		this.m_ActionCD = (float)(500 - this.m_FightRoleData.Agi) / 100f;
+    //	}
 
     //	public override int GetBeingTargetScore()
     //	{

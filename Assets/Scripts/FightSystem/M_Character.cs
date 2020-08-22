@@ -497,9 +497,9 @@ public class M_Character : MonoBehaviour
     //		return true;
     //	}
 
-    public virtual void UpdateFightRoleData()
-    {
-    }
+    //	public virtual void UpdateFightRoleData()
+    //	{
+    //	}
 
     //	public List<Buff_Base> GetShowBuffs()
     //	{
