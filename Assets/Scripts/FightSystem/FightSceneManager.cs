@@ -189,7 +189,7 @@ public class FightSceneManager
         this.InitFightPosition();
         this.InitFightCamera();
         this.CreateCharacters();
-        //this.InitFightSetting();
+        this.InitFightSetting();
         ////UI_GameGMFightStatistics.Instance.InitRole(this.m_PlayerList);
         //this.PlayAppearCameraPath();
         //this.InitFightTalk();
@@ -711,12 +711,12 @@ public class FightSceneManager
                 this.ChangeControlCharacter(1, false);
             }
             int flag = 60 + this.m_ControlledRoleID;
-            M_Player role = this.GetRole(this.m_ControlledRoleID);
-            if (role != null)
-            {
-                //role.SetUseAI(Swd6Application.instance.m_GameDataSystem.GetFlag(flag));
-                //UI_Fight.Instance.UpdateRoleAICheckBox(this.m_ControlledRoleID);
-            }
+            //M_Player role = this.GetRole(this.m_ControlledRoleID);
+            //if (role != null)
+            //{
+            //    //role.SetUseAI(Swd6Application.instance.m_GameDataSystem.GetFlag(flag));
+            //    //UI_Fight.Instance.UpdateRoleAICheckBox(this.m_ControlledRoleID);
+            //}
         }
         else
         {
@@ -1585,11 +1585,9 @@ public class FightSceneManager
 
     public void ChangeControlCharacter(int key, bool bDead)
     {
-        UnityEngine.Debug.Log("执行"+ key);
-        M_Player role = this.GetRole(key);
+        //M_Player role = this.GetRole(key);
         //if (role == null || role.IsDead())
         //{
-        //    UnityEngine.Debug.Log("执行");
         //    return;
         //}
         foreach (KeyValuePair<int, M_Player> current in this.m_PlayerList)
@@ -1624,7 +1622,7 @@ public class FightSceneManager
         {
             return;
         }
-        bool useAI = false;
+        //bool useAI = false;
         //if (bDead)
         //{
         //    //useAI = this.GetControlledPlayer().m_bUseAI;
@@ -2835,12 +2833,10 @@ public class FightSceneManager
         this.m_FightCameraController = this.m_FightCamera.GetComponent<M_FightCameraController>();
         if (this.m_FightCameraController == null)
         {
-            UnityEngine.Debug.Log("执行");
             this.m_FightCameraController = this.m_FightCamera.AddComponent<M_FightCameraController>();
         }
         if (this.m_PlayerList.ContainsKey(this.m_ControlledRoleID))
         {
-            UnityEngine.Debug.Log("执行"+ m_ControlledRoleID);
             this.m_FightCameraController.SetFollower(this.m_PlayerList[this.m_ControlledRoleID]);
         }
     }

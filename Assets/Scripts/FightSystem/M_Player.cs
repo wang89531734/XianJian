@@ -125,7 +125,7 @@ public class M_Player : M_Character
 
     public void InitRole(int roleID)
     {
-        UnityEngine.Debug.Log("执行");
+        UnityEngine.Debug.Log("执行InitRole");
         //this.m_emFight = M_Character.Enum_FightStatus.Idle;
         ////this.m_CharacterController.enabled = true;
         ////this.m_EnableCharacterContoller = true;

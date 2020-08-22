@@ -23,7 +23,21 @@ public class M_FightCameraController : MonoBehaviour
 
 	protected Animator m_Animator;
 
-	public virtual void SetStoryMode(bool isStory)
+    protected Transform m_Transform;
+
+    protected GameObject m_GameObject;
+
+    protected Camera m_Camera;
+
+    protected virtual void Start()
+    {
+        Debug.Log("Ö´ÐÐÏà»úStart");
+        this.m_GameObject = base.gameObject;
+        this.m_Transform = base.transform;
+        this.m_Camera = gameObject.GetComponent<Camera>();
+    }
+
+    public virtual void SetStoryMode(bool isStory)
 	{
 	}
 

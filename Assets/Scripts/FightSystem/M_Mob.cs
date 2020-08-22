@@ -52,46 +52,47 @@ public class M_Mob : M_Character
 
     private void Start()
     {
-        float num = UnityEngine.Random.Range(-1f, 1f);
-        //this.m_ActionCDTimer = base.GetActionCD() + num;
-        this.m_HurtAudioSource = base.gameObject.AddComponent<AudioSource>();
+        //float num = UnityEngine.Random.Range(-1f, 1f);
+        ////this.m_ActionCDTimer = base.GetActionCD() + num;
+        //this.m_HurtAudioSource = base.gameObject.AddComponent<AudioSource>();
     }
 
     public virtual void InitMob(int MobGUID)
     {
-        this.m_emFight = M_Character.Enum_FightStatus.Idle;
-        //if (this.m_CharacterController != null)
+        UnityEngine.Debug.Log("执行InitMob");
+        //this.m_emFight = M_Character.Enum_FightStatus.Idle;
+        ////if (this.m_CharacterController != null)
+        ////{
+        ////    if (MobGUID >= 2048 && MobGUID <= 2051)
+        ////    {
+        ////        this.m_CharacterController.enabled = false;
+        ////        this.m_EnableCharacterContoller = false;
+        ////    }
+        ////    else
+        ////    {
+        ////        this.m_CharacterController.enabled = true;
+        ////        this.m_EnableCharacterContoller = true;
+        ////    }
+        ////}
+        ////else
+        ////{
+        ////    UnityEngine.Debug.LogError("m_CharacterController == null");
+        ////}
+        //S_Item data = GameDataDB.ItemDB.GetData(MobGUID);
+        //if (data == null || data.emItemType != ENUM_ItemType.Mob)
         //{
-        //    if (MobGUID >= 2048 && MobGUID <= 2051)
-        //    {
-        //        this.m_CharacterController.enabled = false;
-        //        this.m_EnableCharacterContoller = false;
-        //    }
-        //    else
-        //    {
-        //        this.m_CharacterController.enabled = true;
-        //        this.m_EnableCharacterContoller = true;
-        //    }
+        //    UnityEngine.Debug.LogWarning("無法取得怪物資料 MobGUID:" + MobGUID);
+        //    return;
         //}
-        //else
-        //{
-        //    UnityEngine.Debug.LogError("m_CharacterController == null");
-        //}
-        S_Item data = GameDataDB.ItemDB.GetData(MobGUID);
-        if (data == null || data.emItemType != ENUM_ItemType.Mob)
-        {
-            UnityEngine.Debug.LogWarning("無法取得怪物資料 MobGUID:" + MobGUID);
-            return;
-        }
-        this.m_MobGUID = MobGUID;
-        this.m_IconNo = data.IconNo;
-        this.m_MobData = data.MobData;
-        //this.ResetSkill();
-        this.InitFightRoleData();
-        //this.m_ActionCD = (float)(1000 - this.m_FightRoleData.Agi) / 100f;
-        //this.SkillSetting(data.MobData);
-        this.m_CharacterName = data.Name;
-        //this.UpdateBuffIconCallback = new M_Character.UpdateBuffIcon(this.UpdateUIBuffIcon);
+        //this.m_MobGUID = MobGUID;
+        //this.m_IconNo = data.IconNo;
+        //this.m_MobData = data.MobData;
+        ////this.ResetSkill();
+        //this.InitFightRoleData();
+        ////this.m_ActionCD = (float)(1000 - this.m_FightRoleData.Agi) / 100f;
+        ////this.SkillSetting(data.MobData);
+        //this.m_CharacterName = data.Name;
+        ////this.UpdateBuffIconCallback = new M_Character.UpdateBuffIcon(this.UpdateUIBuffIcon);
         //this.SetStartUpdate(false);
     }
 

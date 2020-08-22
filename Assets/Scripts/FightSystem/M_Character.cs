@@ -132,14 +132,15 @@ public class M_Character : MonoBehaviour
 
     public virtual void Initialize()
     {
-        this.m_HitTransform = TransformTool.FindChild(base.transform, this.m_HitPointName);
-        if (this.m_HitTransform == null)
-        {
-            UnityEngine.Debug.LogWarning("Character Initialize, Cant Get HitPoint Reference.");
-            this.m_HitTransform = base.transform;
-        }
+        UnityEngine.Debug.Log("Ö´ÐÐM_Character Initialize");
+        //this.m_HitTransform = TransformTool.FindChild(base.transform, this.m_HitPointName);
+        //if (this.m_HitTransform == null)
+        //{
+        //    UnityEngine.Debug.LogWarning("Character Initialize, Cant Get HitPoint Reference.");
+        //    this.m_HitTransform = base.transform;
+        //}
         //this.m_Animator = base.GetComponent<Animator>();
-        this.ClearCommand();
+        //this.ClearCommand();
         //this.m_CharacterController = base.GetComponent<CharacterController>();
         //if (this.m_CharacterController != null)
         //{
@@ -198,7 +199,7 @@ public class M_Character : MonoBehaviour
         //{
         //    UnityEngine.Object.Destroy(component5);
         //}
-        this.m_emLastActionType = ENUM_FightActionType.Null;
+        //this.m_emLastActionType = ENUM_FightActionType.Null;
     }
 
     //	public void ModelDropCheck()
