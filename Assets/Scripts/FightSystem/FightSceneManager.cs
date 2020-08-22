@@ -722,11 +722,8 @@ public class FightSceneManager
         {
             UnityEngine.Debug.LogWarning("==== 無預設陣型資料 ====");
         }
-<<<<<<< HEAD
+
         //this.InitFightTarget();
-=======
-        this.InitFightTarget();
->>>>>>> parent of 7cf5b7da... 8.22
         this.InitPlayerGuardPos(defaultFormationData);
         //for (int i = 0; i < 5; i++)
         //{
@@ -1609,19 +1606,19 @@ public class FightSceneManager
         //this.m_NowControlledEffect.transform.position = this.m_PlayerList[key].GetModelPosition();
         //this.m_NowControlledEffect.transform.rotation = this.m_PlayerList[key].m_ModelTransform.rotation;
         //this.m_NowControlledEffect.transform.parent = this.m_PlayerList[key].m_ModelTransform;
-        if (this.m_FightCamera != null)
-        {
-            M_MouseOrbit component = this.m_FightCamera.GetComponent<M_MouseOrbit>();
-            Transform transform = TransformTool.FindChild(this.m_PlayerList[key].m_ModelTransform, "P1001");
-            if (transform != null)
-            {
-                UnityEngine.Debug.Log("执行");
-                component.target = transform;
-                component.distance = 5f;
-                component.x = this.m_PlayerList[key].m_ModelTransform.eulerAngles.y;
-                component.y = 20f;
-            }
-        }
+        //if (this.m_FightCamera != null)
+        //{
+        //    M_MouseOrbit component = this.m_FightCamera.GetComponent<M_MouseOrbit>();
+        //    Transform transform = TransformTool.FindChild(this.m_PlayerList[key].m_ModelTransform, "P1001");
+        //    if (transform != null)
+        //    {
+        //        UnityEngine.Debug.Log("执行");
+        //        component.target = transform;
+        //        component.distance = 5f;
+        //        component.x = this.m_PlayerList[key].m_ModelTransform.eulerAngles.y;
+        //        component.y = 20f;
+        //    }
+        //}
 
         if (this.m_ControlledRoleID == key)
         {
