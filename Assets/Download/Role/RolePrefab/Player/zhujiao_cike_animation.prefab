@@ -2378,10 +2378,7 @@ GameObject:
   - component: {fileID: 7498850784753197000}
   - component: {fileID: 7498850784743354796}
   - component: {fileID: -1339153460918123160}
-  - component: {fileID: -4877510826538705838}
-  - component: {fileID: -4612034319690588289}
   - component: {fileID: 8787177485007808929}
-  - component: {fileID: 1014083505657026994}
   m_Layer: 0
   m_Name: zhujiao_cike_animation
   m_TagString: Untagged
@@ -2450,40 +2447,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-4877510826538705838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7498850784752698344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c389c9098225f7c469ba209cb9d0b04b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gravityK: 1.5
-  playerAnimType: 1
-  m_AnguarSpeedDampTime: 0.2
-  m_DirectionResponseTime: 0.5
-  ZhiKongSpeedVec: {x: 0, y: 0, z: 0}
-  ZhiKongMag: 0
-  firstShang: 0
-  RotSpeed: 6
---- !u!114 &-4612034319690588289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7498850784752698344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37edb0a67afc01a4499c4a38297fd950, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bInBattleState: 0
-  m_bPlayFromBegining: 0
 --- !u!143 &8787177485007808929
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2502,58 +2465,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1014083505657026994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7498850784752698344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81327b4c7a729e148bf8b24673b442de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  palNPC: {fileID: 0}
-  agent: {fileID: 0}
-  animator: {fileID: 0}
-  animCtrl: {fileID: 0}
-  charCtrller: {fileID: 0}
-  bControl: 1
-  SpeedK: 1
-  m_curCtrlMode: 3
-  RunSpeed: 10
-  WalkSpeed: 2
-  AniRunSpeed: 7
-  RotSpeed: 15
-  dampSpeed: 3.7
-  CurSpeed: 1
-  LongJumpSpeed: 0.45
-  jumpPower: 1
-  MaxJumpPower: 2
-  ActionRadius: 1.5
-  locomotion: {fileID: 0}
-  destObj: {fileID: 0}
-  JudgeStopDistance: 7
-  VerticalSpeed: 0
-  ZhuoDiTime: 100
-  ZhuoDiDistance: 0.05
-  IsInSky: 0
-  IsJump: 0
-  CanSlowByKeyUp: 0
-  XiaLuoSpeed: 5
-  CanSecondJump: 0
-  SecondJumpDegree: 1.2
-  SmallMoveSpeed: 4
-  animatorMoveClient: {fileID: 0}
-  AgentSpeedK: 1
-  kkk: 1
-  JumpTurnBodySpeed: 100
-  CanSmallMove: 0
-  SlowSmoothTime: 0.1
-  SlowDegree: 0.68
-  JumpMoveRatioWhenSlide: 0.3
-  CrossZhuoDiTime: 0.08
 --- !u!1 &7498850784752698346
 GameObject:
   m_ObjectHideFlags: 0
