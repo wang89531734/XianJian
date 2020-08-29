@@ -226,21 +226,21 @@ public class M_Character : MonoBehaviour
     //		}
     //	}
 
-    //	public bool IsLoseHeart()
-    //	{
-    //		if (this.m_BuffList.ContainsKey(76))
-    //		{
-    //			return true;
-    //		}
-    //		for (int i = 0; i < this.m_NoRemoveBuffList.Count; i++)
-    //		{
-    //			if (this.m_NoRemoveBuffList[i].m_BuffData.emBuffType == ENUM_BuffType.LoseHeart)
-    //			{
-    //				return true;
-    //			}
-    //		}
-    //		return false;
-    //	}
+    public bool IsLoseHeart()
+    {
+        if (this.m_BuffList.ContainsKey(76))
+        {
+            return true;
+        }
+        //for (int i = 0; i < this.m_NoRemoveBuffList.Count; i++)
+        //{
+        //    if (this.m_NoRemoveBuffList[i].m_BuffData.emBuffType == ENUM_BuffType.LoseHeart)
+        //    {
+        //        return true;
+        //    }
+        //}
+        return false;
+    }
 
     //	public virtual void Update_Movement()
     //	{
@@ -449,10 +449,10 @@ public class M_Character : MonoBehaviour
         this.m_CommandQueue.Clear();
     }
 
-    //	public virtual Vector3 GetModelPosition()
-    //	{
-    //		return this.m_ModelTransform.position;
-    //	}
+    public virtual Vector3 GetModelPosition()
+    {
+        return this.m_ModelTransform.position;
+    }
 
     //	public virtual int GetBeingTargetScore()
     //	{
@@ -931,26 +931,26 @@ public class M_Character : MonoBehaviour
     //		return this.IsDead() || this.m_BuffList.ContainsKey(77) || this.m_BuffList.ContainsKey(79) || this.m_BuffList.ContainsKey(80);
     //	}
 
-    //	public void SetFaceToTarget(M_Character target)
-    //	{
-    //		if (target == null || target == this)
-    //		{
-    //			return;
-    //		}
-    //		if (target != this && this.m_bStartUpdate)
-    //		{
-    //			this.UpdateDirection_Directly(target.GetModelPosition());
-    //		}
-    //		this.m_FaceToTarget = target;
-    //	}
+    public void SetFaceToTarget(M_Character target)
+    {
+        //if (target == null || target == this)
+        //{
+        //    return;
+        //}
+        //if (target != this && this.m_bStartUpdate)
+        //{
+        //    this.UpdateDirection_Directly(target.GetModelPosition());
+        //}
+        this.m_FaceToTarget = target;
+    }
 
-    //	public virtual void UpdateDirection_Directly(Vector3 targetPos)
-    //	{
-    //		Vector3 forward = targetPos - this.GetModelPosition();
-    //		forward.y = 0f;
-    //		Quaternion rotation = Quaternion.LookRotation(forward);
-    //		base.transform.rotation = rotation;
-    //	}
+    public virtual void UpdateDirection_Directly(Vector3 targetPos)
+    {
+        Vector3 forward = targetPos - this.GetModelPosition();
+        forward.y = 0f;
+        Quaternion rotation = Quaternion.LookRotation(forward);
+        base.transform.rotation = rotation;
+    }
 
     //	public virtual void SetFightFinish()
     //	{

@@ -59,7 +59,7 @@ public class FightSceneManager
 
     private M_Player m_MainPlayer;
 
-    //private M_Mob m_MainTarget;
+    private M_Mob m_MainTarget;
 
     public int m_ControlledRoleID = -1;
 
@@ -533,48 +533,48 @@ public class FightSceneManager
             if (s_BattleMobData != null)
             {        
                 M_Mob m_Mob = this.CreateMob(s_BattleMobData);
-                //if (m_Mob == null)
-                //{
-                //    UnityEngine.Debug.Log("Create mob == null, ID:" + this.m_BattleGroup.BattleMob[i].GUID);
-                //}
-                //else
-                //{
-                //    this.m_MobRewardList.Add(m_Mob);
-                //    if (num <= 0)
-                //    {
-                //        num = m_Mob.m_MobSerialID;
-                //    }
-                //    for (int j = 0; j < m_Mob.m_MobData.DropItem.Count; j++)
-                //    {
-                //        S_DropItem s_DropItem = m_Mob.m_MobData.DropItem[j];
-                //        if (s_DropItem == null)
-                //        {
-                //            UnityEngine.Debug.Log("無掉落品資訊");
-                //        }
-                //        else if ((this.m_BattleGroupGUID < 7001 || this.m_BattleGroupGUID > 7200) && FightSystem.Instance.m_FightPlayerID == 2 && s_DropItem.Rate == 0)
-                //        {
-                //            if (this.m_BonusDropItemList.ContainsKey(s_DropItem.ID))
-                //            {
-                //                Dictionary<int, int> bonusDropItemList;
-                //                Dictionary<int, int> expr_124 = bonusDropItemList = this.m_BonusDropItemList;
-                //                int num2;
-                //                int expr_12E = num2 = s_DropItem.ID;
-                //                num2 = bonusDropItemList[num2];
-                //                expr_124[expr_12E] = num2 + s_DropItem.Count;
-                //            }
-                //            else
-                //            {
-                //                this.m_BonusDropItemList.Add(s_DropItem.ID, s_DropItem.Count);
-                //            }
-                //        }
-                //    }
-                //}
+                if (m_Mob == null)
+                {
+                    UnityEngine.Debug.Log("Create mob == null, ID:" + this.m_BattleGroup.BattleMob[i].GUID);
+                }
+                else
+                {
+                    this.m_MobRewardList.Add(m_Mob);
+                    if (num <= 0)
+                    {
+                        num = m_Mob.m_MobSerialID;
+                    }
+                    //for (int j = 0; j < m_Mob.m_MobData.DropItem.Count; j++)
+                    //{
+                    //    S_DropItem s_DropItem = m_Mob.m_MobData.DropItem[j];
+                    //    if (s_DropItem == null)
+                    //    {
+                    //        UnityEngine.Debug.Log("無掉落品資訊");
+                    //    }
+                    //    else if ((this.m_BattleGroupGUID < 7001 || this.m_BattleGroupGUID > 7200) && FightSystem.Instance.m_FightPlayerID == 2 && s_DropItem.Rate == 0)
+                    //    {
+                    //        if (this.m_BonusDropItemList.ContainsKey(s_DropItem.ID))
+                    //        {
+                    //            Dictionary<int, int> bonusDropItemList;
+                    //            Dictionary<int, int> expr_124 = bonusDropItemList = this.m_BonusDropItemList;
+                    //            int num2;
+                    //            int expr_12E = num2 = s_DropItem.ID;
+                    //            num2 = bonusDropItemList[num2];
+                    //            expr_124[expr_12E] = num2 + s_DropItem.Count;
+                    //        }
+                    //        else
+                    //        {
+                    //            this.m_BonusDropItemList.Add(s_DropItem.ID, s_DropItem.Count);
+                    //        }
+                    //    }
+                    //}
+                }
             }
         }
-        //if (num > 0)
-        //{
-        //    this.ChangeTargetMob(num);
-        //}
+        if (num > 0)
+        {
+            this.ChangeTargetMob(num);
+        }
     }
 
     //	public void SummonMob(int iMobGUID, string strStartPos, string strTargetPos)
@@ -725,7 +725,7 @@ public class FightSceneManager
             UnityEngine.Debug.LogWarning("==== 無預設陣型資料 ====");
         }
 
-        //this.InitFightTarget();
+        this.InitFightTarget();
         this.InitPlayerGuardPos(defaultFormationData);
         //for (int i = 0; i < 5; i++)
         //{
@@ -1656,7 +1656,6 @@ public class FightSceneManager
 
     public bool ChangeTargetMob(int key)
     {
-        UnityEngine.Debug.Log("TODO");
         //if (!this.m_MobList.ContainsKey(key))
         //{
         //    return false;
@@ -1669,8 +1668,8 @@ public class FightSceneManager
         //{
         //    return false;
         //}
-        //this.m_MainTarget = this.m_MobList[key];
-        //this.m_TargetMobKeyID = key;
+        this.m_MainTarget = this.m_MobList[key];
+        this.m_TargetMobKeyID = key;
         //this.m_NowTargetEffect.transform.position = this.m_MainTarget.GetModelPosition();
         //this.m_NowTargetEffect.transform.rotation = this.m_MainTarget.m_ModelTransform.rotation;
         //this.m_NowTargetEffect.transform.parent = this.m_MainTarget.m_ModelTransform;
@@ -1826,7 +1825,7 @@ public class FightSceneManager
         foreach (M_Player current in this.m_PlayerList.Values)
         {
             //current.m_ActionTargetModel = this.m_MainTarget.m_RoleModel;
-            //current.SetFaceToTarget(this.m_MainTarget);
+            current.SetFaceToTarget(this.m_MainTarget);
         }
         //foreach (M_Guard current2 in this.m_GuardList.Values)
         //{

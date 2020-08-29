@@ -195,19 +195,19 @@ public class M_FightCameraController_Black : M_FightCameraController
 
 	private void LateUpdate()
 	{
-		//if (this.m_Follower == null)
-		//{
-		//	return;
-		//}
-		//if (this.m_CurrentState != M_FightCameraController.Enum_CameraState.Normal)
-		//{
-		//	return;
-		//}
-		//if (this.m_FightSceneManager.m_IsFightFinish)
-		//{
-		//	return;
-		//}
-		this.UpdatePosition();
+        if (this.m_Follower == null)
+        {
+            return;
+        }
+        //if (this.m_CurrentState != M_FightCameraController.Enum_CameraState.Normal)
+        //{
+        //	return;
+        //}
+        //if (this.m_FightSceneManager.m_IsFightFinish)
+        //{
+        //	return;
+        //}
+        this.UpdatePosition();
         this.UpdateRotation();
     }
 
@@ -229,7 +229,6 @@ public class M_FightCameraController_Black : M_FightCameraController
 
 	private void UpdateRotation()
 	{
-        UnityEngine.Debug.Log("执行UpdateRotation");
         //if (this.m_GameObject == null)
         //{
         //	return;
@@ -238,13 +237,13 @@ public class M_FightCameraController_Black : M_FightCameraController
         //{
         //	return;
         //}
-        //if (this.m_Follower.m_FaceToTarget is M_Mob || this.m_Follower.IsLoseHeart())
-        //{
-        //	this.m_CurrentFaceTarget = this.m_Follower.m_FaceToTarget;
-        //}
-        //Vector3 a = this.m_CurrentFaceTarget.GetModelPosition() + new Vector3(0f, this.m_CurrentFaceTarget.m_RoleHeight * this.m_TargetHeightRatio, 0f);
-        //Quaternion to = Quaternion.Euler(Quaternion.LookRotation(a - this.m_Transform.position, Vector3.up).eulerAngles);
-        //this.m_Transform.rotation = Quaternion.Slerp(this.m_Transform.rotation, to, Time.deltaTime * this.m_RotateSpeed);
+        if (this.m_Follower.m_FaceToTarget is M_Mob /*|| this.m_Follower.IsLoseHeart()*/)
+        {
+            this.m_CurrentFaceTarget = this.m_Follower.m_FaceToTarget;
+        }
+        Vector3 a = this.m_CurrentFaceTarget.GetModelPosition() + new Vector3(0f, this.m_CurrentFaceTarget.m_RoleHeight * this.m_TargetHeightRatio, 0f);
+        Quaternion to = Quaternion.Euler(Quaternion.LookRotation(a - this.m_Transform.position, Vector3.up).eulerAngles);
+        this.m_Transform.rotation = Quaternion.Slerp(this.m_Transform.rotation, to, Time.deltaTime * this.m_RotateSpeed);
     }
 
 	private void ChangePosition()
