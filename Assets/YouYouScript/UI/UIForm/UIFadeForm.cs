@@ -24,7 +24,7 @@ public class UIFadeForm : UIFormBase
 
     public void FadeTo()
     {
-        m_Image.material.DOFade(0, 3f);
+        m_Image.DOFade(0,3f);
         //this.m_FadeTexture.mainTexture = this.m_BlackTexture;
         //StopAllCoroutines();
         //this.Show();
