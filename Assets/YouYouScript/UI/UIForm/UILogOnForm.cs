@@ -10,21 +10,6 @@ using YouYou;
 /// </summary>
 public class UILogOnForm : UIFormBase
 {
-    private void Start()
-    {
-
-    }
-
-    private void EndState_Start()
-    {
-       
-    }
-
-    private void InitState_Start()
-    {
-
-    }
-
     public void OnNewGameBtn()
     {
         GameEntry.Instance.StartNewGame();

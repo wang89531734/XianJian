@@ -277,6 +277,16 @@ namespace YouYou
             OpenUIForm(UIFormId.UI_Dialog, baseParams);
         }
 
+        public void FadeTo(float amount, float time)
+        {
+            BaseParams baseParams = GameEntry.Pool.DequeueClassObject<BaseParams>();
+            baseParams.Reset();
+
+            baseParams.FloatParam1 = amount;
+            baseParams.FloatParam2 = time;      
+            OpenUIForm(3,baseParams);           
+        }
+
         public void Dispose()
         {
             

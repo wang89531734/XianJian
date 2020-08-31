@@ -21,8 +21,7 @@ namespace YouYou
             this.m_FightSceneMgr = new FightSceneManager();
             this.m_FightSceneMgr.m_FihgtState = this;
             //this.m_FightSceneMgr.m_BuffSystem = this.m_BuffSystem;
-            //GameEntry.UI.OpenUIForm(106);
-            //UI_Fade.Instance.FadeTo(0f, 1f);
+            GameEntry.UI.FadeTo(0f, 1f);
         }
 
         public override void OnUpdate()
@@ -38,14 +37,12 @@ namespace YouYou
             //this.m_FightSceneMgr.ClearFightObjs();
             //UI_Fight.Instance.Hide();
             //UI_FinishFight.Instance.Hide();
-            GameEntry.UI.CloseUIForm(106);
             //UI_TalkDialog.Instance.Close();
             //UI_GameGMFightStatistics.Instance.Hide();
             //if (UI_FinishFight.Instance.m_bWin && Swd6Application.instance != null && Swd6Application.instance.m_ExploreSystem.PlayerController != null)
             //{
             //    Swd6Application.instance.m_ExploreSystem.PlayerController.PlayMotion(1, 0f);
             //}
-            //this.gameApplication.m_UserBehavior.EventInfo.TimeEnd(FightSystem.Instance.m_BattleGroupID, TimerType.Battle);
         }
     }
 }

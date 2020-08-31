@@ -11,6 +11,11 @@ public class UIFormId
     public const int UI_Dialog = 2;
 
     /// <summary>
+    /// Fade
+    /// </summary>
+    public const int UI_Fade = 3;
+
+    /// <summary>
     /// 登录流程背景
     /// </summary>
     public const int UI_LogonBG = 101;
@@ -34,5 +39,10 @@ public class UIFormId
     /// 任务详情
     /// </summary>
     public const int UI_TaskDetail = 105;
+
+    /// <summary>
+    /// 战斗UI
+    /// </summary>
+    public const int UI_Fight = 106;
 
 }
