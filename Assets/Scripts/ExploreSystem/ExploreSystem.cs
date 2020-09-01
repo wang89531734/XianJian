@@ -495,27 +495,27 @@ public class ExploreSystem
         }
     }
 
-    //	public void End()
-    //	{
-    //		Debug.Log("EndExplore_" + this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
-    //		int mapID = this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID;
-    //		this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID = this.m_MapData.GUID;
-    //		UI_ZoneMap.Instance.SaveMapMask();
-    //		this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID = mapID;
-    //		UI_PartnerTalkDialog.Instance.Break();
-    //		UI_ZoneMap.Instance.Close();
-    //		UI_SmallMap.Instance.Close();
-    //		UI_BigMap.Instance.Close();
-    //		GameInput.Clear();
-    //		this.ExitBattleArea(null);
-    //		this.ResetData();
-    //		this.m_ShootFailTime = 0;
-    //		this.m_OpenMainMenu = false;
-    //		if (this.AmberObj)
-    //		{
-    //			this.AmberObj.GetComponent<M_AmberController>().SetRender(false);
-    //		}
-    //	}
+    public void End()
+    {
+        //Debug.Log("EndExplore_" + this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID);
+        //int mapID = this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID;
+        //this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID = this.m_MapData.GUID;
+        //UI_ZoneMap.Instance.SaveMapMask();
+        //this.m_GameApp.m_GameDataSystem.m_MapInfo.MapID = mapID;
+        //UI_PartnerTalkDialog.Instance.Break();
+        //UI_ZoneMap.Instance.Close();
+        //UI_SmallMap.Instance.Close();
+        //UI_BigMap.Instance.Close();
+        GameInput.Clear();
+        //this.ExitBattleArea(null);
+        //this.ResetData();
+        //this.m_ShootFailTime = 0;
+        //this.m_OpenMainMenu = false;
+        //if (this.AmberObj)
+        //{
+        //    this.AmberObj.GetComponent<M_AmberController>().SetRender(false);
+        //}
+    }
 
     //	public void Suspend()
     //	{

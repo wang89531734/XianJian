@@ -12,19 +12,22 @@ using YouYou;
 public class UIFadeForm : UIFormBase
 {
     public RawImage m_Image;
-
-    Tweener tweenAlpha;
+    private Tweener tweenAlpha;
+    private float amount;
+    private float time;
 
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
-        
-        FadeTo();
+
+        BaseParams baseParams = userData as BaseParams;
+        amount = baseParams.FloatParam1;
+        time = baseParams.FloatParam2;
     }
 
     public void FadeTo()
     {
-        m_Image.DOFade(0,3f);
+        //m_Image.DOFade(0,3f);
         //this.m_FadeTexture.mainTexture = this.m_BlackTexture;
         //StopAllCoroutines();
         //this.Show();
