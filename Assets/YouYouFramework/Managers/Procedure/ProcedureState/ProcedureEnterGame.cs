@@ -13,8 +13,7 @@ namespace YouYou
         {
             base.OnEnter();
             Debug.Log("OnEnter Procedure进入游戏流程");
-            GameEntry.UI.OpenUIForm(101);
-
+            GameEntry.UI.OpenUIForm(UIFormId.UI_LogonBG);
         }
 
         public override void OnUpdate()

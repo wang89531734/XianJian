@@ -1086,11 +1086,7 @@ public class ExploreSystem
             return;
         }
         this.m_MainCameraGameObj = GameEntry.Instance.m_MainCamera.gameObject;
-        M_MouseOrbit component2 = GameEntry.Instance.m_MainCamera.gameObject.GetComponent<M_MouseOrbit>();
-        if (component2 != null)
-        {
-            component2.enabled = false;
-        }
+
         this.m_PlayerMouseOrbit = GameEntry.Instance.m_MainCamera.gameObject.GetComponent<M_PlayerMouseOrbit>();
         if (this.m_PlayerMouseOrbit == null)
         {

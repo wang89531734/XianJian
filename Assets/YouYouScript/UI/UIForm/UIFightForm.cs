@@ -10,43 +10,32 @@ using YouYou;
 /// </summary>
 public class UIFightForm : UIFormBase
 {
-    private void Start()
+    /// <summary>
+    /// 设置选择角色
+    /// </summary>
+    public void SetControlledRole(M_Player newControlledRole)
     {
-
+        //if (this.m_ControlledRoleSlot == null)
+        //{
+        //    return;
+        //}
+        //if (this.m_ControlledRoleSlot.GetRoleID() == newControlledRole.m_RoleID)
+        //{
+        //    return;
+        //}
+        //int slotIdx = this.m_ControlledRoleSlot.GetSlotIdx();
+        //if (slotIdx < 0)
+        //{
+        //    this.SetTargetRoleSlot(newControlledRole);
+        //    return;
+        //}
+        //int roleID = this.m_ControlledRoleSlot.GetRoleID();
+        //if (roleID > 0)
+        //{
+        //    this.SetUnitRoleSlot(slotIdx, this.m_FightSceneMgr.GetRole(roleID));
+        //}
+        //this.SetTargetRoleSlot(newControlledRole);
+        //this.m_ControlledRoleSlot.PlayTween();
+        //this.m_RoleSlots[slotIdx].PlayTween();
     }
-
-    private void EndState_Start()
-    {
-       
-    }
-
-    private void InitState_Start()
-    {
-
-    }
-
-    public void OnNewGameBtn()
-    {
-        GameEntry.Instance.StartNewGame();
-    }
-
-    public void OnLoadBtn()
-    {
-        //LoadPlane.SetActive(true);
-    }
-
-    public void OnSystemBtn()
-    {
-        //SystemPlane.SetActive(true);
-    }
-
-    public void OnLoadbackBtn()
-    {
-        //LoadPlane.SetActive(false);
-    }
-
-    public void OnSystembackBtn()
-    {
-        //SystemPlane.SetActive(false);
-    } 
 }

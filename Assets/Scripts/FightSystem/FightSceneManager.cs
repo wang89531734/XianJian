@@ -129,6 +129,8 @@ public class FightSceneManager
 
     private Dictionary<int, int> m_FightTalkItemList = new Dictionary<int, int>();
 
+    private UIFightForm FightUIForm;
+
     public FightSceneManager()
     {
         this.m_GuardIdx = 0;
@@ -140,7 +142,12 @@ public class FightSceneManager
         //this.SetPauseMode(NormalSettingSystem.Instance.GetNormalSetting().m_bEnableFightStop);
         //UI_Fight.Instance.m_FightSceneMgr = this;
         //UI_FinishFight.Instance.m_FightSceneMgr = this;
-        this.Initialize();
+        GameEntry.UI.OpenUIForm(UIFormId.UI_Fight, null, (UIFormBase trans2) =>
+        {
+            UnityEngine.Debug.Log("FightUIForm == UIFormBase");
+            FightUIForm = trans2.gameObject.GetComponent<UIFightForm>();
+            this.Initialize();
+        });
     }
 
     public void Update()
@@ -291,6 +298,8 @@ public class FightSceneManager
             FightCameraController_BlackrMouseOrbit=GameEntry.Instance.m_MainCamera.gameObject.AddComponent<M_FightCameraController_Black>();
             FightCameraController_BlackrMouseOrbit.m_FollowSpeed = 5f;
             FightCameraController_BlackrMouseOrbit.m_FollowPos = new Vector3(1.5f,2.5f,-6f);
+            FightCameraController_BlackrMouseOrbit.m_RotateSpeed = 10f;
+            FightCameraController_BlackrMouseOrbit.m_MouseSpeedX = 0.2f;
         }
 
         this.m_FightCamera = GameEntry.Instance.m_MainCamera.gameObject;
@@ -325,8 +334,8 @@ public class FightSceneManager
         }
         list.Sort();
         this.m_PlayerList.Clear();
-        GameObject gameObject;
-        //RuntimeAnimatorController animatorController_Fight;
+        GameObject gameObject=null;
+
         for (int j = 0; j < list.Count; j++)
         {
             int num = list[j];
@@ -337,34 +346,14 @@ public class FightSceneManager
                     if (GameEntry.Instance.m_GameDataSystem.GetFlag(num))
                     {
                         text = "Player" + num.ToString();
-                        gameObject = GameEntry.Instance.m_GameObjSystem.GetPlayerCosCloth(num);
-                        if (gameObject == null)
+                        GameEntry.Pool.GameObjectSpawn(10001, (Transform trans2) =>
                         {
-                            gameObject = ResourcesManager.Instance.GetCharacterModel_Fight(text);
-                            if (gameObject == null)
-                            {
-                                UnityEngine.Debug.Log("CreatePlayer::無法建立Model物件_" + num);
-                            }
-                        }
-                        // RendererTool.ChangeSenceMaterialSetting(text, gameObject);
+                            gameObject = trans2.gameObject;
+                        });
+
                         M_Player m_Player = gameObject.AddComponent<M_Player>();
                         m_Player.m_ModelName = text;
-                        this.m_PlayerList.Add(num, m_Player);
-                        // animatorController_Fight = ResourcesManager.Instance.GetAnimatorController_Fight(text + "_Fight");
-                        // if (animatorController_Fight != null)
-                        // {
-                        //     Animator component = gameObject.GetComponent<Animator>();
-                        //     if (component != null)
-                        //     {
-                        //         component.runtimeAnimatorController = animatorController_Fight;
-                        //     }
-                        // }
-
-                        // if (m_Player == null)
-                        // {
-                        //     UnityEngine.Debug.LogWarning("M_Player == null");
-                        // }
-
+                        this.m_PlayerList.Add(num, m_Player);     
                         m_Player.m_FightPosition = this.m_FightPosition;
                         m_Player.m_FightSceneMgr = this;
                         m_Player.InitRole(num);
@@ -1606,19 +1595,6 @@ public class FightSceneManager
         //this.m_NowControlledEffect.transform.position = this.m_PlayerList[key].GetModelPosition();
         //this.m_NowControlledEffect.transform.rotation = this.m_PlayerList[key].m_ModelTransform.rotation;
         //this.m_NowControlledEffect.transform.parent = this.m_PlayerList[key].m_ModelTransform;
-        //if (this.m_FightCamera != null)
-        //{
-        //    M_MouseOrbit component = this.m_FightCamera.GetComponent<M_MouseOrbit>();
-        //    Transform transform = TransformTool.FindChild(this.m_PlayerList[key].m_ModelTransform, "P1001");
-        //    if (transform != null)
-        //    {
-        //        UnityEngine.Debug.Log("执行");
-        //        component.target = transform;
-        //        component.distance = 5f;
-        //        component.x = this.m_PlayerList[key].m_ModelTransform.eulerAngles.y;
-        //        component.y = 20f;
-        //    }
-        //}
 
         if (this.m_ControlledRoleID == key)
         {
@@ -1639,7 +1615,12 @@ public class FightSceneManager
             this.m_MainPlayer = null;
         }
         this.SetFightCameraController();
-        ////UI_Fight.Instance.UpdateSelectRole();
+        if (FightUIForm == null)
+        {
+            UnityEngine.Debug.Log("FightUIForm == null");
+        }
+
+        //FightUIForm.SetControlledRole(GetControlledPlayer());
         //foreach (KeyValuePair<int, M_Player> current2 in this.m_PlayerList)
         //{
         //    if (current2.Key == key)
@@ -1806,14 +1787,14 @@ public class FightSceneManager
     //		return this.m_MainTarget;
     //	}
 
-    //	public M_Player GetControlledPlayer()
-    //	{
-    //		if (!this.m_PlayerList.ContainsKey(this.m_ControlledRoleID))
-    //		{
-    //			return null;
-    //		}
-    //		return this.m_PlayerList[this.m_ControlledRoleID];
-    //	}
+    public M_Player GetControlledPlayer()
+    {
+        if (!this.m_PlayerList.ContainsKey(this.m_ControlledRoleID))
+        {
+            return null;
+        }
+        return this.m_PlayerList[this.m_ControlledRoleID];
+    }
 
     //	public int GetControlledPlayerRoleID()
     //	{

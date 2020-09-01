@@ -21,7 +21,7 @@ namespace YouYou
             this.m_FightSceneMgr = new FightSceneManager();
             this.m_FightSceneMgr.m_FihgtState = this;
             //this.m_FightSceneMgr.m_BuffSystem = this.m_BuffSystem;
-            GameEntry.UI.FadeTo(0f, 1f);
+            //GameEntry.UI.FadeTo(0f, 1f);
         }
 
         public override void OnUpdate()
