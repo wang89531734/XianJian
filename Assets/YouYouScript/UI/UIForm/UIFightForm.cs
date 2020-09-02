@@ -15,6 +15,7 @@ public class UIFightForm : UIFormBase
     /// </summary>
     public void SetControlledRole(M_Player newControlledRole)
     {
+        Debug.Log("执行");
         //if (this.m_ControlledRoleSlot == null)
         //{
         //    return;

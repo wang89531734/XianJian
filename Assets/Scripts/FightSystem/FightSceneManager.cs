@@ -1615,12 +1615,8 @@ public class FightSceneManager
             this.m_MainPlayer = null;
         }
         this.SetFightCameraController();
-        if (FightUIForm == null)
-        {
-            UnityEngine.Debug.Log("FightUIForm == null");
-        }
 
-        //FightUIForm.SetControlledRole(GetControlledPlayer());
+        FightUIForm.SetControlledRole(GetControlledPlayer());
         //foreach (KeyValuePair<int, M_Player> current2 in this.m_PlayerList)
         //{
         //    if (current2.Key == key)
