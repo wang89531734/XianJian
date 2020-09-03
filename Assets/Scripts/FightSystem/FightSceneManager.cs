@@ -144,8 +144,8 @@ public class FightSceneManager
         //UI_FinishFight.Instance.m_FightSceneMgr = this;
         GameEntry.UI.OpenUIForm(UIFormId.UI_Fight, null, (UIFormBase trans2) =>
         {
-            UnityEngine.Debug.Log("FightUIForm == UIFormBase");
             FightUIForm = trans2.gameObject.GetComponent<UIFightForm>();
+            FightUIForm.m_FightSceneMgr = this;
             this.Initialize();
         });
     }
@@ -1615,8 +1615,7 @@ public class FightSceneManager
             this.m_MainPlayer = null;
         }
         this.SetFightCameraController();
-
-        FightUIForm.SetControlledRole(GetControlledPlayer());
+        FightUIForm.UpdateSelectRole();
         //foreach (KeyValuePair<int, M_Player> current2 in this.m_PlayerList)
         //{
         //    if (current2.Key == key)
