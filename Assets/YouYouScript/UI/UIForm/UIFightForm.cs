@@ -117,11 +117,11 @@ public class UIFightForm : UIFormBase
 
     //    private TweenAlpha m_CatchResultTw;
 
-    //    [SerializeField]
-    //    private GameObject m_TempRoleSlot;
+    [SerializeField]
+    private GameObject m_TempRoleSlot;
 
-    //    [SerializeField]
-    //    private GameObject m_TempSelectedRoleSlot;
+    [SerializeField]
+    private GameObject m_TempSelectedRoleSlot;
 
     //    [SerializeField]
     //    private UIToggle m_PauseCheckbox;
@@ -147,21 +147,24 @@ public class UIFightForm : UIFormBase
     //    [SerializeField]
     //    private List<UITexture> m_CutInTextureList;
 
-    //    private cUIFightRoleSlot m_ControlledRoleSlot;
+    private UIFightRoleSlot m_ControlledRoleSlot;
 
-    //    private List<cUIFightRoleSlot> m_RoleSlots = new List<cUIFightRoleSlot>();
+    private List<UIFightRoleSlot> m_RoleSlots = new List<UIFightRoleSlot>();
 
-    //    private Dictionary<int, cUIFightRoleSlot> m_RoleSlotTable = new Dictionary<int, cUIFightRoleSlot>();
+    private Dictionary<int, UIFightRoleSlot> m_RoleSlotTable = new Dictionary<int, UIFightRoleSlot>();
 
-    //    [SerializeField]
-    //    private GameObject m_TempMobSlot;
+    [SerializeField]
+    private GameObject m_TempMobSlot;
 
-    //    [SerializeField]
-    //    private GameObject m_TempBossSlot;
+    [SerializeField]
+    private GameObject m_TempBossSlot;
 
-    //    private List<cUIFightMobSlot> m_MobSlots_Normal = new List<cUIFightMobSlot>();
+    [SerializeField]
+    private GameObject m_MobSlot;
+    
+    private List<UIFightMobSlot> m_MobSlots_Normal = new List<UIFightMobSlot>();
 
-    //    private List<cUIFightMobSlot> m_MobSlots_Boss = new List<cUIFightMobSlot>();
+    private List<UIFightMobSlot> m_MobSlots_Boss = new List<UIFightMobSlot>();
 
     //    private Dictionary<int, cUIFightMobSlot> m_MobSlotTable = new Dictionary<int, cUIFightMobSlot>();
 
@@ -865,7 +868,7 @@ public class UIFightForm : UIFormBase
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
-        //this.m_CatchResultTw = this.m_CatchResultTexture.GetComponent<TweenAlpha>();
+        //this.m_CatchResultTw = this.m_CatchResultTexture.GetComponent<TweenAlpha>();//捕捉结果
         //this.CreateMobSlots();
         this.CreateRoleSlots();
         //this.CreateGuardSlot();
@@ -1139,46 +1142,50 @@ public class UIFightForm : UIFormBase
     //        }
     //    }
 
-    //    private void CreateMobSlots()
-    //    {
-    //        this.m_MobSlots_Normal.Clear();
-    //        this.m_MobSlots_Boss.Clear();
-    //        for (int i = 0; i < 6; i++)
-    //        {
-    //            if (this.m_TempMobSlot == null || this.m_TempBossSlot == null)
-    //            {
-    //                UnityEngine.Debug.Log("m_TempMobSlot == null || m_TempBossSlot == null");
-    //                return;
-    //            }
-    //            GameObject gameObject = NGUITools.AddChild(this.m_TempMobSlot.transform.parent.gameObject, this.m_TempMobSlot);
-    //            GameObject gameObject2 = NGUITools.AddChild(this.m_TempBossSlot.transform.parent.gameObject, this.m_TempBossSlot);
-    //            cUIFightMobSlot cUIFightMobSlot = new cUIFightMobSlot(gameObject, false);
-    //            cUIFightMobSlot cUIFightMobSlot2 = new cUIFightMobSlot(gameObject2, true);
-    //            this.m_MobSlots_Normal.Add(cUIFightMobSlot);
-    //            this.m_MobSlots_Boss.Add(cUIFightMobSlot2);
-    //            float y = this.m_TempBossSlot.transform.localPosition.y + -95f * (float)i;
-    //            gameObject.transform.localPosition = new Vector3(this.m_TempMobSlot.transform.localPosition.x, y, this.m_TempMobSlot.transform.localPosition.z);
-    //            gameObject2.transform.localPosition = new Vector3(this.m_TempBossSlot.transform.localPosition.x, y, this.m_TempBossSlot.transform.localPosition.z);
-    //            cUIFightMobSlot.SetSlotIndex(i);
-    //            cUIFightMobSlot.SetEnable(false);
-    //            cUIFightMobSlot2.SetSlotIndex(i);
-    //            cUIFightMobSlot2.SetEnable(false);
-    //        }
-    //        if (this.m_TempMobSlot != null)
-    //        {
-    //            UnityEngine.Object.Destroy(this.m_TempMobSlot);
-    //        }
-    //        if (this.m_TempBossSlot != null)
-    //        {
-    //            UnityEngine.Object.Destroy(this.m_TempBossSlot);
-    //        }
-    //    }
+    /// <summary>
+    /// 创建敌人头像
+    /// </summary>
+    private void CreateMobSlots()
+    {
+        this.m_MobSlots_Normal.Clear();
+        this.m_MobSlots_Boss.Clear();
+        for (int i = 0; i < 6; i++)
+        {
+            GameObject gameObject = UnityEngine.Object.Instantiate(m_TempMobSlot) as GameObject;
+            //GameObject gameObject2 = UnityEngine.Object.Instantiate(m_TempBossSlot) as GameObject;
+           // gameObject.SetParent(m_MobSlot.transform);
+            //UIFightMobSlot cUIFightMobSlot = new UIFightMobSlot(gameObject, false);
+            //cUIFightMobSlot cUIFightMobSlot2 = new cUIFightMobSlot(gameObject2, true);
+            //this.m_MobSlots_Normal.Add(cUIFightMobSlot);
+            //this.m_MobSlots_Boss.Add(cUIFightMobSlot2);
+            //float y = this.m_TempBossSlot.transform.localPosition.y + -95f * (float)i;
+            //gameObject.transform.localPosition = new Vector3(this.m_TempMobSlot.transform.localPosition.x, y, this.m_TempMobSlot.transform.localPosition.z);
+            //gameObject2.transform.localPosition = new Vector3(this.m_TempBossSlot.transform.localPosition.x, y, this.m_TempBossSlot.transform.localPosition.z);
+           // cUIFightMobSlot.SetSlotIndex(i);
+           // cUIFightMobSlot.SetEnable(false);
+            //cUIFightMobSlot2.SetSlotIndex(i);
+            //cUIFightMobSlot2.SetEnable(false);
+        }
 
+        //if (this.m_TempMobSlot != null)
+        //{
+        //    UnityEngine.Object.Destroy(this.m_TempMobSlot);
+        //}
+
+        //if (this.m_TempBossSlot != null)
+        //{
+        //    UnityEngine.Object.Destroy(this.m_TempBossSlot);
+        //}
+    }
+
+    /// <summary>
+    /// 创建角色头像
+    /// </summary>
     private void CreateRoleSlots()
     {
         Debug.Log("CreateRoleSlots");
-        //this.m_ControlledRoleSlot = new cUIFightRoleSlot(this.m_TempSelectedRoleSlot);
-        //this.m_RoleSlotTable.Clear();
+        //this.m_ControlledRoleSlot = new UIFightRoleSlot(this.m_TempSelectedRoleSlot);
+        this.m_RoleSlotTable.Clear();
         //cUIFightRoleSlot cUIFightRoleSlot = new cUIFightRoleSlot(this.m_TempRoleSlot);
         //cUIFightRoleSlot.SetSlotIdx(0);
         //this.m_RoleSlots.Add(cUIFightRoleSlot);

@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using YouYou;
 
-public class cUIFightRoleSlot
+public class UIFightRoleSlot : UIFormBase
 {
     //	public class SlotElement
     //	{
