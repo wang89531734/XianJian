@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 7418429075140449882}
   - component: {fileID: 5880177467647053756}
   - component: {fileID: 7105456526997932821}
+  - component: {fileID: 2289978961440882269}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: TempRoleSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,3 +75,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2289978961440882269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672194783240937485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af41114a786dea44cb20b5db8f899750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

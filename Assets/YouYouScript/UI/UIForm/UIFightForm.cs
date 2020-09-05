@@ -870,7 +870,7 @@ public class UIFightForm : UIFormBase
         base.OnInit(userData);
         //this.m_CatchResultTw = this.m_CatchResultTexture.GetComponent<TweenAlpha>();//捕捉结果
         //this.CreateMobSlots();
-        this.CreateRoleSlots();
+        //this.CreateRoleSlots();
         //this.CreateGuardSlot();
         //this.InitSkillBtn(this.m_SkillBtnList);
         //this.InitItemBtn(this.m_ItemBtnList);
@@ -1186,24 +1186,24 @@ public class UIFightForm : UIFormBase
         Debug.Log("CreateRoleSlots");
         //this.m_ControlledRoleSlot = new UIFightRoleSlot(this.m_TempSelectedRoleSlot);
         this.m_RoleSlotTable.Clear();
-        //cUIFightRoleSlot cUIFightRoleSlot = new cUIFightRoleSlot(this.m_TempRoleSlot);
-        //cUIFightRoleSlot.SetSlotIdx(0);
-        //this.m_RoleSlots.Add(cUIFightRoleSlot);
-        //for (int i = 1; i < 4; i++)
-        //{
-        //    if (this.m_TempRoleSlot == null)
-        //    {
-        //        UnityEngine.Debug.Log("m_TempRoleSlot == null");
-        //        return;
-        //    }
-        //    GameObject slotcontainer = NGUITools.AddChild(this.m_TempRoleSlot.transform.parent.gameObject, this.m_TempRoleSlot);
-        //    cUIFightRoleSlot cUIFightRoleSlot2 = new cUIFightRoleSlot(slotcontainer);
-        //    cUIFightRoleSlot2.SetSlotIdx(i);
-        //    this.m_RoleSlots.Add(cUIFightRoleSlot2);
-        //    Vector3 slotPos = cUIFightRoleSlot.GetSlotPos();
-        //    slotPos.x += cUIFightRoleSlot.m_UIElement.Container.localSize.x * (float)i;
-        //    cUIFightRoleSlot2.SetSlotPos(slotPos);
-        //}
+        UIFightRoleSlot cUIFightRoleSlot = new UIFightRoleSlot(this.m_TempRoleSlot);
+        cUIFightRoleSlot.SetSlotIdx(0);
+        this.m_RoleSlots.Add(cUIFightRoleSlot);
+        for (int i = 1; i < 4; i++)
+        {
+            if (this.m_TempRoleSlot == null)
+            {
+                UnityEngine.Debug.Log("m_TempRoleSlot == null");
+                return;
+            }
+            //GameObject slotcontainer = NGUITools.AddChild(this.m_TempRoleSlot.transform.parent.gameObject, this.m_TempRoleSlot);
+            //cUIFightRoleSlot cUIFightRoleSlot2 = new cUIFightRoleSlot(slotcontainer);
+            //cUIFightRoleSlot2.SetSlotIdx(i);
+            //this.m_RoleSlots.Add(cUIFightRoleSlot2);
+            //Vector3 slotPos = cUIFightRoleSlot.GetSlotPos();
+            //slotPos.x += cUIFightRoleSlot.m_UIElement.Container.localSize.x * (float)i;
+            //cUIFightRoleSlot2.SetSlotPos(slotPos);
+        }
     }
 
     //    public void CreateGuardSlot()
@@ -1803,60 +1803,59 @@ public class UIFightForm : UIFormBase
     //        this.m_RoleSlots[slotIdx].SetRoleInfo(playerInfo);
     //    }
 
-    //    private void SetTargetRoleSlot(M_Player roleInfo)
-    //    {
-    //        if (roleInfo == null)
-    //        {
-    //            return;
-    //        }
-    //        this.m_ControlledRoleSlot.SetRoleInfo(roleInfo);
-    //        if (this.m_RoleSlotTable.ContainsKey(roleInfo.m_RoleID))
-    //        {
-    //            cUIFightRoleSlot cUIFightRoleSlot = this.m_RoleSlotTable[roleInfo.m_RoleID];
-    //            cUIFightRoleSlot.SetEnable(false);
-    //            this.m_ControlledRoleSlot.SetSlotIdx(cUIFightRoleSlot.GetSlotIdx());
-    //            this.m_ControlledRoleSlot.SetSlotPos(cUIFightRoleSlot.GetSlotPos());
-    //            this.m_RoleSlotTable[roleInfo.m_RoleID] = this.m_ControlledRoleSlot;
-    //        }
-    //        else
-    //        {
-    //            this.m_RoleSlotTable.Add(roleInfo.m_RoleID, this.m_ControlledRoleSlot);
-    //        }
-    //        this.SetSelectCommandTargetState(false);
-    //        if (this.m_RoleHotKeyPageRecord.ContainsKey(roleInfo.m_RoleID))
-    //        {
-    //            this.m_NowSkillPage = this.m_RoleHotKeyPageRecord[roleInfo.m_RoleID];
-    //        }
-    //        else
-    //        {
-    //            this.m_NowSkillPage = 0;
-    //        }
-    //        this.SetSkillBtn();
-    //        this.UpdateSkillBtnEnable();
-    //        this.UpdateItemBtnEnableAndCount();
-    //        this.m_MagicItemCont.SetActive(false);
-    //        ItemData equipItemData = roleInfo.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Talisman);
-    //        if (equipItemData == null)
-    //        {
-    //            return;
-    //        }
-    //        S_Item data = GameDataDB.ItemDB.GetData(equipItemData.ID);
-    //        if (data == null || data.emItemType != ENUM_ItemType.MagicItem)
-    //        {
-    //            return;
-    //        }
-    //        if (data.emSubItemType != ENUM_ItemSubType.MagicArms)
-    //        {
-    //            return;
-    //        }
-    //        this.m_MagicItemCont.SetActive(true);
-    //        UIEventListener uIEventListener = UIEventListener.Get(this.m_MagicItemBtn.gameObject);
-    //        uIEventListener.parameter = equipItemData.ID;
-    //    }
+    private void SetTargetRoleSlot(M_Player roleInfo)
+    {
+        if (roleInfo == null)
+        {
+            return;
+        }
+        //this.m_ControlledRoleSlot.SetRoleInfo(roleInfo);
+        //if (this.m_RoleSlotTable.ContainsKey(roleInfo.m_RoleID))
+        //{
+        //    cUIFightRoleSlot cUIFightRoleSlot = this.m_RoleSlotTable[roleInfo.m_RoleID];
+        //    cUIFightRoleSlot.SetEnable(false);
+        //    this.m_ControlledRoleSlot.SetSlotIdx(cUIFightRoleSlot.GetSlotIdx());
+        //    this.m_ControlledRoleSlot.SetSlotPos(cUIFightRoleSlot.GetSlotPos());
+        //    this.m_RoleSlotTable[roleInfo.m_RoleID] = this.m_ControlledRoleSlot;
+        //}
+        //else
+        //{
+        //    this.m_RoleSlotTable.Add(roleInfo.m_RoleID, this.m_ControlledRoleSlot);
+        //}
+        //this.SetSelectCommandTargetState(false);
+        //if (this.m_RoleHotKeyPageRecord.ContainsKey(roleInfo.m_RoleID))
+        //{
+        //    this.m_NowSkillPage = this.m_RoleHotKeyPageRecord[roleInfo.m_RoleID];
+        //}
+        //else
+        //{
+        //    this.m_NowSkillPage = 0;
+        //}
+        //this.SetSkillBtn();
+        //this.UpdateSkillBtnEnable();
+        //this.UpdateItemBtnEnableAndCount();
+        //this.m_MagicItemCont.SetActive(false);
+        //ItemData equipItemData = roleInfo.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Talisman);
+        //if (equipItemData == null)
+        //{
+        //    return;
+        //}
+        //S_Item data = GameDataDB.ItemDB.GetData(equipItemData.ID);
+        //if (data == null || data.emItemType != ENUM_ItemType.MagicItem)
+        //{
+        //    return;
+        //}
+        //if (data.emSubItemType != ENUM_ItemSubType.MagicArms)
+        //{
+        //    return;
+        //}
+        //this.m_MagicItemCont.SetActive(true);
+        //UIEventListener uIEventListener = UIEventListener.Get(this.m_MagicItemBtn.gameObject);
+        //uIEventListener.parameter = equipItemData.ID;
+    }
 
     private void SetControlledRole(M_Player newControlledRole)
     {
-        Debug.Log("执行SetControlledRole");
         //if (this.m_ControlledRoleSlot == null)
         //{
         //    return;
@@ -1876,7 +1875,7 @@ public class UIFightForm : UIFormBase
         //{
         //    this.SetUnitRoleSlot(slotIdx, this.m_FightSceneMgr.GetRole(roleID));
         //}
-        //this.SetTargetRoleSlot(newControlledRole);
+        this.SetTargetRoleSlot(newControlledRole);
         //this.m_ControlledRoleSlot.PlayTween();
         //this.m_RoleSlots[slotIdx].PlayTween();
     }
