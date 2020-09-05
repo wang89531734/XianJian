@@ -1574,6 +1574,11 @@ public class FightSceneManager
     //		return this.m_GuardList;
     //	}
 
+    /// <summary>
+    /// 改变控制角色
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="bDead"></param>
     public void ChangeControlCharacter(int key, bool bDead)
     {
         //M_Player role = this.GetRole(key);

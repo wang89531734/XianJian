@@ -118,10 +118,10 @@ public class UIFightForm : UIFormBase
     //    private TweenAlpha m_CatchResultTw;
 
     [SerializeField]
-    private GameObject m_TempRoleSlot;
+    private GameObject TempRoleSlot;
 
     [SerializeField]
-    private GameObject m_TempSelectedRoleSlot;
+    private GameObject TempSelectedRoleSlot;
 
     //    [SerializeField]
     //    private UIToggle m_PauseCheckbox;
@@ -154,14 +154,17 @@ public class UIFightForm : UIFormBase
     private Dictionary<int, UIFightRoleSlot> m_RoleSlotTable = new Dictionary<int, UIFightRoleSlot>();
 
     [SerializeField]
-    private GameObject m_TempMobSlot;
+    private GameObject TempMobSlot;
 
     [SerializeField]
-    private GameObject m_TempBossSlot;
+    private GameObject TempBossSlot;
 
     [SerializeField]
-    private GameObject m_MobSlot;
-    
+    private GameObject MobSlot;
+
+    [SerializeField]
+    private GameObject RoleSlot;
+
     private List<UIFightMobSlot> m_MobSlots_Normal = new List<UIFightMobSlot>();
 
     private List<UIFightMobSlot> m_MobSlots_Boss = new List<UIFightMobSlot>();
@@ -869,8 +872,8 @@ public class UIFightForm : UIFormBase
     {
         base.OnInit(userData);
         //this.m_CatchResultTw = this.m_CatchResultTexture.GetComponent<TweenAlpha>();//捕捉结果
-        //this.CreateMobSlots();
-        //this.CreateRoleSlots();
+        this.CreateMobSlots();
+        this.CreateRoleSlots();
         //this.CreateGuardSlot();
         //this.InitSkillBtn(this.m_SkillBtnList);
         //this.InitItemBtn(this.m_ItemBtnList);
@@ -1151,18 +1154,19 @@ public class UIFightForm : UIFormBase
         this.m_MobSlots_Boss.Clear();
         for (int i = 0; i < 6; i++)
         {
-            GameObject gameObject = UnityEngine.Object.Instantiate(m_TempMobSlot) as GameObject;
+            GameObject gameObject = UnityEngine.Object.Instantiate(TempMobSlot) as GameObject;
+            gameObject.SetParent(MobSlot.transform);
             //GameObject gameObject2 = UnityEngine.Object.Instantiate(m_TempBossSlot) as GameObject;
-           // gameObject.SetParent(m_MobSlot.transform);
-            //UIFightMobSlot cUIFightMobSlot = new UIFightMobSlot(gameObject, false);
+            // gameObject.SetParent(m_MobSlot.transform);
+            UIFightMobSlot m_UIFightMobSlot=gameObject.GetComponent<UIFightMobSlot>();
             //cUIFightMobSlot cUIFightMobSlot2 = new cUIFightMobSlot(gameObject2, true);
-            //this.m_MobSlots_Normal.Add(cUIFightMobSlot);
+            this.m_MobSlots_Normal.Add(m_UIFightMobSlot);
             //this.m_MobSlots_Boss.Add(cUIFightMobSlot2);
-            //float y = this.m_TempBossSlot.transform.localPosition.y + -95f * (float)i;
-            //gameObject.transform.localPosition = new Vector3(this.m_TempMobSlot.transform.localPosition.x, y, this.m_TempMobSlot.transform.localPosition.z);
+            float y = this.TempMobSlot.transform.localPosition.y + -95f * (float)i;
+            gameObject.transform.localPosition = new Vector3(this.TempMobSlot.transform.localPosition.x, y, this.TempMobSlot.transform.localPosition.z);
             //gameObject2.transform.localPosition = new Vector3(this.m_TempBossSlot.transform.localPosition.x, y, this.m_TempBossSlot.transform.localPosition.z);
-           // cUIFightMobSlot.SetSlotIndex(i);
-           // cUIFightMobSlot.SetEnable(false);
+            m_UIFightMobSlot.SetSlotIndex(i);
+            //m_UIFightMobSlot.SetEnable(false);
             //cUIFightMobSlot2.SetSlotIndex(i);
             //cUIFightMobSlot2.SetEnable(false);
         }
@@ -1183,26 +1187,19 @@ public class UIFightForm : UIFormBase
     /// </summary>
     private void CreateRoleSlots()
     {
-        Debug.Log("CreateRoleSlots");
-        //this.m_ControlledRoleSlot = new UIFightRoleSlot(this.m_TempSelectedRoleSlot);
+        this.m_ControlledRoleSlot = TempSelectedRoleSlot.GetComponent<UIFightRoleSlot>();
         this.m_RoleSlotTable.Clear();
-        UIFightRoleSlot cUIFightRoleSlot = new UIFightRoleSlot(this.m_TempRoleSlot);
+        UIFightRoleSlot cUIFightRoleSlot = TempRoleSlot.GetComponent<UIFightRoleSlot>();
         cUIFightRoleSlot.SetSlotIdx(0);
         this.m_RoleSlots.Add(cUIFightRoleSlot);
         for (int i = 1; i < 4; i++)
         {
-            if (this.m_TempRoleSlot == null)
-            {
-                UnityEngine.Debug.Log("m_TempRoleSlot == null");
-                return;
-            }
-            //GameObject slotcontainer = NGUITools.AddChild(this.m_TempRoleSlot.transform.parent.gameObject, this.m_TempRoleSlot);
-            //cUIFightRoleSlot cUIFightRoleSlot2 = new cUIFightRoleSlot(slotcontainer);
-            //cUIFightRoleSlot2.SetSlotIdx(i);
-            //this.m_RoleSlots.Add(cUIFightRoleSlot2);
-            //Vector3 slotPos = cUIFightRoleSlot.GetSlotPos();
-            //slotPos.x += cUIFightRoleSlot.m_UIElement.Container.localSize.x * (float)i;
-            //cUIFightRoleSlot2.SetSlotPos(slotPos);
+            GameObject slotcontainer = UnityEngine.Object.Instantiate(TempRoleSlot) as GameObject;
+            slotcontainer.SetParent(RoleSlot.transform);
+            UIFightRoleSlot cUIFightRoleSlot2 = slotcontainer.GetComponent<UIFightRoleSlot>();
+            cUIFightRoleSlot2.SetSlotIdx(i);
+            this.m_RoleSlots.Add(cUIFightRoleSlot2);
+            slotcontainer.transform.localPosition = new Vector3(TempRoleSlot.transform.localPosition.x + 200 * (float)i, TempRoleSlot.transform.localPosition.y, TempRoleSlot.transform.localPosition.z);
         }
     }
 
@@ -1803,25 +1800,25 @@ public class UIFightForm : UIFormBase
     //        this.m_RoleSlots[slotIdx].SetRoleInfo(playerInfo);
     //    }
 
+    /// <summary>
+    /// 设置目标角色血槽
+    /// </summary>
+    /// <param name="roleInfo"></param>
     private void SetTargetRoleSlot(M_Player roleInfo)
     {
-        if (roleInfo == null)
+        this.m_ControlledRoleSlot.SetRoleInfo(roleInfo);
+        if (this.m_RoleSlotTable.ContainsKey(roleInfo.m_RoleID))
         {
-            return;
+            //cUIFightRoleSlot cUIFightRoleSlot = this.m_RoleSlotTable[roleInfo.m_RoleID];
+            //cUIFightRoleSlot.SetEnable(false);
+            //this.m_ControlledRoleSlot.SetSlotIdx(cUIFightRoleSlot.GetSlotIdx());
+            //this.m_ControlledRoleSlot.SetSlotPos(cUIFightRoleSlot.GetSlotPos());
+            //this.m_RoleSlotTable[roleInfo.m_RoleID] = this.m_ControlledRoleSlot;
         }
-        //this.m_ControlledRoleSlot.SetRoleInfo(roleInfo);
-        //if (this.m_RoleSlotTable.ContainsKey(roleInfo.m_RoleID))
-        //{
-        //    cUIFightRoleSlot cUIFightRoleSlot = this.m_RoleSlotTable[roleInfo.m_RoleID];
-        //    cUIFightRoleSlot.SetEnable(false);
-        //    this.m_ControlledRoleSlot.SetSlotIdx(cUIFightRoleSlot.GetSlotIdx());
-        //    this.m_ControlledRoleSlot.SetSlotPos(cUIFightRoleSlot.GetSlotPos());
-        //    this.m_RoleSlotTable[roleInfo.m_RoleID] = this.m_ControlledRoleSlot;
-        //}
-        //else
-        //{
-        //    this.m_RoleSlotTable.Add(roleInfo.m_RoleID, this.m_ControlledRoleSlot);
-        //}
+        else
+        {
+            this.m_RoleSlotTable.Add(roleInfo.m_RoleID, this.m_ControlledRoleSlot);
+        }
         //this.SetSelectCommandTargetState(false);
         //if (this.m_RoleHotKeyPageRecord.ContainsKey(roleInfo.m_RoleID))
         //{
@@ -1854,26 +1851,28 @@ public class UIFightForm : UIFormBase
         //uIEventListener.parameter = equipItemData.ID;
     }
 
+    /// <summary>
+    /// 设置控制角色
+    /// </summary>
+    /// <param name="newControlledRole"></param>
     private void SetControlledRole(M_Player newControlledRole)
     {
-        //if (this.m_ControlledRoleSlot == null)
-        //{
-        //    return;
-        //}
         //if (this.m_ControlledRoleSlot.GetRoleID() == newControlledRole.m_RoleID)
         //{
         //    return;
         //}
         //int slotIdx = this.m_ControlledRoleSlot.GetSlotIdx();
+        //Debug.Log("执行"+ slotIdx);
         //if (slotIdx < 0)
         //{
+        //    Debug.Log("执行");
         //    this.SetTargetRoleSlot(newControlledRole);
         //    return;
         //}
         //int roleID = this.m_ControlledRoleSlot.GetRoleID();
         //if (roleID > 0)
         //{
-        //    this.SetUnitRoleSlot(slotIdx, this.m_FightSceneMgr.GetRole(roleID));
+        //    //this.SetUnitRoleSlot(slotIdx, this.m_FightSceneMgr.GetRole(roleID));
         //}
         this.SetTargetRoleSlot(newControlledRole);
         //this.m_ControlledRoleSlot.PlayTween();

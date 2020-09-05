@@ -14,7 +14,6 @@ namespace YouYou
             base.OnEnter();
             Debug.Log("OnEnter Procedure进入游戏流程");
             GameEntry.UI.OpenUIForm(UIFormId.UI_LogonBG);
-            UnityEngine.Object.Instantiate(ResourcesManager.Instance.GetGUI("FightGUI"));
         }
 
         public override void OnUpdate()

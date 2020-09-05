@@ -54,7 +54,7 @@ public class UIFightRoleSlot : UIFormBase
 
     //	public cUIFightRoleSlot.SlotElement m_UIElement = new cUIFightRoleSlot.SlotElement();
 
-    //	private M_Player m_PlayerInfo;
+    private M_Player m_PlayerInfo;
 
     private int m_iSlotIdx = -1;
 
@@ -155,16 +155,6 @@ public class UIFightRoleSlot : UIFormBase
     //		this.m_UIElement.GwTexture.enabled = false;
     //	}
 
-    //	public void SetSlotPos(Vector3 pos)
-    //	{
-    //		this.m_UIElement.Container.gameObject.transform.localPosition = pos;
-    //	}
-
-    //	public Vector3 GetSlotPos()
-    //	{
-    //		return this.m_UIElement.Container.gameObject.transform.localPosition;
-    //	}
-
     //	public void PlayTween()
     //	{
     //	}
@@ -192,18 +182,9 @@ public class UIFightRoleSlot : UIFormBase
         //    this.SetEnable(false);
         //    return;
         //}
-        //this.m_PlayerInfo = playerInfo;
-        //string text = "icon_spc_";
-        //NormalSetting normalSetting = NormalSettingSystem.Instance.GetNormalSetting();
-        //if (normalSetting.m_emCharacterStyle == Enum_CharacterStyle.Enum_CharacterStyle_Real)
-        //{
-        //    text += "l_0";
-        //}
-        //else
-        //{
-        //    text += "h_0";
-        //}
-        //text += playerInfo.m_RoleID.ToString();
+        this.m_PlayerInfo = playerInfo;
+        string text = "icon_spc_h_0";
+        text += playerInfo.m_RoleID.ToString();
         //this.m_UIElement.PCTexture.mainTexture = ResourceManager.Instance.GetImage(text);
         //this.UpdateUseAICheckbox();
         //this.SetHP(playerInfo.m_FightRoleData.HP, playerInfo.m_FightRoleData.MaxHP);
@@ -227,14 +208,14 @@ public class UIFightRoleSlot : UIFormBase
     //		this.UpdateUseAICheckbox();
     //	}
 
-    //	public int GetRoleID()
-    //	{
-    //		if (this.m_PlayerInfo == null)
-    //		{
-    //			return -1;
-    //		}
-    //		return this.m_PlayerInfo.m_RoleID;
-    //	}
+    public int GetRoleID()
+    {
+        if (this.m_PlayerInfo == null)
+        {
+            return -1;
+        }
+        return this.m_PlayerInfo.m_RoleID;
+    }
 
     //	public void SetHotKeyStr(string strHotKey)
     //	{
