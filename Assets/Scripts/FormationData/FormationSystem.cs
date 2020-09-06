@@ -343,6 +343,10 @@ public class FormationSystem
 		return this.m_FormationDataList[index];
 	}
 
+    /// <summary>
+    /// 获取默认阵型
+    /// </summary>
+    /// <returns></returns>
 	public FormationData GetDefaultFormationData()
 	{
 		return this.m_FormationDataList[this.DefaultFormation];

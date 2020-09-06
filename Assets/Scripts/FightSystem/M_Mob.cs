@@ -12,6 +12,9 @@ public class M_Mob : M_Character
 
     public S_MobData m_MobData;
 
+    /// <summary>
+    /// 序列号
+    /// </summary>
     public int m_MobSerialID;
 
     private M_Player m_LastAttackTarget;

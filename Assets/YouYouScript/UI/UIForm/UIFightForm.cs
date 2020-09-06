@@ -58,8 +58,8 @@ public class UIFightForm : UIFormBase
 
     //    private Dictionary<UIButton, UISprite> m_FormationBtnIconTable = new Dictionary<UIButton, UISprite>();
 
-    //    [SerializeField]
-    //    private List<UIButton> m_SkillBtnList;
+    [SerializeField]
+    private List<Button> m_SkillBtnList;
 
     //    [SerializeField]
     //    private UIButton m_SkillPageUpBtn;
@@ -70,9 +70,9 @@ public class UIFightForm : UIFormBase
     //    [SerializeField]
     //    private UILabel m_SkillPageLabel;
 
-    //    private Dictionary<UIButton, int> m_SkillBtnIDTable = new Dictionary<UIButton, int>();
+    private Dictionary<Button, int> m_SkillBtnIDTable = new Dictionary<Button, int>();
 
-    //    private Dictionary<UIButton, UISprite> m_SkillBtnIconTable = new Dictionary<UIButton, UISprite>();
+    private Dictionary<Button, Image> m_SkillBtnIconTable = new Dictionary<Button, Image>();
 
     //    private List<UISprite> m_SkillColddownSpriteList = new List<UISprite>();
 
@@ -188,7 +188,7 @@ public class UIFightForm : UIFormBase
 
     //    private int m_JoyInputIdx = -1;
 
-    //    private Dictionary<GameObject, int> m_ActionBtnsTable = new Dictionary<GameObject, int>();
+    private Dictionary<GameObject, int> m_ActionBtnsTable = new Dictionary<GameObject, int>();
 
     //    public int MAX_SHOWBUFFICON = 10;
 
@@ -875,7 +875,7 @@ public class UIFightForm : UIFormBase
         this.CreateMobSlots();
         this.CreateRoleSlots();
         //this.CreateGuardSlot();
-        //this.InitSkillBtn(this.m_SkillBtnList);
+        this.InitSkillBtn(this.m_SkillBtnList);
         //this.InitItemBtn(this.m_ItemBtnList);
         //this.InitFormationBtnCallback();
         //UIEventListener uieventListener = UIEventListener.Get(this.m_MagicItemBtn.gameObject);
@@ -1041,48 +1041,48 @@ public class UIFightForm : UIFormBase
     //        expr_2B3.onHover = (UIEventListener.BoolDelegate)Delegate.Combine(expr_2B3.onHover, new UIEventListener.BoolDelegate(this.OnBtn_Hover));
     //    }
 
-    //    private void InitSkillBtn(List<UIButton> skillBtnList)
-    //    {
-    //        this.m_SkillBtnIDTable.Clear();
-    //        this.m_SkillBtnIconTable.Clear();
-    //        for (int i = 0; i < skillBtnList.Count; i++)
-    //        {
-    //            UIEventListener uIEventListener = UIEventListener.Get(skillBtnList[i].gameObject);
-    //            UIEventListener expr_30 = uIEventListener;
-    //            expr_30.onClick = (UIEventListener.VoidDelegate)Delegate.Combine(expr_30.onClick, new UIEventListener.VoidDelegate(this.OnSkillBtn_Click));
-    //            UIEventListener expr_52 = uIEventListener;
-    //            expr_52.onTooltip = (UIEventListener.BoolDelegate)Delegate.Combine(expr_52.onTooltip, new UIEventListener.BoolDelegate(this.OnSkillBtn_ToolTip));
-    //            UIEventListener expr_74 = uIEventListener;
-    //            expr_74.onHover = (UIEventListener.BoolDelegate)Delegate.Combine(expr_74.onHover, new UIEventListener.BoolDelegate(this.OnSkillItemBtn_Hover));
-    //            this.m_ActionBtnsTable.Add(skillBtnList[i].gameObject, i + 1);
-    //            UISprite childElement = nGUICustomUtil.getChildElement<UISprite>(skillBtnList[i].gameObject, "ImageSprite");
-    //            this.m_SkillBtnIconList.Add(childElement);
-    //            uIEventListener = UIEventListener.Get(childElement.gameObject);
-    //            UIEventListener expr_DF = uIEventListener;
-    //            expr_DF.onTooltip = (UIEventListener.BoolDelegate)Delegate.Combine(expr_DF.onTooltip, new UIEventListener.BoolDelegate(this.OnSkillBtn_ToolTip));
-    //            UIEventListener expr_101 = uIEventListener;
-    //            expr_101.onHover = (UIEventListener.BoolDelegate)Delegate.Combine(expr_101.onHover, new UIEventListener.BoolDelegate(this.OnSkillItemBtn_Hover));
-    //            UIEventListener expr_123 = uIEventListener;
-    //            expr_123.onClick = (UIEventListener.VoidDelegate)Delegate.Combine(expr_123.onClick, new UIEventListener.VoidDelegate(this.OnBtn_ErrorClick));
-    //            this.m_ActionBtnsTable.Add(childElement.gameObject, i + 1);
-    //            this.m_SkillBtnIDTable.Add(skillBtnList[i], -1);
-    //            this.m_SkillBtnIconTable.Add(skillBtnList[i], childElement);
-    //            UISprite childElement2 = nGUICustomUtil.getChildElement<UISprite>(skillBtnList[i].gameObject, "HighlightSprite");
-    //            childElement2.enabled = false;
-    //            UISprite childElement3 = nGUICustomUtil.getChildElement<UISprite>(skillBtnList[i].gameObject, "ColddownSprite");
-    //            this.m_SkillColddownSpriteList.Add(childElement3);
-    //        }
-    //        EventDelegate item = new EventDelegate(this, "OnSkillPageUpBtn_Click");
-    //        this.m_SkillPageUpBtn.onClick.Add(item);
-    //        UIEventListener uIEventListener2 = UIEventListener.Get(this.m_SkillPageUpBtn.gameObject);
-    //        UIEventListener expr_204 = uIEventListener2;
-    //        expr_204.onHover = (UIEventListener.BoolDelegate)Delegate.Combine(expr_204.onHover, new UIEventListener.BoolDelegate(this.OnBtn_Hover));
-    //        EventDelegate item2 = new EventDelegate(this, "OnSkillPageDownBtn_Click");
-    //        this.m_SkillPageDownBtn.onClick.Add(item2);
-    //        uIEventListener2 = UIEventListener.Get(this.m_SkillPageDownBtn.gameObject);
-    //        UIEventListener expr_258 = uIEventListener2;
-    //        expr_258.onHover = (UIEventListener.BoolDelegate)Delegate.Combine(expr_258.onHover, new UIEventListener.BoolDelegate(this.OnBtn_Hover));
-    //    }
+    private void InitSkillBtn(List<Button> skillBtnList)
+    {
+        this.m_SkillBtnIDTable.Clear();
+        this.m_SkillBtnIconTable.Clear();
+        for (int i = 0; i < skillBtnList.Count; i++)
+        {
+            //UIEventListener uIEventListener = UIEventListener.Get(skillBtnList[i].gameObject);
+            //UIEventListener expr_30 = uIEventListener;
+            //expr_30.onClick = (UIEventListener.VoidDelegate)Delegate.Combine(expr_30.onClick, new UIEventListener.VoidDelegate(this.OnSkillBtn_Click));//按钮按下
+            //UIEventListener expr_52 = uIEventListener;
+            //expr_52.onTooltip = (UIEventListener.BoolDelegate)Delegate.Combine(expr_52.onTooltip, new UIEventListener.BoolDelegate(this.OnSkillBtn_ToolTip));//文本提示
+            //UIEventListener expr_74 = uIEventListener;
+            //expr_74.onHover = (UIEventListener.BoolDelegate)Delegate.Combine(expr_74.onHover, new UIEventListener.BoolDelegate(this.OnSkillItemBtn_Hover));
+            this.m_ActionBtnsTable.Add(skillBtnList[i].gameObject, i + 1);
+            //UISprite childElement = nGUICustomUtil.getChildElement<UISprite>(skillBtnList[i].gameObject, "ImageSprite");
+            //this.m_SkillBtnIconList.Add(childElement);
+            //uIEventListener = UIEventListener.Get(childElement.gameObject);
+            //UIEventListener expr_DF = uIEventListener;
+            //expr_DF.onTooltip = (UIEventListener.BoolDelegate)Delegate.Combine(expr_DF.onTooltip, new UIEventListener.BoolDelegate(this.OnSkillBtn_ToolTip));
+            //UIEventListener expr_101 = uIEventListener;
+            //expr_101.onHover = (UIEventListener.BoolDelegate)Delegate.Combine(expr_101.onHover, new UIEventListener.BoolDelegate(this.OnSkillItemBtn_Hover));
+            //UIEventListener expr_123 = uIEventListener;
+            //expr_123.onClick = (UIEventListener.VoidDelegate)Delegate.Combine(expr_123.onClick, new UIEventListener.VoidDelegate(this.OnBtn_ErrorClick));
+            //this.m_ActionBtnsTable.Add(childElement.gameObject, i + 1);
+            //this.m_SkillBtnIDTable.Add(skillBtnList[i], -1);
+            //this.m_SkillBtnIconTable.Add(skillBtnList[i], childElement);
+            //UISprite childElement2 = nGUICustomUtil.getChildElement<UISprite>(skillBtnList[i].gameObject, "HighlightSprite");
+            //childElement2.enabled = false;
+            //UISprite childElement3 = nGUICustomUtil.getChildElement<UISprite>(skillBtnList[i].gameObject, "ColddownSprite");
+            //this.m_SkillColddownSpriteList.Add(childElement3);
+        }
+        //EventDelegate item = new EventDelegate(this, "OnSkillPageUpBtn_Click");//翻页按钮
+        //this.m_SkillPageUpBtn.onClick.Add(item);
+        //UIEventListener uIEventListener2 = UIEventListener.Get(this.m_SkillPageUpBtn.gameObject);
+        //UIEventListener expr_204 = uIEventListener2;
+        //expr_204.onHover = (UIEventListener.BoolDelegate)Delegate.Combine(expr_204.onHover, new UIEventListener.BoolDelegate(this.OnBtn_Hover));
+        //EventDelegate item2 = new EventDelegate(this, "OnSkillPageDownBtn_Click");//翻页按钮
+        //this.m_SkillPageDownBtn.onClick.Add(item2);
+        //uIEventListener2 = UIEventListener.Get(this.m_SkillPageDownBtn.gameObject);
+        //UIEventListener expr_258 = uIEventListener2;
+        //expr_258.onHover = (UIEventListener.BoolDelegate)Delegate.Combine(expr_258.onHover, new UIEventListener.BoolDelegate(this.OnBtn_Hover));
+    }
 
     //    private void InitFormationBtnCallback()
     //    {
@@ -2081,81 +2081,82 @@ public class UIFightForm : UIFormBase
     //        }
     //    }
 
-    //    public void OnSkillBtn_Click(GameObject go)
-    //    {
-    //        if (Input.GetMouseButtonUp(1))
-    //        {
-    //            return;
-    //        }
-    //        if (go == null)
-    //        {
-    //            return;
-    //        }
-    //        UIEventListener component = go.GetComponent<UIEventListener>();
-    //        if (component == null)
-    //        {
-    //            return;
-    //        }
-    //        int num = (int)component.parameter;
-    //        S_Skill data = GameDataDB.SkillDB.GetData(num);
-    //        if (data == null)
-    //        {
-    //            return;
-    //        }
-    //        S_UseEffect data2 = GameDataDB.UseEffectDB.GetData(data.UseEffectID);
-    //        if (data2 == null)
-    //        {
-    //            return;
-    //        }
-    //        MusicSystem.Instance.PlaySound(3, 1);
-    //        if (data2.emTarget == ENUM_UseTarget.Enemy)
-    //        {
-    //            this.SetSelectCommandTargetState(false);
-    //            this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetMainTarget());
-    //        }
-    //        if (data2.emTarget == ENUM_UseTarget.Partner)
-    //        {
-    //            if (data2.emRange == ENUM_UseRange.All)
-    //            {
-    //                if (data2.DeBuffer.Contains(84))
-    //                {
-    //                    this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetOneDeadRole());
-    //                }
-    //                else
-    //                {
-    //                    this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetControlledPlayer());
-    //                }
-    //                return;
-    //            }
-    //            if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt) || this.m_FightSceneMgr.GetRoleList().Count == 1)
-    //            {
-    //                int controlledPlayerRoleID = this.m_FightSceneMgr.GetControlledPlayerRoleID();
-    //                if (!this.m_RoleSlotTable.ContainsKey(controlledPlayerRoleID))
-    //                {
-    //                    return;
-    //                }
-    //                this.SetSelectCommandTargetState(false);
-    //                this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetControlledPlayer());
-    //                return;
-    //            }
-    //            else
-    //            {
-    //                this.m_TmpCommandID = num;
-    //                this.SetSelectCommandTargetState(true);
-    //                this.m_emMenuState = UI_Fight.ENUM_MenuState.UseSkillTarget;
-    //            }
-    //        }
-    //        if (data2.emTarget == ENUM_UseTarget.Self)
-    //        {
-    //            int controlledPlayerRoleID2 = this.m_FightSceneMgr.GetControlledPlayerRoleID();
-    //            if (!this.m_RoleSlotTable.ContainsKey(controlledPlayerRoleID2))
-    //            {
-    //                return;
-    //            }
-    //            this.SetSelectCommandTargetState(false);
-    //            this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetControlledPlayer());
-    //        }
-    //    }
+    public void OnSkillBtn_Click(GameObject go)
+    {
+        Debug.Log("执行");
+        //if (Input.GetMouseButtonUp(1))
+        //{
+        //    return;
+        //}
+        //if (go == null)
+        //{
+        //    return;
+        //}
+        //UIEventListener component = go.GetComponent<UIEventListener>();
+        //if (component == null)
+        //{
+        //    return;
+        //}
+        //int num = (int)component.parameter;
+        //S_Skill data = GameDataDB.SkillDB.GetData(num);
+        //if (data == null)
+        //{
+        //    return;
+        //}
+        //S_UseEffect data2 = GameDataDB.UseEffectDB.GetData(data.UseEffectID);
+        //if (data2 == null)
+        //{
+        //    return;
+        //}
+        //MusicSystem.Instance.PlaySound(3, 1);
+        //if (data2.emTarget == ENUM_UseTarget.Enemy)
+        //{
+        //    this.SetSelectCommandTargetState(false);
+        //    this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetMainTarget());
+        //}
+        //if (data2.emTarget == ENUM_UseTarget.Partner)
+        //{
+        //    if (data2.emRange == ENUM_UseRange.All)
+        //    {
+        //        if (data2.DeBuffer.Contains(84))
+        //        {
+        //            this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetOneDeadRole());
+        //        }
+        //        else
+        //        {
+        //            this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetControlledPlayer());
+        //        }
+        //        return;
+        //    }
+        //    if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt) || this.m_FightSceneMgr.GetRoleList().Count == 1)
+        //    {
+        //        int controlledPlayerRoleID = this.m_FightSceneMgr.GetControlledPlayerRoleID();
+        //        if (!this.m_RoleSlotTable.ContainsKey(controlledPlayerRoleID))
+        //        {
+        //            return;
+        //        }
+        //        this.SetSelectCommandTargetState(false);
+        //        this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetControlledPlayer());
+        //        return;
+        //    }
+        //    else
+        //    {
+        //        this.m_TmpCommandID = num;
+        //        this.SetSelectCommandTargetState(true);
+        //        this.m_emMenuState = UI_Fight.ENUM_MenuState.UseSkillTarget;
+        //    }
+        //}
+        //if (data2.emTarget == ENUM_UseTarget.Self)
+        //{
+        //    int controlledPlayerRoleID2 = this.m_FightSceneMgr.GetControlledPlayerRoleID();
+        //    if (!this.m_RoleSlotTable.ContainsKey(controlledPlayerRoleID2))
+        //    {
+        //        return;
+        //    }
+        //    this.SetSelectCommandTargetState(false);
+        //    this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetControlledPlayer());
+        //}
+    }
 
     //    public void OnSkillItemBtn_Hover(GameObject go, bool state)
     //    {

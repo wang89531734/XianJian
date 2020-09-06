@@ -27,7 +27,7 @@ public class FightSceneManager
 
     private List<S_FinishMob> m_DeadMobList = new List<S_FinishMob>();
 
-    //public Dictionary<string, M_Mob> m_SummonMobRecordList = new Dictionary<string, M_Mob>();
+    public Dictionary<string, M_Mob> m_SummonMobRecordList = new Dictionary<string, M_Mob>();
 
     /// <summary>
     /// 奖励列表
@@ -57,10 +57,19 @@ public class FightSceneManager
     /// </summary>
     private int m_GuardIdx;
 
+    /// <summary>
+    /// 主角
+    /// </summary>
     private M_Player m_MainPlayer;
 
+    /// <summary>
+    /// 主要目标
+    /// </summary>
     private M_Mob m_MainTarget;
 
+    /// <summary>
+    /// 控制角色ID
+    /// </summary>
     public int m_ControlledRoleID = -1;
 
     public int m_TargetMobKeyID;
@@ -89,8 +98,14 @@ public class FightSceneManager
 
     private int m_PracticeFightExp;
 
+    /// <summary>
+    /// 战斗是否完成
+    /// </summary>
     public bool m_IsFightFinish;
 
+    /// <summary>
+    /// 战斗是否开始
+    /// </summary>
     public bool m_IsFightStart;
 
     public bool m_bIsPauseMode;
@@ -139,8 +154,7 @@ public class FightSceneManager
         this.m_MainPlayer = null;
         this.m_IsFightFinish = false;
         this.m_bWin = false;
-        //this.SetPauseMode(NormalSettingSystem.Instance.GetNormalSetting().m_bEnableFightStop);
-        //UI_Fight.Instance.m_FightSceneMgr = this;
+        //this.SetPauseMode(NormalSettingSystem.Instance.GetNormalSetting().m_bEnableFightStop);//暂停模型
         //UI_FinishFight.Instance.m_FightSceneMgr = this;
         GameEntry.UI.OpenUIForm(UIFormId.UI_Fight, null, (UIFormBase trans2) =>
         {
@@ -197,7 +211,7 @@ public class FightSceneManager
         this.InitFightCamera();
         this.CreateCharacters();
         this.InitFightSetting();
-        ////UI_GameGMFightStatistics.Instance.InitRole(this.m_PlayerList);
+        ////UI_GameGMFightStatistics.Instance.InitRole(this.m_PlayerList);//统计数据
         //this.PlayAppearCameraPath();
         //this.InitFightTalk();
     }
@@ -335,7 +349,6 @@ public class FightSceneManager
         list.Sort();
         this.m_PlayerList.Clear();
         GameObject gameObject=null;
-
         for (int j = 0; j < list.Count; j++)
         {
             int num = list[j];
@@ -632,7 +645,13 @@ public class FightSceneManager
             return null;
         }
         string prefName = data.MobData.PrefName;
-        GameObject characterModel_Fight = ResourcesManager.Instance.GetCharacterModel_Fight(prefName);
+        GameObject characterModel_Fight = null;
+
+        GameEntry.Pool.GameObjectSpawn(10001, (Transform trans2) =>
+        {
+            characterModel_Fight = trans2.gameObject;
+        });
+
         if (characterModel_Fight == null)
         {
             UnityEngine.Debug.LogWarning("cat load model:" + prefName);

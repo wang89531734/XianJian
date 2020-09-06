@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class M_Character : MonoBehaviour
 {
+    /// <summary>
+    /// Õ½¶·×´Ì¬
+    /// </summary>
     public enum Enum_FightStatus
     {
         Debut,
