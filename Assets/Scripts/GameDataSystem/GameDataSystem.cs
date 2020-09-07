@@ -81,8 +81,6 @@ public class GameDataSystem
 
     private List<int> m_TeamRoleList;
 
-    private List<int> m_ActionSkillList;
-
     /// <summary>
     /// 金钱
     /// </summary>
@@ -159,7 +157,6 @@ public class GameDataSystem
         this.m_MapData = new Dictionary<int, S_MapData>();
         this.m_PartyRole = new List<S_PartyData>();
         this.m_TeamRoleList = new List<int>();
-        this.m_ActionSkillList = new List<int>();
         this.m_RoldData = new C_RoleDataEx[10];
         for (int i = 0; i < 10; i++)
         {
@@ -185,7 +182,6 @@ public class GameDataSystem
         this.m_GameFlag.Clear();
         this.m_PartyRole.Clear();
         this.m_TeamRoleList.Clear();
-        this.m_ActionSkillList.Clear();
         this.ClearMapData();
     }
 
@@ -195,16 +191,11 @@ public class GameDataSystem
     public void InitTeamRoleList()
     {
         this.m_TeamRoleList.Clear();
-        this.m_ActionSkillList.Clear();
 
         this.m_TeamRoleList.Add(1);
         this.m_TeamRoleList.Add(2);
         this.m_TeamRoleList.Add(3);
         this.m_TeamRoleList.Add(4);
-        this.m_ActionSkillList.Add(1);
-        this.m_ActionSkillList.Add(2);
-        this.m_ActionSkillList.Add(3);
-        this.m_ActionSkillList.Add(4);
     }
 
     /// <summary>

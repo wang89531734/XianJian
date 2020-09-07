@@ -964,18 +964,23 @@ public class UIFightForm : UIFormBase
     //        this.m_CutInContainer.SetActive(false);
     //    }
 
-    //    private void AddPlayerSkillCommand(int skillId, M_Character target)
-    //    {
-    //        this.SetSelectCommandTargetState(false);
-    //        if (this.m_FightSceneMgr == null)
-    //        {
-    //            return;
-    //        }
-    //        if (!this.m_FightSceneMgr.AddPlayerSkillCommand(skillId, target))
-    //        {
-    //            return;
-    //        }
-    //    }
+    /// <summary>
+    /// 添加播放技能命令
+    /// </summary>
+    /// <param name="skillId"></param>
+    /// <param name="target"></param>
+    private void AddPlayerSkillCommand(int skillId, M_Character target)
+    {
+        //this.SetSelectCommandTargetState(false);
+        //if (this.m_FightSceneMgr == null)
+        //{
+        //    return;
+        //}
+        if (!this.m_FightSceneMgr.AddPlayerSkillCommand(skillId, target))
+        {
+            return;
+        }
+    }
 
     //    private void AddPlayerItemCommand(int itemID, M_Character target)
     //    {
@@ -1053,7 +1058,7 @@ public class UIFightForm : UIFormBase
             //UIEventListener expr_52 = uIEventListener;
             //expr_52.onTooltip = (UIEventListener.BoolDelegate)Delegate.Combine(expr_52.onTooltip, new UIEventListener.BoolDelegate(this.OnSkillBtn_ToolTip));//文本提示
             //UIEventListener expr_74 = uIEventListener;
-            //expr_74.onHover = (UIEventListener.BoolDelegate)Delegate.Combine(expr_74.onHover, new UIEventListener.BoolDelegate(this.OnSkillItemBtn_Hover));
+            //expr_74.onHover = (UIEventListener.BoolDelegate)Delegate.Combine(expr_74.onHover, new UIEventListener.BoolDelegate(this.OnSkillItemBtn_Hover));//鼠标移动上去
             this.m_ActionBtnsTable.Add(skillBtnList[i].gameObject, i + 1);
             //UISprite childElement = nGUICustomUtil.getChildElement<UISprite>(skillBtnList[i].gameObject, "ImageSprite");
             //this.m_SkillBtnIconList.Add(childElement);
@@ -2081,9 +2086,8 @@ public class UIFightForm : UIFormBase
     //        }
     //    }
 
-    public void OnSkillBtn_Click(GameObject go)
+    public void OnSkillBtn_Click(int num)
     {
-        Debug.Log("执行");
         //if (Input.GetMouseButtonUp(1))
         //{
         //    return;
@@ -2109,10 +2113,11 @@ public class UIFightForm : UIFormBase
         //    return;
         //}
         //MusicSystem.Instance.PlaySound(3, 1);
+        //判断技能的类型
         //if (data2.emTarget == ENUM_UseTarget.Enemy)
         //{
         //    this.SetSelectCommandTargetState(false);
-        //    this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetMainTarget());
+        this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetMainTarget());
         //}
         //if (data2.emTarget == ENUM_UseTarget.Partner)
         //{

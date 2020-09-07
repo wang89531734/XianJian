@@ -920,10 +920,10 @@ public class FightSceneManager
     //		UI_FinishFight.Instance.Show();
     //	}
 
-    //	public bool AddPlayerSkillCommand(int skillId, M_Character target)
-    //	{
-    //		return this.m_PlayerList.ContainsKey(this.m_ControlledRoleID) && this.m_PlayerList[this.m_ControlledRoleID].AddSkillCommand(skillId, target);
-    //	}
+    public bool AddPlayerSkillCommand(int skillId, M_Character target)
+    {
+        return this.m_PlayerList.ContainsKey(this.m_ControlledRoleID) && this.m_PlayerList[this.m_ControlledRoleID].AddSkillCommand(skillId, target);
+    }
 
     //	public bool AddPlayerItemCommand(int itemID, M_Character target)
     //	{
@@ -1801,10 +1801,10 @@ public class FightSceneManager
         //}
     }
 
-    //	public M_Mob GetMainTarget()
-    //	{
-    //		return this.m_MainTarget;
-    //	}
+    public M_Mob GetMainTarget()
+    {
+        return this.m_MainTarget;
+    }
 
     public M_Player GetControlledPlayer()
     {

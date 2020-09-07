@@ -303,6 +303,9 @@ namespace YouYou
 
         public static bool isPause;
 
+        [HideInInspector]
+        public bool GamePause;
+
         /// <summary>
         /// 单例
         /// </summary>
@@ -356,6 +359,11 @@ namespace YouYou
 
         void Update()
         {
+            if (this.GamePause)
+            {
+                return;
+            }
+
             //循环更新组件
             for (LinkedListNode<IUpdateComponent> curr = m_UpdateComponentList.First; curr != null; curr = curr.Next)
             {
@@ -465,9 +473,9 @@ namespace YouYou
         {
             this.InitSystemSettings();
             yield return null;
-            new ResourcesManager();
+            new ResourcesManager();//后期要修改
             yield return null;
-            this.ReadGameDB();
+            this.ReadGameDB();//后期要修改
             this.InitGameSystem();
             this.m_InitializeOK = true;
             yield break;
@@ -479,13 +487,13 @@ namespace YouYou
         protected void InitSystemSettings()
         {
             GameInput.Initialize();
-            //this.m_QualitySettingSystem = new QualitySettingSystem();
+            //this.m_QualitySettingSystem = new QualitySettingSystem();//画质设置
             //this.m_QualitySettingSystem.Initialize();
-            //this.m_NormalSettingSystem = new NormalSettingSystem();
+            //this.m_NormalSettingSystem = new NormalSettingSystem();//正常设置
             //this.m_NormalSettingSystem.Initialize();
-            //this.m_SoundSettingSystem = new SoundSettingSystem();
+            //this.m_SoundSettingSystem = new SoundSettingSystem();//声音设置
             //this.m_SoundSettingSystem.Initialize();
-            //this.m_ControlSettingSystem = new ControlSettingSystem();
+            //this.m_ControlSettingSystem = new ControlSettingSystem();//控制设置
             //this.m_ControlSettingSystem.Initialize();
             //this.LoadSettings();
             //this.m_QualitySettingSystem.SetFirstGameQuality();
@@ -549,6 +557,9 @@ namespace YouYou
         /// </summary>
         public MobGuardSystem m_MobGuardSystem { get; private set; }
 
+        /// <summary>
+        /// 初始化游戏系统
+        /// </summary>
         private void InitGameSystem()
         {
             this.m_GameObjSystem = new GameObjSystem();
@@ -559,8 +570,6 @@ namespace YouYou
             this.m_ExploreSystem.Initialize();
             ////this.m_GameMenuSystem = new GameMenuSystem();
             ////this.m_GameMenuSystem.Initialize(this);
-            ///.
-            ///.
             this.m_QuestSystem = new QuestSystem();
             this.m_QuestSystem.Initialize();
             this.m_IdentifySystem = new IdentifySystem();
@@ -611,6 +620,9 @@ namespace YouYou
             });
         }
       
+        /// <summary>
+        /// 初始化新游戏
+        /// </summary>
         public void InitNewGame()
         {
             this.m_GameObjSystem.Clear();

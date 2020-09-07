@@ -767,56 +767,56 @@ public class M_Character : MonoBehaviour
     //		}
     //	}
 
-    //	public virtual bool AddSkillCommand(int skillId, M_Character target)
-    //	{
-    //		if (this.m_bStoryMode)
-    //		{
-    //			return false;
-    //		}
-    //		if (this is M_Player && this.m_CommandQueue.Count >= 2)
-    //		{
-    //			return false;
-    //		}
-    //		if (this.m_ActionCDTimer > 0f)
-    //		{
-    //			return false;
-    //		}
-    //		if (target == null)
-    //		{
-    //			return false;
-    //		}
-    //		S_Skill data = GameDataDB.SkillDB.GetData(skillId);
-    //		if (data == null)
-    //		{
-    //			return false;
-    //		}
-    //		S_UseEffect data2 = GameDataDB.UseEffectDB.GetData(data.UseEffectID);
-    //		if (data2 == null)
-    //		{
-    //			return false;
-    //		}
-    //		if (!this.CheckSkillCastBuff(data.CastBuffer))
-    //		{
-    //			return false;
-    //		}
-    //		if (!this.CheckCommandTarget(this, target, data2))
-    //		{
-    //			return false;
-    //		}
-    //		this.m_ActionCDTimer = 0f;
-    //		if (data2.ActDataName == null || data2.ActDataName == "0")
-    //		{
-    //			FightCommand_NoActDataSkill fightCommand_NoActDataSkill = new FightCommand_NoActDataSkill(this, target, skillId);
-    //			if (fightCommand_NoActDataSkill != null)
-    //			{
-    //				this.DoCommand(fightCommand_NoActDataSkill);
-    //			}
-    //			return true;
-    //		}
-    //		this.m_CommandQueue.Add(new FightCommand_Skill(this, target, skillId));
-    //		this.m_ActionCDTimer = this.GetActionCD();
-    //		return true;
-    //	}
+    public virtual bool AddSkillCommand(int skillId, M_Character target)
+    {
+        //if (this.m_bStoryMode)
+        //{
+        //    return false;
+        //}
+        //if (this is M_Player && this.m_CommandQueue.Count >= 2)
+        //{
+        //    return false;
+        //}
+        //if (this.m_ActionCDTimer > 0f)
+        //{
+        //    return false;
+        //}
+        //if (target == null)
+        //{
+        //    return false;
+        //}
+        //S_Skill data = GameDataDB.SkillDB.GetData(skillId);
+        //if (data == null)
+        //{
+        //    return false;
+        //}
+        //S_UseEffect data2 = GameDataDB.UseEffectDB.GetData(data.UseEffectID);
+        //if (data2 == null)
+        //{
+        //    return false;
+        //}
+        //if (!this.CheckSkillCastBuff(data.CastBuffer))
+        //{
+        //    return false;
+        //}
+        //if (!this.CheckCommandTarget(this, target, data2))
+        //{
+        //    return false;
+        //}
+        //this.m_ActionCDTimer = 0f;
+        //if (data2.ActDataName == null || data2.ActDataName == "0")
+        //{
+        //    FightCommand_NoActDataSkill fightCommand_NoActDataSkill = new FightCommand_NoActDataSkill(this, target, skillId);
+        //    if (fightCommand_NoActDataSkill != null)
+        //    {
+        //        this.DoCommand(fightCommand_NoActDataSkill);
+        //    }
+        //    return true;
+        //}
+        this.m_CommandQueue.Add(new FightCommand_Skill(this, target, skillId));
+        //this.m_ActionCDTimer = this.GetActionCD();
+        return true;
+    }
 
     //	public bool CheckSkillCastBuff(List<int> needCastBuffList)
     //	{

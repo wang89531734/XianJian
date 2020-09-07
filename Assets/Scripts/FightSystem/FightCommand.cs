@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 战斗指令
+/// </summary>
 public class FightCommand
 {
     public M_Character m_Actor;

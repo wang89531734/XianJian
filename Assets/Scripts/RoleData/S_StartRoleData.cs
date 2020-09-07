@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-
+using UnityEngine;
 
 public class S_StartRoleData : I_BaseDBF
 {
@@ -47,7 +47,10 @@ public class S_StartRoleData : I_BaseDBF
 		{
 			return;
 		}
-		this.Desc = GameDataDB.TransStringByLanguageType(this.Desc);
+
+        this.Desc = GameDataDB.TransStringByLanguageType(this.Desc);
+        Debug.Log(GUID+" "+ Desc+" "+Level + " " + HP + " " + MP + " " + AttackRang + " MoveSpeed" + MoveSpeed + " DashSpeed" + DashSpeed);
+        Debug.Log(JsonString);
         Dictionary<string, string> dictionary = Converter.deserializeObject<Dictionary<string, string>>(JsonString);
 		for (int i = 0; i < 10; i++)
 		{
