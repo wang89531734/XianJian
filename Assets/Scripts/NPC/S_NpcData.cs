@@ -101,7 +101,7 @@ public class S_NpcData : I_BaseDBF
 		this.NickName = GameDataDB.TransStringByLanguageType(this.NickName);
 		this.Name = GameDataDB.TransStringByLanguageType(this.Name);
 
-        Debug.Log(GUID + " " + NickName + " " + Name + " " + PrefName + " "+ emType);
+        //Debug.Log(GUID + " " + NickName + " " + Name + " " + PrefName + " "+ emType);
         Dictionary<string, string> dictionary = Converter.deserializeObject<Dictionary<string, string>>(JsonString);
 		for (int i = 0; i < 2; i++)
 		{

@@ -214,6 +214,7 @@ public class GameDataSystem
         this.m_RoldData[0].BaseRoleData.IsJoin = true;
         this.m_DefaultPlayerID = 1;
         this.AddRole(1, false);
+
         ////NormalSetting normalSetting = Swd6Application.instance.m_NormalSettingSystem.GetNormalSetting();
         //if (normalSetting.m_bEnableTeach)//应该是教程
         //{
@@ -221,7 +222,7 @@ public class GameDataSystem
         //    this.FlagON(76);
         //    this.FlagON(77);
         //}
-        //this.AddDLCItem();
+        //this.AddDLCItem();//添加物品
 
         this.m_PlayerID = this.m_DefaultPlayerID;
         this.m_FightPlayerID = this.m_DefaultPlayerID;

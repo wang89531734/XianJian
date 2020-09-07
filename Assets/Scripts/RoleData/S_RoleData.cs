@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// ½ÇÉ«Êý¾Ý
+/// </summary>
 public class S_RoleData
 {
 	public S_BaseRoleData BaseRoleData;
