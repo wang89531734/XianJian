@@ -359,7 +359,7 @@ public class FightSceneManager
                     if (GameEntry.Instance.m_GameDataSystem.GetFlag(num))
                     {
                         text = "Player" + num.ToString();
-                        GameEntry.Pool.GameObjectSpawn(10001, (Transform trans2) =>
+                        GameEntry.Pool.GameObjectSpawn(1, (Transform trans2) =>
                         {
                             gameObject = trans2.gameObject;
                         });

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using YouYou;
+using YouYou.DataTable;
 
 public class GameDataSystem
 {
@@ -42,6 +43,9 @@ public class GameDataSystem
 
     public int m_SelectPet;
 
+    /// <summary>
+    /// 战斗玩家ID
+    /// </summary>
     public int m_FightPlayerID;
 
     public int m_DefaultPlayerID;
@@ -67,7 +71,7 @@ public class GameDataSystem
     /// </summary>
     public S_GameFlag m_GameFlag;
 
-    private C_RoleDataEx[] m_RoldData;
+    private List<C_RoleDataEx> m_RoldData;
 
     /// <summary>
     /// 地图数据
@@ -79,8 +83,8 @@ public class GameDataSystem
     /// </summary>
     private List<S_PartyData> m_PartyRole;
 
-    private List<int> m_TeamRoleList;
-
+    private int MaxRoleCount;
+   
     /// <summary>
     /// 金钱
     /// </summary>
@@ -156,12 +160,7 @@ public class GameDataSystem
         this.m_GameFlag = new S_GameFlag();
         this.m_MapData = new Dictionary<int, S_MapData>();
         this.m_PartyRole = new List<S_PartyData>();
-        this.m_TeamRoleList = new List<int>();
-        this.m_RoldData = new C_RoleDataEx[10];
-        for (int i = 0; i < 10; i++)
-        {
-            this.m_RoldData[i] = new C_RoleDataEx();
-        }
+        this.m_RoldData = new List<C_RoleDataEx>();
     }
 
     public void Reset()
@@ -181,21 +180,8 @@ public class GameDataSystem
         this.m_MapInfo.Clear();
         this.m_GameFlag.Clear();
         this.m_PartyRole.Clear();
-        this.m_TeamRoleList.Clear();
+        this.m_RoldData.Clear();
         this.ClearMapData();
-    }
-
-    /// <summary>
-    /// 初始队伍角色列表
-    /// </summary>
-    public void InitTeamRoleList()
-    {
-        this.m_TeamRoleList.Clear();
-
-        this.m_TeamRoleList.Add(1);
-        this.m_TeamRoleList.Add(2);
-        this.m_TeamRoleList.Add(3);
-        this.m_TeamRoleList.Add(4);
     }
 
     /// <summary>
@@ -205,15 +191,11 @@ public class GameDataSystem
     {
         this.Reset();
         GameEntry.Instance.InitNewGame();
-        this.InitTeamRoleList();
-        for (int j = 0; j < this.m_TeamRoleList.Count; j++)
-        {
-            this.SetStartData(this.m_TeamRoleList[j], this.m_TeamRoleList[j], this.m_TeamRoleList[j]);
-        }
         GameEntry.Instance.m_SkillSystem.InitDefaultHotKeySkill();
-        this.m_RoldData[0].BaseRoleData.IsJoin = true;
+        List<StartRoleData> m_StartRoleDataList = GameEntry.DataTable.StartRoleDataList.GetList();
+        MaxRoleCount = m_StartRoleDataList.Count;
         this.m_DefaultPlayerID = 1;
-        this.AddRole(1, false);
+        this.AddRole(1);
 
         ////NormalSetting normalSetting = Swd6Application.instance.m_NormalSettingSystem.GetNormalSetting();
         //if (normalSetting.m_bEnableTeach)//应该是教程
@@ -462,31 +444,6 @@ public class GameDataSystem
     //		this.m_GameFlag.Set(flag, val);
     //	}
 
-    /// <summary>
-    /// 设置开始数据
-    /// </summary>
-    /// <param name="roleId">角色ID</param>
-    /// <param name="dateId">数据ID</param>
-    /// <param name="levelId">等级ID</param>
-    /// <returns></returns>
-    public bool SetStartData(int roleId, int dateId, int levelId)
-    {
-        int num = roleId - 1;
-        S_StartRoleData data = GameDataDB.StartRoleDB.GetData(dateId);
-        if (data == null)
-        {
-            return false;
-        }
-        this.m_RoldData[num].BaseRoleData.ID = roleId;
-        this.m_RoldData[num].BaseRoleData.FamilyName = GameDataDB.StrID(num * 10 + 51);
-        this.m_RoldData[num].BaseRoleData.Name = GameDataDB.StrID(num * 10 + 52);
-        this.m_RoldData[num].BaseRoleData.SetStartData(data, levelId, true);
-        this.m_RoldData[num].CalRoleAttr();
-        this.m_RoldData[num].SetFullHP();
-        this.m_RoldData[num].SetFullMP();
-        return true;
-    }
-
     public S_Level GetLevelData(int roleId, int level)
     {
         int num = (roleId - 1) * 150 + level;
@@ -643,21 +600,26 @@ public class GameDataSystem
     /// </summary>
     /// <param name="roleId"></param>
     /// <param name="showMsg"></param>
-    public void AddRole(int roleId, bool showMsg)
+    public void AddRole(int roleId, bool showMsg=false)
     {
-        if (roleId > 10)
-        {
-            Debug.LogError("id error!!");
-            return;
-        }
+        StartRoleData m_StartRoleData = GameEntry.DataTable.StartRoleDataList.GetEntityValue(roleId);
+        C_RoleDataEx m_RoleDataEx= new C_RoleDataEx();
+        m_RoleDataEx.BaseRoleData.ID = roleId;
+        m_RoleDataEx.BaseRoleData.Name = m_StartRoleData.Name;
+        m_RoleDataEx.BaseRoleData.SetStartData(m_StartRoleData, roleId, true);
+        m_RoleDataEx.CalRoleAttr();
+        m_RoleDataEx.SetFullHP();
+        m_RoleDataEx.SetFullMP();
+        m_RoleDataEx.BaseRoleData.IsJoin = true;
+        //m_RoleDataEx.BaseRoleData.IsFight = this.CheckCanFight();
+        m_RoldData.Add(m_RoleDataEx);
         if (showMsg && roleId > 1)
         {
-            string str = this.m_RoldData[roleId - 1].BaseRoleData.FamilyName + this.m_RoldData[roleId - 1].BaseRoleData.Name;
+            //显示提示框
+            //string str = this.m_RoldData[roleId - 1].BaseRoleData.FamilyName + this.m_RoldData[roleId - 1].BaseRoleData.Name;
             //UI_OkCancelBox.Instance.AddSysMsg(str + GameDataDB.StrID(1060), 3f);
         }
         this.FlagON(roleId);
-        this.m_RoldData[roleId - 1].BaseRoleData.IsJoin = true;
-        this.m_RoldData[roleId - 1].BaseRoleData.IsFight = this.CheckCanFight();
         this.UpdatePartyRole();
     }
 
@@ -711,9 +673,9 @@ public class GameDataSystem
     public void UpdatePartyRole()
     {
         this.m_PartyRole.Clear();
-        for (int i = 0; i < this.GetMaxTeamRoleCount(); i++)
+        for (int i = 0; i < this.MaxRoleCount; i++)
         {
-            int num = this.m_TeamRoleList[i];
+            int num = i+1;
             if (GameEntry.Instance.m_GameDataSystem.GetFlag(num))
             {
                 S_PartyData s_PartyData = new S_PartyData();
@@ -828,11 +790,6 @@ public class GameDataSystem
     //	{
     //		return this.m_TeamRoleList;
     //	}
-
-    public int GetMaxTeamRoleCount()
-    {
-        return this.m_TeamRoleList.Count;
-    }
 
     public int GetPartyRoleID(int index)
     {

@@ -74,7 +74,7 @@ namespace YouYou
         public Sys_SceneDetailList Sys_SceneDetailList;
         //public Sys_StorySoundList Sys_StorySoundList;
         public Sys_UIFormList Sys_UIFormList;
-
+        public StartRoleDataList StartRoleDataList;
         //public ChapterList ChapterList;
 
         /// <summary>
@@ -91,6 +91,7 @@ namespace YouYou
             Sys_SceneDetailList.LoadData();
             //Sys_StorySoundList.LoadData();
             Sys_UIFormList.LoadData();
+            StartRoleDataList.LoadData();
             //ChapterList.LoadData();
         }
 

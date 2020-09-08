@@ -46,7 +46,6 @@ namespace YouYou
             private set;
         }
 
-
         /// <summary>
         /// ½ÇÉ«Êý¾Ý
         /// </summary>

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using YouYou;
+using YouYou.DataTable;
 
 [Serializable]
 public class S_BaseRoleData
@@ -8,12 +9,7 @@ public class S_BaseRoleData
 	public int ID;
 
     /// <summary>
-    /// 姓
-    /// </summary>
-	public string FamilyName;
-
-    /// <summary>
-    /// 名
+    /// 姓名
     /// </summary>
 	public string Name;
 
@@ -78,7 +74,7 @@ public class S_BaseRoleData
     /// <param name="startData">开始数据</param>
     /// <param name="roldId">角色ID</param>
     /// <param name="setEquip">是否设置装备</param>
-	public void SetStartData(S_StartRoleData startData, int roldId, bool setEquip)
+	public void SetStartData(StartRoleData startData, int roldId, bool setEquip)
 	{
 		int id = (roldId - 1) * 150 + startData.Level;
         S_Level data = GameDataDB.LevelDB.GetData(id);
@@ -94,8 +90,8 @@ public class S_BaseRoleData
 		this.Block = data.Block;
 		this.Dodge = data.Dodage;
 		this.Critical = data.Critical;
-		this.emElemntType = startData.emElemntType;
-		this.Level = startData.Level;
+        this.emElemntType = (ENUM_ElementType)startData.EmElemntType;
+        this.Level = startData.Level;
 		this.TotalExp = startData.StartExp;
 		this.TotalSkillPoint = data.SkillPoint;
 		this.CostSkillPoint = 0;
@@ -103,25 +99,26 @@ public class S_BaseRoleData
 		this.IsFight = false;
 		if (setEquip)
 		{
-			for (int i = 0; i < 8; i++)
-			{
-				this.EquipID[i] = startData.Equip[i];
-				if (this.EquipID[i] > 0)
-				{
-                    ItemData itemData = GameEntry.Instance.m_ItemSystem.AddItem(this.EquipID[i], 1, ENUM_ItemState.Old, false);
-                    if (itemData != null)
-                    {
-                        itemData.Equip = true;
-                        itemData.EquipCount++;
-                        this.EquipID[i] = itemData.SerialID;
-                    }
-                }
-			}
+			//for (int i = 0; i < 8; i++)
+			//{
+			//	this.EquipID[i] = startData.Equip[i];
+			//	if (this.EquipID[i] > 0)
+			//	{
+   //                 ItemData itemData = GameEntry.Instance.m_ItemSystem.AddItem(this.EquipID[i], 1, ENUM_ItemState.Old, false);
+   //                 if (itemData != null)
+   //                 {
+   //                     itemData.Equip = true;
+   //                     itemData.EquipCount++;
+   //                     this.EquipID[i] = itemData.SerialID;
+   //                 }
+   //             }
+			//}
 		}
         GameEntry.Instance.m_SkillSystem.ResetAllHotkey();
-        for (int j = 0; j < startData.Skill.Count; j++)
+        string[] Array=startData.Skill.Split(';');
+        for (int j = 0; j < Array.Length; j++)
         {
-            GameEntry.Instance.m_SkillSystem.LearnSkill(roldId, startData.Skill[j]);
+            GameEntry.Instance.m_SkillSystem.LearnSkill(roldId, Convert.ToInt32(Array[j]));
         }
         this.CostSkillPoint = GameEntry.Instance.m_SkillSystem.LearnDefaultSphereSkill(roldId, (int)this.emElemntType);
     }

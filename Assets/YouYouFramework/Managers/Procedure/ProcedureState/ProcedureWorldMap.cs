@@ -13,8 +13,11 @@ namespace YouYou
         {
             base.OnEnter();
             GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureWorldMap");
-            Debug.Log("加载角色");
-            Debug.Log("显示主UI");
+            //if (UI_Explore.Instance != null)
+            //{
+            //    UI_Explore.Instance.Show();
+            //}
+            //this.gameApplication.m_StorySystem.StoryEnd();
             GameEntry.Instance.m_ExploreSystem.Begin();
             //if (!Swd6Application.instance.m_ExploreSystem.m_PlayStory && UI_Fade.Instance != null)
             //{

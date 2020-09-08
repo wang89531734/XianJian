@@ -557,7 +557,7 @@ public class GameObjSystem
         }
         string text = "Player" + id;
         string name = "Player" + id + "_Map";
-        GameEntry.Pool.GameObjectSpawn(1, (Transform trans) =>
+        GameEntry.Pool.GameObjectSpawn(9999, (Transform trans) =>
         {
             GameObject characterRoot = trans.gameObject;
             if (characterRoot != null)
@@ -567,7 +567,7 @@ public class GameObjSystem
                 //characterRoot.layer = 2;
                 characterRoot.tag = "Player";
                 this.PlayerObj = characterRoot;
-                GameEntry.Pool.GameObjectSpawn(10001, (Transform trans2) =>
+                GameEntry.Pool.GameObjectSpawn(id, (Transform trans2) =>
                 {
                     trans2.SetParent(characterRoot.transform);
                     CapsuleCollider component3 = trans2.GetComponent<CapsuleCollider>();

@@ -271,6 +271,12 @@ public class SkillSystem
         }
     }
 
+    /// <summary>
+    /// 学习技能
+    /// </summary>
+    /// <param name="roleId"></param>
+    /// <param name="skillId"></param>
+    /// <returns></returns>
     public int LearnSkill(int roleId, int skillId)
     {
         if (roleId > 10)
