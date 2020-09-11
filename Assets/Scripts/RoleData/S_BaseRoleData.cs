@@ -94,7 +94,7 @@ public class S_BaseRoleData
         this.Level = startData.Level;
 		this.TotalExp = startData.StartExp;
 		this.TotalSkillPoint = data.SkillPoint;
-		this.CostSkillPoint = 0;
+        this.CostSkillPoint = 0;
 		this.IsJoin = false;
 		this.IsFight = false;
 		if (setEquip)

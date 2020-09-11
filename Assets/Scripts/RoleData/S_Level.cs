@@ -40,7 +40,8 @@ public class S_Level : I_BaseDBF
 
 	public void ParseJson(string JsonString, IConverter Converter, I_BaseDBF Record)
 	{
-		if (!(Record is S_Level))
+        UnityEngine.Debug.Log("Ö´ÐÐ" + JsonString);
+        if (!(Record is S_Level))
 		{
 			return;
 		}

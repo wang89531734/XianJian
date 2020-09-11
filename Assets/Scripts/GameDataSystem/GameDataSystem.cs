@@ -611,7 +611,7 @@ public class GameDataSystem
         m_RoleDataEx.SetFullHP();
         m_RoleDataEx.SetFullMP();
         m_RoleDataEx.BaseRoleData.IsJoin = true;
-        //m_RoleDataEx.BaseRoleData.IsFight = this.CheckCanFight();
+        m_RoleDataEx.BaseRoleData.IsFight = this.CheckCanFight();
         m_RoldData.Add(m_RoleDataEx);
         if (showMsg && roleId > 1)
         {

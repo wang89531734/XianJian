@@ -533,8 +533,8 @@ public class FightSceneManager
         {
             S_BattleMobData s_BattleMobData = this.m_BattleGroup.BattleMob[i];
             if (s_BattleMobData != null)
-            {        
-                M_Mob m_Mob = this.CreateMob(s_BattleMobData);
+            {
+                M_Mob m_Mob = this.CreateMob(s_BattleMobData);            
                 if (m_Mob == null)
                 {
                     UnityEngine.Debug.Log("Create mob == null, ID:" + this.m_BattleGroup.BattleMob[i].GUID);
@@ -647,7 +647,7 @@ public class FightSceneManager
         string prefName = data.MobData.PrefName;
         GameObject characterModel_Fight = null;
 
-        GameEntry.Pool.GameObjectSpawn(10001, (Transform trans2) =>
+        GameEntry.Pool.GameObjectSpawn(1, (Transform trans2) =>
         {
             characterModel_Fight = trans2.gameObject;
         });
@@ -705,6 +705,9 @@ public class FightSceneManager
         return m_Mob;
     }
 
+    /// <summary>
+    /// 初始化战斗设置
+    /// </summary>
     private void InitFightSetting()
     {
         FormationData defaultFormationData = GameEntry.Instance.m_FormationSystem.GetDefaultFormationData();
@@ -721,12 +724,12 @@ public class FightSceneManager
                 this.ChangeControlCharacter(1, false);
             }
             int flag = 60 + this.m_ControlledRoleID;
-            //M_Player role = this.GetRole(this.m_ControlledRoleID);
-            //if (role != null)
-            //{
-            //    //role.SetUseAI(Swd6Application.instance.m_GameDataSystem.GetFlag(flag));
-            //    //UI_Fight.Instance.UpdateRoleAICheckBox(this.m_ControlledRoleID);
-            //}
+            M_Player role = this.GetRole(this.m_ControlledRoleID);
+            if (role != null)
+            {
+                role.SetUseAI(GameEntry.Instance.m_GameDataSystem.GetFlag(flag));
+                FightUIForm.UpdateRoleAICheckBox(this.m_ControlledRoleID);
+            }
         }
         else
         {
@@ -948,14 +951,14 @@ public class FightSceneManager
     //		return -1f;
     //	}
 
-    //	public List<FightSkillHotKeyInfo> GetControlledPlayerSkillList(int page)
-    //	{
-    //		if (!this.m_PlayerList.ContainsKey(this.m_ControlledRoleID))
-    //		{
-    //			return null;
-    //		}
-    //		return Swd6Application.instance.m_SkillSystem.GetFightSkillHotkeyList(this.m_PlayerList[this.m_ControlledRoleID].m_RoleID, page);
-    //	}
+    public List<FightSkillHotKeyInfo> GetControlledPlayerSkillList(int page)
+    {
+        if (!this.m_PlayerList.ContainsKey(this.m_ControlledRoleID))
+        {
+            return null;
+        }
+        return GameEntry.Instance.m_SkillSystem.GetFightSkillHotkeyList(this.m_PlayerList[this.m_ControlledRoleID].m_RoleID, page);
+    }
 
     //	public int[] GetControlledPlayerCommandQueue()
     //	{
@@ -1624,11 +1627,11 @@ public class FightSceneManager
         {
             return;
         }
-        //bool useAI = false;
-        //if (bDead)
-        //{
-        //    //useAI = this.GetControlledPlayer().m_bUseAI;
-        //}
+        bool useAI = false;
+        if (bDead)
+        {
+            useAI = this.GetControlledPlayer().m_bUseAI;
+        }
         this.m_ControlledRoleID = key;
         if (this.m_PlayerList.ContainsKey(key))
         {
@@ -1640,18 +1643,18 @@ public class FightSceneManager
         }
         this.SetFightCameraController();
         FightUIForm.UpdateSelectRole();
-        //foreach (KeyValuePair<int, M_Player> current2 in this.m_PlayerList)
-        //{
-        //    if (current2.Key == key)
-        //    {
-        //        //current2.Value.SetUseAI(useAI);
-        //    }
-        //    else
-        //    {
-        //        //current2.Value.SetUseAI(true);
-        //    }
-        //    //UI_Fight.Instance.UpdateRoleAICheckBox(current2.Key);
-        //}
+        foreach (KeyValuePair<int, M_Player> current2 in this.m_PlayerList)
+        {
+            if (current2.Key == key)
+            {
+                current2.Value.SetUseAI(useAI);
+            }
+            else
+            {
+                current2.Value.SetUseAI(true);
+            }
+            FightUIForm.UpdateRoleAICheckBox(current2.Key);
+        }
     }
 
     public bool ChangeTargetMob(int key)
@@ -1682,6 +1685,10 @@ public class FightSceneManager
     //		return this.m_NowFormation;
     //	}
 
+    /// <summary>
+    /// 改变阵型
+    /// </summary>
+    /// <param name="idx"></param>
     public void ChangeFormation(int idx)
     {
         if (this.m_ChangeFormationCDTimer > 0f)
@@ -1705,14 +1712,14 @@ public class FightSceneManager
                 {
                     if (GameEntry.Instance.m_GameDataSystem.GetFlag(formationUnit.RoleID))
                     {
-                        //this.m_PlayerList[formationUnit.RoleID].SetFormationData(formationData, i);
+                        this.m_PlayerList[formationUnit.RoleID].SetFormationData(formationData, i);
                     }
                 }
             }
         }
         foreach (M_Player current in this.m_PlayerList.Values)
         {
-            //current.UpdateFightRoleData();
+            current.UpdateFightRoleData();
         }
         this.ChangeInitPos(formationData);
         //this.CreateChangeFormationEffect(idx + ENUM_ElementType.Wind);
@@ -1820,11 +1827,14 @@ public class FightSceneManager
     //		return this.m_ControlledRoleID;
     //	}
 
+    /// <summary>
+    /// 初始化战斗目标
+    /// </summary>
     public void InitFightTarget()
     {
         foreach (M_Player current in this.m_PlayerList.Values)
         {
-            //current.m_ActionTargetModel = this.m_MainTarget.m_RoleModel;
+            current.m_ActionTargetModel = this.m_MainTarget.m_RoleModel;
             current.SetFaceToTarget(this.m_MainTarget);
         }
         //foreach (M_Guard current2 in this.m_GuardList.Values)
@@ -1832,22 +1842,22 @@ public class FightSceneManager
         //    current2.m_ActionTargetModel = this.m_MainTarget.m_RoleModel;
         //    current2.SetFaceToTarget(this.m_MainTarget);
         //}
-        //foreach (M_Mob current3 in this.m_MobList.Values)
-        //{
-        //    if (!this.m_PlayerList.ContainsKey(this.m_ControlledRoleID))
-        //    {
-        //        break;
-        //    }
-        //    if (current3.CanBeTarget())
-        //    {
-        //        current3.m_ActionTargetModel = this.m_PlayerList[this.m_ControlledRoleID].m_RoleModel;
-        //        current3.SetFaceToTarget(this.m_PlayerList[this.m_ControlledRoleID]);
-        //    }
-        //}
-        //foreach (M_Player current4 in this.m_PlayerList.Values)
-        //{
-        //    current4.CheckPlayerDead();
-        //}
+        foreach (M_Mob current3 in this.m_MobList.Values)
+        {
+            if (!this.m_PlayerList.ContainsKey(this.m_ControlledRoleID))
+            {
+                break;
+            }
+            if (current3.CanBeTarget())
+            {
+                current3.m_ActionTargetModel = this.m_PlayerList[this.m_ControlledRoleID].m_RoleModel;
+                current3.SetFaceToTarget(this.m_PlayerList[this.m_ControlledRoleID]);
+            }
+        }
+        foreach (M_Player current4 in this.m_PlayerList.Values)
+        {
+            current4.CheckPlayerDead();
+        }
     }
 
     //	public void SetFightRolePause(bool bPause)

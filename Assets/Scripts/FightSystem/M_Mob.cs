@@ -682,10 +682,10 @@ public class M_Mob : M_Character
     //		return this.m_emFight == M_Character.Enum_FightStatus.Idle;
     //	}
 
-    //	public bool CanBeTarget()
-    //	{
-    //		return this.m_bCanBeTarget && !base.IsDead() && this.m_RoleModel.activeSelf;
-    //	}
+    public bool CanBeTarget()
+    {
+        return this.m_bCanBeTarget && !base.IsDead() && this.m_RoleModel.activeSelf;
+    }
 
     //	public void SetCanBeTarget(bool bCan)
     //	{

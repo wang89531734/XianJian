@@ -149,6 +149,7 @@ public class UIFightForm : UIFormBase
 
     private UIFightRoleSlot m_ControlledRoleSlot;
 
+    [SerializeField]
     private List<UIFightRoleSlot> m_RoleSlots = new List<UIFightRoleSlot>();
 
     private Dictionary<int, UIFightRoleSlot> m_RoleSlotTable = new Dictionary<int, UIFightRoleSlot>();
@@ -212,7 +213,7 @@ public class UIFightForm : UIFormBase
 
     //    private float m_HintTimer;
 
-    //    private int m_NowSkillPage;
+    private int m_NowSkillPage;
 
     //    private int m_NowItemPage;
 
@@ -873,7 +874,7 @@ public class UIFightForm : UIFormBase
         base.OnInit(userData);
         //this.m_CatchResultTw = this.m_CatchResultTexture.GetComponent<TweenAlpha>();//捕捉结果
         this.CreateMobSlots();
-        this.CreateRoleSlots();
+        //this.CreateRoleSlots();//以后改成代码生成
         //this.CreateGuardSlot();
         this.InitSkillBtn(this.m_SkillBtnList);
         //this.InitItemBtn(this.m_ItemBtnList);
@@ -1314,74 +1315,77 @@ public class UIFightForm : UIFormBase
     //        this.UpdateItemBtnEnableAndCount();
     //    }
 
-    //    private void SetSkillBtn()
-    //    {
-    //        if (this.m_FightSceneMgr == null)
-    //        {
-    //            return;
-    //        }
-    //        List<FightSkillHotKeyInfo> controlledPlayerSkillList = this.m_FightSceneMgr.GetControlledPlayerSkillList(this.m_NowSkillPage);
-    //        if (controlledPlayerSkillList == null)
-    //        {
-    //            UnityEngine.Debug.Log("List NULL");
-    //            return;
-    //        }
-    //        if (this.m_SkillBtnList == null)
-    //        {
-    //            UnityEngine.Debug.Log("BTN NULL");
-    //            return;
-    //        }
-    //        this.m_SkillPageLabel.text = (this.m_NowSkillPage + 1).ToString();
-    //        for (int i = 0; i < this.m_SkillBtnList.Count; i++)
-    //        {
-    //            if (i >= this.m_SkillBtnIconList.Count)
-    //            {
-    //                break;
-    //            }
-    //            int num;
-    //            if (i < controlledPlayerSkillList.Count)
-    //            {
-    //                num = controlledPlayerSkillList[i].ID;
-    //            }
-    //            else
-    //            {
-    //                num = -1;
-    //            }
-    //            S_Skill data = GameDataDB.SkillDB.GetData(num);
-    //            UIEventListener uIEventListener = UIEventListener.Get(this.m_SkillBtnList[i].gameObject);
-    //            uIEventListener.parameter = num;
-    //            uIEventListener = UIEventListener.Get(this.m_SkillBtnIconList[i].gameObject);
-    //            uIEventListener.parameter = num;
-    //            if (data == null)
-    //            {
-    //                this.m_SkillBtnIconList[i].enabled = false;
-    //                this.m_SkillColddownSpriteList[i].enabled = false;
-    //                this.m_SkillBtnList[i].gameObject.SetActive(false);
-    //            }
-    //            else
-    //            {
-    //                this.m_SkillBtnList[i].gameObject.SetActive(true);
-    //                nGUICustomUtil.SetSpriteAtlas(this.m_SkillBtnIconList[i], data.IconNo);
-    //                this.m_SkillBtnList[i].normalSprite = this.m_SkillBtnIconList[i].spriteName;
-    //                this.m_SkillBtnIconList[i].enabled = true;
-    //                this.m_SkillColddownSpriteList[i].enabled = true;
-    //            }
-    //            if (this.m_SkillBtnIDTable.ContainsKey(this.m_SkillBtnList[i]))
-    //            {
-    //                this.m_SkillBtnIDTable[this.m_SkillBtnList[i]] = num;
-    //            }
-    //        }
-    //        this.UpdateSkillBtnEnable();
-    //        int roleID = this.m_ControlledRoleSlot.GetRoleID();
-    //        if (this.m_RoleHotKeyPageRecord.ContainsKey(roleID))
-    //        {
-    //            this.m_RoleHotKeyPageRecord[roleID] = this.m_NowSkillPage;
-    //        }
-    //        else
-    //        {
-    //            this.m_RoleHotKeyPageRecord.Add(roleID, this.m_NowSkillPage);
-    //        }
-    //    }
+    /// <summary>
+    /// 设置技能按钮
+    /// </summary>
+    private void SetSkillBtn()
+    {
+        if (this.m_FightSceneMgr == null)
+        {
+            return;
+        }
+        List<FightSkillHotKeyInfo> controlledPlayerSkillList = this.m_FightSceneMgr.GetControlledPlayerSkillList(this.m_NowSkillPage);
+        if (controlledPlayerSkillList == null)
+        {
+            UnityEngine.Debug.Log("List NULL");
+            return;
+        }
+        if (this.m_SkillBtnList == null)
+        {
+            UnityEngine.Debug.Log("BTN NULL");
+            return;
+        }
+        //this.m_SkillPageLabel.text = (this.m_NowSkillPage + 1).ToString();
+        for (int i = 0; i < this.m_SkillBtnList.Count; i++)
+        {
+            //if (i >= this.m_SkillBtnIconList.Count)
+            //{
+            //    break;
+            //}
+            //int num;
+            //if (i < controlledPlayerSkillList.Count)
+            //{
+            //    num = controlledPlayerSkillList[i].ID;
+            //}
+            //else
+            //{
+            //    num = -1;
+            //}
+            //S_Skill data = GameDataDB.SkillDB.GetData(num);
+            //UIEventListener uIEventListener = UIEventListener.Get(this.m_SkillBtnList[i].gameObject);
+            //uIEventListener.parameter = num;
+            //uIEventListener = UIEventListener.Get(this.m_SkillBtnIconList[i].gameObject);
+            //uIEventListener.parameter = num;
+            //if (data == null)
+            //{
+            //    this.m_SkillBtnIconList[i].enabled = false;
+            //    this.m_SkillColddownSpriteList[i].enabled = false;
+            //    this.m_SkillBtnList[i].gameObject.SetActive(false);
+            //}
+            //else
+            //{
+            //    this.m_SkillBtnList[i].gameObject.SetActive(true);
+            //    nGUICustomUtil.SetSpriteAtlas(this.m_SkillBtnIconList[i], data.IconNo);
+            //    this.m_SkillBtnList[i].normalSprite = this.m_SkillBtnIconList[i].spriteName;
+            //    this.m_SkillBtnIconList[i].enabled = true;
+            //    this.m_SkillColddownSpriteList[i].enabled = true;
+            //}
+            //if (this.m_SkillBtnIDTable.ContainsKey(this.m_SkillBtnList[i]))
+            //{
+            //    this.m_SkillBtnIDTable[this.m_SkillBtnList[i]] = num;
+            //}
+        }
+        //this.UpdateSkillBtnEnable();
+        //int roleID = this.m_ControlledRoleSlot.GetRoleID();
+        //if (this.m_RoleHotKeyPageRecord.ContainsKey(roleID))
+        //{
+        //    this.m_RoleHotKeyPageRecord[roleID] = this.m_NowSkillPage;
+        //}
+        //else
+        //{
+        //    this.m_RoleHotKeyPageRecord.Add(roleID, this.m_NowSkillPage);
+        //}
+    }
 
     //    public void UpdateMobSlot_HP()
     //    {
@@ -1559,18 +1563,21 @@ public class UIFightForm : UIFormBase
     //        }
     //    }
 
+    /// <summary>
+    /// 更新选择角色
+    /// </summary>
     public void UpdateSelectRole()
     {
         this.SetControlledRole(this.m_FightSceneMgr.GetControlledPlayer());
     }
 
-    //    public void UpdateRoleAICheckBox(int roleID)
-    //    {
-    //        if (this.m_RoleSlotTable.ContainsKey(roleID))
-    //        {
-    //            this.m_RoleSlotTable[roleID].UpdateUseAICheckbox();
-    //        }
-    //    }
+    public void UpdateRoleAICheckBox(int roleID)
+    {
+        if (this.m_RoleSlotTable.ContainsKey(roleID))
+        {
+            this.m_RoleSlotTable[roleID].UpdateUseAICheckbox();
+        }
+    }
 
     //    [DebuggerHidden]
     //    public IEnumerator ShowCatchResult(bool bSuccess)
@@ -1833,7 +1840,7 @@ public class UIFightForm : UIFormBase
         //{
         //    this.m_NowSkillPage = 0;
         //}
-        //this.SetSkillBtn();
+        this.SetSkillBtn();
         //this.UpdateSkillBtnEnable();
         //this.UpdateItemBtnEnableAndCount();
         //this.m_MagicItemCont.SetActive(false);
