@@ -56,15 +56,16 @@ public class S_Skill : I_BaseDBF
 	}
 
 	public void ParseJson(string JsonString, IConverter Converter, I_BaseDBF Record)
-	{
-		if (!(Record is S_Skill))
+	{      
+        if (!(Record is S_Skill))
 		{
 			return;
 		}
 		this.Name = GameDataDB.TransStringByLanguageType(this.Name);
 		this.Desc = GameDataDB.TransStringByLanguageType(this.Desc);
 		this.Help = GameDataDB.TransStringByLanguageType(this.Help);
-		Dictionary<string, string> dictionary = Converter.deserializeObject<Dictionary<string, string>>(JsonString);
+        Debug.Log("Name"+ Name + "Desc"+ Desc + "Help"+ Help + JsonString);
+        Dictionary<string, string> dictionary = Converter.deserializeObject<Dictionary<string, string>>(JsonString);
 		for (int i = 0; i < 4; i++)
 		{
 			int num = 0;

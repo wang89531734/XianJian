@@ -874,7 +874,7 @@ public class UIFightForm : UIFormBase
         base.OnInit(userData);
         //this.m_CatchResultTw = this.m_CatchResultTexture.GetComponent<TweenAlpha>();//捕捉结果
         this.CreateMobSlots();
-        //this.CreateRoleSlots();//以后改成代码生成
+        this.CreateRoleSlots();//以后改成代码生成
         //this.CreateGuardSlot();
         this.InitSkillBtn(this.m_SkillBtnList);
         //this.InitItemBtn(this.m_ItemBtnList);
@@ -972,11 +972,11 @@ public class UIFightForm : UIFormBase
     /// <param name="target"></param>
     private void AddPlayerSkillCommand(int skillId, M_Character target)
     {
-        //this.SetSelectCommandTargetState(false);
-        //if (this.m_FightSceneMgr == null)
-        //{
-        //    return;
-        //}
+        this.SetSelectCommandTargetState(false);
+        if (this.m_FightSceneMgr == null)
+        {
+            return;
+        }
         if (!this.m_FightSceneMgr.AddPlayerSkillCommand(skillId, target))
         {
             return;
@@ -1195,18 +1195,18 @@ public class UIFightForm : UIFormBase
     {
         this.m_ControlledRoleSlot = TempSelectedRoleSlot.GetComponent<UIFightRoleSlot>();
         this.m_RoleSlotTable.Clear();
-        UIFightRoleSlot cUIFightRoleSlot = TempRoleSlot.GetComponent<UIFightRoleSlot>();
-        cUIFightRoleSlot.SetSlotIdx(0);
-        this.m_RoleSlots.Add(cUIFightRoleSlot);
-        for (int i = 1; i < 4; i++)
-        {
-            GameObject slotcontainer = UnityEngine.Object.Instantiate(TempRoleSlot) as GameObject;
-            slotcontainer.SetParent(RoleSlot.transform);
-            UIFightRoleSlot cUIFightRoleSlot2 = slotcontainer.GetComponent<UIFightRoleSlot>();
-            cUIFightRoleSlot2.SetSlotIdx(i);
-            this.m_RoleSlots.Add(cUIFightRoleSlot2);
-            slotcontainer.transform.localPosition = new Vector3(TempRoleSlot.transform.localPosition.x + 200 * (float)i, TempRoleSlot.transform.localPosition.y, TempRoleSlot.transform.localPosition.z);
-        }
+        //UIFightRoleSlot cUIFightRoleSlot = TempRoleSlot.GetComponent<UIFightRoleSlot>();
+        //cUIFightRoleSlot.SetSlotIdx(0);
+        //this.m_RoleSlots.Add(cUIFightRoleSlot);
+        //for (int i = 1; i < 4; i++)
+        //{
+        //    GameObject slotcontainer = UnityEngine.Object.Instantiate(TempRoleSlot) as GameObject;
+        //    slotcontainer.SetParent(RoleSlot.transform);
+        //    UIFightRoleSlot cUIFightRoleSlot2 = slotcontainer.GetComponent<UIFightRoleSlot>();
+        //    cUIFightRoleSlot2.SetSlotIdx(i);
+        //    this.m_RoleSlots.Add(cUIFightRoleSlot2);
+        //    slotcontainer.transform.localPosition = new Vector3(TempRoleSlot.transform.localPosition.x + 200 * (float)i, TempRoleSlot.transform.localPosition.y, TempRoleSlot.transform.localPosition.z);
+        //}
     }
 
     //    public void CreateGuardSlot()
@@ -1342,16 +1342,18 @@ public class UIFightForm : UIFormBase
             //{
             //    break;
             //}
-            //int num;
-            //if (i < controlledPlayerSkillList.Count)
-            //{
-            //    num = controlledPlayerSkillList[i].ID;
-            //}
-            //else
-            //{
-            //    num = -1;
-            //}
-            //S_Skill data = GameDataDB.SkillDB.GetData(num);
+            int num;
+            if (i < controlledPlayerSkillList.Count)
+            {
+                num = controlledPlayerSkillList[i].ID;
+            }
+            else
+            {
+                num = -1;
+            }
+            S_Skill data = GameDataDB.SkillDB.GetData(num);
+            UnityEngine.Debug.Log(data.Name+""+data.Desc+""+data.Help);
+            UnityEngine.Debug.Log("parameter" + num);
             //UIEventListener uIEventListener = UIEventListener.Get(this.m_SkillBtnList[i].gameObject);
             //uIEventListener.parameter = num;
             //uIEventListener = UIEventListener.Get(this.m_SkillBtnIconList[i].gameObject);
@@ -1376,7 +1378,7 @@ public class UIFightForm : UIFormBase
             //}
         }
         //this.UpdateSkillBtnEnable();
-        //int roleID = this.m_ControlledRoleSlot.GetRoleID();
+        int roleID = this.m_ControlledRoleSlot.GetRoleID();
         //if (this.m_RoleHotKeyPageRecord.ContainsKey(roleID))
         //{
         //    this.m_RoleHotKeyPageRecord[roleID] = this.m_NowSkillPage;
@@ -1551,17 +1553,17 @@ public class UIFightForm : UIFormBase
     //        this.m_MobSlotTable[mobKeyID].UpdateBuffIcon();
     //    }
 
-    //    private void SetSelectCommandTargetState(bool enabled)
-    //    {
-    //        if (!enabled)
-    //        {
-    //            this.m_emMenuState = UI_Fight.ENUM_MenuState.Null;
-    //        }
-    //        foreach (KeyValuePair<int, cUIFightRoleSlot> current in this.m_RoleSlotTable)
-    //        {
-    //            current.Value.SetHighlight(enabled);
-    //        }
-    //    }
+    private void SetSelectCommandTargetState(bool enabled)
+    {
+        if (!enabled)
+        {
+            //this.m_emMenuState = UI_Fight.ENUM_MenuState.Null;
+        }
+        //foreach (KeyValuePair<int, cUIFightRoleSlot> current in this.m_RoleSlotTable)
+        //{
+        //    current.Value.SetHighlight(enabled);
+        //}
+    }
 
     /// <summary>
     /// 更新选择角色
@@ -2108,24 +2110,23 @@ public class UIFightForm : UIFormBase
         //{
         //    return;
         //}
-        //int num = (int)component.parameter;
-        //S_Skill data = GameDataDB.SkillDB.GetData(num);
-        //if (data == null)
-        //{
-        //    return;
-        //}
-        //S_UseEffect data2 = GameDataDB.UseEffectDB.GetData(data.UseEffectID);
-        //if (data2 == null)
-        //{
-        //    return;
-        //}
+        S_Skill data = GameDataDB.SkillDB.GetData(num);
+        if (data == null)
+        {
+            return;
+        }
+        S_UseEffect data2 = GameDataDB.UseEffectDB.GetData(data.UseEffectID);
+        if (data2 == null)
+        {
+            return;
+        }
         //MusicSystem.Instance.PlaySound(3, 1);
         //判断技能的类型
-        //if (data2.emTarget == ENUM_UseTarget.Enemy)
-        //{
-        //    this.SetSelectCommandTargetState(false);
-        this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetMainTarget());
-        //}
+        if (data2.emTarget == ENUM_UseTarget.Enemy)
+        {
+            this.SetSelectCommandTargetState(false);
+            this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetMainTarget());
+        }
         //if (data2.emTarget == ENUM_UseTarget.Partner)
         //{
         //    if (data2.emRange == ENUM_UseRange.All)

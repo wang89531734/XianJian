@@ -7,20 +7,23 @@ public class FightCommand_Skill : FightCommand
 
 	public FightCommand_Skill(M_Character a, M_Character t, int id) : base(a, t, id)
 	{
-		//this.m_SkillData = GameDataDB.SkillDB.GetData(id);
-		//if (this.m_SkillData == null)
-		//{
-		//	Debug.Log("找不到Skill 資料: " + id);
-		//	return;
-		//}
-		//this.m_UseEffectID = this.m_SkillData.UseEffectID;
-		//this.m_UseEffect = GameDataDB.UseEffectDB.GetData(this.m_UseEffectID);
-		//if (this.m_UseEffect == null)
-		//{
-		//	Debug.Log("找不到UseEffect : " + this.m_UseEffectID);
-		//}
-	}
+        this.m_SkillData = GameDataDB.SkillDB.GetData(id);
+        //if (this.m_SkillData == null)
+        //{
+        //	Debug.Log("找不到Skill 資料: " + id);
+        //	return;
+        //}
+        //this.m_UseEffectID = this.m_SkillData.UseEffectID;
+        //this.m_UseEffect = GameDataDB.UseEffectDB.GetData(this.m_UseEffectID);
+        //if (this.m_UseEffect == null)
+        //{
+        //	Debug.Log("找不到UseEffect : " + this.m_UseEffectID);
+        //}
+    }
 
+    /// <summary>
+    /// 执行
+    /// </summary>
 	public override void Execute()
 	{
 		//if (this.m_UseEffect == null)

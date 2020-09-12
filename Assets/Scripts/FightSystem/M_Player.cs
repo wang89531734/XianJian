@@ -380,131 +380,131 @@ public class M_Player : M_Character
     //		return this.m_emFight == M_Character.Enum_FightStatus.Idle;
     //	}
 
-    //	private void Update()
-    //	{
-    //		base.ModelDropCheck();
-    //		if (base.IsDead())
-    //		{
-    //			this.CheckDeadAnimation();
-    //			return;
-    //		}
-    //		if (this.m_FightSceneMgr.m_IsFightFinish)
-    //		{
-    //			if (this.m_emFight != M_Character.Enum_FightStatus.Finish)
-    //			{
-    //				if (this.m_FightSceneMgr.m_bWin)
-    //				{
-    //					this.Win();
-    //				}
-    //				else
-    //				{
-    //					this.Lose();
-    //				}
-    //			}
-    //			if (this.m_Animator.speed != 1f)
-    //			{
-    //				base.SetAnimatorSpeed(1f);
-    //			}
-    //			return;
-    //		}
-    //		if (!this.m_bStartUpdate)
-    //		{
-    //			return;
-    //		}
-    //		if (this.m_CommandQueue.Count < 2)
-    //		{
-    //			if (base.IsLoseHeart())
-    //			{
-    //				this.Update_AI_LostHeart();
-    //			}
-    //			else if (this.m_bUseAI)
-    //			{
-    //				this.Update_AI();
-    //			}
-    //		}
-    //		if (this.m_bIsControlCharacter)
-    //		{
-    //			if (this.m_FightSceneMgr.m_bIsPauseMode)
-    //			{
-    //				if (this.m_CommandQueue.Count == 0 && this.m_ActionCDTimer <= 0f)
-    //				{
-    //					switch (this.m_emFight)
-    //					{
-    //					case M_Character.Enum_FightStatus.Stun:
-    //					case M_Character.Enum_FightStatus.Sleep:
-    //					case M_Character.Enum_FightStatus.Freeze:
-    //						this.m_FightSceneMgr.SetFightRolePause(false);
-    //						break;
-    //					default:
-    //						this.m_FightSceneMgr.SetFightRolePause(true);
-    //						break;
-    //					}
-    //				}
-    //				else
-    //				{
-    //					this.m_FightSceneMgr.SetFightRolePause(false);
-    //				}
-    //			}
-    //			else
-    //			{
-    //				this.m_FightSceneMgr.SetFightRolePause(false);
-    //			}
-    //		}
-    //		if (this.m_bStoryMode)
-    //		{
-    //			this.Update_StoryMode();
-    //		}
-    //		else
-    //		{
-    //			this.Update_Movement();
-    //		}
-    //		if (this.m_bPause)
-    //		{
-    //			return;
-    //		}
-    //		base.Update_Buff();
-    //		if (this.m_MagicItem_Passive != null)
-    //		{
-    //			if (this.m_MagicItem.ID == 714)
-    //			{
-    //				this.m_MagicItem_Passive.UpdateHP();
-    //			}
-    //			if (this.m_MagicItem.ID == 715)
-    //			{
-    //				this.m_MagicItem_Passive.UpdateMP();
-    //			}
-    //			this.m_MagicItem_Passive.UpdateReviveCD();
-    //		}
-    //		if (this.m_MagicItem_Active != null)
-    //		{
-    //			this.m_MagicItem_Active.UpdateTimer();
-    //		}
-    //		if (this.m_bIsControlCharacter)
-    //		{
-    //			if (this.m_FightSceneMgr.m_CatchMobCDTimer > 0f)
-    //			{
-    //				this.m_FightSceneMgr.m_CatchMobCDTimer -= Time.deltaTime;
-    //			}
-    //			if (this.m_FightSceneMgr.m_ChangeFormationCDTimer > 0f)
-    //			{
-    //				this.m_FightSceneMgr.m_ChangeFormationCDTimer -= Time.deltaTime;
-    //			}
-    //			if (!this.m_bStoryMode)
-    //			{
-    //				this.m_FightSceneMgr.m_FightTotalTime_RealFightCD += Time.deltaTime;
-    //			}
-    //		}
-    //		if (this.m_ActionCDTimer < 0f)
-    //		{
-    //			return;
-    //		}
-    //		this.m_ActionCDTimer -= Time.deltaTime;
-    //		if (this.m_ActionCDTimer < 0f)
-    //		{
-    //			UI_Fight.Instance.UpdateSkillBtnEnable();
-    //			UI_Fight.Instance.UpdateItemBtnEnableAndCount();
-    //		}
-    //	}
+    private void Update()
+    {
+        //base.ModelDropCheck();
+        //if (base.IsDead())
+        //{
+        //    this.CheckDeadAnimation();
+        //    return;
+        //}
+        //if (this.m_FightSceneMgr.m_IsFightFinish)
+        //{
+        //    if (this.m_emFight != M_Character.Enum_FightStatus.Finish)
+        //    {
+        //        if (this.m_FightSceneMgr.m_bWin)
+        //        {
+        //            this.Win();
+        //        }
+        //        else
+        //        {
+        //            this.Lose();
+        //        }
+        //    }
+        //    if (this.m_Animator.speed != 1f)
+        //    {
+        //        base.SetAnimatorSpeed(1f);
+        //    }
+        //    return;
+        //}
+        //if (!this.m_bStartUpdate)
+        //{
+        //    return;
+        //}
+        //if (this.m_CommandQueue.Count < 2)
+        //{
+        //    if (base.IsLoseHeart())
+        //    {
+        //        this.Update_AI_LostHeart();
+        //    }
+        //    else if (this.m_bUseAI)
+        //    {
+        //        this.Update_AI();
+        //    }
+        //}
+        //if (this.m_bIsControlCharacter)
+        //{
+        //    if (this.m_FightSceneMgr.m_bIsPauseMode)
+        //    {
+        //        if (this.m_CommandQueue.Count == 0 && this.m_ActionCDTimer <= 0f)
+        //        {
+        //            switch (this.m_emFight)
+        //            {
+        //                case M_Character.Enum_FightStatus.Stun:
+        //                case M_Character.Enum_FightStatus.Sleep:
+        //                case M_Character.Enum_FightStatus.Freeze:
+        //                    this.m_FightSceneMgr.SetFightRolePause(false);
+        //                    break;
+        //                default:
+        //                    this.m_FightSceneMgr.SetFightRolePause(true);
+        //                    break;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            this.m_FightSceneMgr.SetFightRolePause(false);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        this.m_FightSceneMgr.SetFightRolePause(false);
+        //    }
+        //}
+        //if (this.m_bStoryMode)
+        //{
+        //    this.Update_StoryMode();
+        //}
+        //else
+        //{
+        //    this.Update_Movement();
+        //}
+        //if (this.m_bPause)
+        //{
+        //    return;
+        //}
+        //base.Update_Buff();
+        //if (this.m_MagicItem_Passive != null)
+        //{
+        //    if (this.m_MagicItem.ID == 714)
+        //    {
+        //        this.m_MagicItem_Passive.UpdateHP();
+        //    }
+        //    if (this.m_MagicItem.ID == 715)
+        //    {
+        //        this.m_MagicItem_Passive.UpdateMP();
+        //    }
+        //    this.m_MagicItem_Passive.UpdateReviveCD();
+        //}
+        //if (this.m_MagicItem_Active != null)
+        //{
+        //    this.m_MagicItem_Active.UpdateTimer();
+        //}
+        //if (this.m_bIsControlCharacter)
+        //{
+        //    if (this.m_FightSceneMgr.m_CatchMobCDTimer > 0f)
+        //    {
+        //        this.m_FightSceneMgr.m_CatchMobCDTimer -= Time.deltaTime;
+        //    }
+        //    if (this.m_FightSceneMgr.m_ChangeFormationCDTimer > 0f)
+        //    {
+        //        this.m_FightSceneMgr.m_ChangeFormationCDTimer -= Time.deltaTime;
+        //    }
+        //    if (!this.m_bStoryMode)
+        //    {
+        //        this.m_FightSceneMgr.m_FightTotalTime_RealFightCD += Time.deltaTime;
+        //    }
+        //}
+        //if (this.m_ActionCDTimer < 0f)
+        //{
+        //    return;
+        //}
+        //this.m_ActionCDTimer -= Time.deltaTime;
+        //if (this.m_ActionCDTimer < 0f)
+        //{
+        //    UI_Fight.Instance.UpdateSkillBtnEnable();
+        //    UI_Fight.Instance.UpdateItemBtnEnableAndCount();
+        //}
+    }
 
     //	private void Update_AI_LostHeart()
     //	{

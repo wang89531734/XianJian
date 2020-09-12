@@ -597,7 +597,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5662764267571127337}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -765,7 +765,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 2041
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -971,7 +971,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2011
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1354,7 +1354,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
+          m_IntArgument: 2411
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2256,8 +2256,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 56516539704140847}
-  - {fileID: 5010252511394051711}
   - {fileID: 6193758184148263472}
+  - {fileID: 5010252511394051711}
   - {fileID: 3122994454836871224}
   - {fileID: 2962690940594828096}
   - {fileID: 7263829218416733915}
@@ -2384,7 +2384,7 @@ RectTransform:
   m_Children:
   - {fileID: 7998290181130839766}
   m_Father: {fileID: 5662764267571127337}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2699,7 +2699,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 2031
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

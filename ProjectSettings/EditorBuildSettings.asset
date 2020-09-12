@@ -6,32 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Scene_Launch.unity
-    guid: 85bd2eaa9f5bb054fb4b2b6fd98aa544
+    path: Assets/RPGGame/Demo/Scenes/LoginSceneSQLite.unity
+    guid: 7fa5e2dc86638584cbfda8dc90f4a2c5
   - enabled: 1
-    path: Assets/Download/Scenes/GameScene_LogOn.unity
-    guid: bf62cddcab3449f4193e128c5d5f7e0e
+    path: Assets/RPGGame/Demo/Scenes/LoginScene.unity
+    guid: 5ba16c903e63f814aaca0ea52d109985
   - enabled: 1
-    path: Assets/Download/Scenes/GameScene_ErHai.unity
-    guid: dc3afa76bdb2eb143929a19bb4a9ab11
+    path: Assets/RPGGame/Demo/Scenes/ManageScene.unity
+    guid: 5363cade84d2d5f46bbb795f1790c3bd
   - enabled: 1
-    path: Assets/Download/Scenes/GameScene_HuPaoCun.unity
-    guid: 452a065eac07ee346b40f641122a33c3
-  - enabled: 1
-    path: Assets/Download/Scenes/GameScene_JingHu.unity
-    guid: 9ffb33526c1a1c7479c1fde3c0b105af
-  - enabled: 1
-    path: Assets/Download/Scenes/GameScene_LuoYang.unity
-    guid: 7f80e0516b39a9c489b385a0ae421113
-  - enabled: 1
-    path: Assets/Download/Scenes/GameScene_ShiLin.unity
-    guid: 9095f6924ef9e1c4489faa6f9a919131
-  - enabled: 1
-    path: Assets/Download/Scenes/GameScene_WuYi.unity
-    guid: c9d708d5c9c6a27499b1f191eebb5590
-  - enabled: 1
-    path: Assets/Download/Scenes/GameScene_YuXi.unity
-    guid: ca9ed2e1fcf7715489776176bb84e452
-  m_configObjects:
-    com.unity.input.settings: {fileID: 11400000, guid: 9b0dbe24cdc58cf48b7e89d871b784ed,
-      type: 2}
+    path: Assets/RPGGame/Demo/Scenes/BattleScene.unity
+    guid: 967cb20e45e726d48b41aa35e120c407
