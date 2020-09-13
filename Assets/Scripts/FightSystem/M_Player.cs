@@ -6,8 +6,14 @@ using YouYou;
 
 public class M_Player : M_Character
 {
+    /// <summary>
+    /// 角色ID
+    /// </summary>
     public int m_RoleID;
 
+    /// <summary>
+    /// 技能冷却列表
+    /// </summary>
     public Dictionary<int, float> m_SkillCDList = new Dictionary<int, float>();
 
     public List<int> m_PassiveSkillTrigger = new List<int>();
@@ -129,8 +135,8 @@ public class M_Player : M_Character
         this.m_emFight = M_Character.Enum_FightStatus.Idle;
         //this.m_CharacterController.enabled = true;
         //this.m_EnableCharacterContoller = true;
-        //this.m_RoleID = roleID;
-        ////this.m_SkillCDList.Clear();
+        this.m_RoleID = roleID;
+        this.m_SkillCDList.Clear();
         //for (int i = 0; i < 5; i++)
         //{
         //    //List<FightSkillHotKeyInfo> fightSkillHotkeyList = Swd6Application.instance.m_SkillSystem.GetFightSkillHotkeyList(this.m_RoleID, i);
@@ -174,12 +180,12 @@ public class M_Player : M_Character
         ////this.m_AIDebuffSkills_1.Reverse();
         ////this.m_AIDebuffSkills_2.Sort();
         ////this.m_AIDebuffSkills_2.Reverse();
-        //this.m_RoleDataEx = GameEntry.Instance.m_GameDataSystem.GetRoleData(this.m_RoleID);
-        //if (this.m_RoleDataEx == null)
-        //{
-        //    Debug.LogWarning("m_RoleDataEx is Null m_RoleID = " + this.m_RoleID);
-        //    return;
-        //}
+        this.m_RoleDataEx = GameEntry.Instance.m_GameDataSystem.GetRoleData(this.m_RoleID);
+        if (this.m_RoleDataEx == null)
+        {
+            Debug.LogWarning("m_RoleDataEx is Null m_RoleID = " + this.m_RoleID);
+            return;
+        }
         ////ItemData equipItemData = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Weapon);
         ////this.m_emWeaponElemntType = this.m_RoleDataEx.BaseRoleData.emWeaponElemntType;
         ////this.m_MagicItem = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Talisman);

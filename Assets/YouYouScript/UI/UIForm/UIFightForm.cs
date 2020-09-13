@@ -1155,26 +1155,26 @@ public class UIFightForm : UIFormBase
     /// </summary>
     private void CreateMobSlots()
     {
-        this.m_MobSlots_Normal.Clear();
-        this.m_MobSlots_Boss.Clear();
-        for (int i = 0; i < 6; i++)
-        {
-            GameObject gameObject = UnityEngine.Object.Instantiate(TempMobSlot) as GameObject;
-            gameObject.SetParent(MobSlot.transform);
-            //GameObject gameObject2 = UnityEngine.Object.Instantiate(m_TempBossSlot) as GameObject;
-            // gameObject.SetParent(m_MobSlot.transform);
-            UIFightMobSlot m_UIFightMobSlot=gameObject.GetComponent<UIFightMobSlot>();
-            //cUIFightMobSlot cUIFightMobSlot2 = new cUIFightMobSlot(gameObject2, true);
-            this.m_MobSlots_Normal.Add(m_UIFightMobSlot);
-            //this.m_MobSlots_Boss.Add(cUIFightMobSlot2);
-            float y = this.TempMobSlot.transform.localPosition.y + -95f * (float)i;
-            gameObject.transform.localPosition = new Vector3(this.TempMobSlot.transform.localPosition.x, y, this.TempMobSlot.transform.localPosition.z);
-            //gameObject2.transform.localPosition = new Vector3(this.m_TempBossSlot.transform.localPosition.x, y, this.m_TempBossSlot.transform.localPosition.z);
-            m_UIFightMobSlot.SetSlotIndex(i);
-            //m_UIFightMobSlot.SetEnable(false);
-            //cUIFightMobSlot2.SetSlotIndex(i);
-            //cUIFightMobSlot2.SetEnable(false);
-        }
+        //this.m_MobSlots_Normal.Clear();
+        //this.m_MobSlots_Boss.Clear();
+        //for (int i = 0; i < 6; i++)
+        //{
+        //    //GameObject gameObject = UnityEngine.Object.Instantiate(TempMobSlot) as GameObject;
+        //    //gameObject.SetParent(MobSlot.transform);
+        //    ////GameObject gameObject2 = UnityEngine.Object.Instantiate(m_TempBossSlot) as GameObject;
+        //    //// gameObject.SetParent(m_MobSlot.transform);
+        //    //UIFightMobSlot m_UIFightMobSlot=gameObject.GetComponent<UIFightMobSlot>();
+        //    ////cUIFightMobSlot cUIFightMobSlot2 = new cUIFightMobSlot(gameObject2, true);
+        //    //this.m_MobSlots_Normal.Add(m_UIFightMobSlot);
+        //    ////this.m_MobSlots_Boss.Add(cUIFightMobSlot2);
+        //    //float y = this.TempMobSlot.transform.localPosition.y + -95f * (float)i;
+        //    //gameObject.transform.localPosition = new Vector3(this.TempMobSlot.transform.localPosition.x, y, this.TempMobSlot.transform.localPosition.z);
+        //    ////gameObject2.transform.localPosition = new Vector3(this.m_TempBossSlot.transform.localPosition.x, y, this.m_TempBossSlot.transform.localPosition.z);
+        //    //m_UIFightMobSlot.SetSlotIndex(i);
+        //    //m_UIFightMobSlot.SetEnable(false);
+        //    //cUIFightMobSlot2.SetSlotIndex(i);
+        //    //cUIFightMobSlot2.SetEnable(false);
+        //}
 
         //if (this.m_TempMobSlot != null)
         //{
@@ -2093,6 +2093,7 @@ public class UIFightForm : UIFormBase
 
     public void OnSkillBtn_Click(int num)
     {
+        Debug.Log("技能按键"+num);
         //if (Input.GetMouseButtonUp(1))
         //{
         //    return;
@@ -2106,23 +2107,26 @@ public class UIFightForm : UIFormBase
         //{
         //    return;
         //}
-        S_Skill data = GameDataDB.SkillDB.GetData(num);
-        if (data == null)
-        {
-            return;
-        }
-        S_UseEffect data2 = GameDataDB.UseEffectDB.GetData(data.UseEffectID);
-        if (data2 == null)
-        {
-            return;
-        }
-        //MusicSystem.Instance.PlaySound(3, 1);
-        //判断技能的类型
-        if (data2.emTarget == ENUM_UseTarget.Enemy)
-        {
-            this.SetSelectCommandTargetState(false);
-            this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetMainTarget());
-        }
+        List<int> SkillList = GameEntry.Instance.m_SkillSystem.GetSkillList(m_FightSceneMgr.m_ControlledRoleID);
+        int num2=SkillList[num];
+        Debug.Log("技能编号" + num2);
+        //S_Skill data = GameDataDB.SkillDB.GetData(num2);
+        //if (data == null)
+        //{
+        //    return;
+        //}
+        //S_UseEffect data2 = GameDataDB.UseEffectDB.GetData(data.UseEffectID);
+        //if (data2 == null)
+        //{
+        //    return;
+        //}
+        ////MusicSystem.Instance.PlaySound(3, 1);
+        ////判断技能的类型
+        //if (data2.emTarget == ENUM_UseTarget.Enemy)
+        //{
+        //    this.SetSelectCommandTargetState(false);
+        //    this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetMainTarget());
+        //}
         //if (data2.emTarget == ENUM_UseTarget.Partner)
         //{
         //    if (data2.emRange == ENUM_UseRange.All)

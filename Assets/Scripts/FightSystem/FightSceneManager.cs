@@ -15,6 +15,9 @@ public class FightSceneManager
 
     //public M_CatchMob m_CatchMobPet;
 
+    /// <summary>
+    /// 玩家列表
+    /// </summary>
     public Dictionary<int, M_Player> m_PlayerList = new Dictionary<int, M_Player>();
 
     //public Dictionary<int, M_Guard> m_GuardList = new Dictionary<int, M_Guard>();
@@ -385,27 +388,11 @@ public class FightSceneManager
                         //         //}
                         //     }
                         // }
-                        //TransformTool.SetLayerRecursively(m_Player.m_ModelTransform, 18);
+                        //TransformTool.SetLayerRecursively(m_Player.m_ModelTransform, 18);//设置层级
                     }
                 }
             }
         }
-        //text = "Player5";//后面是创建小猪的 不用管
-        //gameObject = ResourcesManager.Instance.GetCharacterModel_Fight(text);
-        //animatorController_Fight = ResourcesManager.Instance.GetAnimatorController_Fight(text + "_Fight");
-        //if (animatorController_Fight != null)
-        //{
-        //    Animator component2 = gameObject.GetComponent<Animator>();
-        //    if (component2 != null)
-        //    {
-        //        component2.runtimeAnimatorController = animatorController_Fight;
-        //    }
-        //}
-        //this.m_CatchMobPet = gameObject.AddComponent<M_CatchMob>();
-        //this.m_CatchMobPet.m_FightSceneMgr = this;
-        //this.m_CatchMobPet.Initialize();
-        //TransformTool.SetLayerRecursively(this.m_CatchMobPet.m_ModelTransform, 18);
-        //this.m_CatchMobPet.m_RoleModel.SetActive(false);
     }
 
     private void CreateGuards()
@@ -518,12 +505,6 @@ public class FightSceneManager
     /// </summary>
     private void CreateMobs()
     {
-        if (this.m_BattleGroup == null)
-        {
-            UnityEngine.Debug.LogWarning("無佈怪資料");
-            return;
-        }
-
         int num = -1;
         for (int i = 0; i < this.m_BattleGroup.BattleMob.Count; i++)
         {
