@@ -507,9 +507,9 @@ public class M_Character : MonoBehaviour
     //		return true;
     //	}
 
-    public virtual void UpdateFightRoleData()
-    {
-    }
+    //	public virtual void UpdateFightRoleData()
+    //	{
+    //	}
 
     //	public List<Buff_Base> GetShowBuffs()
     //	{
@@ -1034,9 +1034,9 @@ public class M_Character : MonoBehaviour
     //		return !this.m_Animator.IsInTransition(0) && this.m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f;
     //	}
 
-    public virtual void Dead()
-    {
-    }
+    //	public virtual void Dead()
+    //	{
+    //	}
 
     //	public virtual void Revive()
     //	{

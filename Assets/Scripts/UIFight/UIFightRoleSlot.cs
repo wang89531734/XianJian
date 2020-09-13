@@ -3,66 +3,72 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.UI;
 using YouYou;
 
 public class UIFightRoleSlot : UIFormBase
 {
-    //public UIWidget Container;
+    //	public class SlotElement
+    //	{
+    //		public UIWidget Container;
 
-    public GameObject BaseElement;
+    //		public GameObject BaseElement;
 
-    // public UISprite BaseSprite;
+    //		public UISprite BaseSprite;
 
-    public GameObject CDCont;
+    //		public GameObject CDCont;
 
-    //public UIButton SelectButton;
+    //		public UIButton SelectButton;
 
-    public Image PCTexture;
+    //		public UITexture PCTexture;
 
-    //public UITexture GwTexture;
+    //		public UITexture GwTexture;
 
-    //public UILabel HotKeyLabel;
+    //		public UILabel HotKeyLabel;
 
-    //public UIProgressBar HPBar;
+    //		public UIProgressBar HPBar;
 
-    //public UIProgressBar MPBar;
+    //		public UIProgressBar MPBar;
 
-    //public UILabel HPLabel;
+    //		public UILabel HPLabel;
 
-    //public UILabel MPLabel;
+    //		public UILabel MPLabel;
 
-    public Toggle AICheckBox;
+    //		public UIToggle AICheckBox;
 
-    //public UISprite HighLightSprite;
+    //		public UISprite HighLightSprite;
 
-    //public List<UISprite> PowerSpriteList = new List<UISprite>();
+    //		public List<UISprite> PowerSpriteList = new List<UISprite>();
 
-    //public List<UISprite> BuffIconList = new List<UISprite>();
+    //		public List<UISprite> BuffIconList = new List<UISprite>();
 
-    //public UISprite CureSprite_HP;
+    //		public UISprite CureSprite_HP;
 
-    //public UISpriteAnimation CureSprite_HP_Animation;
+    //		public UISpriteAnimation CureSprite_HP_Animation;
 
-    //public UISprite CureSprite_MP;
+    //		public UISprite CureSprite_MP;
 
-    //public UISpriteAnimation CureSprite_MP_Animation;
+    //		public UISpriteAnimation CureSprite_MP_Animation;
+
+    //		public UIToggledComponents AICheckBoxComponents;
+    //	}
+
+    //	public cUIFightRoleSlot.SlotElement m_UIElement = new cUIFightRoleSlot.SlotElement();
 
     private M_Player m_PlayerInfo;
 
     private int m_iSlotIdx = -1;
 
-    private bool m_bHighLight;
+    //	private bool m_bHighLight;
 
-    private int m_NowHP;
+    //	private int m_NowHP;
 
-    private int m_NowMP;
+    //	private int m_NowMP;
 
-    private float m_CureAnimationTime;
+    //	private float m_CureAnimationTime;
 
-    private float m_CureAnimationTimer_HP;
+    //	private float m_CureAnimationTimer_HP;
 
-    private float m_CureAnimationTimer_MP;
+    //	private float m_CureAnimationTimer_MP;
 
     public UIFightRoleSlot(GameObject slotcontainer)
     {
@@ -179,8 +185,8 @@ public class UIFightRoleSlot : UIFormBase
         this.m_PlayerInfo = playerInfo;
         string text = "icon_spc_h_0";
         text += playerInfo.m_RoleID.ToString();
-        //PCTexture.sprite = ;
-        this.UpdateUseAICheckbox();
+        //this.m_UIElement.PCTexture.mainTexture = ResourceManager.Instance.GetImage(text);
+        //this.UpdateUseAICheckbox();
         //this.SetHP(playerInfo.m_FightRoleData.HP, playerInfo.m_FightRoleData.MaxHP);
         //this.SetMP(playerInfo.m_FightRoleData.MP, playerInfo.m_FightRoleData.MaxMP);
         //this.UpdateBuffIcon(this.m_PlayerInfo.GetShowBuffs());
@@ -351,18 +357,18 @@ public class UIFightRoleSlot : UIFormBase
     //		this.SetMP(nowMP, maxMp);
     //	}
 
-    public void UpdateUseAICheckbox()
-    {
-        AICheckBox.isOn = this.m_PlayerInfo.m_bUseAI;
-        //for (int i = 0; i < this.m_UIElement.AICheckBoxComponents.activate.Count; i++)
-        //{
-        //    this.m_UIElement.AICheckBoxComponents.activate[i].enabled = this.m_PlayerInfo.m_bUseAI;
-        //}
-        //for (int j = 0; j < this.m_UIElement.AICheckBoxComponents.deactivate.Count; j++)
-        //{
-        //    this.m_UIElement.AICheckBoxComponents.deactivate[j].enabled = !this.m_PlayerInfo.m_bUseAI;
-        //}
-    }
+    //	public void UpdateUseAICheckbox()
+    //	{
+    //		this.m_UIElement.AICheckBox.value = this.m_PlayerInfo.m_bUseAI;
+    //		for (int i = 0; i < this.m_UIElement.AICheckBoxComponents.activate.Count; i++)
+    //		{
+    //			this.m_UIElement.AICheckBoxComponents.activate[i].enabled = this.m_PlayerInfo.m_bUseAI;
+    //		}
+    //		for (int j = 0; j < this.m_UIElement.AICheckBoxComponents.deactivate.Count; j++)
+    //		{
+    //			this.m_UIElement.AICheckBoxComponents.deactivate[j].enabled = !this.m_PlayerInfo.m_bUseAI;
+    //		}
+    //	}
 
     //	public void SetEnable(bool bEnable)
     //	{

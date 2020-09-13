@@ -1,8 +1,5 @@
 using System;
 
-/// <summary>
-/// ’Û–Õµ•Œª
-/// </summary>
 public class FormationUnit
 {
 	public int RoleID;

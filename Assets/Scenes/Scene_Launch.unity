@@ -322,7 +322,6 @@ MonoBehaviour:
   m_InitializeOK: 0
   m_MainCamera: {fileID: 1893041469}
   timeScale: 1
-  GamePause: 0
 --- !u!4 &1531371453
 Transform:
   m_ObjectHideFlags: 0
