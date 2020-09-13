@@ -78,6 +78,9 @@ public class FightSceneManager
 
     public GameObject m_FightPosition;
 
+    /// <summary>
+    /// 战斗摄像机
+    /// </summary>
     public GameObject m_FightCamera;
 
     public GameObject m_NowTargetEffect;
@@ -92,6 +95,9 @@ public class FightSceneManager
 
     public int m_BattleGroupGUID;
 
+    /// <summary>
+    /// 战斗组实体
+    /// </summary>
     public S_BattleGroup m_BattleGroup;
 
     public bool m_bParcticeFight;
@@ -210,7 +216,7 @@ public class FightSceneManager
         this.InitFightPosition();
         this.InitFightCamera();
         this.CreateCharacters();
-        this.InitFightSetting();
+        //this.InitFightSetting();
         ////UI_GameGMFightStatistics.Instance.InitRole(this.m_PlayerList);//统计数据
         //this.PlayAppearCameraPath();
         //this.InitFightTalk();
@@ -223,11 +229,6 @@ public class FightSceneManager
     {
         this.m_BattleGroupGUID = FightSystem.Instance.m_BattleGroupID;
         this.m_BattleGroup = GameDataDB.BattleGroupDB.GetData(this.m_BattleGroupGUID);
-        if (this.m_BattleGroup == null)
-        {
-            UnityEngine.Debug.LogWarning("無法取得佈怪資訊 m_BattleGroupGUID:" + this.m_BattleGroupGUID);
-            return;
-        }
     }
 
     //	private void InitFightMusic()
@@ -277,11 +278,7 @@ public class FightSceneManager
             this.m_FightPosition.transform.position = gameObject.transform.position + new Vector3(0f, 0.05f, 0f);
             this.m_FightPosition.transform.rotation = gameObject.transform.rotation;
             this.m_BattlePoint = gameObject.transform;
-        }
-        else
-        {
-            UnityEngine.Debug.Log("抓不到戰場中心點 m_BattleGroup.BattleCenterPoint:" + this.m_BattleGroup.BattleCenterPoint);
-        }
+        }      
 
         for (int i = 1; i <= 8; i++)
         {
@@ -294,12 +291,11 @@ public class FightSceneManager
         }
     }
 
+    /// <summary>
+    /// 初始化战斗摄像机
+    /// </summary>
     private void InitFightCamera()
     {
-        if (this.m_BattleGroup == null)
-        {
-            return;
-        }
         M_PlayerMouseOrbit PlayerMouseOrbit = GameEntry.Instance.m_MainCamera.GetComponent<M_PlayerMouseOrbit>();
         if (PlayerMouseOrbit != null)
         {

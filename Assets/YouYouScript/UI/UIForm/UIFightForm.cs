@@ -872,10 +872,10 @@ public class UIFightForm : UIFormBase
     {
         base.OnInit(userData);
         //this.m_CatchResultTw = this.m_CatchResultTexture.GetComponent<TweenAlpha>();//捕捉结果
-        this.CreateMobSlots();
-        this.CreateRoleSlots();//以后改成代码生成
-        //this.CreateGuardSlot();
-        this.InitSkillBtn(this.m_SkillBtnList);
+        //this.CreateMobSlots();
+        //this.CreateRoleSlots();//以后改成代码生成
+        ////this.CreateGuardSlot();
+        //this.InitSkillBtn(this.m_SkillBtnList);
         //this.InitItemBtn(this.m_ItemBtnList);
         //this.InitFormationBtnCallback();
         //UIEventListener uieventListener = UIEventListener.Get(this.m_MagicItemBtn.gameObject);
@@ -1884,7 +1884,7 @@ public class UIFightForm : UIFormBase
         //{
         //    //this.SetUnitRoleSlot(slotIdx, this.m_FightSceneMgr.GetRole(roleID));
         //}
-        this.SetTargetRoleSlot(newControlledRole);
+        //this.SetTargetRoleSlot(newControlledRole);
         //this.m_ControlledRoleSlot.PlayTween();
         //this.m_RoleSlots[slotIdx].PlayTween();
     }

@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 89fceff4df00be046b616d04147558de, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -322,6 +322,7 @@ MonoBehaviour:
   m_InitializeOK: 0
   m_MainCamera: {fileID: 1893041469}
   timeScale: 1
+  GamePause: 0
 --- !u!4 &1531371453
 Transform:
   m_ObjectHideFlags: 0
