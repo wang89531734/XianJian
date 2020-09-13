@@ -219,7 +219,7 @@ public class FightSceneManager
         this.InitFightPosition();
         this.InitFightCamera();
         this.CreateCharacters();
-        //this.InitFightSetting();
+        this.InitFightSetting();
         ////UI_GameGMFightStatistics.Instance.InitRole(this.m_PlayerList);//统计数据
         //this.PlayAppearCameraPath();
         //this.InitFightTalk();
@@ -624,7 +624,7 @@ public class FightSceneManager
         string prefName = data.MobData.PrefName;
         GameObject characterModel_Fight = null;
 
-        GameEntry.Pool.GameObjectSpawn(10001, (Transform trans2) =>
+        GameEntry.Pool.GameObjectSpawn(1, (Transform trans2) =>
         {
             characterModel_Fight = trans2.gameObject;
         });
@@ -925,14 +925,14 @@ public class FightSceneManager
     //		return -1f;
     //	}
 
-    //	public List<FightSkillHotKeyInfo> GetControlledPlayerSkillList(int page)
-    //	{
-    //		if (!this.m_PlayerList.ContainsKey(this.m_ControlledRoleID))
-    //		{
-    //			return null;
-    //		}
-    //		return Swd6Application.instance.m_SkillSystem.GetFightSkillHotkeyList(this.m_PlayerList[this.m_ControlledRoleID].m_RoleID, page);
-    //	}
+    public List<FightSkillHotKeyInfo> GetControlledPlayerSkillList(int page)
+    {
+        if (!this.m_PlayerList.ContainsKey(this.m_ControlledRoleID))
+        {
+            return null;
+        }
+        return GameEntry.Instance.m_SkillSystem.GetFightSkillHotkeyList(this.m_PlayerList[this.m_ControlledRoleID].m_RoleID, page);
+    }
 
     //	public int[] GetControlledPlayerCommandQueue()
     //	{

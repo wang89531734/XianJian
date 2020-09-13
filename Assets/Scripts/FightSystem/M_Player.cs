@@ -388,13 +388,15 @@ public class M_Player : M_Character
 
     private void Update()
     {
-        //base.ModelDropCheck();
-        //if (base.IsDead())
+        base.ModelDropCheck();
+
+        //if (base.IsDead())//角色死亡
         //{
         //    this.CheckDeadAnimation();
         //    return;
         //}
-        //if (this.m_FightSceneMgr.m_IsFightFinish)
+
+        //if (this.m_FightSceneMgr.m_IsFightFinish)//战斗完成
         //{
         //    if (this.m_emFight != M_Character.Enum_FightStatus.Finish)
         //    {
@@ -413,21 +415,24 @@ public class M_Player : M_Character
         //    }
         //    return;
         //}
+
         //if (!this.m_bStartUpdate)
         //{
         //    return;
         //}
-        //if (this.m_CommandQueue.Count < 2)
-        //{
-        //    if (base.IsLoseHeart())
-        //    {
-        //        this.Update_AI_LostHeart();
-        //    }
-        //    else if (this.m_bUseAI)
-        //    {
-        //        this.Update_AI();
-        //    }
-        //}
+
+        if (this.m_CommandQueue.Count < 2)
+        {
+            //if (base.IsLoseHeart())
+            //{
+            //    this.Update_AI_LostHeart();
+            //}
+            //else if (this.m_bUseAI)
+            //{
+            //    this.Update_AI();
+            //}
+        }
+
         //if (this.m_bIsControlCharacter)
         //{
         //    if (this.m_FightSceneMgr.m_bIsPauseMode)
@@ -456,19 +461,23 @@ public class M_Player : M_Character
         //        this.m_FightSceneMgr.SetFightRolePause(false);
         //    }
         //}
+
         //if (this.m_bStoryMode)
         //{
         //    this.Update_StoryMode();
         //}
         //else
         //{
-        //    this.Update_Movement();
+        this.Update_Movement();
         //}
+
         //if (this.m_bPause)
         //{
         //    return;
         //}
+
         //base.Update_Buff();
+
         //if (this.m_MagicItem_Passive != null)
         //{
         //    if (this.m_MagicItem.ID == 714)
@@ -481,10 +490,12 @@ public class M_Player : M_Character
         //    }
         //    this.m_MagicItem_Passive.UpdateReviveCD();
         //}
+
         //if (this.m_MagicItem_Active != null)
         //{
         //    this.m_MagicItem_Active.UpdateTimer();
         //}
+
         //if (this.m_bIsControlCharacter)
         //{
         //    if (this.m_FightSceneMgr.m_CatchMobCDTimer > 0f)
@@ -500,11 +511,14 @@ public class M_Player : M_Character
         //        this.m_FightSceneMgr.m_FightTotalTime_RealFightCD += Time.deltaTime;
         //    }
         //}
+
         //if (this.m_ActionCDTimer < 0f)
         //{
         //    return;
         //}
+
         //this.m_ActionCDTimer -= Time.deltaTime;
+
         //if (this.m_ActionCDTimer < 0f)
         //{
         //    UI_Fight.Instance.UpdateSkillBtnEnable();
@@ -1080,123 +1094,125 @@ public class M_Player : M_Character
     //		return this.m_AddActionCD;
     //	}
 
-    //	public override void Update_Idle()
-    //	{
-    //		this.CheckTarget();
-    //		if (this.m_CommandQueue.Count > 0)
-    //		{
-    //			FightCommand fightCommand = this.m_CommandQueue[0];
-    //			if (fightCommand is FightCommand_NoActDataSkill)
-    //			{
-    //				fightCommand.Execute();
-    //				this.m_CommandQueue.Remove(fightCommand);
-    //				return;
-    //			}
-    //			this.m_MoveTimer = 0f;
-    //			this.CheckTarget();
-    //			this.m_RunToTargetTimer = 0f;
-    //			this.m_emFight = M_Character.Enum_FightStatus.MoveToAttack;
-    //			return;
-    //		}
-    //		else
-    //		{
-    //			AnimatorStateInfo currentAnimatorStateInfo = this.m_Animator.GetCurrentAnimatorStateInfo(0);
-    //			if (currentAnimatorStateInfo.nameHash == M_Character.State_Hit || currentAnimatorStateInfo.nameHash == M_Character.State_Hit2)
-    //			{
-    //				return;
-    //			}
-    //			if (this.m_Animator.IsInTransition(0))
-    //			{
-    //				return;
-    //			}
-    //			int num;
-    //			if (this.m_MoveBackTimer > 0f)
-    //			{
-    //				this.m_MoveBackTimer -= Time.deltaTime;
-    //				if (this.m_MoveBackTimer <= 0f)
-    //				{
-    //					this.m_MoveBackTimer = 0f;
-    //					num = UnityEngine.Random.Range(1, 101);
-    //					if (num <= 60)
-    //					{
-    //						this.CrossFadeAnimation(M_Character.State_BackJumpSmall, 0.1f);
-    //						this.m_emFight = M_Character.Enum_FightStatus.JumpBack;
-    //					}
-    //					else
-    //					{
-    //						this.CrossFadeAnimation(this.State_Standby, 0.1f);
-    //					}
-    //				}
-    //				return;
-    //			}
-    //			if (this.m_MoveTimer > 0f)
-    //			{
-    //				this.m_MoveTimer -= Time.deltaTime;
-    //				if (this.m_MoveTimer <= 0f)
-    //				{
-    //					this.m_MoveTimer = 0f;
-    //				}
-    //				return;
-    //			}
-    //			if (this.m_IdleTimer > 0f)
-    //			{
-    //				this.m_IdleTimer -= Time.deltaTime;
-    //			}
-    //			if (this.m_IdleTimer > 0f)
-    //			{
-    //				if (currentAnimatorStateInfo.nameHash != this.State_Standby)
-    //				{
-    //					this.CrossFadeAnimation(this.State_Standby, 0.5f);
-    //				}
-    //				return;
-    //			}
-    //			num = UnityEngine.Random.Range(1, 101);
-    //			if (num % 2 == 0)
-    //			{
-    //				if (this.m_bPause)
-    //				{
-    //					this.m_IdleTimer = UnityEngine.Random.Range(15f, 20f);
-    //				}
-    //				else
-    //				{
-    //					this.m_IdleTimer = UnityEngine.Random.Range(10f, 15f);
-    //				}
-    //				if (currentAnimatorStateInfo.nameHash != this.State_Standby && !this.m_Animator.IsInTransition(0))
-    //				{
-    //					this.CrossFadeAnimation(this.State_Standby, 0.5f);
-    //				}
-    //				return;
-    //			}
-    //			if (this.m_FaceToTarget == null || this.m_FaceToTarget == this)
-    //			{
-    //				return;
-    //			}
-    //			if (this.m_FaceToTarget.IsDead() || !this.m_FaceToTarget.m_RoleModel.activeSelf)
-    //			{
-    //				base.SetFaceToTarget(this.m_FightSceneMgr.GetMainTarget());
-    //			}
-    //			this.UpdateDirection_Directly(this.m_FaceToTarget.GetModelPosition());
-    //			this.m_MoveTimer = 2.5f;
-    //			int towardPosDirection = base.GetTowardPosDirection(this.m_InitPos);
-    //			if (towardPosDirection == 0)
-    //			{
-    //				this.CrossFadeAnimation(M_Player.State_Walk_Front_Start, 0.5f);
-    //			}
-    //			else if (towardPosDirection == 1)
-    //			{
-    //				this.CrossFadeAnimation(M_Player.State_Walk_Back_Start, 0.5f);
-    //			}
-    //			else if (towardPosDirection == 2)
-    //			{
-    //				this.CrossFadeAnimation(M_Player.State_Walk_Left_Start, 0.5f);
-    //			}
-    //			else
-    //			{
-    //				this.CrossFadeAnimation(M_Player.State_Walk_Right_Start, 0.5f);
-    //			}
-    //			return;
-    //		}
-    //	}
+    public override void Update_Idle()
+    {
+        //this.CheckTarget();
+        if (this.m_CommandQueue.Count > 0)
+        {
+            Debug.Log("执行m_CommandQueue.Count > 0");
+            //FightCommand fightCommand = this.m_CommandQueue[0];
+            //if (fightCommand is FightCommand_NoActDataSkill)
+            //{
+            //    fightCommand.Execute();
+            //    this.m_CommandQueue.Remove(fightCommand);
+            //    return;
+            //}
+            //this.m_MoveTimer = 0f;
+            //this.CheckTarget();
+            //this.m_RunToTargetTimer = 0f;
+            //this.m_emFight = M_Character.Enum_FightStatus.MoveToAttack;
+            //return;
+        }
+        else
+        {
+            Debug.Log("执行");
+            //AnimatorStateInfo currentAnimatorStateInfo = this.m_Animator.GetCurrentAnimatorStateInfo(0);
+            //if (currentAnimatorStateInfo.nameHash == M_Character.State_Hit || currentAnimatorStateInfo.nameHash == M_Character.State_Hit2)
+            //{
+            //    return;
+            //}
+            //if (this.m_Animator.IsInTransition(0))
+            //{
+            //    return;
+            //}
+            //int num;
+            //if (this.m_MoveBackTimer > 0f)
+            //{
+            //    this.m_MoveBackTimer -= Time.deltaTime;
+            //    if (this.m_MoveBackTimer <= 0f)
+            //    {
+            //        this.m_MoveBackTimer = 0f;
+            //        num = UnityEngine.Random.Range(1, 101);
+            //        if (num <= 60)
+            //        {
+            //            this.CrossFadeAnimation(M_Character.State_BackJumpSmall, 0.1f);
+            //            this.m_emFight = M_Character.Enum_FightStatus.JumpBack;
+            //        }
+            //        else
+            //        {
+            //            this.CrossFadeAnimation(this.State_Standby, 0.1f);
+            //        }
+            //    }
+            //    return;
+            //}
+            //if (this.m_MoveTimer > 0f)
+            //{
+            //    this.m_MoveTimer -= Time.deltaTime;
+            //    if (this.m_MoveTimer <= 0f)
+            //    {
+            //        this.m_MoveTimer = 0f;
+            //    }
+            //    return;
+            //}
+            //if (this.m_IdleTimer > 0f)
+            //{
+            //    this.m_IdleTimer -= Time.deltaTime;
+            //}
+            //if (this.m_IdleTimer > 0f)
+            //{
+            //    if (currentAnimatorStateInfo.nameHash != this.State_Standby)
+            //    {
+            //        this.CrossFadeAnimation(this.State_Standby, 0.5f);
+            //    }
+            //    return;
+            //}
+            //num = UnityEngine.Random.Range(1, 101);
+            //if (num % 2 == 0)
+            //{
+            //    if (this.m_bPause)
+            //    {
+            //        this.m_IdleTimer = UnityEngine.Random.Range(15f, 20f);
+            //    }
+            //    else
+            //    {
+            //        this.m_IdleTimer = UnityEngine.Random.Range(10f, 15f);
+            //    }
+            //    if (currentAnimatorStateInfo.nameHash != this.State_Standby && !this.m_Animator.IsInTransition(0))
+            //    {
+            //        this.CrossFadeAnimation(this.State_Standby, 0.5f);
+            //    }
+            //    return;
+            //}
+            //if (this.m_FaceToTarget == null || this.m_FaceToTarget == this)
+            //{
+            //    return;
+            //}
+            //if (this.m_FaceToTarget.IsDead() || !this.m_FaceToTarget.m_RoleModel.activeSelf)
+            //{
+            //    base.SetFaceToTarget(this.m_FightSceneMgr.GetMainTarget());
+            //}
+            //this.UpdateDirection_Directly(this.m_FaceToTarget.GetModelPosition());
+            //this.m_MoveTimer = 2.5f;
+            //int towardPosDirection = base.GetTowardPosDirection(this.m_InitPos);
+            //if (towardPosDirection == 0)
+            //{
+            //    this.CrossFadeAnimation(M_Player.State_Walk_Front_Start, 0.5f);
+            //}
+            //else if (towardPosDirection == 1)
+            //{
+            //    this.CrossFadeAnimation(M_Player.State_Walk_Back_Start, 0.5f);
+            //}
+            //else if (towardPosDirection == 2)
+            //{
+            //    this.CrossFadeAnimation(M_Player.State_Walk_Left_Start, 0.5f);
+            //}
+            //else
+            //{
+            //    this.CrossFadeAnimation(M_Player.State_Walk_Right_Start, 0.5f);
+            //}
+            //return;
+        }
+    }
 
     //	public override bool DoCommand(FightCommand skillCommand)
     //	{

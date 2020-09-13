@@ -211,23 +211,26 @@ public class M_Character : MonoBehaviour
         //this.m_emLastActionType = ENUM_FightActionType.Null;
     }
 
-    //	public void ModelDropCheck()
-    //	{
-    //		if (this.m_DropCheckTimer > 0f)
-    //		{
-    //			this.m_DropCheckTimer -= Time.deltaTime;
-    //		}
-    //		else
-    //		{
-    //			float num = this.m_FightSceneMgr.m_BattlePoint.position.y - this.m_ModelTransform.position.y;
-    //			if (num > 2f)
-    //			{
-    //				Vector3 position = new Vector3(this.m_ModelTransform.position.x, this.m_FightSceneMgr.m_BattlePoint.position.y + 0.05f, this.m_ModelTransform.position.z);
-    //				this.m_ModelTransform.position = position;
-    //			}
-    //			this.m_DropCheckTimer = 1f;
-    //		}
-    //	}
+    /// <summary>
+    /// 模型下坠
+    /// </summary>
+    public void ModelDropCheck()
+    {
+        if (this.m_DropCheckTimer > 0f)
+        {
+            this.m_DropCheckTimer -= Time.deltaTime;
+        }
+        else
+        {
+            float num = this.m_FightSceneMgr.m_BattlePoint.position.y - this.m_ModelTransform.position.y;
+            if (num > 2f)
+            {
+                Vector3 position = new Vector3(this.m_ModelTransform.position.x, this.m_FightSceneMgr.m_BattlePoint.position.y + 0.05f, this.m_ModelTransform.position.z);
+                this.m_ModelTransform.position = position;
+            }
+            this.m_DropCheckTimer = 1f;
+        }
+    }
 
     public bool IsLoseHeart()
     {
@@ -245,41 +248,41 @@ public class M_Character : MonoBehaviour
         return false;
     }
 
-    //	public virtual void Update_Movement()
-    //	{
-    //		switch (this.m_emFight)
-    //		{
-    //		case M_Character.Enum_FightStatus.Idle:
-    //			this.Update_Idle();
-    //			break;
-    //		case M_Character.Enum_FightStatus.MoveToAttack:
-    //			this.Update_MoveToAttack();
-    //			break;
-    //		case M_Character.Enum_FightStatus.Attack:
-    //			this.Update_Attack();
-    //			break;
-    //		case M_Character.Enum_FightStatus.AfterAttackMoveBack:
-    //			this.Update_AfterAttackMoveBack();
-    //			break;
-    //		case M_Character.Enum_FightStatus.Revive:
-    //			this.Update_Revive();
-    //			break;
-    //		case M_Character.Enum_FightStatus.JumpBack:
-    //			this.Update_JumpBack();
-    //			break;
-    //		case M_Character.Enum_FightStatus.Pause:
-    //			this.Update_Pause();
-    //			break;
-    //		case M_Character.Enum_FightStatus.Finish:
-    //			this.Update_Finish();
-    //			break;
-    //		case M_Character.Enum_FightStatus.Stun:
-    //		case M_Character.Enum_FightStatus.Sleep:
-    //		case M_Character.Enum_FightStatus.Freeze:
-    //			this.Update_CantActionState();
-    //			break;
-    //		}
-    //	}
+    public virtual void Update_Movement()
+    {
+        switch (this.m_emFight)
+        {
+            case M_Character.Enum_FightStatus.Idle:
+                this.Update_Idle();
+                break;
+            case M_Character.Enum_FightStatus.MoveToAttack:
+                //this.Update_MoveToAttack();
+                break;
+            case M_Character.Enum_FightStatus.Attack:
+                //this.Update_Attack();
+                break;
+            case M_Character.Enum_FightStatus.AfterAttackMoveBack:
+                //this.Update_AfterAttackMoveBack();
+                break;
+            case M_Character.Enum_FightStatus.Revive:
+                //this.Update_Revive();
+                break;
+            case M_Character.Enum_FightStatus.JumpBack:
+                //this.Update_JumpBack();
+                break;
+            case M_Character.Enum_FightStatus.Pause:
+                //this.Update_Pause();
+                break;
+            case M_Character.Enum_FightStatus.Finish:
+                //this.Update_Finish();
+                break;
+            case M_Character.Enum_FightStatus.Stun:
+            case M_Character.Enum_FightStatus.Sleep:
+            case M_Character.Enum_FightStatus.Freeze:
+                //this.Update_CantActionState();
+                break;
+        }
+    }
 
     //	public virtual void Update_StoryMode()
     //	{
@@ -321,9 +324,9 @@ public class M_Character : MonoBehaviour
     //	{
     //	}
 
-    //	public virtual void Update_Idle()
-    //	{
-    //	}
+    public virtual void Update_Idle()
+    {
+    }
 
     //	public virtual void Update_Idle_StoryMode()
     //	{
@@ -813,7 +816,10 @@ public class M_Character : MonoBehaviour
         //    }
         //    return true;
         //}
+
         this.m_CommandQueue.Add(new FightCommand_Skill(this, target, skillId));
+
+        UnityEngine.Debug.Log("执行" + target + "" + skillId);
         //this.m_ActionCDTimer = this.GetActionCD();
         return true;
     }
