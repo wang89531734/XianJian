@@ -20,9 +20,13 @@ public class FightSceneManager
     /// </summary>
     public Dictionary<int, M_Player> m_PlayerList = new Dictionary<int, M_Player>();
 
+    public List<M_Player> PlayerList = new List<M_Player>();
+
     //public Dictionary<int, M_Guard> m_GuardList = new Dictionary<int, M_Guard>();
 
     public Dictionary<int, M_Mob> m_MobList = new Dictionary<int, M_Mob>();
+
+    public List<M_Mob> MobList = new List<M_Mob>();
 
     public Dictionary<int, int> m_CatchMobList = new Dictionary<int, int>();
 
@@ -372,7 +376,8 @@ public class FightSceneManager
 
                         M_Player m_Player = gameObject.AddComponent<M_Player>();
                         m_Player.m_ModelName = text;
-                        this.m_PlayerList.Add(num, m_Player);     
+                        this.m_PlayerList.Add(num, m_Player);
+                        this.PlayerList.Add(m_Player);
                         m_Player.m_FightPosition = this.m_FightPosition;
                         m_Player.m_FightSceneMgr = this;
                         m_Player.InitRole(num);
@@ -679,6 +684,7 @@ public class FightSceneManager
         characterModel_Fight.transform.rotation = rotation;
         this.m_MobSerialID++;
         this.m_MobList.Add(this.m_MobSerialID, m_Mob);
+        this.MobList.Add(m_Mob);
         m_Mob.InitMob(mobGUID);
         m_Mob.m_FightPosition = this.m_FightPosition;
         m_Mob.m_FightSceneMgr = this;
@@ -3076,8 +3082,8 @@ public class FightSceneManager
         M_Character activatingCharacter = null;
         var maxTime = int.MinValue;
         List<M_Character> characters = new List<M_Character>();
-        characters.AddRange(m_PlayerList.Values);
-        characters.AddRange(m_MobList.Values);
+        characters.AddRange(PlayerList);
+        characters.AddRange(MobList);
         for (int i = 0; i < characters.Count; ++i)
         {
             M_Character character = characters[i] as M_Character;
@@ -3085,20 +3091,22 @@ public class FightSceneManager
             {
                 if (character.m_FightRoleData.HP > 0)
                 {
+                    UnityEngine.Debug.Log(""+ character.m_FightRoleData.Agi);
                     int spd = (int)character.m_FightRoleData.Agi;
                     if (spd <= 0)
                     {
                         spd = 1;
-                    }                      
-                    character.currentTimeCount += spd;
-                    if (character.currentTimeCount > maxTime)
-                    {
-                        maxTime = character.currentTimeCount;
-                        activatingCharacter = character;
                     }
+                    //character.currentTimeCount += spd;
+                    //if (character.currentTimeCount > maxTime)
+                    //{
+                    //    maxTime = character.currentTimeCount;
+                    activatingCharacter = character;
+                    //}
                 }
                 else
                 {
+                    UnityEngine.Debug.Log(" character.currentTimeCount = 0;");
                     character.currentTimeCount = 0;
                 }
             }
@@ -3107,27 +3115,33 @@ public class FightSceneManager
         //ActiveCharacter.DecreaseBuffsTurn();
         //ActiveCharacter.DecreaseSkillsTurn();
         //ActiveCharacter.ResetStates();
-        if (ActiveCharacter.m_FightRoleData.HP > 0)
+        UnityEngine.Debug.Log("" + characters.Count);
+        if (ActiveCharacter == null)
         {
-            //if (ActiveCharacter.IsPlayerCharacter)
-            //{
-            //    if (IsAutoPlay)
-            //    {
-            //        ActiveCharacter.RandomAction();
-            //    }
-            //    else
-            //    {
-            //        uiCharacterActionManager.Show();
-            //    }                    
-            //}
-            //else
-            //{
-            //    ActiveCharacter.RandomAction();
-            //}
+            UnityEngine.Debug.Log("ActiveCharacter == null");
         }
-        else
-        {
-            //ActiveCharacter.NotifyEndAction();
-        }
+        //UnityEngine.Debug.Log(""+ ActiveCharacter.name);
+        //if (ActiveCharacter.m_FightRoleData.HP > 0)
+        //{
+        //    //if (ActiveCharacter.IsPlayerCharacter)
+        //    //{
+        //    //    if (IsAutoPlay)
+        //    //    {
+        //    //        ActiveCharacter.RandomAction();
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        uiCharacterActionManager.Show();
+        //    //    }                    
+        //    //}
+        //    //else
+        //    //{
+        //    //    ActiveCharacter.RandomAction();
+        //    //}
+        //}
+        //else
+        //{
+        //    //ActiveCharacter.NotifyEndAction();
+        //}
     }
 }
