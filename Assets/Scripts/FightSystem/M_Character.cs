@@ -124,6 +124,8 @@ public class M_Character : MonoBehaviour
 
     public Transform m_ModelTransform;
 
+    public int currentTimeCount;
+
     private void Start()
     {
     }
@@ -510,9 +512,9 @@ public class M_Character : MonoBehaviour
     //		return true;
     //	}
 
-    //	public virtual void UpdateFightRoleData()
-    //	{
-    //	}
+    public virtual void UpdateFightRoleData()
+    {
+    }
 
     //	public List<Buff_Base> GetShowBuffs()
     //	{

@@ -155,8 +155,13 @@ public class FightSceneManager
 
     private UIFightForm FightUIForm;
 
+    public int CurrentWave { get; private set; }
+
+    public M_Character ActiveCharacter { get; private set; }
+
     public FightSceneManager()
     {
+        CurrentWave = 0;
         this.m_GuardIdx = 0;
         this.m_MobSerialID = 0;
         this.m_ControlledRoleID = -1;
@@ -223,6 +228,8 @@ public class FightSceneManager
         ////UI_GameGMFightStatistics.Instance.InitRole(this.m_PlayerList);//统计数据
         //this.PlayAppearCameraPath();
         //this.InitFightTalk();
+        //NextWave();
+        NewTurn();
     }
 
     /// <summary>
@@ -698,21 +705,17 @@ public class FightSceneManager
                 this.ChangeControlCharacter(1, false);
             }
             int flag = 60 + this.m_ControlledRoleID;
-            //M_Player role = this.GetRole(this.m_ControlledRoleID);
-            //if (role != null)
+            M_Player role = this.GetRole(this.m_ControlledRoleID);
+            //if (role != null)//设置是否自动战斗
             //{
             //    //role.SetUseAI(Swd6Application.instance.m_GameDataSystem.GetFlag(flag));
             //    //UI_Fight.Instance.UpdateRoleAICheckBox(this.m_ControlledRoleID);
             //}
         }
-        else
-        {
-            UnityEngine.Debug.LogWarning("==== 無預設陣型資料 ====");
-        }
 
         this.InitFightTarget();
         this.InitPlayerGuardPos(defaultFormationData);
-        //for (int i = 0; i < 5; i++)
+        //for (int i = 0; i < 5; i++)//设置战斗物品
         //{
         //    List<FightItemHotKeyInfo> fightItemHotkeyList = Swd6Application.instance.m_ItemSystem.GetFightItemHotkeyList(i);
         //    for (int j = 0; j < fightItemHotkeyList.Count; j++)
@@ -1682,14 +1685,14 @@ public class FightSceneManager
                 {
                     if (GameEntry.Instance.m_GameDataSystem.GetFlag(formationUnit.RoleID))
                     {
-                        //this.m_PlayerList[formationUnit.RoleID].SetFormationData(formationData, i);
+                        this.m_PlayerList[formationUnit.RoleID].SetFormationData(formationData, i);
                     }
                 }
             }
         }
         foreach (M_Player current in this.m_PlayerList.Values)
         {
-            //current.UpdateFightRoleData();
+            current.UpdateFightRoleData();
         }
         this.ChangeInitPos(formationData);
         //this.CreateChangeFormationEffect(idx + ENUM_ElementType.Wind);
@@ -3027,4 +3030,104 @@ public class FightSceneManager
     //	{
     //		return this.m_BattleGroupGUID >= 7001 && this.m_BattleGroupGUID <= 7100;
     //	}
+
+    /// <summary>
+    /// 下一场战斗
+    /// </summary>
+    public void NextWave()
+    {
+        //PlayerItem[] characters;
+        //StageFoe[] foes;
+        //var wave = CastedStage.waves[CurrentWave];
+        //if (!wave.useRandomFoes && wave.foes.Length > 0)
+        //    foes = wave.foes;
+        //else
+        //    foes = CastedStage.RandomFoes().foes;
+
+        //characters = new PlayerItem[foes.Length];
+        //for (var i = 0; i < characters.Length; ++i)
+        //{
+        //    var foe = foes[i];
+        //    if (foe != null && foe.character != null)
+        //    {
+        //        var character = PlayerItem.CreateActorItemWithLevel(foe.character, foe.level);
+        //        characters[i] = character;
+        //    }
+        //}
+
+        //if (characters.Length == 0)
+        //    Debug.LogError("Missing Foes Data");
+
+        //foeFormation.SetCharacters(characters);
+        //foeFormation.Revive();
+        //++CurrentWave;
+    }
+
+    /// <summary>
+    /// 下一回合
+    /// </summary>
+    public void NewTurn()
+    {
+        if (ActiveCharacter != null)
+        {
+            ActiveCharacter.currentTimeCount = 0;
+        }
+
+        M_Character activatingCharacter = null;
+        var maxTime = int.MinValue;
+        List<M_Character> characters = new List<M_Character>();
+        characters.AddRange(m_PlayerList.Values);
+        characters.AddRange(m_MobList.Values);
+        for (int i = 0; i < characters.Count; ++i)
+        {
+            M_Character character = characters[i] as M_Character;
+            if (character != null)
+            {
+                if (character.m_FightRoleData.HP > 0)
+                {
+                    int spd = (int)character.m_FightRoleData.Agi;
+                    if (spd <= 0)
+                    {
+                        spd = 1;
+                    }                      
+                    character.currentTimeCount += spd;
+                    if (character.currentTimeCount > maxTime)
+                    {
+                        maxTime = character.currentTimeCount;
+                        activatingCharacter = character;
+                    }
+                }
+                else
+                {
+                    character.currentTimeCount = 0;
+                }
+            }
+        }
+        ActiveCharacter = activatingCharacter;
+        //ActiveCharacter.DecreaseBuffsTurn();
+        //ActiveCharacter.DecreaseSkillsTurn();
+        //ActiveCharacter.ResetStates();
+        if (ActiveCharacter.m_FightRoleData.HP > 0)
+        {
+            //if (ActiveCharacter.IsPlayerCharacter)
+            //{
+            //    if (IsAutoPlay)
+            //    {
+            //        ActiveCharacter.RandomAction();
+            //    }
+            //    else
+            //    {
+            //        uiCharacterActionManager.Show();
+            //    }                    
+            //}
+            //else
+            //{
+            //    ActiveCharacter.RandomAction();
+            //}
+        }
+        else
+        {
+            //ActiveCharacter.NotifyEndAction();
+        }
+    }
 }

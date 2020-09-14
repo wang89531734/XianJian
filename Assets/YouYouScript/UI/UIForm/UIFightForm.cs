@@ -228,7 +228,7 @@ public class UIFightForm : UIFormBase
 
     //    private bool m_bStoryMode;
 
-    //    public static UI_Fight Instance;
+    public UICharacterActionManager uiCharacterActionManager;
 
     //    public void HotKeyTestShowHide()
     //    {
@@ -871,6 +871,7 @@ public class UIFightForm : UIFormBase
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
+        uiCharacterActionManager.Hide();
         //this.m_CatchResultTw = this.m_CatchResultTexture.GetComponent<TweenAlpha>();//捕捉结果
         //this.CreateMobSlots();
         //this.CreateRoleSlots();//以后改成代码生成
