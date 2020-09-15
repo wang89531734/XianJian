@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(ToggleGroup))]
 public class UICharacterActionManager : UIBase
 {
     public UICharacterAction[] uiActions;
     public FightSceneManager Manager;
-    private readonly List<UICharacterActionSkill> UICharacterSkills = new List<UICharacterActionSkill>();
+    private readonly List<UICharacterAction> UICharacterSkills = new List<UICharacterAction>();
 
     private ToggleGroup tempToggleGroup;
     public ToggleGroup TempToggleGroup

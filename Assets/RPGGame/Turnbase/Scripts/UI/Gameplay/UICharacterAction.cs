@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Toggle))]
-public abstract class UICharacterAction : UIBase
+public class UICharacterAction : UIBase
 {
     public UISkill uiSkill;
     public Text textRemainsTurns;
@@ -139,6 +138,4 @@ public abstract class UICharacterAction : UIBase
         //    //this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetControlledPlayer());
         //}
     }
-
-    protected abstract void OnActionSelected();
 }
