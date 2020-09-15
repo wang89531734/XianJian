@@ -1471,4 +1471,20 @@ public class M_Character : MonoBehaviour
     //			break;
     //		}
     //	}
+
+    public void NotifyEndAction()
+    {
+        m_FightSceneMgr.NotifyEndAction(this);
+    }
+
+    public bool SetAction(int action)
+    {
+        //if (action == ACTION_ATTACK || (action >= 0 && action < Skills.Count))
+        //{
+        //    Action = action;
+        //    Manager.ShowTargetScopesOrDoAction(this);
+        //    return true;
+        //}
+        return false;
+    }
 }

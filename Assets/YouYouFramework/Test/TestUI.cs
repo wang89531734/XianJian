@@ -39,12 +39,12 @@ public class TestUI : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.B))
         {
-            GameEntry.UI.OpenUIForm(UIFormId.UI_Login);
+            //GameEntry.UI.OpenUIForm(UIFormId.UI_Login);
 
         }
         else if (Input.GetKeyUp(KeyCode.C))
         {
-            GameEntry.UI.OpenUIForm(UIFormId.UI_Reg);
+            //GameEntry.UI.OpenUIForm(UIFormId.UI_Reg);
         }
         else if (Input.GetKeyUp(KeyCode.T))
         {

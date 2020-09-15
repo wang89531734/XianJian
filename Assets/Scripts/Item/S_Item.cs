@@ -105,6 +105,7 @@ public class S_Item : I_BaseDBF
 			this.MItem.ParseData(values);
 			break;
 		case ENUM_ItemType.Mob:
+                Debug.Log(JsonString);
 			this.MobData = Converter.deserializeObject<S_MobData>(JsonString);
 			this.ParseMobData(values);
 			break;

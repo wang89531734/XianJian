@@ -13,8 +13,8 @@ namespace YouYou
         public override void OnEnter()
         {
             base.OnEnter();
-            GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureLogOn");
-            GameEntry.Procedure.ChangeState(ProcedureState.EnterGame);
+            GameEntry.Log(LogCategory.Procedure, "OnEnter ProcedureLogOn");          
+            GameEntry.UI.OpenUIForm(UIFormId.UI_LogonBG);
         }
 
         public override void OnUpdate()
@@ -26,7 +26,7 @@ namespace YouYou
         {
             base.OnLeave();
             GameEntry.Log(LogCategory.Procedure, "OnLeave ProcedureLogOn");
-
+            GameEntry.UI.CloseUIForm(101);
         }
     }
 }

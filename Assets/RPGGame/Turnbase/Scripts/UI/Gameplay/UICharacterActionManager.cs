@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UICharacterActionManager : UIBase
 {
     public UICharacterAction[] uiActions;
-    public GamePlayManager Manager { get { return GamePlayManager.Singleton; } }
+    public FightSceneManager Manager;
     private readonly List<UICharacterActionSkill> UICharacterSkills = new List<UICharacterActionSkill>();
 
     private ToggleGroup tempToggleGroup;
@@ -21,75 +21,76 @@ public class UICharacterActionManager : UIBase
         }
     }
 
-    public CharacterEntity ActiveCharacter
+    public M_Character ActiveCharacter
     {
         get { return Manager.ActiveCharacter; }
     }
 
     public bool IsPlayerCharacterActive
     {
-        get { return ActiveCharacter != null && ActiveCharacter.IsPlayerCharacter; }
+        get { return ActiveCharacter != null; }// && ActiveCharacter.IsPlayerCharacter;
     }
 
     protected override void Awake()
     {
         base.Awake();
-        TempToggleGroup.allowSwitchOff = false;
+        //TempToggleGroup.allowSwitchOff = false;
         var skillIndex = 0;
-        foreach (var uiAction in uiActions)
-        {
-            uiAction.ActionManager = this;
-            uiAction.IsOn = false;
-            var uiSkill = uiAction as UICharacterActionSkill;
-            if (uiSkill != null)
-            {
-                uiSkill.skillIndex = skillIndex;
-                UICharacterSkills.Add(uiSkill);
-                ++skillIndex;
-            }
-        }
+        //foreach (var uiAction in uiActions)
+        //{
+        //    uiAction.ActionManager = this;
+        //    uiAction.IsOn = false;
+        //    var uiSkill = uiAction as UICharacterActionSkill;
+        //    if (uiSkill != null)
+        //    {
+        //        uiSkill.skillIndex = skillIndex;
+        //        UICharacterSkills.Add(uiSkill);
+        //        ++skillIndex;
+        //    }
+        //}
     }
 
     private void Update()
     {
-        if (!IsPlayerCharacterActive || ActiveCharacter.IsDoingAction)
-        {
-            Hide();
-            return;
-        }
+        //if (!IsPlayerCharacterActive || ActiveCharacter.IsDoingAction)
+        //{
+        //    Hide();
+        //    return;
+        //}
 
-        var i = 0;
-        foreach (var skill in Manager.ActiveCharacter.Skills)
-        {
-            if (i >= UICharacterSkills.Count)
-                break;
-            var ui = UICharacterSkills[i];
-            ui.skill = skill as CharacterSkill;
-            ui.Show();
-            ++i;
-        }
-        for (; i < UICharacterSkills.Count; ++i)
-        {
-            var ui = UICharacterSkills[i];
-            ui.Hide();
-        }
+        //var i = 0;
+        //foreach (var skill in Manager.ActiveCharacter.Skills)
+        //{
+        //    if (i >= UICharacterSkills.Count)
+        //        break;
+        //    var ui = UICharacterSkills[i];
+        //    ui.skill = skill as CharacterSkill;
+        //    ui.Show();
+        //    ++i;
+        //}
+        //for (; i < UICharacterSkills.Count; ++i)
+        //{
+        //    var ui = UICharacterSkills[i];
+        //    ui.Hide();
+        //}
     }
 
     public override void Show()
     {
-        var i = 0;
-        for (i = 0; i < uiActions.Length; ++i)
-        {
-            uiActions[i].IsOn = false;
-            if (i == 0)
-                uiActions[i].IsOn = true;
-        }
-        i = 0;
-        for (; i < UICharacterSkills.Count; ++i)
-        {
-            var ui = UICharacterSkills[i];
-            ui.Hide();
-        }
+        Debug.Log("根据角色数据加载技能");
+        //var i = 0;
+        //for (i = 0; i < uiActions.Length; ++i)
+        //{
+        //    uiActions[i].IsOn = false;
+        //    if (i == 0)
+        //        uiActions[i].IsOn = true;
+        //}
+        //i = 0;
+        //for (; i < UICharacterSkills.Count; ++i)
+        //{
+        //    var ui = UICharacterSkills[i];
+        //    ui.Hide();
+        //}
         base.Show();
     }
 }

@@ -325,7 +325,7 @@ public class M_PlayerController : M_GameRoleBase
         //{
         //    this.m_RoleMotion.Init(base.RoleID, 1);
         //}    
-        this.m_RunSpeed = 3f;
+        this.m_RunSpeed = 6f;
         //S_StartRoleData data = GameDataDB.StartRoleDB.GetData(base.RoleID);
         //if (data != null)
         //{

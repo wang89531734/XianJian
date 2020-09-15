@@ -187,7 +187,7 @@ public class M_Player : M_Character
             return;
         }
         ////ItemData equipItemData = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Weapon);
-        ////this.m_emWeaponElemntType = this.m_RoleDataEx.BaseRoleData.emWeaponElemntType;
+        //this.m_emWeaponElemntType = this.m_RoleDataEx.BaseRoleData.emWeaponElemntType;
         ////this.m_MagicItem = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Talisman);
         ////if (this.m_MagicItem != null)
         ////{
@@ -203,7 +203,7 @@ public class M_Player : M_Character
         ////}
         //this.m_CharacterName = this.m_RoleDataEx.BaseRoleData.FamilyName + this.m_RoleDataEx.BaseRoleData.Name;
         ////this.m_BeforeLevelUpInfo = new FightLevelUpInfo(this.m_RoleDataEx);
-        //this.InitFightRoleData();
+        this.InitFightRoleData();
         //this.SetPassiveSkill(roleID);
         //this.m_ActionCD = (float)(500 - this.m_FightRoleData.Agi) / 100f;
         //this.UpdateBuffIconCallback = new M_Character.UpdateBuffIcon(this.UpdateUIBuffIcon);
@@ -1647,17 +1647,17 @@ public class M_Player : M_Character
 
     public override void InitFightRoleData()
     {
-        //this.m_FightRoleData.Level = this.m_RoleDataEx.GetLevel();
-        //this.m_FightRoleData.MaxHP = this.m_RoleDataEx.RoleAttr.sFinial.MaxHP;
-        //this.m_FightRoleData.HP = this.m_RoleDataEx.GetHP();
-        //this.m_OriginalHP = this.m_RoleDataEx.GetHP();
-        //this.m_FightRoleData.MaxMP = this.m_RoleDataEx.RoleAttr.sFinial.MaxMP;
-        //this.m_FightRoleData.MP = this.m_RoleDataEx.GetMP();
-        //this.m_FightRoleData.Atk = this.m_RoleDataEx.RoleAttr.sFinial.Attack;
-        //this.m_FightRoleData.Def = this.m_RoleDataEx.RoleAttr.sFinial.Def;
-        //this.m_FightRoleData.MagicAtk = this.m_RoleDataEx.RoleAttr.sFinial.MAttack;
-        //this.m_FightRoleData.MagicDef = this.m_RoleDataEx.RoleAttr.sFinial.MDef;
-        //this.m_FightRoleData.Agi = this.m_RoleDataEx.RoleAttr.sFinial.Agi;
+        this.m_FightRoleData.Level = this.m_RoleDataEx.GetLevel();
+        this.m_FightRoleData.MaxHP = this.m_RoleDataEx.RoleAttr.sFinial.MaxHP;
+        this.m_FightRoleData.HP = this.m_RoleDataEx.GetHP();
+        this.m_OriginalHP = this.m_RoleDataEx.GetHP();
+        this.m_FightRoleData.MaxMP = this.m_RoleDataEx.RoleAttr.sFinial.MaxMP;
+        this.m_FightRoleData.MP = this.m_RoleDataEx.GetMP();
+        this.m_FightRoleData.Atk = this.m_RoleDataEx.RoleAttr.sFinial.Attack;
+        this.m_FightRoleData.Def = this.m_RoleDataEx.RoleAttr.sFinial.Def;
+        this.m_FightRoleData.MagicAtk = this.m_RoleDataEx.RoleAttr.sFinial.MAttack;
+        this.m_FightRoleData.MagicDef = this.m_RoleDataEx.RoleAttr.sFinial.MDef;
+        this.m_FightRoleData.Agi = this.m_RoleDataEx.RoleAttr.sFinial.Agi;
         //this.m_FightRoleData.Dodge = this.m_RoleDataEx.RoleAttr.sFinial.Dodge;
         //this.m_FightRoleData.Block = this.m_RoleDataEx.RoleAttr.sFinial.Block;
         //this.m_FightRoleData.Critical = this.m_RoleDataEx.RoleAttr.sFinial.Critical;

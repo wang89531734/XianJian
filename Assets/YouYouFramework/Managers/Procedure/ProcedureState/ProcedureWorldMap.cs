@@ -19,6 +19,7 @@ namespace YouYou
             //}
             //this.gameApplication.m_StorySystem.StoryEnd();
             GameEntry.Instance.m_ExploreSystem.Begin();
+            GameEntry.UI.OpenUIForm(UIFormId.UI_MainCity);
             //if (!Swd6Application.instance.m_ExploreSystem.m_PlayStory && UI_Fade.Instance != null)
             //{
             //    UI_Fade.Instance.DelayFadeTo(0f, 1.5f, 0.3f);

@@ -6,6 +6,6 @@ public class UICharacterActionAttack : UICharacterAction
 {
     protected override void OnActionSelected()
     {
-        ActionManager.ActiveCharacter.SetAction(CharacterEntity.ACTION_ATTACK);
+        //ActionManager.ActiveCharacter.SetAction(CharacterEntity.ACTION_ATTACK);
     }
 }

@@ -12,8 +12,8 @@ namespace YouYou
         public override void OnEnter()
         {
             base.OnEnter();
-            Debug.Log("OnEnter Procedure进入游戏流程");
-            GameEntry.UI.OpenUIForm(UIFormId.UI_LogonBG);
+            Debug.Log("OnEnter Procedure主城UI");
+          
         }
 
         public override void OnUpdate()
@@ -25,7 +25,7 @@ namespace YouYou
         {
             base.OnLeave();
             Debug.Log("OnLeave ProcedureEnterGame");
-            GameEntry.UI.CloseUIForm(101);
+  
         }
 
         public override void OnDestroy()

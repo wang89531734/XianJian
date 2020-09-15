@@ -88,11 +88,11 @@ public class M_Mob : M_Character
             return;
         }
         UnityEngine.Debug.Log("取得怪物資料 MobGUID:" + MobGUID+ data.Name);
-        //this.m_MobGUID = MobGUID;
+        this.m_MobGUID = MobGUID;
         //this.m_IconNo = data.IconNo;
-        //this.m_MobData = data.MobData;
+        this.m_MobData = data.MobData;
         //this.ResetSkill();
-        //this.InitFightRoleData();
+        this.InitFightRoleData();
         ////this.m_ActionCD = (float)(1000 - this.m_FightRoleData.Agi) / 100f;
         ////this.SkillSetting(data.MobData);
         //this.m_CharacterName = data.Name;
@@ -730,11 +730,11 @@ public class M_Mob : M_Character
     public override void InitFightRoleData()
     {
         this.m_FightRoleData.Level = this.m_MobData.Level;
-        //this.m_BaseFihgtRoleData.MaxHP = Mathf.RoundToInt((float)this.m_MobData.MaxHP * this.GetDifficultyValueRate() + 0.1f);
-        //this.m_FightRoleData.MaxHP = this.m_BaseFihgtRoleData.MaxHP;
-        //this.m_FightRoleData.HP = this.m_FightRoleData.MaxHP;
-        //this.m_FightRoleData.MaxMP = this.m_MobData.MaxMP;
-        //this.m_FightRoleData.MP = this.m_FightRoleData.MP;
+        this.m_BaseFihgtRoleData.MaxHP = this.m_MobData.MaxHP;
+        this.m_FightRoleData.MaxHP = this.m_BaseFihgtRoleData.MaxHP;
+        this.m_FightRoleData.HP = this.m_FightRoleData.MaxHP;
+        this.m_FightRoleData.MaxMP = this.m_MobData.MaxMP;
+        this.m_FightRoleData.MP = this.m_FightRoleData.MaxMP;
         //this.m_BaseFihgtRoleData.Atk = Mathf.RoundToInt((float)this.m_MobData.Attack * this.GetDifficultyValueRate() + 0.1f);
         //this.m_FightRoleData.Atk = this.m_BaseFihgtRoleData.Atk;
         //this.m_BaseFihgtRoleData.Def = Mathf.RoundToInt((float)this.m_MobData.Def * this.GetDifficultyValueRate() + 0.1f);
@@ -743,12 +743,12 @@ public class M_Mob : M_Character
         //this.m_FightRoleData.MagicAtk = this.m_BaseFihgtRoleData.MagicAtk;
         //this.m_BaseFihgtRoleData.MagicDef = Mathf.RoundToInt((float)this.m_MobData.MDef * this.GetDifficultyValueRate() + 0.1f);
         //this.m_FightRoleData.MagicDef = this.m_BaseFihgtRoleData.MagicDef;
-        //this.m_BaseFihgtRoleData.Agi = this.m_MobData.Agi;
+        this.m_BaseFihgtRoleData.Agi = this.m_MobData.Agi;
         //if (NormalSettingSystem.Instance.GetNormalSetting().m_FightingDifficulty == Enum_FightingDifficulty.Hard)
         //{
-        //    this.m_BaseFihgtRoleData.Agi += 100;
+        ///this.m_BaseFihgtRoleData.Agi += 100;
         //}
-        //this.m_FightRoleData.Agi = this.m_BaseFihgtRoleData.Agi;
+        this.m_FightRoleData.Agi = this.m_BaseFihgtRoleData.Agi;
         //this.m_BaseFihgtRoleData.Dodge = this.m_MobData.Dodge;
         //this.m_BaseFihgtRoleData.Block = this.m_MobData.Block;
         //this.m_BaseFihgtRoleData.Critical = this.m_MobData.Critical;
@@ -769,7 +769,7 @@ public class M_Mob : M_Character
         //        array[i] = 0;
         //    }
         //}
-       // this.m_FightRoleData.DefElement = array;
+        // this.m_FightRoleData.DefElement = array;
     }
 
     //	public override void ChangeHP_Buff(int hp, M_Character sourceCharacter, Enum_FightHitType emType)

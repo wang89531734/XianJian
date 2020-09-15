@@ -3091,22 +3091,20 @@ public class FightSceneManager
             {
                 if (character.m_FightRoleData.HP > 0)
                 {
-                    UnityEngine.Debug.Log(""+ character.m_FightRoleData.Agi);
                     int spd = (int)character.m_FightRoleData.Agi;
                     if (spd <= 0)
                     {
                         spd = 1;
                     }
-                    //character.currentTimeCount += spd;
-                    //if (character.currentTimeCount > maxTime)
-                    //{
-                    //    maxTime = character.currentTimeCount;
-                    activatingCharacter = character;
-                    //}
+                    character.currentTimeCount += spd;
+                    if (character.currentTimeCount > maxTime)
+                    {
+                        maxTime = character.currentTimeCount;
+                        activatingCharacter = character;
+                    }
                 }
                 else
                 {
-                    UnityEngine.Debug.Log(" character.currentTimeCount = 0;");
                     character.currentTimeCount = 0;
                 }
             }
@@ -3115,33 +3113,54 @@ public class FightSceneManager
         //ActiveCharacter.DecreaseBuffsTurn();
         //ActiveCharacter.DecreaseSkillsTurn();
         //ActiveCharacter.ResetStates();
-        UnityEngine.Debug.Log("" + characters.Count);
-        if (ActiveCharacter == null)
+
+        if (ActiveCharacter.m_FightRoleData.HP > 0)
         {
-            UnityEngine.Debug.Log("ActiveCharacter == null");
+            //if (ActiveCharacter.IsPlayerCharacter)
+            //{
+            //    if (IsAutoPlay)
+            //    {
+            //        ActiveCharacter.RandomAction();
+            //    }
+            //    else
+            //    {
+                     FightUIForm.uiCharacterActionManager.Show();
+            //    }
+            //}
+            //else
+            //{
+            //    ActiveCharacter.RandomAction();
+            //}
         }
-        //UnityEngine.Debug.Log(""+ ActiveCharacter.name);
-        //if (ActiveCharacter.m_FightRoleData.HP > 0)
+        else
+        {
+            //ActiveCharacter.NotifyEndAction();
+        }
+    }
+
+    public void NotifyEndAction(M_Character character)
+    {
+        //if (character != ActiveCharacter)
+        //    return;
+
+        //if (!playerFormation.IsAnyCharacterAlive())
         //{
-        //    //if (ActiveCharacter.IsPlayerCharacter)
-        //    //{
-        //    //    if (IsAutoPlay)
-        //    //    {
-        //    //        ActiveCharacter.RandomAction();
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        uiCharacterActionManager.Show();
-        //    //    }                    
-        //    //}
-        //    //else
-        //    //{
-        //    //    ActiveCharacter.RandomAction();
-        //    //}
+        //    ActiveCharacter = null;
+        //    StartCoroutine(LoseGameRoutine());
+        //}
+        //else if (!foeFormation.IsAnyCharacterAlive())
+        //{
+        //    ActiveCharacter = null;
+        //    if (CurrentWave >= CastedStage.waves.Length)
+        //    {
+        //        StartCoroutine(WinGameRoutine());
+        //        return;
+        //    }
+        //    StartCoroutine(MoveToNextWave());
         //}
         //else
         //{
-        //    //ActiveCharacter.NotifyEndAction();
+        //    NewTurn();
         //}
     }
 }

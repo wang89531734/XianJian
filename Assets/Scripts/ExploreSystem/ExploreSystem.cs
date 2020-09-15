@@ -1044,33 +1044,6 @@ public class ExploreSystem
     //	{
     //	}
 
-    //	public void OpenGameMainMenu()
-    //	{
-    //		if (this.LockPlayer)
-    //		{
-    //			return;
-    //		}
-    //		if (this.PlayerController.IsJump())
-    //		{
-    //			return;
-    //		}
-    //		if (this.m_OpenMainMenu)
-    //		{
-    //			return;
-    //		}
-    //		if (this.m_OpenMenuTime > 0f)
-    //		{
-    //			return;
-    //		}
-    //		this.m_OpenMainMenu = true;
-    //		if (this.m_GameApp.gameStateService.getCurrentState().name != "ExploreState")
-    //		{
-    //			return;
-    //		}
-    //		MusicControlSystem.PlayUISound(4023, 1);
-    //		this.m_GameApp.StartCoroutine(this.m_GameApp.OpenGameMainMenu());
-    //	}
-
     public void SetCharacterCollisionController()
     {
         //if ((this.m_MapData.emType == ENUM_MapType.Town || this.m_MapData.emType == ENUM_MapType.House) && (this.m_GameApp.m_GameDataSystem.m_PlayerID == 1 || this.m_GameApp.m_GameDataSystem.m_PlayerID == 6))

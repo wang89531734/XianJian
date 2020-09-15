@@ -2,6 +2,8 @@ public sealed class DataTableDefine
 {
     public const string RoleLevelName = "RoleLevel";
     public const int RoleLevelVersion = 15;
+    public const string SkillDataName = "SkillData";
+    public const int SkillDataVersion = 20;
     public const string StartRoleDataName = "StartRoleData";
     public const int StartRoleDataVersion = 14;
     public const string Sys_AudioName = "Sys_Audio";

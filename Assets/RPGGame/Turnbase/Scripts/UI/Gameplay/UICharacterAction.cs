@@ -6,6 +6,12 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Toggle))]
 public abstract class UICharacterAction : UIBase
 {
+    public UISkill uiSkill;
+    public Text textRemainsTurns;
+    public Image imageRemainsTurnsGage;
+    public int skillIndex;
+    public CharacterSkill skill;
+
     private UICharacterActionManager actionManager;
     public UICharacterActionManager ActionManager
     {
@@ -45,10 +51,11 @@ public abstract class UICharacterAction : UIBase
 
     protected void OnSelected(bool select)
     {
-        if (!ActionManager.IsPlayerCharacterActive || ActionManager.ActiveCharacter.IsDoingAction || !select)
-            return;
-
-        OnActionSelected();
+        //if (!ActionManager.IsPlayerCharacterActive || ActionManager.ActiveCharacter.IsDoingAction || !select)
+        //    return;
+        ActionManager.ActiveCharacter.SetAction(skillIndex);
+        //OnActionSelected();
+        Debug.Log("直接执行");
     }
 
     protected abstract void OnActionSelected();
