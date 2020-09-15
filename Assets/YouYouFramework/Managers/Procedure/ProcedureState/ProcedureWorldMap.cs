@@ -36,7 +36,7 @@ namespace YouYou
         {
             base.OnLeave();
             GameEntry.Log(LogCategory.Procedure, "OnLeave ProcedureWorldMap");
-            //UI_Explore.Instance.Hide();
+            GameEntry.UI.CloseUIForm(UIFormId.UI_MainCity);
             //UI_BubbleDialog.Instance.Close();
             GameEntry.Instance.m_ExploreSystem.End();
         }

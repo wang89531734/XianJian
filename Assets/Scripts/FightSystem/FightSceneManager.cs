@@ -401,6 +401,7 @@ public class FightSceneManager
                         //     }
                         // }
                         //TransformTool.SetLayerRecursively(m_Player.m_ModelTransform, 18);//设置层级
+                        FightUIForm.CreateRoleSlots(m_Player);
                     }
                 }
             }
@@ -524,6 +525,7 @@ public class FightSceneManager
             if (s_BattleMobData != null)
             {        
                 M_Mob m_Mob = this.CreateMob(s_BattleMobData);
+                FightUIForm.CreateMobSlots(m_Mob);
                 if (m_Mob == null)
                 {
                     UnityEngine.Debug.Log("Create mob == null, ID:" + this.m_BattleGroup.BattleMob[i].GUID);

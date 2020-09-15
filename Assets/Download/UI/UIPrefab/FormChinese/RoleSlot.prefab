@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7105456526997932821}
   - component: {fileID: 2289978961440882269}
   m_Layer: 5
-  m_Name: TempRoleSlot
+  m_Name: RoleSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -310, y: -249}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 197, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5880177467647053756

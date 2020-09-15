@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Download/Scenes/GameScene_HuPaoCun.unity
     guid: 452a065eac07ee346b40f641122a33c3
+  - enabled: 1
+    path: Assets/RPGGame/Demo/Scenes/ManageScene.unity
+    guid: 5363cade84d2d5f46bbb795f1790c3bd
   m_configObjects: {}
