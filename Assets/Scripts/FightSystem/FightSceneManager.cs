@@ -224,7 +224,7 @@ public class FightSceneManager
     {
         this.InitBattleGroup();
         //this.InitFightMusic();
-        //this.InitFightEffect();
+        this.InitFightEffect();
         this.InitFightPosition();
         this.InitFightCamera();
         this.CreateCharacters();
@@ -265,20 +265,31 @@ public class FightSceneManager
     //		MusicSystem.Instance.PlayBackgroundMusic(music, 1f, true);
     //	}
 
-    //	private void InitFightEffect()
-    //	{
-    //		this.m_NowTargetEffect = ResourceManager.Instance.GetEffect_Fight("select_Monster");
-    //		this.m_NowTargetEffect.SetActive(false);
-    //		this.m_NowControlledEffect = ResourceManager.Instance.GetEffect_Fight("select_Player");
-    //		this.m_NowControlledEffect.SetActive(false);
-    //		this.m_GuardMobEffect.Clear();
-    //		for (int i = 1; i <= 2; i++)
-    //		{
-    //			GameObject effect_Fight = ResourceManager.Instance.GetEffect_Fight("select_escort");
-    //			this.m_GuardMobEffect.Add(i, effect_Fight);
-    //			effect_Fight.SetActive(false);
-    //		}
-    //	}
+    /// <summary>
+    /// 初始化战争特效
+    /// </summary>
+    private void InitFightEffect()
+    {
+        GameEntry.Pool.GameObjectSpawn(1001, (Transform trans2) =>
+        {
+            m_NowControlledEffect = trans2.gameObject;
+            m_NowControlledEffect.SetActive(false);
+        });
+
+        GameEntry.Pool.GameObjectSpawn(1002, (Transform trans2) =>
+        {
+            m_NowTargetEffect = trans2.gameObject;
+            m_NowTargetEffect.SetActive(false);
+        });
+
+        //this.m_GuardMobEffect.Clear();
+        //for (int i = 1; i <= 2; i++)
+        //{
+        //    GameObject effect_Fight = ResourcesManager.Instance.GetEffect_Fight("select_escort");
+        //    this.m_GuardMobEffect.Add(i, effect_Fight);
+        //    effect_Fight.SetActive(false);
+        //}
+    }
 
     /// <summary>
     /// 初始化战斗位置
@@ -697,6 +708,9 @@ public class FightSceneManager
         return m_Mob;
     }
 
+    /// <summary>
+    /// 初始化战斗设置
+    /// </summary>
     private void InitFightSetting()
     {
         FormationData defaultFormationData = GameEntry.Instance.m_FormationSystem.GetDefaultFormationData();

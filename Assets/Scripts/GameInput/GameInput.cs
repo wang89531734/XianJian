@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using YouYou;
 
-public class GameInput
+public class GameInput : ManagerBase, IDisposable
 {
     private static bool m_Initialize = false;
 
@@ -75,12 +76,6 @@ public class GameInput
 			GameInput.m_IsJoyPad = value;
 		}
 	}
-
-	public static void Initialize()
-	{
-		GameInput.InitDefalutKeyMapping();
-        GameInput.m_Initialize = true;
-    }
 
 	public static void InitDefalutKeyMapping()
 	{
@@ -277,11 +272,11 @@ public class GameInput
 		return !GameInput.m_FirstPress;
 	}
 
-	public static void Update()
-	{
-		GameInput.GetDirKeyUp();
-		GameInput.GetKeyUp();
-	}
+    public void OnUpdate()
+    {
+        GameInput.GetDirKeyUp();
+        GameInput.GetKeyUp();
+    }
 
 	public static bool IsDelayInput()
 	{
@@ -570,4 +565,15 @@ public class GameInput
 		}
 		return KeyCode.None;
 	}
+
+    public override void Init()
+    {
+        GameInput.InitDefalutKeyMapping();
+        GameInput.m_Initialize = true;
+    }
+
+    public void Dispose()
+    {
+        
+    }
 }

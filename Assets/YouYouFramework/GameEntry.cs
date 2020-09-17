@@ -231,6 +231,15 @@ namespace YouYou
             get;
             private set;
         }
+
+        /// <summary>
+        /// UI管理器
+        /// </summary>
+        public static GameInput Input
+        {
+            get;
+            private set;
+        }
         #endregion
 
         #region InitManagers 初始化管理器
@@ -251,6 +260,7 @@ namespace YouYou
             Scene = new YouYouSceneManager();
             Resource = new AddressableManager();
             UI = new YouYouUIManager();
+            Input = new GameInput();
 
             Logger.Init();
             Event.Init();
@@ -264,6 +274,7 @@ namespace YouYou
             Scene.Init();
             Resource.Init();
             UI.Init();
+            Input.Init();
             //进入第一个流程
 
             Procedure.ChangeState(ProcedureState.Preload);
@@ -352,8 +363,8 @@ namespace YouYou
         {
             InitManagers();
             UnityEngine.Time.timeScale = timeScale = 1;
-            Application.targetFrameRate = ParamsSettings.GetGradeParamData(ConstDefine.targetFrameRate, CurrDeviceGrade);
-
+            //Application.targetFrameRate = ParamsSettings.GetGradeParamData(ConstDefine.targetFrameRate, CurrDeviceGrade);
+            Application.targetFrameRate = 30;
             base.StartCoroutine(this.InitializeNormalGame());
         }
 
@@ -376,6 +387,7 @@ namespace YouYou
             Scene.OnUpdate();
             Resource.OnUpdate();
             UI.OnUpdate();
+            Input.OnUpdate();
 
             if (this.m_InitializeOK)
             {
@@ -391,7 +403,7 @@ namespace YouYou
                 //{
                 //    this.m_AchievementSystem.Update();
                 //}
-                GameInput.Update();
+               
                 //if (this.m_UpdateResizeTime > 0f)
                 //{
                 //    this.m_UpdateResizeTime -= Time.deltaTime;
@@ -421,6 +433,7 @@ namespace YouYou
             Scene.Dispose();
             Resource.Dispose();
             UI.Dispose();
+            Input.Dispose();
         }
 
         /// <summary>
@@ -486,7 +499,6 @@ namespace YouYou
         /// </summary>
         protected void InitSystemSettings()
         {
-            GameInput.Initialize();
             //this.m_QualitySettingSystem = new QualitySettingSystem();//画质设置
             //this.m_QualitySettingSystem.Initialize();
             //this.m_NormalSettingSystem = new NormalSettingSystem();//正常设置
