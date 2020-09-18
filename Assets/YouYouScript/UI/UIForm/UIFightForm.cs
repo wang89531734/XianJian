@@ -1558,6 +1558,9 @@ public class UIFightForm : UIFormBase
         //}
     }
 
+    /// <summary>
+    /// 更新选择角色
+    /// </summary>
     public void UpdateSelectRole()
     {
         this.SetControlledRole(this.m_FightSceneMgr.GetControlledPlayer());

@@ -391,6 +391,7 @@ public class FightSceneManager
                         this.PlayerList.Add(m_Player);
                         m_Player.m_FightPosition = this.m_FightPosition;
                         m_Player.m_FightSceneMgr = this;
+                        m_Player.IsPlayerCharacter = true;
                         m_Player.InitRole(num);
                         // ItemData equipItemData = m_Player.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Weapon);
                         // if (equipItemData != null)
@@ -537,6 +538,7 @@ public class FightSceneManager
             {        
                 M_Mob m_Mob = this.CreateMob(s_BattleMobData);
                 FightUIForm.CreateMobSlots(m_Mob);
+                m_Mob.IsPlayerCharacter = false;
                 if (m_Mob == null)
                 {
                     UnityEngine.Debug.Log("Create mob == null, ID:" + this.m_BattleGroup.BattleMob[i].GUID);
@@ -1618,9 +1620,8 @@ public class FightSceneManager
                 current.Value.SetIsControlCharacter(false);
             }
         }
-        //this.m_NowControlledEffect.transform.position = this.m_PlayerList[key].GetModelPosition();
-        //this.m_NowControlledEffect.transform.rotation = this.m_PlayerList[key].m_ModelTransform.rotation;
-        //this.m_NowControlledEffect.transform.parent = this.m_PlayerList[key].m_ModelTransform;
+        this.m_NowControlledEffect.transform.position = this.m_PlayerList[key].GetModelPosition();
+        this.m_NowControlledEffect.transform.rotation = this.m_PlayerList[key].m_ModelTransform.rotation;
 
         if (this.m_ControlledRoleID == key)
         {
@@ -1834,18 +1835,18 @@ public class FightSceneManager
         //    current2.m_ActionTargetModel = this.m_MainTarget.m_RoleModel;
         //    current2.SetFaceToTarget(this.m_MainTarget);
         //}
-        //foreach (M_Mob current3 in this.m_MobList.Values)
-        //{
-        //    if (!this.m_PlayerList.ContainsKey(this.m_ControlledRoleID))
-        //    {
-        //        break;
-        //    }
-        //    if (current3.CanBeTarget())
-        //    {
-        //        current3.m_ActionTargetModel = this.m_PlayerList[this.m_ControlledRoleID].m_RoleModel;
-        //        current3.SetFaceToTarget(this.m_PlayerList[this.m_ControlledRoleID]);
-        //    }
-        //}
+        foreach (M_Mob current3 in this.m_MobList.Values)
+        {
+            if (!this.m_PlayerList.ContainsKey(this.m_ControlledRoleID))
+            {
+                break;
+            }
+            //if (current3.CanBeTarget())
+            //{
+            //    current3.m_ActionTargetModel = this.m_PlayerList[this.m_ControlledRoleID].m_RoleModel;
+            //    current3.SetFaceToTarget(this.m_PlayerList[this.m_ControlledRoleID]);
+            //}
+        }
         //foreach (M_Player current4 in this.m_PlayerList.Values)
         //{
         //    current4.CheckPlayerDead();
@@ -3132,21 +3133,28 @@ public class FightSceneManager
 
         if (ActiveCharacter.m_FightRoleData.HP > 0)
         {
-            //if (ActiveCharacter.IsPlayerCharacter)
-            //{
-            //    if (IsAutoPlay)
-            //    {
-            //        ActiveCharacter.RandomAction();
-            //    }
-            //    else
-            //    {
-                     FightUIForm.uiCharacterActionManager.Show();
-            //    }
-            //}
-            //else
-            //{
-            //    ActiveCharacter.RandomAction();
-            //}
+           
+            if (ActiveCharacter.IsPlayerCharacter)
+            {
+           
+                //if (IsAutoPlay)
+                //{
+                //    ActiveCharacter.RandomAction();
+                //}
+                //else
+                //{
+                FightUIForm.uiCharacterActionManager.Show();
+                m_NowControlledEffect.SetActive(true);
+                this.m_NowControlledEffect.transform.position = ActiveCharacter.GetModelPosition();
+                this.m_NowControlledEffect.transform.rotation = ActiveCharacter.m_ModelTransform.rotation;
+                //}
+            }
+            else
+            {
+
+                UnityEngine.Debug.Log("怪物先手");
+                //ActiveCharacter.RandomAction();
+            }
         }
         else
         {

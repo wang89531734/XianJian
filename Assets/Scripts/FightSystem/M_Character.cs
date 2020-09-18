@@ -126,6 +126,11 @@ public class M_Character : MonoBehaviour
 
     public int currentTimeCount;
 
+    /// <summary>
+    /// ÊÇ·ñÍæ¼Ò½ÇÉ«
+    /// </summary>
+    public bool IsPlayerCharacter;
+
     private void Start()
     {
     }
