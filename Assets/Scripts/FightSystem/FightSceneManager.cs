@@ -651,7 +651,7 @@ public class FightSceneManager
         string prefName = data.MobData.PrefName;
         GameObject characterModel_Fight = null;
 
-        GameEntry.Pool.GameObjectSpawn(1, (Transform trans2) =>
+        GameEntry.Pool.GameObjectSpawn(2, (Transform trans2) =>
         {
             characterModel_Fight = trans2.gameObject;
         });
