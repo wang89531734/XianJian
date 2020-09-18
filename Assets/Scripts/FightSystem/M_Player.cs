@@ -186,6 +186,7 @@ public class M_Player : M_Character
             Debug.LogWarning("m_RoleDataEx is Null m_RoleID = " + this.m_RoleID);
             return;
         }
+        m_RoleDataEx.BaseRoleData.Agi = 500;
         ////ItemData equipItemData = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Weapon);
         //this.m_emWeaponElemntType = this.m_RoleDataEx.BaseRoleData.emWeaponElemntType;
         ////this.m_MagicItem = this.m_RoleDataEx.GetEquipItemData(ENUM_EquipPosition.Talisman);

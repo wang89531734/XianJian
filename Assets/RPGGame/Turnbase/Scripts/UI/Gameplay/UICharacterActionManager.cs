@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using YouYou;
 
 public class UICharacterActionManager : UIBase
 {
@@ -77,6 +78,11 @@ public class UICharacterActionManager : UIBase
     public override void Show()
     {
         Debug.Log("根据角色数据加载技能");
+        List<FightSkillHotKeyInfo> controlledPlayerSkillList = GameEntry.Instance.m_SkillSystem.GetFightSkillHotkeyList(1, 0);
+
+        uiActions[0].skillIndex = controlledPlayerSkillList[0].ID;
+        uiActions[1].skillIndex = controlledPlayerSkillList[1].ID;
+        uiActions[2].skillIndex = controlledPlayerSkillList[2].ID;
         //var i = 0;
         //for (i = 0; i < uiActions.Length; ++i)
         //{

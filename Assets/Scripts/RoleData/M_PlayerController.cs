@@ -550,13 +550,13 @@ public class M_PlayerController : M_GameRoleBase
             //}  
             this.bWalk = true;
             //this.m_UpdateIdleTime = 0f;
-            m_Animation.Play("Run");
+            m_Animation.CrossFade("Run");
             this.m_PlayerMotor.desiredMovementDirection = m_DirectionVector;
         }
         else
         {
             this.bWalk = false;
-            m_Animation.Play("Stand");
+            m_Animation.CrossFade("Stand");
             this.m_PlayerMotor.desiredMovementDirection = Vector3.zero;
             //if (this.m_IdelState == ENUM_IDLESTATE.None)
             //{
