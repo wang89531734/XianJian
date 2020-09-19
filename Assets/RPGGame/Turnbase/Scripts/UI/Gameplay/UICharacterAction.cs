@@ -11,19 +11,8 @@ public class UICharacterAction : UIBase
     public int skillIndex;
     public CharacterSkill skill;
 
-    private UICharacterActionManager actionManager;
-    public UICharacterActionManager ActionManager
-    {
-        get { return actionManager; }
-        set
-        {
-            if (value == null)
-                return;
-            actionManager = value;
-            TempToggle.group = actionManager.TempToggleGroup;
-        }
-    }
-
+    public UICharacterActionManager ActionManager;
+  
     private Toggle tempToggle;
     public Toggle TempToggle
     {
@@ -74,68 +63,75 @@ public class UICharacterAction : UIBase
         //    return;
         //}
 
-        //List<FightSkillHotKeyInfo> controlledPlayerSkillList = this.m_FightSceneMgr.GetControlledPlayerSkillList(0);
-        //int num2 = controlledPlayerSkillList[num].ID;
+        S_Skill data = GameDataDB.SkillDB.GetData(skillIndex);
+        if (data == null)
+        {
+            return;
+        }
 
-        //Debug.Log("技能编号" + num2);
-        //S_Skill data = GameDataDB.SkillDB.GetData(num2);
-        //if (data == null)
-        //{
-        //    return;
-        //}
-        ////S_UseEffect data2 = GameDataDB.UseEffectDB.GetData(data.UseEffectID);
-        ////if (data2 == null)
-        ////{
-        ////    return;
-        ////}
+        S_UseEffect data2 = GameDataDB.UseEffectDB.GetData(data.UseEffectID);
+        if (data2 == null)
+        {
+            return;
+        }
+
         ////MusicSystem.Instance.PlaySound(3, 1);
         ////判断技能的类型
-        ////if (data2.emTarget == ENUM_UseTarget.Enemy)
-        ////{
-        //this.SetSelectCommandTargetState(false);
-        //this.AddPlayerSkillCommand(num2, this.m_FightSceneMgr.GetMainTarget());
-        ////}
-        //if (data2.emTarget == ENUM_UseTarget.Partner)
-        //{
-        //    //if (data2.emRange == ENUM_UseRange.All)
-        //    //{
-        //    //    if (data2.DeBuffer.Contains(84))
-        //    //    {
-        //    //        this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetOneDeadRole());
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetControlledPlayer());
-        //    //    }
-        //    //    return;
-        //    //}
-        //    //if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt) || this.m_FightSceneMgr.GetRoleList().Count == 1)
-        //    //{
-        //    //    int controlledPlayerRoleID = this.m_FightSceneMgr.GetControlledPlayerRoleID();
-        //    //    if (!this.m_RoleSlotTable.ContainsKey(controlledPlayerRoleID))
-        //    //    {
-        //    //        return;
-        //    //    }
-        //    //    this.SetSelectCommandTargetState(false);
-        //    //    this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetControlledPlayer());
-        //    //    return;
-        //    //}
-        //    //else
-        //    //{
-        //    //    this.m_TmpCommandID = num;
-        //    //    this.SetSelectCommandTargetState(true);
-        //    //    this.m_emMenuState = UI_Fight.ENUM_MenuState.UseSkillTarget;
-        //    //}
-        //}
-        //if (data2.emTarget == ENUM_UseTarget.Self)
-        //{
-        //    //int controlledPlayerRoleID2 = this.m_FightSceneMgr.GetControlledPlayerRoleID();
-        //    //if (!this.m_RoleSlotTable.ContainsKey(controlledPlayerRoleID2))
-        //    //{
-        //    //    return;
-        //    //}
-        //    //this.SetSelectCommandTargetState(false);
-        //    //this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetControlledPlayer());
-        //}
+        if (data2.emTarget == ENUM_UseTarget.Enemy)
+        {
+            ActionManager.ActiveCharacter.AddSkillCommand(skillIndex, ActionManager.Manager.m_FightSceneMgr.GetMainTarget());
+            //this.SetSelectCommandTargetState(false);
+            //this.AddPlayerSkillCommand(num2, this.m_FightSceneMgr.GetMainTarget());
+            //if (!this.m_FightSceneMgr.AddPlayerItemCommand(itemID, target))
+            //        {
+            //            return;
+            //        }
+            //        UI_Fight.S_UIFightCommand s_UIFightCommand = default(UI_Fight.S_UIFightCommand);
+            //        s_UIFightCommand.id = itemID;
+            //        s_UIFightCommand.bSkill = true;
+            //        this.m_GCDTimer = this.m_FightSceneMgr.GetControlledPlayerGCD();
+        }
+        if (data2.emTarget == ENUM_UseTarget.Partner)
+        {
+            //if (data2.emRange == ENUM_UseRange.All)
+            //{
+            //    if (data2.DeBuffer.Contains(84))
+            //    {
+            //        this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetOneDeadRole());
+            //    }
+            //    else
+            //    {
+            //        this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetControlledPlayer());
+            //    }
+            //    return;
+            //}
+            //if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt) || this.m_FightSceneMgr.GetRoleList().Count == 1)
+            //{
+            //    int controlledPlayerRoleID = this.m_FightSceneMgr.GetControlledPlayerRoleID();
+            //    if (!this.m_RoleSlotTable.ContainsKey(controlledPlayerRoleID))
+            //    {
+            //        return;
+            //    }
+            //    this.SetSelectCommandTargetState(false);
+            //    this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetControlledPlayer());
+            //    return;
+            //}
+            //else
+            //{
+            //    this.m_TmpCommandID = num;
+            //    this.SetSelectCommandTargetState(true);
+            //    this.m_emMenuState = UI_Fight.ENUM_MenuState.UseSkillTarget;
+            //}
+        }
+        if (data2.emTarget == ENUM_UseTarget.Self)
+        {
+            //int controlledPlayerRoleID2 = this.m_FightSceneMgr.GetControlledPlayerRoleID();
+            //if (!this.m_RoleSlotTable.ContainsKey(controlledPlayerRoleID2))
+            //{
+            //    return;
+            //}
+            //this.SetSelectCommandTargetState(false);
+            //this.AddPlayerSkillCommand(num, this.m_FightSceneMgr.GetControlledPlayer());
+        }
     }
 }

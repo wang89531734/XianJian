@@ -7,7 +7,7 @@ using YouYou;
 public class UICharacterActionManager : UIBase
 {
     public UICharacterAction[] uiActions;
-    public FightSceneManager Manager;
+    public UIFightForm Manager;
     private readonly List<UICharacterAction> UICharacterSkills = new List<UICharacterAction>();
 
     private ToggleGroup tempToggleGroup;
@@ -21,10 +21,8 @@ public class UICharacterActionManager : UIBase
         }
     }
 
-    public M_Character ActiveCharacter
-    {
-        get { return Manager.ActiveCharacter; }
-    }
+    public M_Character ActiveCharacter;
+   
 
     public bool IsPlayerCharacterActive
     {
@@ -48,6 +46,7 @@ public class UICharacterActionManager : UIBase
         //        ++skillIndex;
         //    }
         //}
+
     }
 
     private void Update()
@@ -83,6 +82,7 @@ public class UICharacterActionManager : UIBase
         uiActions[0].skillIndex = controlledPlayerSkillList[0].ID;
         uiActions[1].skillIndex = controlledPlayerSkillList[1].ID;
         uiActions[2].skillIndex = controlledPlayerSkillList[2].ID;
+        ActiveCharacter = Manager.m_FightSceneMgr.ActiveCharacter;
         //var i = 0;
         //for (i = 0; i < uiActions.Length; ++i)
         //{

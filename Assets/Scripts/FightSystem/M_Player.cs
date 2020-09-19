@@ -1100,19 +1100,19 @@ public class M_Player : M_Character
         //this.CheckTarget();
         if (this.m_CommandQueue.Count > 0)
         {
-            Debug.Log("执行m_CommandQueue.Count > 0");
-            //FightCommand fightCommand = this.m_CommandQueue[0];
-            //if (fightCommand is FightCommand_NoActDataSkill)
-            //{
-            //    fightCommand.Execute();
-            //    this.m_CommandQueue.Remove(fightCommand);
-            //    return;
-            //}
+            FightCommand fightCommand = this.m_CommandQueue[0];
+            if (fightCommand is FightCommand_NoActDataSkill)
+            {
+                fightCommand.Execute();
+                this.m_CommandQueue.Remove(fightCommand);
+                return;
+            }
             //this.m_MoveTimer = 0f;
             //this.CheckTarget();
             //this.m_RunToTargetTimer = 0f;
-            //this.m_emFight = M_Character.Enum_FightStatus.MoveToAttack;
-            //return;
+            Debug.Log("执行MoveToAttack");
+            this.m_emFight = M_Character.Enum_FightStatus.MoveToAttack;
+            return;
         }
         else
         {
@@ -1463,50 +1463,50 @@ public class M_Player : M_Character
     //		return Mathf.RoundToInt(num);
     //	}
 
-    //	public override bool AddSkillCommand(int skillId, M_Character target)
-    //	{
-    //		S_Skill data = GameDataDB.SkillDB.GetData(skillId);
-    //		if (data == null)
-    //		{
-    //			return false;
-    //		}
-    //		S_UseEffect data2 = GameDataDB.UseEffectDB.GetData(data.UseEffectID);
-    //		if (data2 == null)
-    //		{
-    //			return false;
-    //		}
-    //		if (target == null)
-    //		{
-    //			return false;
-    //		}
-    //		int skillCostMP = this.GetSkillCostMP(data2.emElementType, data.CastMP);
-    //		if (this.m_FightRoleData.MP < skillCostMP)
-    //		{
-    //			return false;
-    //		}
-    //		bool flag = base.AddSkillCommand(skillId, target);
-    //		if (flag)
-    //		{
-    //			this.m_FightRoleData.MP -= skillCostMP;
-    //			Swd6Application.instance.m_UserBehavior.EventInfo.Counter(skillId, CounterType.Skill);
-    //		}
-    //		if (flag && this.m_SkillCDList.ContainsKey(skillId))
-    //		{
-    //			this.m_ActionCDTimer += this.m_SkillCDList[skillId];
-    //			if (this.m_bUseAI)
-    //			{
-    //				int num = UnityEngine.Random.Range(6, 12);
-    //				this.m_AIDelayTimer = (0.55f - (float)(this.m_FightRoleData.Level / 10) * 0.05f) * (float)num;
-    //			}
-    //			this.m_AddActionCD = this.m_ActionCDTimer;
-    //		}
-    //		if (flag && this.m_bIsControlCharacter)
-    //		{
-    //			UI_Fight.Instance.UpdateSkillBtnEnable();
-    //			UI_Fight.Instance.UpdateItemBtnEnableAndCount();
-    //		}
-    //		return flag;
-    //	}
+    public override bool AddSkillCommand(int skillId, M_Character target)
+    {
+        S_Skill data = GameDataDB.SkillDB.GetData(skillId);
+        if (data == null)
+        {
+            return false;
+        }
+        S_UseEffect data2 = GameDataDB.UseEffectDB.GetData(data.UseEffectID);
+        if (data2 == null)
+        {
+            return false;
+        }
+        if (target == null)
+        {
+            return false;
+        }
+        //int skillCostMP = this.GetSkillCostMP(data2.emElementType, data.CastMP);
+        //if (this.m_FightRoleData.MP < skillCostMP)
+        //{
+        //    return false;
+        //}
+        bool flag = base.AddSkillCommand(skillId, target);
+        if (flag)
+        {
+            //this.m_FightRoleData.MP -= skillCostMP;
+            //Swd6Application.instance.m_UserBehavior.EventInfo.Counter(skillId, CounterType.Skill);
+        }
+        if (flag && this.m_SkillCDList.ContainsKey(skillId))
+        {
+            this.m_ActionCDTimer += this.m_SkillCDList[skillId];
+            if (this.m_bUseAI)
+            {
+                int num = UnityEngine.Random.Range(6, 12);
+                this.m_AIDelayTimer = (0.55f - (float)(this.m_FightRoleData.Level / 10) * 0.05f) * (float)num;
+            }
+            this.m_AddActionCD = this.m_ActionCDTimer;
+        }
+        if (flag && this.m_bIsControlCharacter)
+        {
+            //UI_Fight.Instance.UpdateSkillBtnEnable();
+            //UI_Fight.Instance.UpdateItemBtnEnableAndCount();
+        }
+        return flag;
+    }
 
     //	private int GetSkillCostMP(ENUM_ElementType emType, int originalMP)
     //	{

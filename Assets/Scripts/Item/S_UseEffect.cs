@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
 
-public class S_UseEffect
+public class S_UseEffect : I_BaseDBF
 {
-	public int EffectID;
+	public int GUID;
+
+	public string ActDataName;
+
+	public ENUM_ItemSubType emItemType;
 
 	public ENUM_Distance emDistance;
 
@@ -17,17 +21,11 @@ public class S_UseEffect
 
 	public int AddRoleAttrID;
 
-	public ENUM_RefValue emRefValue;
-
-	public ENUM_RefType emRefType;
-
-	public float RefPercent;
+	public List<S_RefValue> RefValueList;
 
 	public ENUM_ElementType emElementType;
 
 	public int Damage;
-
-	public int HitTimes;
 
 	public int Count;
 
@@ -41,69 +39,90 @@ public class S_UseEffect
 
 	public int AddRatioMP;
 
-	public int AddAP;
+	public List<int> Buffer;
 
-	public int AddRatioAP;
+	public List<int> DeBuffer;
 
-	public int AddActivePoint;
+	public Enum_UseSkillCamera emUseSkillCamera;
 
-	public int AddRatioActivePoint;
+	public Enum_ShakeSkillCamera emShakeSkillCamera;
 
-	public int AddWeakValue;
-
-	public int AddRatioWeakValue;
-
-	public List<S_Buffer> Buffer;
-
-	public List<S_Buffer> DeBuffer;
+	public S_SkillCameraData SkillCameraData;
 
 	public S_UseEffect()
 	{
-		this.Buffer = new List<S_Buffer>();
-		this.DeBuffer = new List<S_Buffer>();
+		this.Buffer = new List<int>();
+		this.DeBuffer = new List<int>();
+		this.RefValueList = new List<S_RefValue>();
+		this.SkillCameraData = new S_SkillCameraData();
 	}
 
-	public void ParseData(Dictionary<string, string> values)
+	public int GetGUID()
 	{
-		for (int i = 0; i < 5; i++)
+		return this.GUID;
+	}
+
+	public void ParseJson(string JsonString, IConverter Converter, I_BaseDBF Record)
+	{
+		if (!(Record is S_UseEffect))
 		{
-			S_Buffer s_Buffer = new S_Buffer();
-			string key = string.Format("BufferID_{0}", i);
-			if (values.ContainsKey(key))
+			return;
+		}
+		Dictionary<string, string> dictionary = Converter.deserializeObject<Dictionary<string, string>>(JsonString);
+		for (int i = 0; i < 2; i++)
+		{
+			S_RefValue s_RefValue = new S_RefValue();
+			string key = string.Format("emRefValue_{0}", i);
+			if (dictionary.ContainsKey(key))
 			{
-				string s = values[key];
-				int.TryParse(s, out s_Buffer.ID);
+				string s = dictionary[key];
+				int emRefValue;
+				int.TryParse(s, out emRefValue);
+				s_RefValue.emRefValue = (ENUM_RefValue)emRefValue;
 			}
-			key = string.Format("HitRate_{0}", i);
-			if (values.ContainsKey(key))
+			key = string.Format("RefPercent_{0}", i);
+			if (dictionary.ContainsKey(key))
 			{
-				string s = values[key];
-				int.TryParse(s, out s_Buffer.HitRate);
+				string s = dictionary[key];
+				float.TryParse(s, out s_RefValue.RefPercent);
 			}
-			if (s_Buffer.ID > 0)
+			if (s_RefValue.emRefValue != ENUM_RefValue.Null && s_RefValue.emRefValue != ENUM_RefValue.No)
 			{
-				this.Buffer.Add(s_Buffer);
+				this.RefValueList.Add(s_RefValue);
 			}
 		}
 		for (int j = 0; j < 5; j++)
 		{
-			S_Buffer s_Buffer2 = new S_Buffer();
-			string key2 = string.Format("DeBufferID_{0}", j);
-			if (values.ContainsKey(key2))
+			int num = 0;
+			string key2 = string.Format("BufferID_{0}", j);
+			if (dictionary.ContainsKey(key2))
 			{
-				string s2 = values[key2];
-				int.TryParse(s2, out s_Buffer2.ID);
+				string s2 = dictionary[key2];
+				int.TryParse(s2, out num);
 			}
-			key2 = string.Format("DeHitRate_{0}", j);
-			if (values.ContainsKey(key2))
+			if (num > 0)
 			{
-				string s2 = values[key2];
-				int.TryParse(s2, out s_Buffer2.HitRate);
-			}
-			if (s_Buffer2.ID > 0)
-			{
-				this.DeBuffer.Add(s_Buffer2);
+				this.Buffer.Add(num);
 			}
 		}
+		for (int k = 0; k < 5; k++)
+		{
+			int num2 = 0;
+			string key3 = string.Format("DeBufferID_{0}", k);
+			if (dictionary.ContainsKey(key3))
+			{
+				string s3 = dictionary[key3];
+				int.TryParse(s3, out num2);
+			}
+			if (num2 > 0)
+			{
+				this.DeBuffer.Add(num2);
+			}
+		}
+		if (this.emUseSkillCamera == Enum_UseSkillCamera.No)
+		{
+			return;
+		}
+		this.SkillCameraData = Converter.deserializeObject<S_SkillCameraData>(JsonString);
 	}
 }

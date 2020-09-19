@@ -3162,6 +3162,8 @@ MonoBehaviour:
   - {fileID: 4905693988032810508}
   - {fileID: 5784487595934552001}
   - {fileID: 2879031765287385377}
+  Manager: {fileID: 3207507959884162792}
+  ActiveCharacter: {fileID: 0}
 --- !u!114 &783670416975210625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8941,6 +8943,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1736638066106485029}
     m_Modifications:
+    - target: {fileID: 1958011629839843146, guid: bd94903ecb6be054b880518d2189dbb1,
+        type: 3}
+      propertyPath: ActionManager
+      value: 
+      objectReference: {fileID: 6756584905482708816}
     - target: {fileID: 4322293900141295819, guid: bd94903ecb6be054b880518d2189dbb1,
         type: 3}
       propertyPath: m_Name
@@ -9078,6 +9085,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1736638066106485029}
     m_Modifications:
+    - target: {fileID: 1958011629839843146, guid: bd94903ecb6be054b880518d2189dbb1,
+        type: 3}
+      propertyPath: ActionManager
+      value: 
+      objectReference: {fileID: 6756584905482708816}
     - target: {fileID: 4322293900141295819, guid: bd94903ecb6be054b880518d2189dbb1,
         type: 3}
       propertyPath: m_Name
@@ -9215,6 +9227,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1736638066106485029}
     m_Modifications:
+    - target: {fileID: 1958011629839843146, guid: bd94903ecb6be054b880518d2189dbb1,
+        type: 3}
+      propertyPath: ActionManager
+      value: 
+      objectReference: {fileID: 6756584905482708816}
     - target: {fileID: 4322293900141295819, guid: bd94903ecb6be054b880518d2189dbb1,
         type: 3}
       propertyPath: m_Name

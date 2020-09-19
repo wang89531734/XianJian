@@ -8,17 +8,17 @@ public class FightCommand_Skill : FightCommand
 	public FightCommand_Skill(M_Character a, M_Character t, int id) : base(a, t, id)
 	{
         this.m_SkillData = GameDataDB.SkillDB.GetData(id);
-        //if (this.m_SkillData == null)
-        //{
-        //	Debug.Log("找不到Skill 資料: " + id);
-        //	return;
-        //}
-        //this.m_UseEffectID = this.m_SkillData.UseEffectID;
-        //this.m_UseEffect = GameDataDB.UseEffectDB.GetData(this.m_UseEffectID);
-        //if (this.m_UseEffect == null)
-        //{
-        //	Debug.Log("找不到UseEffect : " + this.m_UseEffectID);
-        //}
+        if (this.m_SkillData == null)
+        {
+            Debug.Log("找不到Skill 資料: " + id);
+            return;
+        }
+        this.m_UseEffectID = this.m_SkillData.UseEffectID;
+        this.m_UseEffect = GameDataDB.UseEffectDB.GetData(this.m_UseEffectID);
+        if (this.m_UseEffect == null)
+        {
+            Debug.Log("找不到UseEffect : " + this.m_UseEffectID);
+        }
     }
 
     /// <summary>
@@ -26,63 +26,63 @@ public class FightCommand_Skill : FightCommand
     /// </summary>
 	public override void Execute()
 	{
-		//if (this.m_UseEffect == null)
-		//{
-		//	Debug.Log("找不到UseEffect : " + this.m_UseEffectID);
-		//	this.OnAnimationFinish();
-		//	return;
-		//}
-		//base.ProcessActData(this.m_UseEffect.ActDataName);
-		//bool bCritical = false;
-		//this.m_HitDatas.Clear();
-		//foreach (M_Character current in this.m_Targets)
-		//{
-		//	FightDamageData fightDamageData = FightCalculate.DamageDataCalculte_Skill(this.m_Actor, current, this.m_UseEffect);
-		//	this.m_HitDatas.Add(current, fightDamageData);
-		//	if (fightDamageData.m_bCritical)
-		//	{
-		//		bCritical = true;
-		//	}
-		//}
-		//if (this.m_UseEffect.emUseSkillCamera == Enum_UseSkillCamera.Yes)
-		//{
-		//	FightState fightState = Swd6Application.instance.GetCurrentGameState() as FightState;
-		//	if (fightState != null && fightState.m_FightSceneMgr != null)
-		//	{
-		//		fightState.m_FightSceneMgr.SetSkillCameraPath(this.m_Actor, this.m_UseEffect.SkillCameraData, bCritical);
-		//	}
-		//}
-	}
+        //if (this.m_UseEffect == null)
+        //{
+        Debug.Log("找不到UseEffect : " + this.m_UseEffectID);
+        //	this.OnAnimationFinish();
+        //	return;
+        //}
+        //base.ProcessActData(this.m_UseEffect.ActDataName);
+        //bool bCritical = false;
+        //this.m_HitDatas.Clear();
+        //foreach (M_Character current in this.m_Targets)
+        //{
+        //	FightDamageData fightDamageData = FightCalculate.DamageDataCalculte_Skill(this.m_Actor, current, this.m_UseEffect);
+        //	this.m_HitDatas.Add(current, fightDamageData);
+        //	if (fightDamageData.m_bCritical)
+        //	{
+        //		bCritical = true;
+        //	}
+        //}
+        //if (this.m_UseEffect.emUseSkillCamera == Enum_UseSkillCamera.Yes)
+        //{
+        //	FightState fightState = Swd6Application.instance.GetCurrentGameState() as FightState;
+        //	if (fightState != null && fightState.m_FightSceneMgr != null)
+        //	{
+        //		fightState.m_FightSceneMgr.SetSkillCameraPath(this.m_Actor, this.m_UseEffect.SkillCameraData, bCritical);
+        //	}
+        //}
+    }
 
-	//public override void OnAnimationFinish()
-	//{
-	//	//base.OnAnimationFinish();
-	//	//this.EndSkill();
-	//	//if (this.m_UseEffect == null || this.m_UseEffect.emItemType != ENUM_ItemSubType.Attack)
-	//	//{
-	//	//	return;
-	//	//}
-	//	//if (!(this.m_Actor is M_Player))
-	//	//{
-	//	//	return;
-	//	//}
-	//	//M_Player m_Player = this.m_Actor as M_Player;
-	//	//if (m_Player.m_MagicItem_Passive != null && m_Player.m_MagicItem_Passive.m_EquipItem.ID == 719)
-	//	//{
-	//	//	if (!m_Player.m_MagicItem_Passive.IsTrigger())
-	//	//	{
-	//	//		return;
-	//	//	}
-	//	//	FightCommand_NoActDataSkill fightCommand_NoActDataSkill = new FightCommand_NoActDataSkill(this.m_Actor, this.m_Target, 719);
-	//	//	if (fightCommand_NoActDataSkill == null)
-	//	//	{
-	//	//		return;
-	//	//	}
-	//	//	this.m_Actor.DoCommand(fightCommand_NoActDataSkill);
-	//	//}
-	//}
+    public override void OnAnimationFinish()
+    {
+        base.OnAnimationFinish();
+        //this.EndSkill();
+        //if (this.m_UseEffect == null || this.m_UseEffect.emItemType != ENUM_ItemSubType.Attack)
+        //{
+        //	return;
+        //}
+        //if (!(this.m_Actor is M_Player))
+        //{
+        //	return;
+        //}
+        //M_Player m_Player = this.m_Actor as M_Player;
+        //if (m_Player.m_MagicItem_Passive != null && m_Player.m_MagicItem_Passive.m_EquipItem.ID == 719)
+        //{
+        //	if (!m_Player.m_MagicItem_Passive.IsTrigger())
+        //	{
+        //		return;
+        //	}
+        //	FightCommand_NoActDataSkill fightCommand_NoActDataSkill = new FightCommand_NoActDataSkill(this.m_Actor, this.m_Target, 719);
+        //	if (fightCommand_NoActDataSkill == null)
+        //	{
+        //		return;
+        //	}
+        //	this.m_Actor.DoCommand(fightCommand_NoActDataSkill);
+        //}
+    }
 
-	public virtual void EndSkill()
+    public virtual void EndSkill()
 	{
 		//if (this.m_SkillData == null)
 		//{

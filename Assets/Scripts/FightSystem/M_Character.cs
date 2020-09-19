@@ -263,7 +263,7 @@ public class M_Character : MonoBehaviour
                 this.Update_Idle();
                 break;
             case M_Character.Enum_FightStatus.MoveToAttack:
-                //this.Update_MoveToAttack();
+                this.Update_MoveToAttack();
                 break;
             case M_Character.Enum_FightStatus.Attack:
                 //this.Update_Attack();
@@ -354,44 +354,44 @@ public class M_Character : MonoBehaviour
     //		}
     //	}
 
-    //	public virtual void Update_MoveToAttack()
-    //	{
-    //		if (this.m_CommandQueue.Count <= 0)
-    //		{
-    //			this.CrossFadeAnimation(this.State_Standby, 0.1f);
-    //			this.m_emFight = M_Character.Enum_FightStatus.Idle;
-    //			return;
-    //		}
-    //		FightCommand fightCommand = this.m_CommandQueue[0];
-    //		this.m_RunToTargetTimer += Time.deltaTime;
-    //		if (this.m_FaceToTarget != this)
-    //		{
-    //			this.UpdateDirection_Directly(this.m_FaceToTarget.GetModelPosition());
-    //		}
-    //		float num = Vector3.Distance(this.m_FaceToTarget.GetModelPosition(), this.GetModelPosition()) - this.m_FaceToTarget.m_RoleRadius;
-    //		if (this.m_RunToTargetTimer > 1.5f)
-    //		{
-    //			float d = num - this.m_DoAttackRange;
-    //			Vector3 b = (this.m_FaceToTarget.GetModelPosition() - this.GetModelPosition()).normalized * d;
-    //			this.m_ModelTransform.position += b;
-    //			num = this.m_DoAttackRange;
-    //		}
-    //		if (num <= this.m_DoAttackRange || !this.CheckCommandNeedMove(fightCommand.m_UseEffectID))
-    //		{
-    //			this.m_emFight = M_Character.Enum_FightStatus.Attack;
-    //			this.m_CharacterController.enabled = this.m_EnableCharacterContoller;
-    //			this.CrossFadeAnimation(this.State_Standby, 0.1f);
-    //			this.DoCommand(fightCommand);
-    //			this.m_RunToTargetTimer = 0f;
-    //			return;
-    //		}
-    //		if (this.m_Animator.GetCurrentAnimatorStateInfo(0).nameHash != M_Character.State_Sprint && !this.m_Animator.IsInTransition(0))
-    //		{
-    //			this.CrossFadeAnimation(M_Character.State_Sprint, 0.1f);
-    //			this.m_bNoMoveAttack = false;
-    //			this.m_CharacterController.enabled = false;
-    //		}
-    //	}
+    public virtual void Update_MoveToAttack()
+    {
+        //if (this.m_CommandQueue.Count <= 0)
+        //{
+        //    this.CrossFadeAnimation(this.State_Standby, 0.1f);
+        //    this.m_emFight = M_Character.Enum_FightStatus.Idle;
+        //    return;
+        //}
+        FightCommand fightCommand = this.m_CommandQueue[0];
+        this.m_RunToTargetTimer += Time.deltaTime;
+        if (this.m_FaceToTarget != this)
+        {
+            this.UpdateDirection_Directly(this.m_FaceToTarget.GetModelPosition());
+        }
+        float num = Vector3.Distance(this.m_FaceToTarget.GetModelPosition(), this.GetModelPosition()) - this.m_FaceToTarget.m_RoleRadius;
+        if (this.m_RunToTargetTimer > 1.5f)
+        {
+            float d = num - this.m_DoAttackRange;
+            Vector3 b = (this.m_FaceToTarget.GetModelPosition() - this.GetModelPosition()).normalized * d;
+            this.m_ModelTransform.position += b;
+            num = this.m_DoAttackRange;
+        }
+        //if (num <= this.m_DoAttackRange || !this.CheckCommandNeedMove(fightCommand.m_UseEffectID))
+        //{
+        //    this.m_emFight = M_Character.Enum_FightStatus.Attack;
+        //    this.m_CharacterController.enabled = this.m_EnableCharacterContoller;
+        //    this.CrossFadeAnimation(this.State_Standby, 0.1f);
+        //    this.DoCommand(fightCommand);
+        //    this.m_RunToTargetTimer = 0f;
+        //    return;
+        //}
+        //if (this.m_Animator.GetCurrentAnimatorStateInfo(0).nameHash != M_Character.State_Sprint && !this.m_Animator.IsInTransition(0))
+        //{
+        //    this.CrossFadeAnimation(M_Character.State_Sprint, 0.1f);
+        //    this.m_bNoMoveAttack = false;
+        //    this.m_CharacterController.enabled = false;
+        //}
+    }
 
     //	public virtual void Update_Attack()
     //	{
@@ -795,16 +795,16 @@ public class M_Character : MonoBehaviour
         //{
         //    return false;
         //}
-        //S_Skill data = GameDataDB.SkillDB.GetData(skillId);
+        S_Skill data = GameDataDB.SkillDB.GetData(skillId);
         //if (data == null)
         //{
         //    return false;
         //}
-        //S_UseEffect data2 = GameDataDB.UseEffectDB.GetData(data.UseEffectID);
-        //if (data2 == null)
-        //{
-        //    return false;
-        //}
+        S_UseEffect data2 = GameDataDB.UseEffectDB.GetData(data.UseEffectID);
+        if (data2 == null)
+        {
+            return false;
+        }
         //if (!this.CheckSkillCastBuff(data.CastBuffer))
         //{
         //    return false;
@@ -813,20 +813,20 @@ public class M_Character : MonoBehaviour
         //{
         //    return false;
         //}
-        //this.m_ActionCDTimer = 0f;
-        //if (data2.ActDataName == null || data2.ActDataName == "0")
-        //{
-        //    FightCommand_NoActDataSkill fightCommand_NoActDataSkill = new FightCommand_NoActDataSkill(this, target, skillId);
-        //    if (fightCommand_NoActDataSkill != null)
-        //    {
-        //        this.DoCommand(fightCommand_NoActDataSkill);
-        //    }
-        //    return true;
-        //}
+        this.m_ActionCDTimer = 0f;
+        UnityEngine.Debug.Log("Ö´ÐÐdata2.ActDataName == " + data2.ActDataName);
+        if (data2.ActDataName == null || data2.ActDataName == "0")
+        {
+            UnityEngine.Debug.Log("Ö´ÐÐdata2.ActDataName == null" + target + "" + skillId);
+            //FightCommand_NoActDataSkill fightCommand_NoActDataSkill = new FightCommand_NoActDataSkill(this, target, skillId);
+            //if (fightCommand_NoActDataSkill != null)
+            //{
+            //    this.DoCommand(fightCommand_NoActDataSkill);
+            //}
+            return true;
+        }
 
         this.m_CommandQueue.Add(new FightCommand_Skill(this, target, skillId));
-
-        UnityEngine.Debug.Log("Ö´ÐÐ" + target + "" + skillId);
         //this.m_ActionCDTimer = this.GetActionCD();
         return true;
     }

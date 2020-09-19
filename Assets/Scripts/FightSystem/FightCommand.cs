@@ -176,74 +176,74 @@ public class FightCommand
     //		}
     //	}
 
-    //	public virtual void OnHitDamage()
-    //	{
-    //		this.m_HitTimesCounter--;
-    //		if (this.m_HitTimesCounter <= 0)
-    //		{
-    //			this.OnLastHit();
-    //		}
-    //		M_ActProcessor actProcessor = ActSystem.Instance.GetActProcessor(this.m_UseEffect.ActDataName);
-    //		foreach (KeyValuePair<M_Character, FightDamageData> current in this.m_HitDatas)
-    //		{
-    //			FightDamageData value = current.Value;
-    //			if (value != null)
-    //			{
-    //				M_Character key = current.Key;
-    //				if (!(key == null))
-    //				{
-    //					if (key.gameObject.activeInHierarchy)
-    //					{
-    //						for (int i = 0; i < value.m_HitList.Count; i++)
-    //						{
-    //							if (this.m_HitTimes > 1)
-    //							{
-    //								if (value.m_HitList[i].m_emMsgType == Enum_FightHitType.DamageHP || value.m_HitList[i].m_emMsgType == Enum_FightHitType.DamageMP)
-    //								{
-    //									float num = (float)value.m_HitList[i].m_MsgValue / (float)this.m_HitTimes;
-    //									num += 0.1f;
-    //									key.OnHitDamage(value.m_HitList[i].m_emMsgType, value.m_bCritical, value.m_bBlock, Mathf.RoundToInt(num), this.m_Actor);
-    //									if (value.m_DoubleDmg)
-    //									{
-    //										key.OnHitDamage(value.m_HitList[i].m_emMsgType, value.m_bCritical, value.m_bBlock, Mathf.RoundToInt(num), this.m_Actor);
-    //									}
-    //								}
-    //								else
-    //								{
-    //									key.OnHitDamage(value.m_HitList[i].m_emMsgType, value.m_bCritical, value.m_bBlock, value.m_HitList[i].m_MsgValue, this.m_Actor);
-    //									if (value.m_DoubleDmg)
-    //									{
-    //										key.OnHitDamage(value.m_HitList[i].m_emMsgType, value.m_bCritical, value.m_bBlock, value.m_HitList[i].m_MsgValue, this.m_Actor);
-    //									}
-    //								}
-    //							}
-    //							else
-    //							{
-    //								key.OnHitDamage(value.m_HitList[i].m_emMsgType, value.m_bCritical, value.m_bBlock, value.m_HitList[i].m_MsgValue, this.m_Actor);
-    //								if (value.m_DoubleDmg)
-    //								{
-    //									key.OnHitDamage(value.m_HitList[i].m_emMsgType, value.m_bCritical, value.m_bBlock, value.m_HitList[i].m_MsgValue, this.m_Actor);
-    //								}
-    //							}
-    //						}
-    //					}
-    //				}
-    //			}
-    //		}
-    //	}
+    public virtual void OnHitDamage()
+    {
+        //this.m_HitTimesCounter--;
+        //if (this.m_HitTimesCounter <= 0)
+        //{
+        //    this.OnLastHit();
+        //}
+        //M_ActProcessor actProcessor = ActSystem.Instance.GetActProcessor(this.m_UseEffect.ActDataName);
+        //foreach (KeyValuePair<M_Character, FightDamageData> current in this.m_HitDatas)
+        //{
+        //    FightDamageData value = current.Value;
+        //    if (value != null)
+        //    {
+        //        M_Character key = current.Key;
+        //        if (!(key == null))
+        //        {
+        //            if (key.gameObject.activeInHierarchy)
+        //            {
+        //                for (int i = 0; i < value.m_HitList.Count; i++)
+        //                {
+        //                    if (this.m_HitTimes > 1)
+        //                    {
+        //                        if (value.m_HitList[i].m_emMsgType == Enum_FightHitType.DamageHP || value.m_HitList[i].m_emMsgType == Enum_FightHitType.DamageMP)
+        //                        {
+        //                            float num = (float)value.m_HitList[i].m_MsgValue / (float)this.m_HitTimes;
+        //                            num += 0.1f;
+        //                            key.OnHitDamage(value.m_HitList[i].m_emMsgType, value.m_bCritical, value.m_bBlock, Mathf.RoundToInt(num), this.m_Actor);
+        //                            if (value.m_DoubleDmg)
+        //                            {
+        //                                key.OnHitDamage(value.m_HitList[i].m_emMsgType, value.m_bCritical, value.m_bBlock, Mathf.RoundToInt(num), this.m_Actor);
+        //                            }
+        //                        }
+        //                        else
+        //                        {
+        //                            key.OnHitDamage(value.m_HitList[i].m_emMsgType, value.m_bCritical, value.m_bBlock, value.m_HitList[i].m_MsgValue, this.m_Actor);
+        //                            if (value.m_DoubleDmg)
+        //                            {
+        //                                key.OnHitDamage(value.m_HitList[i].m_emMsgType, value.m_bCritical, value.m_bBlock, value.m_HitList[i].m_MsgValue, this.m_Actor);
+        //                            }
+        //                        }
+        //                    }
+        //                    else
+        //                    {
+        //                        key.OnHitDamage(value.m_HitList[i].m_emMsgType, value.m_bCritical, value.m_bBlock, value.m_HitList[i].m_MsgValue, this.m_Actor);
+        //                        if (value.m_DoubleDmg)
+        //                        {
+        //                            key.OnHitDamage(value.m_HitList[i].m_emMsgType, value.m_bCritical, value.m_bBlock, value.m_HitList[i].m_MsgValue, this.m_Actor);
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+    }
 
-    //	public virtual void OnAnimationFinish()
-    //	{
-    //		if (this.m_Actor == null)
-    //		{
-    //			return;
-    //		}
-    //		if (!this.m_Actor.gameObject.activeInHierarchy)
-    //		{
-    //			return;
-    //		}
-    //		this.m_Actor.OnCommandFinish(this);
-    //	}
+    public virtual void OnAnimationFinish()
+    {
+        //if (this.m_Actor == null)
+        //{
+        //    return;
+        //}
+        //if (!this.m_Actor.gameObject.activeInHierarchy)
+        //{
+        //    return;
+        //}
+        //this.m_Actor.OnCommandFinish(this);
+    }
 
     //	public virtual void OnLastHit()
     //	{
