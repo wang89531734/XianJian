@@ -369,28 +369,23 @@ public class M_Character : MonoBehaviour
             this.UpdateDirection_Directly(this.m_FaceToTarget.GetModelPosition());
         }
         float num = Vector3.Distance(this.m_FaceToTarget.GetModelPosition(), this.GetModelPosition()) - this.m_FaceToTarget.m_RoleRadius;
-        if (this.m_RunToTargetTimer > 3f)
-        {
-            UnityEngine.Debug.Log("执行"+ m_DoAttackRange);
+        if (this.m_RunToTargetTimer > 1.5f)
+        {     
             float d = num - this.m_DoAttackRange;
-            UnityEngine.Debug.Log("执行"+ num);
-            UnityEngine.Debug.Log("执行" + d);
             Vector3 b = (this.m_FaceToTarget.GetModelPosition() - this.GetModelPosition()).normalized * d;
-            UnityEngine.Debug.Log("执行" + b);
             this.m_ModelTransform.position += b;
-            UnityEngine.Debug.Log("执行" + b);
             num = this.m_DoAttackRange;
-            UnityEngine.Debug.Log("执行" + b);
         }
-        //if (num <= this.m_DoAttackRange || !this.CheckCommandNeedMove(fightCommand.m_UseEffectID))
-        //{
-        //    this.m_emFight = M_Character.Enum_FightStatus.Attack;
-        //    this.m_CharacterController.enabled = this.m_EnableCharacterContoller;
-        //    this.CrossFadeAnimation(this.State_Standby, 0.1f);
-        //    this.DoCommand(fightCommand);
-        //    this.m_RunToTargetTimer = 0f;
-        //    return;
-        //}
+        if (num <= this.m_DoAttackRange)//|| !this.CheckCommandNeedMove(fightCommand.m_UseEffectID)
+        {
+            UnityEngine.Debug.Log("执行DoCommand");
+            this.m_emFight = M_Character.Enum_FightStatus.Attack;
+            //this.m_CharacterController.enabled = this.m_EnableCharacterContoller;
+            //this.CrossFadeAnimation(this.State_Standby, 0.1f);
+            this.DoCommand(fightCommand);
+            this.m_RunToTargetTimer = 0f;
+            return;
+        }
         //if (this.m_Animator.GetCurrentAnimatorStateInfo(0).nameHash != M_Character.State_Sprint && !this.m_Animator.IsInTransition(0))
         //{
         //    this.CrossFadeAnimation(M_Character.State_Sprint, 0.1f);
@@ -478,50 +473,50 @@ public class M_Character : MonoBehaviour
     //		return 0;
     //	}
 
-    //	public virtual bool DoCommand(FightCommand skillCommand)
-    //	{
-    //		if (skillCommand is FightCommand_MagicItem)
-    //		{
-    //			skillCommand.Execute();
-    //			return true;
-    //		}
-    //		S_UseEffect data = GameDataDB.UseEffectDB.GetData(skillCommand.m_UseEffectID);
-    //		if (data == null)
-    //		{
-    //			return false;
-    //		}
-    //		skillCommand.m_Targets.Clear();
-    //		if (data.emRange == ENUM_UseRange.All)
-    //		{
-    //			skillCommand.m_Targets = this.m_FightSceneMgr.GetAllTargetCharacterList(data, skillCommand.m_Actor);
-    //		}
-    //		else
-    //		{
-    //			skillCommand.m_Targets.Add(skillCommand.m_Target);
-    //		}
-    //		bool flag = false;
-    //		if (this.m_BuffList.ContainsKey(24))
-    //		{
-    //			Buff_Execute buff_Execute = this.m_BuffList[24] as Buff_Execute;
-    //			buff_Execute.UpdateAtkTarget(skillCommand.m_Target);
-    //			flag = true;
-    //		}
-    //		for (int i = 0; i < this.m_NoRemoveBuffList.Count; i++)
-    //		{
-    //			if (this.m_NoRemoveBuffList[i].m_BuffData.emBuffType == ENUM_BuffType.Execute)
-    //			{
-    //				Buff_Execute buff_Execute2 = this.m_NoRemoveBuffList[i] as Buff_Execute;
-    //				buff_Execute2.UpdateAtkTarget(skillCommand.m_Target);
-    //				flag = true;
-    //			}
-    //		}
-    //		if (flag)
-    //		{
-    //			this.UpdateFightRoleData();
-    //		}
-    //		skillCommand.Execute();
-    //		return true;
-    //	}
+    public virtual bool DoCommand(FightCommand skillCommand)
+    {
+        //if (skillCommand is FightCommand_MagicItem)
+        //{
+        //    skillCommand.Execute();
+        //    return true;
+        //}
+        //S_UseEffect data = GameDataDB.UseEffectDB.GetData(skillCommand.m_UseEffectID);
+        //if (data == null)
+        //{
+        //    return false;
+        //}
+        //skillCommand.m_Targets.Clear();
+        //if (data.emRange == ENUM_UseRange.All)
+        //{
+        //    skillCommand.m_Targets = this.m_FightSceneMgr.GetAllTargetCharacterList(data, skillCommand.m_Actor);
+        //}
+        //else
+        //{
+        //    skillCommand.m_Targets.Add(skillCommand.m_Target);
+        //}
+        //bool flag = false;
+        //if (this.m_BuffList.ContainsKey(24))
+        //{
+        //    Buff_Execute buff_Execute = this.m_BuffList[24] as Buff_Execute;
+        //    buff_Execute.UpdateAtkTarget(skillCommand.m_Target);
+        //    flag = true;
+        //}
+        //for (int i = 0; i < this.m_NoRemoveBuffList.Count; i++)
+        //{
+        //    if (this.m_NoRemoveBuffList[i].m_BuffData.emBuffType == ENUM_BuffType.Execute)
+        //    {
+        //        Buff_Execute buff_Execute2 = this.m_NoRemoveBuffList[i] as Buff_Execute;
+        //        buff_Execute2.UpdateAtkTarget(skillCommand.m_Target);
+        //        flag = true;
+        //    }
+        //}
+        //if (flag)
+        //{
+        //    this.UpdateFightRoleData();
+        //}
+        skillCommand.Execute();
+        return true;
+    }
 
     public virtual void UpdateFightRoleData()
     {
