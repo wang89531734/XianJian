@@ -15,14 +15,14 @@ public class UIBase : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if (isAwaken)
-            return;
-        isAwaken = true;
-        ValidateRoot();
-        if (hideOnAwake)
-            Hide();
-        else
-            Show();
+        //if (isAwaken)
+        //    return;
+        //isAwaken = true;
+        //ValidateRoot();
+        //if (hideOnAwake)
+        //    Hide();
+        //else
+        //    Show();
     }
 
     public void ValidateRoot()
@@ -36,13 +36,13 @@ public class UIBase : MonoBehaviour
 
     public virtual void Show()
     {
-        isAwaken = true;
-        ValidateRoot();
-        if (uiExtension != null)
-            uiExtension.Show();
-        else
-            root.SetActive(true);
-        eventShow.Invoke();
+        //isAwaken = true;
+        //ValidateRoot();
+        //if (uiExtension != null)
+        //    uiExtension.Show();
+        //else
+        //    root.SetActive(true);
+        //eventShow.Invoke();
     }
 
     public virtual void Hide()

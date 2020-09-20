@@ -50,7 +50,7 @@ public class M_Character : MonoBehaviour
 
     public float m_RoleRadius;
 
-    public float m_DoAttackRange;
+    public float m_DoAttackRange=2f;
 
     //public ShroudInstance m_ShroudInstance;
 
@@ -369,12 +369,18 @@ public class M_Character : MonoBehaviour
             this.UpdateDirection_Directly(this.m_FaceToTarget.GetModelPosition());
         }
         float num = Vector3.Distance(this.m_FaceToTarget.GetModelPosition(), this.GetModelPosition()) - this.m_FaceToTarget.m_RoleRadius;
-        if (this.m_RunToTargetTimer > 1.5f)
+        if (this.m_RunToTargetTimer > 3f)
         {
+            UnityEngine.Debug.Log("执行"+ m_DoAttackRange);
             float d = num - this.m_DoAttackRange;
+            UnityEngine.Debug.Log("执行"+ num);
+            UnityEngine.Debug.Log("执行" + d);
             Vector3 b = (this.m_FaceToTarget.GetModelPosition() - this.GetModelPosition()).normalized * d;
+            UnityEngine.Debug.Log("执行" + b);
             this.m_ModelTransform.position += b;
+            UnityEngine.Debug.Log("执行" + b);
             num = this.m_DoAttackRange;
+            UnityEngine.Debug.Log("执行" + b);
         }
         //if (num <= this.m_DoAttackRange || !this.CheckCommandNeedMove(fightCommand.m_UseEffectID))
         //{
@@ -814,7 +820,6 @@ public class M_Character : MonoBehaviour
         //    return false;
         //}
         this.m_ActionCDTimer = 0f;
-        UnityEngine.Debug.Log("执行data2.ActDataName == " + data2.ActDataName);
         if (data2.ActDataName == null || data2.ActDataName == "0")
         {
             UnityEngine.Debug.Log("执行data2.ActDataName == null" + target + "" + skillId);

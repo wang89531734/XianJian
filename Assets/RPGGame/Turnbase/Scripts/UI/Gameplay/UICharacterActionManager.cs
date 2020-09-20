@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using YouYou;
 
-public class UICharacterActionManager : UIBase
+public class UICharacterActionManager : MonoBehaviour
 {
     public UICharacterAction[] uiActions;
     public UIFightForm Manager;
@@ -29,9 +29,9 @@ public class UICharacterActionManager : UIBase
         get { return ActiveCharacter != null; }// && ActiveCharacter.IsPlayerCharacter;
     }
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
+      
         //TempToggleGroup.allowSwitchOff = false;
         var skillIndex = 0;
         //foreach (var uiAction in uiActions)
@@ -74,7 +74,7 @@ public class UICharacterActionManager : UIBase
         //}
     }
 
-    public override void Show()
+    public void Show()
     {
         Debug.Log("根据角色数据加载技能");
         List<FightSkillHotKeyInfo> controlledPlayerSkillList = GameEntry.Instance.m_SkillSystem.GetFightSkillHotkeyList(1, 0);
@@ -96,6 +96,5 @@ public class UICharacterActionManager : UIBase
         //    var ui = UICharacterSkills[i];
         //    ui.Hide();
         //}
-        base.Show();
     }
 }

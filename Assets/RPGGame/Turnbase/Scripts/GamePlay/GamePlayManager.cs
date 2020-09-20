@@ -45,7 +45,7 @@ public class GamePlayManager : BaseGamePlayManager
         if (inputCamera == null)
             inputCamera = Camera.main;
         // Setup uis
-        uiCharacterActionManager.Hide();
+        //uiCharacterActionManager.Hide();
         // Setup player formation
         playerFormation.isPlayerFormation = true;
         playerFormation.foeFormation = foeFormation;
@@ -75,7 +75,7 @@ public class GamePlayManager : BaseGamePlayManager
         {
             if (IsAutoPlay)
             {
-                uiCharacterActionManager.Hide();
+                //uiCharacterActionManager.Hide();
                 if (ActiveCharacter != null)
                     ActiveCharacter.RandomAction();
             }

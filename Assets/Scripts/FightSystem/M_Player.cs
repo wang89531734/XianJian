@@ -1107,10 +1107,9 @@ public class M_Player : M_Character
                 this.m_CommandQueue.Remove(fightCommand);
                 return;
             }
-            //this.m_MoveTimer = 0f;
-            //this.CheckTarget();
-            //this.m_RunToTargetTimer = 0f;
-            Debug.Log("执行MoveToAttack");
+            this.m_MoveTimer = 0f;
+            this.CheckTarget();
+            this.m_RunToTargetTimer = 0f;
             this.m_emFight = M_Character.Enum_FightStatus.MoveToAttack;
             return;
         }
@@ -1380,81 +1379,81 @@ public class M_Player : M_Character
     //		this.CrossFadeAnimation(M_Player.State_Giddy_Start, 0.1f);
     //	}
 
-    //	private void CheckTarget()
-    //	{
-    //		if (this.m_FightSceneMgr.m_IsFightFinish)
-    //		{
-    //			return;
-    //		}
-    //		FightCommand fightCommand = null;
-    //		if (this.m_CommandQueue.Count > 0)
-    //		{
-    //			fightCommand = this.m_CommandQueue[0];
-    //		}
-    //		if (fightCommand != null)
-    //		{
-    //			M_Character target = fightCommand.m_Target;
-    //			S_UseEffect data = GameDataDB.UseEffectDB.GetData(fightCommand.m_UseEffectID);
-    //			if (data == null)
-    //			{
-    //				return;
-    //			}
-    //			if (data.DeBuffer.Contains(84))
-    //			{
-    //				return;
-    //			}
-    //			if (target == null || target.IsDead() || !target.m_RoleModel.activeSelf)
-    //			{
-    //				if (data.emTarget == ENUM_UseTarget.Enemy)
-    //				{
-    //					fightCommand.m_Target = this.m_FightSceneMgr.GetFirstOrder_Mob();
-    //					if (fightCommand.m_Target == null)
-    //					{
-    //						this.m_CommandQueue.Remove(fightCommand);
-    //						return;
-    //					}
-    //					this.m_ActionTargetModel = fightCommand.m_Target.m_RoleModel;
-    //					if (fightCommand.m_Target is M_Mob || base.IsLoseHeart())
-    //					{
-    //						base.SetFaceToTarget(fightCommand.m_Target);
-    //					}
-    //				}
-    //				if (data.emTarget == ENUM_UseTarget.Partner)
-    //				{
-    //					fightCommand.m_Target = this.m_FightSceneMgr.GetFirstOrder_Role();
-    //					if (fightCommand.m_Target == null)
-    //					{
-    //						this.m_CommandQueue.Remove(fightCommand);
-    //						return;
-    //					}
-    //				}
-    //			}
-    //			else
-    //			{
-    //				this.m_ActionTargetModel = fightCommand.m_Target.m_RoleModel;
-    //				if (fightCommand.m_Target is M_Mob || base.IsLoseHeart())
-    //				{
-    //					base.SetFaceToTarget(fightCommand.m_Target);
-    //				}
-    //				if (base.IsLoseHeart())
-    //				{
-    //					base.SetFaceToTarget(fightCommand.m_Target);
-    //				}
-    //			}
-    //		}
-    //		if (this.m_FaceToTarget == null || this.m_FaceToTarget.IsDead())
-    //		{
-    //			if (base.IsLoseHeart())
-    //			{
-    //				return;
-    //			}
-    //			if ((this.m_FaceToTarget is M_Guard || this.m_FaceToTarget is M_Player) && this.m_FightSceneMgr.GetFirstOrder_Mob() != null)
-    //			{
-    //				this.m_ActionTargetModel = this.m_FightSceneMgr.GetFirstOrder_Mob().m_RoleModel;
-    //				base.SetFaceToTarget(this.m_FightSceneMgr.GetFirstOrder_Mob());
-    //			}
-    //		}
-    //	}
+    private void CheckTarget()
+    {
+        //if (this.m_FightSceneMgr.m_IsFightFinish)
+        //{
+        //    return;
+        //}
+        //FightCommand fightCommand = null;
+        //if (this.m_CommandQueue.Count > 0)
+        //{
+        //    fightCommand = this.m_CommandQueue[0];
+        //}
+        //if (fightCommand != null)
+        //{
+        //    M_Character target = fightCommand.m_Target;
+        //    S_UseEffect data = GameDataDB.UseEffectDB.GetData(fightCommand.m_UseEffectID);
+        //    if (data == null)
+        //    {
+        //        return;
+        //    }
+        //    if (data.DeBuffer.Contains(84))
+        //    {
+        //        return;
+        //    }
+        //    if (target == null || target.IsDead() || !target.m_RoleModel.activeSelf)
+        //    {
+        //        if (data.emTarget == ENUM_UseTarget.Enemy)
+        //        {
+        //            fightCommand.m_Target = this.m_FightSceneMgr.GetFirstOrder_Mob();
+        //            if (fightCommand.m_Target == null)
+        //            {
+        //                this.m_CommandQueue.Remove(fightCommand);
+        //                return;
+        //            }
+        //            this.m_ActionTargetModel = fightCommand.m_Target.m_RoleModel;
+        //            if (fightCommand.m_Target is M_Mob || base.IsLoseHeart())
+        //            {
+        //                base.SetFaceToTarget(fightCommand.m_Target);
+        //            }
+        //        }
+        //        if (data.emTarget == ENUM_UseTarget.Partner)
+        //        {
+        //            fightCommand.m_Target = this.m_FightSceneMgr.GetFirstOrder_Role();
+        //            if (fightCommand.m_Target == null)
+        //            {
+        //                this.m_CommandQueue.Remove(fightCommand);
+        //                return;
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        this.m_ActionTargetModel = fightCommand.m_Target.m_RoleModel;
+        //        if (fightCommand.m_Target is M_Mob || base.IsLoseHeart())
+        //        {
+        //            base.SetFaceToTarget(fightCommand.m_Target);
+        //        }
+        //        if (base.IsLoseHeart())
+        //        {
+        //            base.SetFaceToTarget(fightCommand.m_Target);
+        //        }
+        //    }
+        //}
+        //if (this.m_FaceToTarget == null || this.m_FaceToTarget.IsDead())
+        //{
+        //    if (base.IsLoseHeart())
+        //    {
+        //        return;
+        //    }
+        //    if ((this.m_FaceToTarget is M_Guard || this.m_FaceToTarget is M_Player) && this.m_FightSceneMgr.GetFirstOrder_Mob() != null)
+        //    {
+        //        this.m_ActionTargetModel = this.m_FightSceneMgr.GetFirstOrder_Mob().m_RoleModel;
+        //        base.SetFaceToTarget(this.m_FightSceneMgr.GetFirstOrder_Mob());
+        //    }
+        //}
+    }
 
     //	private int CostDowbByBuff(ENUM_ElementType emElmentType, int castMP)
     //	{

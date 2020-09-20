@@ -870,7 +870,7 @@ public class UIFightForm : UIFormBase
     protected override void OnInit(object userData)
     {
         base.OnInit(userData);
-        uiCharacterActionManager.Hide();
+        //uiCharacterActionManager.Hide();
         this.m_RoleSlotTable.Clear();
         this.m_MobSlots_Normal.Clear();
         //this.m_CatchResultTw = this.m_CatchResultTexture.GetComponent<TweenAlpha>();//捕捉结果
