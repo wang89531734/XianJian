@@ -233,7 +233,7 @@ public class FightSceneManager
         //this.PlayAppearCameraPath();
         //this.InitFightTalk();
         //NextWave();
-        //NewTurn();
+        NewTurn();
     }
 
     /// <summary>
@@ -336,8 +336,12 @@ public class FightSceneManager
             FightCameraController_BlackrMouseOrbit.m_RotateSpeed = 10f;
             FightCameraController_BlackrMouseOrbit.m_MouseSpeedX = 0.2f;
         }
-
         this.m_FightCamera = GameEntry.Instance.m_MainCamera.gameObject;
+        this.m_FightCameraController = this.m_FightCamera.GetComponent<M_FightCameraController>();
+        if (this.m_FightCameraController == null)
+        {
+            this.m_FightCameraController = this.m_FightCamera.AddComponent<M_FightCameraController>();
+        }
     }
 
     /// <summary>
@@ -575,6 +579,10 @@ public class FightSceneManager
                     //    }
                     //}
                 }
+                if (num > 0)
+                {
+                    this.ChangeTargetMob(num);
+                }
             }
         }
     }
@@ -734,6 +742,8 @@ public class FightSceneManager
         }
 
         this.InitPlayerGuardPos(defaultFormationData);
+        this.InitFightTarget();
+        this.m_FightCameraController.SetFollower(this.m_PlayerList[1]);
         //for (int i = 0; i < 5; i++)//设置战斗物品
         //{
         //    List<FightItemHotKeyInfo> fightItemHotkeyList = Swd6Application.instance.m_ItemSystem.GetFightItemHotkeyList(i);
@@ -1636,7 +1646,7 @@ public class FightSceneManager
         {
             this.m_MainPlayer = null;
         }
-        this.SetFightCameraController();
+        //this.SetFightCameraController();
         FightUIForm.UpdateSelectRole();
         //foreach (KeyValuePair<int, M_Player> current2 in this.m_PlayerList)
         //{
@@ -1829,7 +1839,7 @@ public class FightSceneManager
     {
         foreach (M_Player current in this.m_PlayerList.Values)
         {
-            //current.m_ActionTargetModel = this.m_MainTarget.m_RoleModel;
+            current.m_ActionTargetModel = this.m_MainTarget.m_RoleModel;
             current.SetFaceToTarget(this.m_MainTarget);
         }
         //foreach (M_Guard current2 in this.m_GuardList.Values)
@@ -2836,11 +2846,6 @@ public class FightSceneManager
 
     private void SetFightCameraController()
     {
-        this.m_FightCameraController = this.m_FightCamera.GetComponent<M_FightCameraController>();
-        if (this.m_FightCameraController == null)
-        {
-            this.m_FightCameraController = this.m_FightCamera.AddComponent<M_FightCameraController>();
-        }
         if (this.m_PlayerList.ContainsKey(this.m_ControlledRoleID))
         {
             this.m_FightCameraController.SetFollower(this.m_PlayerList[this.m_ControlledRoleID]);
@@ -3118,18 +3123,19 @@ public class FightSceneManager
                     character.currentTimeCount += spd;
                     if (character.currentTimeCount > maxTime)
                     {
+                        UnityEngine.Debug.Log("执行");
                         maxTime = character.currentTimeCount;
                         activatingCharacter = character;
                     }
                 }
-                else
+                else//后期删除HP小于0直接删除
                 {
                     character.currentTimeCount = 0;
                 }
             }
         }
         ActiveCharacter = activatingCharacter;
-        ChangeControlCharacter(1, false);
+        //ChangeControlCharacter(1, false);
         //ActiveCharacter.DecreaseBuffsTurn();
         //ActiveCharacter.DecreaseSkillsTurn();
         //ActiveCharacter.ResetStates();
