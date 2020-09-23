@@ -28,22 +28,22 @@ public class FightCommand_Skill : FightCommand
 	{
         //if (this.m_UseEffect == null)
         //{
-        Debug.Log("找不到UseEffect : " + this.m_UseEffectID);
+        //Debug.Log("找不到UseEffect : " + this.m_UseEffectID);
         //	this.OnAnimationFinish();
         //	return;
         //}
-        //base.ProcessActData(this.m_UseEffect.ActDataName);
+        base.ProcessActData(this.m_UseEffect.ActDataName);
         //bool bCritical = false;
         //this.m_HitDatas.Clear();
-        //foreach (M_Character current in this.m_Targets)
-        //{
-        //	FightDamageData fightDamageData = FightCalculate.DamageDataCalculte_Skill(this.m_Actor, current, this.m_UseEffect);
-        //	this.m_HitDatas.Add(current, fightDamageData);
-        //	if (fightDamageData.m_bCritical)
-        //	{
-        //		bCritical = true;
-        //	}
-        //}
+        foreach (M_Character current in this.m_Targets)
+        {
+            //FightDamageData fightDamageData = FightCalculate.DamageDataCalculte_Skill(this.m_Actor, current, this.m_UseEffect);
+            //this.m_HitDatas.Add(current, fightDamageData);
+            //if (fightDamageData.m_bCritical)
+            //{
+            //    bCritical = true;
+            //}
+        }
         //if (this.m_UseEffect.emUseSkillCamera == Enum_UseSkillCamera.Yes)
         //{
         //	FightState fightState = Swd6Application.instance.GetCurrentGameState() as FightState;

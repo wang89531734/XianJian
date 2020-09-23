@@ -48,32 +48,32 @@ public class FightCommand
     {
     }
 
-    //	public void ProcessActData(string actDataName)
-    //	{
-    //		M_ActProcessor actProcessor = ActSystem.Instance.GetActProcessor(actDataName);
-    //		if (actProcessor == null)
-    //		{
-    //			Debug.Log("找不到ActData : " + actDataName);
-    //			this.OnAnimationFinish();
-    //			return;
-    //		}
-    //		actProcessor.OnCallActData = new M_ActProcessor.ActEventTrigger(this.OnCallActData);
-    //		actProcessor.OnWeaponTrail_ON = new M_ActProcessor.EventTrigger(this.OnWeaponTrail_ON);
-    //		actProcessor.OnWeaponTrail_OFF = new M_ActProcessor.EventTrigger(this.OnWeaponTrail_OFF);
-    //		actProcessor.OnAfterImage = new M_ActProcessor.EventTrigger(this.OnAfterImage);
-    //		actProcessor.OnHitAnimation = new M_ActProcessor.EventTrigger(this.OnHitAnimation);
-    //		actProcessor.OnHitDamage = new M_ActProcessor.EventTrigger(this.OnHitDamage);
-    //		actProcessor.OnAnimationFinish = new M_ActProcessor.EventTrigger(this.OnAnimationFinish);
-    //		actProcessor.OnAnimationTrigger = new M_ActProcessor.AnimationEventTrigger(this.OnAnimationTrigger);
-    //		actProcessor.OnShootEffect = new M_ActProcessor.ShootEffectEventTrigger(this.OnShootEffect);
-    //		actProcessor.OnHitEffect_One = new M_ActProcessor.HitEffectEventTrigger(this.OnHitEffect_One);
-    //		actProcessor.OnHitEffect_All = new M_ActProcessor.HitEffectEventTrigger(this.OnHitEffect_All);
-    //		actProcessor.OnBulletEffect = new M_ActProcessor.BulletEffectEventTrigger(this.OnBulletEffect);
-    //		actProcessor.OnSoundTrigger = new M_ActProcessor.SoundEventTrigger(this.OnSoundTrigger);
-    //		this.m_ActDatas.Add(actProcessor.gameObject);
-    //		this.m_HitTimes = actProcessor.GetHitTimes();
-    //		this.m_HitTimesCounter = this.m_HitTimes;
-    //	}
+    public void ProcessActData(string actDataName)
+    {
+        //M_ActProcessor actProcessor = ActSystem.Instance.GetActProcessor(actDataName);
+        //if (actProcessor == null)
+        //{
+        Debug.Log("找不到ActData : " + actDataName);
+        //    this.OnAnimationFinish();
+        //    return;
+        //}
+        //actProcessor.OnCallActData = new M_ActProcessor.ActEventTrigger(this.OnCallActData);
+        //actProcessor.OnWeaponTrail_ON = new M_ActProcessor.EventTrigger(this.OnWeaponTrail_ON);
+        //actProcessor.OnWeaponTrail_OFF = new M_ActProcessor.EventTrigger(this.OnWeaponTrail_OFF);
+        //actProcessor.OnAfterImage = new M_ActProcessor.EventTrigger(this.OnAfterImage);
+        //actProcessor.OnHitAnimation = new M_ActProcessor.EventTrigger(this.OnHitAnimation);
+        //actProcessor.OnHitDamage = new M_ActProcessor.EventTrigger(this.OnHitDamage);
+        //actProcessor.OnAnimationFinish = new M_ActProcessor.EventTrigger(this.OnAnimationFinish);
+        //actProcessor.OnAnimationTrigger = new M_ActProcessor.AnimationEventTrigger(this.OnAnimationTrigger);
+        //actProcessor.OnShootEffect = new M_ActProcessor.ShootEffectEventTrigger(this.OnShootEffect);
+        //actProcessor.OnHitEffect_One = new M_ActProcessor.HitEffectEventTrigger(this.OnHitEffect_One);
+        //actProcessor.OnHitEffect_All = new M_ActProcessor.HitEffectEventTrigger(this.OnHitEffect_All);
+        //actProcessor.OnBulletEffect = new M_ActProcessor.BulletEffectEventTrigger(this.OnBulletEffect);
+        //actProcessor.OnSoundTrigger = new M_ActProcessor.SoundEventTrigger(this.OnSoundTrigger);
+        //this.m_ActDatas.Add(actProcessor.gameObject);
+        //this.m_HitTimes = actProcessor.GetHitTimes();
+        //this.m_HitTimesCounter = this.m_HitTimes;
+    }
 
     //	public virtual void OnCallActData(string actDataName)
     //	{

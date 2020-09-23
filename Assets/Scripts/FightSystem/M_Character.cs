@@ -266,7 +266,7 @@ public class M_Character : MonoBehaviour
                 this.Update_MoveToAttack();
                 break;
             case M_Character.Enum_FightStatus.Attack:
-                //this.Update_Attack();
+                this.Update_Attack();
                 break;
             case M_Character.Enum_FightStatus.AfterAttackMoveBack:
                 //this.Update_AfterAttackMoveBack();
@@ -394,13 +394,13 @@ public class M_Character : MonoBehaviour
         //}
     }
 
-    //	public virtual void Update_Attack()
-    //	{
-    //		if (this.m_FaceToTarget != this)
-    //		{
-    //			this.UpdateDirection_Directly(this.m_FaceToTarget.GetModelPosition());
-    //		}
-    //	}
+    public virtual void Update_Attack()
+    {
+        if (this.m_FaceToTarget != this)
+        {
+            this.UpdateDirection_Directly(this.m_FaceToTarget.GetModelPosition());
+        }
+    }
 
     //	public virtual void Update_AfterAttackMoveBack()
     //	{

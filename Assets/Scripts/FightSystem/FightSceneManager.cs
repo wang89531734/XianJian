@@ -233,7 +233,7 @@ public class FightSceneManager
         //this.PlayAppearCameraPath();
         //this.InitFightTalk();
         //NextWave();
-        NewTurn();
+        //NewTurn();
     }
 
     /// <summary>
@@ -577,10 +577,6 @@ public class FightSceneManager
                 }
             }
         }
-        if (num > 0)
-        {
-            this.ChangeTargetMob(num);
-        }
     }
 
     //	public void SummonMob(int iMobGUID, string strStartPos, string strTargetPos)
@@ -636,6 +632,13 @@ public class FightSceneManager
         return this.CreateMob(data.GUID, transform.position, transform.rotation);
     }
 
+    /// <summary>
+    /// 创建怪物模型
+    /// </summary>
+    /// <param name="mobGUID"></param>
+    /// <param name="pos"></param>
+    /// <param name="rotation"></param>
+    /// <returns></returns>
     public M_Mob CreateMob(int mobGUID, Vector3 pos, Quaternion rotation)
     {
         S_Item data = GameDataDB.ItemDB.GetData(mobGUID);
@@ -662,17 +665,9 @@ public class FightSceneManager
             return null;
         }
         //RendererTool.ChangeSenceMaterialSetting(prefName, characterModel_Fight);
-        M_Mob m_Mob;
-        if (data.MobData.ScriptName == null || data.MobData.ScriptName.Length == 0)
-        {
-            m_Mob = characterModel_Fight.AddComponent<M_Mob>();
-        }
-        else
-        {
-            UnityEngine.Debug.Log(data.MobData.ScriptName);
-            //m_Mob = (characterModel_Fight.AddComponent<M_Mob>(data.MobData.ScriptName);
-            m_Mob =null;
-        }
+        M_Mob m_Mob;      
+        m_Mob = characterModel_Fight.AddComponent<M_Mob>();
+       
         string text = prefName;
         if (data.MobData.emType != ENUM_MobType.Boss)
         {
@@ -682,6 +677,7 @@ public class FightSceneManager
             });
             text = array[0];
         }
+        //添加动画
         //RuntimeAnimatorController animatorController_Fight = ResourcesManager.Instance.GetAnimatorController_Fight(text);
         //if (animatorController_Fight != null)
         //{
@@ -720,24 +716,23 @@ public class FightSceneManager
         {
             this.ChangeFormation(GameEntry.Instance.m_FormationSystem.DefaultFormation);
             int fightPlayerID = GameEntry.Instance.m_GameDataSystem.m_FightPlayerID;
-            if (this.GetRole(fightPlayerID) != null)
-            {
-                this.ChangeControlCharacter(GameEntry.Instance.m_GameDataSystem.m_FightPlayerID, false);
-            }
-            else
-            {
-                this.ChangeControlCharacter(1, false);
-            }
-            int flag = 60 + this.m_ControlledRoleID;
-            M_Player role = this.GetRole(this.m_ControlledRoleID);
-            //if (role != null)//设置是否自动战斗
+            //if (this.GetRole(fightPlayerID) != null)
+            //{
+            //    this.ChangeControlCharacter(GameEntry.Instance.m_GameDataSystem.m_FightPlayerID, false);
+            //}
+            //else
+            //{
+            //    this.ChangeControlCharacter(1, false);
+            //}
+            //int flag = 60 + this.m_ControlledRoleID;
+            //M_Player role = this.GetRole(this.m_ControlledRoleID);
+            ////if (role != null)//设置是否自动战斗
             //{
             //    //role.SetUseAI(Swd6Application.instance.m_GameDataSystem.GetFlag(flag));
             //    //UI_Fight.Instance.UpdateRoleAICheckBox(this.m_ControlledRoleID);
             //}
         }
 
-        this.InitFightTarget();
         this.InitPlayerGuardPos(defaultFormationData);
         //for (int i = 0; i < 5; i++)//设置战斗物品
         //{
@@ -1685,6 +1680,10 @@ public class FightSceneManager
     //		return this.m_NowFormation;
     //	}
 
+    /// <summary>
+    /// 改变阵型
+    /// </summary>
+    /// <param name="idx"></param>
     public void ChangeFormation(int idx)
     {
         if (this.m_ChangeFormationCDTimer > 0f)
@@ -1823,6 +1822,9 @@ public class FightSceneManager
     //		return this.m_ControlledRoleID;
     //	}
 
+    /// <summary>
+    /// 初始化战斗目标
+    /// </summary>
     public void InitFightTarget()
     {
         foreach (M_Player current in this.m_PlayerList.Values)
@@ -3127,16 +3129,17 @@ public class FightSceneManager
             }
         }
         ActiveCharacter = activatingCharacter;
+        ChangeControlCharacter(1, false);
         //ActiveCharacter.DecreaseBuffsTurn();
         //ActiveCharacter.DecreaseSkillsTurn();
         //ActiveCharacter.ResetStates();
 
         if (ActiveCharacter.m_FightRoleData.HP > 0)
         {
-           
+
             if (ActiveCharacter.IsPlayerCharacter)
             {
-           
+                //this.InitFightTarget();
                 //if (IsAutoPlay)
                 //{
                 //    ActiveCharacter.RandomAction();
