@@ -378,16 +378,16 @@ public class M_Character : MonoBehaviour
         }
         if (num <= this.m_DoAttackRange)//|| !this.CheckCommandNeedMove(fightCommand.m_UseEffectID)
         {
-            UnityEngine.Debug.Log("执行DoCommand");
             this.m_emFight = M_Character.Enum_FightStatus.Attack;
             //this.m_CharacterController.enabled = this.m_EnableCharacterContoller;
-            //this.CrossFadeAnimation(this.State_Standby, 0.1f);
+            //this.CrossFadeAnimation(this.State_Standby, 0.1f);//切换成待机动画
             this.DoCommand(fightCommand);
             this.m_RunToTargetTimer = 0f;
             return;
         }
         //if (this.m_Animator.GetCurrentAnimatorStateInfo(0).nameHash != M_Character.State_Sprint && !this.m_Animator.IsInTransition(0))
         //{
+        //    //播放跑步动画
         //    this.CrossFadeAnimation(M_Character.State_Sprint, 0.1f);
         //    this.m_bNoMoveAttack = false;
         //    this.m_CharacterController.enabled = false;
@@ -473,6 +473,11 @@ public class M_Character : MonoBehaviour
     //		return 0;
     //	}
 
+    /// <summary>
+    /// 执行命令
+    /// </summary>
+    /// <param name="skillCommand"></param>
+    /// <returns></returns>
     public virtual bool DoCommand(FightCommand skillCommand)
     {
         //if (skillCommand is FightCommand_MagicItem)

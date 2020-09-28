@@ -48,12 +48,17 @@ public class FightCommand
     {
     }
 
+    /// <summary>
+    /// 计算攻击数据
+    /// </summary>
+    /// <param name="actDataName"></param>
     public void ProcessActData(string actDataName)
     {
+        Debug.Log("actDataName : " + actDataName);
         //M_ActProcessor actProcessor = ActSystem.Instance.GetActProcessor(actDataName);
         //if (actProcessor == null)
         //{
-        Debug.Log("找不到ActData : " + actDataName);
+        //    Debug.Log("找不到ActData : " + actDataName);
         //    this.OnAnimationFinish();
         //    return;
         //}
