@@ -55,7 +55,7 @@ public class FightCommand
     public void ProcessActData(string actDataName)
     {
         Debug.Log("actDataName : " + actDataName);
-        //M_ActProcessor actProcessor = ActSystem.Instance.GetActProcessor(actDataName);
+        M_ActProcessor actProcessor = ActSystem.Instance.GetActProcessor(actDataName);
         //if (actProcessor == null)
         //{
         //    Debug.Log("找不到ActData : " + actDataName);
@@ -75,9 +75,9 @@ public class FightCommand
         //actProcessor.OnHitEffect_All = new M_ActProcessor.HitEffectEventTrigger(this.OnHitEffect_All);
         //actProcessor.OnBulletEffect = new M_ActProcessor.BulletEffectEventTrigger(this.OnBulletEffect);
         //actProcessor.OnSoundTrigger = new M_ActProcessor.SoundEventTrigger(this.OnSoundTrigger);
-        //this.m_ActDatas.Add(actProcessor.gameObject);
-        //this.m_HitTimes = actProcessor.GetHitTimes();
-        //this.m_HitTimesCounter = this.m_HitTimes;
+        this.m_ActDatas.Add(actProcessor.gameObject);
+        this.m_HitTimes = actProcessor.GetHitTimes();
+        this.m_HitTimesCounter = this.m_HitTimes;
     }
 
     //	public virtual void OnCallActData(string actDataName)
@@ -247,7 +247,7 @@ public class FightCommand
         //{
         //    return;
         //}
-        //this.m_Actor.OnCommandFinish(this);
+        this.m_Actor.OnCommandFinish(this);
     }
 
     //	public virtual void OnLastHit()

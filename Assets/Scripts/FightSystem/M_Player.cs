@@ -1929,32 +1929,32 @@ public class M_Player : M_Character
     //		}
     //	}
 
-    //	public override void OnCommandFinish(FightCommand command)
-    //	{
-    //		if (!this.m_CommandQueue.Contains(command))
-    //		{
-    //			return;
-    //		}
-    //		if (this.m_CommandQueue.Count <= 0)
-    //		{
-    //			this.m_emFight = M_Character.Enum_FightStatus.AfterAttackMoveBack;
-    //			return;
-    //		}
-    //		this.m_CommandQueue.Remove(command);
-    //		if (this.m_CommandQueue.Count > 0)
-    //		{
-    //			this.CheckTarget();
-    //			this.m_emFight = M_Character.Enum_FightStatus.MoveToAttack;
-    //		}
-    //		else if (base.CheckCommandNeedMove(command.m_UseEffectID))
-    //		{
-    //			this.m_emFight = M_Character.Enum_FightStatus.AfterAttackMoveBack;
-    //		}
-    //		else
-    //		{
-    //			this.m_emFight = M_Character.Enum_FightStatus.Idle;
-    //		}
-    //	}
+    public override void OnCommandFinish(FightCommand command)
+    {
+        //if (!this.m_CommandQueue.Contains(command))
+        //{
+        //    return;
+        //}
+        //if (this.m_CommandQueue.Count <= 0)
+        //{
+        //    this.m_emFight = M_Character.Enum_FightStatus.AfterAttackMoveBack;
+        //    return;
+        //}
+        //this.m_CommandQueue.Remove(command);
+        //if (this.m_CommandQueue.Count > 0)
+        //{
+        //    this.CheckTarget();
+        //    this.m_emFight = M_Character.Enum_FightStatus.MoveToAttack;
+        //}
+        //else if (base.CheckCommandNeedMove(command.m_UseEffectID))
+        //{
+        this.m_emFight = M_Character.Enum_FightStatus.AfterAttackMoveBack;
+        //}
+        //else
+        //{
+        //    this.m_emFight = M_Character.Enum_FightStatus.Idle;
+        //}
+    }
 
     //	public override void OnHitAnimation(Enum_FightHitType hitType)
     //	{

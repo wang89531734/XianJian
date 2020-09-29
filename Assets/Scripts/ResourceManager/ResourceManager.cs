@@ -214,7 +214,8 @@ public class ResourcesManager
 		UnityEngine.Object resourceObj = this.m_ActDataLoader.GetResourceObj(name);
 		if (resourceObj == null)
 		{
-			return null;
+            Debug.Log("resourceObj == null : ");
+            return null;
 		}
 		return UnityEngine.Object.Instantiate(resourceObj) as ActData;
 	}

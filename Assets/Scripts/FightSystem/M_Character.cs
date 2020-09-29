@@ -984,11 +984,11 @@ public class M_Character : MonoBehaviour
     //		this.m_emFight = M_Character.Enum_FightStatus.Finish;
     //	}
 
-    //	public bool CheckCommandNeedMove(int useEffectID)
-    //	{
-    //		S_UseEffect data = GameDataDB.UseEffectDB.GetData(useEffectID);
-    //		return data != null && data.emDistance != ENUM_Distance.Far;
-    //	}
+    public bool CheckCommandNeedMove(int useEffectID)
+    {
+        S_UseEffect data = GameDataDB.UseEffectDB.GetData(useEffectID);
+        return data != null && data.emDistance != ENUM_Distance.Far;
+    }
 
     //	public int GetTowardPosDirection(Vector3 pos)
     //	{
@@ -1298,9 +1298,9 @@ public class M_Character : MonoBehaviour
     //		}
     //	}
 
-    //	public virtual void OnCommandFinish(FightCommand command)
-    //	{
-    //	}
+    public virtual void OnCommandFinish(FightCommand command)
+    {
+    }
 
     //	public virtual void OnHitAnimation(Enum_FightHitType hitType)
     //	{

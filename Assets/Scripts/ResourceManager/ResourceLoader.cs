@@ -45,17 +45,18 @@ public class ResourceLoader
 			return null;
 		}
 		UnityEngine.Object @object = null;
-		if (this.m_ResourceDB_Map.ContainsKey(name))
-		{
-			@object = this.m_ResourceDB_Map[name];
-			if (@object == null)
-			{
-				this.m_ResourceDB_Map.Remove(name);
-			}
-		}
+		//if (this.m_ResourceDB_Map.ContainsKey(name))
+		//{
+		//	@object = this.m_ResourceDB_Map[name];
+		//	if (@object == null)
+		//	{
+		//		this.m_ResourceDB_Map.Remove(name);
+		//	}
+		//}
 		if (@object == null)
 		{
-			@object = this.LoadFromAssetBundle(name, this.m_ResourceDB_Map);
+            Debug.Log("name : " + name);
+            @object = this.LoadFromAssetBundle(name, this.m_ResourceDB_Map);
 		}
 		return @object;
 	}
@@ -164,15 +165,18 @@ public class ResourceLoader
 		{
 			return null;
 		}
-		AssetBundle assetBundle = AssetBundle.LoadFromFile(Application.dataPath + this.m_AssetBundlePath + name + ".unity3d");
+        Debug.Log(Application.dataPath + this.m_AssetBundlePath + name + ".unity3d");
+        AssetBundle assetBundle = AssetBundle.LoadFromFile(Application.dataPath + this.m_AssetBundlePath + name + ".unity3d");
         if (assetBundle == null)
 		{
+            Debug.Log("assetBundle == null");
             return null;
 		}
         GameObject mainAsset = assetBundle.LoadAsset<GameObject>(name);
 		if (mainAsset == null)
 		{
-			assetBundle.Unload(false);
+            Debug.Log("mainAsset == null");
+            assetBundle.Unload(false);
 			return null;
 		}
 		DB.Add(name, mainAsset);
